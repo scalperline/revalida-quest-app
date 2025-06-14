@@ -1,36 +1,42 @@
 
 import { Link, useLocation } from "react-router-dom";
-import { Book, Timer, FileText } from "lucide-react";
+import { Book, Timer, BarChartBig, HomeIcon } from "lucide-react";
 
 const links = [
-  { label: "Dashboard", to: "/", icon: FileText },
-  { label: "Banco de Questões", to: "/questoes", icon: Book },
-  { label: "Simulado", to: "/simulado", icon: Timer },
-  { label: "Estatísticas", to: "/estatisticas", icon: FileText },
+  { label: "Questões", to: "/questoes", icon: Book },
+  { label: "Simulados", to: "/simulado", icon: Timer },
+  { label: "Desempenho", to: "/estatisticas", icon: BarChartBig },
 ];
 
 export function Navbar() {
   const { pathname } = useLocation();
   return (
-    <nav className="w-full bg-white border-b border-gray-200 px-6 py-2 flex items-center gap-4 shadow-sm z-30 sticky top-0">
-      <div className="text-2xl font-bold tracking-tight text-primary flex-1">
-        RevalidaQuest
-      </div>
-      <ul className="flex gap-4">
+    <nav className="w-full bg-background border-b border-border px-3 md:px-7 py-2 flex items-center gap-4 shadow-sm z-30 sticky top-0">
+      <Link to="/" className="flex items-center gap-2 text-primary font-bold text-xl md:text-2xl mr-6 hover:opacity-80 transition-opacity hover-scale">
+        <HomeIcon size={26} className="text-blue-500" />
+        <span className="tracking-tighter">RevalidaQuest</span>
+      </Link>
+      <ul className="flex gap-1 sm:gap-2 md:gap-4 flex-1">
         {links.map(({ label, to, icon: Icon }) => (
           <li key={label}>
             <Link
               to={to}
-              className={`flex items-center gap-1 px-3 py-2 rounded-md hover:bg-primary/10 transition-colors ${
-                pathname === to ? "text-primary font-semibold bg-primary/10" : "text-gray-700"
+              className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-all hover:scale-105 font-medium border border-transparent ${
+                pathname.startsWith(to)
+                  ? "bg-primary/70 text-primary-foreground shadow"
+                  : "text-muted-foreground hover:text-primary"
               }`}
             >
-              <Icon size={18} className="mr-1" />
-              {label}
+              <Icon size={18} />
+              <span className="hidden sm:inline">{label}</span>
             </Link>
           </li>
         ))}
       </ul>
+      <div className="hidden md:block">
+        {/* Placeholder para futuras ações de usuário/configurações */}
+      </div>
     </nav>
   );
 }
+

@@ -14,7 +14,7 @@ export const QUESTOES_REVALIDA_2013_VERMELHA_83_95: Question[] = [
       { id: "D", text: "A quimioprofilaxia é discutível neste caso por tratar-se de uma menina, apesar de sua segurança ter sido demonstrada em estudos." },
       { id: "E", text: "A profilaxia deve ser indicada neste caso e nos demais casos de refluxo vesico-ureteral até sua resolução ou correção cirúrgica." },
     ],
-    correct: "",
+    correct: "B",
   },
   {
     id: 84,
@@ -28,7 +28,7 @@ export const QUESTOES_REVALIDA_2013_VERMELHA_83_95: Question[] = [
       { id: "D", text: "solicitar ultrassonografia das vias urinárias e realizar uroculturas bimensais para monitoramento do quadro." },
       { id: "E", text: "solicitar sedimento urinário para confirmar infecção urinária e se mostrar a presença de nitritos, iniciar tratamento." },
     ],
-    correct: "",
+    correct: "B",
   },
   {
     id: 85,
@@ -42,7 +42,7 @@ export const QUESTOES_REVALIDA_2013_VERMELHA_83_95: Question[] = [
       { id: "D", text: "trocar antibioticoterapia, indicar a realização de exame de imagem pelo risco de infecção intracavitária." },
       { id: "E", text: "manter antibioticoterapia, indicar a exploração cirúrgica da ferida operatória pelo risco de infecção intracavitária." },
     ],
-    correct: "",
+    correct: "C",
   },
   {
     id: 86,
@@ -56,7 +56,7 @@ export const QUESTOES_REVALIDA_2013_VERMELHA_83_95: Question[] = [
       { id: "D", text: "prevalência." },
       { id: "E", text: "mortalidade." },
     ],
-    correct: "",
+    correct: "B",
   },
   {
     id: 87,
@@ -70,7 +70,7 @@ export const QUESTOES_REVALIDA_2013_VERMELHA_83_95: Question[] = [
       { id: "D", text: "punção torácica com cateter de grosso calibre no 2.º espaço intercostal na linha hemiclavicular." },
       { id: "E", text: "drenagem pleural no 5.º espaço intercostal na linha axilar anterior, com preparo de material para autotransfusão." },
     ],
-    correct: "",
+    correct: "E",
   },
   {
     id: 88,
@@ -84,7 +84,7 @@ export const QUESTOES_REVALIDA_2013_VERMELHA_83_95: Question[] = [
       { id: "D", text: "desproporção céfalo-pélvica relativa; indicar operação cesariana." },
       { id: "E", text: "parada secundária de descida; indicar operação cesariana." },
     ],
-    correct: "",
+    correct: "A",
   },
   {
     id: 89,
@@ -98,7 +98,7 @@ export const QUESTOES_REVALIDA_2013_VERMELHA_83_95: Question[] = [
       { id: "D", text: "As Redes de Atenção à Saúde são definidas como um modelo linear de cuidado dentro do sistema de saúde. Elas orientam gestores e usuários sobre a porta de entrada e o escalonamento entre os diversos níveis de densidade tecnológica no sistema, com os seus objetivos de prestação de serviços singulares." },
       { id: "E", text: "Nas Redes de Atenção à Saúde, todos os pontos de atenção são igualmente importantes para que se cumpram os objetivos do cuidado integral, que deve ser realizado por meio de relações horizontais entre os diversos níveis de atenção, que diferenciam-se apenas pelas distintas densidades tecnológicas que os caracterizam." },
     ],
-    correct: "",
+    correct: "E",
   },
   {
     id: 90,
@@ -112,7 +112,7 @@ export const QUESTOES_REVALIDA_2013_VERMELHA_83_95: Question[] = [
       { id: "D", text: "parada secundária da dilatação; administrar ocitocina." },
       { id: "E", text: "parada secundária da descida; realizar analgesia (bloqueio combinado)." },
     ],
-    correct: "",
+    correct: "C",
   },
   {
     id: 91,
@@ -126,7 +126,7 @@ export const QUESTOES_REVALIDA_2013_VERMELHA_83_95: Question[] = [
       { id: "D", text: "sífilis congênita e penicilina cristalina." },
       { id: "E", text: "toxoplasmose e pirimetamina/sulfadiazina." },
     ],
-    correct: "",
+    correct: "B",
   },
   {
     id: 92,
@@ -140,7 +140,7 @@ export const QUESTOES_REVALIDA_2013_VERMELHA_83_95: Question[] = [
       { id: "D", text: "transtorno de ansiedade." },
       { id: "E", text: "transtorno bipolar (psicose maníaco-depressiva)." },
     ],
-    correct: "",
+    correct: "B",
   },
   {
     id: 93,
@@ -154,7 +154,7 @@ export const QUESTOES_REVALIDA_2013_VERMELHA_83_95: Question[] = [
       { id: "D", text: "Contatos assintomáticos devem realizar prova tuberculínica." },
       { id: "E", text: "Todos os contatos devem realizar raio-X de tórax." },
     ],
-    correct: "",
+    correct: "D",
   },
   {
     id: 94,
@@ -168,7 +168,7 @@ export const QUESTOES_REVALIDA_2013_VERMELHA_83_95: Question[] = [
       { id: "D", text: "fixação de parâmetros ventilatórios para manter a pCO2 entre 25 e 30 mmHg, manitol endovenoso em infusão lenta, craniotomia imediata para drenagem do hematoma e instalação de monitorização de pressão intracraniana." },
       { id: "E", text: "fixação de parâmetros ventilatórios para manter a pCO2 entre 25 e 30 mmHg, manitol endovenoso em bolus, craniotomia imediata para drenagem do hematoma e instalação de monitorização de pressão intracraniana." },
     ],
-    correct: "",
+    correct: "E",
   },
   {
     id: 95,
@@ -182,6 +182,6 @@ export const QUESTOES_REVALIDA_2013_VERMELHA_83_95: Question[] = [
       { id: "D", text: "desidratação; hidratação endovenosa." },
       { id: "E", text: "síndrome hepatorrenal; albumina associada à terlipressina." },
     ],
-    correct: "",
+    correct: "C",
   },
 ];

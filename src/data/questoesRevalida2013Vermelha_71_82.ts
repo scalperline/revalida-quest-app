@@ -14,7 +14,7 @@ export const QUESTOES_REVALIDA_2013_VERMELHA_71_82: Question[] = [
       { id: "D", text: "vigilância de doenças crônicas." },
       { id: "E", text: "atenção em ambulatório especializado." },
     ],
-    correct: "",
+    correct: "A",
   },
   {
     id: 72,
@@ -28,7 +28,7 @@ export const QUESTOES_REVALIDA_2013_VERMELHA_71_82: Question[] = [
       { id: "D", text: "anti-inflamatório por via oral." },
       { id: "E", text: "antibiótico por via intramuscular." },
     ],
-    correct: "",
+    correct: "A",
   },
   {
     id: 73,
@@ -42,7 +42,7 @@ export const QUESTOES_REVALIDA_2013_VERMELHA_71_82: Question[] = [
       { id: "D", text: "Streptococcus pneumoniae." },
       { id: "E", text: "Mycobacterium tuberculosis." },
     ],
-    correct: "",
+    correct: "C",
   },
   {
     id: 74,
@@ -56,7 +56,7 @@ export const QUESTOES_REVALIDA_2013_VERMELHA_71_82: Question[] = [
       { id: "D", text: "aumentar em 2U a dose da insulina NPH noturna caso a medida da glicemia matinal em jejum tenha sido superior a 120mg/dL, na maioria dos dias." },
       { id: "E", text: "associar 4U de insulina regular antes do almoço e ao deitar caso a medida da glicemia matinal em jejum tenha sido superior a 120mg/dL, na maioria dos dias." },
     ],
-    correct: "",
+    correct: "D",
   },
   {
     id: 75,
@@ -70,7 +70,7 @@ export const QUESTOES_REVALIDA_2013_VERMELHA_71_82: Question[] = [
       { id: "D", text: "polissilábica; senta-se sem apoio; muda objeto de uma mão para outra; reflexo de preensão plantar." },
       { id: "E", text: "emissão de palavras-frase; capacidade de andar com apoio observada na consulta; bate palmas; reflexo do paraquedista." },
     ],
-    correct: "",
+    correct: "D",
   },
   {
     id: 76,
@@ -84,7 +84,7 @@ export const QUESTOES_REVALIDA_2013_VERMELHA_71_82: Question[] = [
       { id: "D", text: "Ferritina sérica." },
       { id: "E", text: "Proteína C reativa." },
     ],
-    correct: "",
+    correct: "B",
   },
   {
     id: 77,
@@ -98,7 +98,7 @@ export const QUESTOES_REVALIDA_2013_VERMELHA_71_82: Question[] = [
       { id: "D", text: "Sulfametoxazol/trimetoprim." },
       { id: "E", text: "Zidovudina + lamivudina." },
     ],
-    correct: "",
+    correct: "B",
   },
   {
     id: 78,
@@ -112,7 +112,7 @@ export const QUESTOES_REVALIDA_2013_VERMELHA_71_82: Question[] = [
       { id: "D", text: "TSH e T4 livre; hipotireoidismo secundário." },
       { id: "E", text: "cortisol e potássio séricos; insuficiência adrenal." },
     ],
-    correct: "",
+    correct: "B",
   },
   {
     id: 79,
@@ -126,7 +126,7 @@ export const QUESTOES_REVALIDA_2013_VERMELHA_71_82: Question[] = [
       { id: "D", text: "solicitar teste oral de tolerância à glicose com 75g, com 28 semanas de gestação." },
       { id: "E", text: "solicitar dosagem de glicemia pós-prandial, com 34 semanas de gestação." },
     ],
-    correct: "",
+    correct: "D",
   },
   {
     id: 80,
@@ -140,7 +140,7 @@ export const QUESTOES_REVALIDA_2013_VERMELHA_71_82: Question[] = [
       { id: "D", text: "corticoide." },
       { id: "E", text: "anti-inflamatório não hormonal." },
     ],
-    correct: "",
+    correct: "D",
   },
   {
     id: 81,
@@ -154,7 +154,7 @@ export const QUESTOES_REVALIDA_2013_VERMELHA_71_82: Question[] = [
       { id: "D", text: "ingurgitamento mamário; indicar massagem circular e ordenha do excesso de leite." },
       { id: "E", text: "mastite; indicar esvaziar manual do leite após mamadas e antibioticoterapia." },
     ],
-    correct: "",
+    correct: "E",
   },
   {
     id: 82,
@@ -168,6 +168,6 @@ export const QUESTOES_REVALIDA_2013_VERMELHA_71_82: Question[] = [
       { id: "D", text: "solicitar uma ressonância de abdome superior e orientar para tomar medicamentos sintomáticos com continuação de acompanhamento ambulatorial." },
       { id: "E", text: "encaminhar para psiquiatria a fim de descartar síndrome do pânico e prescrever medicamentos sintomáticos até o paciente decidir submeter-se à cirurgia." },
     ],
-    correct: "",
+    correct: "C",
   },
 ];

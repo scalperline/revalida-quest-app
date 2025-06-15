@@ -14,7 +14,7 @@ export const QUESTOES_REVALIDA_2013_VERMELHA_96_110: Question[] = [
       { id: "D", text: "fibrose cística; terapia de reposição enzimática." },
       { id: "E", text: "doença inflamatória intestinal; antibioticoterapia." },
     ],
-    correct: "",
+    correct: "B",
   },
   {
     id: 97,
@@ -28,7 +28,7 @@ export const QUESTOES_REVALIDA_2013_VERMELHA_96_110: Question[] = [
       { id: "D", text: "Traçar um plano de ação com a esposa para que ela informe, progressivamente, o diagnóstico ao marido." },
       { id: "E", text: "Aguardar a evolução, postergando a informação do diagnóstico ao paciente até que o quadro clínico tenha se agravado." },
     ],
-    correct: "",
+    correct: "A",
   },
   {
     id: 98,
@@ -42,7 +42,7 @@ export const QUESTOES_REVALIDA_2013_VERMELHA_96_110: Question[] = [
       { id: "D", text: "A Atenção Básica realiza a promoção da saúde e prevenção das doenças e, numa epidemia de dengue, este nível de atenção serve para realizar a triagem e encaminhamentos dos casos para os outros níveis." },
       { id: "E", text: "O propósito da Atenção Básica é realizar os procedimentos básicos de cuidado à saúde de forma individual, atuando na epidemia da dengue através de consultas e procedimentos médicos." },
     ],
-    correct: "",
+    correct: "B",
   },
   {
     id: 99,
@@ -56,7 +56,7 @@ export const QUESTOES_REVALIDA_2013_VERMELHA_96_110: Question[] = [
       { id: "D", text: "Realizar exame citopatológico de colo uterino anual." },
       { id: "E", text: "Recomendar que a paciente oriente o namorado a procurar um urologista para realização de peniscopia." },
     ],
-    correct: "",
+    correct: "A",
   },
   {
     id: 100,
@@ -70,7 +70,7 @@ export const QUESTOES_REVALIDA_2013_VERMELHA_96_110: Question[] = [
       { id: "D", text: "período pré-ovulatório imediato." },
       { id: "E", text: "fase lútea do ciclo menstrual." },
     ],
-    correct: "",
+    correct: "D",
   },
   {
     id: 101,
@@ -84,7 +84,7 @@ export const QUESTOES_REVALIDA_2013_VERMELHA_96_110: Question[] = [
       { id: "D", text: "Atorvastatina." },
       { id: "E", text: "Ácido acetilsalicílico." },
     ],
-    correct: "",
+    correct: "A",
   },
   {
     id: 102,
@@ -98,7 +98,7 @@ export const QUESTOES_REVALIDA_2013_VERMELHA_96_110: Question[] = [
       { id: "D", text: "varicela; acompanhamento ambulatorial e prescrição de sintomáticos." },
       { id: "E", text: "exantema súbito; prescrição de sintomáticos e observação de sinais de piora." },
     ],
-    correct: "",
+    correct: "D",
   },
   {
     id: 103,
@@ -112,7 +112,7 @@ export const QUESTOES_REVALIDA_2013_VERMELHA_96_110: Question[] = [
       { id: "D", text: "Anemia de doença crônica." },
       { id: "E", text: "Anemia por deficiência de folato." },
     ],
-    correct: "",
+    correct: "B",
   },
   {
     id: 104,
@@ -124,9 +124,9 @@ export const QUESTOES_REVALIDA_2013_VERMELHA_96_110: Question[] = [
       { id: "B", text: "solicitar ressonância nuclear magnética da coluna vertebral." },
       { id: "C", text: "prescrever infiltração com corticoesteroides." },
       { id: "D", text: "afastar o paciente do trabalho por 30 dias." },
-      { id: "E", text: "solicitar cintilografia de coluna vertebral." },
+      { id: "E", "text": "solicitar cintilografia de coluna vertebral." },
     ],
-    correct: "",
+    correct: "A",
   },
   {
     id: 105,
@@ -140,7 +140,7 @@ export const QUESTOES_REVALIDA_2013_VERMELHA_96_110: Question[] = [
       { id: "D", text: "as mulheres, após os 40 anos de idade, podem ter anemia leve, por isso é correto reservar sangue para a cirurgia." },
       { id: "E", text: "a transfusão poderá ser indicada com a finalidade de proporcionar a mais rápida recuperação da paciente." },
     ],
-    correct: "",
+    correct: "A",
   },
   {
     id: 106,
@@ -154,7 +154,7 @@ export const QUESTOES_REVALIDA_2013_VERMELHA_96_110: Question[] = [
       { id: "D", text: "solicitação de transporte de ambulância para que possa ser feito o curativo e avaliação médica diária na Unidade de Saúde." },
       { id: "E", text: "orientação à família para fazer o curativo da ferida cirúrgica e solicitar transporte para aplicação diária da insulina na Unidade de Saúde." },
     ],
-    correct: "",
+    correct: "A",
   },
   {
     id: 107,
@@ -168,7 +168,7 @@ export const QUESTOES_REVALIDA_2013_VERMELHA_96_110: Question[] = [
       { id: "D", text: "o tratamento inicial deve ser cirúrgico para melhor avaliar o comprometimento do sistema reprodutivo." },
       { id: "E", text: "deve ser instituído o tratamento clínico ambulatorial de imediato, com retorno em 48 horas para reavaliação." },
     ],
-    correct: "",
+    correct: "C",
   },
   {
     id: 108,
@@ -182,7 +182,7 @@ export const QUESTOES_REVALIDA_2013_VERMELHA_96_110: Question[] = [
       { id: "D", text: "Laparotomia se ocorrer distensão abdominal importante." },
       { id: "E", text: "Laparotomia exploradora imediata." },
     ],
-    correct: "",
+    correct: "X",
   },
   {
     id: 109,
@@ -196,7 +196,7 @@ export const QUESTOES_REVALIDA_2013_VERMELHA_96_110: Question[] = [
       { id: "D", text: "6,0%." },
       { id: "E", text: "10,0%." },
     ],
-    correct: "",
+    correct: "X",
   },
   {
     id: 110,
@@ -210,6 +210,6 @@ export const QUESTOES_REVALIDA_2013_VERMELHA_96_110: Question[] = [
       { id: "D", text: "suspender o aleitamento materno, manter papa de legumes, iniciar fórmula antirregurgitação e solicitar endoscopia digestiva alta." },
       { id: "E", text: "manter a alimentação e acrescentar mamadeira com fórmula para a idade, solicitando retorno em 30 dias para reavaliar peso." },
     ],
-    correct: "",
+    correct: "A",
   },
 ];

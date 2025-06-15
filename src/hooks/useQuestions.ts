@@ -14,6 +14,7 @@ import { QUESTOES_REVALIDA_2016_PROVA2 } from "@/data/questoesRevalida2016Prova2
 import { QUESTOES_REVALIDA_2017_PROVA1 } from "@/data/questoesRevalida2017Prova1";
 import { QUESTOES_REVALIDA_2017_PROVA2 } from "@/data/questoesRevalida2017Prova2";
 import { QUESTOES_REVALIDA_2020 } from "@/data/questoesRevalida2020";
+import { QUESTOES_REVALIDA_2021 } from "@/data/questoesRevalida2021";
 
 const QUESTOES_POR_PAGINA = 10;
 
@@ -56,6 +57,9 @@ export function useQuestions() {
     }
     if (anoSelecionado === 2020) {
       return QUESTOES_REVALIDA_2020;
+    }
+    if (anoSelecionado === 2021) {
+      return QUESTOES_REVALIDA_2021;
     }
     return [];
   }, [anoSelecionado, tipoProva]);

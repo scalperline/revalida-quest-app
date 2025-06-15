@@ -1,3 +1,4 @@
+
 import {
   Select,
   SelectContent,
@@ -44,6 +45,7 @@ export function QuestionsHeader({
               <SelectItem value="2016">Revalida 2016</SelectItem>
               <SelectItem value="2017">Revalida 2017</SelectItem>
               <SelectItem value="2020">Revalida 2020</SelectItem>
+              <SelectItem value="2021">Revalida 2021</SelectItem>
             </SelectContent>
           </Select>
           {[2013, 2014, 2015, 2016, 2017].includes(anoSelecionado) &&

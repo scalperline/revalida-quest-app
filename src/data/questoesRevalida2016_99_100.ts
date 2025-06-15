@@ -1,34 +1,9 @@
+
 import { type Question } from "@/components/QuestionCard";
 
 export const QUESTOES_REVALIDA_2016_99_100: Question[] = [
   {
     id: 99,
-    year: 2016,
-    area: "Clínica Médica",
-    enunciado:
-      "Uma mulher com 34 anos de idade comparece ao ambulatório de Clínica Médica de atenção terciária, com vistas a esclarecer quadro caracterizado por hepatoesplenomegalia, linfadenopatia e alterações persistentes no hemograma. De acordo com a Ficha de Referência, o quadro teve início há 2 meses com mal-estar, dor de garganta e febre baixa; o exame físico evidenciou linfoadenomegalia cervical e hepatoesplenomegalia; o hemograma realizado na ocasião revelou linfocitose, além de anemia leve e trombocitopenia; a hipótese diagnóstica foi de mononucleose infecciosa; as pesquisas de anticorpos heterófilos contra o vírus Epstein-Barr (EBV) e de anticorpos anticapsídeo viral de EBV foram negativas na ocasião do primeiro atendimento e 2 semanas depois. Ao exame físico, a paciente apresenta-se levemente hipocorada, com discretas equimoses nos membros inferiores e superiores, com linfonodos palpáveis em todas as cadeias cervicais, baço palpável a cerca de 4 cm do rebordo costal esquerdo e fígado palpável a 2 cm do rebordo costal direito, na linha hemiclavicular. Os linfonodos cervicais são pequenos, com cerca de 1 cm de diâmetro, indolores e móveis. Novo hemograma mantém o padrão do resultado do exame anteriormente descrito.\n\nNesse caso, a hipótese diagnóstica e a conduta para a investigação diagnóstica são",
-    options: [
-      {
-        id: "A",
-        text: "leucemia linfoblástica aguda; realização de aspirado e biópsia de medula óssea.",
-      },
-      {
-        id: "B",
-        text: "mononucleose infecciosa atípica; pesquisa de EBV DNA por Polymerase Chain Reaction.",
-      },
-      {
-        id: "C",
-        text: "linfoma não-Hodgkin do tipo folicular; dosagem sérica de desidrogenase lática e biópsia linfonodal.",
-      },
-      {
-        id: "D",
-        text: "hepatite crônica por vírus C; pesquisa de HCV RNA por Polymerase Chain Reaction e biópsia hepática.",
-      },
-    ],
-    correct: "A",
-  },
-  {
-    id: 100,
     year: 2016,
     area: "Medicina Preventiva e Social",
     enunciado:
@@ -52,5 +27,31 @@ export const QUESTOES_REVALIDA_2016_99_100: Question[] = [
       },
     ],
     correct: "D",
+  },
+  {
+    id: 100,
+    year: 2016,
+    area: "Clínica Médica",
+    enunciado:
+      "Uma mulher com 34 anos de idade comparece ao ambulatório de Clínica Médica de atenção terciária, com vistas a esclarecer quadro caracterizado por hepatoesplenomegalia, linfadenopatia e alterações persistentes no hemograma. De acordo com a Ficha de Referência, o quadro teve início há 2 meses com mal-estar, dor de garganta e febre baixa; o exame físico evidenciou linfoadenomegalia cervical e hepatoesplenomegalia; o hemograma realizado na ocasião revelou linfocitose, além de anemia leve e trombocitopenia; a hipótese diagnóstica foi de mononucleose infecciosa; as pesquisas de anticorpos heterófilos contra o vírus Epstein-Barr (EBV) e de anticorpos anticapsídeo viral de EBV foram negativas na ocasião do primeiro atendimento e 2 semanas depois. Ao exame físico, a paciente apresenta-se levemente hipocorada, com discretas equimoses nos membros inferiores e superiores, com linfonodos palpáveis em todas as cadeias cervicais, baço palpável a cerca de 4 cm do rebordo costal esquerdo e fígado palpável a 2 cm do rebordo costal direito, na linha hemiclavicular. Os linfonodos cervicais são pequenos, com cerca de 1 cm de diâmetro, indolores e móveis. Novo hemograma mantém o padrão do resultado do exame anteriormente descrito.\n\nNesse caso, a hipótese diagnóstica e a conduta para a investigação diagnóstica são",
+    options: [
+      {
+        id: "A",
+        text: "leucemia linfoblástica aguda; realização de aspirado e biópsia de medula óssea.",
+      },
+      {
+        id: "B",
+        text: "mononucleose infecciosa atípica; pesquisa de EBV DNA por Polymerase Chain Reaction.",
+      },
+      {
+        id: "C",
+        text: "linfoma não-Hodgkin do tipo folicular; dosagem sérica de desidrogenase lática e biópsia linfonodal.",
+      },
+      {
+        id: "D",
+        text: "hepatite crônica por vírus C; pesquisa de HCV RNA por Polymerase Chain Reaction e biópsia hepática.",
+      },
+    ],
+    correct: "A",
   },
 ];

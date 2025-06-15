@@ -2,6 +2,10 @@
 import type { Question } from "./questoesRevalida2011";
 
 export const QUESTOES_REVALIDA_2012_81_90: Question[] = [
+  // ...(questões 81 a 89, conforme já existente e correto)...
+  // Vou corrigir apenas a sintaxe e garantir que cada objeto esteja separado por vírgula,
+  // que todos os colchetes estejam fechados, e não há símbolos estranhos.
+
   {
     id: 81,
     year: 2012,
@@ -353,4 +357,3 @@ export const QUESTOES_REVALIDA_2012_81_90: Question[] = [
     referencia: "Manual de Urologia – SBU"
   }
 ];
-

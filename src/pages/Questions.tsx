@@ -1,9 +1,9 @@
-
 import { QuestionCard } from "@/components/QuestionCard";
 import { DiscursiveQuestionCard } from "@/components/DiscursiveQuestionCard";
 import { useState } from "react";
 import { QUESTOES_REVALIDA_2011 } from "@/data/questoesRevalida2011";
 import { QUESTOES_DISCURSIVAS_REVALIDA_2011 } from "@/data/questoesDiscursivasRevalida2011";
+import { QUESTOES_REVALIDA_2012 } from "@/data/questoesRevalida2012";
 import { QuestionsHeader } from "@/components/QuestionsHeader";
 
 const QUESTOES_POR_PAGINA = 10;
@@ -17,11 +17,14 @@ export default function Questions() {
   const questoesObjetivas =
     anoSelecionado === 2011
       ? QUESTOES_REVALIDA_2011.filter((q) => q.year === anoSelecionado)
+      : anoSelecionado === 2012
+      ? QUESTOES_REVALIDA_2012.filter((q) => q.year === anoSelecionado)
       : [];
+
   const questoesDiscursivas =
     anoSelecionado === 2011
       ? QUESTOES_DISCURSIVAS_REVALIDA_2011.filter((q) => q.ano === anoSelecionado)
-      : [];
+      : []; // Aqui entrará as discursivas de 2012 no futuro
 
   // Escolher a lista de questões conforme o tipo
   const questoesAnoSelecionado =
@@ -146,4 +149,3 @@ export default function Questions() {
     </div>
   );
 }
-

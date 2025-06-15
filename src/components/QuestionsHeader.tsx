@@ -18,8 +18,10 @@ interface QuestionsHeaderProps {
   setTipoProva: (tipo: string) => void;
 }
 
+// Adicionado 2012 na lista de anos disponíveis
 const ANOS_PROVA = [
   { value: 2011, label: "Revalida 2011" },
+  { value: 2012, label: "Revalida 2012" },
 ];
 
 const TIPOS_PROVA = [

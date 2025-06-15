@@ -14,16 +14,25 @@ interface QuestionsHeaderProps {
   anoSelecionado: number;
   setAnoSelecionado: (value: number) => void;
   totalQuestoes: number;
+  tipoProva: string;
+  setTipoProva: (tipo: string) => void;
 }
 
 const ANOS_PROVA = [
   { value: 2011, label: "Revalida 2011" },
 ];
 
+const TIPOS_PROVA = [
+  { value: "objetiva", label: "Prova Objetiva" },
+  { value: "discursiva", label: "Prova Discursiva" },
+];
+
 export function QuestionsHeader({
   anoSelecionado,
   setAnoSelecionado,
   totalQuestoes,
+  tipoProva,
+  setTipoProva,
 }: QuestionsHeaderProps) {
   return (
     <>
@@ -46,25 +55,45 @@ export function QuestionsHeader({
         </span>
       </div>
 
-      {/* Filtro por ano */}
+      {/* Filtro por ano e tipo de prova */}
       <div className="max-w-6xl mx-auto w-full p-6 rounded-2xl border border-muted bg-card shadow flex flex-col gap-6 mb-8">
-        <div className="flex flex-col gap-1 w-full">
-          <label className="mb-1 text-lg font-semibold">Ano da prova</label>
-          <Select
-            value={anoSelecionado.toString()}
-            onValueChange={v => setAnoSelecionado(Number(v))}
-          >
-            <SelectTrigger className="w-full h-12 rounded-lg bg-background border border-muted">
-              <SelectValue placeholder="Selecione o ano" />
-            </SelectTrigger>
-            <SelectContent>
-              {ANOS_PROVA.map(a => (
-                <SelectItem key={a.value} value={a.value.toString()}>
-                  {a.label}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+        <div className="flex flex-col gap-1 w-full md:flex-row md:items-end md:gap-8">
+          <div className="flex-1">
+            <label className="mb-1 text-lg font-semibold">Ano da prova</label>
+            <Select
+              value={anoSelecionado.toString()}
+              onValueChange={v => setAnoSelecionado(Number(v))}
+            >
+              <SelectTrigger className="w-full h-12 rounded-lg bg-background border border-muted">
+                <SelectValue placeholder="Selecione o ano" />
+              </SelectTrigger>
+              <SelectContent>
+                {ANOS_PROVA.map(a => (
+                  <SelectItem key={a.value} value={a.value.toString()}>
+                    {a.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+          <div className="flex-1">
+            <label className="mb-1 text-lg font-semibold">Tipo de prova</label>
+            <Select
+              value={tipoProva}
+              onValueChange={v => setTipoProva(v)}
+            >
+              <SelectTrigger className="w-full h-12 rounded-lg bg-background border border-muted">
+                <SelectValue placeholder="Selecione o tipo de prova" />
+              </SelectTrigger>
+              <SelectContent>
+                {TIPOS_PROVA.map(tp => (
+                  <SelectItem key={tp.value} value={tp.value}>
+                    {tp.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
         </div>
       </div>
     </>

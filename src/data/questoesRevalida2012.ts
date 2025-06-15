@@ -1,3 +1,4 @@
+
 import { Question } from "./questoesRevalida2011";
 
 import { QUESTOES_REVALIDA_2012_1_10 } from "./questoesRevalida2012_1_10";
@@ -10,6 +11,7 @@ import { QUESTOES_REVALIDA_2012_61_70 } from "./questoesRevalida2012_61_70";
 import { QUESTOES_REVALIDA_2012_71_80 } from "./questoesRevalida2012_71_80";
 import { QUESTOES_REVALIDA_2012_81_85 } from "./questoesRevalida2012_81_85";
 import { QUESTOES_REVALIDA_2012_86_90 } from "./questoesRevalida2012_86_90";
+import { QUESTOES_REVALIDA_2012_91_100 } from "./questoesRevalida2012_91_100";
 
 // Todos os arquivos são agregados mantendo a ordem sequencial.
 export const QUESTOES_REVALIDA_2012: Question[] = [
@@ -23,4 +25,5 @@ export const QUESTOES_REVALIDA_2012: Question[] = [
   ...QUESTOES_REVALIDA_2012_71_80,
   ...QUESTOES_REVALIDA_2012_81_85,
   ...QUESTOES_REVALIDA_2012_86_90,
+  ...QUESTOES_REVALIDA_2012_91_100,
 ];

@@ -9,11 +9,12 @@ import { QUESTOES_REVALIDA_2014 } from "@/data/questoesRevalida2014";
 import { QUESTOES_REVALIDA_2014_VERMELHA } from "@/data/questoesRevalida2014Vermelha";
 import { QUESTOES_REVALIDA_2015 } from "@/data/questoesRevalida2015";
 import { QUESTOES_REVALIDA_2015_VERMELHA } from "@/data/questoesRevalida2015Vermelha";
+import { QUESTOES_REVALIDA_2016 } from "@/data/questoesRevalida2016";
 
 const QUESTOES_POR_PAGINA = 10;
 
 export function useQuestions() {
-  const [anoSelecionado, setAnoSelecionado] = useState<number>(2015);
+  const [anoSelecionado, setAnoSelecionado] = useState<number>(2016);
   const [tipoProva, setTipoProva] = useState<string>("Cinza");
   const [paginaAtual, setPaginaAtual] = useState(1);
 
@@ -38,6 +39,9 @@ export function useQuestions() {
       return tipoProva === "Cinza"
         ? QUESTOES_REVALIDA_2015
         : QUESTOES_REVALIDA_2015_VERMELHA;
+    }
+    if (anoSelecionado === 2016) {
+      return QUESTOES_REVALIDA_2016;
     }
     return [];
   }, [anoSelecionado, tipoProva]);

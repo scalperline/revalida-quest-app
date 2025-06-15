@@ -42,6 +42,7 @@ export function QuestionsHeader({
               <SelectItem value="2013">Revalida 2013</SelectItem>
               <SelectItem value="2014">Revalida 2014</SelectItem>
               <SelectItem value="2015">Revalida 2015</SelectItem>
+              <SelectItem value="2016">Revalida 2016</SelectItem>
             </SelectContent>
           </Select>
           {[2013, 2014, 2015].includes(anoSelecionado) && tipoProva && setTipoProva && (

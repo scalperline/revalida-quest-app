@@ -32,15 +32,15 @@ export default function Questions() {
       ? QUESTOES_REVALIDA_2011.filter((q) => q.year === anoSelecionado)
       : [];
 
-  // Filtros aplicados corretamente ao banco
+  // Filtros aplicados corretamente ao banco (sem filtrar por tema, pois o banco não possui "tema1"/"tema2" nos enunciados)
   const questoesFiltradas = questoesAnoSelecionado.filter((q) =>
     (especialidade ? q.area.toLocaleLowerCase().replace(/ /g, "-") === especialidade : true) &&
-    (temaSelecionado ? q.enunciado.toLocaleLowerCase().includes(temaSelecionado) : true) &&
     (
       q.enunciado.toLocaleLowerCase().includes(filtro.toLocaleLowerCase()) ||
       q.area.toLocaleLowerCase().includes(filtro.toLocaleLowerCase()) ||
       q.year.toString().includes(filtro)
     )
+    // Removido filtro de temaSelecionado, pois atualmente não há relação real
   );
 
   const totalPaginas = Math.ceil(questoesFiltradas.length / QUESTOES_POR_PAGINA);
@@ -50,13 +50,11 @@ export default function Questions() {
   const indiceFim = indiceInicio + QUESTOES_POR_PAGINA;
   const questoesPaginadas = questoesFiltradas.slice(indiceInicio, indiceFim);
 
-  // Sempre que filtro ou ano muda, volta para página 1
   function atualizarFiltro(e: React.ChangeEvent<HTMLInputElement>) {
     setFiltro(e.target.value);
     setPaginaAtual(1);
   }
 
-  // Renderização da paginação (simplificada para clareza, pode customizar conforme o código original)
   function renderPagination() {
     if (totalPaginas <= 1) return null;
     const items = [];
@@ -129,6 +127,8 @@ export default function Questions() {
         {questoesFiltradas.length === 0 ? (
           <div className="text-center text-muted-foreground py-40 text-lg rounded-lg bg-card shadow max-w-2xl mx-auto">
             Nenhuma questão encontrada.
+            <br />
+            <span className="block text-xs mt-3 text-muted-foreground">Dica: verifique os filtros de especialidade, ano, tema ou pesquisa.</span>
           </div>
         ) : (
           <div>

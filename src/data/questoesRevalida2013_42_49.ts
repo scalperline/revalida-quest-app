@@ -132,18 +132,15 @@ A intervenção mais importante a ser realizada, antes da transferência a fim d
   {
     id: 49,
     year: 2013,
-    area: "Clínica Médica/Geriatria",
-    enunciado: `Homem com 76 anos de idade, portador de insuficiência cardíaca terminal e doença coronariana, é acompanhado pelo médico da Equipe de Saúde da Família há dois anos, com visitas domiciliares periódicas. Durante o seu turno de trabalho na Unidade de Saúde da Família, os familiares procuram o médico e informam que o paciente acabara de falecer em seu domicílio.
-
-O procedimento em relação à emissão da declaração de óbito e ao preenchimento da causa básica do óbito é:
-`,
+    area: "Ginecologia/Obstetrícia",
+    enunciado: `Uma gestante de 32 semanas, com pré-eclâmpsia grave, é admitida na maternidade com queixa de cefaleia e escotomas. Ao exame, apresenta PA = 170 x 110 mmHg. Durante a avaliação, a paciente apresenta uma convulsão tônico-clônica generalizada.\n\nQual a conduta imediata mais adequada?`,
     options: [
-      { id: "A", text: "preencher a declaração e entregar aos familiares, identificando insuficiência cardíaca como causa básica do óbito." },
-      { id: "B", text: "acionar o IML (Instituto Médico Legal); o legista deverá declarar 'falência múltipla de órgãos' como causa básica do óbito." },
-      { id: "C", text: "acionar o SVO (Sistema de Verificação de Óbitos); o legista deverá declarar insuficiência coronariana como causa básica do óbito." },
-      { id: "D", text: "acompanhar os familiares ao domicílio e constatar o óbito o mais breve possível; declarar miocardiopatia isquêmica como causa básica do óbito." },
-      { id: "E", text: "acionar o SAMU (Serviço de Atendimento Móvel de Urgência); o médico deverá declarar 'causa da morte desconhecida' como causa básica do óbito." },
+      { id: "A", text: "Administrar diazepam intravenoso." },
+      { id: "B", text: "Administrar sulfato de magnésio intravenoso." },
+      { id: "C", text: "Realizar cesariana de emergência." },
+      { id: "D", text: "Administrar hidralazina intravenosa." },
+      { id: "E", text: "Aguardar o término da convulsão para iniciar o tratamento." },
     ],
-    correct: "D"
-  }
+    correct: "", // Questão Anulada
+  },
 ];

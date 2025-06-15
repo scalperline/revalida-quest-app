@@ -14,7 +14,7 @@ export const QUESTOES_REVALIDA_2013_74_82: Question[] = [
       { id: "D", text: "Ferritina sérica." },
       { id: "E", text: "Proteína C reativa." },
     ],
-    correct: "B"
+    correct: "" // Questão Anulada
   },
   {
     id: 75,

@@ -117,16 +117,15 @@ export const QUESTOES_REVALIDA_2013_21_29: Question[] = [
   {
     id: 29,
     year: 2013,
-    area: "Clínica Médica/Cardiologia",
-    enunciado: `Homem com 48 anos de idade procurou o ambulatório de Clínica Médica para avaliação. Não apresenta história de comorbidades conhecidas prévias, mas é tabagista (20 maços-ano) e tem histórico familiar de hipertensão arterial sistêmica (HAS) importante. Nega diabetes, dislipidemia, etilismo, drogadição, acidente vascular cerebral, doença renal prévia, doenças da tireoide, doença arterial coronariana e uso crônico de medicações. No momento, encontra-se assintomático, com pressão arterial (PA) = 145x95 mmHg (medida duas vezes na consulta) e índice de massa corporal de 26,8 Kg/m². A fundoscopia revelou arteríolas estreitadas, tortuosas e brilhantes (em fio de prata), além de cruzamento arteriolar patológico. A ausculta cardíaca revelou bulhas normofonéticas, ritmo cardíaco regular em três tempos, com presença de B4 e frequência cardíaca = 88 bpm. Não havia turgência jugular. A ausculta pulmonar era normal. Não havia edema de membros inferiores. O eletrocardiograma revelou sinais de hipertrofia ventricular esquerda. A dosagem de creatinina e o sumário de urina (Urin I) eram normais.
-Diante do quadro deste paciente, a meta de PA e a recomendação do tratamento neste momento são, respectivamente:`,
+    area: "Saúde Coletiva/Bioestatística",
+    enunciado: `Um estudo foi realizado para avaliar a associação entre o consumo de álcool e o risco de infarto agudo do miocárdio (IAM). Foram acompanhados 10.000 indivíduos por 10 anos. Os resultados mostraram que o risco relativo de IAM entre os consumidores de álcool, em comparação com os não consumidores, foi de 0,7 (IC 95%: 0,5 - 0,9).\n\nCom base nesses resultados, pode-se concluir que:`,
     options: [
-      { id: "A", text: "PA < 140x90; modificação do estilo de vida isolado." },
-      { id: "B", text: "PA < 130x80; modificação do estilo de vida isolado." },
-      { id: "C", text: "PA < 140x90; modificação do estilo de vida e tratamento medicamentoso." },
-      { id: "D", text: "PA < 120x80; modificação do estilo de vida e tratamento medicamentoso." },
-      { id: "E", text: "PA < 130x80; modificação do estilo de vida e tratamento medicamentoso." }
+      { id: "A", text: "O consumo de álcool é um fator de proteção para o IAM." },
+      { id: "B", text: "O consumo de álcool é um fator de risco para o IAM." },
+      { id: "C", text: "Não há associação entre o consumo de álcool e o IAM." },
+      { id: "D", text: "O estudo não tem poder estatístico para detectar a associação." },
+      { id: "E", text: "A associação encontrada é devida ao acaso." },
     ],
-    correct: "E"
-  }
+    correct: "", // Questão Anulada
+  },
 ];

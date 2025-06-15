@@ -1,4 +1,3 @@
-
 import { type Question } from "./questoesRevalida2011";
 
 export const QUESTOES_REVALIDA_2014_29_42: Question[] = [
@@ -14,7 +13,7 @@ export const QUESTOES_REVALIDA_2014_29_42: Question[] = [
       { id: "C", text: "encaminhar para procedimento de biópsia do colo uterino." },
       { id: "D", text: "encaminhar para colposcopia e escovado endocervical." },
     ],
-    correct: "A",
+    correct: "D",
   },
   {
     id: 30,
@@ -28,7 +27,7 @@ export const QUESTOES_REVALIDA_2014_29_42: Question[] = [
       { id: "C", text: "deve ser realizada, através do instrumento de autorização judicial, regulamentada na forma de lei." },
       { id: "D", text: "deve ser realizada, através do consentimento expresso do paciente, da parceira e dos pais." },
     ],
-    correct: "D",
+    correct: "C",
   },
   {
     id: 31,
@@ -42,7 +41,7 @@ export const QUESTOES_REVALIDA_2014_29_42: Question[] = [
       { id: "C", text: "Diarreia grave com desidratação grave ou muito grave; referir urgentemente para o hospital." },
       { id: "D", text: "Diarreia moderada com desidratação; referir urgentemente para o hospital." },
     ],
-    correct: "B",
+    correct: "C",
   },
   {
     id: 32,
@@ -56,7 +55,7 @@ export const QUESTOES_REVALIDA_2014_29_42: Question[] = [
       { id: "C", text: "nos contatos adultos ou adolescentes (> 10 anos ), assintomáticos, não há necessidade de solicitação da Prova Tuberculínica." },
       { id: "D", text: "nos contatos sintomáticos adultos, o diagnóstico de tuberculose é estabelecido pela cultura de escarro positiva para Bacilo de Koch (BK)." },
     ],
-    correct: "C",
+    correct: "D",
   },
   {
     id: 33,
@@ -196,6 +195,6 @@ export const QUESTOES_REVALIDA_2014_29_42: Question[] = [
       { id: "C", text: "acrescenta recursos à atenção básica de acordo com resultados, acesso e qualidade, conforme avaliação de programa específico (Programa de Melhoria de Acesso e Qualidade - PMAQ)." },
       { id: "D", text: "é impedida de repassar recursos complementares aos municípios, além daqueles previstos para a atenção básica, mesmo diante de especificidades regionais que justifiquem necessidade de maior investimento." },
     ],
-    correct: "D",
+    correct: "C",
   },
 ];

@@ -1,4 +1,3 @@
-
 import { type Question } from "./questoesRevalida2011";
 
 export const QUESTOES_REVALIDA_2014_80_95: Question[] = [
@@ -13,7 +12,7 @@ export const QUESTOES_REVALIDA_2014_80_95: Question[] = [
       { id: "C", text: "Prescrever diurético." },
       { id: "D", text: "Prescrever gluconato de cálcio." },
     ],
-    correct: "A",
+    correct: "C",
   },
   {
     id: 81,
@@ -26,7 +25,7 @@ export const QUESTOES_REVALIDA_2014_80_95: Question[] = [
       { id: "C", text: "ancilostomíase; mebendazol." },
       { id: "D", text: "larva migrans cutânea; tiabendazol." },
     ],
-    correct: "A",
+    correct: "C",
   },
   {
     id: 82,
@@ -41,7 +40,7 @@ export const QUESTOES_REVALIDA_2014_80_95: Question[] = [
       { id: "D", text: "a remoção de um segmento de unha com anestesia da região realizada através de bloqueio digital com lidocaína com vasoconstritor." },
     ],
     correct: "C",
-  },
+  } as any,
   {
     id: 83,
     year: 2014,
@@ -53,7 +52,7 @@ export const QUESTOES_REVALIDA_2014_80_95: Question[] = [
       { id: "C", text: "claritromicina e amoxicilina, ambos na dose de 1g, uma vez ao dia, por 7 dias." },
       { id: "D", text: "claritromicina 500 mg de 12/12 horas e amoxicilina - 1g de 12/12 horas, por 10 dias." },
     ],
-    correct: "B",
+    correct: "D",
   },
   {
     id: 84,
@@ -211,5 +210,5 @@ export const QUESTOES_REVALIDA_2014_80_95: Question[] = [
       { id: "D", text: "Mycoplasma pneumoniae; antibioticoterapia com macrolídios." },
     ],
     correct: "C",
-  },
+  } as any,
 ];

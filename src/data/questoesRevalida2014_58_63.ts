@@ -13,7 +13,7 @@ export const QUESTOES_REVALIDA_2014_58_63: Question[] = [
       { id: "C", text: "iniciar nitroprussiato de sódio e dobutamina e encaminhar para cirurgia cardíaca de emergência." },
       { id: "D", text: "iniciar noradrenalina e dopamina e encaminhar para instalação, de emergência, de balão intra-aórtico." },
     ],
-    correct: "A",
+    correct: "C",
   },
   {
     id: 59,
@@ -29,7 +29,7 @@ export const QUESTOES_REVALIDA_2014_58_63: Question[] = [
       { id: "D", text: "Candida albicans." },
     ],
     correct: "A",
-  },
+  } as any,
   {
     id: 60,
     year: 2014,

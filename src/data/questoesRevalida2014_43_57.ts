@@ -1,4 +1,3 @@
-
 import { type Question } from "./questoesRevalida2011";
 
 export const QUESTOES_REVALIDA_2014_43_57: Question[] = [
@@ -28,7 +27,7 @@ export const QUESTOES_REVALIDA_2014_43_57: Question[] = [
       { id: "C", text: "encaminhar para consulta com especialista." },
       { id: "D", text: "prescrever terapia hormonal com a associação estradiol-progestagênio." },
     ],
-    correct: "C",
+    correct: "A",
   },
   {
     id: 45,
@@ -42,7 +41,7 @@ export const QUESTOES_REVALIDA_2014_43_57: Question[] = [
       { id: "C", text: "Fístula anorretal; iniciar tratamento clínico com analgésicos e referenciar ao coloproctologista." },
       { id: "D", text: "Fístula anorretal; referenciar ao Pronto-Socorro com indicação de cirurgia de urgência." },
     ],
-    correct: "A",
+    correct: "B",
   },
   {
     id: 46,
@@ -84,7 +83,7 @@ export const QUESTOES_REVALIDA_2014_43_57: Question[] = [
       { id: "C", text: "Escore de Child-Pugh." },
       { id: "D", text: "Grau de fibrose hepática." },
     ],
-    correct: "C",
+    correct: "B",
   },
   {
     id: 49,
@@ -98,7 +97,7 @@ export const QUESTOES_REVALIDA_2014_43_57: Question[] = [
       { id: "C", text: "Não prescrever ACO, pois a paciente é menor de idade." },
       { id: "D", text: "Orientar que a paciente venha à consulta acompanhada da mãe." },
     ],
-    correct: "A",
+    correct: "B",
   },
   {
     id: 50,
@@ -112,7 +111,7 @@ export const QUESTOES_REVALIDA_2014_43_57: Question[] = [
       { id: "C", text: "Torção de cisto de ovário; ultrassonografia pélvica." },
       { id: "D", text: "Adenosinas intestinais; radiografia de abdome de pé e deitada." },
     ],
-    correct: "A",
+    correct: "D",
   },
   {
     id: 51,
@@ -140,7 +139,7 @@ export const QUESTOES_REVALIDA_2014_43_57: Question[] = [
       { id: "C", text: "a doença é transmitida predominantemente, pela mucosa oral e mucosa do trato respiratório, através de aerossóis, secreções orais e nasais e por objetos contaminados, o que significa que poucos se infectam e muitos adoecem." },
       { id: "D", text: "para avaliar a consistência de incidência, no Brasil, em 2011, utilizada a somatória do número de casos novos ou iniciados no período acrescido do número de casos antigos existentes no período em estudo." },
     ],
-    correct: "A",
+    correct: "B",
   },
   {
     id: 53,
@@ -210,6 +209,6 @@ export const QUESTOES_REVALIDA_2014_43_57: Question[] = [
       { id: "C", text: "exposição crônica à radiação ionizante." },
       { id: "D", text: "exposição solar cumulativa prolongada." },
     ],
-    correct: "C",
+    correct: "D",
   },
 ];

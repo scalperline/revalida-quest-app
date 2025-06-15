@@ -1,4 +1,3 @@
-
 import { type Question } from "./questoesRevalida2011";
 
 export const QUESTOES_REVALIDA_2014_96_110: Question[] = [
@@ -41,7 +40,7 @@ export const QUESTOES_REVALIDA_2014_96_110: Question[] = [
       { id: "C", text: "desproporção céfalo-pélvica; parto fórceps." },
       { id: "D", text: "fase ativa prolongada; parto cesáreo." },
     ],
-    correct: "D",
+    correct: "B",
   } as any,
   {
     id: 99,
@@ -54,7 +53,7 @@ export const QUESTOES_REVALIDA_2014_96_110: Question[] = [
       { id: "C", text: "Sutura primária, toxoide tetânico e imunoglobulina antitetânica." },
       { id: "D", text: "Desbridamento das bordas, sutura primária e toxoide tetânico." },
     ],
-    correct: "D",
+    correct: "B",
   },
   {
     id: 100,
@@ -107,7 +106,7 @@ export const QUESTOES_REVALIDA_2014_96_110: Question[] = [
       { id: "C", text: "a cada dois anos, inciando a partir dos 40 anos." },
       { id: "D", text: "a cada dois anos, inciando a partir dos 50 anos." },
     ],
-    correct: "A",
+    correct: "B",
   },
   {
     id: 104,
@@ -120,7 +119,7 @@ export const QUESTOES_REVALIDA_2014_96_110: Question[] = [
       { id: "C", text: "Drenagem pleural a selo d'água no quinto espaço intercostal." },
       { id: "D", text: "Descompressão pleural por punção no segundo espaço intercostal." },
     ],
-    correct: "A",
+    correct: "B",
   },
   {
     id: 105,

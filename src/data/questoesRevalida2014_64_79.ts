@@ -1,4 +1,3 @@
-
 import { type Question } from "./questoesRevalida2011";
 
 export const QUESTOES_REVALIDA_2014_64_79: Question[] = [
@@ -13,7 +12,7 @@ export const QUESTOES_REVALIDA_2014_64_79: Question[] = [
       { id: "C", text: "sinéquia uterina." },
       { id: "D", text: "falência ovariana precoce." },
     ],
-    correct: "B",
+    correct: "A",
   },
   {
     id: 65,
@@ -28,7 +27,7 @@ export const QUESTOES_REVALIDA_2014_64_79: Question[] = [
       { id: "D", text: "abscesso hepático; o paciente deve ser encaminhado para drenagem do abscesso o mais rapidamente possível." },
     ],
     correct: "D",
-  },
+  } as any,
   {
     id: 66,
     year: 2014,
@@ -40,7 +39,7 @@ export const QUESTOES_REVALIDA_2014_64_79: Question[] = [
       { id: "C", text: "infecção urinária." },
       { id: "D", text: "parasitose intestinal." },
     ],
-    correct: "D",
+    correct: "A",
   },
   {
     id: 67,
@@ -53,7 +52,7 @@ export const QUESTOES_REVALIDA_2014_64_79: Question[] = [
       { id: "C", text: "poderá emitir a CAT e o atestado médico para a concessão de benefícios previdenciários, que deverão ser completamente acatados pelo médico perito do INSS." },
       { id: "D", text: "não poderá emitir atestado médico para a concessão de benefícios previdenciários, por não ter atendido a paciente no momento do acidente, sendo a emissão da CAT de responsabilidade da empresa empregadora." },
     ],
-    correct: "C",
+    correct: "B",
   },
   {
     id: 68,
@@ -66,7 +65,7 @@ export const QUESTOES_REVALIDA_2014_64_79: Question[] = [
       { id: "C", text: "Episódio depressivo (depressão maior); prescrição de inibidor seletivo de receptação de serotonina." },
       { id: "D", text: "Transtorno de humor (depressivo) induzido pelo álcool; recomendação para se abster do uso de álcool." },
     ],
-    correct: "A",
+    correct: "C",
   },
   {
     id: 69,
@@ -81,7 +80,7 @@ export const QUESTOES_REVALIDA_2014_64_79: Question[] = [
       { id: "D", text: "cultura de secreção da lesão." },
     ],
     correct: "B",
-  },
+  } as any,
   {
     id: 70,
     year: 2014,
@@ -119,7 +118,7 @@ export const QUESTOES_REVALIDA_2014_64_79: Question[] = [
       { id: "C", text: "Colibacilose." },
       { id: "D", text: "Giardíase." },
     ],
-    correct: "D",
+    correct: "B",
   },
   {
     id: 73,
@@ -145,7 +144,7 @@ export const QUESTOES_REVALIDA_2014_64_79: Question[] = [
       { id: "C", text: "realização imediata de curetagem uterina." },
       { id: "D", text: "repouso relativo no domicílio e controle ambulatorial." },
     ],
-    correct: "B",
+    correct: "D",
   },
   {
     id: 75,
@@ -158,7 +157,7 @@ export const QUESTOES_REVALIDA_2014_64_79: Question[] = [
       { id: "C", text: "Gentamicina." },
       { id: "D", text: "Ciprofloxacina." },
     ],
-    correct: "C",
+    correct: "A",
   },
   {
     id: 76,
@@ -197,7 +196,7 @@ export const QUESTOES_REVALIDA_2014_64_79: Question[] = [
       { id: "C", text: "hipertensão portal, recomendando-se a reposição volêmica, inicialmente com cristaloides, e endoscopia digestiva alta entre 2 e 24 horas do atendimento." },
       { id: "D", text: "síndrome de Mallory-Weiss, devendo-se fazer a reposição volêmica imediata com coloide, sendo a endoscopia digestiva alta contraindicada nessa fase." },
     ],
-    correct: "B",
+    correct: "C",
   },
   {
     id: 79,

@@ -82,9 +82,11 @@ export function QuestionCard({ question, showAnswer }: Props) {
 
   return (
     <div className="bg-card shadow-lg rounded-2xl px-6 py-8 mb-7 border border-muted max-w-2xl mx-auto flex flex-col gap-4 transition-colors duration-200">
-      {/* Número da questão oficial */}
-      <div className="flex items-center gap-2 text-primary font-bold text-base pb-1">
-        Questão {question.id}
+      {/* Número da questão oficial com borda em destaque */}
+      <div className="flex items-center gap-2 pb-1">
+        <div className="rounded-xl border-2 border-primary bg-primary/10 px-4 py-1 font-bold text-primary text-base shadow-sm select-none">
+          Questão {question.id}
+        </div>
       </div>
       <div className="flex items-center gap-2 text-sm text-muted-foreground pb-1">
         <span>{question.year}</span>

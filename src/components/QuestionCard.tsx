@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 
 type Option = {
@@ -83,6 +82,10 @@ export function QuestionCard({ question, showAnswer }: Props) {
 
   return (
     <div className="bg-card shadow-lg rounded-2xl px-6 py-8 mb-7 border border-muted max-w-2xl mx-auto flex flex-col gap-4 transition-colors duration-200">
+      {/* Número da questão oficial */}
+      <div className="flex items-center gap-2 text-primary font-bold text-base pb-1">
+        Questão {question.id}
+      </div>
       <div className="flex items-center gap-2 text-sm text-muted-foreground pb-1">
         <span>{question.year}</span>
         <span className="mx-2 text-xs opacity-80">|</span>
@@ -146,4 +149,3 @@ export function QuestionCard({ question, showAnswer }: Props) {
     </div>
   );
 }
-

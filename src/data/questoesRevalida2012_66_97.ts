@@ -72,352 +72,442 @@ Frente a esse quadro, a conduta mais adequada é`,
     correct: "A",
     referencia: "Ministério da Saúde. Dengue: diagnóstico e manejo clínico."
   },
+  // Questão 69 (Substitua pelo conteúdo oficial real)
   {
-    id: 69, year: 2012, area: "", enunciado: "",
+    id: 69,
+    year: 2012,
+    area: "Clínica Médica/Exemplo",
+    enunciado: `Exemplo de questão completa para ilustrar preenchimento correto. Por favor substitua este conteúdo pela transcrição fiel da questão oficial 69 quando disponível.`,
     options: [
-      { id: "A", text: "" },
-      { id: "B", text: "" },
-      { id: "C", text: "" },
-      { id: "D", text: "" },
-      { id: "E", text: "" }
+      { id: "A", text: "Alternativa A" },
+      { id: "B", text: "Alternativa B" },
+      { id: "C", text: "Alternativa C" },
+      { id: "D", text: "Alternativa D" },
+      { id: "E", text: "Alternativa E" }
     ],
-    correct: "",
-    referencia: ""
+    correct: "A",
+    referencia: "Referência oficial da questão 69."
+  },
+  // Questão 70 (repita padrão, substitua com texto real ao conseguir)
+  {
+    id: 70,
+    year: 2012,
+    area: "Área da questão 70",
+    enunciado: `Enunciado oficial da questão 70... Por favor, complete com o texto original.`,
+    options: [
+      { id: "A", text: "Alternativa A" },
+      { id: "B", text: "Alternativa B" },
+      { id: "C", text: "Alternativa C" },
+      { id: "D", text: "Alternativa D" },
+      { id: "E", text: "Alternativa E" }
+    ],
+    correct: "B",
+    referencia: "Referência oficial da questão 70."
+  },
+  // Repita este modelo para todas as demais questões até a 97:
+  {
+    id: 71,
+    year: 2012,
+    area: "Área da questão 71",
+    enunciado: "Enunciado oficial da questão 71...",
+    options: [
+      { id: "A", text: "Alternativa A" },
+      { id: "B", text: "Alternativa B" },
+      { id: "C", text: "Alternativa C" },
+      { id: "D", text: "Alternativa D" },
+      { id: "E", text: "Alternativa E" }
+    ],
+    correct: "C",
+    referencia: "Referência oficial da questão 71."
   },
   {
-    id: 70, year: 2012, area: "", enunciado: "",
+    id: 72,
+    year: 2012,
+    area: "Área da questão 72",
+    enunciado: "Enunciado oficial da questão 72...",
     options: [
-      { id: "A", text: "" },
-      { id: "B", text: "" },
-      { id: "C", text: "" },
-      { id: "D", text: "" },
-      { id: "E", text: "" }
+      { id: "A", text: "Alternativa A" },
+      { id: "B", text: "Alternativa B" },
+      { id: "C", text: "Alternativa C" },
+      { id: "D", text: "Alternativa D" },
+      { id: "E", text: "Alternativa E" }
     ],
-    correct: "",
-    referencia: ""
+    correct: "C",
+    referencia: "Referência oficial da questão 72."
   },
   {
-    id: 71, year: 2012, area: "", enunciado: "",
+    id: 73,
+    year: 2012,
+    area: "Área da questão 73",
+    enunciado: "Enunciado oficial da questão 73...",
     options: [
-      { id: "A", text: "" },
-      { id: "B", text: "" },
-      { id: "C", text: "" },
-      { id: "D", text: "" },
-      { id: "E", text: "" }
+      { id: "A", text: "Alternativa A" },
+      { id: "B", text: "Alternativa B" },
+      { id: "C", text: "Alternativa C" },
+      { id: "D", text: "Alternativa D" },
+      { id: "E", text: "Alternativa E" }
     ],
-    correct: "",
-    referencia: ""
+    correct: "C",
+    referencia: "Referência oficial da questão 73."
   },
   {
-    id: 72, year: 2012, area: "", enunciado: "",
+    id: 74,
+    year: 2012,
+    area: "Área da questão 74",
+    enunciado: "Enunciado oficial da questão 74...",
     options: [
-      { id: "A", text: "" },
-      { id: "B", text: "" },
-      { id: "C", text: "" },
-      { id: "D", text: "" },
-      { id: "E", text: "" }
+      { id: "A", text: "Alternativa A" },
+      { id: "B", text: "Alternativa B" },
+      { id: "C", text: "Alternativa C" },
+      { id: "D", text: "Alternativa D" },
+      { id: "E", text: "Alternativa E" }
     ],
-    correct: "",
-    referencia: ""
+    correct: "C",
+    referencia: "Referência oficial da questão 74."
   },
   {
-    id: 73, year: 2012, area: "", enunciado: "",
+    id: 75,
+    year: 2012,
+    area: "Área da questão 75",
+    enunciado: "Enunciado oficial da questão 75...",
     options: [
-      { id: "A", text: "" },
-      { id: "B", text: "" },
-      { id: "C", text: "" },
-      { id: "D", text: "" },
-      { id: "E", text: "" }
+      { id: "A", text: "Alternativa A" },
+      { id: "B", text: "Alternativa B" },
+      { id: "C", text: "Alternativa C" },
+      { id: "D", text: "Alternativa D" },
+      { id: "E", text: "Alternativa E" }
     ],
-    correct: "",
-    referencia: ""
+    correct: "C",
+    referencia: "Referência oficial da questão 75."
   },
   {
-    id: 74, year: 2012, area: "", enunciado: "",
+    id: 76,
+    year: 2012,
+    area: "Área da questão 76",
+    enunciado: "Enunciado oficial da questão 76...",
     options: [
-      { id: "A", text: "" },
-      { id: "B", text: "" },
-      { id: "C", text: "" },
-      { id: "D", text: "" },
-      { id: "E", text: "" }
+      { id: "A", text: "Alternativa A" },
+      { id: "B", text: "Alternativa B" },
+      { id: "C", text: "Alternativa C" },
+      { id: "D", text: "Alternativa D" },
+      { id: "E", text: "Alternativa E" }
     ],
-    correct: "",
-    referencia: ""
+    correct: "C",
+    referencia: "Referência oficial da questão 76."
   },
   {
-    id: 75, year: 2012, area: "", enunciado: "",
+    id: 77,
+    year: 2012,
+    area: "Área da questão 77",
+    enunciado: "Enunciado oficial da questão 77...",
     options: [
-      { id: "A", text: "" },
-      { id: "B", text: "" },
-      { id: "C", text: "" },
-      { id: "D", text: "" },
-      { id: "E", text: "" }
+      { id: "A", text: "Alternativa A" },
+      { id: "B", text: "Alternativa B" },
+      { id: "C", text: "Alternativa C" },
+      { id: "D", text: "Alternativa D" },
+      { id: "E", text: "Alternativa E" }
     ],
-    correct: "",
-    referencia: ""
+    correct: "C",
+    referencia: "Referência oficial da questão 77."
   },
   {
-    id: 76, year: 2012, area: "", enunciado: "",
+    id: 78,
+    year: 2012,
+    area: "Área da questão 78",
+    enunciado: "Enunciado oficial da questão 78...",
     options: [
-      { id: "A", text: "" },
-      { id: "B", text: "" },
-      { id: "C", text: "" },
-      { id: "D", text: "" },
-      { id: "E", text: "" }
+      { id: "A", text: "Alternativa A" },
+      { id: "B", text: "Alternativa B" },
+      { id: "C", text: "Alternativa C" },
+      { id: "D", text: "Alternativa D" },
+      { id: "E", text: "Alternativa E" }
     ],
-    correct: "",
-    referencia: ""
+    correct: "C",
+    referencia: "Referência oficial da questão 78."
   },
   {
-    id: 77, year: 2012, area: "", enunciado: "",
+    id: 79,
+    year: 2012,
+    area: "Área da questão 79",
+    enunciado: "Enunciado oficial da questão 79...",
     options: [
-      { id: "A", text: "" },
-      { id: "B", text: "" },
-      { id: "C", text: "" },
-      { id: "D", text: "" },
-      { id: "E", text: "" }
+      { id: "A", text: "Alternativa A" },
+      { id: "B", text: "Alternativa B" },
+      { id: "C", text: "Alternativa C" },
+      { id: "D", text: "Alternativa D" },
+      { id: "E", text: "Alternativa E" }
     ],
-    correct: "",
-    referencia: ""
+    correct: "C",
+    referencia: "Referência oficial da questão 79."
   },
   {
-    id: 78, year: 2012, area: "", enunciado: "",
+    id: 80,
+    year: 2012,
+    area: "Área da questão 80",
+    enunciado: "Enunciado oficial da questão 80...",
     options: [
-      { id: "A", text: "" },
-      { id: "B", text: "" },
-      { id: "C", text: "" },
-      { id: "D", text: "" },
-      { id: "E", text: "" }
+      { id: "A", text: "Alternativa A" },
+      { id: "B", text: "Alternativa B" },
+      { id: "C", text: "Alternativa C" },
+      { id: "D", text: "Alternativa D" },
+      { id: "E", text: "Alternativa E" }
     ],
-    correct: "",
-    referencia: ""
+    correct: "C",
+    referencia: "Referência oficial da questão 80."
   },
   {
-    id: 79, year: 2012, area: "", enunciado: "",
+    id: 81,
+    year: 2012,
+    area: "Área da questão 81",
+    enunciado: "Enunciado oficial da questão 81...",
     options: [
-      { id: "A", text: "" },
-      { id: "B", text: "" },
-      { id: "C", text: "" },
-      { id: "D", text: "" },
-      { id: "E", text: "" }
+      { id: "A", text: "Alternativa A" },
+      { id: "B", text: "Alternativa B" },
+      { id: "C", text: "Alternativa C" },
+      { id: "D", text: "Alternativa D" },
+      { id: "E", text: "Alternativa E" }
     ],
-    correct: "",
-    referencia: ""
+    correct: "C",
+    referencia: "Referência oficial da questão 81."
   },
   {
-    id: 80, year: 2012, area: "", enunciado: "",
+    id: 82,
+    year: 2012,
+    area: "Área da questão 82",
+    enunciado: "Enunciado oficial da questão 82...",
     options: [
-      { id: "A", text: "" },
-      { id: "B", text: "" },
-      { id: "C", text: "" },
-      { id: "D", text: "" },
-      { id: "E", text: "" }
+      { id: "A", text: "Alternativa A" },
+      { id: "B", text: "Alternativa B" },
+      { id: "C", text: "Alternativa C" },
+      { id: "D", text: "Alternativa D" },
+      { id: "E", text: "Alternativa E" }
     ],
-    correct: "",
-    referencia: ""
+    correct: "C",
+    referencia: "Referência oficial da questão 82."
   },
   {
-    id: 81, year: 2012, area: "", enunciado: "",
+    id: 83,
+    year: 2012,
+    area: "Área da questão 83",
+    enunciado: "Enunciado oficial da questão 83...",
     options: [
-      { id: "A", text: "" },
-      { id: "B", text: "" },
-      { id: "C", text: "" },
-      { id: "D", text: "" },
-      { id: "E", text: "" }
+      { id: "A", text: "Alternativa A" },
+      { id: "B", text: "Alternativa B" },
+      { id: "C", text: "Alternativa C" },
+      { id: "D", text: "Alternativa D" },
+      { id: "E", text: "Alternativa E" }
     ],
-    correct: "",
-    referencia: ""
+    correct: "C",
+    referencia: "Referência oficial da questão 83."
   },
   {
-    id: 82, year: 2012, area: "", enunciado: "",
+    id: 84,
+    year: 2012,
+    area: "Área da questão 84",
+    enunciado: "Enunciado oficial da questão 84...",
     options: [
-      { id: "A", text: "" },
-      { id: "B", text: "" },
-      { id: "C", text: "" },
-      { id: "D", text: "" },
-      { id: "E", text: "" }
+      { id: "A", text: "Alternativa A" },
+      { id: "B", text: "Alternativa B" },
+      { id: "C", text: "Alternativa C" },
+      { id: "D", text: "Alternativa D" },
+      { id: "E", text: "Alternativa E" }
     ],
-    correct: "",
-    referencia: ""
+    correct: "C",
+    referencia: "Referência oficial da questão 84."
   },
   {
-    id: 83, year: 2012, area: "", enunciado: "",
+    id: 85,
+    year: 2012,
+    area: "Área da questão 85",
+    enunciado: "Enunciado oficial da questão 85...",
     options: [
-      { id: "A", text: "" },
-      { id: "B", text: "" },
-      { id: "C", text: "" },
-      { id: "D", text: "" },
-      { id: "E", text: "" }
+      { id: "A", text: "Alternativa A" },
+      { id: "B", text: "Alternativa B" },
+      { id: "C", text: "Alternativa C" },
+      { id: "D", text: "Alternativa D" },
+      { id: "E", text: "Alternativa E" }
     ],
-    correct: "",
-    referencia: ""
+    correct: "C",
+    referencia: "Referência oficial da questão 85."
   },
   {
-    id: 84, year: 2012, area: "", enunciado: "",
+    id: 86,
+    year: 2012,
+    area: "Área da questão 86",
+    enunciado: "Enunciado oficial da questão 86...",
     options: [
-      { id: "A", text: "" },
-      { id: "B", text: "" },
-      { id: "C", text: "" },
-      { id: "D", text: "" },
-      { id: "E", text: "" }
+      { id: "A", text: "Alternativa A" },
+      { id: "B", text: "Alternativa B" },
+      { id: "C", text: "Alternativa C" },
+      { id: "D", text: "Alternativa D" },
+      { id: "E", text: "Alternativa E" }
     ],
-    correct: "",
-    referencia: ""
+    correct: "C",
+    referencia: "Referência oficial da questão 86."
   },
   {
-    id: 85, year: 2012, area: "", enunciado: "",
+    id: 87,
+    year: 2012,
+    area: "Área da questão 87",
+    enunciado: "Enunciado oficial da questão 87...",
     options: [
-      { id: "A", text: "" },
-      { id: "B", text: "" },
-      { id: "C", text: "" },
-      { id: "D", text: "" },
-      { id: "E", text: "" }
+      { id: "A", text: "Alternativa A" },
+      { id: "B", text: "Alternativa B" },
+      { id: "C", text: "Alternativa C" },
+      { id: "D", text: "Alternativa D" },
+      { id: "E", text: "Alternativa E" }
     ],
-    correct: "",
-    referencia: ""
+    correct: "C",
+    referencia: "Referência oficial da questão 87."
   },
   {
-    id: 86, year: 2012, area: "", enunciado: "",
+    id: 88,
+    year: 2012,
+    area: "Área da questão 88",
+    enunciado: "Enunciado oficial da questão 88...",
     options: [
-      { id: "A", text: "" },
-      { id: "B", text: "" },
-      { id: "C", text: "" },
-      { id: "D", text: "" },
-      { id: "E", text: "" }
+      { id: "A", text: "Alternativa A" },
+      { id: "B", text: "Alternativa B" },
+      { id: "C", text: "Alternativa C" },
+      { id: "D", text: "Alternativa D" },
+      { id: "E", text: "Alternativa E" }
     ],
-    correct: "",
-    referencia: ""
+    correct: "C",
+    referencia: "Referência oficial da questão 88."
   },
   {
-    id: 87, year: 2012, area: "", enunciado: "",
+    id: 89,
+    year: 2012,
+    area: "Área da questão 89",
+    enunciado: "Enunciado oficial da questão 89...",
     options: [
-      { id: "A", text: "" },
-      { id: "B", text: "" },
-      { id: "C", text: "" },
-      { id: "D", text: "" },
-      { id: "E", text: "" }
+      { id: "A", text: "Alternativa A" },
+      { id: "B", text: "Alternativa B" },
+      { id: "C", text: "Alternativa C" },
+      { id: "D", text: "Alternativa D" },
+      { id: "E", text: "Alternativa E" }
     ],
-    correct: "",
-    referencia: ""
+    correct: "C",
+    referencia: "Referência oficial da questão 89."
   },
   {
-    id: 88, year: 2012, area: "", enunciado: "",
+    id: 90,
+    year: 2012,
+    area: "Área da questão 90",
+    enunciado: "Enunciado oficial da questão 90...",
     options: [
-      { id: "A", text: "" },
-      { id: "B", text: "" },
-      { id: "C", text: "" },
-      { id: "D", text: "" },
-      { id: "E", text: "" }
+      { id: "A", text: "Alternativa A" },
+      { id: "B", text: "Alternativa B" },
+      { id: "C", text: "Alternativa C" },
+      { id: "D", text: "Alternativa D" },
+      { id: "E", text: "Alternativa E" }
     ],
-    correct: "",
-    referencia: ""
+    correct: "C",
+    referencia: "Referência oficial da questão 90."
   },
   {
-    id: 89, year: 2012, area: "", enunciado: "",
+    id: 91,
+    year: 2012,
+    area: "Área da questão 91",
+    enunciado: "Enunciado oficial da questão 91...",
     options: [
-      { id: "A", text: "" },
-      { id: "B", text: "" },
-      { id: "C", text: "" },
-      { id: "D", text: "" },
-      { id: "E", text: "" }
+      { id: "A", text: "Alternativa A" },
+      { id: "B", text: "Alternativa B" },
+      { id: "C", text: "Alternativa C" },
+      { id: "D", text: "Alternativa D" },
+      { id: "E", text: "Alternativa E" }
     ],
-    correct: "",
-    referencia: ""
+    correct: "C",
+    referencia: "Referência oficial da questão 91."
   },
   {
-    id: 90, year: 2012, area: "", enunciado: "",
+    id: 92,
+    year: 2012,
+    area: "Área da questão 92",
+    enunciado: "Enunciado oficial da questão 92...",
     options: [
-      { id: "A", text: "" },
-      { id: "B", text: "" },
-      { id: "C", text: "" },
-      { id: "D", text: "" },
-      { id: "E", text: "" }
+      { id: "A", text: "Alternativa A" },
+      { id: "B", text: "Alternativa B" },
+      { id: "C", text: "Alternativa C" },
+      { id: "D", text: "Alternativa D" },
+      { id: "E", text: "Alternativa E" }
     ],
-    correct: "",
-    referencia: ""
+    correct: "C",
+    referencia: "Referência oficial da questão 92."
   },
   {
-    id: 91, year: 2012, area: "", enunciado: "",
+    id: 93,
+    year: 2012,
+    area: "Área da questão 93",
+    enunciado: "Enunciado oficial da questão 93...",
     options: [
-      { id: "A", text: "" },
-      { id: "B", text: "" },
-      { id: "C", text: "" },
-      { id: "D", text: "" },
-      { id: "E", text: "" }
+      { id: "A", text: "Alternativa A" },
+      { id: "B", text: "Alternativa B" },
+      { id: "C", text: "Alternativa C" },
+      { id: "D", text: "Alternativa D" },
+      { id: "E", text: "Alternativa E" }
     ],
-    correct: "",
-    referencia: ""
+    correct: "C",
+    referencia: "Referência oficial da questão 93."
   },
   {
-    id: 92, year: 2012, area: "", enunciado: "",
+    id: 94,
+    year: 2012,
+    area: "Área da questão 94",
+    enunciado: "Enunciado oficial da questão 94...",
     options: [
-      { id: "A", text: "" },
-      { id: "B", text: "" },
-      { id: "C", text: "" },
-      { id: "D", text: "" },
-      { id: "E", text: "" }
+      { id: "A", text: "Alternativa A" },
+      { id: "B", text: "Alternativa B" },
+      { id: "C", text: "Alternativa C" },
+      { id: "D", text: "Alternativa D" },
+      { id: "E", text: "Alternativa E" }
     ],
-    correct: "",
-    referencia: ""
+    correct: "C",
+    referencia: "Referência oficial da questão 94."
   },
   {
-    id: 93, year: 2012, area: "", enunciado: "",
+    id: 95,
+    year: 2012,
+    area: "Área da questão 95",
+    enunciado: "Enunciado oficial da questão 95...",
     options: [
-      { id: "A", text: "" },
-      { id: "B", text: "" },
-      { id: "C", text: "" },
-      { id: "D", text: "" },
-      { id: "E", text: "" }
+      { id: "A", text: "Alternativa A" },
+      { id: "B", text: "Alternativa B" },
+      { id: "C", text: "Alternativa C" },
+      { id: "D", text: "Alternativa D" },
+      { id: "E", text: "Alternativa E" }
     ],
-    correct: "",
-    referencia: ""
+    correct: "C",
+    referencia: "Referência oficial da questão 95."
   },
   {
-    id: 94, year: 2012, area: "", enunciado: "",
+    id: 96,
+    year: 2012,
+    area: "Área da questão 96",
+    enunciado: "Enunciado oficial da questão 96...",
     options: [
-      { id: "A", text: "" },
-      { id: "B", text: "" },
-      { id: "C", text: "" },
-      { id: "D", text: "" },
-      { id: "E", text: "" }
+      { id: "A", text: "Alternativa A" },
+      { id: "B", text: "Alternativa B" },
+      { id: "C", text: "Alternativa C" },
+      { id: "D", text: "Alternativa D" },
+      { id: "E", text: "Alternativa E" }
     ],
-    correct: "",
-    referencia: ""
+    correct: "C",
+    referencia: "Referência oficial da questão 96."
   },
   {
-    id: 95, year: 2012, area: "", enunciado: "",
+    id: 97,
+    year: 2012,
+    area: "Área da questão 97",
+    enunciado: "Enunciado oficial da questão 97...",
     options: [
-      { id: "A", text: "" },
-      { id: "B", text: "" },
-      { id: "C", text: "" },
-      { id: "D", text: "" },
-      { id: "E", text: "" }
+      { id: "A", text: "Alternativa A" },
+      { id: "B", text: "Alternativa B" },
+      { id: "C", text: "Alternativa C" },
+      { id: "D", text: "Alternativa D" },
+      { id: "E", text: "Alternativa E" }
     ],
-    correct: "",
-    referencia: ""
-  },
-  {
-    id: 96, year: 2012, area: "", enunciado: "",
-    options: [
-      { id: "A", text: "" },
-      { id: "B", text: "" },
-      { id: "C", text: "" },
-      { id: "D", text: "" },
-      { id: "E", text: "" }
-    ],
-    correct: "",
-    referencia: ""
-  },
-  {
-    id: 97, year: 2012, area: "", enunciado: "",
-    options: [
-      { id: "A", text: "" },
-      { id: "B", text: "" },
-      { id: "C", text: "" },
-      { id: "D", text: "" },
-      { id: "E", text: "" }
-    ],
-    correct: "",
-    referencia: ""
+    correct: "C",
+    referencia: "Referência oficial da questão 97."
   }
 ];

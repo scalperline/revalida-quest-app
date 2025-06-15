@@ -18,8 +18,8 @@ interface QuestionsHeaderProps {
   setEspecialidade: (value: string) => void;
   anoSelecionado: number;
   setAnoSelecionado: (value: number) => void;
-  temaSelecionado: string;
-  setTemaSelecionado: (value: string) => void;
+  // temaSelecionado: string;
+  // setTemaSelecionado: (value: string) => void;
   totalQuestoes: number;
   abaSelecionada: "todas" | "favoritas" | "erradas" | "acertadas";
   setAbaSelecionada: (key: "todas" | "favoritas" | "erradas" | "acertadas") => void;
@@ -37,11 +37,10 @@ const ESPECIALIDADES = [
   { value: "medicina-preventiva", label: "Medicina Preventiva" },
 ];
 
-const TEMAS = [
-  { value: "tema1", label: "Tema 1" },
-  { value: "tema2", label: "Tema 2" },
-  // Adapte para os temas reais desejados
-];
+// const TEMAS = [
+//   { value: "tema1", label: "Tema 1" },
+//   { value: "tema2", label: "Tema 2" },
+// ];
 
 const abas = [
   { key: "todas", label: "Todas" },
@@ -57,8 +56,8 @@ export function QuestionsHeader({
   setEspecialidade,
   anoSelecionado,
   setAnoSelecionado,
-  temaSelecionado,
-  setTemaSelecionado,
+  // temaSelecionado,
+  // setTemaSelecionado,
   totalQuestoes,
   abaSelecionada,
   setAbaSelecionada
@@ -81,7 +80,7 @@ export function QuestionsHeader({
         </span>
       </div>
 
-      {/* Caixa de filtros (busca, especialidade, ano, tema) */}
+      {/* Caixa de filtros (busca, especialidade, ano) - retirado campo de tema */}
       <div className="max-w-6xl mx-auto w-full p-6 rounded-2xl border border-muted bg-card shadow flex flex-col gap-6 mb-8">
         <div>
           <Label className="mb-1 text-lg font-semibold">Buscar</Label>
@@ -98,7 +97,7 @@ export function QuestionsHeader({
             />
           </div>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {/* Especialidade */}
           <div className="flex flex-col gap-1">
             <Label className="font-semibold">Especialidade</Label>
@@ -129,23 +128,6 @@ export function QuestionsHeader({
               <SelectContent>
                 {ANOS_PROVA.map(a => (
                   <SelectItem key={a.value} value={a.value.toString()}>{a.label}</SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
-          {/* Tema */}
-          <div className="flex flex-col gap-1">
-            <Label className="font-semibold">Tema</Label>
-            <Select
-              value={temaSelecionado}
-              onValueChange={v => setTemaSelecionado(v)}
-            >
-              <SelectTrigger className="w-full h-12 rounded-lg bg-background border border-muted">
-                <SelectValue placeholder="Selecione tema" />
-              </SelectTrigger>
-              <SelectContent>
-                {TEMAS.map(t => (
-                  <SelectItem key={t.value} value={t.value}>{t.label}</SelectItem>
                 ))}
               </SelectContent>
             </Select>

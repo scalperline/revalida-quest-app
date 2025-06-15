@@ -9,7 +9,8 @@ import { QUESTOES_REVALIDA_2014 } from "@/data/questoesRevalida2014";
 import { QUESTOES_REVALIDA_2014_VERMELHA } from "@/data/questoesRevalida2014Vermelha";
 import { QUESTOES_REVALIDA_2015 } from "@/data/questoesRevalida2015";
 import { QUESTOES_REVALIDA_2015_VERMELHA } from "@/data/questoesRevalida2015Vermelha";
-import { QUESTOES_REVALIDA_2016 } from "@/data/questoesRevalida2016";
+import { QUESTOES_REVALIDA_2016_PROVA1 } from "@/data/questoesRevalida2016Prova1";
+import { QUESTOES_REVALIDA_2016_PROVA2 } from "@/data/questoesRevalida2016Prova2";
 
 const QUESTOES_POR_PAGINA = 10;
 
@@ -41,7 +42,9 @@ export function useQuestions() {
         : QUESTOES_REVALIDA_2015_VERMELHA;
     }
     if (anoSelecionado === 2016) {
-      return QUESTOES_REVALIDA_2016;
+      return tipoProva === "Prova 2"
+        ? QUESTOES_REVALIDA_2016_PROVA2
+        : QUESTOES_REVALIDA_2016_PROVA1;
     }
     return [];
   }, [anoSelecionado, tipoProva]);

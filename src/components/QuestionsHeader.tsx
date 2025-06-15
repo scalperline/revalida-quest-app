@@ -1,4 +1,3 @@
-
 import {
   Select,
   SelectContent,
@@ -45,17 +44,28 @@ export function QuestionsHeader({
               <SelectItem value="2016">Revalida 2016</SelectItem>
             </SelectContent>
           </Select>
-          {[2013, 2014, 2015].includes(anoSelecionado) && tipoProva && setTipoProva && (
-            <Select onValueChange={setTipoProva} defaultValue={tipoProva}>
-              <SelectTrigger className="w-[180px] bg-card">
-                <SelectValue placeholder="Selecione a Prova" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="Cinza">Prova Cinza</SelectItem>
-                <SelectItem value="Vermelha">Prova Vermelha</SelectItem>
-              </SelectContent>
-            </Select>
-          )}
+          {[2013, 2014, 2015, 2016].includes(anoSelecionado) &&
+            tipoProva &&
+            setTipoProva && (
+              <Select onValueChange={setTipoProva} defaultValue={tipoProva}>
+                <SelectTrigger className="w-[180px] bg-card">
+                  <SelectValue placeholder="Selecione a Prova" />
+                </SelectTrigger>
+                <SelectContent>
+                  {[2013, 2014, 2015].includes(anoSelecionado) ? (
+                    <>
+                      <SelectItem value="Cinza">Prova Cinza</SelectItem>
+                      <SelectItem value="Vermelha">Prova Vermelha</SelectItem>
+                    </>
+                  ) : (
+                    <>
+                      <SelectItem value="Prova 1">Prova 1</SelectItem>
+                      <SelectItem value="Prova 2">Prova 2</SelectItem>
+                    </>
+                  )}
+                </SelectContent>
+              </Select>
+            )}
         </div>
       </div>
       <div className="flex flex-col md:flex-row justify-between items-center gap-2">

@@ -1,36 +1,9 @@
+
 import { QuestionCard } from "@/components/QuestionCard";
 import { useState } from "react";
 import { QUESTOES_REVALIDA_2011 } from "@/data/questoesRevalida2011";
-import { Link } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
-import {
-  Pagination,
-  PaginationContent,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-} from "@/components/ui/pagination";
-import { Button } from "@/components/ui/button";
-import {
-  Select,
-  SelectTrigger,
-  SelectContent,
-  SelectItem,
-  SelectValue,
-} from "@/components/ui/select";
-import { Label } from "@/components/ui/label";
-import { Search } from "lucide-react";
 import { QuestionsHeader } from "@/components/QuestionsHeader";
 
-// NOVO: anos disponíveis para prova oficial
-const ANOS_PROVA = [
-  { value: 2011, label: "Revalida 2011" },
-  // { value: 2012, label: "Revalida 2012" },
-  // { value: 2013, label: "Revalida 2013" },
-];
-
-// Remover os valores "" dos filtros para Select. Usar valores default válidos.
 const ESPECIALIDADES = [
   { value: "clinica-medica", label: "Clínica Médica" },
   { value: "cirurgia-geral", label: "Cirurgia Geral" },
@@ -38,7 +11,6 @@ const ESPECIALIDADES = [
   { value: "pediatria", label: "Pediatria" },
   { value: "medicina-preventiva", label: "Medicina Preventiva" },
 ];
-// TEMAS também precisa remover ""
 const TEMAS = [
   { value: "tema1", label: "Tema 1" },
   { value: "tema2", label: "Tema 2" },
@@ -48,18 +20,19 @@ const QUESTOES_POR_PAGINA = 10;
 
 export default function Questions() {
   const [anoSelecionado, setAnoSelecionado] = useState<number>(2011);
-  const [especialidade, setEspecialidade] = useState<string>(ESPECIALIDADES[0].value); // default válido
-  const [temaSelecionado, setTemaSelecionado] = useState<string>(TEMAS[0].value); // default válido
+  const [especialidade, setEspecialidade] = useState<string>(ESPECIALIDADES[0].value);
+  const [temaSelecionado, setTemaSelecionado] = useState<string>(TEMAS[0].value);
   const [filtro, setFiltro] = useState("");
   const [paginaAtual, setPaginaAtual] = useState(1);
   const [abaSelecionada, setAbaSelecionada] = useState<"todas" | "favoritas" | "erradas" | "acertadas">("todas");
 
+  // Inclui todas as questões do ano selecionado
   const questoesAnoSelecionado =
     anoSelecionado === 2011
       ? QUESTOES_REVALIDA_2011.filter((q) => q.year === anoSelecionado)
       : [];
 
-  // Atualizando filtro UI (ajustado para valores válidos)
+  // Filtros aplicados corretamente ao banco
   const questoesFiltradas = questoesAnoSelecionado.filter((q) =>
     (especialidade ? q.area.toLocaleLowerCase().replace(/ /g, "-") === especialidade : true) &&
     (temaSelecionado ? q.enunciado.toLocaleLowerCase().includes(temaSelecionado) : true) &&
@@ -72,28 +45,21 @@ export default function Questions() {
 
   const totalPaginas = Math.ceil(questoesFiltradas.length / QUESTOES_POR_PAGINA);
 
-  // Calcula o índice de início e fim das questões para esta página
+  // Paginação correta das questões (1 a 110)
   const indiceInicio = (paginaAtual - 1) * QUESTOES_POR_PAGINA;
   const indiceFim = indiceInicio + QUESTOES_POR_PAGINA;
   const questoesPaginadas = questoesFiltradas.slice(indiceInicio, indiceFim);
 
-  // Sempre que filtro ou ano mudar, voltar para página 1
+  // Sempre que filtro ou ano muda, volta para página 1
   function atualizarFiltro(e: React.ChangeEvent<HTMLInputElement>) {
     setFiltro(e.target.value);
     setPaginaAtual(1);
   }
-  function atualizarAno(e: React.ChangeEvent<HTMLSelectElement>) {
-    setAnoSelecionado(Number(e.target.value));
-    setPaginaAtual(1);
-    setFiltro("");
-  }
 
-  // Paginação (idêntica à existente)
+  // Renderização da paginação (simplificada para clareza, pode customizar conforme o código original)
   function renderPagination() {
     if (totalPaginas <= 1) return null;
     const items = [];
-    const mostrarPaginas = Math.max(Math.min(7, totalPaginas), 1);
-
     let start = Math.max(1, paginaAtual - 2);
     let end = Math.min(totalPaginas, paginaAtual + 2);
 
@@ -106,104 +72,41 @@ export default function Questions() {
 
     if (start > 1) {
       items.push(
-        <PaginationItem key={1}>
-          <PaginationLink
-            isActive={paginaAtual === 1}
-            onClick={(e) => {
-              e.preventDefault(); setPaginaAtual(1);
-            }}
-            href="#"
-          >
-            1
-          </PaginationLink>
-        </PaginationItem>
+        <button key={1} onClick={() => setPaginaAtual(1)} className={`px-3 py-1 rounded-lg text-sm ${paginaAtual === 1 ? "bg-primary text-primary-foreground" : "bg-background text-foreground"}`}>1</button>
       );
-      if (start > 2) {
-        items.push(
-          <PaginationItem key="start-ellipsis">
-            <span className="px-2 select-none">...</span>
-          </PaginationItem>
-        );
-      }
+      if (start > 2) items.push(<span key="start-ellipsis" className="px-2 select-none">...</span>);
     }
-
     for (let i = start; i <= end; ++i) {
       items.push(
-        <PaginationItem key={i}>
-          <PaginationLink
-            isActive={paginaAtual === i}
-            onClick={e => {
-              e.preventDefault();
-              setPaginaAtual(i);
-            }}
-            href="#"
-          >
-            {i}
-          </PaginationLink>
-        </PaginationItem>
+        <button key={i} onClick={() => setPaginaAtual(i)} className={`px-3 py-1 rounded-lg text-sm ${paginaAtual === i ? "bg-primary text-primary-foreground" : "bg-background text-foreground"}`}>{i}</button>
       );
     }
-
     if (end < totalPaginas) {
-      if (end < totalPaginas - 1) {
-        items.push(
-          <PaginationItem key="end-ellipsis">
-            <span className="px-2 select-none">...</span>
-          </PaginationItem>
-        );
-      }
+      if (end < totalPaginas - 1) items.push(<span key="end-ellipsis" className="px-2 select-none">...</span>);
       items.push(
-        <PaginationItem key={totalPaginas}>
-          <PaginationLink
-            isActive={paginaAtual === totalPaginas}
-            onClick={e => {
-              e.preventDefault();
-              setPaginaAtual(totalPaginas);
-            }}
-            href="#"
-          >
-            {totalPaginas}
-          </PaginationLink>
-        </PaginationItem>
+        <button key={totalPaginas} onClick={() => setPaginaAtual(totalPaginas)} className={`px-3 py-1 rounded-lg text-sm ${paginaAtual === totalPaginas ? "bg-primary text-primary-foreground" : "bg-background text-foreground"}`}>{totalPaginas}</button>
       );
     }
-
     return (
-      <Pagination>
-        <PaginationContent>
-          <PaginationItem>
-            <PaginationPrevious
-              onClick={e => {
-                e.preventDefault();
-                if (paginaAtual > 1) setPaginaAtual(paginaAtual - 1);
-              }}
-              href="#"
-              aria-disabled={paginaAtual === 1}
-            />
-          </PaginationItem>
-          {items}
-          <PaginationItem>
-            <PaginationNext
-              onClick={e => {
-                e.preventDefault();
-                if (paginaAtual < totalPaginas) setPaginaAtual(paginaAtual + 1);
-              }}
-              href="#"
-              aria-disabled={paginaAtual === totalPaginas}
-            />
-          </PaginationItem>
-        </PaginationContent>
-      </Pagination>
+      <div className="flex gap-1 md:gap-2">
+        <button
+          className="px-2 py-1 rounded disabled:opacity-40"
+          disabled={paginaAtual === 1}
+          onClick={() => paginaAtual > 1 && setPaginaAtual(paginaAtual - 1)}
+        >
+          {"<"}
+        </button>
+        {items}
+        <button
+          className="px-2 py-1 rounded disabled:opacity-40"
+          disabled={paginaAtual === totalPaginas}
+          onClick={() => paginaAtual < totalPaginas && setPaginaAtual(paginaAtual + 1)}
+        >
+          {">"}
+        </button>
+      </div>
     );
   }
-
-  // Novo: opções de abas (somente UI)
-  const abas = [
-    { key: "todas", label: "Todas" },
-    { key: "favoritas", label: "Favoritas" },
-    { key: "erradas", label: "Erradas" },
-    { key: "acertadas", label: "Acertadas" },
-  ];
 
   return (
     <div className="min-h-screen bg-background px-1 md:px-2 py-10 flex flex-col">
@@ -229,12 +132,9 @@ export default function Questions() {
           </div>
         ) : (
           <div>
-            {questoesFiltradas
-              .slice((paginaAtual - 1) * QUESTOES_POR_PAGINA, paginaAtual * QUESTOES_POR_PAGINA)
-              .map(q => (
-                <QuestionCard key={q.id} question={q} />
-              ))
-            }
+            {questoesPaginadas.map(q => (
+              <QuestionCard key={q.id} question={q} />
+            ))}
           </div>
         )}
       </div>

@@ -7,8 +7,9 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
-import { Search } from "lucide-react";
+import { Search, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 interface QuestionsHeaderProps {
   filtro: string;
@@ -64,9 +65,15 @@ export function QuestionsHeader({
 }: QuestionsHeaderProps) {
   return (
     <>
-      {/* Título e contador */}
-      <div className="flex justify-between items-center mb-2 gap-2 max-w-6xl mx-auto w-full">
-        <h2 className="text-4xl font-extrabold tracking-tight text-foreground">
+      {/* Linha superior: voltar + Título + contador */}
+      <div className="flex justify-between items-center mb-2 gap-2 max-w-6xl mx-auto w-full relative">
+        {/* Botão Voltar */}
+        <Link to="/" className="absolute left-0 top-1">
+          <Button variant="ghost" size="icon" className="rounded-full">
+            <ArrowLeft size={24} />
+          </Button>
+        </Link>
+        <h2 className="text-4xl font-extrabold tracking-tight text-foreground mx-auto">
           Banco de Questões
         </h2>
         <span className="border rounded-full px-4 py-1 text-base font-semibold text-foreground bg-background shadow-md border-muted/60">

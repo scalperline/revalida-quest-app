@@ -1,9 +1,9 @@
-
 import { QuestionCard } from "@/components/QuestionCard";
 import { useState } from "react";
 import { QUESTOES_REVALIDA_2011, type Question } from "@/data/questoesRevalida2011";
 import { QUESTOES_REVALIDA_2012 } from "@/data/questoesRevalida2012";
 import { QUESTOES_REVALIDA_2013 } from "@/data/questoesRevalida2013";
+import { QUESTOES_REVALIDA_2013_VERMELHA } from "@/data/questoesRevalida2013Vermelha";
 import { QuestionsHeader } from "@/components/QuestionsHeader";
 
 const QUESTOES_POR_PAGINA = 10;
@@ -24,7 +24,9 @@ export default function Questions() {
       if (tipoProva === "Cinza") {
         return QUESTOES_REVALIDA_2013;
       }
-      // Placeholder para a Prova Vermelha. Retorna vazio por enquanto.
+      if (tipoProva === "Vermelha") {
+        return QUESTOES_REVALIDA_2013_VERMELHA;
+      }
       return [];
     }
     return [];

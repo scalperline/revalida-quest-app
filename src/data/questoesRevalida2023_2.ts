@@ -1,0 +1,7 @@
+
+import { type Question } from "@/components/QuestionCard";
+import { QUESTOES_REVALIDA_2023_2_1_34 } from "./questoesRevalida2023_2_1_34";
+
+export const QUESTOES_REVALIDA_2023_2: Question[] = [
+  ...QUESTOES_REVALIDA_2023_2_1_34,
+];

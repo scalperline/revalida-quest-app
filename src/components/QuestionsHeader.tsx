@@ -50,7 +50,7 @@ export function QuestionsHeader({
               <SelectItem value="2023">Revalida 2023</SelectItem>
             </SelectContent>
           </Select>
-          {[2013, 2014, 2015, 2016, 2017, 2022].includes(anoSelecionado) &&
+          {[2013, 2014, 2015, 2016, 2017, 2022, 2023].includes(anoSelecionado) &&
             tipoProva &&
             setTipoProva && (
               <Select onValueChange={setTipoProva} defaultValue={tipoProva}>

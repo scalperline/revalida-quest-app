@@ -302,5 +302,32 @@ export const QUESTOES_REVALIDA_2020_1_25: Question[] = [
         { id: "D", text: "cirurgia de emergência somente por via aberta, com equipe cirúrgica utilizando os seguintes equipamentos de proteção individual: máscara N95, protetor facial e avental impermeável, gorro e luvas estéreis." }
     ],
     correct: ""
-  }
+  },
+  {
+    id: 24,
+    year: 2020,
+    area: "Clínica Médica",
+    enunciado: "Uma mulher com 69 anos de idade, hipertensa, em uso de enalapril 40 mg/dia e de hidroclorotiazida 25 mg/dia, tem palpitações, tremores de membros superiores e dispneia que começaram há cerca de 30 minutos, logo após ter sido deitada. Está orientada, corada, sem estalitis motores locais, FC = 110 bpm, PA = 200 x 130 mmHg em membros superiores. Ausculta cardíaca, bulhas normofonéticas, ritmo regular em 2 tempos, sem sopros. Pulsos radiais e femorais amplos, bilateralmente. FR = 24 irpm, sem esforço respiratório. Ausculta pulmonar normal. Oximetria de pulso de 99 % (em ar ambiente). O eletrocardiograma mostra taquicardia sinusal e sinais de sobrecarga ventricular esquerda.\n\nA abordagem inicial adequada para essa paciente é administrar",
+    options: [
+      { id: "A", text: "nifedipina de liberação rápida por via oral ou sublingual, repetindo a medicação se PA permanecer acima de 180 x 100 mmHg após 60 minutos." },
+      { id: "B", text: "ansiolítico por via oral, mantendo-a em observação em local tranquilo e reavaliando os níveis pressóricos num intervalo de 30 a 60 minutos." },
+      { id: "C", text: "nitroglicerina por via endovenosa contínua, ajustando a dose a cada 5 minutos até alcançar níveis pressóricos inferiores a 160 x 90 mmHg." },
+      { id: "D", text: "metoprolol em bolus por via endovenosa, repetindo a medicação se PA permanecer acima de 180 x 100 mmHg após 10 minutos." },
+    ],
+    correct: "",
+  },
+  {
+    id: 25,
+    year: 2020,
+    area: "Pediatria",
+    enunciado: "Um menino com 8 anos de idade comparece à Unidade Básica de Saúde, acompanhado de sua mãe, para consulta anual. Quando perguntada sobre a atividade física, a mãe relata que a criança frequenta a escola de manhã e não gosta de realizar as atividades que exigem esforço físico na escola e, em casa, tem o hábito de jogar videogame e jogos pelo celular. No recordatório alimentar foi observada alta ingesta de carboidratos. A avaliação antropométrica apresenta estatura de 130 cm e peso de 37 kg.\n\nCom base na situação e no quadro apresentados e de acordo com o Índice de Massa Corporal (IMC) para a idade, qual é a classificação do estado nutricional do menino?",
+    image: "/lovable-uploads/e9426c36-329b-4941-b93c-5390091c8708.png",
+    options: [
+      { id: "A", text: "Obesidade." },
+      { id: "B", text: "Sobrepeso." },
+      { id: "C", text: "Obesidade grave." },
+      { id: "D", text: "Risco de sobrepeso." },
+    ],
+    correct: "",
+  },
 ];

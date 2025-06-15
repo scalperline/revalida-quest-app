@@ -16,6 +16,7 @@ import { QUESTOES_REVALIDA_2013 } from "@/data/questoesRevalida2013";
 import { QUESTOES_REVALIDA_2013_VERMELHA } from "@/data/questoesRevalida2013Vermelha";
 import { QUESTOES_REVALIDA_2014 } from "@/data/questoesRevalida2014";
 import { QuestionsHeader } from "@/components/QuestionsHeader";
+import { QUESTOES_REVALIDA_2014_VERMELHA } from "@/data/questoesRevalida2014Vermelha";
 
 const QUESTOES_POR_PAGINA = 10;
 
@@ -41,7 +42,13 @@ export default function Questions() {
       return [];
     }
     if (anoSelecionado === 2014) {
-      return QUESTOES_REVALIDA_2014;
+      if (tipoProva === "Cinza") {
+        return QUESTOES_REVALIDA_2014;
+      }
+      if (tipoProva === "Vermelha") {
+        return QUESTOES_REVALIDA_2014_VERMELHA;
+      }
+      return [];
     }
     return [];
   })();

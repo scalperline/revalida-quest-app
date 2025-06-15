@@ -1,7 +1,8 @@
 
-import { Link } from "react-router-dom";
 import { Book, Timer, BarChartBig, Star, Brain } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
+import { FeatureCard } from "@/components/FeatureCard";
+import { WhyItem } from "@/components/WhyItem";
 
 export default function Index() {
   return (
@@ -54,30 +55,6 @@ export default function Index() {
           &copy; {new Date().getFullYear()} RevalidaQuest. Projeto acadêmico sem fins lucrativos.
         </footer>
       </main>
-    </div>
-  );
-}
-
-// Card de destaque das funcionalidades principais
-function FeatureCard({ title, description, icon, to }: { title: string, description: string, icon: React.ReactNode, to: string }) {
-  return (
-    <Link to={to} className="flex-1 bg-card shadow border rounded-xl px-6 py-7 flex flex-col items-center gap-3 hover:scale-105 transition-transform hover:ring-2 hover:ring-primary/40 text-center min-w-[220px]">
-      {icon}
-      <h2 className="text-lg md:text-xl font-semibold mb-1">{title}</h2>
-      <p className="text-muted-foreground text-sm">{description}</p>
-    </Link>
-  );
-}
-
-// Features extras da primeira seção "por que usar"
-function WhyItem({ icon, title, desc }: { icon: React.ReactNode, title: string, desc: string }) {
-  return (
-    <div className="flex items-start gap-3 bg-muted/70 rounded-lg px-5 py-4">
-      <div>{icon}</div>
-      <div>
-        <div className="font-semibold text-base">{title}</div>
-        <div className="text-muted-foreground text-sm">{desc}</div>
-      </div>
     </div>
   );
 }

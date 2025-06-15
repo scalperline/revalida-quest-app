@@ -1,7 +1,8 @@
-
 import { QuestionCard } from "@/components/QuestionCard";
 import { useState } from "react";
 import { QUESTOES_REVALIDA_2011 } from "@/data/questoesRevalida2011";
+import { Link } from "react-router-dom";
+import { ArrowLeft } from "lucide-react";
 
 export default function Questions() {
   const [filtro, setFiltro] = useState("");
@@ -13,6 +14,15 @@ export default function Questions() {
 
   return (
     <div className="min-h-screen bg-background px-1 md:px-2 py-10 flex flex-col">
+      {/* Botão de voltar para home */}
+      <div className="max-w-4xl mx-auto w-full flex items-center gap-2 mb-2">
+        <Link to="/" className="inline-flex items-center gap-2 rounded-lg p-2 bg-muted hover:bg-accent transition-colors group border border-muted shadow">
+          <ArrowLeft size={22} className="text-primary group-hover:text-blue-500 transition-colors" />
+          <span className="font-medium text-sm text-foreground group-hover:text-blue-500 transition-colors">
+            Voltar para Home
+          </span>
+        </Link>
+      </div>
       <div className="max-w-4xl mx-auto flex flex-col gap-2 mb-8">
         <h2 className="text-3xl font-extrabold tracking-tight text-foreground">Banco de Questões Oficiais</h2>
         <input

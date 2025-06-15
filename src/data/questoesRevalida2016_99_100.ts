@@ -1,4 +1,3 @@
-
 import { type Question } from "@/components/QuestionCard";
 
 export const QUESTOES_REVALIDA_2016_99_100: Question[] = [
@@ -26,7 +25,7 @@ export const QUESTOES_REVALIDA_2016_99_100: Question[] = [
         text: "hepatite crônica por vírus C; pesquisa de HCV RNA por Polymerase Chain Reaction e biópsia hepática.",
       },
     ],
-    correct: "C",
+    correct: "A",
   },
   {
     id: 100,
@@ -55,4 +54,3 @@ export const QUESTOES_REVALIDA_2016_99_100: Question[] = [
     correct: "D",
   },
 ];
-

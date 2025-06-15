@@ -1,4 +1,3 @@
-
 import { type Question } from "@/components/QuestionCard";
 
 export const QUESTOES_REVALIDA_2016_1_25: Question[] = [
@@ -26,7 +25,7 @@ export const QUESTOES_REVALIDA_2016_1_25: Question[] = [
         text: "prescrever penicilina G cristalina aquosa 3 milhões UI por via endovenosa, a cada 4 horas por 14 dias, para a paciente, e penicilina benzatina 2,4 milhões UI, por via intramuscular, em dose única, para o parceiro.",
       },
     ],
-    correct: "",
+    correct: "C",
   },
   {
     id: 2,
@@ -41,7 +40,7 @@ export const QUESTOES_REVALIDA_2016_1_25: Question[] = [
       { id: "C", text: "Hemorragia intraparenquimatosa." },
       { id: "D", text: "Contusões cerebrais coalescentes." },
     ],
-    correct: "",
+    correct: "A",
   },
   {
     id: 3,
@@ -67,7 +66,7 @@ export const QUESTOES_REVALIDA_2016_1_25: Question[] = [
         text: "prescrever medicação antipsicótica de depósito, em razão dos indícios de esquizofrenia, informar a família do paciente sobre os riscos atribuídos ao uso de drogas e encaminhar para acompanhamento na Unidade Básica de Saúde do seu município.",
       },
     ],
-    correct: "",
+    correct: "B",
   },
   {
     id: 4,
@@ -82,7 +81,7 @@ export const QUESTOES_REVALIDA_2016_1_25: Question[] = [
       { id: "C", text: "metoprolol por via endovenosa." },
       { id: "D", text: "nitroglicerina por via endovenosa." },
     ],
-    correct: "",
+    correct: "B",
   },
   {
     id: 5,
@@ -105,7 +104,7 @@ export const QUESTOES_REVALIDA_2016_1_25: Question[] = [
         text: "exame simples de urina e urocultura por saco coletor para investigar se o tratamento foi adequado.",
       },
     ],
-    correct: "",
+    correct: "ANULADA",
   },
   {
     id: 6,
@@ -131,7 +130,7 @@ export const QUESTOES_REVALIDA_2016_1_25: Question[] = [
         text: "indução do trabalho de parto; profilaxia para sepse neonatal por estreptococo beta-hemolítico; antibioticoterapia de largo espectro.",
       },
     ],
-    correct: "",
+    correct: "D",
   },
   {
     id: 7,
@@ -157,7 +156,7 @@ export const QUESTOES_REVALIDA_2016_1_25: Question[] = [
         text: "manter a cirurgia para o dia seguinte, administrar vitamina K e, se necessário, transfundir plasma fresco congelado no transoperatório.",
       },
     ],
-    correct: "",
+    correct: "A",
   },
   {
     id: 8,
@@ -183,7 +182,7 @@ export const QUESTOES_REVALIDA_2016_1_25: Question[] = [
         text: "estimular e orientar mudanças nos hábitos de vida, fazer acompanhamento rigoroso com medições diárias da pressão arterial e aguardar resultados para iniciar o tratamento medicamentoso.",
       },
     ],
-    correct: "",
+    correct: "B",
   },
   {
     id: 9,
@@ -209,7 +208,7 @@ export const QUESTOES_REVALIDA_2016_1_25: Question[] = [
         text: "Isolar os casos suspeitos em celas individuais e solicitar sorologia para diagnóstico de influenza em casos suspeitos até a confirmação de três casos.",
       },
     ],
-    correct: "",
+    correct: "C",
   },
   {
     id: 10,
@@ -223,7 +222,7 @@ export const QUESTOES_REVALIDA_2016_1_25: Question[] = [
       { id: "C", text: "adenite bacteriana." },
       { id: "D", text: "mononucleose infecciosa." },
     ],
-    correct: "",
+    correct: "C",
   },
   {
     id: 11,
@@ -249,7 +248,7 @@ export const QUESTOES_REVALIDA_2016_1_25: Question[] = [
         text: "acompanhar mensalmente a gestante, sem prescrição imediata de medicamentos; solicitar uroculturas de controle até a definição do caso.",
       },
     ],
-    correct: "",
+    correct: "B",
   },
   {
     id: 12,
@@ -276,7 +275,7 @@ export const QUESTOES_REVALIDA_2016_1_25: Question[] = [
         text: "reavaliar a paciente em 6 meses, para observar a evolução da lesão pigmentada sob dermatoscopia e, caso não apresente alterações, acompanhar a paciente anualmente.",
       },
     ],
-    correct: "",
+    correct: "C",
   },
   {
     id: 13,
@@ -293,7 +292,7 @@ export const QUESTOES_REVALIDA_2016_1_25: Question[] = [
         text: "a solicitação de teste de quantificação da carga viral do HCV.",
       },
     ],
-    correct: "",
+    correct: "D",
   },
   {
     id: 14,
@@ -320,7 +319,7 @@ export const QUESTOES_REVALIDA_2016_1_25: Question[] = [
         text: "situação epidemiológica controlada, sendo o aumento verificado na taxa de incidência da doença nos últimos anos devido ao aumento na captação e diagnóstico das gestantes a partir da expansão da cobertura de atenção primária.",
       },
     ],
-    correct: "",
+    correct: "B",
   },
   {
     id: 15,
@@ -346,7 +345,7 @@ export const QUESTOES_REVALIDA_2016_1_25: Question[] = [
         text: "um provável atraso no desenvolvimento neuropsicomotor, sendo necessário encaminhá-la para avaliação pelo neurologista.",
       },
     ],
-    correct: "",
+    correct: "A",
   },
   {
     id: 16,
@@ -372,7 +371,7 @@ export const QUESTOES_REVALIDA_2016_1_25: Question[] = [
         text: "manter o DIU e encaminhar a paciente para antibioticoterapia em nível hospitalar.",
       },
     ],
-    correct: "",
+    correct: "B",
   },
   {
     id: 17,
@@ -398,7 +397,7 @@ export const QUESTOES_REVALIDA_2016_1_25: Question[] = [
         text: "Colocação de tampão com algodão e encaminhamento imediato do paciente para consulta com o especialista.",
       },
     ],
-    correct: "",
+    correct: "ANULADA",
   },
   {
     id: 18,
@@ -424,7 +423,7 @@ export const QUESTOES_REVALIDA_2016_1_25: Question[] = [
         text: "selecionar um grupo de pessoas não doentes, classificar os participantes quanto às exposições de interesse e acompanhá-los ao longo do tempo para avaliar a ocorrência de casos novos de doenças nos grupos.",
       },
     ],
-    correct: "",
+    correct: "B",
   },
   {
     id: 19,
@@ -438,7 +437,7 @@ export const QUESTOES_REVALIDA_2016_1_25: Question[] = [
       { id: "C", text: "lúpus eritematoso sistêmico." },
       { id: "D", text: "tuberculose de sistema nervoso central." },
     ],
-    correct: "",
+    correct: "C",
   },
   {
     id: 20,
@@ -452,7 +451,7 @@ export const QUESTOES_REVALIDA_2016_1_25: Question[] = [
       { id: "C", text: "amigdalite bacteriana." },
       { id: "D", text: "mononucleose infecciosa." },
     ],
-    correct: "",
+    correct: "D",
   },
   {
     id: 21,
@@ -469,7 +468,7 @@ export const QUESTOES_REVALIDA_2016_1_25: Question[] = [
         text: "são passíveis de aplicação quando há intenção de selecionar o sexo do filho.",
       },
     ],
-    correct: "",
+    correct: "A",
   },
   {
     id: 22,
@@ -495,7 +494,7 @@ export const QUESTOES_REVALIDA_2016_1_25: Question[] = [
         text: "Conversar com a família sobre a necessidade de ser realizada tal cirurgia, explicando os riscos e os benefícios para o paciente, caso seja operado ou não, e solicitar que ela autorize a cirurgia, mesmo contra a vontade do paciente, com base no princípio da ação doente e no princípio da não maleficência do ato médico.",
       },
     ],
-    correct: "",
+    correct: "B",
   },
   {
     id: 23,
@@ -521,7 +520,7 @@ export const QUESTOES_REVALIDA_2016_1_25: Question[] = [
         text: "evitar a colocação de tapetes soltos, especialmente os de tecido, pois não permitem firmeza do idoso ao caminhar.",
       },
     ],
-    correct: "",
+    correct: "D",
   },
   {
     id: 24,
@@ -547,7 +546,7 @@ export const QUESTOES_REVALIDA_2016_1_25: Question[] = [
         text: "aguardar a presença do marido da paciente à UBS para instituir o tratamento do casal e, caso ele não compareça espontaneamente à consulta, solicitar novamente seu comparecimento na próxima consulta da paciente ao pré-natal.",
       },
     ],
-    correct: "",
+    correct: "B",
   },
   {
     id: 25,
@@ -574,6 +573,6 @@ export const QUESTOES_REVALIDA_2016_1_25: Question[] = [
         text: "Neoplasia de cabeça de pâncreas; indicar cirurgia (duodenopancreatectomia com ressecção de artéria mesentérica superior e anastomose primária) e discutir prognóstico com o paciente.",
       },
     ],
-    correct: "",
+    correct: "C",
   },
 ];

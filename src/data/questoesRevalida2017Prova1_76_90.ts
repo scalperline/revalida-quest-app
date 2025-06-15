@@ -1,4 +1,3 @@
-
 import { type Question } from "@/components/QuestionCard";
 
 export const QUESTOES_REVALIDA_2017_PROVA1_76_90: Question[] = [
@@ -20,7 +19,7 @@ export const QUESTOES_REVALIDA_2017_PROVA1_76_90: Question[] = [
         text: "conduta expectante e convocação do parceiro para orientações ao casal.",
       },
     ],
-    correct: "",
+    correct: "N",
   },
   {
     id: 77,
@@ -46,7 +45,7 @@ export const QUESTOES_REVALIDA_2017_PROVA1_76_90: Question[] = [
         text: "suturar a lesão, se o quadro clínico se mantiver estável, pois a extensão da lesão não demanda abordagem cirúrgica.",
       },
     ],
-    correct: "",
+    correct: "C",
   },
   {
     id: 78,
@@ -72,7 +71,7 @@ export const QUESTOES_REVALIDA_2017_PROVA1_76_90: Question[] = [
         text: "aplicar miniexame do estado mental para estabelecer o grau de comprometimento mental da paciente e as condutas adequadas.",
       },
     ],
-    correct: "",
+    correct: "B",
   },
   {
     id: 79,
@@ -99,7 +98,7 @@ export const QUESTOES_REVALIDA_2017_PROVA1_76_90: Question[] = [
         text: "Orientar os familiares para que busquem, por meios jurídicos, a guarda do idoso e o mantenham na sede do município para iniciar tratamento com varfarina.",
       },
     ],
-    correct: "",
+    correct: "C",
   },
   {
     id: 80,
@@ -113,7 +112,7 @@ export const QUESTOES_REVALIDA_2017_PROVA1_76_90: Question[] = [
       { id: "C", text: "bromoprida." },
       { id: "D", text: "ranitidina." },
     ],
-    correct: "",
+    correct: "D",
   },
   {
     id: 81,
@@ -136,7 +135,7 @@ export const QUESTOES_REVALIDA_2017_PROVA1_76_90: Question[] = [
         text: "encaminhar a paciente para realização imediata de laqueadura tubária.",
       },
     ],
-    correct: "",
+    correct: "C",
   },
   {
     id: 82,
@@ -163,7 +162,7 @@ export const QUESTOES_REVALIDA_2017_PROVA1_76_90: Question[] = [
         text: "Encaminhar a paciente para a realização da biópsia da lesão, informando-a sobre a possibilidade de tratar-se de uma neoplasia.",
       },
     ],
-    correct: "",
+    correct: "C",
   },
   {
     id: 83,
@@ -177,7 +176,7 @@ export const QUESTOES_REVALIDA_2017_PROVA1_76_90: Question[] = [
       { id: "C", text: "síndrome alcoólico-fetal." },
       { id: "D", text: "hipotireoidismo congênito." },
     ],
-    correct: "",
+    correct: "C",
   },
   {
     id: 84,
@@ -192,7 +191,7 @@ export const QUESTOES_REVALIDA_2017_PROVA1_76_90: Question[] = [
       { id: "C", text: "parada secundária da descida." },
       { id: "D", text: "parto taquitócico." },
     ],
-    correct: "",
+    correct: "A",
   },
   {
     id: 85,
@@ -219,7 +218,7 @@ export const QUESTOES_REVALIDA_2017_PROVA1_76_90: Question[] = [
         text: "Infarto agudo do miocárdio de parede lateral alta; elevações séricas de mioglobina e CK-MB.",
       },
     ],
-    correct: "",
+    correct: "C",
   },
   {
     id: 86,
@@ -246,7 +245,7 @@ export const QUESTOES_REVALIDA_2017_PROVA1_76_90: Question[] = [
         text: "Entre 28 e 364 dias, por causas relacionadas à assistência direta ao parto.",
       },
     ],
-    correct: "",
+    correct: "A",
   },
   {
     id: 87,
@@ -263,7 +262,7 @@ export const QUESTOES_REVALIDA_2017_PROVA1_76_90: Question[] = [
         text: "Hemorragia subconjuntival; consulta ambulatorial.",
       },
     ],
-    correct: "",
+    correct: "B",
   },
   {
     id: 88,
@@ -277,7 +276,7 @@ export const QUESTOES_REVALIDA_2017_PROVA1_76_90: Question[] = [
       { id: "C", text: "Heparina; angiotomografia pulmonar." },
       { id: "D", text: "Alteplase; angiografia pulmonar por cateterismo." },
     ],
-    correct: "",
+    correct: "C",
   },
   {
     id: 89,
@@ -303,7 +302,7 @@ export const QUESTOES_REVALIDA_2017_PROVA1_76_90: Question[] = [
         text: "A probabilidade de o paciente ter câncer de próstata e este não ser diagnosticado a partir da dosagem do PSA é de 33%.",
       },
     ],
-    correct: "",
+    correct: "B",
   },
   {
     id: 90,
@@ -317,6 +316,6 @@ export const QUESTOES_REVALIDA_2017_PROVA1_76_90: Question[] = [
       { id: "C", text: "intraósseo; soro glicofisiológico a 20 mL/kg." },
       { id: "D", text: "intraósseo; soro fisiológico a 20 mL/kg." },
     ],
-    correct: "",
+    correct: "D",
   },
 ];

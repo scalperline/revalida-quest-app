@@ -1,4 +1,3 @@
-
 import { type Question } from "@/components/QuestionCard";
 
 export const QUESTOES_REVALIDA_2017_PROVA1_91_100: Question[] = [
@@ -26,7 +25,7 @@ export const QUESTOES_REVALIDA_2017_PROVA1_91_100: Question[] = [
         text: "internação hospitalar para antibioticoterapia e hidratação endovenosas; administração de analgésicos, antiespasmódicos e antieméticos.",
       },
     ],
-    correct: "",
+    correct: "D",
   },
   {
     id: 92,
@@ -49,7 +48,7 @@ export const QUESTOES_REVALIDA_2017_PROVA1_91_100: Question[] = [
         text: "Radioterapia e quimioterapia neoadjuvantes, seguidas de prostatectomia radical.",
       },
     ],
-    correct: "",
+    correct: "A",
   },
   {
     id: 93,
@@ -75,7 +74,7 @@ export const QUESTOES_REVALIDA_2017_PROVA1_91_100: Question[] = [
         text: "Cetoacidose alcoólica; hidratação com solução fisiológica e tiamina por via intravenosa.",
       },
     ],
-    correct: "",
+    correct: "A",
   },
   {
     id: 94,
@@ -89,7 +88,7 @@ export const QUESTOES_REVALIDA_2017_PROVA1_91_100: Question[] = [
       { id: "C", text: "A cada ano; dosagem da glicemia em jejum." },
       { id: "D", text: "A cada 6 meses; dosagem da hemoglobina glicada." },
     ],
-    correct: "",
+    correct: "C",
   },
   {
     id: 95,
@@ -103,7 +102,7 @@ export const QUESTOES_REVALIDA_2017_PROVA1_91_100: Question[] = [
       { id: "C", text: "sedimentoscopia urinária." },
       { id: "D", text: "biópsia renal por agulha." },
     ],
-    correct: "",
+    correct: "A",
   },
   {
     id: 96,
@@ -129,7 +128,7 @@ export const QUESTOES_REVALIDA_2017_PROVA1_91_100: Question[] = [
         text: "informar que o resultado do exame é sugestivo de malignidade e indicar biópsia mamária imediata no serviço de atenção secundária.",
       },
     ],
-    correct: "",
+    correct: "A",
   },
   {
     id: 97,
@@ -155,7 +154,7 @@ export const QUESTOES_REVALIDA_2017_PROVA1_91_100: Question[] = [
         text: "laparotomia exploradora com esplenectomia, packing hepático e peritoniostomia.",
       },
     ],
-    correct: "",
+    correct: "D",
   },
   {
     id: 98,
@@ -181,7 +180,7 @@ export const QUESTOES_REVALIDA_2017_PROVA1_91_100: Question[] = [
         text: "o adiamento do início de atividade física, pois existe o risco de o paciente desenvolver cetoacidose glicêmica nesse momento.",
       },
     ],
-    correct: "",
+    correct: "D",
   },
   {
     id: 99,
@@ -207,7 +206,7 @@ export const QUESTOES_REVALIDA_2017_PROVA1_91_100: Question[] = [
         text: "quadro de transtorno alimentar grave; encaminhar para a unidade hospitalar de referência e orientar a família acerca da importância da busca de ajuda especializada e seguimento do tratamento na UBS após internação.",
       },
     ],
-    correct: "",
+    correct: "D",
   },
   {
     id: 100,
@@ -233,6 +232,6 @@ export const QUESTOES_REVALIDA_2017_PROVA1_91_100: Question[] = [
         text: "transtorno de déficit de atenção/hiperatividade; iniciar tratamento com metilfenidato.",
       },
     ],
-    correct: "",
+    correct: "D",
   },
 ];

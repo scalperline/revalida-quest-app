@@ -1,4 +1,3 @@
-
 import { type Question } from "@/components/QuestionCard";
 
 export const QUESTOES_REVALIDA_2017_PROVA1_59_75: Question[] = [
@@ -27,7 +26,7 @@ export const QUESTOES_REVALIDA_2017_PROVA1_59_75: Question[] = [
         text: "planejar atividades de prevenção primária, secundária e terciária (que inclui tratamento), além de acesso a cuidados paliativos e considerar o monitoramento e a avaliação componentes essenciais de programas de prevenção e controle do câncer do colo do útero.",
       },
     ],
-    correct: "",
+    correct: "D",
   },
   {
     id: 60,
@@ -53,7 +52,7 @@ export const QUESTOES_REVALIDA_2017_PROVA1_59_75: Question[] = [
         text: "diarreia persistente com desidratação grave; iniciar hidratação venosa com solução glicofisiológica 1:2, 100 mL/kg de peso, em 4 horas.",
       },
     ],
-    correct: "",
+    correct: "C",
   },
   {
     id: 61,
@@ -79,7 +78,7 @@ export const QUESTOES_REVALIDA_2017_PROVA1_59_75: Question[] = [
         text: "realizar a profilaxia antimicrobiana para Streptococcus beta hemolítico até o nascimento da criança.",
       },
     ],
-    correct: "",
+    correct: "D",
   },
   {
     id: 62,
@@ -93,7 +92,7 @@ export const QUESTOES_REVALIDA_2017_PROVA1_59_75: Question[] = [
       { id: "C", text: "tamponamento nasal anterior." },
       { id: "D", text: "tamponamento nasal posterior." },
     ],
-    correct: "",
+    correct: "C",
   },
   {
     id: 63,
@@ -107,7 +106,7 @@ export const QUESTOES_REVALIDA_2017_PROVA1_59_75: Question[] = [
       { id: "C", text: "Integralidade." },
       { id: "D", text: "Equidade." },
     ],
-    correct: "",
+    correct: "C",
   },
   {
     id: 64,
@@ -133,7 +132,7 @@ export const QUESTOES_REVALIDA_2017_PROVA1_59_75: Question[] = [
         text: "solicitar sorologia anti-HIV, sem haver necessidade de pedir autorização ao paciente, e, sendo a sorologia positiva, iniciar o tratamento antirretroviral se a contagem de linfócitos T CD4+ for ≤ 350 células/mm³, e, ainda, aguardar o diagnóstico de testagem da parceira do paciente, em dia útil, à UBS, para comunicar-lhe o diagnóstico do parceiro.",
       },
     ],
-    correct: "",
+    correct: "N",
   },
   {
     id: 65,
@@ -159,7 +158,7 @@ export const QUESTOES_REVALIDA_2017_PROVA1_59_75: Question[] = [
         text: "exsanguineotransfusão parcial e instalação de BiPAP.",
       },
     ],
-    correct: "",
+    correct: "A",
   },
   {
     id: 66,
@@ -173,7 +172,7 @@ export const QUESTOES_REVALIDA_2017_PROVA1_59_75: Question[] = [
       { id: "C", text: "vaginose bacteriana." },
       { id: "D", text: "candidíase vulvovaginal." },
     ],
-    correct: "",
+    correct: "C",
   },
   {
     id: 67,
@@ -199,7 +198,7 @@ export const QUESTOES_REVALIDA_2017_PROVA1_59_75: Question[] = [
         text: "indicar contenção física e mecânica do paciente a ser realizada pelos policiais; administrar glicose a 50% (60 a 100 mL, diluída a 50% via endovenosa em bolus) e diazepam 10 mg via endovenosa; realizar sutura do ferimento; manter o paciente em observação na UPA e solicitar ao Serviço Social o contato com seus familiares.",
       },
     ],
-    correct: "",
+    correct: "A",
   },
   {
     id: 68,
@@ -216,7 +215,7 @@ export const QUESTOES_REVALIDA_2017_PROVA1_59_75: Question[] = [
         text: "Pesquisa de anticorpos antiendomísio e antigliadina.",
       },
     ],
-    correct: "",
+    correct: "A",
   },
   {
     id: 69,
@@ -243,7 +242,7 @@ export const QUESTOES_REVALIDA_2017_PROVA1_59_75: Question[] = [
         text: "Fraca e demanda energia com igreja e genro, forte e estressante com ESF e neta 2.",
       },
     ],
-    correct: "",
+    correct: "N",
   },
   {
     id: 70,
@@ -269,7 +268,7 @@ export const QUESTOES_REVALIDA_2017_PROVA1_59_75: Question[] = [
         text: "pneumonia com derrame pleural; antibioticoterapia endovenosa com realização de toracocentese e internação em unidade de terapia intensiva pediátrica.",
       },
     ],
-    correct: "",
+    correct: "C",
   },
   {
     id: 71,
@@ -295,7 +294,7 @@ export const QUESTOES_REVALIDA_2017_PROVA1_59_75: Question[] = [
         text: "iniciar tocólise com nifedipina via oral e prescrever corticoterapia para maturação pulmonar fetal.",
       },
     ],
-    correct: "",
+    correct: "C",
   },
   {
     id: 72,
@@ -309,7 +308,7 @@ export const QUESTOES_REVALIDA_2017_PROVA1_59_75: Question[] = [
       { id: "C", text: "doença de Chagas." },
       { id: "D", text: "hepatite viral Delta." },
     ],
-    correct: "",
+    correct: "N",
   },
   {
     id: 73,
@@ -317,7 +316,7 @@ export const QUESTOES_REVALIDA_2017_PROVA1_59_75: Question[] = [
     area: "clínica médica",
     enunciado: "ÁREA LIVRE",
     options: [],
-    correct: "",
+    correct: "B",
   },
   {
     id: 74,
@@ -343,7 +342,7 @@ export const QUESTOES_REVALIDA_2017_PROVA1_59_75: Question[] = [
         text: "Avaliar glicemia em virtude do risco de complicações metabólicas decorrentes do controle do quadro psicótico em função do tratamento medicamentoso para esquizofrenia.",
       },
     ],
-    correct: "",
+    correct: "D",
   },
   {
     id: 75,
@@ -363,6 +362,6 @@ export const QUESTOES_REVALIDA_2017_PROVA1_59_75: Question[] = [
         text: "uma dose da vacina hoje e uma dose de reforço aos 4 anos de idade.",
       },
     ],
-    correct: "",
+    correct: "N",
   },
 ];

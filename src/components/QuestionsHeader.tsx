@@ -11,12 +11,16 @@ interface QuestionsHeaderProps {
   anoSelecionado: number;
   setAnoSelecionado: (ano: number) => void;
   totalQuestoes: number;
+  tipoProva?: string;
+  setTipoProva?: (tipo: string) => void;
 }
 
 export function QuestionsHeader({
   anoSelecionado,
   setAnoSelecionado,
   totalQuestoes,
+  tipoProva,
+  setTipoProva,
 }: QuestionsHeaderProps) {
   return (
     <div className="max-w-6xl mx-auto w-full mb-8">
@@ -38,6 +42,17 @@ export function QuestionsHeader({
               <SelectItem value="2013">Revalida 2013</SelectItem>
             </SelectContent>
           </Select>
+          {anoSelecionado === 2013 && tipoProva && setTipoProva && (
+            <Select onValueChange={setTipoProva} defaultValue={tipoProva}>
+              <SelectTrigger className="w-[180px] bg-card">
+                <SelectValue placeholder="Selecione a Prova" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="Cinza">Prova Cinza</SelectItem>
+                <SelectItem value="Vermelha">Prova Vermelha</SelectItem>
+              </SelectContent>
+            </Select>
+          )}
         </div>
       </div>
       <div className="flex flex-col md:flex-row justify-between items-center gap-2">

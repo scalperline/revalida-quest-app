@@ -1,3 +1,4 @@
+
 import { QuestionCard } from "@/components/QuestionCard";
 import { useState } from "react";
 import { QUESTOES_REVALIDA_2011, type Question } from "@/data/questoesRevalida2011";
@@ -8,17 +9,26 @@ import { QuestionsHeader } from "@/components/QuestionsHeader";
 const QUESTOES_POR_PAGINA = 10;
 
 export default function Questions() {
-  const [anoSelecionado, setAnoSelecionado] = useState<number>(2011);
+  const [anoSelecionado, setAnoSelecionado] = useState<number>(2013);
+  const [tipoProva, setTipoProva] = useState<string>("Cinza");
   const [paginaAtual, setPaginaAtual] = useState(1);
 
-  const questoesAnoSelecionado: Question[] =
-    anoSelecionado === 2011
-      ? QUESTOES_REVALIDA_2011.filter((q) => q.year === anoSelecionado)
-      : anoSelecionado === 2012
-      ? QUESTOES_REVALIDA_2012.filter((q) => q.year === anoSelecionado)
-      : anoSelecionado === 2013
-      ? QUESTOES_REVALIDA_2013.filter((q) => q.year === anoSelecionado)
-      : [];
+  const questoesAnoSelecionado: Question[] = (() => {
+    if (anoSelecionado === 2011) {
+      return QUESTOES_REVALIDA_2011;
+    }
+    if (anoSelecionado === 2012) {
+      return QUESTOES_REVALIDA_2012;
+    }
+    if (anoSelecionado === 2013) {
+      if (tipoProva === "Cinza") {
+        return QUESTOES_REVALIDA_2013;
+      }
+      // Placeholder para a Prova Vermelha. Retorna vazio por enquanto.
+      return [];
+    }
+    return [];
+  })();
 
   const totalPaginas = Math.ceil(questoesAnoSelecionado.length / QUESTOES_POR_PAGINA);
 
@@ -85,12 +95,19 @@ export default function Questions() {
     setPaginaAtual(1);
   }
 
+  function handleTipoProva(v: string) {
+    setTipoProva(v);
+    setPaginaAtual(1);
+  }
+
   return (
     <div className="min-h-screen bg-background px-1 md:px-2 py-10 flex flex-col">
       <QuestionsHeader
         anoSelecionado={anoSelecionado}
         setAnoSelecionado={handleAnoSelecionado}
         totalQuestoes={questoesAnoSelecionado.length}
+        tipoProva={tipoProva}
+        setTipoProva={handleTipoProva}
       />
 
       {/* Questões */}

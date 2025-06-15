@@ -7,6 +7,7 @@ import { QUESTOES_REVALIDA_2013_VERMELHA_46_57 } from "./questoesRevalida2013Ver
 import { QUESTOES_REVALIDA_2013_VERMELHA_58_70 } from "./questoesRevalida2013Vermelha_58_70";
 import { QUESTOES_REVALIDA_2013_VERMELHA_71_82 } from "./questoesRevalida2013Vermelha_71_82";
 import { QUESTOES_REVALIDA_2013_VERMELHA_83_95 } from "./questoesRevalida2013Vermelha_83_95";
+import { QUESTOES_REVALIDA_2013_VERMELHA_96_110 } from "./questoesRevalida2013Vermelha_96_110";
 
 export const QUESTOES_REVALIDA_2013_VERMELHA: Question[] = [
   ...QUESTOES_REVALIDA_2013_VERMELHA_1_13,
@@ -16,5 +17,5 @@ export const QUESTOES_REVALIDA_2013_VERMELHA: Question[] = [
   ...QUESTOES_REVALIDA_2013_VERMELHA_58_70,
   ...QUESTOES_REVALIDA_2013_VERMELHA_71_82,
   ...QUESTOES_REVALIDA_2013_VERMELHA_83_95,
-  // ...próximos blocos de questões da prova vermelha serão adicionados aqui
+  ...QUESTOES_REVALIDA_2013_VERMELHA_96_110,
 ];

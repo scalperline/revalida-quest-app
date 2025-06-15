@@ -2,6 +2,7 @@ import { QuestionCard } from "@/components/QuestionCard";
 import { useState } from "react";
 import { QUESTOES_REVALIDA_2011, type Question } from "@/data/questoesRevalida2011";
 import { QUESTOES_REVALIDA_2012 } from "@/data/questoesRevalida2012";
+import { QUESTOES_REVALIDA_2013 } from "@/data/questoesRevalida2013";
 import { QuestionsHeader } from "@/components/QuestionsHeader";
 
 const QUESTOES_POR_PAGINA = 10;
@@ -15,6 +16,8 @@ export default function Questions() {
       ? QUESTOES_REVALIDA_2011.filter((q) => q.year === anoSelecionado)
       : anoSelecionado === 2012
       ? QUESTOES_REVALIDA_2012.filter((q) => q.year === anoSelecionado)
+      : anoSelecionado === 2013
+      ? QUESTOES_REVALIDA_2013.filter((q) => q.year === anoSelecionado)
       : [];
 
   const totalPaginas = Math.ceil(questoesAnoSelecionado.length / QUESTOES_POR_PAGINA);

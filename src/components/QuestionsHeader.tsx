@@ -35,11 +35,11 @@ export function QuestionsHeader({
             <SelectContent>
               <SelectItem value="2011">Revalida 2011</SelectItem>
               <SelectItem value="2012">Revalida 2012</SelectItem>
+              <SelectItem value="2013">Revalida 2013</SelectItem>
             </SelectContent>
           </Select>
         </div>
       </div>
-
       <div className="flex flex-col md:flex-row justify-between items-center gap-2">
         <div className="text-sm text-muted-foreground">
           {totalQuestoes > 0

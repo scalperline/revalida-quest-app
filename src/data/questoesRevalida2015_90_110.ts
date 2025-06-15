@@ -1,3 +1,4 @@
+
 import { type Question } from "@/components/QuestionCard";
 
 export const QUESTOES_REVALIDA_2015_90_110: Question[] = [
@@ -43,7 +44,7 @@ export const QUESTOES_REVALIDA_2015_90_110: Question[] = [
       { id: "C", text: "Curetagem simples com eletrodessecação e recomendação de utilização diária de filtro solar." },
       { id: "D", text: "Exérese da lesão com sutura simples e recomendação de uso contínuo de boné ou similares, além de uso diário de filtro solar." },
     ],
-    correct: "ANULADA",
+    correct: "D",
   },
   {
     id: 93,
@@ -57,7 +58,7 @@ export const QUESTOES_REVALIDA_2015_90_110: Question[] = [
       { id: "C", text: "Terciária." },
       { id: "D", text: "Quarternária." },
     ],
-    correct: "A",
+    correct: "C",
   },
   {
     id: 94,
@@ -71,7 +72,7 @@ export const QUESTOES_REVALIDA_2015_90_110: Question[] = [
       { id: "C", text: "a mãe deverá ser vacinada com, no mínimo, cinco dias de antecedência em relação à viagem e a amamentação deverá ser suspensa por 10 dias." },
       { id: "D", text: "a vacina é constituída de fragmentos de vírus mortos, não havendo, portanto, contraindicações à aplicação no recém-nascido e na puérpera, o que justifica a manutenção da amamentação." },
     ],
-    correct: "B",
+    correct: "C",
   },
   {
     id: 95,
@@ -202,7 +203,7 @@ export const QUESTOES_REVALIDA_2015_90_110: Question[] = [
       { id: "C", text: "Estrófulo; prescrever antibiótico tópico para a mãe e a criança, além de tratar o pai e evitar que a criança possa frequentar normalmente a creche." },
       { id: "D", text: "Escabiose; prescrever anti-histamínicos para a criança e a mãe, além de reforçar a necessidade de higiene corporal para a criança, a qual poderá frequentar a creche sem problemas desde então." }
     ],
-    correct: "B"
+    correct: "A"
   },
   {
     id: 105,

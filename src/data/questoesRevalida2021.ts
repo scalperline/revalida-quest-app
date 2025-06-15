@@ -1,4 +1,5 @@
 
+```typescript
 import { type Question } from "@/components/QuestionCard";
 import { QUESTOES_REVALIDA_2021_1_5 } from "./questoesRevalida2021_1_5";
 import { QUESTOES_REVALIDA_2021_6_36 } from "./questoesRevalida2021_6_36";
@@ -11,3 +12,4 @@ export const QUESTOES_REVALIDA_2021: Question[] = [
   ...QUESTOES_REVALIDA_2021_37_73,
   ...QUESTOES_REVALIDA_2021_74_100,
 ];
+```

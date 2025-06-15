@@ -1,8 +1,6 @@
 import { QuestionCard } from "@/components/QuestionCard";
-import { DiscursiveQuestionCard } from "@/components/DiscursiveQuestionCard";
 import { useState } from "react";
-import { QUESTOES_REVALIDA_2011 } from "@/data/questoesRevalida2011";
-import { QUESTOES_DISCURSIVAS_REVALIDA_2011 } from "@/data/questoesDiscursivasRevalida2011";
+import { QUESTOES_REVALIDA_2011, type Question } from "@/data/questoesRevalida2011";
 import { QUESTOES_REVALIDA_2012 } from "@/data/questoesRevalida2012";
 import { QuestionsHeader } from "@/components/QuestionsHeader";
 
@@ -10,25 +8,14 @@ const QUESTOES_POR_PAGINA = 10;
 
 export default function Questions() {
   const [anoSelecionado, setAnoSelecionado] = useState<number>(2011);
-  const [tipoProva, setTipoProva] = useState<string>("objetiva");
   const [paginaAtual, setPaginaAtual] = useState(1);
 
-  // Filtros por tipo de prova
-  const questoesObjetivas =
+  const questoesAnoSelecionado: Question[] =
     anoSelecionado === 2011
       ? QUESTOES_REVALIDA_2011.filter((q) => q.year === anoSelecionado)
       : anoSelecionado === 2012
       ? QUESTOES_REVALIDA_2012.filter((q) => q.year === anoSelecionado)
       : [];
-
-  const questoesDiscursivas =
-    anoSelecionado === 2011
-      ? QUESTOES_DISCURSIVAS_REVALIDA_2011.filter((q) => q.ano === anoSelecionado)
-      : []; // Aqui entrará as discursivas de 2012 no futuro
-
-  // Escolher a lista de questões conforme o tipo
-  const questoesAnoSelecionado =
-    tipoProva === "objetiva" ? questoesObjetivas : questoesDiscursivas;
 
   const totalPaginas = Math.ceil(questoesAnoSelecionado.length / QUESTOES_POR_PAGINA);
 
@@ -95,20 +82,12 @@ export default function Questions() {
     setPaginaAtual(1);
   }
 
-  // Quando troca o tipo de prova, volta para página 1
-  function handleTipoProva(tipo: string) {
-    setTipoProva(tipo);
-    setPaginaAtual(1);
-  }
-
   return (
     <div className="min-h-screen bg-background px-1 md:px-2 py-10 flex flex-col">
       <QuestionsHeader
         anoSelecionado={anoSelecionado}
         setAnoSelecionado={handleAnoSelecionado}
         totalQuestoes={questoesAnoSelecionado.length}
-        tipoProva={tipoProva}
-        setTipoProva={handleTipoProva}
       />
 
       {/* Questões */}
@@ -119,21 +98,9 @@ export default function Questions() {
           </div>
         ) : (
           <div>
-            {tipoProva === "objetiva"
-              ? questoesPaginadas.map((q) => (
-                  // @ts-ignore
-                  <QuestionCard key={q.id} question={q} />
-                ))
-              : questoesPaginadas.map((q: any) => (
-                  <DiscursiveQuestionCard
-                    key={q.id}
-                    ordem={q.ordem}
-                    titulo={q.titulo}
-                    enunciado={q.enunciado}
-                    imagem={q.imagem}
-                    gabarito={q.gabarito}
-                  />
-                ))}
+            {questoesPaginadas.map((q) => (
+              <QuestionCard key={q.id} question={q} />
+            ))}
           </div>
         )}
       </div>

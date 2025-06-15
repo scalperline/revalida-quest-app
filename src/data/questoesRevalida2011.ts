@@ -26,6 +26,7 @@ export type QuestaoRevalida = {
   options: Opcao[];
   correct: string; // letra (A, B, C, D ou E)
   referencia?: string; // referência do INEP ou bibliográfica, caso disponível
+  imagemEnunciado?: string; // Caminho para a imagem do enunciado, caso exista
 };
 
 // Questões extraídas das páginas 1 e 2 (primeiras 10 questões das imagens)

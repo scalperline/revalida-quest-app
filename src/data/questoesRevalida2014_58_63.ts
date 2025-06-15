@@ -14,7 +14,7 @@ export const QUESTOES_REVALIDA_2014_58_63: Question[] = [
       { id: "C", text: "iniciar nitroprussiato de sódio e dobutamina e encaminhar para cirurgia cardíaca de emergência." },
       { id: "D", text: "iniciar noradrenalina e dopamina e encaminhar para instalação, de emergência, de balão intra-aórtico." },
     ],
-    correct: "D",
+    correct: "A",
   },
   {
     id: 59,
@@ -29,8 +29,8 @@ export const QUESTOES_REVALIDA_2014_58_63: Question[] = [
       { id: "C", text: "Neisseria gonorrhoeae." },
       { id: "D", text: "Candida albicans." },
     ],
-    correct: "D",
-  } as any,
+    correct: "A",
+  },
   {
     id: 60,
     year: 2014,
@@ -43,7 +43,7 @@ export const QUESTOES_REVALIDA_2014_58_63: Question[] = [
       { id: "C", text: "adenocarcinoma de pâncreas e realização de tomografia abdominal contrastada." },
       { id: "D", text: "pancreatite aguda e realização de colangiopancreatografia endoscópica retrógrada." },
     ],
-    correct: "A",
+    correct: "C",
   },
   {
     id: 61,
@@ -57,7 +57,7 @@ export const QUESTOES_REVALIDA_2014_58_63: Question[] = [
       { id: "C", text: "aspiração nasal e broncodilatador." },
       { id: "D", text: "mínimo manuseio e medicação antiviral." },
     ],
-    correct: "D",
+    correct: "A",
   },
   {
     id: 62,
@@ -71,7 +71,7 @@ export const QUESTOES_REVALIDA_2014_58_63: Question[] = [
       { id: "C", text: "haloperidol por via intramuscular." },
       { id: "D", text: "prometazina por via intramuscular." },
     ],
-    correct: "A",
+    correct: "C",
   },
   {
     id: 63,
@@ -85,6 +85,6 @@ export const QUESTOES_REVALIDA_2014_58_63: Question[] = [
       { id: "C", text: "suspender glibenclamida e metformina, adicionar insulina NPH antes do café da manhã e antes de dormir, bem como insulina Regular antes das refeições." },
       { id: "D", text: "suspender glibenclamida, manter metformina, adicionar insulina NPH antes do café da manhã e antes do jantar, bem como insulina Regular antes do café da manhã." },
     ],
-    correct: "B",
+    correct: "C",
   },
 ];

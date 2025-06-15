@@ -30,7 +30,11 @@ export function QuestionsHeader({
       {/* Cabeçalho */}
       <div className="flex justify-between items-center mb-2 gap-2 max-w-6xl mx-auto w-full relative">
         <Link to="/" className="absolute left-0 top-1">
-          <Button variant="ghost" size="icon" className="rounded-full">
+          <Button
+            variant="ghost"
+            size="icon"
+            className="rounded-full border-2 border-primary shadow-lg hover:border-primary/70 transition"
+          >
             <ArrowLeft size={24} />
           </Button>
         </Link>
@@ -55,7 +59,9 @@ export function QuestionsHeader({
             </SelectTrigger>
             <SelectContent>
               {ANOS_PROVA.map(a => (
-                <SelectItem key={a.value} value={a.value.toString()}>{a.label}</SelectItem>
+                <SelectItem key={a.value} value={a.value.toString()}>
+                  {a.label}
+                </SelectItem>
               ))}
             </SelectContent>
           </Select>
@@ -64,3 +70,4 @@ export function QuestionsHeader({
     </>
   );
 }
+

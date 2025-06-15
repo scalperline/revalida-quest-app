@@ -18,9 +18,11 @@ export type Question = {
 
 import { QUESTOES_REVALIDA_2011_1_10 } from "./questoesRevalida2011_1_10";
 import { QUESTOES_REVALIDA_2011_11_20 } from "./questoesRevalida2011_11_20";
+import { QUESTOES_REVALIDA_2011_21_30 } from "./questoesRevalida2011_21_30";
 
 // Concatenar todas as páginas para exportação principal
 export const QUESTOES_REVALIDA_2011: Question[] = [
   ...QUESTOES_REVALIDA_2011_1_10,
   ...QUESTOES_REVALIDA_2011_11_20,
+  ...QUESTOES_REVALIDA_2011_21_30,
 ];

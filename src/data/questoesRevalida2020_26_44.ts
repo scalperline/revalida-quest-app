@@ -1,4 +1,3 @@
-
 import { type Question } from "@/components/QuestionCard";
 
 export const QUESTOES_REVALIDA_2020_26_44: Question[] = [
@@ -13,7 +12,7 @@ export const QUESTOES_REVALIDA_2020_26_44: Question[] = [
         { id: "C", text: "o anel vaginal e o dispositivo intrauterino liberador de levonorgestrel são contraindicados." },
         { id: "D", text: "o anel vaginal e o dispositivo intrauterino liberador de levonorgestrel são adequados." },
     ],
-    correct: ""
+    correct: "A"
   },
   {
     id: 27,
@@ -26,7 +25,7 @@ export const QUESTOES_REVALIDA_2020_26_44: Question[] = [
         { id: "C", text: "realizar, com um bisturi, uma incisão para ampliar o orifício de entrada do anzol, a fim de que ele possa ser retirado." },
         { id: "D", text: "realizar a tração do anzol até efetuar a sua retirada." },
     ],
-    correct: ""
+    correct: "B"
   },
   {
     id: 28,
@@ -39,7 +38,7 @@ export const QUESTOES_REVALIDA_2020_26_44: Question[] = [
         { id: "C", text: "Choque Séptico." },
         { id: "D", text: "Síndrome da Resposta Inflamatória Sistêmica." },
     ],
-    correct: ""
+    correct: "A"
   },
   {
     id: 29,
@@ -53,7 +52,7 @@ export const QUESTOES_REVALIDA_2020_26_44: Question[] = [
         { id: "C", text: "Acidente vascular encefálico isquêmico; contraindicar a terapia trombolítica." },
         { id: "D", text: "Ataque isquêmico transitório; associar clopidogrel ao AAS." },
     ],
-    correct: ""
+    correct: "B"
   },
   {
     id: 30,
@@ -66,7 +65,7 @@ export const QUESTOES_REVALIDA_2020_26_44: Question[] = [
         { id: "C", text: "diazepam em dose dobrada endovenosa." },
         { id: "D", text: "tiopental por cânula endotraqueal." },
     ],
-    correct: ""
+    correct: "B"
   },
   {
     id: 31,
@@ -79,7 +78,7 @@ export const QUESTOES_REVALIDA_2020_26_44: Question[] = [
         { id: "C", text: "Endometriose; ultrassonografia transvaginal; e hormonal contínuo." },
         { id: "D", text: "Endometrite; histeroscopia diagnóstica; e método de barreira." },
     ],
-    correct: ""
+    correct: "C"
   },
   {
     id: 32,
@@ -92,7 +91,7 @@ export const QUESTOES_REVALIDA_2020_26_44: Question[] = [
         { id: "C", text: "agendar nova consulta presencial, porque a infecção por SARS-CoV-2 está associada a risco de maior gravidade em gestantes." },
         { id: "D", text: "evitar o uso de antitérmicos, pois a temperatura é importante parâmetro para avaliar a evolução e para tomar uma decisão clínica." },
     ],
-    correct: ""
+    correct: "A"
   },
   {
     id: 33,
@@ -105,7 +104,7 @@ export const QUESTOES_REVALIDA_2020_26_44: Question[] = [
         { id: "C", text: "esvaziamento colônico manual." },
         { id: "D", text: "laxantes via sonda nasogástrica." },
     ],
-    correct: ""
+    correct: "A"
   },
   {
     id: 34,
@@ -118,7 +117,7 @@ export const QUESTOES_REVALIDA_2020_26_44: Question[] = [
         { id: "C", text: "Aplicar penicilina benzatina 2,4 milhões UI em dose única, por via intramuscular, e solicitar VDRL nessa consulta." },
         { id: "D", text: "Solicitar VDRL e, se teste for positivo, prescrever penicilina benzatina 2,4 milhões UI por via intramuscular, 3 doses, com intervalos de 7 dias." },
     ],
-    correct: ""
+    correct: "C"
   },
   {
     id: 35,
@@ -131,7 +130,7 @@ export const QUESTOES_REVALIDA_2020_26_44: Question[] = [
         { id: "C", text: "Mononucleose infecciosa; meningite asséptica." },
         { id: "D", text: "Mononucleose infecciosa; síndrome de Guillain-Barré." },
     ],
-    correct: ""
+    correct: "D"
   },
   {
     id: 36,
@@ -144,7 +143,7 @@ export const QUESTOES_REVALIDA_2020_26_44: Question[] = [
         { id: "C", text: "orientar a vacinação da adolescente e de seu irmão." },
         { id: "D", text: "orientar que não é recomendada a vacinação da adolescente e de seu irmão." },
     ],
-    correct: ""
+    correct: "C"
   },
   {
     id: 37,
@@ -157,7 +156,7 @@ export const QUESTOES_REVALIDA_2020_26_44: Question[] = [
         { id: "C", text: "preservar a matriz ungueal e fazer a exérese em cunha do tecido de granulação." },
         { id: "D", text: "retirar uma elipse de pele e tecido subcutâneo da borda com tecido de granulação e sinais de infecção local." },
     ],
-    correct: ""
+    correct: "B"
   },
   {
     id: 38,
@@ -170,7 +169,7 @@ export const QUESTOES_REVALIDA_2020_26_44: Question[] = [
         { id: "C", text: "encaminhar o paciente para cirurgia imediata para descompressão." },
         { id: "D", text: "receitar corticosteroide sistêmico e repouso por 14 dias." },
     ],
-    correct: ""
+    correct: "A"
   },
   {
     id: 39,
@@ -183,7 +182,7 @@ export const QUESTOES_REVALIDA_2020_26_44: Question[] = [
         { id: "C", text: "prostatite crônica." },
         { id: "D", text: "prostatite aguda." },
     ],
-    correct: ""
+    correct: "B"
   },
   {
     id: 40,
@@ -196,7 +195,7 @@ export const QUESTOES_REVALIDA_2020_26_44: Question[] = [
         { id: "C", text: "Não é pneumonia." },
         { id: "D", text: "Pneumonia muito grave." },
     ],
-    correct: ""
+    correct: "B"
   },
   {
     id: 41,
@@ -209,7 +208,7 @@ export const QUESTOES_REVALIDA_2020_26_44: Question[] = [
         { id: "C", text: "Solicitar biópsia do colo uterino." },
         { id: "D", text: "Solicitar colposcopia." },
     ],
-    correct: ""
+    correct: "A"
   },
   {
     id: 42,
@@ -222,7 +221,7 @@ export const QUESTOES_REVALIDA_2020_26_44: Question[] = [
         { id: "C", text: "Iniciar tramadol em solução oral 100 mg/mL, 20 gotas, de 12 em 12 horas, para controle de dor intensa." },
         { id: "D", text: "Encaminhar para reinternação hospitalar para controle da dor com morfina endovenosa." },
     ],
-    correct: ""
+    correct: "A"
   },
   {
     id: 43,
@@ -235,7 +234,7 @@ export const QUESTOES_REVALIDA_2020_26_44: Question[] = [
         { id: "C", text: "solicitar tomografia de crânio e, se o resultado for normal, dar alta hospitalar à paciente com orientações." },
         { id: "D", text: "solicitar tomografia de crânio e indicar internação hospitalar da paciente para observação clínica por 24 horas." },
     ],
-    correct: ""
+    correct: "B"
   },
   {
     id: 44,
@@ -248,6 +247,6 @@ export const QUESTOES_REVALIDA_2020_26_44: Question[] = [
         { id: "C", text: "Primeira gestação em idade avançada." },
         { id: "D", text: "Tia paterna com câncer de mama pós-menopausa." },
     ],
-    correct: ""
+    correct: "C"
   },
 ];

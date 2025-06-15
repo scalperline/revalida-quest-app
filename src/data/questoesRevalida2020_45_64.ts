@@ -1,4 +1,3 @@
-
 import { type Question } from "@/components/QuestionCard";
 
 export const QUESTOES_REVALIDA_2020_45_64: Question[] = [
@@ -26,7 +25,7 @@ export const QUESTOES_REVALIDA_2020_45_64: Question[] = [
         text: "Dengue grupo C; internação hospitalar e hidratação parenteral com soro fisiológico 0,9 %.",
       },
     ],
-    correct: "",
+    correct: "D",
   },
   {
     id: 46,
@@ -52,7 +51,7 @@ export const QUESTOES_REVALIDA_2020_45_64: Question[] = [
         text: "diagnosticar a paciente com diabete melito gestacional e iniciar tratamento adequado.",
       },
     ],
-    correct: "",
+    correct: "C",
   },
   {
     id: 47,
@@ -79,7 +78,7 @@ export const QUESTOES_REVALIDA_2020_45_64: Question[] = [
         text: "As capitais com maiores taxas de mortalidade por COVID-19 apresentam menores proporções de pessoas com rendimento familiar abaixo da linha da pobreza.",
       },
     ],
-    correct: "",
+    correct: "C",
   },
   {
     id: 48,
@@ -106,7 +105,7 @@ export const QUESTOES_REVALIDA_2020_45_64: Question[] = [
         text: "laparoscopia de urgência para hemostasia da lesão hepática.",
       },
     ],
-    correct: "",
+    correct: "C",
   },
   {
     id: 49,
@@ -129,7 +128,7 @@ export const QUESTOES_REVALIDA_2020_45_64: Question[] = [
         text: "Administração de ácido tranexâmico, a cada 8 horas, por 24 a 48 horas.",
       },
     ],
-    correct: "",
+    correct: "B",
   },
   {
     id: 50,
@@ -143,7 +142,7 @@ export const QUESTOES_REVALIDA_2020_45_64: Question[] = [
       { id: "C", text: "Terapia com amitriptilina." },
       { id: "D", text: "Terapia comportamental." },
     ],
-    correct: "",
+    correct: "D",
   },
   {
     id: 51,
@@ -166,7 +165,7 @@ export const QUESTOES_REVALIDA_2020_45_64: Question[] = [
       },
       { id: "D", text: "histórico de parto prematuro." },
     ],
-    correct: "",
+    correct: "D",
   },
   {
     id: 52,
@@ -192,7 +191,7 @@ export const QUESTOES_REVALIDA_2020_45_64: Question[] = [
         text: "Respeitar a autonomia da mãe, direito fundamental garantido pelo Estatuto da Criança e do Adolescente.",
       },
     ],
-    correct: "",
+    correct: "C",
   },
   {
     id: 53,
@@ -218,7 +217,7 @@ export const QUESTOES_REVALIDA_2020_45_64: Question[] = [
         text: "obstrução da sonda vesical e desobstrução com irrigação sob pressão.",
       },
     ],
-    correct: "",
+    correct: "C",
   },
   {
     id: 54,
@@ -241,7 +240,7 @@ export const QUESTOES_REVALIDA_2020_45_64: Question[] = [
         text: "FAN; positivo com padrão nuclear pontilhado grosso; encefalopatia lúpica.",
       },
     ],
-    correct: "",
+    correct: "A",
   },
   {
     id: 55,
@@ -267,7 +266,7 @@ export const QUESTOES_REVALIDA_2020_45_64: Question[] = [
         text: "reação em cadeia da polimerase para espiroquetas; doxiciclina via oral.",
       },
     ],
-    correct: "",
+    correct: "B",
   },
   {
     id: 56,
@@ -281,7 +280,7 @@ export const QUESTOES_REVALIDA_2020_45_64: Question[] = [
       { id: "C", text: "Trichomonas vaginalis." },
       { id: "D", text: "Chlamydia trachomatis." },
     ],
-    correct: "",
+    correct: "D",
   },
   {
     id: 57,
@@ -307,7 +306,7 @@ export const QUESTOES_REVALIDA_2020_45_64: Question[] = [
         text: "acolhimento do usuário pela equipe, pois é de sua competência classificar riscos e definir condutas.",
       },
     ],
-    correct: "",
+    correct: "D",
   },
   {
     id: 58,
@@ -331,7 +330,7 @@ export const QUESTOES_REVALIDA_2020_45_64: Question[] = [
       },
       { id: "D", text: "hérnia diafragmática e laparotomia exploradora." },
     ],
-    correct: "",
+    correct: "A",
   },
   {
     id: 59,
@@ -345,7 +344,7 @@ export const QUESTOES_REVALIDA_2020_45_64: Question[] = [
       { id: "C", text: "Pneumopatia restritiva pela obesidade." },
       { id: "D", text: "Derrame pleural por insuficiência cardíaca." },
     ],
-    correct: "",
+    correct: "B",
   },
   {
     id: 60,
@@ -371,7 +370,7 @@ export const QUESTOES_REVALIDA_2020_45_64: Question[] = [
         text: "ventilar com pressão positiva através de máscara facial.",
       },
     ],
-    correct: "",
+    correct: "B",
   },
   {
     id: 61,
@@ -392,7 +391,7 @@ export const QUESTOES_REVALIDA_2020_45_64: Question[] = [
         text: "Solicitar marcadores tumorais, como o antígeno carcino-embrionário e o CA-125.",
       },
     ],
-    correct: "",
+    correct: "C",
   },
   {
     id: 62,
@@ -418,7 +417,7 @@ export const QUESTOES_REVALIDA_2020_45_64: Question[] = [
         text: "indicar farmacoterapia sem contraindicações clínicas para fumantes que já tentaram parar de fumar somente com terapia cognitivo-comportamental.",
       },
     ],
-    correct: "",
+    correct: "C",
   },
   {
     id: 63,
@@ -444,7 +443,7 @@ export const QUESTOES_REVALIDA_2020_45_64: Question[] = [
         text: "solicitar angiografia por tomografia ou ressonância magnética para descartar tromboangeíte obliterante de Buerger.",
       },
     ],
-    correct: "",
+    correct: "C",
   },
   {
     id: 64,
@@ -458,6 +457,6 @@ export const QUESTOES_REVALIDA_2020_45_64: Question[] = [
       { id: "C", text: "Staphylococcus aureus e Sabouraud." },
       { id: "D", text: "Mycobacterium kansasii e chocolate." },
     ],
-    correct: "",
+    correct: "D",
   },
 ];

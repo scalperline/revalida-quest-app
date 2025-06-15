@@ -1,4 +1,3 @@
-
 import { type Question } from "@/components/QuestionCard";
 
 export const QUESTOES_REVALIDA_2020_87_100: Question[] = [
@@ -13,7 +12,7 @@ export const QUESTOES_REVALIDA_2020_87_100: Question[] = [
       { id: "C", text: "Solicitar teste rápido molecular para tuberculose e cultura de escarro com teste de sensibilidade já na primeira consulta." },
       { id: "D", text: "Solicitar teste rápido molecular para tuberculose e cultura de escarro com teste de sensibilidade somente se resistência à rifampicina." },
     ],
-    correct: "",
+    correct: "C",
   },
   {
     id: 88,
@@ -26,7 +25,7 @@ export const QUESTOES_REVALIDA_2020_87_100: Question[] = [
       { id: "C", text: "hérnia inguinal e aguardar a regressão espontânea até os 5 anos de idade." },
       { id: "D", text: "cisto do canal de Nuck e aguardar a regressão espontânea até os 5 anos de idade." },
     ],
-    correct: "",
+    correct: "B",
   },
   {
     id: 89,
@@ -39,7 +38,7 @@ export const QUESTOES_REVALIDA_2020_87_100: Question[] = [
       { id: "C", text: "inversão albumina/globulina por cirrose hepática complicada com síndrome hepatorrenal." },
       { id: "D", text: "hipoalbuminemia decorrente de síndrome nefrótica por nefropatia membranosa associada a síndrome hiper-IgG." },
     ],
-    correct: "",
+    correct: "A",
   },
   {
     id: 90,
@@ -52,7 +51,7 @@ export const QUESTOES_REVALIDA_2020_87_100: Question[] = [
       { id: "C", text: "tríplice viral em até 48 horas após o contato com o caso suspeito, sendo essa a dose zero, seguida da segunda dose aos 12 meses." },
       { id: "D", text: "tríplice viral em até 72 horas após o contato com o caso suspeito, sendo essa a dose zero, seguida da vacinação habitual aos 12 meses." },
     ],
-    correct: "",
+    correct: "D",
   },
   {
     id: 91,
@@ -65,7 +64,7 @@ export const QUESTOES_REVALIDA_2020_87_100: Question[] = [
       { id: "C", text: "Progesterona." },
       { id: "D", text: "Ácido acetilsalicílico." },
     ],
-    correct: "",
+    correct: "D",
   },
   {
     id: 92,
@@ -78,7 +77,7 @@ export const QUESTOES_REVALIDA_2020_87_100: Question[] = [
       { id: "C", text: "Encaminhar o paciente ao centro de referência em saúde do trabalhador." },
       { id: "D", text: "Encaminhar o paciente à perícia médica no INSS." },
     ],
-    correct: "",
+    correct: "C",
   },
   {
     id: 93,
@@ -91,7 +90,7 @@ export const QUESTOES_REVALIDA_2020_87_100: Question[] = [
       { id: "C", text: "aumento da bilirrubina indireta e aumento da alanina aminotransferase." },
       { id: "D", text: "aumento da bilirrubina direta e diminuição do tempo de protrombina em segundos." },
     ],
-    correct: "",
+    correct: "B",
   },
   {
     id: 94,
@@ -104,7 +103,7 @@ export const QUESTOES_REVALIDA_2020_87_100: Question[] = [
       { id: "C", text: "prescrever levotiroxina e dosar anti-tireoide peroxidase para definir a abordagem dos nódulos." },
       { id: "D", text: "solicitar T4 livre e punção aspirativa com agulha fina do maior nódulo antes de definir o tratamento." },
     ],
-    correct: "",
+    correct: "B",
   },
   {
     id: 95,
@@ -117,7 +116,7 @@ export const QUESTOES_REVALIDA_2020_87_100: Question[] = [
       { id: "C", text: "solicitar urocultura com antibiograma e iniciar antibioticoterapia domiciliar empírica, antes da obtenção do resultado do exame." },
       { id: "D", text: "iniciar antibioticoterapia domiciliar empírica imediatamente, sem necessidade de outros exames, e reavaliar a criança em 24 horas." },
     ],
-    correct: "",
+    correct: "C",
   },
   {
     id: 96,
@@ -130,7 +129,7 @@ export const QUESTOES_REVALIDA_2020_87_100: Question[] = [
       { id: "C", text: "Iniciar indução do parto com misoprostol." },
       { id: "D", text: "Realizar cesariana de urgência." },
     ],
-    correct: "",
+    correct: "B",
   },
   {
     id: 97,
@@ -143,7 +142,7 @@ export const QUESTOES_REVALIDA_2020_87_100: Question[] = [
       { id: "C", text: "Realizar entrevistas para levantar informações sobre o território e a vida das famílias e da comunidade, aspectos geográficos, políticos, econômicos, sociais e culturais percebidos e de relevância para a comunidade." },
       { id: "D", text: "Levantar a documentação (incluindo plano diretor do município, projetos e estudos), dados demográficos, econômicos e sociais; adquirir mapa-base e definir responsabilidades, principalmente dos ACS (Agente Comunitário de Saúde) e dos profissionais mais antigos e/ou moradores na área." },
     ],
-    correct: "",
+    correct: "D",
   },
   {
     id: 98,
@@ -156,7 +155,7 @@ export const QUESTOES_REVALIDA_2020_87_100: Question[] = [
       { id: "C", text: "neoplasia colônica." },
       { id: "D", text: "doença de Crohn." },
     ],
-    correct: "",
+    correct: "C",
   },
   {
     id: 99,
@@ -169,7 +168,7 @@ export const QUESTOES_REVALIDA_2020_87_100: Question[] = [
       { id: "C", text: "Proceder cateterismo cardíaco diagnóstico e possivelmente terapêutico, dada a inegável existência de doença arterial coronariana como causa da angina pectoris estável e disfunção sitólica do VE." },
       { id: "D", text: "Solicitar avaliação do risco cirúrgico visando à realização de troca valvar aórtica, em razão da existência de estenose aórtica grave sintomática, com indicação de substituição da valva afetada." },
     ],
-    correct: "",
+    correct: "D",
   },
   {
     id: 100,
@@ -182,6 +181,6 @@ export const QUESTOES_REVALIDA_2020_87_100: Question[] = [
       { id: "C", text: "duas doses de imunoglobulina humana Anti-hepatite B." },
       { id: "D", text: "uma única dose de imunoglobulina humana Anti-hepatite B." },
     ],
-    correct: "",
+    correct: "A",
   },
 ];

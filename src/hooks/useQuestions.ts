@@ -11,12 +11,14 @@ import { QUESTOES_REVALIDA_2015 } from "@/data/questoesRevalida2015";
 import { QUESTOES_REVALIDA_2015_VERMELHA } from "@/data/questoesRevalida2015Vermelha";
 import { QUESTOES_REVALIDA_2016_PROVA1 } from "@/data/questoesRevalida2016Prova1";
 import { QUESTOES_REVALIDA_2016_PROVA2 } from "@/data/questoesRevalida2016Prova2";
+import { QUESTOES_REVALIDA_2017_PROVA1 } from "@/data/questoesRevalida2017Prova1";
+import { QUESTOES_REVALIDA_2017_PROVA2 } from "@/data/questoesRevalida2017Prova2";
 
 const QUESTOES_POR_PAGINA = 10;
 
 export function useQuestions() {
-  const [anoSelecionado, setAnoSelecionado] = useState<number>(2016);
-  const [tipoProva, setTipoProva] = useState<string>("Cinza");
+  const [anoSelecionado, setAnoSelecionado] = useState<number>(2017);
+  const [tipoProva, setTipoProva] = useState<string>("Prova 1");
   const [paginaAtual, setPaginaAtual] = useState(1);
 
   const questoesAnoSelecionado: Question[] = useMemo(() => {
@@ -46,6 +48,11 @@ export function useQuestions() {
         ? QUESTOES_REVALIDA_2016_PROVA2
         : QUESTOES_REVALIDA_2016_PROVA1;
     }
+    if (anoSelecionado === 2017) {
+      return tipoProva === "Prova 2"
+        ? QUESTOES_REVALIDA_2017_PROVA2
+        : QUESTOES_REVALIDA_2017_PROVA1;
+    }
     return [];
   }, [anoSelecionado, tipoProva]);
 
@@ -63,6 +70,11 @@ export function useQuestions() {
   function handleAnoSelecionado(v: number) {
     setAnoSelecionado(v);
     setPaginaAtual(1);
+    if ([2013, 2014, 2015].includes(v)) {
+      setTipoProva("Cinza");
+    } else if ([2016, 2017].includes(v)) {
+      setTipoProva("Prova 1");
+    }
   }
 
   function handleTipoProva(v: string) {

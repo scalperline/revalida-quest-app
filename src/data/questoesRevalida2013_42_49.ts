@@ -1,4 +1,3 @@
-
 import { Question } from "./questoesRevalida2011";
 
 // Questões 42 a 49 do Revalida 2013 (transcrição oficial das imagens)
@@ -19,7 +18,7 @@ Com base nos dados apresentados, pode-se afirmar que:
       { id: "D", text: "o paciente deve receber digoxina para controle da frequência cardíaca e heparina de baixo peso molecular para anticoagulação." },
       { id: "E", text: "o paciente deve ser internado na Unidade de Terapia Intensiva e receber furosemida, morfina, ventilação não invasiva e dobutamina." },
     ],
-    correct: "C"
+    correct: "D"
   },
   {
     id: 43,
@@ -77,7 +76,7 @@ A conduta mais apropriada para esse paciente, neste momento, é:
       { id: "D", text: "repetir radiografia do tórax." },
       { id: "E", text: "iniciar tratamento com macrolídeo." },
     ],
-    correct: "A"
+    correct: "B"
   },
   {
     id: 46,
@@ -94,7 +93,7 @@ Diante destes dados, a conduta a ser tomada é:
       { id: "D", text: "realizar seguimento mensal com medidas seriadas da altura uterina, desde que ausentes alterações maternas como hipertensão arterial e diabetes." },
       { id: "E", text: "aguardar até a 38.ª semana para avaliação das condições obstétricas; realizar a indução do parto, se favoráveis; ou indicar cesárea, se desfavoráveis." },
     ],
-    correct: "B"
+    correct: "C"
   },
   {
     id: 47,

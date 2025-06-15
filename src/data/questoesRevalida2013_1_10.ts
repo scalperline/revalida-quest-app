@@ -1,4 +1,3 @@
-
 import { Question } from "./questoesRevalida2011"; // Reaproveitando o tipo
 
 export const QUESTOES_REVALIDA_2013_1_10: Question[] = [
@@ -15,7 +14,7 @@ O diagnóstico do paciente e a conduta inicial a ser adotada são, respectivamen
       { id: "D", text: "osteoartrite; solicitar radiografia dos joelhos e iniciar o uso de anti-inflamatório não hormonal." },
       { id: "E", text: "artrite séptica; não há necessidade de exames complementares e deve-se iniciar antibioticoterapia imediatamente." }
     ],
-    correct: "B"
+    correct: "C"
   },
   {
     id: 2,
@@ -45,7 +44,7 @@ A conduta mais adequada para esse paciente é:`,
       { id: "D", text: "orientá-lo a realizar tratamento em regime ambulatorial, com reavaliação clínica diária na Unidade de Saúde e hidratação oral de 2 litros de líquidos por dia. Preencher cartão de acompanhamento de dengue; prescrever sintomáticos e repouso; notificar o caso e orientar retorno." },
       { id: "E", text: "liberá-lo para o domicílio, com orientação de ingerir 5 a 6 litros de líquidos/dia, sendo 1/3 com solução salina e os 2/3 restantes de líquidos caseiros (água, suco de frutas, soro caseiro, chás, água de coco etc.). Prescrever sintomáticos e repouso; notificar o caso e orientar retorno." },
     ],
-    correct: "D"
+    correct: "E"
   },
   {
     id: 4,
@@ -120,7 +119,7 @@ O preenchimento adequado na declaração de óbito é:`,
       { id: "D", text: "Parte II: embolia pulmonar." },
       { id: "E", text: "Parte I: a. trombose venosa profunda. Parte II: embolia pulmonar." }
     ],
-    correct: "A"
+    correct: "C"
   },
   {
     id: 9,

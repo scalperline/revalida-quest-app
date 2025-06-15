@@ -1,4 +1,3 @@
-
 import { Question } from "./questoesRevalida2011";
 
 // Questões 96 a 110 do Revalida 2013 (transcrição oficial das imagens)
@@ -113,7 +112,8 @@ export const QUESTOES_REVALIDA_2013_96_110: Question[] = [
       { id: "D", text: "6,0%." },
       { id: "E", text: "10,0%." },
     ],
-    correct: "C"
+    correct: "",
+    anulada: true
   },
   {
     id: 104,
@@ -169,7 +169,8 @@ export const QUESTOES_REVALIDA_2013_96_110: Question[] = [
       { id: "D", text: "Laparotomia se ocorrer distensão abdominal importante." },
       { id: "E", text: "Laparotomia exploradora imediata." },
     ],
-    correct: "B"
+    correct: "",
+    anulada: true
   },
   {
     id: 108,

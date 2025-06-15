@@ -1,4 +1,3 @@
-
 import { Question } from "./questoesRevalida2011";
 
 // Questões 74 a 82 do Revalida 2013 (transcrição oficial das imagens)
@@ -15,7 +14,7 @@ export const QUESTOES_REVALIDA_2013_74_82: Question[] = [
       { id: "D", text: "Ferritina sérica." },
       { id: "E", text: "Proteína C reativa." },
     ],
-    correct: "E"
+    correct: "B"
   },
   {
     id: 75,
@@ -29,7 +28,7 @@ export const QUESTOES_REVALIDA_2013_74_82: Question[] = [
       { id: "D", text: "Sulfametoxazol/trimetoprim." },
       { id: "E", text: "Zidovudina + lamivudina." },
     ],
-    correct: "A"
+    correct: "B"
   },
   {
     id: 76,
@@ -43,7 +42,7 @@ export const QUESTOES_REVALIDA_2013_74_82: Question[] = [
       { id: "D", text: "Ecolalia; senta-se sem apoio; muda objeto de uma mão para outra; reflexo de preensão plantar." },
       { id: "E", text: "Emissão de palavras-frase; capacidade de andar com apoio observado na consulta; bate palmas; reflexo do paraquedista." },
     ],
-    correct: "C"
+    correct: "D"
   },
   {
     id: 77,
@@ -57,7 +56,7 @@ export const QUESTOES_REVALIDA_2013_74_82: Question[] = [
       { id: "D", text: "aumentar em 2U a dose de insulina NPH noturna caso a medida da glicemia matinal em jejum tenha sido superior a 120mg/dL na maioria dos dias." },
       { id: "E", text: "associar 4U de insulina regular antes do almoço e ao deitar caso a medida da glicemia matinal em jejum tenha sido superior a 120mg/dL na maioria dos dias." },
     ],
-    correct: "A"
+    correct: "D"
   },
   {
     id: 78,

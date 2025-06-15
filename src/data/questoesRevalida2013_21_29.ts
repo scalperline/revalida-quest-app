@@ -1,4 +1,3 @@
-
 import { Question } from "./questoesRevalida2011";
 
 // Questões 21 a 29 do Revalida 2013 (transcrição oficial)
@@ -119,7 +118,8 @@ export const QUESTOES_REVALIDA_2013_21_29: Question[] = [
     id: 29,
     year: 2013,
     area: "Clínica Médica/Cardiologia",
-    enunciado: `Homem com 48 anos de idade procurou o ambulatório de Clínica Médica para avaliação. Não apresenta história de comorbidades conhecidas prévias, mas é tabagista (20 maços-ano) e tem histórico familiar de hipertensão arterial sistêmica (HAS) importante. Nega diabetes, dislipidemia, etilismo, drogadição, acidente vascular cerebral, doença renal prévia, doenças da tireoide, doença arterial coronariana e uso crônico de medicações. No momento, encontra-se assintomático, com pressão arterial (PA) = 145x95 mmHg (medida duas vezes na consulta) e índice de massa corporal de 26,8 Kg/m². A fundoscopia revelou arteríolas estreitadas, tortuosas e brilhantes (em fio de prata), além de cruzamento arteriolar patológico. A ausculta cardíaca revelou bulhas normofonéticas, ritmo cardíaco regular em três tempos, com presença de B4 e frequência cardíaca = 88 bpm. Não havia turgência jugular. A ausculta pulmonar era normal. Não havia edema de membros inferiores. O eletrocardiograma revelou sinais de hipertrofia ventricular esquerda. A dosagem de creatinina e o sumário de urina (Urin I) eram normais.\nDiante do quadro deste paciente, a meta de PA e a recomendação do tratamento neste momento são, respectivamente:`,
+    enunciado: `Homem com 48 anos de idade procurou o ambulatório de Clínica Médica para avaliação. Não apresenta história de comorbidades conhecidas prévias, mas é tabagista (20 maços-ano) e tem histórico familiar de hipertensão arterial sistêmica (HAS) importante. Nega diabetes, dislipidemia, etilismo, drogadição, acidente vascular cerebral, doença renal prévia, doenças da tireoide, doença arterial coronariana e uso crônico de medicações. No momento, encontra-se assintomático, com pressão arterial (PA) = 145x95 mmHg (medida duas vezes na consulta) e índice de massa corporal de 26,8 Kg/m². A fundoscopia revelou arteríolas estreitadas, tortuosas e brilhantes (em fio de prata), além de cruzamento arteriolar patológico. A ausculta cardíaca revelou bulhas normofonéticas, ritmo cardíaco regular em três tempos, com presença de B4 e frequência cardíaca = 88 bpm. Não havia turgência jugular. A ausculta pulmonar era normal. Não havia edema de membros inferiores. O eletrocardiograma revelou sinais de hipertrofia ventricular esquerda. A dosagem de creatinina e o sumário de urina (Urin I) eram normais.
+Diante do quadro deste paciente, a meta de PA e a recomendação do tratamento neste momento são, respectivamente:`,
     options: [
       { id: "A", text: "PA < 140x90; modificação do estilo de vida isolado." },
       { id: "B", text: "PA < 130x80; modificação do estilo de vida isolado." },
@@ -127,6 +127,6 @@ export const QUESTOES_REVALIDA_2013_21_29: Question[] = [
       { id: "D", text: "PA < 120x80; modificação do estilo de vida e tratamento medicamentoso." },
       { id: "E", text: "PA < 130x80; modificação do estilo de vida e tratamento medicamentoso." }
     ],
-    correct: "C"
+    correct: "E"
   }
 ];

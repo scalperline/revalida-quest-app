@@ -18,11 +18,13 @@ import { QUESTOES_REVALIDA_2014 } from "@/data/questoesRevalida2014";
 import { QuestionsHeader } from "@/components/QuestionsHeader";
 import { QUESTOES_REVALIDA_2014_VERMELHA } from "@/data/questoesRevalida2014Vermelha";
 import { type Question } from "@/components/QuestionCard";
+import { QUESTOES_REVALIDA_2015 } from "@/data/questoesRevalida2015";
+import { QUESTOES_REVALIDA_2015_VERMELHA } from "@/data/questoesRevalida2015Vermelha";
 
 const QUESTOES_POR_PAGINA = 10;
 
 export default function Questions() {
-  const [anoSelecionado, setAnoSelecionado] = useState<number>(2014);
+  const [anoSelecionado, setAnoSelecionado] = useState<number>(2015);
   const [tipoProva, setTipoProva] = useState<string>("Cinza");
   const [paginaAtual, setPaginaAtual] = useState(1);
 
@@ -48,6 +50,15 @@ export default function Questions() {
       }
       if (tipoProva === "Vermelha") {
         return QUESTOES_REVALIDA_2014_VERMELHA;
+      }
+      return [];
+    }
+    if (anoSelecionado === 2015) {
+      if (tipoProva === "Cinza") {
+        return QUESTOES_REVALIDA_2015;
+      }
+      if (tipoProva === "Vermelha") {
+        return QUESTOES_REVALIDA_2015_VERMELHA;
       }
       return [];
     }

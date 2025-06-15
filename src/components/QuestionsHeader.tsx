@@ -41,9 +41,10 @@ export function QuestionsHeader({
               <SelectItem value="2012">Revalida 2012</SelectItem>
               <SelectItem value="2013">Revalida 2013</SelectItem>
               <SelectItem value="2014">Revalida 2014</SelectItem>
+              <SelectItem value="2015">Revalida 2015</SelectItem>
             </SelectContent>
           </Select>
-          {[2013, 2014].includes(anoSelecionado) && tipoProva && setTipoProva && (
+          {[2013, 2014, 2015].includes(anoSelecionado) && tipoProva && setTipoProva && (
             <Select onValueChange={setTipoProva} defaultValue={tipoProva}>
               <SelectTrigger className="w-[180px] bg-card">
                 <SelectValue placeholder="Selecione a Prova" />

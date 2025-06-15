@@ -1,4 +1,3 @@
-
 import { type Question } from "@/components/QuestionCard";
 
 export const QUESTOES_REVALIDA_2022_1_37_73: Question[] = [
@@ -26,7 +25,7 @@ export const QUESTOES_REVALIDA_2022_1_37_73: Question[] = [
         text: "reposição com fluidos endovenosos, monitorização eletrocardiográfica e transferência para centro especializado em queimados, após estabilização.",
       },
     ],
-    correct: "B",
+    correct: "D",
   },
   {
     id: 38,
@@ -94,7 +93,7 @@ export const QUESTOES_REVALIDA_2022_1_37_73: Question[] = [
       { id: "C", text: "a tireoidectomia subtotal." },
       { id: "D", text: "a tireoidectomia total." },
     ],
-    correct: "A",
+    correct: "B",
   },
   {
     id: 42,
@@ -146,7 +145,7 @@ export const QUESTOES_REVALIDA_2022_1_37_73: Question[] = [
         text: "asma persistente grave parcialmente controlada; iniciar corticoide inalatório oral em dosagem alta.",
       },
     ],
-    correct: "D",
+    correct: "ANULADA",
   },
   {
     id: 44,
@@ -235,7 +234,7 @@ export const QUESTOES_REVALIDA_2022_1_37_73: Question[] = [
         text: "irrigação ocular com soro fisiológico a 0,9% em temperatura ambiente.",
       },
     ],
-    correct: "A",
+    correct: "D",
   },
   {
     id: 48,
@@ -270,7 +269,7 @@ export const QUESTOES_REVALIDA_2022_1_37_73: Question[] = [
       { id: "C", text: "o uso do Dispositivo Intrauterino (DIU) de cobre." },
       { id: "D", text: "a realização de vasectomia." },
     ],
-    correct: "D",
+    correct: "B",
   },
   {
     id: 50,
@@ -401,8 +400,7 @@ export const QUESTOES_REVALIDA_2022_1_37_73: Question[] = [
         text: "toxoplasmose; tomografia, imunofluorescência indireta e teste imunoenzimático (ELISA).",
       },
       {
-        id: "D",
-        text: "tuberculose pulmonar; teste rápido molecular para tuberculose (TRM-TB), cultura de escarro e teste de sensibilidade.",
+        id: "D", text: "tuberculose pulmonar; teste rápido molecular para tuberculose (TRM-TB), cultura de escarro e teste de sensibilidade.",
       },
     ],
     correct: "D",
@@ -436,7 +434,7 @@ export const QUESTOES_REVALIDA_2022_1_37_73: Question[] = [
         text: "a terapia expulsora do cálculo com hidratação e alfabloqueadores.",
       },
     ],
-    correct: "A",
+    correct: "ANULADA",
   },
   {
     id: 58,
@@ -490,7 +488,7 @@ export const QUESTOES_REVALIDA_2022_1_37_73: Question[] = [
         text: "o tecido de granulação pode ser preservado, não havendo necessidade de ressecá-lo, pois não há sinais de infecção.",
       },
     ],
-    correct: "D",
+    correct: "C",
   },
   {
     id: 61,
@@ -516,7 +514,7 @@ export const QUESTOES_REVALIDA_2022_1_37_73: Question[] = [
         text: "os valores do volume expiratório forçado no primeiro segundo afastam o diagnóstico de doença pulmonar obstrutiva crônica nessa paciente.",
       },
     ],
-    correct: "D",
+    correct: "ANULADA",
   },
   {
     id: 62,
@@ -676,7 +674,7 @@ export const QUESTOES_REVALIDA_2022_1_37_73: Question[] = [
     year: 2022,
     area: "Pediatria",
     enunciado:
-      "Uma escolar com 8 anos de idade, acompanhada da mãe, chega à emergência com dor abdominal intensa, iniciada há 2 dias, com piora progressiva. A paciente apresenta vômitos biliosos, que não melhoram com a medicação, e distensão abdominal. A mãe relata que, há 1 semana, a filha eliminou vermes e está em tratamento de anemia. O exame físico mostrou massa cilíndrica na região periumbilical e ausculta débil da peristalse. O resultado da radiografia do abdome apresentou níveis hidroaéreos no intestino delgado e sombra radiológica com forma e aparência de “feixe de charuto”.\n\nDiante desses dados, considerando a principal hipótese diagnóstica para o caso, a conduta imediata, além da hidratação da criança, é",
+      "Uma escolar com 8 anos de idade, acompanhada da mãe, chega à emergência com dor abdominal intensa, iniciada há 2 dias, com piora progressiva. A paciente apresenta vômitos biliosos, que não melhoram com a medicação, e distensão abdominal. A mãe relata que, há 1 semana, a filha eliminou vermes e está em tratamento de anemia. O exame físico mostrou massa cilíndrica na região periumbilical e ausculta débil da peristalse. O resultado da radiografia do abdome apresentou níveis hidroaéreos no intestino delgado e sombra radiológica com forma e aparência de “feixe de charuto”.\n\nDiante desses dados, considerando a principal hipótese diagnóstica para o caso, a conduta imediata, além da hidratação da criança, é",
     options: [
       {
         id: "A",
@@ -735,7 +733,7 @@ export const QUESTOES_REVALIDA_2022_1_37_73: Question[] = [
       { id: "C", text: "o reforço da meningocócica C conjugada." },
       { id: "D", text: "o segundo dose da tríplice viral + varicela." },
     ],
-    correct: "ANULADA",
+    correct: "D",
   },
   {
     id: 71,
@@ -749,7 +747,7 @@ export const QUESTOES_REVALIDA_2022_1_37_73: Question[] = [
       { id: "C", text: "Anti-Scl-70; esclerose sistêmica." },
       { id: "D", text: "Anti-Ro; síndrome de Sjögren." },
     ],
-    correct: "B",
+    correct: "A",
     image: "/lovable-uploads/88bf79b5-cc55-464e-bb56-009f8affb082.png",
   },
   {

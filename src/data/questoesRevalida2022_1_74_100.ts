@@ -1,4 +1,3 @@
-
 import { type Question } from "@/components/QuestionCard";
 
 export const QUESTOES_REVALIDA_2022_1_74_100: Question[] = [
@@ -17,7 +16,7 @@ export const QUESTOES_REVALIDA_2022_1_74_100: Question[] = [
       { id: "C", text: "Solicitar pesquisa do tipo e da classe viral." },
       { id: "D", text: "Encaminhar para colposcopia e biópsia." },
     ],
-    correct: "D",
+    correct: "A",
   },
   {
     id: 75,
@@ -57,7 +56,7 @@ export const QUESTOES_REVALIDA_2022_1_74_100: Question[] = [
         text: "teste de rastreamento para HIV e tratar a paciente com esquema para sífilis primária.",
       },
     ],
-    correct: "B",
+    correct: "C",
   },
   {
     id: 77,
@@ -109,7 +108,7 @@ export const QUESTOES_REVALIDA_2022_1_74_100: Question[] = [
         text: "Radiografia simples do abdome; calibre do reto maior que o do segmento colônico a montante.",
       },
     ],
-    correct: "A",
+    correct: "C",
   },
   {
     id: 79,
@@ -238,7 +237,7 @@ export const QUESTOES_REVALIDA_2022_1_74_100: Question[] = [
         text: "encaminhar a paciente para tratamento cirúrgico a fim de melhor avaliar o comprometimento do sistema reprodutivo.",
       },
     ],
-    correct: "C",
+    correct: "B",
   },
   {
     id: 85,
@@ -315,7 +314,7 @@ export const QUESTOES_REVALIDA_2022_1_74_100: Question[] = [
       { id: "C", text: "Ressonância magnética." },
       { id: "D", text: "Ultrassonografia." },
     ],
-    correct: "D",
+    correct: "A",
   },
   {
     id: 89,
@@ -358,7 +357,7 @@ export const QUESTOES_REVALIDA_2022_1_74_100: Question[] = [
         text: "explicar que novos exames são desnecessários, iniciar benzodiazepínico nas crises e antidepressivo tricíclico; indicar apoio psicológico e retorno em 6 semanas.",
       },
     ],
-    correct: "B",
+    correct: "C",
   },
   {
     id: 91,
@@ -413,7 +412,7 @@ export const QUESTOES_REVALIDA_2022_1_74_100: Question[] = [
       { id: "C", text: "encaminhar o paciente para cirurgia corretiva." },
       { id: "D", text: "ventilar o paciente com uma FiO₂ entre 80 a 100%." },
     ],
-    correct: "A",
+    correct: "B",
   },
   {
     id: 94,
@@ -427,7 +426,7 @@ export const QUESTOES_REVALIDA_2022_1_74_100: Question[] = [
       { id: "C", text: "repetição da coleta da citologia oncótica em 6 meses." },
       { id: "D", text: "amputação do colo uterino com eletrocauterização." },
     ],
-    correct: "B",
+    correct: "A",
   },
   {
     id: 95,
@@ -453,7 +452,7 @@ export const QUESTOES_REVALIDA_2022_1_74_100: Question[] = [
         text: "elaboração de uma série de palestras informativas, com exposição das melhores evidências científicas para o tratamento das doenças neurodegenerativas da infância.",
       },
     ],
-    correct: "D",
+    correct: "B",
   },
   {
     id: 96,
@@ -467,7 +466,7 @@ export const QUESTOES_REVALIDA_2022_1_74_100: Question[] = [
       { id: "C", text: "repetição da dosagem de PSA em 6 meses." },
       { id: "D", text: "realização de novo PSA e de biópsia de próstata em 12 meses." },
     ],
-    correct: "D",
+    correct: "A",
   },
   {
     id: 97,
@@ -493,7 +492,7 @@ export const QUESTOES_REVALIDA_2022_1_74_100: Question[] = [
         text: "fio não absorvível 5-0 para a musculatura, fio não absorvível 5-0 para o tecido celular subcutâneo e fio não absorvível 4-0 para a pele.",
       },
     ],
-    correct: "D",
+    correct: "A",
   },
   {
     id: 98,
@@ -539,7 +538,7 @@ export const QUESTOES_REVALIDA_2022_1_74_100: Question[] = [
         text: "situação longitudinal, apresentação cefálica, variedade de posição naso-esquerda-anterior.",
       },
     ],
-    correct: "A",
+    correct: "C",
     image: "/lovable-uploads/2a66e74b-ab49-410a-acb0-a5417435555c.png",
   },
   {

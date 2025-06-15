@@ -24,7 +24,7 @@ export default function Questions() {
   const [tipoProva, setTipoProva] = useState<string>("Cinza");
   const [paginaAtual, setPaginaAtual] = useState(1);
 
-  const questoesAnoSelecionado: Question[] = (() => {
+  const questoesAnoSelecionado: any[] = (() => {
     if (anoSelecionado === 2011) {
       return QUESTOES_REVALIDA_2011;
     }

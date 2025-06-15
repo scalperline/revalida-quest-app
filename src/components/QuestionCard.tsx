@@ -16,6 +16,7 @@ type Question = {
   options: Option[];
   correct: string;
   referencia?: string;
+  image?: string;
 };
 
 interface Props {
@@ -43,6 +44,15 @@ export function QuestionCard({ question, showAnswer }: Props) {
       <div className="font-semibold text-lg md:text-xl text-foreground whitespace-pre-line">
         {question.enunciado}
       </div>
+      {question.image && (
+        <div className="my-4">
+          <img
+            src={question.image}
+            alt={`Imagem para a questão ${question.id}`}
+            className="rounded-lg mx-auto border"
+          />
+        </div>
+      )}
       <div className="flex flex-col gap-2 pt-2">
         {question.options.map((opt) => {
           const acerto = selected && opt.id === question.correct;

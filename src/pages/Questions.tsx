@@ -4,56 +4,24 @@ import { useState } from "react";
 import { QUESTOES_REVALIDA_2011 } from "@/data/questoesRevalida2011";
 import { QuestionsHeader } from "@/components/QuestionsHeader";
 
-const ESPECIALIDADES = [
-  { value: "clinica-medica", label: "Clínica Médica" },
-  { value: "cirurgia-geral", label: "Cirurgia Geral" },
-  { value: "ginecologia-obstetricia", label: "Ginecologia e Obstetrícia" },
-  { value: "pediatria", label: "Pediatria" },
-  { value: "medicina-preventiva", label: "Medicina Preventiva" },
-];
-// const TEMAS = [
-//   { value: "tema1", label: "Tema 1" },
-//   { value: "tema2", label: "Tema 2" },
-// ];
-
 const QUESTOES_POR_PAGINA = 10;
 
 export default function Questions() {
   const [anoSelecionado, setAnoSelecionado] = useState<number>(2011);
-  const [especialidade, setEspecialidade] = useState<string>(ESPECIALIDADES[0].value);
-  // const [temaSelecionado, setTemaSelecionado] = useState<string>(TEMAS[0].value);
-  const [filtro, setFiltro] = useState("");
   const [paginaAtual, setPaginaAtual] = useState(1);
-  const [abaSelecionada, setAbaSelecionada] = useState<"todas" | "favoritas" | "erradas" | "acertadas">("todas");
 
-  // Inclui todas as questões do ano selecionado
+  // Pegando todas as questões do ano selecionado
   const questoesAnoSelecionado =
     anoSelecionado === 2011
       ? QUESTOES_REVALIDA_2011.filter((q) => q.year === anoSelecionado)
       : [];
 
-  // Filtros aplicados corretamente ao banco (sem filtrar por tema, pois o banco não possui "tema1"/"tema2" nos enunciados)
-  const questoesFiltradas = questoesAnoSelecionado.filter((q) =>
-    (especialidade ? q.area.toLocaleLowerCase().replace(/ /g, "-") === especialidade : true) &&
-    (
-      q.enunciado.toLocaleLowerCase().includes(filtro.toLocaleLowerCase()) ||
-      q.area.toLocaleLowerCase().includes(filtro.toLocaleLowerCase()) ||
-      q.year.toString().includes(filtro)
-    )
-    // Removido filtro de temaSelecionado, pois atualmente não há relação real
-  );
-
-  const totalPaginas = Math.ceil(questoesFiltradas.length / QUESTOES_POR_PAGINA);
+  const totalPaginas = Math.ceil(questoesAnoSelecionado.length / QUESTOES_POR_PAGINA);
 
   // Paginação correta das questões (1 a 110)
   const indiceInicio = (paginaAtual - 1) * QUESTOES_POR_PAGINA;
   const indiceFim = indiceInicio + QUESTOES_POR_PAGINA;
-  const questoesPaginadas = questoesFiltradas.slice(indiceInicio, indiceFim);
-
-  function atualizarFiltro(e: React.ChangeEvent<HTMLInputElement>) {
-    setFiltro(e.target.value);
-    setPaginaAtual(1);
-  }
+  const questoesPaginadas = questoesAnoSelecionado.slice(indiceInicio, indiceFim);
 
   function renderPagination() {
     if (totalPaginas <= 1) return null;
@@ -109,24 +77,16 @@ export default function Questions() {
   return (
     <div className="min-h-screen bg-background px-1 md:px-2 py-10 flex flex-col">
       <QuestionsHeader
-        filtro={filtro}
-        setFiltro={(v) => { setFiltro(v); setPaginaAtual(1); }}
-        especialidade={especialidade}
-        setEspecialidade={(v) => { setEspecialidade(v); setPaginaAtual(1); }}
         anoSelecionado={anoSelecionado}
         setAnoSelecionado={(v) => { setAnoSelecionado(v); setPaginaAtual(1); }}
-        totalQuestoes={questoesFiltradas.length}
-        abaSelecionada={abaSelecionada}
-        setAbaSelecionada={setAbaSelecionada}
+        totalQuestoes={questoesAnoSelecionado.length}
       />
 
       {/* Questões */}
       <div>
-        {questoesFiltradas.length === 0 ? (
+        {questoesAnoSelecionado.length === 0 ? (
           <div className="text-center text-muted-foreground py-40 text-lg rounded-lg bg-card shadow max-w-2xl mx-auto">
-            Nenhuma questão encontrada.
-            <br />
-            <span className="block text-xs mt-3 text-muted-foreground">Dica: verifique os filtros de especialidade, ano, tema ou pesquisa.</span>
+            Nenhuma questão encontrada para este ano.
           </div>
         ) : (
           <div>

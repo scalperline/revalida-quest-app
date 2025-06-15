@@ -1,3 +1,4 @@
+
 import { type Question } from "@/components/QuestionCard";
 
 export const QUESTOES_REVALIDA_2022_2_83_100: Question[] = [
@@ -13,7 +14,7 @@ export const QUESTOES_REVALIDA_2022_2_83_100: Question[] = [
       { id: "C", text: "não cometeu uma infração, por a mãe já saber das internações." },
       { id: "D", text: "cometeu uma infração, por não respeitar a autonomia do paciente." },
     ],
-    correct: "B",
+    correct: "C",
   },
   {
     id: 84,
@@ -27,7 +28,7 @@ export const QUESTOES_REVALIDA_2022_2_83_100: Question[] = [
       { id: "C", text: "Inserir dispositivo intrauterino (DIU) de cobre." },
       { id: "D", text: "Manter o esquema contraceptivo adotado." },
     ],
-    correct: "Anulada",
+    correct: "B",
   },
   {
     id: 85,
@@ -41,7 +42,7 @@ export const QUESTOES_REVALIDA_2022_2_83_100: Question[] = [
       { id: "C", text: "desenvolver mecanismos que posterguem o cumprimento de contratos e o atendimento à saúde, a partir dos critérios da ANS, haja vista a excepcionalidade da pandemia de covid-19." },
       { id: "D", text: "empreender ações que visem garantir o atendimento às necessidades de tratamento dos pacientes graves, permitindo-se que os casos leves sejam atendidos pela APS da rede SUS." },
     ],
-    correct: "Anulada",
+    correct: "A",
   },
   {
     id: 86,
@@ -139,7 +140,7 @@ export const QUESTOES_REVALIDA_2022_2_83_100: Question[] = [
       { id: "C", text: "inguinal direta encarcerada." },
       { id: "D", text: "inguinal indireta encarcerada." },
     ],
-    correct: "A",
+    correct: "B",
   },
   {
     id: 93,
@@ -209,7 +210,7 @@ export const QUESTOES_REVALIDA_2022_2_83_100: Question[] = [
       { id: "C", text: "Instalação de infusão lenta de SG 5% 500 ml." },
       { id: "D", text: "Solicitação de radiografia de tórax de controle." },
     ],
-    correct: "B",
+    correct: "D",
   },
   {
     id: 98,
@@ -223,7 +224,7 @@ export const QUESTOES_REVALIDA_2022_2_83_100: Question[] = [
       { id: "C", text: "antibiótico." },
       { id: "D", text: "anti-inflamatório não hormonal." },
     ],
-    correct: "B",
+    correct: "A",
   },
   {
     id: 99,

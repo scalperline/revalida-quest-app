@@ -14,12 +14,13 @@ import { QUESTOES_REVALIDA_2011, type Question } from "@/data/questoesRevalida20
 import { QUESTOES_REVALIDA_2012 } from "@/data/questoesRevalida2012";
 import { QUESTOES_REVALIDA_2013 } from "@/data/questoesRevalida2013";
 import { QUESTOES_REVALIDA_2013_VERMELHA } from "@/data/questoesRevalida2013Vermelha";
+import { QUESTOES_REVALIDA_2014 } from "@/data/questoesRevalida2014";
 import { QuestionsHeader } from "@/components/QuestionsHeader";
 
 const QUESTOES_POR_PAGINA = 10;
 
 export default function Questions() {
-  const [anoSelecionado, setAnoSelecionado] = useState<number>(2013);
+  const [anoSelecionado, setAnoSelecionado] = useState<number>(2014);
   const [tipoProva, setTipoProva] = useState<string>("Cinza");
   const [paginaAtual, setPaginaAtual] = useState(1);
 
@@ -38,6 +39,9 @@ export default function Questions() {
         return QUESTOES_REVALIDA_2013_VERMELHA;
       }
       return [];
+    }
+    if (anoSelecionado === 2014) {
+      return QUESTOES_REVALIDA_2014;
     }
     return [];
   })();

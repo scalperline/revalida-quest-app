@@ -40,6 +40,7 @@ export function QuestionsHeader({
               <SelectItem value="2011">Revalida 2011</SelectItem>
               <SelectItem value="2012">Revalida 2012</SelectItem>
               <SelectItem value="2013">Revalida 2013</SelectItem>
+              <SelectItem value="2014">Revalida 2014</SelectItem>
             </SelectContent>
           </Select>
           {anoSelecionado === 2013 && tipoProva && setTipoProva && (

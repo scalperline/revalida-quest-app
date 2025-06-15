@@ -24,6 +24,7 @@ import { QUESTOES_REVALIDA_2011_61_70 } from "./questoesRevalida2011_61_70";
 import { QUESTOES_REVALIDA_2011_71_80 } from "./questoesRevalida2011_71_80";
 import { QUESTOES_REVALIDA_2011_81_90 } from "./questoesRevalida2011_81_90";
 import { QUESTOES_REVALIDA_2011_91_100 } from "./questoesRevalida2011_91_100";
+import { QUESTOES_REVALIDA_2011_101_110 } from "./questoesRevalida2011_101_110";
 
 // Concatenar todas as páginas para exportação principal
 export const QUESTOES_REVALIDA_2011: Question[] = [
@@ -37,4 +38,5 @@ export const QUESTOES_REVALIDA_2011: Question[] = [
   ...QUESTOES_REVALIDA_2011_71_80,
   ...QUESTOES_REVALIDA_2011_81_90,
   ...QUESTOES_REVALIDA_2011_91_100,
+  ...QUESTOES_REVALIDA_2011_101_110,
 ];

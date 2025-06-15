@@ -6,6 +6,7 @@ import { QUESTOES_REVALIDA_2013_21_29 } from "./questoesRevalida2013_21_29";
 import { QUESTOES_REVALIDA_2013_30_41 } from "./questoesRevalida2013_30_41";
 import { QUESTOES_REVALIDA_2013_42_49 } from "./questoesRevalida2013_42_49";
 import { QUESTOES_REVALIDA_2013_50_61 } from "./questoesRevalida2013_50_61";
+import { QUESTOES_REVALIDA_2013_62_73 } from "./questoesRevalida2013_62_73";
 // Crie os próximos blocos similares conforme as próximas questões forem transcritas
 export const QUESTOES_REVALIDA_2013: Question[] = [
   ...QUESTOES_REVALIDA_2013_1_10,
@@ -14,5 +15,6 @@ export const QUESTOES_REVALIDA_2013: Question[] = [
   ...QUESTOES_REVALIDA_2013_30_41,
   ...QUESTOES_REVALIDA_2013_42_49,
   ...QUESTOES_REVALIDA_2013_50_61,
-  // ...import e adiciona depois os próximos blocos: _62_... etc.
+  ...QUESTOES_REVALIDA_2013_62_73,
+  // ...import e adiciona depois os próximos blocos: _74_... etc.
 ];

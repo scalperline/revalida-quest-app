@@ -106,12 +106,25 @@ export function QuestionCard({ question, showAnswer }: Props) {
       </div>
       {respostaRevelada && (
         <div className="mt-3 p-4 rounded-lg bg-muted border-l-4 border-primary shadow">
-          <span className={`font-semibold text-lg ${selected === question.correct || showAnswer ? "text-green-600" : "text-red-600"}`}>
-            Gabarito: {question.correct}
-            {selected && (selected === question.correct
-              ? " (Acertou 🎉)"
-              : " (Errou 😓)")}
-          </span>
+          {question.correct === "ANULADA" ? (
+            <span className="font-semibold text-lg text-orange-500">
+              Gabarito: Questão Anulada
+            </span>
+          ) : (
+            <span
+              className={`font-semibold text-lg ${
+                selected === question.correct || showAnswer
+                  ? "text-green-600"
+                  : "text-red-600"
+              }`}
+            >
+              Gabarito: {question.correct}
+              {selected &&
+                (selected === question.correct
+                  ? " (Acertou 🎉)"
+                  : " (Errou 😓)")}
+            </span>
+          )}
         </div>
       )}
     </div>

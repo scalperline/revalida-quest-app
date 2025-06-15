@@ -1,4 +1,3 @@
-
 import { Question } from "./questoesRevalida2011";
 
 export const QUESTOES_REVALIDA_2013_VERMELHA_14_29: Question[] = [
@@ -31,7 +30,7 @@ export const QUESTOES_REVALIDA_2013_VERMELHA_14_29: Question[] = [
     correct: "",
   },
   {
-    id: 17,
+    id: 15,
     year: 2013,
     area: "Cirurgia Geral/Proctologia",
     enunciado: "Mulher com 41 anos de idade procurou a Unidade de Pronto Atendimento com relato de dor anal há três dias e, há cerca de seis horas, notou sangramento anal vermelho vivo entremeado com coágulos. Nega alteração de hábito intestinal e história familiar de neoplasia colorretal. Ao exame observa-se uma nodulação perianal com cerca de 1 cm de diâmetro, arroxeada e com laceração central por onde se extrui um coágulo sanguíneo. O toque retal foi muito doloroso e não evidenciou tumores ou presença de sangue nas fezes.\n\nCom base nessas informações, a conduta correta é:",
@@ -41,6 +40,20 @@ export const QUESTOES_REVALIDA_2013_VERMELHA_14_29: Question[] = [
       { id: "C", text: "realizar a trombectomia no momento do exame." },
       { id: "D", text: "fazer ligadura elástica para hemostasia do vaso sangrante." },
       { id: "E", text: "prescrever anti-inflamatório não esteroidal e observar o sangramento." },
+    ],
+    correct: "",
+  },
+  {
+    id: 17,
+    year: 2013,
+    area: "Clínica Médica/Gastroenterologia",
+    enunciado: "Mulher com 22 anos de idade vem à consulta ambulatorial com diarreia há seis meses. Apresenta cerca de seis evacuações ao dia, com fezes pastosas volumosas, de odor fétido, amareladas e espumosas, sem muco ou sangue. Nega tenesmo ou febre. Piora com a ingestão de leite. Tem cólicas eventuais e distensão abdominal gasosa. Teve perda ponderal de 5 kg desde o início do quadro. É solteira, sem atividade sexual. Nega uso de drogas ou álcool. Nega cirurgias prévias. Ao exame físico apresenta-se com índice de massa corpórea de 22 kg/m². Mucosas hipocrômicas. Evidente perda de massa muscular. Abdome discretamente distendido por gases, sem ascite, visceromegalias ou tumorações. Presença de lesões de pele, de aspecto herpetiforme, em tronco.\n\nNo relatório, para justificar o encaminhamento da paciente para o especialista, deverá ser especificada a necessidade de que a paciente seja submetida a:",
+    options: [
+      { id: "A", text: "tomografia computadorizada de abdome total." },
+      { id: "B", text: "retossigmoidoscopia com biópsia de mucosa retal." },
+      { id: "C", text: "colonoscopia com biópsia de mucosa de sigmóide." },
+      { id: "D", text: "estudo radiológico de trânsito do intestino delgado." },
+      { id: "E", text: "endoscopia digestiva alta com biópsia de duodeno." },
     ],
     correct: "",
   },
@@ -146,7 +159,7 @@ export const QUESTOES_REVALIDA_2013_VERMELHA_14_29: Question[] = [
     id: 25,
     year: 2013,
     area: "Clínica Médica/Cardiologia",
-    enunciado: "Homem com 54 anos de idade, com antecedentes de dislipidemia, hipertensão arterial e histórico de doença familiar cardiovascular precoce (pai teve infarto do miocárdio aos 50 anos), deu entrada na Emergência de um hospital com história de dor em região epigástrica há cerca de cinco horas, em aperto, de forte intensidade, sem relação com a alimentação e sem fatores de melhora, acompanhada de náuseas e vômitos. Havia recebido 200 mg de AAS no hospital de origem. Ao exame, encontrava-se pálido, sudoreico e sonolento. Temperatura axilar = 35,8 °C; pressão arterial = 80x50 mmHg; frequência cardíaca = 118 bpm; frequência respiratória = 16 irpm. Perfusão periférica diminuída. A ausculta cardíaca revelava bulhas normofonéticas, sem sopros. Havia turgência jugular a 45.°. A ausculta pulmonar não revelava estertores. O eletrocardiograma da admissão é apresentado abaixo.\n\nDiante do quadro clínico do paciente, a hipótese diagnóstica, a provável causa do choque e o tratamento inicial recomendado são, respectivamente:",
+    enunciado: "Homem com 54 anos de idade, com antecedentes de dislipidemia, hipertensão arterial e histórico de doença familiar cardiovascular precoce (pai teve infarto do miocárdio aos 50 anos), deu entrada na Emergência de um hospital com história de dor em região epigástrica há cerca de cinco horas, em aperto, de forte intensidade, sem relação com a alimentação e sem fatores de melhora, acompanhada de náuseas e vômitos. Havia recebido 200 mg de AAS no hospital de origem. Ao exame, encontrava-se pálido, sudoreico e sonolento. Temperatura axilar = 35,8 °C; pressão arterial = 80x50 mmHg; frequência cardíaca = 118 bpm; frequência respiratória = 16 irpm. Perfusão periférica diminuída. A ausculta cardíaca revelava bulhas normofonéticas, sem sopros. Havia turgência jugular a 45.°. A ausculta pulmonar era normal. Não havia edema de membros inferiores. O eletrocardiograma revelou sinais de hipertrofia ventricular esquerda. A dosagem de creatinina e o sumário de urina (Urina I) foram normais.\n\nDiante do quadro clínico do paciente, a hipótese diagnóstica, a provável causa do choque e o tratamento inicial recomendado são, respectivamente:",
     options: [
       { id: "A", text: "infarto do miocárdio com supra de ST de parede inferior; tamponamento cardíaco; pericardiocentese." },
       { id: "B", text: "infarto do miocárdio com supra de ST de parede anterior; resposta inflamatória sistêmica; noradrenalina." },

@@ -42,12 +42,14 @@ export default function Questions() {
     return [];
   })();
 
-  const totalPaginas = Math.ceil(questoesAnoSelecionado.length / QUESTOES_POR_PAGINA);
+  const sortedQuestoes = [...questoesAnoSelecionado].sort((a, b) => a.id - b.id);
+
+  const totalPaginas = Math.ceil(sortedQuestoes.length / QUESTOES_POR_PAGINA);
 
   // Paginação correta das questões por tipo
   const indiceInicio = (paginaAtual - 1) * QUESTOES_POR_PAGINA;
   const indiceFim = indiceInicio + QUESTOES_POR_PAGINA;
-  const questoesPaginadas = questoesAnoSelecionado.slice(indiceInicio, indiceFim);
+  const questoesPaginadas = sortedQuestoes.slice(indiceInicio, indiceFim);
 
   function renderPagination() {
     if (totalPaginas <= 1) return null;
@@ -164,14 +166,14 @@ export default function Questions() {
       <QuestionsHeader
         anoSelecionado={anoSelecionado}
         setAnoSelecionado={handleAnoSelecionado}
-        totalQuestoes={questoesAnoSelecionado.length}
+        totalQuestoes={sortedQuestoes.length}
         tipoProva={tipoProva}
         setTipoProva={handleTipoProva}
       />
 
       {/* Questões */}
       <div>
-        {questoesAnoSelecionado.length === 0 ? (
+        {sortedQuestoes.length === 0 ? (
           <div className="text-center text-muted-foreground py-40 text-lg rounded-lg bg-card shadow max-w-2xl mx-auto">
             Nenhuma questão encontrada para este filtro.
           </div>

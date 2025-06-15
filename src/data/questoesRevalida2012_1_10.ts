@@ -1,4 +1,3 @@
-
 import { Question } from "./questoesRevalida2011"; // Reaproveitando o tipo
 
 export const QUESTOES_REVALIDA_2012_1_10: Question[] = [
@@ -29,7 +28,7 @@ export const QUESTOES_REVALIDA_2012_1_10: Question[] = [
       { id: "D", text: "Os territórios das equipes serão definidos pelas equipes e o número de pessoas adscritas a cada equipe vai depender da análise de vulnerabilidade das famílias de cada microrregião." },
       { id: "E", text: "A definição acerca dos territórios e da população sob responsabilidade de cada equipe da Estratégia da Saúde da Família depende do diagnóstico de vulnerabilidade feito pelo médico." }
     ],
-    correct: "B",
+    correct: "D",
     referencia: "Ministério da Saúde. Política Nacional de Atenção Básica, 2011."
   },
   {
@@ -59,7 +58,7 @@ export const QUESTOES_REVALIDA_2012_1_10: Question[] = [
       { id: "D", text: "a mesma rotina laboratorial deve ser repetida após 30 dias para nova avaliação." },
       { id: "E", text: "a gestante está assintomática, fato que não indica reposição de hormônio tireoidiano." }
     ],
-    correct: "E",
+    correct: "A",
     referencia: "Manual Técnico do Pré-Natal e Nascimento. Ministério da Saúde."
   },
   {
@@ -149,7 +148,7 @@ export const QUESTOES_REVALIDA_2012_1_10: Question[] = [
       { id: "D", text: "Cricotireoidotomia." },
       { id: "E", text: "Ventilação não invasiva com CPAP e máscara." }
     ],
-    correct: "A",
+    correct: "D",
     referencia: "Manual de Urgência e Emergência – Ministério da Saúde."
   }
 ];

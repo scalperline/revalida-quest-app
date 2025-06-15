@@ -1,4 +1,3 @@
-
 import { Question } from "./questoesRevalida2011";
 
 export const QUESTOES_REVALIDA_2012_101_110: Question[] = [
@@ -44,7 +43,7 @@ export const QUESTOES_REVALIDA_2012_101_110: Question[] = [
       { id: "D", text: "argumentar que procedimentos coletivos como reuniões, atividades educativas, bochechos fluorados e visitas domiciliares só precisam ser registrados por seus totais mensais na Ficha D para Registro de Atividades, Procedimentos e Notificações, e não individualmente.", feedbackErrada: "A Ficha D requer o registro detalhado de atividades e procedimentos, tanto individuais quanto coletivos." },
       { id: "E", text: "considerar que as notificações a serem registradas na Ficha D para Registro de Atividades, Procedimentos e Notificações são apenas àquelas referentes a agravos de notificação compulsória, que são menos prevalentes.", feedbackErrada: "A Ficha D serve para registrar diversas notificações, não apenas as de agravos de notificação compulsória." }
     ],
-    correct: "A",
+    correct: "D",
     referencia: "Ministério da Saúde - Manual do Sistema de Informação da Atenção Básica (SIAB)"
   },
   {
@@ -59,7 +58,7 @@ export const QUESTOES_REVALIDA_2012_101_110: Question[] = [
       { id: "D", text: "Descolamento da bolsa amniótica.", feedbackErrada: "Procedimentos para indução do parto não são indicados diante de um padrão cardiotocográfico não tranquilizador." },
       { id: "E", text: "Dilatação cervical com aminotomia.", feedbackErrada: "Procedimentos para indução do parto não são indicados diante de um padrão cardiotocográfico não tranquilizador." }
     ],
-    correct: "A",
+    correct: "B",
     referencia: "FEBRASGO - Protocolos de Obstetrícia"
   },
   {
@@ -74,7 +73,7 @@ export const QUESTOES_REVALIDA_2012_101_110: Question[] = [
       { id: "D", text: "Vancomicina.", feedbackErrada: "A vancomicina é reservada para casos de suspeita de MRSA ou alergia grave a penicilinas." },
       { id: "E", text: "Ticarcilina.", feedbackErrada: "A ticarcilina tem espectro muito amplo e não é indicada como primeira linha." }
     ],
-    correct: "B",
+    correct: "C",
     referencia: "Harrison's Principles of Internal Medicine"
   },
   {
@@ -104,7 +103,7 @@ export const QUESTOES_REVALIDA_2012_101_110: Question[] = [
       { id: "D", text: "A microcefalia, o crescimento intrauterino restrito e a prematuridade são altamente específicos para o diagnóstico de infecção por CMV.", feedbackErrada: "Esses achados são clássicos da síndrome de TORCH e não são específicos para CMV." },
       { id: "E", text: "Uma tomografia computadorizada revelando calcificações difusas pelo córtex sugeriria fortemente o diagnóstico de infecção por CMV em detrimento das outras infecções congênitas.", feedbackErrada: "As calcificações periventriculares são a alteração de imagem mais característica do CMV congênito." }
     ],
-    correct: "B",
+    correct: "C",
     referencia: "Sociedade Brasileira de Pediatria - Tratado de Pediatria"
   },
   {
@@ -149,7 +148,7 @@ export const QUESTOES_REVALIDA_2012_101_110: Question[] = [
       { id: "D", text: "Fase ativa prolongada; administração de ocitocina para aumentar as metrossístoles.", feedbackErrada: "A ocitocina é contraindicada na presença de sofrimento fetal (DIP II)." },
       { id: "E", text: "Parada secundária da dilatação; orientação para a paciente ficar em decúbito lateral esquerdo para coordenar as metrossístoles.", feedbackErrada: "Medidas conservadoras são insuficientes diante de um quadro de distocia estabelecida com sofrimento fetal agudo." }
     ],
-    correct: "C",
+    correct: "A",
     referencia: "Zugaib Obstetrícia"
   }
 ];

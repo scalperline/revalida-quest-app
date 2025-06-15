@@ -1,4 +1,3 @@
-
 import { Question } from "./questoesRevalida2011";
 
 export const QUESTOES_REVALIDA_2012_31_40: Question[] = [
@@ -89,7 +88,7 @@ export const QUESTOES_REVALIDA_2012_31_40: Question[] = [
       { id: "D", text: "Adotar protocolos para tratamento da doença, construídos cuidadosamente ao longo do episódio epidêmico." },
       { id: "E", text: "Capacitar seletivamente os profissionais de saúde a serem mobilizados na atenção aos suspeitos de dengue." }
     ],
-    correct: "A",
+    correct: "B",
     referencia: "Ministério da Saúde – Guia de Vigilância Epidemiológica da Dengue"
   },
   {

@@ -1,4 +1,3 @@
-
 import { Question } from "./questoesRevalida2011";
 
 export const QUESTOES_REVALIDA_2012_41_50: Question[] = [
@@ -47,7 +46,7 @@ export const QUESTOES_REVALIDA_2012_41_50: Question[] = [
       { id: "D", text: "pesquisa de sangue oculto nas fezes." },
       { id: "E", text: "tomografia computadorizada de abdome." }
     ],
-    correct: "D",
+    correct: "A",
     referencia: "Ministério da Saúde – Protocolo de Anemia Ferropriva"
   },
   {
@@ -142,7 +141,7 @@ export const QUESTOES_REVALIDA_2012_41_50: Question[] = [
       { id: "D", text: "de ureteres e vias biliares." },
       { id: "E", text: "pancreática e pneumoperitônio." }
     ],
-    correct: "B",
+    correct: "E",
     referencia: "Ministério da Saúde – Protocolo de Trauma Abdominal em Crianças"
   },
   {

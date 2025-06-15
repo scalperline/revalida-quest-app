@@ -1,23 +1,20 @@
-
 import { Question } from "./questoesRevalida2011";
 
 export const QUESTOES_REVALIDA_2012_11_20: Question[] = [
   {
     id: 11,
     year: 2012,
-    area: "Pediatria",
-    enunciado: `Um menino de dois anos de idade é levado à Unidade Básica de Saúde (UBS) próxima ao assentamento onde sua família reside, com queixa de diarreia intermitente, com restos alimentares em algumas episódios, sem sangue ou muco, associada a dor epigástrica e hiporexia, iniciada há 15 dias. No último ano, a criança foi levada à UBS duas vezes pelo mesmo motivo. A genitora relata que, há dois meses, a criança também apresentou lesões de pele muito pruriginosas, seguidas de tosse, com resolução espontânea em 3 dias. O padrão alimentar inclui alimentos da família e leite de vaca engrossado com farináceos desde que foi suspenso o aleitamento materno aos 3 meses de vida. A situação vacinal está adequada à idade. O médico observou: peso = 11 kg (percentil 15); turgor e elasticidade da pele um pouco diminuídos, mucosas hipocoradas, distensão abdominal moderada, com dolorimento discreto e difuso e ausência de edema, sem lesões de pele significativas ou de sinais de instabilidade respiratória ou hemodinâmica. Para esse paciente, foram prescritas reidratação oral e orientação higiênico-sanitária.
-
-Qual a hipótese diagnóstica que melhor explica o quadro descrito acima e qual a conduta que deve ser aplicada?`,
+    area: "Clínica Médica/Psiquiatria",
+    enunciado: `Uma mulher de 24 anos de idade procura a Unidade de Saúde da Família (USF) com queixas de cansaço e dores no corpo, sentimentos de tristeza e inadequação. Relata que, desde a infância, sente-se “diferente” dos outros, “sempre no mundo da lua”. Na escola, tinha dificuldades de atenção, não conseguia terminar as tarefas, perdia seus pertences e interrompia os professores. Na adolescência, teve problemas de relacionamento com as amigas por ser “explosiva” e falar o que pensa. Já adulta, foi demitida de dois empregos por não conseguir cumprir prazos. Há 1 ano, procurou um psiquiatra, que lhe prescreveu um antidepressivo, sem melhora do quadro. Apresenta exame físico normal.\n\nQual a hipótese diagnóstica para esse caso?`,
     options: [
-      { id: "A", text: "Enteropatia ambiental; solicitar parasitológico de fezes e tratar com antiparasitário adequado ao agente identificado." },
-      { id: "B", text: "Enteropatia dependente do glúten; solicitar anticorpo antiglidiina e antiedomisio e excluir da dieta glúten e farináceos em geral." },
-      { id: "C", text: "Enteropatia por alergia ao leite de vaca; solicitar dosagem de IgA secretora, excluir leite de vaca da dieta e prescrever fórmula isenta de proteínas do leite." },
-      { id: "D", text: "Enteropatia infecciosa aguda; solicitar coprocultura, iniciar sulfametoxazol-trimetoprim ou cefalosporina de primeira geração durante 7 a 10 dias." },
-      { id: "E", text: "Enteropatia dependente da lactose; excluir fontes de lactose da dieta, prescrever probióticos, prebióticos e usar leite de soja ou fórmula láctea isenta de lactose." }
+      { id: "A", text: "Transtorno do déficit de atenção com hiperatividade." },
+      { id: "B", text: "Transtorno bipolar." },
+      { id: "C", text: "Transtorno de personalidade borderline." },
+      { id: "D", text: "Distimia." },
+      { id: "E", text: "Fobia social." }
     ],
     correct: "A",
-    referencia: "Ministério da Saúde – Protocolos em Pediatria"
+    referencia: "Manual Diagnóstico e Estatístico de Transtornos Mentais (DSM-V)."
   },
   {
     id: 12,
@@ -39,19 +36,17 @@ Que exames são indicados para a elucidação diagnóstica nesse caso?`,
   {
     id: 13,
     year: 2012,
-    area: "Clínica Médica",
-    enunciado: `Uma mulher de 25 anos de idade procurou o ambulatório com queixa de febre e diarreia há mais de um mês, com cerca de seis evacuações por dia, seguidas por sangramento, dor abdominal e perda de peso de aproximadamente 10 quilos. Ao exame físico, apresentava-se emagrecida, com pele e mucosas descoradas ++/4+ e temperatura = 38,5°C. Foi observada a presença de fissuras perianais. Exames laboratoriais mostraram Hb = 8,2 g/dL (valor de referência = 11,3 a 16,3 g/dL), volume corpuscular médio = 70 fL (valor de referência = 79 a 93,3 fL), leucócitos = 15 000/mm³ (valor de referência = 3 800 a 10 600/mm³), plaquetas = 520 000/mm³ (valor de referência = 165 000 a 415 000/mm³), velocidade de hemossedimentação = 70 mm/h (valor de referência: < 20 mm/h). Imediatamente, o médico decidiu encaminhar a paciente para um serviço especializado devido à suspeita diagnóstica de doença inflamatória intestinal grave.
-
-Os critérios de inclusão nessa categoria de gravidade devem considerar`,
+    area: "Pediatria/Dermatologia",
+    enunciado: `Uma criança de 8 anos de idade é levada pela mãe à Unidade Básica de Saúde (UBS). A mãe relata que, há 2 semanas, surgiu uma lesão avermelhada e descamativa no couro cabeludo do seu filho, que foi aumentando progressivamente de tamanho. Ao exame, a médica observa uma placa alopécica, bem delimitada, com cerca de 5 cm de diâmetro, com presença de cabelos curtos e quebradiços, além de descamação acinzentada. A criança não apresenta outras queixas.\n\nQual o tratamento de escolha para essa condição?`,
     options: [
-      { id: "A", text: "leucocitose, o número de plaquetas, a perda de peso, a febre e a anemia." },
-      { id: "B", text: "o número de evacuações com sangue por dia, a febre, a anemia e a VHS elevada." },
-      { id: "C", text: "o número de plaquetas, a febre, a perda de peso, as fissuras perianais e a anemia." },
-      { id: "D", text: "a idade, o número de evacuações com sangue por dia, a leucocitose e a VHS elevada." },
-      { id: "E", text: "a idade, a dor abdominal, o número de evacuações com sangue por dia e a VHS elevada." }
+      { id: "A", text: "Cetoconazol tópico." },
+      { id: "B", text: "Griseofulvina oral." },
+      { id: "C", text: "Nistatina oral." },
+      { id: "D", text: "Amoxicilina oral." },
+      { id: "E", text: "Corticosteroide tópico." }
     ],
     correct: "B",
-    referencia: "Ministério da Saúde – Protocolo Clínico e Diretrizes Terapêuticas para Doença Inflamatória Intestinal"
+    referencia: "Sociedade Brasileira de Pediatria – Guia de Dermatologia Pediátrica."
   },
   {
     id: 14,
@@ -90,70 +85,68 @@ Qual a conduta inicial para essa paciente?`,
   {
     id: 16,
     year: 2012,
-    area: "Ginecologia / Obstetrícia",
-    enunciado: `Uma adolescente com idade de 14 anos procura uma Unidade Básica de Saúde (UBS) para a sua primeira consulta ginecológica, pois deseja usar anticoncepcional oral. Ela iniciou atividade sexual há 6 meses e refere menarca aos 11 anos de idade e ciclos regulares. A adolescente nega comorbidades e diz, ainda, que os pais não sabem do início da atividade sexual.
-
-Qual a conduta mais adequada frente ao caso relatado acima?`,
+    area: "Saúde Coletiva",
+    enunciado: `Uma Unidade Básica de Saúde (UBS) desenvolve um programa de controle da hipertensão arterial e do diabetes, que inclui grupos de educação em saúde e atividades físicas. A equipe percebe que a adesão dos usuários ao programa é baixa e decide realizar uma pesquisa para identificar os motivos. Os resultados mostram que muitos usuários desconhecem os benefícios das atividades e têm dificuldades de acesso à UBS. Com base nesses dados, a equipe planeja ações para melhorar a divulgação e facilitar o acesso dos usuários.\n\nEssa iniciativa da equipe de saúde corresponde a qual campo da Promoção da Saúde?`,
     options: [
-      { id: "A", text: "Não prescrever anticoncepcional oral, pois a paciente é menor de idade." },
-      { id: "B", text: "Não prescrever anticoncepcional oral, pois a paciente teve menarca há apenas 3 anos." },
-      { id: "C", text: "Solicitar que a paciente compareça acompanhada de um responsável à consulta médica." },
-      { id: "D", text: "Prescrever anticoncepcional oral, orientar uso de preservativo e garantir a confidencialidade da consulta." },
-      { id: "E", text: "Prescrever anticoncepcional oral e solicitar a presença de um responsável pela menor para comunicar o fato." }
+      { id: "A", text: "Políticas públicas saudáveis." },
+      { id: "B", text: "Criação de ambientes favoráveis." },
+      { id: "C", text: "Reforço da ação comunitária." },
+      { id: "D", text: "Desenvolvimento de habilidades pessoais." },
+      { id: "E", text: "Reorientação dos serviços de saúde." }
     ],
     correct: "D",
-    referencia: "Ministério da Saúde – Atenção à Saúde da Adolescente"
+    referencia: "Carta de Ottawa – Promoção da Saúde."
   },
   {
     id: 17,
     year: 2012,
-    area: "Clínica Médica",
-    enunciado: `Uma mulher de 22 anos de idade procurou atendimento de urgência, apresentando falta de ar, chegando a ter dificuldade para completar frases. Informou a ocorrência de episódios prévios semelhantes. Ao exame: acianótica, padrão respiratório com uso da musculatura acessória, tiragem intercostal e supraesternal. Pressão arterial = 110 x 80 mmHg, frequência cardíaca = 115 bpm e frequência respiratória = 28 irpm; ausculta pulmonar com sibilos expiratórios difusos. A oximetria digital em ar ambiente evidenciou saturação de oxigênio (SaO2) = 91%. Foi administrado beta-agonista inalatória e oxigênio por cateter nasal. Reavaliada após 30 minutos, a paciente apresentou melhora parcial do quadro: frequência respiratória = 24 irpm, SaO2 = 94%, frequência cardíaca = 110 bpm, ausculta pulmonar com sibilos expiratórios.
+    area: "Ginecologia/Obstetrícia",
+    enunciado: `Uma mulher de 30 anos de idade, com queixa de dismenorreia progressiva e infertilidade, procura assistência médica. Ao exame físico, observa-se dor à palpação dos ligamentos uterossacros e espessamento dos mesmos.
 
-Qual a conduta terapêutica mais adequada a ser tomada após essa reavaliação?`,
+Qual a hipótese diagnóstica mais provável para esse caso?`,
     options: [
-      { id: "A", text: "Nebulização com beta-agonista – até 3 doses em uma hora, prednisolona oral e suspensão do oxigênio." },
-      { id: "B", text: "Nebulização com beta-agonista e ipratrópio – 3 doses sequenciais, aminofilina venosa e manutenção do oxigênio." },
-      { id: "C", text: "Beta-agonista em spray, com espaçador, até 3 doses em uma hora; hidrocortisona venosa e suspensão do oxigênio." },
-      { id: "D", text: "Nebulização com beta-agonista e ipratrópio a cada 30 minutos, aminofilina venosa e manutenção do oxigênio." },
-      { id: "E", text: "Associação de beta-agonista e ipratrópio em spray, com espaçador, a cada 30 minutos; prednisolona oral e manutenção do oxigênio." }
+      { id: "A", text: "Doença inflamatória pélvica." },
+      { id: "B", text: "Mioma uterino." },
+      { id: "C", text: "Câncer de ovário." },
+      { id: "D", text: "Pólipo endometrial." },
+      { id: "E", text: "Endometriose." }
     ],
     correct: "E",
-    referencia: "Ministério da Saúde – Protocolos de Manejo de Asma"
+    referencia: "Federação Brasileira das Associações de Ginecologia e Obstetrícia (FEBRASGO)."
   },
   {
     id: 18,
     year: 2012,
-    area: "Pediatria / Neonatologia",
-    enunciado: `Um pediatra de plantão em uma maternidade de nível secundário é chamado para assistir o nascimento de um recém-nascido a termo, com 39 semanas de idade gestacional. O obstetra da equipe comunica que a gestante está na admissão em início de trabalho de parto (com 3 cm de dilatação) e com uma avaliação ultrassonográfica gestacional que evidencia hérnia diafragmática. A bolsa amniótica ainda está íntegra.
+    area: "Cirurgia/Gastroenterologia",
+    enunciado: `Um homem de 50 anos de idade procura atendimento médico com queixa de disfagia progressiva para sólidos e líquidos, associada à regurgitação de alimentos não digeridos. O paciente relata que os sintomas têm piorado gradualmente ao longo dos últimos meses.
 
-Qual a conduta recomendada no caso?`,
+Qual a hipótese diagnóstica mais provável para esse caso?`,
     options: [
-      { id: "A", text: "Contatar imediatamente a equipe de cirurgia pediátrica para que o recém-nascido seja encaminhado ao bloco cirúrgico de outro hospital tão logo ocorra o nascimento." },
-      { id: "B", text: "Transferir a gestante para um centro terciário por se tratar de uma unidade secundária sem UTI neonatal, pois pressupõe-se a necessidade de ventilação mecânica." },
-      { id: "C", text: "Preparar o material de intubação e sala de parto, por se tratar de uma patologia cirúrgica grave, gerando prejuízo da ventilação, não sendo indicada a ventilação com máscara após o nascimento." },
-      { id: "D", text: "Preparar o material para a cirurgia imediata do recém-nascido na maternidade secundária, pois não haverá tempo hábil para transferência para um hospital de nível terciário." },
-      { id: "E", text: "Conversar com o obstetra e avisar que não poderá atender o bebê em maternidade de nível secundário e que, por esse motivo, não irá comparecer à sala de parto." }
+      { id: "A", text: "Hérnia de hiato por deslizamento." },
+      { id: "B", text: "Acalasia." },
+      { id: "C", text: "Divertículo de Zenker." },
+      { id: "D", text: "Câncer de esôfago." },
+      { id: "E", text: "Esofagite de refluxo." }
     ],
     correct: "B",
-    referencia: "Ministério da Saúde – Protocolo de Assistência ao Recém-nascido com Hérnia Diafragmática Congênita"
+    referencia: "Tratado de Cirurgia – Sabiston."
   },
   {
     id: 19,
     year: 2012,
-    area: "Ginecologia / Obstetrícia",
-    enunciado: `Uma paciente de 25 anos de idade, com história obstétrica gesta = 1, para = 0, aborto = 0, com 28 semanas de idade gestacional, foi atendida na Unidade Básica de Saúde (UBS) referindo que há 2 dias está gripada e fez uso de medicação sintomática. Resolveu vir ao posto de saúde porque está tossindo muito. Ao ser realizado o exame físico, constatou-se: temperatura axilar = 38,1ºC, frequência respiratória = 30 irpm, pressão arterial = 80 x 60 mmHg, normohidratada.
+    area: "Clínica Médica/Nefrologia",
+    enunciado: `Um paciente de 65 anos de idade, com histórico de hipertensão arterial e diabetes mellitus tipo 2, é internado devido a um quadro de desidratação e infecção urinária. Durante a internação, o paciente apresenta elevação dos níveis de creatinina sérica e diminuição do volume urinário. O exame de urina revela a presença de cilindros hialinos e ausência de proteinúria significativa.
 
-Qual é a abordagem adequada para o caso?`,
+Qual a causa mais provável para a insuficiência renal aguda nesse paciente?`,
     options: [
-      { id: "A", text: "Encaminhar a paciente para internação hospitalar." },
-      { id: "B", text: "Solicitar hemograma completo e radiografia de tórax com urgência." },
-      { id: "C", text: "Orientar hidratação, prescrever paracetamol e solicitar retorno se piorar." },
-      { id: "D", text: "Solicitar hemograma completo, prescrever vitamina C, dipirona e nebulização." },
-      { id: "E", text: "Prescrever dipirona, nebulização sem uso de broncodilatador e reavaliar a paciente em 48 horas." }
+      { id: "A", text: "Insuficiência renal aguda pré-renal." },
+      { id: "B", text: "Nefrite intersticial aguda." },
+      { id: "C", text: "Necrose tubular aguda." },
+      { id: "D", text: "Síndrome hepatorrenal." },
+      { id: "E", text: "Glomerulonefrite rapidamente progressiva." }
     ],
     correct: "A",
-    referencia: "Ministério da Saúde – Protocolo de Doenças Respiratórias em Gestantes"
+    referencia: "Sociedade Brasileira de Nefrologia – Diretrizes Clínicas."
   },
   {
     id: 20,

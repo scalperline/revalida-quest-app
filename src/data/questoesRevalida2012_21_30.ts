@@ -1,4 +1,3 @@
-
 import { Question } from "./questoesRevalida2011";
 
 export const QUESTOES_REVALIDA_2012_21_30: Question[] = [
@@ -33,7 +32,7 @@ Que achado do LCR é indicativo de meningite viral?`,
       { id: "D", text: "Número baixo de células." },
       { id: "E", text: "Número elevado de linfócitos." }
     ],
-    correct: "E",
+    correct: "D",
     referencia: "Ministério da Saúde – Protocolo de Meningites"
   },
   {
@@ -135,7 +134,7 @@ Qual a melhor conduta a ser realizada na sequência do atendimento?`,
       { id: "D", text: "Prescrição de dexametasona para prevenir edema cerebral." },
       { id: "E", text: "Administração de nitroprussiato de sódio, por via endovenosa." }
     ],
-    correct: "A",
+    correct: "B",
     referencia: "Ministério da Saúde – Protocolo de AVC Isquêmico"
   },
   {
@@ -152,7 +151,7 @@ Qual é a conduta mais adequada nesse momento?`,
       { id: "D", text: "Prescrever paracetamol, orientar repouso e hidratação em domicílio e fazer a notificação compulsória." },
       { id: "E", text: "Encaminhar o paciente para o ambulatório de Geriatria e fazer a notificação compulsória." }
     ],
-    correct: "A",
+    correct: "D",
     referencia: "Ministério da Saúde – Protocolo de Atenção à Saúde do Idoso"
   },
   {

@@ -1,4 +1,3 @@
-
 import type { Question } from "./questoesRevalida2011";
 
 export const QUESTOES_REVALIDA_2012_81_85: Question[] = [
@@ -34,7 +33,7 @@ export const QUESTOES_REVALIDA_2012_81_85: Question[] = [
         feedbackErrada: "O correto é acionar o Conselho Tutelar como intermediador para proteção da menor."
       }
     ],
-    correct: "D",
+    correct: "E",
     referencia: "Estatuto da Criança e Adolescente / Código de Ética Médica"
   },
   {
@@ -139,7 +138,7 @@ export const QUESTOES_REVALIDA_2012_81_85: Question[] = [
         feedbackCorreta: "Correto. Síndrome nefrótica em criança: prednisona é primeira escolha."
       }
     ],
-    correct: "E",
+    correct: "A",
     referencia: "Manual de Nefrologia Pediátrica – SBP"
   },
   {

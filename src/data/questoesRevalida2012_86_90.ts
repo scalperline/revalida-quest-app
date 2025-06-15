@@ -1,4 +1,3 @@
-
 import type { Question } from "./questoesRevalida2011";
 
 export const QUESTOES_REVALIDA_2012_86_90: Question[] = [
@@ -34,7 +33,7 @@ export const QUESTOES_REVALIDA_2012_86_90: Question[] = [
         feedbackErrada: "Não configura necessariamente compulsoriedade sem gestação."
       }
     ],
-    correct: "A",
+    correct: "C",
     referencia: "Portaria MS - Vigilância de Óbitos"
   },
   {
@@ -139,7 +138,7 @@ export const QUESTOES_REVALIDA_2012_86_90: Question[] = [
         feedbackErrada: "Não há sinais de gravidade que justifiquem internação prolongada."
       }
     ],
-    correct: "A",
+    correct: "E",
     referencia: "Ministério da Saúde – Protocolo de Dengue"
   },
   {

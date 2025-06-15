@@ -1,4 +1,3 @@
-
 import {
   Select,
   SelectContent,
@@ -49,7 +48,7 @@ export function QuestionsHeader({
               <SelectItem value="2022">Revalida 2022</SelectItem>
             </SelectContent>
           </Select>
-          {[2013, 2014, 2015, 2016, 2017].includes(anoSelecionado) &&
+          {[2013, 2014, 2015, 2016, 2017, 2022].includes(anoSelecionado) &&
             tipoProva &&
             setTipoProva && (
               <Select onValueChange={setTipoProva} defaultValue={tipoProva}>

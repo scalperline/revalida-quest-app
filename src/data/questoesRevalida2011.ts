@@ -1,4 +1,3 @@
-
 export type Option = {
   id: string;
   text: string;
@@ -20,6 +19,7 @@ import { QUESTOES_REVALIDA_2011_11_20 } from "./questoesRevalida2011_11_20";
 import { QUESTOES_REVALIDA_2011_21_30 } from "./questoesRevalida2011_21_30";
 import { QUESTOES_REVALIDA_2011_31_40 } from "./questoesRevalida2011_31_40";
 import { QUESTOES_REVALIDA_2011_41_50 } from "./questoesRevalida2011_41_50";
+import { QUESTOES_REVALIDA_2011_51_60 } from "./questoesRevalida2011_51_60";
 
 // Concatenar todas as páginas para exportação principal
 export const QUESTOES_REVALIDA_2011: Question[] = [
@@ -28,4 +28,5 @@ export const QUESTOES_REVALIDA_2011: Question[] = [
   ...QUESTOES_REVALIDA_2011_21_30,
   ...QUESTOES_REVALIDA_2011_31_40,
   ...QUESTOES_REVALIDA_2011_41_50,
+  ...QUESTOES_REVALIDA_2011_51_60,
 ];

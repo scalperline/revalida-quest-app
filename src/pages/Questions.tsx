@@ -1,3 +1,13 @@
+
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
 import { QuestionCard } from "@/components/QuestionCard";
 import { useState } from "react";
 import { QUESTOES_REVALIDA_2011, type Question } from "@/data/questoesRevalida2011";
@@ -41,54 +51,101 @@ export default function Questions() {
 
   function renderPagination() {
     if (totalPaginas <= 1) return null;
-    const items = [];
-    let start = Math.max(1, paginaAtual - 2);
-    let end = Math.min(totalPaginas, paginaAtual + 2);
+
+    const handlePageChange = (page: number) => {
+      if (page >= 1 && page <= totalPaginas) {
+        setPaginaAtual(page);
+      }
+    };
+
+    const pageItems = [];
+    let startPage = Math.max(1, paginaAtual - 2);
+    let endPage = Math.min(totalPaginas, paginaAtual + 2);
 
     if (paginaAtual <= 3) {
-      end = Math.min(5, totalPaginas);
+      endPage = Math.min(5, totalPaginas);
     }
     if (paginaAtual >= totalPaginas - 2) {
-      start = Math.max(1, totalPaginas - 4);
+      startPage = Math.max(1, totalPaginas - 4);
     }
 
-    if (start > 1) {
-      items.push(
-        <button key={1} onClick={() => setPaginaAtual(1)} className={`px-3 py-1 rounded-lg text-sm ${paginaAtual === 1 ? "bg-primary text-primary-foreground" : "bg-background text-foreground"}`}>1</button>
+    if (startPage > 1) {
+      pageItems.push(
+        <PaginationItem key={1}>
+          <PaginationLink href="#" onClick={(e) => { e.preventDefault(); handlePageChange(1); }}>
+            1
+          </PaginationLink>
+        </PaginationItem>
       );
-      if (start > 2) items.push(<span key="start-ellipsis" className="px-2 select-none">...</span>);
+      if (startPage > 2) {
+        pageItems.push(
+          <PaginationItem key="start-ellipsis">
+            <PaginationEllipsis />
+          </PaginationItem>
+        );
+      }
     }
-    for (let i = start; i <= end; ++i) {
-      items.push(
-        <button key={i} onClick={() => setPaginaAtual(i)} className={`px-3 py-1 rounded-lg text-sm ${paginaAtual === i ? "bg-primary text-primary-foreground" : "bg-background text-foreground"}`}>{i}</button>
+
+    for (let i = startPage; i <= endPage; i++) {
+      pageItems.push(
+        <PaginationItem key={i}>
+          <PaginationLink
+            href="#"
+            isActive={paginaAtual === i}
+            onClick={(e) => {
+              e.preventDefault();
+              handlePageChange(i);
+            }}
+          >
+            {i}
+          </PaginationLink>
+        </PaginationItem>
       );
     }
-    if (end < totalPaginas) {
-      if (end < totalPaginas - 1) items.push(<span key="end-ellipsis" className="px-2 select-none">...</span>);
-      items.push(
-        <button key={totalPaginas} onClick={() => setPaginaAtual(totalPaginas)} className={`px-3 py-1 rounded-lg text-sm ${paginaAtual === totalPaginas ? "bg-primary text-primary-foreground" : "bg-background text-foreground"}`}>{totalPaginas}</button>
+
+    if (endPage < totalPaginas) {
+      if (endPage < totalPaginas - 1) {
+        pageItems.push(
+          <PaginationItem key="end-ellipsis">
+            <PaginationEllipsis />
+          </PaginationItem>
+        );
+      }
+      pageItems.push(
+        <PaginationItem key={totalPaginas}>
+          <PaginationLink href="#" onClick={(e) => { e.preventDefault(); handlePageChange(totalPaginas); }}>
+            {totalPaginas}
+          </PaginationLink>
+        </PaginationItem>
       );
     }
+
     return (
-      <div className="flex gap-1 md:gap-2">
-        <button
-          className="flex items-center border border-muted rounded-lg px-3 py-2 text-base font-semibold bg-background hover:bg-muted transition-colors disabled:opacity-40"
-          disabled={paginaAtual === 1}
-          onClick={() => paginaAtual > 1 && setPaginaAtual(paginaAtual - 1)}
-        >
-          <span className="mr-2">{'←'}</span>
-          <span className="text-primary font-bold">anterior</span>
-        </button>
-        {items}
-        <button
-          className="flex items-center border border-muted rounded-lg px-3 py-2 text-base font-semibold bg-background hover:bg-muted transition-colors disabled:opacity-40"
-          disabled={paginaAtual === totalPaginas}
-          onClick={() => paginaAtual < totalPaginas && setPaginaAtual(paginaAtual + 1)}
-        >
-          <span className="text-primary font-bold">próximo</span>
-          <span className="ml-2">{'→'}</span>
-        </button>
-      </div>
+      <Pagination>
+        <PaginationContent>
+          <PaginationItem>
+            <PaginationPrevious
+              href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                handlePageChange(paginaAtual - 1);
+              }}
+              className={paginaAtual === 1 ? "pointer-events-none opacity-50" : ""}
+            />
+          </PaginationItem>
+          {pageItems}
+          <PaginationItem>
+            <PaginationNext
+              href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                handlePageChange(paginaAtual + 1);
+              }}
+              className={paginaAtual === totalPaginas ? "pointer-events-none opacity-50" : ""}
+            />
+          </PaginationItem>
+        </PaginationContent>
+      </Pagination>
     );
   }
 

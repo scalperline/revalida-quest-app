@@ -54,16 +54,18 @@ export function QuestionCard({ question, showAnswer }: Props) {
         </div>
       )}
       <div className="flex flex-col gap-2 pt-2">
-        {question.options.map((opt) => {
-          const acerto = selected && opt.id === question.correct;
-          const erro = selected === opt.id && selected !== question.correct;
-          const marcado = selected === opt.id;
-          const showHighlight = respostaRevelada && opt.id === question.correct;
+        {Array.isArray(question.options) &&
+          question.options.map((opt) => {
+            const acerto = selected && opt.id === question.correct;
+            const erro = selected === opt.id && selected !== question.correct;
+            const marcado = selected === opt.id;
+            const showHighlight =
+              respostaRevelada && opt.id === question.correct;
 
-          return (
-            <button
-              key={opt.id}
-              className={`flex items-center gap-3 px-4 py-2 rounded-lg border text-left transition-colors text-base font-normal
+            return (
+              <button
+                key={opt.id}
+                className={`flex items-center gap-3 px-4 py-2 rounded-lg border text-left transition-colors text-base font-normal
                 ${
                   marcado
                     ? acerto
@@ -81,11 +83,11 @@ export function QuestionCard({ question, showAnswer }: Props) {
                     : "hover:ring-2 hover:ring-primary/50"
                 }
               `}
-              disabled={!!selected || showAnswer}
-              onClick={() => setSelected(opt.id)}
-            >
-              <span
-                className={`w-8 h-8 flex items-center justify-center rounded-full border  text-lg font-semibold
+                disabled={!!selected || showAnswer}
+                onClick={() => setSelected(opt.id)}
+              >
+                <span
+                  className={`w-8 h-8 flex items-center justify-center rounded-full border  text-lg font-semibold
                   ${
                     marcado
                       ? acerto
@@ -96,13 +98,13 @@ export function QuestionCard({ question, showAnswer }: Props) {
                       : "bg-white border-muted"
                   }
                 `}
-              >
-                {opt.id}
-              </span>
-              <span>{opt.text}</span>
-            </button>
-          );
-        })}
+                >
+                  {opt.id}
+                </span>
+                <span>{opt.text}</span>
+              </button>
+            );
+          })}
       </div>
       {respostaRevelada && (
         <div className="mt-3 p-4 rounded-lg bg-muted border-l-4 border-primary shadow">

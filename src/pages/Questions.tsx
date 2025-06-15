@@ -1,42 +1,12 @@
-
 import { QuestionCard } from "@/components/QuestionCard";
 import { useState } from "react";
 
 // Demo: Simulando banco de dados de questões
-const QUESTOES = [
-  {
-    id: 1,
-    year: 2022,
-    area: "Clínica Médica",
-    enunciado: `Paciente, 28 anos, apresenta febre, tosse produtiva há 3 dias. Ao exame, crepitações no pulmão direito. Assinale a alternativa correta sobre a conduta inicial:`,
-    options: [
-      { id: "A", text: "Observar em casa e prescrever antitérmico apenas." },
-      { id: "B", text: "Internar e iniciar antibiótico endovenoso." },
-      { id: "C", text: "Solicitar radiografia de tórax e prescrever antibiótico oral." },
-      { id: "D", text: "Prescrever antiviral para influenza e liberar." }
-    ],
-    correct: "C",
-    referencia: "Manual de Pneumonia INEP 2022"
-  },
-  {
-    id: 2,
-    year: 2021,
-    area: "Pediatria",
-    enunciado: `Criança de 2 anos, com desidratação grave. Qual a conduta prioritária?`,
-    options: [
-      { id: "A", text: "Indicação de antibióticos sem hidratação." },
-      { id: "B", text: "Reposição oral com soro caseiro." },
-      { id: "C", text: "Reposição venosa com solução isotônica." },
-      { id: "D", text: "Alta para cuidados domiciliares." }
-    ],
-    correct: "C",
-    referencia: "Manual de Reidratação INEP 2021"
-  }
-];
+import { QUESTOES_REVALIDA_2011 } from "@/data/questoesRevalida2011";
 
 export default function Questions() {
   const [filtro, setFiltro] = useState("");
-  const questoesFiltradas = QUESTOES.filter(q =>
+  const questoesFiltradas = QUESTOES_REVALIDA_2011.filter(q =>
     q.enunciado.toLocaleLowerCase().includes(filtro.toLocaleLowerCase()) ||
     q.area.toLocaleLowerCase().includes(filtro.toLocaleLowerCase()) ||
     q.year.toString().includes(filtro)

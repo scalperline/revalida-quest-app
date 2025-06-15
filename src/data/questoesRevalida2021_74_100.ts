@@ -1,5 +1,4 @@
 
-```typescript
 import { type Question } from "@/components/QuestionCard";
 
 export const QUESTOES_REVALIDA_2021_74_100: Question[] = [
@@ -27,7 +26,7 @@ export const QUESTOES_REVALIDA_2021_74_100: Question[] = [
         text: "suspender o tratamento contra a infecção pelo HIV e iniciar o tratamento de tuberculose de imediato.",
       },
     ],
-    correct: "D",
+    correct: "B",
   },
   {
     id: 75,
@@ -53,7 +52,7 @@ export const QUESTOES_REVALIDA_2021_74_100: Question[] = [
         text: "VEF₁/CVF inferior a 0,7 mesmo após broncodilatador.",
       },
     ],
-    correct: "C",
+    correct: "D",
   },
   {
     id: 76,
@@ -67,7 +66,7 @@ export const QUESTOES_REVALIDA_2021_74_100: Question[] = [
       { id: "C", text: "Punção com agulha fina." },
       { id: "D", text: "Antibioticoterapia oral." },
     ],
-    correct: "B",
+    correct: "A",
   },
   {
     id: 77,
@@ -93,7 +92,7 @@ export const QUESTOES_REVALIDA_2021_74_100: Question[] = [
         text: "Constipação intestinal funcional, devendo fazer desimpactação fecal com polietilenoglicol ou enema.",
       },
     ],
-    correct: "A",
+    correct: "D",
   },
   {
     id: 78,
@@ -107,7 +106,7 @@ export const QUESTOES_REVALIDA_2021_74_100: Question[] = [
       { id: "C", text: "creme vaginal antifúngico." },
       { id: "D", text: "estradiol via transdérmica." },
     ],
-    correct: "C",
+    correct: "A",
   },
   {
     id: 79,
@@ -124,7 +123,7 @@ export const QUESTOES_REVALIDA_2021_74_100: Question[] = [
         text: "endocardite infecciosa de septo interventricular.",
       },
     ],
-    correct: "D",
+    correct: "B",
   },
   {
     id: 80,
@@ -150,7 +149,7 @@ export const QUESTOES_REVALIDA_2021_74_100: Question[] = [
         text: "a testagem para hepatite C no 2.º e 3.º trimestres, além do parto e/ou se história de exposição de risco/violência sexual.",
       },
     ],
-    correct: "B",
+    correct: "A",
   },
   {
     id: 81,
@@ -176,7 +175,7 @@ export const QUESTOES_REVALIDA_2021_74_100: Question[] = [
         text: "aplicar a imunoglobulina anti-D semanalmente até completar 34 semanas, caso os anticorpos irregulares sejam positivos.",
       },
     ],
-    correct: "B",
+    correct: "A",
   },
   {
     id: 82,
@@ -202,7 +201,7 @@ export const QUESTOES_REVALIDA_2021_74_100: Question[] = [
         text: "área de 18% de SCQ e 1 800 mL administrados nas primeiras 24 horas do momento da queimadura.",
       },
     ],
-    correct: "C",
+    correct: "B",
   },
   {
     id: 83,
@@ -228,7 +227,7 @@ export const QUESTOES_REVALIDA_2021_74_100: Question[] = [
         text: "Soluções cristaloides por acessos venosos periféricos e avaliação de ortopedista.",
       },
     ],
-    correct: "C",
+    correct: "B",
   },
   {
     id: 84,
@@ -254,7 +253,7 @@ export const QUESTOES_REVALIDA_2021_74_100: Question[] = [
         text: "colonoscopia com biopsia; histopatológico com granuloma não caseoso.",
       },
     ],
-    correct: "C",
+    correct: "D",
   },
   {
     id: 85,
@@ -332,7 +331,7 @@ export const QUESTOES_REVALIDA_2021_74_100: Question[] = [
         text: "infecção recente, iniciar pirimetamina + sulfadiazina + ácido folínico e encaminhar para a referência de gestação de risco.",
       },
     ],
-    correct: "B",
+    correct: "A",
   },
   {
     id: 88,
@@ -372,7 +371,7 @@ export const QUESTOES_REVALIDA_2021_74_100: Question[] = [
       { id: "C", text: "alcalose metabólica hipoclorêmica." },
       { id: "D", text: "acidose metabólica hipoclorêmica." },
     ],
-    correct: "C",
+    correct: "A",
   },
   {
     id: 90,
@@ -398,7 +397,7 @@ export const QUESTOES_REVALIDA_2021_74_100: Question[] = [
         text: "o paciente não apresenta anemia, contudo o resultado laboratorial sugere deficiência de ferro, devendo-se realizar a orientação dietética pertinente.",
       },
     ],
-    correct: "C",
+    correct: "D",
   },
   {
     id: 91,
@@ -418,7 +417,7 @@ export const QUESTOES_REVALIDA_2021_74_100: Question[] = [
         text: "Prescrever anti-inflamatório por via oral e pomada com antibiótico.",
       },
     ],
-    correct: "D",
+    correct: "B",
   },
   {
     id: 92,
@@ -444,7 +443,7 @@ export const QUESTOES_REVALIDA_2021_74_100: Question[] = [
         text: "Pneumonia por paracoccidioidomicose; solicitar pesquisa de BK e fungo no escarro; iniciar rifampicina, isoniazida, pirazinamida.",
       },
     ],
-    correct: "C",
+    correct: "D",
   },
   {
     id: 93,
@@ -490,7 +489,7 @@ export const QUESTOES_REVALIDA_2021_74_100: Question[] = [
         text: "Prescrever inibidor da secreção gástrica e tratar Helicobacter pylori empiricamente por sua prevalência em ulcerosos, evitando recidiva.",
       },
     ],
-    correct: "D",
+    correct: "A",
   },
   {
     id: 95,
@@ -530,7 +529,7 @@ export const QUESTOES_REVALIDA_2021_74_100: Question[] = [
         text: "notificação compulsória dos casos isolados de doença diarreica aguda causada por água e/ou alimento.",
       },
     ],
-    correct: "C",
+    correct: "A",
   },
   {
     id: 97,
@@ -556,7 +555,7 @@ export const QUESTOES_REVALIDA_2021_74_100: Question[] = [
         text: "A paciente apresenta um quadro que pode indicar dano cerebral, portanto, deve ser transferida para Unidade de Terapia Intensiva imediatamente.",
       },
     ],
-    correct: "B",
+    correct: "A",
   },
   {
     id: 98,
@@ -610,7 +609,7 @@ export const QUESTOES_REVALIDA_2021_74_100: Question[] = [
         text: "granulomas e estruturas arredondadas compatíveis com formas amastigotas; N-metilglucamina.",
       },
     ],
-    correct: "B",
+    correct: "D",
   },
   {
     id: 100,
@@ -637,4 +636,3 @@ export const QUESTOES_REVALIDA_2021_74_100: Question[] = [
     correct: "B",
   },
 ];
-```

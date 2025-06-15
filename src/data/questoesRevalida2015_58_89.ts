@@ -1,5 +1,4 @@
 
-```typescript
 import { type Question } from "@/components/QuestionCard";
 
 export const QUESTOES_REVALIDA_2015_58_89: Question[] = [
@@ -8,7 +7,7 @@ export const QUESTOES_REVALIDA_2015_58_89: Question[] = [
     year: 2015,
     area: "Clínica Médica",
     enunciado:
-      "Um homem de 70 anos de idade, recém-aposentado, comparece à consulta na Unidade Básica de Saúde de seu bairro. Segundo ele, agora vai 'cuidar melhor da saúde', pois não tinha muito tempo antes. Foi diagnosticado com diabete há 3 anos e hipertensão desde os 60 anos de idade. Ele faz uso, há aproximadamente 1 ano, de clortalidona 25 mg/dia e metformina 850 mg/dia, ambos pela manhã. Relata ganho de peso no último ano. Hoje, no exame, apresentou bom estado geral, PA = 140 x 100 mmHg; FC = 88 bpm. A ausculta cardíaca indicou ritmo cardíaco regular em 2 tempos, sem sopros. Glicemia de jejum = 120 mg/dL (valor de referência = 60-100 mg/dL) e HbA1c (glicohemoglobina) = 6,5% (VR = 4,8% a 6,4%). Peso = 91 kg e estatura = 164 cm. O restante do exame clínico não apresentou alterações.\n\nConsiderando o caso, qual conduta deveria ser adotada na organização do plano terapêutico do paciente?",
+      'Um homem de 70 anos de idade, recém-aposentado, comparece à consulta na Unidade Básica de Saúde do seu bairro. Segundo ele, agora vai “cuidar melhor da saúde, pois não tinha muito tempo antes”. Foi diagnosticado como diabético há 3 anos e hipertenso desde os 60 anos de idade. Ele faz uso, há aproximadamente 1 ano, de clortalidona 25 mg/dia e metformina 850 mg/dia, ambos pela manhã. Relata ganho de peso no último ano. Hoje, no exame, apresentou bom estado geral, PA = 130 x 100 mmHg; FC = 88 bpm. A ausculta cardíaca indicou ritmo cardíaco regular em 2 tempos, sem sopros. Glicemia de jejum = 120 mg/dL (valor de referência < 60-100 mg/dL) e HbA1c (glico-hemoglobina) = 6,5% (VR < 5,8% a 6,4%). Peso = 91 kg e estatura = 164 cm. O restante do exame clínico não apresentou alterações.\n\nConsiderando o caso, qual conduta deveria ser adotada na organização do plano terapêutico do paciente?',
     options: [
       {
         id: "A",
@@ -34,7 +33,7 @@ export const QUESTOES_REVALIDA_2015_58_89: Question[] = [
     year: 2015,
     area: "Pediatria",
     enunciado:
-      "Um menino de 6 anos de idade é levado ao Pronto Socorro em razão de uma picada de aranha na face dorsal da mão esquerda, ocorrida há cerca de 24 horas. Os pais relatam que, inicialmente, a criança queixou-se de dor local, que melhorou com analgesia oral. Por essa razão, a família não havia buscado atendimento. Hoje pela manhã, no entanto, os pais observaram o surgimento de bolha com 'picos de pus'. A criança descreve que 'é como se queimasse'. A aranha não foi coletada, mas a mãe descreve que ela era pequena e 'amarronzada'. Ao exame físico, além da lesão descrita, observa-se palidez e temperatura axilar de 39 °C.\n\nQual aracnídeo está associado ao quadro descrito e qual seria uma conduta adequada?",
+      'Um menino de 6 anos de idade é levado ao Pronto Socorro em razão de uma picada de aranha na face dorsal da mão esquerda, ocorrida há cerca de 24 horas. Os pais relatam que, inicialmente, a criança queixou-se de dor local, que melhorou com analgesia oral. Por essa razão, a família não havia buscado atendimento. Hoje pela manhã, no entanto, os pais observaram o surgimento de bolha com “picos de pus”. A criança descreve que “é como se queimasse”. A aranha não foi coletada, mas a mãe descreve que ela era pequena e “amarroneada”. Ao exame físico, além da lesão descrita, observa-se palidez e temperatura axilar de 39 °C.\n\nQual aracnídeo está associado ao quadro descrito e qual seria uma conduta adequada?',
     options: [
       {
         id: "A",
@@ -42,7 +41,7 @@ export const QUESTOES_REVALIDA_2015_58_89: Question[] = [
       },
       {
         id: "B",
-        text: "Phoneutria; tratamento tópico da lesão, sendo dispensável soroterapia.",
+        text: "Phoneutria; tratamento tópico da lesão, sendo dispensável a soroterapia.",
       },
       {
         id: "C",
@@ -60,7 +59,7 @@ export const QUESTOES_REVALIDA_2015_58_89: Question[] = [
     year: 2015,
     area: "Cirurgia Geral",
     enunciado:
-      "Um paciente de 57 anos de idade apresenta queixas dispépticas há cerca de dois anos, tendo procurou atendimento médico. Na época, recebeu orientações, tratamento sintomático e foi solicitado o exame de endoscopia digestiva alta. Porém, por ter apresentado melhora com o tratamento instituído, não realizou o exame. Há cerca de 1 mês, voltou a apresentar piora do quadro álgico com as mesmas características e o exame endoscópico agora realizado apresentou laudo sugestivo de lesão maligna, não ulcerada, de 5 centímetros na porção alta do corpo gástrico. O exame anatomopatológico mostrou adenocarcinoma bem diferenciado. A tomografia computadorizada de abdome para estadiamento não mostrou qualquer outro achado.\n\nConsiderando os resultados dos exames, a conduta terapêutica a ser tomada deveria incluir a",
+      "Um paciente de 57 anos de idade apresentava queixas dispépticas há cerca de dois anos, tendo procurou atendimento médico. Na época, recebeu orientações, tratamento sintomático e foi solicitado o exame de endoscopia digestiva alta. Porém, por ter apresentado melhora com o tratamento instituído, não realizou o exame. Há cerca de 1 mês, voltou a apresentar piora do quadro álgico com as mesmas características e o exame endoscópico agora realizado apresentou laudo sugestivo de lesão maligna, não ulcerada, de 5 centímetros, na porção alta do corpo gástrico. O exame anatomopatológico mostrou adenocarcinoma bem diferenciado. A tomografia computadorizada de abdome para estadiamento não mostrou qualquer outro achado.\n\nConsiderando os resultados dos exames, a conduta terapêutica a ser tomada deveria incluir a",
     options: [
       {
         id: "A",
@@ -84,22 +83,25 @@ export const QUESTOES_REVALIDA_2015_58_89: Question[] = [
   {
     id: 61,
     year: 2015,
-    area: "Cirurgia Geral",
+    area: "Clínica Médica",
     enunciado:
-      "Uma paciente de 65 anos de idade foi encaminhada ao ambulatório de Cirurgia após realizar uma radiografia simples de tórax durante uma consulta de rotina na Unidade Básica de Saúde, tendo sido constatada a presença de nódulo único arredondado com aproximadamente 3,2 centímetros em região central do pulmão direito. Durante a consulta relatou ao médico que fumou 3 maços de cigarros/dia por mais de 30 anos, mas cessou o vício há 1 ano. Nega história familiar de neoplasias.\n\nQual das seguintes condutas deve ser tomada diante desse quadro?",
+      "Uma paciente de 65 anos de idade foi encaminhada ao ambulatório de Cirurgia após realizar uma radiografia simples de tórax durante uma consulta de rotina na Unidade Básica de Saúde, tendo sido constatada a presença de nódulo único arredondado com aproximadamente 3,2 centímetros em região central do pulmão direito. Durante a consulta relatou ao médico que fumou 3 maços de cigarros/dia por mais de 30 anos, mas cessou o vício há 1 ano. Nega historia familiar de neoplasias.\n\nQual das seguintes condutas deve ser tomada diante desse quadro?",
     options: [
-      { id: "A", text: "Solicitar ressonância magnética de tórax." },
+      {
+        id: "A",
+        text: "solicitar ressonância magnética de tórax.",
+      },
       {
         id: "B",
-        text: "Solicitar tomografia computadorizada de tórax com secção transtorácica.",
+        text: "solicitar tomografia computadorizada de tórax com secção transtorácica.",
       },
       {
         id: "C",
-        text: "Realizar broncoscopia com biópsia transbrônquica e exame anatomopatológico.",
+        text: "realizar broncoscopia com biópsia transbrônquica e exame anatomopatológico.",
       },
       {
         id: "D",
-        text: "Realizar seguimento semestral com radiografia simples de tórax e dosagem de marcadores tumorais séricos.",
+        text: "realizar seguimento semestral com radiografia simples de tórax e dosagem de marcadores tumorais séricos.",
       },
     ],
     correct: "",
@@ -109,10 +111,10 @@ export const QUESTOES_REVALIDA_2015_58_89: Question[] = [
     year: 2015,
     area: "Clínica Médica",
     enunciado:
-      "Uma mulher de 32 anos de idade apresentou quadro de cefaleia de forte intensidade, de início abrupto, seguido de náuseas, vômitos, fotofobia e rigidez de nuca nas últimas 3 horas. Ela foi atendida em um serviço de emergência. Durante a anamnese, negou febre ou uso de drogas ilícitas. Em relação a seus antecedentes pessoais, informou hipertensão arterial sistêmica controlada com uso de captopril 25 mg, duas vezes ao dia. Ao exame físico, apresentava-se sonolenta, sem sinais neurológicos de localização. Os sinais vitais aferidos mostraram pressão arterial = 100 x 65 mmHg; frequência cardíaca = 104 bpm; frequência respiratória = 18 irpm.\n\nOs exames laboratoriais iniciais mostraram:\nHemoglobina = 12,2 g/dL (VR = 11,5 - 15g/dL);\nLeucócitos = 4.500/mm³ (contagem diferencial normal) (VR = 4.000 - 11.000 mm³);\nPlaquetas = 297.000/mm³ (VR = 100.000 - 400.000 mm³);\nINR (International Normalized Ratio) = 1,27 (valor de referência até 1,3);\nSódio = 130 mEq/L (VR = 136-145 mEq/L);\nPotássio = 3,8 mEq/L (VR = 3,5-5 mEq/L).\n\nO exame fundoscópico revelou a presença de hemorragias pré-retinianas, com papilas ópticas mal definidas.\n\nConsiderando esse caso, após avaliação da relação risco-benefício, qual procedimento diagnóstico imediato deve ser empreendido para investigação etiológica do quadro neurológico?",
+      "Uma mulher de 32 anos de idade apresentou quadro de cefaleia de forte intensidade, de início abrupto, seguido de náuseas, vômitos, fotofobia e rigidez de nuca nas últimas 2 horas. Ela foi atendida em um serviço de emergência. Durante a anamnese, negou febre ou uso de drogas ilícitas. Em relação a seus antecedentes pessoais, informou hipertensão arterial sistêmica controlada com uso de captopril 25 mg, duas vezes ao dia. Ao exame físico, apresentava-se sonolenta, sem sinais neurológicos focais. Os sinais vitais indicavam pressão arterial = 100 x 65 mmHg; frequência cardíaca = 104 bpm; frequência respiratória = 18 irpm.\n\nOs exames laboratoriais iniciais mostraram:\nHemoglobina = 12,2 g/dL (VR = 11,5 - 15g/dL);\nLeucócitos = 4.500/mm³ (contagem diferencial normal) (VR = 4.000 - 11.000/mm³);\nPlaquetas = 297.000/mm³ (VR = 100.000 - 400.000 mm³);\nINR (International Normalized Ratio) = 1,27 (valor de referência até 1,3);\nSódio = 130 mEq/L (VR = 136-145 mEq/L);\nPotássio = 3,8 mEq/L (VR = 3,5-5 mEq/L).\n\nO exame fundoscópico revelou a presença de hemorragias pré-retinianas, com papilas ópticas mal definidas.\n\nConsiderando esse caso, após avaliação da relação risco-benefício, qual procedimento diagnóstico imediato deve ser empreendido para investigação etiológica do quadro neurológico?",
     options: [
       { id: "A", text: "Angiografia cerebral." },
-      { id: "B", text: "Ecodoppler transcraniano." },
+      { id: "B", text: "Ecocdoppler transcraniano." },
       { id: "C", text: "Ressonância magnética cerebral." },
       { id: "D", text: "Tomografia computadorizada cerebral." },
     ],
@@ -123,11 +125,11 @@ export const QUESTOES_REVALIDA_2015_58_89: Question[] = [
     year: 2015,
     area: "Medicina Preventiva e Social",
     enunciado:
-      "Em razão do aparecimento de casos autóctones de febre amarela em um município, foi necessário realizar vacinação de bloqueio para evitar a disseminação da doença. A aplicação da vacina foi feita por técnicos do Ministério da Saúde, em parceria com as três grandes esferas de governo, com recursos do município e o Estado ao qual pertence o município participou com a garantia de realização de análises laboratoriais de interesse da Vigilância.\n\nAnalisando esse evento segundo as atribuições de participação dos entes federativos no SUS (Lei nº 8.080, de 19 de setembro de 1990 e Portaria nº 1.378, de 9 de julho de 2013), é correto afirmar que",
+      "Em razão do aparecimento de casos autóctones de febre amarela em um município, foi necessário realizar vacinação de bloqueio para evitar a disseminação da doença. A aplicação da vacina foi feita por técnicos do Ministério da Saúde e enfermeiros e auxiliares foram enviados com recursos do município e o Estado ao qual pertence o município participou com a garantia da realização de análises laboratoriais de interesse da vigilância.\n\nAnalisando esse evento segundo as atribuições de participação dos entes federativos no SUS (Lei nº 8.080, de 19 de setembro de 1990 e Portaria nº 1.378, de 9 de julho de 2013), é correto afirmar que as",
     options: [
       {
         id: "A",
-        text: "as participações do Município, Estado e União estão de acordo com os princípios, diretrizes e legislação do SUS.",
+        text: "participações do Município, Estado e União estão de acordo com os princípios, diretrizes e legislação do SUS.",
       },
       {
         id: "B",
@@ -154,7 +156,10 @@ export const QUESTOES_REVALIDA_2015_58_89: Question[] = [
       { id: "A", text: "o dispositivo intrauterino." },
       { id: "B", text: "a laqueadura tubária bilateral." },
       { id: "C", text: "o diafragma com geleia espermicida." },
-      { id: "D", text: "a anticoncepção hormonal combinado de baixa dosagem." },
+      {
+        id: "D",
+        text: "a anticoncepção hormonal combinado de baixa dosagem.",
+      },
     ],
     correct: "",
   },
@@ -163,7 +168,7 @@ export const QUESTOES_REVALIDA_2015_58_89: Question[] = [
     year: 2015,
     area: "Cirurgia Geral",
     enunciado:
-      "Uma paciente de 35 anos de idade, no 2º pós-operatório de apendicectomia, encontra-se internada em enfermaria coletiva (6 leitos) de pequeno hospital secundário. O achado cirúrgico foi de uma apendicite aguda em fase flemonosa e realizou-se apenas antibioticoprofilaxia durante a cirurgia, com a administração de cefazolina. Foi iniciada a alimentação por via oral com boa aceitação, após a eliminação de flatos e fezes. Não apresentou febre. Ao exame clínico, a ferida cirúrgica encontra-se em bom estado.\n\nNo planejamento da alta hospitalar para esta paciente, além de orientá-la quanto aos sinais de alerta para infecção da ferida, deve-se",
+      "Uma paciente de 35 anos de idade, no 2º pós-operatório de apendicectomia, encontra-se internada em enfermaria coletiva (6 leitos) de pequeno hospital secundário. O achado cirúrgico foi de uma apendicite aguda em fase flegmonosa e realizou-se apenas antibioticoprofilaxia durante a cirurgia, com a administração de cefazolina. Foi iniciada a alimentação por via oral com boa aceitação, após a eliminação de flatos e fezes. Não apresentou febre. Ao exame clínico, a ferida cirúrgica encontra-se em bom estado.\n\nNo planejamento da alta hospitalar para esta paciente, além de orientá-la quanto aos sinais de alerta para infecção da ferida, deve-se",
     options: [
       {
         id: "A",
@@ -189,7 +194,7 @@ export const QUESTOES_REVALIDA_2015_58_89: Question[] = [
     year: 2015,
     area: "Medicina Preventiva e Social",
     enunciado:
-      "Na unidade de saúde da família, uma criança com 4 anos de idade é atendida com febre e exantema pruriginoso com vesículas, pústulas e crostas na região do pescoço e tronco, verificadas ao exame clínico. Segundo a mãe, as lesões surgiram há dois dias. Na creche frequentada pela paciente, outras crianças apresentam quadro semelhante há 4 dias. Ao visitar a creche, o médico da Unidade percebe que três crianças ainda apresentam lesões. Uma das cuidadoras está grávida, com 5 meses de gestação, e refere não ter tido a doença previamente.\n\nAlém do afastamento das crianças com lesões, até que todas estejam em crostas, quais são as outras medidas profiláticas necessárias?",
+      "Na Unidade de Saúde da Família, uma criança com 4 anos de idade é atendida com febre e exantema pruriginoso com vesículas, pústulas e crostas na região do pescoço e tronco, verificadas ao exame clínico. Segundo a mãe, as lesões surgiram há dois dias. Na classe frequentada pela paciente, outras crianças apresentaram quadro semelhante há 4 dias. Ao visitar a creche, o médico da Unidade percebe que três crianças ainda apresentam lesões. Uma das cuidadoras está grávida, com 5 meses de gestação, e refere não ter tido a doença previamente.\n\nAlém do afastamento das crianças com lesões, até que todas estejam em crostas, quais são as outras medidas profiláticas necessárias?",
     options: [
       {
         id: "A",
@@ -197,7 +202,7 @@ export const QUESTOES_REVALIDA_2015_58_89: Question[] = [
       },
       {
         id: "B",
-        text: "Administração de imunoglobulina para a gestante e vacinação das crianças maiores de 9 meses de idade suscetíveis, até 4 semanas após o último caso.",
+        text: "Administração de imunoglobulina para a gestante e vacinação das crianças maiores de 12 meses de idade suscetíveis, até 4 semanas após o último caso.",
       },
       {
         id: "C",
@@ -213,9 +218,9 @@ export const QUESTOES_REVALIDA_2015_58_89: Question[] = [
   {
     id: 67,
     year: 2015,
-    area: "Ginecologia e Obstetrícia",
+    area: "Pediatria",
     enunciado:
-      "Uma puérpera vem à Unidade de Saúde com seu recém-nascido (RN) de 4 dias de vida. Segundo ela, o bebê está 'muito amarelo'. Ela refere ainda que na alta do hospital, há 2 dias, o RN já estava amarelo, mas que houve aumento progressivo da amarelião. O exame físico revela pele ictérica até região umbilical, sem outras alterações. A carteira de saúde do RN mostra os seguintes dados:\n\nIdade gestacional = 38 semanas;\nPeso do RN = 2.900 g;\nComprimento = 49 cm;\nApgar = 8/9;\nTipagem sanguínea do RN = O positivo;\nTipagem sanguínea da mãe = O positivo;\nAusência de intercorrências no nascimento.\n\nQuais são, respectivamente, a hipótese diagnóstica mais provável e a conduta adequada nesse caso?",
+      'Uma puérpera leva seu recém-nascido (RN) de 4 dias de vida à Unidade de Saúde com seu recém-nascido (RN) de 4 dias de vida. Segundo ela, o bebê está “muito amarelo”. Ela refere ainda que na alta do hospital, há 2 dias, o RN já estava amarelo, mas que houve aumento progressivo da cor amarela. O exame físico revela pela icterícia até região umbilical, sem outras alterações. A carteira de saúde do RN mostra os seguintes dados:\n\nIdade gestacional = 38 semanas;\nPeso do RN = 2.900 g;\nComprimento = 49 cm;\nApgar = 8/9;\nTipagem sanguínea do RN = O positivo;\nTipagem sanguínea da mãe = O positivo;\nAusência de intercorrências no nascimento.\n\nQuais são, respectivamente, a hipótese diagnóstica mais provável e a conduta adequada nesse caso?',
     options: [
       {
         id: "A",
@@ -239,13 +244,16 @@ export const QUESTOES_REVALIDA_2015_58_89: Question[] = [
   {
     id: 68,
     year: 2015,
-    area: "Pediatria",
+    area: "Cirurgia Geral",
     enunciado:
-      "Um menino de 2 anos de idade, previamente hígido, foi atendido em uma Unidade Básica de Saúde em consulta pediátrica de rotina. No exame clínico genital, o médico observou que o prepúcio não expõe a glande, devido a aderências balanoprepuciais. A glande apresenta anel fibroso e sem sinais flogísticos. A mãe informa que, eventualmente, ao trocar a fralda da criança, observa discreta hiperemia local sem edema ou saída de secreções e sem dor.\n\nA melhor conduta para o caso clínico relatado é",
+      "Um menino de 2 anos de idade, previamente hígido, foi atendido em uma Unidade Básica de Saúde em consulta pediátrica de rotina. No exame clínico genital, o médico observou que o prepúcio não expõe a glande, devido a aderência balanoprepucial que impede seu anel fibroso e sem sinais flogísticos. A mãe informa que, eventualmente, ao trocar a fralda da criança, observa discreta hiperemia local sem edema ou saída de secreções e sem dor.\n\nA melhor conduta para o caso clínico relatado é",
     options: [
       { id: "A", text: "estimular a retração prepucial manual diária." },
       { id: "B", text: "aguardar resolução espontânea da aderência." },
-      { id: "C", text: "descolar manualmente a aderência durante a consulta." },
+      {
+        id: "C",
+        text: "descolar manualmente a aderência durante a consulta.",
+      },
       {
         id: "D",
         text: "encaminhar a criança para resolução cirúrgica da aderência.",
@@ -258,7 +266,7 @@ export const QUESTOES_REVALIDA_2015_58_89: Question[] = [
     year: 2015,
     area: "Clínica Médica",
     enunciado:
-      "Um homem de 70 anos de idade é atendido no Ambulatório de Cardiologia com queixa de dispneia aos grandes esforços há um mês, com progressão para o repouso. Trata-se de paciente hipertenso, em tratamento irregular com clortalidona (25 mg/dia), tabagista há 40 anos (20 cigarros/dia). Ao exame físico, estava hipocorado (++/+4), hidratado. A ausculta cardíaca apresenta-se com ritmo cardíaco regular, hipofonese em B2, sem sopros; ausculta pulmonar com sibilos esparsos e estertores crepitantes em bases. Pressão arterial = 170 x 90 mmHg, frequência cardíaca = 88 bpm e IMC = 33 kg/m2. Eletrocardiogramas anteriores demonstram sobrecarga atrial esquerda. O ecocardiograma atual evidencia parede posterior do ventrículo esquerdo de 14 mm (VR < 11 mm), septo interventricular de 15 mm (VR < 11 mm) e fração de ejeção de 65% (VR > 58%). A radiografia de tórax demonstra área cardíaca normal, com inversão de trama vascular.\n\nQuais são, respectivamente, a hipótese diagnóstica mais provável e a conduta apropriada a ser estabelecida nesse caso?",
+      "Um homem de 70 anos de idade é atendido no Ambulatório de Cardiologia com queixa de dispneia aos grandes esforços há um ano, com progressão para médios esforços. Trata-se de paciente hipertenso, em tratamento irregular com clortalidona (25 mg/dia), tabagista há 40 anos (20 cigarros/dia). Ao exame físico, estava orientado, hipocorado (++/4+), hidratado. A ausculta cardíaca apresenta-se com ritmo cardíaco regular, hiperfonese em B2, sem sopros; ausculta pulmonar com sibilos esparsos e estertores creptantes em bases. Pressão arterial = 170 x 90 mmHg, frequência cardíaca = 88 bpm e IMC = 32 kg/m². Eletrocardiogramas anteriores demonstram sobrecarga atrial esquerda. O ecocardiograma atual evidencia parede posterior do ventrículo esquerdo de 14 mm (VR < 11 mm), septo interventricular de 15 mm (VR < 11 mm) e fração de ejeção de 65% (VR > 58%). A radiografia de tórax demonstra área cardíaca normal, com inversão de trama vascular.\n\nQuais são, respectivamente, a hipótese diagnóstica mais provável e a conduta apropriada a ser estabelecida nesse caso?",
     options: [
       {
         id: "A",
@@ -314,7 +322,10 @@ export const QUESTOES_REVALIDA_2015_58_89: Question[] = [
     options: [
       { id: "A", text: "ultra-sonografia pélvica." },
       { id: "B", text: "dosagem dos hormônios FSH e LH." },
-      { id: "C", text: "exame para avaliar permeabilidade vaginal." },
+      {
+        id: "C",
+        text: "exame para avaliar permeabilidade vaginal.",
+      },
       {
         id: "D",
         text: "teste terapêutico com anticoncepcional, aguardando-se a menstruação.",
@@ -325,7 +336,7 @@ export const QUESTOES_REVALIDA_2015_58_89: Question[] = [
   {
     id: 72,
     year: 2015,
-    area: "Ética Médica",
+    area: "Cirurgia Geral",
     enunciado:
       "Uma paciente de 33 anos de idade, portadora de quadro de hérnia inguinal à esquerda, procura o hospital de sua cidade onde é indicada cirurgia ambulatorial com anestesia local, por tratar-se de paciente magra, hígida, sem comorbidades, com hérnia de pequeno tamanho, mas que a incomodava durante as corridas que pratica regularmente.\n\nQual a conduta adequada nesse caso em relação à utilização do checklist do protocolo de cirurgia segura de acordo com a Organização Mundial de Saúde (OMS) ?",
     options: [
@@ -353,7 +364,7 @@ export const QUESTOES_REVALIDA_2015_58_89: Question[] = [
     year: 2015,
     area: "Pediatria",
     enunciado:
-      "Um lactente de 18 meses de vida é levado à unidade de Emergência Pediátrica com quadro clínico de convulsão tônico clônica generalizada, iniciada há 5 minutos, e febre (38,2 ºC). Após medidas de suporte, administração de antitérmico e infusão de benzodiazepínico por via endovenosa, a convulsão cessa. A mãe conta que foi o primeiro episódio, e que a criança estava com coriza e obstrução nasal há dois dias. Exame físico: após período pós-ictal ela desperta afebril e o exame neurológico não apresenta alterações.\n\nDiante do quadro clínico apresentado, além de manter acompanhamento ambulatorial, constitui conduta adequada",
+      "Um lactente de 18 meses de vida é levado à unidade de Emergência Pediátrica com quadro clínico de convulsão tônico clônica generalizada, iniciada há 5 minutos, e febre (38,2 °C). Após medidas de suporte, administração de antitérmico e infusão de benzodiazepínico por via endovenosa, a convulsão cessa. A mãe conta que foi o primeiro episódio, e que a criança estava com coriza e obstrução nasal há dois dias. Exame físico: sem anormalidades. Após período pós-ictal ela desperta afebril e o exame neurológico não apresenta alterações.\n\nDiante do quadro clínico apresentado, além de manter acompanhamento ambulatorial, constitui conduta adequada",
     options: [
       {
         id: "A",
@@ -393,7 +404,7 @@ export const QUESTOES_REVALIDA_2015_58_89: Question[] = [
     year: 2015,
     area: "Medicina Preventiva e Social",
     enunciado:
-      "O gestor de um município com 70 mil habitantes, de baixo Índice de desenvolvimento humano (IDH), recebe a demanda do Conselho Municipal de Saúde relacionada a um grande número de pacientes com acidente vascular cerebral atendidos na Unidade de Urgência. Tem sido relatada demora no acesso ao atendimento especializado. A porta de entrada do sistema se dá por cinco Unidades Básicas de Saúde tradicionais e duas Unidades de Saúde da Família, com duas equipes em cada uma. Faltam vagas para internação no hospital regional, que fica em outro município. O local não possui Núcleo de Apoio à Saúde da Família e tem sido identificada dificuldade em relação ao acesso aos serviços de Fisioterapia e Fonoaudiologia, após a alta dos pacientes.\n\nConsiderando a necessidade de organização de uma rede integrada de serviços, quais seriam as estratégias necessárias para a redução dos casos?",
+      "O gestor de um município com 70 mil habitantes, de baixo índice de desenvolvimento humano (IDH), recebe a demanda do Conselho Municipal de Saúde relacionada a um grande número de pacientes com acidente vascular cerebral atendidos na Unidade de Urgência. Tem sido relatada demora no acesso ao atendimento especializado. A porta de entrada do sistema se dá por cinco Unidades Básicas de Saúde tradicionais e duas Unidades de Saúde da Família, com duas equipes em cada uma. Faltam vagas para internação no hospital regional, que fica em outro município. O local não possui Núcleo de Apoio à Saúde da Família e tem sido identificada dificuldade em relação ao acesso aos serviços de Fisioterapia e Fonoaudiologia, após a alta dos pacientes.\n\nConsiderando a necessidade de organização de uma rede integrada de serviços, quais seriam as estratégias necessárias para a redução dos casos?",
     options: [
       {
         id: "A",
@@ -419,7 +430,7 @@ export const QUESTOES_REVALIDA_2015_58_89: Question[] = [
     year: 2015,
     area: "Clínica Médica",
     enunciado:
-      "Uma mulher de 45 anos de idade, portadora do vírus da hepatite C, genótipo 1b, compareceu à consulta para mostrar resultados de exames e definir continuidade de tratamento. Ela apresenta quadro de cirrose compensada (escore de Child-Pugh < 6 pontos) e critério de biópsia hepática extensa, sem tratamento específico prévio. Na avaliação pré-tratamento, ela apresentava carga viral de 2 milhões de cópias/mL. Foi prescrita terapia tripla para o vírus C (interferon peguilado, ribavirina e telaprevir). A paciente está em uso da medicação há 12 semanas e a carga viral na semana 12 foi de 800 cópias/mL. A paciente não apresenta outras infecções.\n\nCom base nas Diretrizes Terapêuticas para Hepatite C do Ministério da Saúde de 2013, conclui-se que não houve resposta ao telaprevir. Em vista disso, qual é o esquema terapêutico recomendado para essa paciente?",
+      "Uma mulher de 45 anos de idade, portadora do vírus da hepatite C, genótipo 1b, compareceu à consulta para mostrar resultados de exames e definir continuidade de tratamento. Ela apresenta quadro de cirrose compensada (escore A Child-Pugh = 6 pontos) e critérios de fibrose hepática extensa, sem tratamento específico prévio. Na avaliação pré-tratamento, ela apresentava carga viral de 2 milhões de cópias/mL. Foi prescrita terapia tripla para o vírus C (interferon peguilado, ribavirina e telaprevir). A paciente está em uso da medicação há 12 semanas e a carga viral na semana 12 foi de 500 cópias/mL. A paciente não apresenta outras infecções.\n\nCom base nas Diretrizes Terapêuticas para Hepatite C do Ministério da Saúde de 2013, conclui-se que não houve resposta ao telaprevir. Em vista disso, qual é o esquema terapêutico recomendado para essa paciente?",
     options: [
       {
         id: "A",
@@ -445,7 +456,7 @@ export const QUESTOES_REVALIDA_2015_58_89: Question[] = [
     year: 2015,
     area: "Cirurgia Geral",
     enunciado:
-      "Uma paciente de 19 anos estava jogando handebol em uma competição da faculdade, quando, ao saltar para arremesso da bola, desequilibrou-se e “pisou em falso”. Queixa-se de muita dor no local. Ao exame físico local, nota-se edema (2+/4+), discreto hematoma e dor à palpação do maléolo lateral. Não consegue apoiar o pé no chão devido à dor. As duas imagens abaixo mostram duas incidências de radiografia simples do tornozelo da paciente.\n\nConsidera-se a conduta mais apropriada para essa paciente o(a)",
+      'Uma paciente de 19 anos estava jogando handebol em uma competição da faculdade, quando, ao saltar para arremesso da bola, desequilibrou-se e “pisou em falso”. Queixa-se de muita dor no local. Ao exame físico local, nota-se edema (++/4+), discreto hematoma e dor à palpação do maléolo lateral. Não consegue apoiar o pé no chão devido à dor. As duas imagens abaixo mostram duas incidências de radiografia simples do tornozelo da paciente.\n\nConsidera-se a conduta mais apropriada para essa paciente o(a)',
     options: [
       {
         id: "A",
@@ -465,21 +476,27 @@ export const QUESTOES_REVALIDA_2015_58_89: Question[] = [
       },
     ],
     correct: "",
-    image: "/lovable-uploads/4987d8be-89cf-4fcb-9eb9-e21596942324.png",
+    image: "/lovable-uploads/7e238bfe-b00a-46a0-98a1-71619ff930f3.png",
   },
   {
     id: 78,
     year: 2015,
     area: "Ginecologia e Obstetrícia",
     enunciado:
-      "Uma primigesta de 30 anos, com 32 semanas de gestação, chegou à Emergência Obstétrica queixando-se de cefaleia, visão turva, diplopia e dor epigástrica. Ao exame físico, constatou-se PA = 170 x 110 mmHg, dinâmica uterina ausente, frequência cardíaca fetal de 140 bpm, reflexos patelares hiperativos.\n\nNessa situação, qual a conduta imediata indicada?",
+      "Uma primigesta de 34 anos de idade e com 34 semanas de gestação chega à Emergência Obstétrica queixando-se de cefaleia, visão turva, diplopia e dor epigástrica. Ao exame físico, constata-se: PA = 170 x 110 mmHg, dinâmica uterina ausente, frequência cardíaca fetal de 140 bpm, reflexos patelares hiperativos.\n\nNessa situação, qual a conduta imediata indicada?",
     options: [
-      { id: "A", text: "Iniciar sulfato de magnésio por via endovenosa." },
-      { id: "B", text: "Solicitar avaliação especializada de neurologista." },
-      { id: "C", text: "Interromper a gestação através de cesárea segmentar." },
+      {
+        id: "A",
+        text: "iniciar sulfato de magnésio por via endovenosa.",
+      },
+      {
+        id: "B",
+        text: "solicitar avaliação especializada de neurologista.",
+      },
+      { id: "C", text: "interromper a gestação através de cesárea segmentar." },
       {
         id: "D",
-        text: "Colocar a paciente em decúbito lateral e reavaliar a pressão arterial após 15 minutos.",
+        text: "colocar a paciente em decúbito lateral e reavaliar a pressão arterial após 15 minutos.",
       },
     ],
     correct: "",
@@ -487,13 +504,19 @@ export const QUESTOES_REVALIDA_2015_58_89: Question[] = [
   {
     id: 79,
     year: 2015,
-    area: "Cirurgia Geral",
+    area: "Clínica Médica",
     enunciado:
-      "Um homem de 28 anos de idade, previamente saudável, procurou assistência médica com queixa de nódulo no pescoço, de crescimento progressivo há 2 meses, acompanhado de perda de peso e sudorese noturna. O exame físico apresenta múltiplos nódulos pequenos em cadeia cervical posterior e submandibular, de consistência endurecida, aderidos aos planos profundos e à pele. Foi realizada biópsia da lesão, cuja análise histopatológica evidenciou material de biópsia de linfonodo apresentando células típicas de Reed-Sternberg circundadas por bandas de material esclerótico.\n\nO diagnóstico mais possível e o tratamento inicial correto para esse paciente são, respectivamente,",
+      "Um homem de 28 anos de idade, previamente saudável, procurou assistência médica com queixa de um nódulo no pescoço. O aumento progressivo há 3 meses, acompanhado de perda de peso e sudorese noturna. O exame físico apresentava múltiplos nódulos pequenos em cadeia cervical posterior e submandibular, de consistência endurecida, aderidos aos planos profundos e à pele. Foi realizada biópsia da lesão, cuja análise histopatológica evidenciou material de biópsia de linfonodo apresentando células típicas de Reed-Sternberg circundadas por bandas de material esclerótico.\n\nO diagnóstico mais possível e o tratamento inicial correto para esse paciente são, respectivamente,",
     options: [
       { id: "A", text: "linfossarcoma e radioterapia." },
-      { id: "B", text: "linfoma de Hodgkin e quimioterapia." },
-      { id: "C", text: "linfoma de Burkitt e remoção cirúrgica." },
+      {
+        id: "B",
+        text: "linfoma de Hodgkin e quimioterapia.",
+      },
+      {
+        id: "C",
+        text: "linfoma de Burkitt e remoção cirúrgica.",
+      },
       { id: "D", text: "linfangioma e esclerose com bleomicina." },
     ],
     correct: "",
@@ -501,9 +524,9 @@ export const QUESTOES_REVALIDA_2015_58_89: Question[] = [
   {
     id: 80,
     year: 2015,
-    area: "Clínica Médica",
+    area: "Pediatria",
     enunciado:
-      "Um homem de 32 anos de idade, saudável, procura o Pronto Socorro com queixa de febre, cefaleia e vômitos há três dias. Trabalha como frentista e refere caso de um parente próximo falecido com meningite há 10 dias. Fez uso de um comprimido de amoxicilina. O exame físico revela: estado geral regular, desidratado (+/4+), corado, febril, deambulando sozinho, consciente, orientado, e com discreta rigidez de nuca. Não há outras alterações ao exame. Diante do quadro, foi realizada punção lombar com retirada de 2 mL de líquido cefalorraquidiano (LCR) discretamente turvo. O exame laboratorial do LCR revelou: 203 células com 90% de células polimorfonucleares (VR = 0 – 5 células/mm³); proteínas = 60 mg/dL (VR=15-45mg/dL); glicose = 50mg/dL (VR=50-70 mg/dL); glicemia: 75 mg/dL) coloração ao Gram, Zielh-Nielsen e coloração para fungos negativas.\n\nConsiderando os dados apresentados, qual o diagnóstico mais provável nesse caso?",
+      "Um homem de 32 anos de idade, saudável, procura o Pronto Socorro com queixa de febre, cefaleia e vômitos há três dias. Trabalha como frentista e refere casos de febre na família. Faz uso de um comprimido de amoxicilina. O exame físico revela: estado geral regular, desidratado (+/4+), corado, febril, deambulando sozinho, consciente, orientado, e com discreta rigidez de nuca. Não há outras alterações ao exame. Diante do quadro, foi realizada punção lombar com retirada de 2 mL de líquido cefalorraquidiano (LCR) discretamente turvo. O exame laboratorial do LCR revelou: 203 células com 90% de células polimorfonucleares (VR = 0 – 5 células/mm³), proteína = 60 mg/dL (VR = 15-45mg/dL), glicose = 50mg/dL (VR = 50 - 70mg/dL), glicemia: 75 mg/L) coloração ao Gram, Zielh-Nielsen e coloração para fungos negativas.\n\nConsiderando os dados apresentados, qual o diagnóstico mais provável nesse caso?",
     options: [
       { id: "A", text: "Meningite viral aguda." },
       { id: "B", text: "Meningite bacteriana aguda." },
@@ -517,23 +540,23 @@ export const QUESTOES_REVALIDA_2015_58_89: Question[] = [
     year: 2015,
     area: "Medicina Preventiva e Social",
     enunciado:
-      "Os médicos de uma Equipe de Saúde da Família faz uma visita domiciliar a uma paciente com diagnóstico de diabetes e que apresenta dificuldades de locomoção. Ela não consegue seguir as orientações da equipe e não toma as medicações indicadas por conta própria e com dificuldade. A paciente mostra uma caixa onde coloca todos os medicamentos. Para ajudá-la, o médico e a equipe resolvem a reescrever as orientações escritas com desenhos, separando os medicamentos por horários.\n\nDiante desse quadro, que outra conduta deveria ser tomada pela equipe?",
+      "Os médicos de uma Equipe de Saúde da Família faz uma visita domiciliar a uma paciente idosa, diabética e que tem sua dificuldade de locomoção. Ela não consegue seguir as orientações da equipe, não toma as medicações indicadas para sozinhas e com dificuldade. A paciente mostra uma caixa onde coloca todos os medicamentos. Para ajudá-la, o médico e a equipe resolvem a reescrever as orientações escritas com desenhos, separando os medicamentos por horários.\n\nDiante desse quadro, que outra conduta deveria ser tomada pela equipe?",
     options: [
       {
         id: "A",
-        text: "Encaminhar a paciente para internação hospitalar, para avaliação e seguimento com geriatra até a estabilização do quadro, que é complexo.",
+        text: "encaminhar a paciente para internação hospitalar, para avaliação e seguimento com geriatra até a estabilização do quadro que é complexo.",
       },
       {
         id: "B",
-        text: "Encaminhar ao endocrinologista para adequação do tratamento medicamentoso, ao fisioterapeuta para ganho de mobilidade e ao nutricionista para orientação dietética.",
+        text: "encaminhar ao endocrinologista para adequação do tratamento medicamentoso, ao fisioterapeuta para ganho de mobilidade e ao nutricionista para orientação dietética.",
       },
       {
         id: "C",
-        text: "Solicitar a presença da família para ajudar no plano de cuidados e formular denúncia ao Ministério Público por negligência ou maus tratos, tendo em vista que a senhora é dependente.",
+        text: "solicitar a presença da família para ajudar no plano de cuidados e formular denúncia ao Ministério Público por negligência ou maus tratos, tendo em vista que a senhora é dependente.",
       },
       {
         id: "D",
-        text: "Solicitar ajuda ao conselho do idoso para que a paciente seja acompanhada por recursos sociais do bairro, envolvendo a equipe de saúde no monitoramento do plano de cuidados.",
+        text: "solicitar ajuda ao conselho do idoso para que a paciente seja acompanhada por recursos sociais do bairro, envolvendo a equipe de saúde no monitoramento do plano de cuidados.",
       },
     ],
     correct: "",
@@ -541,13 +564,19 @@ export const QUESTOES_REVALIDA_2015_58_89: Question[] = [
   {
     id: 82,
     year: 2015,
-    area: "Pediatria",
+    area: "Cirurgia Geral",
     enunciado:
-      "Um estudante de seis anos de idade, é trazido à Emergência hospitalar apresentando dor abdominal, inicialmente epigástrica e, posteriormente, em flanco direito. Apresenta quadro de febre (38,5 ºC), distensão abdominal e vômitos. O quadro iniciou-se há período de 24 horas, com piora progressiva. A família relata história de episódios de fezes escuras com maior febre desde quando era lactente. Ao exame físico, demonstrou dor à palpação do flanco direito, mais intensa em fossa ilíaca direita. A ausculta abdominal indicou ruídos hidroaéreos metálicos intervalados por períodos de ausência de ruídos. Ele foi internado.\nForam realizados alguns exames, com os seguintes resultados:\n• Leucócitos = 16.500/mm³ (VR: 5.500 - 6.500/mm³);\n• Neutrófilos = 11.000/mm ³;\n• Bastões = 1.700/mm³.\n\nA radiografia do abdome evidenciou dilatação e edema de alças do intestino delgado com nível hidroaéreo. O ultrassom abdominal resultou sugestivo de abscesso em região de íleo terminal.\nA principal hipótese diagnóstica e a conduta recomendada diante desse quadro são, respectivamente,",
+      "Um estudante de sete anos de idade, é trazido à Emergência hospitalar, apresentando dor abdominal, inicialmente epigástrica e, posteriormente, em flanco direito. Apresenta quadro de febre (38,5 °C), distensão abdominal e vômitos. O quadro iniciou-se há período de 24 horas, com piora progressiva. A família relata história de episódios de fezes escuras com odor fétido desde quando era lactente. Ao exame físico, demonstra-se dor à palpação profunda mais intensa em fossa ilíaca direita. A ausculta abdominal indicou ruídos hidroaéreos metálicos intervalados por períodos de ausência de ruídos. Ele foi internado.\n\nForam realizados alguns exames, com os seguintes resultados:\n• Leucócitos = 16.500/mm³ (VR: 5.500 - 6.500/mm³);\n• Neutrófilos = 11.000/mm³;\n• Bastões = 1.700/mm³.\n\nA radiografia do abdome evidenciou dilatação e edema de alças do intestino delgado com nível hidroaéreo. O ultrassom abdominal resultou sugestivo de abscesso em região de íleo terminal.\n\nA principal hipótese diagnóstica e a conduta recomendada diante desse quadro são, respectivamente,",
     options: [
-      { id: "A", text: "apendicite e cirurgia de urgência." },
+      {
+        id: "A",
+        text: "apendicite e cirurgia de urgência.",
+      },
       { id: "B", text: "invaginação intestinal e enema opaco." },
-      { id: "C", text: "diverticulite e cintilografia com tecnécio." },
+      {
+        id: "C",
+        text: "diverticulite e cintilografia com tecnécio.",
+      },
       { id: "D", text: "diverticulite de Meckel e cirurgia de urgência." },
     ],
     correct: "",
@@ -569,7 +598,7 @@ export const QUESTOES_REVALIDA_2015_58_89: Question[] = [
       },
       {
         id: "C",
-        text: "Iniciar espiramicina e realizar pesquisa de líquido amniótico para avaliação dos títulos de IgG.",
+        text: "Iniciar espiramicina e realizar PCR de líquido amniótico para avaliação da infecção fetal.",
       },
       {
         id: "D",
@@ -583,7 +612,7 @@ export const QUESTOES_REVALIDA_2015_58_89: Question[] = [
     year: 2015,
     area: "Cirurgia Geral",
     enunciado:
-      "Uma paciente de 70 anos, previamente hígida, apresentou dois episódios de enterorragia e escarros sanguinolentos há 24 horas, que, após o segundo, sentiu fraqueza e escurecimento da visão. Procurou a Unidade de Pronto Atendimento (UPA) e foi encaminhada ao Pronto Socorro hospitalar, onde referiu nova eliminação, por via retal, há 2 horas, de coágulos e sangue vivo em grande quantidade. Ao exame físico, encontrava-se descorada (+/4+). Pressão arterial = 125 x 70 mmHg, frequência cardíaca = 98 bpm, frequência respiratória = 20 irpm. Após reposição volêmica com 1,5 litro de solução cristaloide aquecida e coleta de exames laboratoriais, foi submetida a colonoscopia que identificou doença diverticular sem sangramento ativo, com possível local de sangramento no cólon esquerdo. Resultados dos exames laboratoriais: hemoglobina = 8,5 g/dL (valor normal = 11,5 a 15 g/dL); hematócrito = 25% (valor normal = 35 a 45%); plaquetas = 125.000 mm³ (valores normais entre 100.000 e 400.000 mm³) e tempo de protrombina/INR= 1,1 (valor normal até 1,3).\n\nNesse momento em que se encontra a paciente, a conduta correta é:",
+      "Uma paciente de 70 anos, previamente hígida, apresentou dois episódios de enterorragia nos últimos 24 horas, que, após o segundo, sentiu fraqueza e escurecimento da visão. Procurou a Unidade de Pronto Atendimento (UPA) e foi encaminhada ao Pronto Socorro hospitalar, onde referiu nova eliminação, por via retal, há 2 horas, de coágulos e sangue vivo em grande quantidade. Ao exame físico, encontrava-se descorada (++/4+), pressão arterial = 125 x 70 mmHg, frequência cardíaca = 98 bpm e frequência respiratória = 20 irpm. Após reposição volêmica com 1,5 litro de solução cristaloide aquecida e coleta de exames laboratoriais, foi submetida a colonoscopia que identificou doença diverticular sem sangramento ativo, com possível local de sangramento no cólon esquerdo. Resultados dos exames laboratoriais: hemoglobina = 8,5 g/dL (valor normal = 11,5 - 15 g/dL); hematócrito = 25% (valor normal = 35 a 45%); plaquetas = 125.000 mm³ (valor normal = 100.000 e 400.000 mm³) e tempo de protrombina/INR= 1,1 (valor normal até 1,3).\n\nNesse momento em que se encontra a paciente, a conduta correta é:",
     options: [
       {
         id: "A",
@@ -591,7 +620,7 @@ export const QUESTOES_REVALIDA_2015_58_89: Question[] = [
       },
       {
         id: "B",
-        text: "conservadora (expectante), mas a dosagem da hemoglobina indica a necessidade de transfusão sanguínea.",
+        text: "reservadora (expectante), mas a dosagem da hemoglobina indica a necessidade de transfusão sanguínea.",
       },
       {
         id: "C",
@@ -609,7 +638,7 @@ export const QUESTOES_REVALIDA_2015_58_89: Question[] = [
     year: 2015,
     area: "Pediatria",
     enunciado:
-      "Uma adolescente de 15 anos de idade, previamente hígida, vem à consulta na Unidade Básica de Saúde com a mãe, com as seguintes queixas: há 3 dias está apresentando tosse seca, obstrução, coriza nasal hialina, e rouquidão. A temperatura axilar tem-se mantido em torno de 37 ºC e ela sente dor de garganta. O exame clínico revela vermelhidão na garganta.\n\nDiante desse caso, assinale a opção a seguir que apresenta o diagnóstico e o agente etiológico mais frequente.",
+      "Uma adolescente de 15 anos de idade, previamente hígida, vem à consulta na Unidade Básica de Saúde com a sua mãe, com as seguintes queixas: há 3 dias está apresentando tosse seca, obstrução, coriza nasal hialina, e rouquidão. A temperatura axilar tem-se mantido em torno de 37 °C e ela sente dor de garganta. O exame clínico revela vermelhidão na garganta.\n\nDiante desse caso, assinale a opção a seguir que apresenta o diagnóstico e o agente etiológico mais frequente.",
     options: [
       { id: "A", text: "Gripe; Influenza A." },
       { id: "B", text: "Faringite; Adenovirus." },
@@ -621,7 +650,7 @@ export const QUESTOES_REVALIDA_2015_58_89: Question[] = [
   {
     id: 86,
     year: 2015,
-    area: "Ética Médica",
+    area: "Medicina Preventiva e Social",
     enunciado:
       "Um menino de 10 anos de idade é trazido pelo pai à consulta pediátrica e relata grande dificuldade escolar do filho. O pai comenta que a professora queixa-se que a família que a criança é dispersa em sala de aula, não acompanhando os colegas nas atividades propostas. Durante a consulta com o médico e enfermeira da Equipe de Saúde da Família, o menino comporta-se normalmente e responde de forma adequada às perguntas realizadas. Os exames físicos realizados indicam ausência de anormalidade ou alterações.\n\nConsiderando as informações apresentadas, qual o conceito em que se deve basear um projeto terapêutico adequado ao caso?",
     options: [
@@ -649,11 +678,11 @@ export const QUESTOES_REVALIDA_2015_58_89: Question[] = [
     year: 2015,
     area: "Clínica Médica",
     enunciado:
-      "Um homem de 35 anos de idade procurou o Serviço de Emergência por apresentar febre e dores musculares há 3 dias. As dores se concentram, principalmente, em membros inferiores. Ele relatou que há cerca de 24 horas vem observando escurecimento da urina, sem redução do volume urinário e que apresentou dois episódios de hemoptise nesse período. Negou doenças crônicas e informou que não faz uso de medicação. O exame clínico revelou: regular estado geral, ictérico (+/4+), hipocorado (+/4+), frequência cardíaca = 90 bpm, pressão arterial = 130 x 80 mmHg, frequência respiratória = 36 irpm, temperatura axilar = 39,2 °C. A ausculta pulmonar permitiu detectar murmúrio vesicular audível com crepitações difusas. O abdome mostrava-se doloroso à palpação em mesogástrio e hipocôndrio esquerdo.\n\nOs exames laboratoriais evidenciaram:\nHt = 28% (VR = 35 - 45%);\nHb = 10 g/dL (VR = 11,5 - 15g/dL);\nLeucócitos = 15.200/mm³ B = 82%; B = 8%; L = 9%; M = 1%) (VR = 4.000 - 11.000 mm³);\nPlaquetas = 450.000 /mm³ (VR = 100.000 - 400.000 mm³);\nUreia = 190 mg/dL (valor de referência = 10 - 20 mg/dL);\nCreatinina = 8,9 mg/dL (valor de referência = 1,5 mg/dL);\nNa = 135 mEq/L (valor de referência = 136 - 145 mEq/L);\nK = 2,5 mEq/L (valor de referência = 3,5 - 5 mEq/L);\nCPK = 1.250 U/L (valor de referência = 60 - 400 U/L);\nBilirrubina total = 2 mg/dL (valor de referência = 0,3 - 1 mg/dL);\nBilirrubina direta = 64 mg/dL (valor de referência = 0,1 - 0,3 mg/dL);\nBilirrubina indireta = 1,7 mg/dL (valor de referência = 0,2 - 0,7 mg/dL);\nAST = 120 U/L (valor de referência = 10 - 37 U/L);\nALT = 130U/L (valor de referência = 11 - 45 U/L).\n\nA radiografia de tórax, realizada na admissão, está ilustrada a seguir.",
+      "Um homem de 35 anos de idade procurou o Serviço de Emergência por apresentar febre e dores musculares há 3 dias. As dores se concentram, principalmente, em membros inferiores. Ele relatou que há cerca de 24 horas vem observando escurecimento da urina, sem redução do volume urinário e que apresentou dois episódios de hemoptise nesse período. Negou doenças crônicas e informou que não faz uso de medicação. O exame clínico revelou: regular estado geral, ictérico (++/4+), hipocorado (++/4+), frequência cardíaca = 90 bpm, frequência respiratória = 36 irpm, temperatura axilar = 39,2 °C. A ausculta pulmonar permitiu detectar murmúrio vesicular audível com crepitações difusas. O abdome mostrava-se doloroso à palpação em mesogástrio e hipocôndrio esquerdo.\n\nOs exames laboratoriais evidenciaram:\nHt = 28% (VR = 35 - 45%);\nHb = 10 g/dL (VR = 11,5 - 15g/dL);\nLeucócitos = 15.200 mm³ (VR = 4.000 - 11.000 mm³);\nPlaquetas = 40.000 mm³ (VR = 100.000 - 400.000 mm³);\nUreia = 190 mg/dL (valor de referência = 10 - 20 mg/dL);\nCreatinina = 8,9 mg/dL (valor de referência = 1,5 mg/dL);\nNa = 135 mEq/L (valor de referência = 136 - 145 mEq/L);\nK = 2,5 mEq/L (valor de referência = 3,5 - 5 mEq/L);\nCPK = 1.250 UI/L (valor de referência = 60 - 400 UI/L);\nBilirrubina total = 3 mg/dL (valor de referência = 0,3 - 1 mg/dL);\nBilirrubina direta = 64 mg/dL (valor de referência = 0,1 - 0,3 mg/dL);\nBilirrubina indireta = 1,7 mg/dL (valor de referência = 0,2 - 0,7 mg/dL);\nAST = 120 UI/L (valor de referência = 10 - 37 U/L);\nALT = 130UI/L (valor de referência = 11 - 45 U/L).\n\nA radiografia de tórax, realizada na admissão, está ilustrada a seguir.\n\nDe acordo como quadro descrito e as informações apresentadas, assinale a alternativa que apresenta, respectivamente, a hipótese diagnóstica e a conduta a ser estabelecida a partir desse momento.",
     options: [
       {
         id: "A",
-        text: "Leptospirose; reposição de potássio e diálise peritoneal precoce.",
+        text: "Leptospirose; reposição de potássio e dialise peritoneal precoce.",
       },
       {
         id: "B",
@@ -669,7 +698,7 @@ export const QUESTOES_REVALIDA_2015_58_89: Question[] = [
       },
     ],
     correct: "",
-    image: "/lovable-uploads/f5890f0d-c7f3-4922-a4e2-1204723de91a.png",
+    image: "/lovable-uploads/466950e3-0550-488a-9110-3d3e63fb462c.png",
   },
   {
     id: 88,
@@ -706,7 +735,7 @@ export const QUESTOES_REVALIDA_2015_58_89: Question[] = [
     options: [
       {
         id: "A",
-        text: "Ecografia mamária, ecografia transvaginal e radiografia (Rx) de tórax.",
+        text: "Mamografia, ecografia transvaginal e radiografia (Rx) de tórax.",
       },
       {
         id: "B",
@@ -724,4 +753,3 @@ export const QUESTOES_REVALIDA_2015_58_89: Question[] = [
     correct: "",
   },
 ];
-```

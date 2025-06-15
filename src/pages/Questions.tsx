@@ -11,17 +11,17 @@ const ESPECIALIDADES = [
   { value: "pediatria", label: "Pediatria" },
   { value: "medicina-preventiva", label: "Medicina Preventiva" },
 ];
-const TEMAS = [
-  { value: "tema1", label: "Tema 1" },
-  { value: "tema2", label: "Tema 2" },
-];
+// const TEMAS = [
+//   { value: "tema1", label: "Tema 1" },
+//   { value: "tema2", label: "Tema 2" },
+// ];
 
 const QUESTOES_POR_PAGINA = 10;
 
 export default function Questions() {
   const [anoSelecionado, setAnoSelecionado] = useState<number>(2011);
   const [especialidade, setEspecialidade] = useState<string>(ESPECIALIDADES[0].value);
-  const [temaSelecionado, setTemaSelecionado] = useState<string>(TEMAS[0].value);
+  // const [temaSelecionado, setTemaSelecionado] = useState<string>(TEMAS[0].value);
   const [filtro, setFiltro] = useState("");
   const [paginaAtual, setPaginaAtual] = useState(1);
   const [abaSelecionada, setAbaSelecionada] = useState<"todas" | "favoritas" | "erradas" | "acertadas">("todas");
@@ -115,8 +115,6 @@ export default function Questions() {
         setEspecialidade={(v) => { setEspecialidade(v); setPaginaAtual(1); }}
         anoSelecionado={anoSelecionado}
         setAnoSelecionado={(v) => { setAnoSelecionado(v); setPaginaAtual(1); }}
-        temaSelecionado={temaSelecionado}
-        setTemaSelecionado={(v) => { setTemaSelecionado(v); setPaginaAtual(1); }}
         totalQuestoes={questoesFiltradas.length}
         abaSelecionada={abaSelecionada}
         setAbaSelecionada={setAbaSelecionada}

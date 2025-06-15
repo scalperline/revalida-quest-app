@@ -13,15 +13,29 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 
-// Número de questões por página
+// NOVO: anos disponíveis para prova oficial
+const ANOS_PROVA = [
+  { value: 2011, label: "Revalida 2011" },
+  // { value: 2012, label: "Revalida 2012" },
+  // { value: 2013, label: "Revalida 2013" },
+];
+
 const QUESTOES_POR_PAGINA = 10;
 
 export default function Questions() {
+  // Novo estado para o ano selecionado, padrão: 2011 (único por enquanto)
+  const [anoSelecionado, setAnoSelecionado] = useState<number>(2011);
   const [filtro, setFiltro] = useState("");
   const [paginaAtual, setPaginaAtual] = useState(1);
 
-  // Filtra as questões conforme o campo de busca
-  const questoesFiltradas = QUESTOES_REVALIDA_2011.filter((q) =>
+  // Filtre as questões pelo ano selecionado
+  const questoesAnoSelecionado =
+    anoSelecionado === 2011
+      ? QUESTOES_REVALIDA_2011.filter((q) => q.year === anoSelecionado)
+      : [];
+
+  // Filtra as questões pelo campo de busca
+  const questoesFiltradas = questoesAnoSelecionado.filter((q) =>
     q.enunciado.toLocaleLowerCase().includes(filtro.toLocaleLowerCase()) ||
     q.area.toLocaleLowerCase().includes(filtro.toLocaleLowerCase()) ||
     q.year.toString().includes(filtro)
@@ -34,16 +48,23 @@ export default function Questions() {
   const indiceFim = indiceInicio + QUESTOES_POR_PAGINA;
   const questoesPaginadas = questoesFiltradas.slice(indiceInicio, indiceFim);
 
-  // Navegação auxiliar (mostra primeira, as próximas, anterior e última se houver muitas páginas)
-  function renderPagination() {
-    // Oculta se só tem uma página
-    if (totalPaginas <= 1) return null;
+  // Sempre que filtro ou ano mudar, voltar para página 1
+  function atualizarFiltro(e: React.ChangeEvent<HTMLInputElement>) {
+    setFiltro(e.target.value);
+    setPaginaAtual(1);
+  }
+  function atualizarAno(e: React.ChangeEvent<HTMLSelectElement>) {
+    setAnoSelecionado(Number(e.target.value));
+    setPaginaAtual(1);
+    setFiltro("");
+  }
 
-    // Gerar os itens da paginação (máximo de 7 visíveis para UX)
+  // Paginação (idêntica à existente)
+  function renderPagination() {
+    if (totalPaginas <= 1) return null;
     const items = [];
     const mostrarPaginas = Math.max(Math.min(7, totalPaginas), 1);
 
-    // Lógica: mostra sempre a primeira, última, atual, e até 2 antes/depois se possível
     let start = Math.max(1, paginaAtual - 2);
     let end = Math.min(totalPaginas, paginaAtual + 2);
 
@@ -59,7 +80,9 @@ export default function Questions() {
         <PaginationItem key={1}>
           <PaginationLink
             isActive={paginaAtual === 1}
-            onClick={() => setPaginaAtual(1)}
+            onClick={(e) => {
+              e.preventDefault(); setPaginaAtual(1);
+            }}
             href="#"
           >
             1
@@ -145,12 +168,6 @@ export default function Questions() {
     );
   }
 
-  // Sempre que filtro mudar, voltar para página 1
-  function atualizarFiltro(e: React.ChangeEvent<HTMLInputElement>) {
-    setFiltro(e.target.value);
-    setPaginaAtual(1);
-  }
-
   return (
     <div className="min-h-screen bg-background px-1 md:px-2 py-10 flex flex-col">
       {/* Botão de voltar para home */}
@@ -162,14 +179,28 @@ export default function Questions() {
           </span>
         </Link>
       </div>
-      <div className="max-w-4xl mx-auto flex flex-col gap-2 mb-8">
+      <div className="max-w-4xl mx-auto flex flex-col gap-3 mb-8">
         <h2 className="text-3xl font-extrabold tracking-tight text-foreground">Banco de Questões Oficiais</h2>
-        <input
-          className="border border-muted px-3 py-2 rounded-lg max-w-xs bg-background text-foreground focus-visible:ring-2 focus-visible:ring-primary"
-          placeholder="Buscar por enunciado, área ou ano..."
-          value={filtro}
-          onChange={atualizarFiltro}
-        />
+        <div className="flex gap-3 flex-col md:flex-row items-start md:items-center">
+          <label className="text-sm font-medium text-foreground">Prova:</label>
+          <select
+            className="border border-muted px-3 py-2 rounded-lg bg-background text-foreground focus-visible:ring-2 focus-visible:ring-primary cursor-pointer"
+            value={anoSelecionado}
+            onChange={atualizarAno}
+          >
+            {ANOS_PROVA.map((a) => (
+              <option key={a.value} value={a.value}>
+                {a.label}
+              </option>
+            ))}
+          </select>
+          <input
+            className="border border-muted px-3 py-2 rounded-lg max-w-xs bg-background text-foreground focus-visible:ring-2 focus-visible:ring-primary"
+            placeholder="Buscar por enunciado, área ou ano..."
+            value={filtro}
+            onChange={atualizarFiltro}
+          />
+        </div>
       </div>
       <div>
         {questoesFiltradas.length === 0 ? (

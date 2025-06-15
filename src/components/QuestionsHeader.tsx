@@ -35,6 +35,7 @@ export function QuestionsHeader({
             <SelectContent>
               <SelectItem value="2011">Revalida 2011</SelectItem>
               <SelectItem value="2012">Revalida 2012</SelectItem>
+              <SelectItem value="2013">Revalida 2013</SelectItem>
             </SelectContent>
           </Select>
         </div>

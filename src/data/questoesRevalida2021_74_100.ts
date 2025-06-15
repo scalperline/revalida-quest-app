@@ -1,4 +1,3 @@
-
 import { type Question } from "@/components/QuestionCard";
 
 export const QUESTOES_REVALIDA_2021_74_100: Question[] = [
@@ -140,7 +139,7 @@ export const QUESTOES_REVALIDA_2021_74_100: Question[] = [
         text: "a testagem para hepatite C no 2.º e 3.º trimestres, além do parto e/ou se história de exposição de risco/violência sexual.",
       },
     ],
-    correct: "A",
+    correct: "ANULADA",
   },
   {
     id: 81,
@@ -440,7 +439,7 @@ export const QUESTOES_REVALIDA_2021_74_100: Question[] = [
         text: "Pneumonia por paracoccidioidomicose; solicitar pesquisa de BK e fungo no escarro; iniciar rifampicina, isoniazida, pirazinamida.",
       },
     ],
-    correct: "D",
+    correct: "ANULADA",
   },
   {
     id: 93,

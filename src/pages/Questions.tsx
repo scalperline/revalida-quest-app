@@ -56,19 +56,21 @@ export default function Questions() {
     return (
       <div className="flex gap-1 md:gap-2">
         <button
-          className="px-2 py-1 rounded disabled:opacity-40"
+          className="flex items-center border border-muted rounded-lg px-3 py-2 text-base font-semibold bg-background hover:bg-muted transition-colors disabled:opacity-40"
           disabled={paginaAtual === 1}
           onClick={() => paginaAtual > 1 && setPaginaAtual(paginaAtual - 1)}
         >
-          {"<"}
+          <span className="mr-2">{'←'}</span>
+          <span className="text-primary font-bold">anterior</span>
         </button>
         {items}
         <button
-          className="px-2 py-1 rounded disabled:opacity-40"
+          className="flex items-center border border-muted rounded-lg px-3 py-2 text-base font-semibold bg-background hover:bg-muted transition-colors disabled:opacity-40"
           disabled={paginaAtual === totalPaginas}
           onClick={() => paginaAtual < totalPaginas && setPaginaAtual(paginaAtual + 1)}
         >
-          {">"}
+          <span className="text-primary font-bold">próximo</span>
+          <span className="ml-2">{'→'}</span>
         </button>
       </div>
     );
@@ -108,3 +110,4 @@ export default function Questions() {
     </div>
   );
 }
+

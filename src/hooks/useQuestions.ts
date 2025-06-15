@@ -1,3 +1,4 @@
+
 import { useState, useMemo } from "react";
 import { type Question } from "@/components/QuestionCard";
 import { QUESTOES_REVALIDA_2011 } from "@/data/questoesRevalida2011";
@@ -16,12 +17,13 @@ import { QUESTOES_REVALIDA_2020 } from "@/data/questoesRevalida2020";
 import { QUESTOES_REVALIDA_2021 } from "@/data/questoesRevalida2021";
 import { QUESTOES_REVALIDA_2022_1 } from "@/data/questoesRevalida2022_1";
 import { QUESTOES_REVALIDA_2022_2 } from "@/data/questoesRevalida2022_2";
+import { QUESTOES_REVALIDA_2023_1 } from "@/data/questoesRevalida2023_1";
 
 const QUESTOES_POR_PAGINA = 10;
 
 export function useQuestions() {
-  const [anoSelecionado, setAnoSelecionado] = useState<number>(2022);
-  const [tipoProva, setTipoProva] = useState<string>("Prova 2");
+  const [anoSelecionado, setAnoSelecionado] = useState<number>(2023);
+  const [tipoProva, setTipoProva] = useState<string>("");
   const [paginaAtual, setPaginaAtual] = useState(1);
 
   const questoesAnoSelecionado: Question[] = useMemo(() => {
@@ -67,6 +69,9 @@ export function useQuestions() {
         ? QUESTOES_REVALIDA_2022_2
         : QUESTOES_REVALIDA_2022_1;
     }
+    if (anoSelecionado === 2023) {
+      return QUESTOES_REVALIDA_2023_1;
+    }
     return [];
   }, [anoSelecionado, tipoProva]);
 
@@ -88,6 +93,8 @@ export function useQuestions() {
       setTipoProva("Cinza");
     } else if ([2016, 2017, 2022].includes(v)) {
       setTipoProva("Prova 1");
+    } else {
+      setTipoProva("");
     }
   }
 

@@ -1,4 +1,3 @@
-
 import { type Question } from "@/components/QuestionCard";
 
 export const QUESTOES_REVALIDA_2022_2_1_38: Question[] = [
@@ -40,7 +39,7 @@ export const QUESTOES_REVALIDA_2022_2_1_38: Question[] = [
         text: "A gema do ovo, por ser uma importante fonte proteica, deve ser oferecida de imediato, ao passo que a clara, devido ao seu poder alergênico, deve ser oferecida somente após 12 meses de idade.",
       },
     ],
-    correct: "D",
+    correct: "A",
   },
   {
     id: 3,
@@ -60,7 +59,7 @@ export const QUESTOES_REVALIDA_2022_2_1_38: Question[] = [
         text: "ultrassom transretal com biópsia de próstata; adenocarcinoma de próstata.",
       },
     ],
-    correct: "A",
+    correct: "B",
   },
   {
     id: 4,
@@ -106,7 +105,7 @@ export const QUESTOES_REVALIDA_2022_2_1_38: Question[] = [
         text: "Referenciar a paciente à equipe multiprofissional do Centro de Atenção Psicossocial.",
       },
     ],
-    correct: "C",
+    correct: "D",
   },
   {
     id: 6,
@@ -166,7 +165,7 @@ export const QUESTOES_REVALIDA_2022_2_1_38: Question[] = [
         text: "idade óssea compatível com distúrbio constitucional de estatura.",
       },
     ],
-    correct: "D",
+    correct: "B",
   },
   {
     id: 9,
@@ -258,7 +257,7 @@ export const QUESTOES_REVALIDA_2022_2_1_38: Question[] = [
         text: "Coledocolitíase; colecistectomia videolaparoscópica.",
       },
     ],
-    correct: "D",
+    correct: "Anulada",
   },
   {
     id: 13,
@@ -750,25 +749,4 @@ export const QUESTOES_REVALIDA_2022_2_1_38: Question[] = [
     year: 2022,
     area: "Ginecologia e Obstetrícia",
     enunciado:
-      "Recém-nascido prematuro, sexo masculino, com 15 dias de idade gestacional corrigida, foi levado pela mãe ao ambulatório de cirurgia pediátrica, para avaliação de aumento da bolsa escrotal direita, o que piora com o choro. No exame, a criança estava tranquila, ativa e reativa, corada, hidratada, anictérica, com frequência cardíaca de 120 batimentos por minuto, ritmo cardíaco regular em 2 tempos, sem sopros, perfusão capilar < 2s e frequência respiratória de 30 incursões respiratórias por minuto, eupneico, com murmúrio vesicular fisiológico. Abdome globoso, normotenso, peristáltico, sem visceromegalias. Bolsa escrotal direita aumentada de tamanho, conteúdo redutível, testículo palpável sem alterações, transiluminação negativa, espessamento do cordão espermático. Bolsa escrotal esquerda sem alterações, testículo palpável.\n\nA programação cirúrgrica para essa patologia é",
-    options: [
-      {
-        id: "A",
-        text: "solicitar hemograma e marcar cirurgia eletiva logo após o diagnóstico.",
-      },
-      {
-        id: "B",
-        text: "solicitar ultrassonografia inguinal, para confirmar o diagnóstico, e programar cirurgia eletiva.",
-      },
-      {
-        id: "C",
-        text: "aguardar o paciente completar um ano de idade, uma vez que 90% desses quadros têm resolução espontânea.",
-      },
-      {
-        id: "D",
-        text: "aguardar o paciente completar dois anos de idade, pois nessa idade a cirurgia terá menor risco.",
-      },
-    ],
-    correct: "C",
-  },
-];
+      "Recém-nascido prematuro, sexo masculino

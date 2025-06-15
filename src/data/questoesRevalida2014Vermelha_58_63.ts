@@ -41,7 +41,7 @@ export const QUESTOES_REVALIDA_2014_VERMELHA_58_63: Question[] = [
         text: "iniciar noradrenalina e dopamina e encaminhar para instalação, de emergência, de balão intra-aórtico.",
       },
     ],
-    correct: "A",
+    correct: "C",
   },
   {
     id: 60,
@@ -55,14 +55,14 @@ export const QUESTOES_REVALIDA_2014_VERMELHA_58_63: Question[] = [
       { id: "C", text: "haloperidol por via intramuscular." },
       { id: "D", text: "prometazina por via intramuscular." },
     ],
-    correct: "A",
+    correct: "C",
   },
   {
     id: 61,
     year: 2014,
     area: "Clínica Médica",
     enunciado:
-      "Um homem com 34 anos de idade, sem antecedentes patológicos prévios, procurou ontem uma Unidade Básica de Saúde porque vem evoluindo nos últimos quatro meses com queixas de poliúria, polidipsia e perda ponderal de cerca de 7 kg nesse período. Há dois meses realizou exames complementares que evidenciaram glicemia de jejum de 348 mg/dL (Valor de referência = 75 - 99 mg/dL). Nega história de diabetes na família. Desde então, vem em uso de doses crescentes de metformina e glibenclamida, atualmente com 1.700 mg/dia e 10 mg/dia, respectivamente. As auscultas cardíaca e pulmonar são normais. Refere persistência dos sintomas e os exames complementares colhidos hoje revelaram: glicemia de jejum = 296 mg/dL, glicemia 2h após o café da manhã = 412 mg/dL, hemoglobina glicada 10,1% (Valor de referência < 3,8%). Ao exame físico o paciente mostra-se desidratado, corado, pressão arterial = 110 × 75 mmHg, circunferência abdominal = 92 cm, índice de massa corporal - IMC = 23,3 kg/m², peso = 60 kg.\n\nAlém de referenciar para o especialista, a conduta adequada para esse paciente é",
+      "Um homem com 34 anos de idade, sem antecedentes patológicos prévios, procurou ontem uma Unidade Básica de Saúde porque vem evoluindo nos últimos quatro meses com queixas de poliúria, polidipsia e perda ponderal de cerca de 7 kg nesse período. Há dois meses realizou exames complementares que evidenciaram glicemia de jejum de 348 mg/dL (Valor de referência = 75 - 99 mg/dL). Nega história de diabetes na família. Desde então, vem em uso de doses crescentes de metformina e glibenclamida, atualmente com 1.700 mg/dia e 10 mg/dia, respectively. As auscultas cardíaca e pulmonar são normais. Refere persistência dos sintomas e os exames complementares colhidos hoje revelaram: glicemia de jejum = 296 mg/dL, glicemia 2h após o café da manhã = 412 mg/dL, hemoglobina glicada 10,1% (Valor de referência < 3,8%). Ao exame físico o paciente mostra-se desidratado, corado, pressão arterial = 110 × 75 mmHg, circunferência abdominal = 92 cm, índice de massa corporal - IMC = 23,3 kg/m², peso = 60 kg.\n\nAlém de referenciar para o especialista, a conduta adequada para esse paciente é",
     options: [
       {
         id: "A",
@@ -81,7 +81,7 @@ export const QUESTOES_REVALIDA_2014_VERMELHA_58_63: Question[] = [
         text: "suspender glibenclamida, manter metformina, adicionar insulina NPH antes do café da manhã e antes do jantar, bem como insulina Regular antes do café da manhã.",
       },
     ],
-    correct: "A",
+    correct: "C",
   },
   {
     id: 62,
@@ -107,7 +107,7 @@ export const QUESTOES_REVALIDA_2014_VERMELHA_58_63: Question[] = [
         text: "pancreatite aguda e realização de colangiopancreatografia endoscópica retrógrada.",
       },
     ],
-    correct: "A",
+    correct: "C",
   },
   {
     id: 63,

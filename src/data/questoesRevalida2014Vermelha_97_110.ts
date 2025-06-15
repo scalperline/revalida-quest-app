@@ -21,7 +21,7 @@ export const QUESTOES_REVALIDA_2014_VERMELHA_97_110: Question[] = [
         text: "Mycoplasma pneumoniae; antibioticoterapia com macrolídios.",
       },
     ],
-    correct: "A",
+    correct: "C",
   },
   {
     id: 98,
@@ -47,7 +47,7 @@ export const QUESTOES_REVALIDA_2014_VERMELHA_97_110: Question[] = [
         text: "Desbridamento das bordas, sutura primária e toxoide tetânico.",
       },
     ],
-    correct: "A",
+    correct: "B",
   },
   {
     id: 99,
@@ -76,7 +76,7 @@ export const QUESTOES_REVALIDA_2014_VERMELHA_97_110: Question[] = [
       { id: "C", text: "desproporção céfalo-pélvica; parto fórceps." },
       { id: "D", text: "fase ativa prolongada; parto cesáreo." },
     ],
-    correct: "A",
+    correct: "B",
   },
   {
     id: 101,
@@ -90,7 +90,7 @@ export const QUESTOES_REVALIDA_2014_VERMELHA_97_110: Question[] = [
       { id: "C", text: "Leptospirose." },
       { id: "D", text: "Febre macular." },
     ],
-    correct: "A",
+    correct: "C",
   },
   {
     id: 102,
@@ -104,7 +104,7 @@ export const QUESTOES_REVALIDA_2014_VERMELHA_97_110: Question[] = [
       { id: "C", text: "a cada dois anos, iniciando a partir dos 40 anos." },
       { id: "D", text: "a cada dois anos, iniciando a partir dos 50 anos." },
     ],
-    correct: "A",
+    correct: "D",
   },
   {
     id: 103,
@@ -172,7 +172,7 @@ export const QUESTOES_REVALIDA_2014_VERMELHA_97_110: Question[] = [
       { id: "C", text: "artrite reativa pós-estreptocóccica." },
       { id: "D", text: "lúpus eritematoso sistêmico juvenil." },
     ],
-    correct: "A",
+    correct: "B",
   },
   {
     id: 107,
@@ -195,7 +195,7 @@ export const QUESTOES_REVALIDA_2014_VERMELHA_97_110: Question[] = [
         text: "comprometimento dos órgãos-alvos na hipertensão arterial sistêmica.",
       },
     ],
-    correct: "A",
+    correct: "D",
   },
   {
     id: 108,
@@ -229,7 +229,7 @@ export const QUESTOES_REVALIDA_2014_VERMELHA_97_110: Question[] = [
       { id: "C", text: "biópsia do colo uterino." },
       { id: "D", text: "coleta de colpocitologia." },
     ],
-    correct: "A",
+    correct: "C",
   },
   {
     id: 110,
@@ -243,6 +243,6 @@ export const QUESTOES_REVALIDA_2014_VERMELHA_97_110: Question[] = [
       { id: "C", text: "Cirurgia e quimioterapia." },
       { id: "D", text: "Quimioterapia e radioterapia." },
     ],
-    correct: "A",
+    correct: "D",
   },
 ];

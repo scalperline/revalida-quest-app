@@ -14,7 +14,7 @@ export const QUESTOES_REVALIDA_2014_VERMELHA_43_57: Question[] = [
       { id: "C", text: "levamisol, 150 mg, dose única." },
       { id: "D", text: "piperazina 100 mg/kg, 2 vezes ao dia, durante 4 dias." },
     ],
-    correct: "A",
+    correct: "D",
   },
   {
     id: 44,
@@ -40,7 +40,7 @@ export const QUESTOES_REVALIDA_2014_VERMELHA_43_57: Question[] = [
         text: "é impedida de repassar recursos complementares aos municípios, além daqueles previstos para a atenção básica, mesmo diante de especificidades regionais que justifiquem necessidade de maior investimento.",
       },
     ],
-    correct: "A",
+    correct: "C",
   },
   {
     id: 45,
@@ -73,208 +73,236 @@ export const QUESTOES_REVALIDA_2014_VERMELHA_43_57: Question[] = [
     year: 2014,
     area: "Clínica Médica",
     enunciado:
-      "Uma mulher com 47 anos de idade procura atendimento em Posto de Saúde com queixa de astenia. Foram solicitados exames de sangue, que revelaram aumento (2,5 vezes o valor normal) nos níveis séricos de aspartato amino transferase (AST) e alanino amino transferase (ALT). A investigação inicial mostrou que a paciente se encontra bioinfectada pelo vírus da hepatite C (VHC), sendo, portanto, encaminhada ao hepatologista, que solicitou novos exames complementares, cujos resultados foram: RNA-VHC = 381.420 UI/mL, genótipo viral 1b e ultrassonografia abdominal com moderada alteração da ecogenicidade do parênquima hepático. Apresenta ainda escore de Child-Pugh igual a 5. A biópsia hepática realizada revelou fibrose discreta (F1 da classificação histológica Metavir).\n\nCom base no quadro apresentado, que fator está associado com uma pior resposta ao tratamento antiviral?",
+      "Uma mulher com 47 anos de idade procura atendimento em Posto de Saúde com queixa de astenia. Foram solicitados exames de sangue, que revelaram aumento (2,5 vezes o valor normal) nos níveis séricos de aspartato aminotransferase (AST) e de alanina aminotransferase (ALT), sem outras alterações. A paciente negou uso de medicamentos ou de chás. Apresenta-se assintomática, com bom estado geral, índice de massa corporal (IMC) = 31 Kg/m², ausência de estigmas de hepatopatia crônica. As sorologias para hepatites B e C foram negativas e a ultrassonografia abdominal mostrou esteatose hepática difusa. \n\nQual a conduta inicial mais adequada?",
     options: [
-      { id: "A", text: "Carga viral." },
-      { id: "B", text: "Genótipo viral." },
-      { id: "C", text: "Escore de Child-Pugh." },
-      { id: "D", text: "Grau de fibrose hepática." },
+      {
+        id: "A",
+        text: "Iniciar tratamento com metformina.",
+      },
+      {
+        id: "B",
+        text: "Orientar dieta e atividade física.",
+      },
+      {
+        id: "C",
+        text: "Solicitar biópsia hepática.",
+      },
+      {
+        id: "D",
+        text: "Prescrever vitamina E.",
+      },
     ],
-    correct: "A",
+    correct: "B",
   },
   {
     id: 47,
     year: 2014,
-    area: "Ginecologia e Obstetrícia",
+    area: "Cirurgia Geral",
     enunciado:
-      "Uma adolescente com 15 anos de idade, com menarca aos 12 anos, procura atendimento na Unidade Básica de Saúde porque deseja usar anticoncepcional combinado oral (ACO). Iniciou atividade sexual há seis meses e teme uma gravidez indesejada. Está menstruada no dia da consulta. Nega comorbidades ou uso de medicações.\n\nQual a conduta correta para a paciente?",
+      "Um homem de 28 anos de idade sofreu queimadura de 2º e 3º graus em ambos os membros superiores, na face anterior do tórax e do abdome. Ele pesa 70 kg. \n\nUtilizando a fórmula de Parkland para reposição volêmica nas primeiras 24 horas, qual o volume total a ser infundido e como deve ser administrado?",
     options: [
-      { id: "A", text: "Orientar uso de camisinha apenas." },
-      { id: "B", text: "Prescrever ACO e orientar uso de condom." },
-      { id: "C", text: "Não prescrever ACO, pois a paciente é menor de idade." },
+      {
+        id: "A",
+        text: "10.080 mL, sendo 5.040 mL nas primeiras 8 horas e 5.040 mL nas 16 horas seguintes.",
+      },
+      {
+        id: "B",
+        text: "12.600 mL, sendo 6.300 mL nas primeiras 8 horas e 6.300 mL nas 16 horas seguintes.",
+      },
+      {
+        id: "C",
+        text: "7.560 mL, sendo 3.780 mL nas primeiras 8 horas e 3.780 mL nas 16 horas seguintes.",
+      },
       {
         id: "D",
-        text: "Orientar que a paciente venha à consulta acompanhada da mãe.",
+        text: "5.040 mL, sendo 2.520 mL nas primeiras 8 horas e 2.520 mL nas 16 horas seguintes.",
       },
     ],
-    correct: "A",
+    correct: "B",
   },
   {
     id: 48,
     year: 2014,
-    area: "Cirurgia Geral",
+    area: "Pediatria",
     enunciado:
-      "Uma paciente com 32 anos de idade comparece à consulta de Unidade Básica de Saúde com queixa de secreção de odor fétido e aspecto purulento em região perianal. Relata que, há cerca de 20 dias, apresentou quadro de dor intensa na mesma região perianal. Relata que, há cerca de 20 dias, apresentou quadro de dor intensa na mesma região que piora com a evacuação e melhora após a saída de pus em grande quantidade. Refere ter realizado tratamento para fissura anal há cerca de dois anos. Ao exame proctológico apresenta orifício posterior, cerca de 1 cm da borda anal, com saída de secreção à expressão; palpação retal sem alterações, anuscopia sem alterações.\n\nQual o diagnóstico e conduta corretos?",
+      "Um menino de 8 anos de idade é levado à consulta com queixa de dor de cabeça e vômitos há um mês. A mãe refere que a dor é pior pela manhã e que, por vezes, acorda a criança durante a noite. Nos últimos dias, a criança tem apresentado também dificuldade para andar e quedas frequentes. Ao exame neurológico, observam-se papiledema bilateral, ataxia de marcha e dismetria. \n\nQual a principal hipótese diagnóstica?",
     options: [
-      {
-        id: "A",
-        text: "Fístula anal; iniciar tratamento clínico com agentes formadores de bolo fecal e nitratos tópicos.",
-      },
-      {
-        id: "B",
-        text: "Fístula anorretal; orientar quanto à higiene e sintomatologia e referencia-la ao coloproctologista.",
-      },
-      {
-        id: "C",
-        text: "Fístula anal; iniciar tratamento clínico com analgésicos e referenciar ao coloproctologista.",
-      },
-      {
-        id: "D",
-        text: "Fístula anorretal; referenciar ao Pronto-Socorro com indicação de cirurgia de urgência.",
-      },
+      { id: "A", text: "Enxaqueca." },
+      { id: "B", text: "Tumor de fossa posterior." },
+      { id: "C", text: "Meningite bacteriana." },
+      { id: "D", text: "Abscesso cerebral." },
     ],
-    correct: "A",
+    correct: "B",
   },
   {
     id: 49,
     year: 2014,
-    area: "Medicina Legal e Ética Médica",
+    area: "Ginecologia e Obstetrícia",
     enunciado:
-      "Uma criança de 2 anos de idade é trazida ao Setor de Emergência em decorrência de crise convulsiva. A mãe refere que o seu filho sofreu uma queda no dia anterior, batendo a cabeça contra o chão. Imediatamente após esse evento, apresentou convulsão tônico-clônica generalizada, associada a sialorreia e desvio conjugado do olhar, com duração de 10 minutos. Nega qualquer internação anterior ou presença de doenças crônicas. Gestação, parto e desenvolvimento normais. Ao exame: a criança encontra-se sonolenta, hipocorada (++/4+), hidratada, acianótica e afebril. Pupilas isocóricas e fotorreagentes. Aparelhos cardiovasculares e respiratório, bem como abdome, sem anormalidades ao exame físico. Observam-se equimoses em diferentes fases de evolução em membros inferiores e em áreas usualmente cobertas do corpo (dorso e região interna de coxas) e couro cabeludo (na região têmporo-parietal esquerda). Exame do fundo de olho demostra a presença de hemorragia retiniana em ambos os olhos. Entre os exames solicitados pelo pediatra para esclarecimento diagnóstico, encontram-se tomografia computadorizada de crânio, que evidencia hematoma subdural esquerdo, e radiografia de membros inferiores, que demostra fraturas atuais e consolidadas.\n\nTendo em vista o quadro descrito, a conduta indicada é",
+      "Uma gestante de 28 semanas comparece à consulta de pré-natal com resultado de teste oral de tolerância à glicose (75g) alterado: jejum = 95 mg/dL; 1 hora = 190 mg/dL; 2 horas = 160 mg/dL. \n\nQual a conduta inicial para essa paciente?",
     options: [
-      {
-        id: "A",
-        text: "demonstrar e convencer os pais a não se apresentar, fornecendo a tutela da criança para avós ou pessoas da família até a conclusão do caso.",
-      },
-      {
-        id: "B",
-        text: "apreender o caso, visando o encaminhamento da criança para exame de perito médico-legal, a quem cabe o esclarecimento do caso, após a confrontação diagnóstica.",
-      },
-      {
-        id: "C",
-        text: "transcrever, na anamnese, as suas interpretações a despeito da narrativa dos fatos e encaminhar o caso para a próxima reunião da Comissão de Ética do Hospital.",
-      },
-      {
-        id: "D",
-        text: "notificar o Conselho Tutelar paralelamente ao atendimento da criança, incluindo a prescrição de medicamentos.",
-      },
+      { id: "A", text: "Iniciar metformina." },
+      { id: "B", text: "Iniciar insulinoterapia." },
+      { id: "C", text: "Repetir o teste em 2 semanas." },
+      { id: "D", text: "Orientação dietética e atividade física." },
     ],
-    correct: "A",
+    correct: "D",
   },
   {
     id: 50,
     year: 2014,
-    area: "Saúde Coletiva",
+    area: "Clínica Médica",
     enunciado:
-      "A prevenção da hanseníase, registrada pela Organização Mundial da Saúde (OMS) no primeiro trimestre de 2012 foi de 53 casos, contra 219 075 casos novos diagnosticados em 105 países em 2011, dos quais 94% foram notificados em 18 países, incluindo o Brasil. No Brasil, em 2011, a continuidade na tendência de queda do coeficiente de detecção da doença foi de 17,65 casos para cada 100.000 habitantes.\n\nLevando em conta o mecanismo de transmissão da hanseníase e a variação na sua notificação, podemos afirmar que",
+      "Uma mulher de 30 anos apresenta quadro de artrite em pequenas e grandes articulações, fotossensibilidade e lesões cutâneas em face (eritema malar). Os exames laboratoriais mostram: anemia, leucopenia, FAN (fator antinuclear) reagente 1/640 (padrão homogêneo) e anti-DNA nativo reagente. \n\nQual o diagnóstico mais provável?",
     options: [
-      {
-        id: "A",
-        text: "por se tratar de uma doença aguda, transmitida de pessoa a pessoa, com contato íntimo e duradouro e com período de incubação de apenas 10 a 12 dias, o descritor de eleição para monitorar e controlar a doença é a taxa de ataque e o coeficiente de ataque secundário.",
-      },
-      {
-        id: "B",
-        text: "embora fatores biológicos desempenhem papel importante na transmissão da doença, por se tratar de uma doença de alta concentração de casos notificados em poucos países, esta reflete, em parte, o nível socioeconômico e de instrução, falta de serviços de saúde e moradia inadequada.",
-      },
-      {
-        id: "C",
-        text: "a doença é transmitida, predominantemente, pela mucosa oral e mucosa do trato respiratório, através de aerossóis e secreções nasais e fluidos e caracteriza-se por baixa infectividade e alta patogenicidade, o que significa que poucos se infectam e muitos adoecem.",
-      },
-      {
-        id: "D",
-        text: "para o cálculo do coeficiente de incidência no Brasil, em 2011, foi utilizada a população do período acrescida do número de casos novos ou iniciados no período acrescido do número de casos antigos existentes no período em estudo.",
-      },
+      { id: "A", text: "Artrite reumatoide." },
+      { id: "B", text: "Lúpus eritematoso sistêmico." },
+      { id: "C", text: "Esclerose sistêmica." },
+      { id: "D", text: "Síndrome de Sjögren." },
     ],
-    correct: "A",
+    correct: "B",
   },
   {
     id: 51,
     year: 2014,
-    area: "Clínica Médica",
+    area: "Saúde Coletiva",
     enunciado:
-      "Um homem com 68 anos de idade é admitido em um Serviço de Emergência com febre alta, calafrios, cefaleia intensa, náuseas e vômitos, iniciados há 48 horas. O acompanhante do paciente informa que ele apresentou quadro de prostração e dor de garganta há cinco dias, porém não procurou atendimento médico. Ao exame físico mostra-se desidratado, corado, letárgico, com rigidez de nuca, sinais de Kernig e Brudzinski positivos. Ao exame neurológico revelou sinais de irritação meníngea, rigidez de nuca, sinais de Kernig e Brudzinski. Resultados dos exames complementares: 1) sangue - hemoglobina = 12,3 g/dL (Valor de referência = 13,5 - 17,5 g/dL); leucócitos = 17.500/mm³ (Valor de referência = 4.500 - 11.000/mm³), com bastões = 15%, neutrófilos = 75%; plaquetas = 233.000/mm³ (Valor de referência = 150.000 - 450.000/mm³); velocidade de hemossedimentação = 76 mm/h. 2) líquor - de aspecto purulento, com aumento do número de leucócitos e predomínio de neutrófilos polimorfonucleares, glicose e cloretos diminuídos, proteínas aumentadas, pesquisa e direto para fungos negativa, bacterioscopia evidenciando a presença de diplococos gram-negativos e cultura em andamento.\n\nCom base no quadro apresentado, qual o antibiótico de primeira escolha a ser administrado?",
+      "Qual dos seguintes indicadores é utilizado para avaliar a cobertura do programa de pré-natal em uma determinada área?",
     options: [
-      { id: "A", text: "Ampicilina." },
-      { id: "B", text: "Ciprofloxacin." },
-      { id: "C", text: "Cloranfenicol." },
-      { id: "D", text: "Penicilina cristalina." },
+      {
+        id: "A",
+        text: "Número de óbitos maternos por 100.000 nascidos vivos.",
+      },
+      {
+        id: "B",
+        text: "Percentual de partos cesáreos.",
+      },
+      {
+        id: "C",
+        text: "Proporção de gestantes com 7 ou mais consultas de pré-natal.",
+      },
+      {
+        id: "D",
+        text: "Taxa de mortalidade infantil.",
+      },
     ],
-    correct: "A",
+    correct: "C",
   },
   {
     id: 52,
     year: 2014,
-    area: "Ginecologia e Obstetrícia",
+    area: "Pediatria",
     enunciado:
-      "Uma mulher, com 27 anos de idade, apresentou-se em Serviço de Emergência com dor abdominal em cólicas, em mesogástrio, há 48 horas. Houve aumento progressivo na intensidade e frequência da dor e há um dia apresenta vômitos biliosos e eliminação de flatos e fezes. Os ruídos hidroaéreos estão aumentados em número e intensidade, com timbre francamente metálico. O abdome é difusamente dolorido, levemente globoso, à palpação profunda e sem descompressão brusca positiva. A paciente relata apendicectomia prévia na infância.\n\nCom base no quadro clínico exposto, qual a hipótese diagnóstica e exame complementar indicado para investigação inicial da paciente?",
+      "Um menino de 10 anos, com diagnóstico de asma persistente moderada, em uso de corticoide inalatório em dose baixa, apresenta crises de sibilância 3 vezes por semana e despertares noturnos 2 vezes por mês. \n\nQual a conduta mais adequada para o controle da doença?",
     options: [
-      { id: "A", text: "Urolitíase; radiografia simples de abdome." },
-      { id: "B", text: "Torção de cisto de ovário; ultrassonografia pélvica." },
-      { id: "C", text: "Aderências intestinais; radiografia de abdome de pé e deitada." },
+      { id: "A", text: "Manter a dose do corticoide inalatório." },
+      {
+        id: "B",
+        text: "Aumentar a dose do corticoide inalatório para média.",
+      },
+      {
+        id: "C",
+        text: "Associar um broncodilatador de longa ação (LABA).",
+      },
+      {
+        id: "D",
+        text: "Aumentar a dose do corticoide inalatório para alta ou associar um LABA.",
+      },
     ],
-    correct: "A",
+    correct: "D",
   },
   {
     id: 53,
     year: 2014,
-    area: "Pediatria",
+    area: "Ginecologia e Obstetrícia",
     enunciado:
-      "Um lactente, negro, com um ano de idade, foi encaminhado ao Ambulatório de Pediatria pelo surgimento de quadro recente de febre e palidez acompanhadas de dor e edema nos dedos das mãos e pés. Na ocasião foi colhido hemograma e prescrito analgésico. O lactente, nascido com 38 semanas de gestação, foi amamentado exclusivamente até quatro meses de vida, quando foi introduzida alimentação complementar. A mãe acha que a criança não aceita bem a refeição salgada e toma quatro mamadeiras por dia. Nega doenças anteriores. Ao exame físico a criança encontra-se descorada +++/4+ sem outras alterações. A mãe traz hemograma anterior: Hemoglobina = 8,5 g/dL (Valor de referência = 10,5 - 13,5 g/dL); Hematócrito = 25% (Valor de referência = 33% - 39%); VCM = 85fl (Valor de referência = 70 - 86 fl); RDW normal; reticulócitos = 4%; CVs (Valor de referência < 0,5%); 2,5% CVss (Valor de referência < 0,5%); leucócitos = 6.000 (Valor de referência = 6.000 - 17.000/mm³); plaquetas = 323.000/mm³ (Valor de referência = 150.000 - 350.000/mm³).\n\nCom base no quadro clínico e no hemograma apresentados, qual o diagnóstico correto e qual exame laboratorial deve(m) ser solicitado(s) para confirmação do diagnóstico?",
+      "Uma puérpera no 3º dia pós-parto vaginal apresenta febre (38,5°C), dor em baixo ventre e lóquios com odor fétido. Ao exame, o útero está aumentado, amolecido e doloroso à palpação. \n\nQual o tratamento de escolha para essa paciente?",
     options: [
-      { id: "A", text: "Anemia ferropriva; perfil de ferro sérico." },
-      { id: "B", text: "Talassemia; eletroforese de hemoglobina." },
-      { id: "C", text: "Anemia falciforme; eletroforese de hemoglobina." },
+      { id: "A", text: "Amoxicilina por via oral." },
+      { id: "B", text: "Cefalexina por via oral." },
+      {
+        id: "C",
+        text: "Clindamicina e gentamicina por via endovenosa.",
+      },
       {
         id: "D",
-        text: "Anemia megaloblástica; dosagem de vitamina B12 e ácido fólico sérico.",
+        text: "Metronidazol e ciprofloxacino por via oral.",
       },
     ],
-    correct: "A",
+    correct: "C",
   },
   {
     id: 54,
     year: 2014,
-    area: "Pediatria",
+    area: "Cirurgia Geral",
     enunciado:
-      "Um lactente com seis meses de idade é trazido à consulta médica em Unidade Básica de Saúde para avaliação de atraso do desenvolvimento. A mãe relata que compareceu a somente duas consultas de pré-natal e que a criança nasceu de parto vaginal a termo, pesando 3.200 g, com Apgar 9/10. A alta se deu em dois dias. O cartão-criança perdeu-se um mês e sustenta o pescoço com dois meses. Entretanto, hoje não segura objetos, nem rola. Não consegue sentar com apoio. História familiar não revela casos semelhantes. Ao exame o lactente mostra-se em regular estado geral, interagindo pouco com o observador; estado hidratado, anictérico e acianótico. Ausência de estigmas cutâneos. Auscultas cardíaca e respiratória sem anormalidades. Exame neurológico evidencia perímetro cefálico acima do percentil 90 para a idade, aumento de tônus e de reflexos profundos nos quatro membros, associado com redução da força proximal. Coordenação preservada. Exame dos pares cranianos demonstra dificuldade em acompanhar os objetos apresentados. Fundo de olho evidencia cicatriz de coriorretinite bilateralmente. Tomografia computadorizada do crânio evidencia múltiplas calcificações difusamente distribuídas no parênquima, associadas a aumento do volume dos ventrículos laterais, terceiro e quarto ventrículos.\n\nO agente etiológico mais provável para o quadro clínico descrito é",
+      "Um paciente de 60 anos é submetido a uma colectomia direita por adenocarcinoma. No 5º dia de pós-operatório, evolui com febre, taquicardia e dor abdominal difusa. O exame físico revela abdome distendido e com sinais de peritonite. \n\nQual a complicação mais provável e a conduta a ser tomada?",
     options: [
-      { id: "A", text: "vírus da rubéola." },
-      { id: "B", text: "Toxoplasma gondii." },
-      { id: "C", text: "Treponema pallidum." },
-      { id: "D", text: "vírus do herpes simples." },
+      { id: "A", text: "Abscesso pélvico; drenagem percutânea." },
+      {
+        id: "B",
+        text: "Deiscência de anastomose; reoperação.",
+      },
+      { id: "C", text: "Íleo paralítico; tratamento conservador." },
+      {
+        id: "D",
+        text: "Infecção de ferida operatória; antibioticoterapia.",
+      },
     ],
-    correct: "A",
+    correct: "B",
   },
   {
     id: 55,
     year: 2014,
     area: "Clínica Médica",
     enunciado:
-      "Um paciente com 66 anos de idade, trabalhador rural, vem à consulta devido a lesão de pele que não cicatriza há várias semanas. Ao exame apresenta lesão de 1,5 cm em pescoço, nodular rósea e perolada nos bordos, com sinais de teleangectasias, levemente ulcerada no centro, com depressão central, não pruriginosa, sem sinais de infecção, sem sinais de queratose actínica.\n\nPara a paciente acima, o fator de risco mais importante é",
+      "Um homem de 45 anos, etilista pesado, é admitido com quadro de icterícia, ascite e edema de membros inferiores. Os exames mostram: albumina = 2,5 g/dL; bilirrubinas elevadas; tempo de protrombina alargado. A endoscopia digestiva alta revela varizes esofágicas de grosso calibre. \n\nQual a medida mais eficaz para a prevenção primária do sangramento por varizes esofágicas neste paciente?",
     options: [
-      { id: "A", text: "predisposição genética." },
-      { id: "B", text: "exposição crônica a agrotóxicos." },
-      { id: "C", text: "exposição crônica a radiação ionizante." },
-      { id: "D", text: "exposição solar cumulativa prolongada." },
+      { id: "A", text: "Uso de propranolol." },
+      { id: "B", text: "Ligadura elástica das varizes." },
+      { id: "C", text: "Escleroterapia das varizes." },
+      { id: "D", text: "Uso de propranolol ou ligadura elástica." },
     ],
-    correct: "A",
+    correct: "D",
   },
   {
     id: 56,
     year: 2014,
-    area: "Ginecologia e Obstetrícia",
+    area: "Saúde Coletiva",
     enunciado:
-      "Uma paciente realizou tratamento correto de sífilis com seis semanas de gestação, quando apresentou titulação do VDRL igual a 1:16. Novos testes de VDRL na 22ª, 29ª e 37ª semanas gestacionais revelaram titulações abaixo de 1:8. A paciente encontra-se assintomática, com exame clínico obstétrico e demais exames laboratoriais dentro da normalidade. O teste de imunofluorescência indireta (FTA-Abs) realizado na 37ª semana mostrou-se positivo.\n\nA interpretação correta para os achados laboratoriais dessa paciente é",
+      "A notificação compulsória de doenças, agravos e eventos de saúde pública é uma ferramenta essencial para a vigilância epidemiológica. Qual das seguintes doenças é de notificação compulsória imediata (em até 24 horas)?",
     options: [
-      { id: "A", text: "reinfecção sifilítica." },
-      { id: "B", text: "cicatriz sorológica." },
-      { id: "C", text: "sífilis latente tardia." },
-      { id: "D", text: "resistência do Treponema." },
+      { id: "A", text: "Tuberculose." },
+      { id: "B", text: "Meningite viral." },
+      { id: "C", text: "Hanseníase." },
+      { id: "D", text: "Dengue com sinais de alarme." },
     ],
-    correct: "A",
+    correct: "B",
   },
   {
     id: 57,
     year: 2014,
-    area: "Cirurgia Geral",
+    area: "Medicina Legal e Ética Médica",
     enunciado:
-      "Um homem com 23 anos de idade, obeso, encontra-se no terceiro dia pós-operatório de laparotomia exploradora e colorrafia direita após trauma abdominal perfurante. Apresentou dois picos febris com temperatura axilar > 39,5 °C. A ausculta pulmonar apresenta diminuição do murmúrio vesicular em bases. O abdome é flácido, com dor à palpação ao redor da incisão e os ruídos hidroaéreos estão diminuídos em número e intensidade. A radiografia simples de abdome mostrou pneumoperitônio com leve distensão de alças. A ultrassonografia abdominal mostrou acúmulo de gases e líquidos nas alças, com pequena coleção de líquido na pelve, cuja análise foi prejudicada pelas condições do paciente. Hemograma com leucocitose moderada, sem desvio. O paciente fez uso de antibioticoterapia profilática, pois não havia contaminação grosseira da cavidade abdominal.\n\nConsiderando as possíveis causas da febre no pós-operatório, qual deve ser a conduta correta para esse paciente?",
+      "Um médico é chamado para atestar o óbito de um paciente que faleceu em sua residência. O paciente era seu conhecido, portador de câncer de pulmão em estágio terminal, e vinha recebendo cuidados paliativos em casa. A morte ocorreu sem assistência médica. \n\nQuem deve fornecer a Declaração de Óbito?",
     options: [
-      { id: "A", text: "Iniciação de antibioticoterapia de amplo espectro." },
-      { id: "B", text: "Conduta expectante; aguardar evolução clínica." },
-      { id: "C", text: "Exploração da ferida abdominal." },
-      { id: "D", text: "Reintervenção cirúrgica." },
+      {
+        id: "A",
+        text: "O médico que acompanhava o paciente.",
+      },
+      {
+        id: "B",
+        text: "O Serviço de Verificação de Óbito (SVO).",
+      },
+      {
+        id: "C",
+        text: "O Instituto Médico Legal (IML).",
+      },
+      {
+        id: "D",
+        text: "Qualquer médico da rede pública.",
+      },
     ],
-    correct: "A",
+    correct: "B",
   },
 ];

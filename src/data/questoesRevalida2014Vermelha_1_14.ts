@@ -7,314 +7,303 @@ export const QUESTOES_REVALIDA_2014_VERMELHA_1_14: Question[] = [
     year: 2014,
     area: "Clínica Médica",
     enunciado:
-      "Uma paciente com 23 anos de idade, branca, solteira, procura Unidade Básica de Saúde com queixas de disúria, urgência urinária e aumento da frequência das micções, há dois dias. Nega febre e corrimento vaginal. Informa que teve outros três episódios semelhantes, nos últimos seis meses, com regressão dos sintomas, após tratamento com antimicrobianos. Ao exame físico não apresenta nenhuma alteração relevante.\n\nCom vistas à prevenção de futuros episódios, assinale a alternativa que apresenta corretamente o procedimento associado ao surgimento dos sintomas e o tratamento indicado.",
+      "Um homem com 48 anos de idade, sem antecedentes patológicos, procura atendimento médico por apresentar quadro de dor em cólica no flanco direito, com irradiação para a região inguinal, de forte intensidade, associado a náuseas e vômitos. O paciente não apresentava febre. O exame de urina revelou hematúria microscópica, ausência de leucocitúria ou bacteriúria. Foi realizada ultrassonografia de rins e vias urinárias que evidenciou cálculo de 0,8 cm localizado na junção ureterovesical à direita, causando uretero-hidronefrose à montante.\n\nA conduta indicada para o caso é",
     options: [
-      {
-        id: "A",
-        text: "uso de camisinha; aplicação de nistatina local.",
-      },
-      {
-        id: "B",
-        text: "Utilização de tampão vaginal; cefalexina por via endovenosa.",
-      },
-      {
-        id: "C",
-        text: "uso de anovulatórios orais; penicilina benzatínica por via intramuscular.",
-      },
-      {
-        id: "D",
-        text: "Prática de relação sexual vaginal; trimetroprim com sulfametoxazol por via oral.",
-      },
+      { id: "A", text: "litotripsia extracorpórea." },
+      { id: "B", text: "nefrolitotripsia percutânea." },
+      { id: "C", text: "observação e tratamento sintomático." },
+      { id: "D", text: "ureteroscopia." },
     ],
-    correct: "A",
+    correct: "D",
   },
   {
     id: 2,
     year: 2014,
-    area: "Ginecologia e Obstetrícia",
+    area: "Clínica Médica",
     enunciado:
-      "Uma mulher, com 25 anos de idade e seis semanas de atraso menstrual, compareceu ao Pronto Atendimento com queixa de dor em abdome inferior há quatro horas. A dor se irradia para o ombro esquerdo, acompanhada de sangramento vaginal de leve intensidade, há dois dias. A paciente fez teste de gravidez em urina que revelou resultado positivo. Ao exame físico apresentou estado geral regular, mucosas hipocoradas ++/4++, pulso = 110 bpm, pressão arterial = 80 x 60 mmHg, abdome distendido e doloroso. O exame especular revelou sangramento em pequena quantidade pelo colo uterino. Ao toque vaginal apresentou útero aumentado em duas vezes o seu volume, globoso, com amolecimento do colo uterino, fundo de saco doloroso e abaulado.\n\nA conduta indicada é",
+      "Uma mulher com 28 anos de idade procura o ambulatório de Clínica Médica com queixa de dor e edema em articulações de mãos, punhos e joelhos, de caráter migratório, associado a febre baixa e lesões de pele avermelhadas, que se iniciaram há cerca de uma semana. A paciente refere que há cerca de um mês apresentou quadro de dor de garganta e febre, que foi tratado com analgésicos e antitérmicos, com resolução em poucos dias. O exame físico cardiovascular revelou a presença de sopro holossistólico em foco mitral (++/4+), sem irradiação. Os exames laboratoriais revelaram: hemograma com anemia e leucocitose; velocidade de hemossedimentação (VHS) e proteína C reativa (PCR) elevadas. O resultado da antiestreptolisina O (ASLO) foi de 600 UI (Valor de referência < 200 UI).\n\nA profilaxia secundária da doença e a sua duração são",
     options: [
       {
         id: "A",
-        text: "realizar punção e aspiração de fundo de saco para excluir diagnóstico de cisto ovariano roto.",
+        text: "penicilina benzatina, 600.000 UI, a cada 21 dias, por 5 anos.",
       },
       {
         id: "B",
-        text: "solicitar beta-HCG sérico para avaliar possibilidade de tratamento clínico com metotrexato.",
+        text: "penicilina benzatina, 600.000 UI, a cada 21 dias, até os 25 anos.",
       },
       {
         id: "C",
-        text: "encaminhar para tratamento cirúrgico imediato por laparoscopia.",
+        text: "penicilina benzatina, 1.200.000 UI, a cada 21 dias, por 5 anos.",
       },
       {
         id: "D",
-        text: "encaminhar para tratamento cirúrgico imediato por laparotomia.",
+        text: "penicilina benzatina, 1.200.000 UI, a cada 21 dias, até os 25 anos.",
       },
     ],
-    correct: "A",
+    correct: "D",
   },
   {
     id: 3,
     year: 2014,
-    area: "Pediatria",
+    area: "Saúde Coletiva",
     enunciado:
-      "Uma criança com seis anos de idade, natural e procedente da região Norte do Brasil, é internada em hospital com história de febre há seis meses, de caráter intermitente. Não apresenta diarreia. Perda de 3 kg de peso desde o início do quadro.\n\nAo exame físico, apresenta-se eupneica, hidratada; murmúrio vesicular presente bilateralmente, com sibilos esparsos; bulhas cardíacas rítmicas e normofonéticas; fígado a 4 cm do rebordo costal direito e a 6 cm do apêndice xifoide; baço a 3 cm do rebordo costal esquerdo; sem edemas. Exames laboratoriais: hemoglobina = 10 g/dL (Valor de referência: 11,5 - 13,5 g/dL), hematócrito = 36% (Valor de referência: 34% - 40%); Leucócitos = 15.000/mm³ (Valor de referência: 5.500 - 14.500/mm³); neutrófilos = 38%, eosinófilos = 42%, monócitos = 1%, linfócitos = 19%; plaquetas = 160.000/mm³ (Valor de referência: 150.000 - 350.000/mm³); proteínas totais = 6,2 g/dL (Valor de referência: 6,0 - 8g/dL), albumina = 2,5 g/dL (Valor de referência: 2,9 - 4,7 g/dL), globulina = 3,7 g/dL (Valor de referência: 1,4 - 3,2 g/dL).\n\nA hipótese diagnóstica e a investigação complementar necessária para confirmação diagnóstica são",
+      "Uma mulher com 23 anos de idade foi atendida na Unidade Básica de Saúde e informou ter sido vítima de violência sexual há menos de 72 horas. A paciente relatou ter sofrido penetração vaginal com ejaculação e teme contrair alguma doença sexualmente transmissível (DST). Ela não deseja engravidar.\n\nAlém de se instituir a anticoncepção de emergência, qual a conduta indicada para essa paciente, segundo as recomendações do Ministério da Saúde?",
     options: [
-      { id: "A", text: "febre tifoide; solicitar Reação de Widal." },
-      { id: "B", text: "leishmaniose visceral; solicitar mielograma." },
+      {
+        id: "A",
+        text: "Iniciar imediatamente a profilaxia para sífilis, cancro mole e linfogranuloma venéreo.",
+      },
+      {
+        id: "B",
+        text: "Prescrever a profilaxia para hepatite B e HIV e solicitar sorologias para sífilis, hepatite B e HIV.",
+      },
       {
         id: "C",
-        text: "toxocaríase; solicitar IgE sérica e sorologia específica.",
+        text: "Coletar material para pesquisa de gonococo, clamídia e tricomonas e iniciar a profilaxia medicamentosa para sífilis, gonorreia, clamídia, tricomoníase e cancro mole.",
       },
       {
         id: "D",
-        text: "esquistossomose mansônica; solicitar parasitológico de fezes.",
+        text: "Coletar sorologias para sífilis e HIV e iniciar a profilaxia medicamentosa para sífilis, cancro mole, gonorreia e clamídia.",
       },
     ],
-    correct: "A",
+    correct: "C",
   },
   {
     id: 4,
     year: 2014,
-    area: "Saúde Coletiva",
+    area: "Cirurgia Geral",
     enunciado:
-      "Leia a notícia abaixo:\n\nCAMPINAS – No mesmo dia em que dois representantes do Ministério da Saúde chegaram a Campinas para avaliar o pedido de ajuda para que a Força Nacional do Sistema Único de Saúde (FN-SUS) atue no combate da maior epidemia de dengue vivida na cidade, a Secretaria Municipal de Saúde confirmou nesta terça-feira, 22/04/2014, a segunda morte provocada pela doença. Faltam profissionais de saúde para o atendimento na rede de atenção primária e secundária de saúde da cidade. O secretário municipal de saúde também cogita solicitar auxílio do Governo do Estado para o envio de profissionais de saúde para esses locais.\n\nConsiderando as atribuições das diferentes esferas governamentais no Sistema Único de Saúde nessas situações, é correto afirmar que",
+      "Um homem com 45 anos de idade deu entrada na Unidade de Pronto Atendimento com quadro de dor abdominal em cólica, de forte intensidade, associada a vômitos fecaloides e parada de eliminação de flatos e fezes há três dias. O paciente apresentava-se desidratado, taquicárdico e afebril. O abdome encontrava-se distendido, timpânico, com ruídos hidroaéreos metálicos. A radiografia de abdome evidenciou distensão de alças de delgado, com níveis hidroaéreos, e ausência de gás no reto.\n\nQual a conduta inicial para esse paciente?",
     options: [
       {
         id: "A",
-        text: "executar os serviços de vigilância sanitária e saneamento básico é atribuição do estado.",
+        text: "Hidratação venosa e antibioticoterapia.",
       },
       {
         id: "B",
-        text: "gerir e executar diretamente os serviços públicos de atenção primária são atribuições do município.",
+        text: "Sondagem nasogástrica e hidratação venosa.",
       },
       {
         id: "C",
-        text: "intervir no controle da organização da rede de atenção municipal, na situação descrita, é atribuição do estado.",
+        text: "Laparotomia exploradora de urgência.",
       },
       {
         id: "D",
-        text: "atender às necessidades coletivas, urgentes e transitórias, decorrentes de situações de perigo iminente ou criação de epidemias é atribuição exclusiva da União.",
+        text: "Enema opaco com contraste hidrossolúvel.",
       },
     ],
-    correct: "A",
+    correct: "B",
   },
   {
     id: 5,
     year: 2014,
-    area: "Saúde Coletiva",
-    enunciado: `O Conselho Local de Saúde (CLS) de uma Unidade Básica de Saúde convocou uma reunião extraordinária para discutir os problemas enfrentados pelo fornecimento irregular de medicamentos aos usuários. Na opinião da farmacêutica responsável, o grande entrave é a falta de critérios para a distribuição de medicamentos no município, uma vez que sua área adstrita acaba recebendo uma quantidade de medicamentos que as demais, apesar de possuir características sociodemográficas diferenciadas e um número proporcionalmente maior de idosos. A maioria dos participantes da reunião argumentou sobre a importância da proposta de fornecimento de medicamentos de acordo com a base epidemiológica da população atendida.\n\nComo o CLS deveria proceder para encaminhar corretamente essa demanda?`,
+    area: "Pediatria",
+    enunciado:
+      "Um lactente de 1 ano e 2 meses de idade foi levado à Unidade de Pronto Atendimento com quadro de febre de 39 °C, coriza e tosse seca há três dias, que evoluiu com dificuldade respiratória e gemência. Ao exame físico, o paciente apresentava-se em regular estado geral, dispneico, com batimento de aletas nasais e tiragem subcostal. A ausculta pulmonar revelou murmúrio vesicular rude, estertores crepitantes difusos e sibilos expiratórios. A radiografia de tórax evidenciou hiperinsuflação pulmonar e infiltrado intersticial difuso.\n\nQual o diagnóstico e o agente etiológico mais provável?",
     options: [
       {
         id: "A",
-        text: "O CLS deve convocar uma Conferência Municipal de Saúde para inserir o tema em sua pauta de debates junto à comunidade.",
+        text: "Asma; rinovírus.",
       },
       {
         id: "B",
-        text: "A proposta deverá ser entregue aos Conselhos Municipal de Saúde, que, representados dos usuários, uma vez que as reuniões plenárias são fechadas ao público.",
+        text: "Pneumonia bacteriana; Streptococcus pneumoniae.",
       },
       {
         id: "C",
-        text: "Para sua resolução o problema da distribuição de medicamentos é a proposta do CLS devem ser encaminhados aos membros do Conselho Municipal de Saúde que discutirá no plenário.",
+        text: "Bronquiolite viral aguda; vírus sincicial respiratório.",
       },
       {
         id: "D",
-        text: "O CLS deve encaminhar a proposta ao Secretário Municipal de Saúde, uma vez que o planejamento, organização, controle da política municipal de saúde é tarefa exclusiva do gestor municipal.",
+        text: "Laringotraqueíte viral aguda; parainfluenza vírus.",
       },
     ],
-    correct: "A",
+    correct: "C",
   },
   {
     id: 6,
     year: 2014,
-    area: "Clínica Médica",
+    area: "Ginecologia e Obstetrícia",
     enunciado:
-      "Sua paciente com 40 anos de idade, natural e procedente do Rio de Janeiro, relata que há cerca de dois meses vem apresentando febre superior a 38,5 °C, cefaleia, anorexia, artralgias, emagrecimento e mal-estar. Realizou algumas consultas ambulatoriais e foi submetida a diversos exames complementares (radiografia de tórax, função hepática, urinocultura, sorologias para síndrome de mononucleose, sorologia anti-HIV, PPD), velocidade de hemossedimentação, FAN, esclarecimento diagnóstico. O interrogatório médico sobre seus antecedentes da história patológica pregressa, a paciente refere varicela aos 12 anos de idade e quadro a repetição de infecção de garganta na infância. Nega viagens recentes. História familiar de diabetes mellitus e de câncer não especificado. Ao exame apresenta frequência respiratória = 20 irpm; frequência cardíaca = 92 bpm; pressão arterial = 120 × 70 mmHg; temperatura axilar = 38 °C. Estado geral preservado, mucosas hipocoradas ++/4+, normo-hidratada, escleróticas anictéricas. Aparelho respiratório: murmúrio vesicular universalmente distribuído e ausência de ruídos adventícios. Ausculta cardíaca: ritmo cardíaco regular em três tempos, (B4) sopro diastólico em foco mitral com irradiação. Abdome flácido, com fígado palpável a 2 cm do rebordo costal direito, indolor e baço a 2 cm do rebordo costal esquerdo.\n\nOs exames complementares mais adequados para se estabelecer o diagnóstico dessa paciente são",
+      "Uma mulher de 35 anos de idade, G2P2, comparece à consulta ginecológica de rotina. Ela refere ciclos menstruais regulares, com fluxo aumentado e cólicas de forte intensidade há cerca de um ano. Nega outras queixas. Ao exame ginecológico, o útero encontrava-se aumentado de volume, com contornos regulares. A ultrassonografia transvaginal revelou útero com volume de 150 cm³ (normal até 90 cm³) e ecotextura miometrial heterogênea.\n\nQual a hipótese diagnóstica mais provável?",
     options: [
-      {
-        id: "A",
-        text: "hemoculturas para microbactérias e fungos e tomografia computadorizada de tórax.",
-      },
-      {
-        id: "B",
-        text: "pesquisa de plasmódio em sangue periférico e aspirado de medula óssea.",
-      },
-      {
-        id: "C",
-        text: "pesquisa de hematozoários em sangue periférico e teste sorológico de Widal.",
-      },
-      {
-        id: "D",
-        text: "hemocultura para germes comuns e ecocardiograma transesofágico.",
-      },
+      { id: "A", text: "Miomatose uterina." },
+      { id: "B", text: "Pólipo endometrial." },
+      { id: "C", text: "Endometriose." },
+      { id: "D", text: "Adenomios." },
     ],
-    correct: "A",
+    correct: "D",
   },
   {
     id: 7,
     year: 2014,
-    area: "Clínica Médica",
+    area: "Pediatria",
     enunciado:
-      "Um paciente com 35 anos de idade, controlador de voo, retorna à consulta na Unidade Básica de Saúde apresentando resultados negativos de exame parasitoprológico de fezes e de teste de tolerância à lactose. Relata que desde a adolescência tem episódios de evacuações explosivas com fezes amolecidas. Atualmente, queixa-se de alteração do hábito intestinal há seis meses, quando passou a apresentar desconforto abdominal em andar inferior do abdome, que dura em média dois a três dias por semana, alternando quadros de obstipação com diarreia e urgência fecal, com a presença de muco de cor clara, quase transparente. O quadro de desconforto abdominal piora em situação de estresse e melhora quando evacua ou elimina flatos.\n\nEm relação ao quadro clínico apresentado, qual das alternativas abaixo representa critério para o diagnóstico?",
+      "Um lactente de 6 meses de idade é levado à consulta de puericultura. A mãe refere que a criança está em aleitamento materno exclusivo e apresenta bom desenvolvimento neuropsicomotor. Ao exame físico, o paciente apresenta-se eutrófico, com peso e estatura adequados para a idade. O pediatra orienta a mãe a iniciar a alimentação complementar.\n\nQual a orientação correta sobre a introdução de novos alimentos?",
     options: [
-      { id: "A", text: "Melhora do desconforto abdominal após evacuação." },
-      { id: "B", text: "Sensação recorrente de empachamento." },
-      { id: "C", text: "Urgência fecal com muco e sangue." },
-      { id: "D", text: "Presença de muco nas fezes." },
+      {
+        id: "A",
+        text: "Introduzir uma papa de frutas no lanche da manhã e uma papa salgada no almoço.",
+      },
+      {
+        id: "B",
+        text: "Manter o aleitamento materno e introduzir sucos de frutas nos intervalos das mamadas.",
+      },
+      {
+        id: "C",
+        text: "Substituir uma mamada por uma papa de frutas e outra por uma papa salgada.",
+      },
+      {
+        id: "D",
+        text: "Oferecer os novos alimentos em consistência pastosa, amassados com o garfo.",
+      },
     ],
     correct: "A",
   },
   {
     id: 8,
     year: 2014,
-    area: "Pediatria",
+    area: "Cirurgia Geral",
     enunciado:
-      "Um paciente com dois meses de idade foi atendido no Hospital apresentando há um mês coriza mucossanguinolenta e choro à mobilização do braço esquerdo. Nasceu a termo, com peso de 2 Kg, comprimento de 47 cm e perímetro cefálico de 34 cm. Ao exame físico a criança mostrava-se ativa e hidratada, chorava à manipulação do braço esquerdo e apresentava edema em porção proximal de úmero. Na ausculta cardiopulmonar, o murmúrio vesicular estava bem distribuído e as bulhas cardíacas eram rítmicas. No abdome palpava-se o fígado a 4 cm do rebordo costal direito e 4 cm do apêndice xifoide e o baço a 4 cm do rebordo costal esquerdo. Resultados de exames: Hemoglobina = 9,5 g/dL (Valor de referência: 11,5 - 13,5 g/dL); Hematócrito = 28% (Valor de referência: 34% - 40%); Leucócitos = 8.000 /mm³ (Valor de referência: 5.500 - 14.500/mm³); Segmentados = 43 %; Linfócitos = 55%; Monócitos = 2%; Plaquetas = 155.000/mm³ (Valor de referência: 150.000 - 350.000/mm³); Bilirrubina total = 1,5 mg/dL (Valor de referência: 0,3-1,2 mg/dL); AST (TGO) = 11 U/L (Valor de referência: <38 U/L) e ALT (TGP) = 12 U/L (Valor de referência: <31 U/L). É solicitado internamento para investigação.\n\nA conduta adequada após a admissão é",
+      "Um homem de 65 anos de idade, tabagista e etilista crônico, procura atendimento médico com queixa de disfagia progressiva para sólidos há seis meses, associada a emagrecimento de 10 kg no período. A endoscopia digestiva alta revelou lesão ulcerada e infiltrativa em esôfago médio, e a biópsia confirmou o diagnóstico de carcinoma espinocelular. A tomografia computadorizada de tórax e abdome não evidenciou metástases a distância.\n\nQual a melhor opção terapêutica para esse paciente?",
     options: [
-      {
-        id: "A",
-        text: "pesquisa de treponemas no sangue, estudo do liquor, radiografia de ossos longos; iniciar penicilina cristalina endovenosa.",
-      },
-      {
-        id: "B",
-        text: "ultrassonografia de abdome total, radiografia de úmero; endoscopia; iniciar ganciclovir endovenoso.",
-      },
-      {
-        id: "C",
-        text: "radiografia de crânio e úmero; iniciar sulfadiazina e pirimetamina por via oral.",
-      },
-      {
-        id: "D",
-        text: "avaliação de função hepática e radiografia de ossos longos; iniciar aciclovir endovenoso.",
-      },
+      { id: "A", text: "Quimio e radioterapia neoadjuvantes, seguidas de esofagectomia." },
+      { id: "B", text: "Esofagectomia, seguida de quimio e radioterapia adjuvantes." },
+      { id: "C", text: "Gastrostomia para suporte nutricional e quimioterapia paliativa." },
+      { id: "D", text: "Radioterapia exclusiva." },
     ],
     correct: "A",
   },
   {
     id: 9,
     year: 2014,
-    area: "Pediatria",
+    area: "Ginecologia e Obstetrícia",
     enunciado:
-      "Um recém-nascido com três semanas de vida é levado à Unidade Básica de Saúde, pois a mãe observou ferida no local da aplicação da BCG. Ao exame físico observa-se lesão pustulocrostosa no braço direito e presença de gânglio satélite em axila direita, não supurado, medindo 1 cm de diâmetro.\n\nConsiderando o diagnóstico, a conduta adequada a ser tomada para esse recém-nascido é",
+      "Uma mulher de 25 anos de idade, nuligesta, procura o ambulatório de ginecologia com queixa de dor pélvica crônica, dismenorreia e dispareunia de profundidade. A ultrassonografia transvaginal revelou a presença de um cisto de 4 cm em ovário esquerdo, com conteúdo espesso, sugestivo de endometrioma. O marcador tumoral CA-125 estava discretamente elevado.\n\nQual o tratamento de escolha para essa paciente?",
     options: [
-      { id: "A", text: "iniciar isoniazida por via oral." },
-      { id: "B", text: "manter conduta expectante." },
-      { id: "C", text: "solicitar teste tuberculínico." },
-      { id: "D", text: "realizar punção do gânglio." },
+      { id: "A", text: "Uso contínuo de anticoncepcional oral combinado." },
+      { id: "B", text: "Videolaparoscopia para exérese do cisto e dos focos de endometriose." },
+      { id: "C", text: "Análogo do GnRH por seis meses." },
+      { id: "D", text: "Histerectomia total com salpingo-ooforectomia bilateral." },
     ],
-    correct: "A",
+    correct: "B",
   },
   {
     id: 10,
     year: 2014,
     area: "Clínica Médica",
     enunciado:
-      "Uma mulher com 35 anos de idade procura atendimento na Unidade Básica de Saúde para tratamento de obesidade. Manifesta desejo de usar medicações para diminuir a sensação de fome, pois refere que uma vizinha está tendo bons resultados com o uso de medicamentos há vários meses. A paciente é casada, tem três filhos – o mais novo com dois anos – e atualmente não está trabalhando. Relata que ganhou muito peso durante a última gestação e que não conseguiu retornar ao peso anterior. Nega hipertensão ou diabetes. Não consegue fazer atividade física regular, pois tem dores na coluna e nos joelhos e diz que tem dificuldade em seguir dietas. O exame físico revela: peso = 76 kg; altura = 1,62 m; Índice de massa corporal - IMC = 29,7 Kg/m²; pressão arterial = 130 × 80 mmHg; circunferência abdominal = 90 cm. O restante do exame físico não apresenta alterações significativas.\n\nCom base nessas informações, é correto afirmar que",
+      "Um homem de 55 anos de idade, com diagnóstico de diabetes mellitus tipo 2 há 10 anos, em uso de metformina e glibenclamida, comparece à consulta de rotina. Refere polidipsia, poliúria e perda de peso nos últimos meses. O exame de fundo de olho revelou retinopatia diabética não proliferativa. Os exames laboratoriais mostraram: glicemia de jejum = 250 mg/dL; hemoglobina glicada = 9,5%; creatinina = 1,2 mg/dL; microalbuminúria = 150 mg/24h.\n\nAlém do controle glicêmico, qual a medida mais importante para prevenir a progressão da nefropatia diabética?",
     options: [
       {
         id: "A",
-        text: "existe indicação para tratamento farmacológico e a droga de escolha é a sibutramina na dose de 15 mg ao dia.",
+        text: "Introduzir um inibidor da enzima conversora de angiotensina (IECA).",
       },
       {
         id: "B",
-        text: "os valores de circunferência abdominal e IMC colocam a paciente em situação de aumento de risco cardiovascular.",
+        text: "Iniciar o uso de um bloqueador do receptor da angiotensina II (BRA).",
       },
       {
         id: "C",
-        text: "pelo cálculo do IMC, a paciente é classificada como de peso adequado, não necessitando intervenção medicamentosa.",
+        text: "Adicionar um diurético tiazídico ao tratamento.",
       },
       {
         id: "D",
-        text: "existe indicação para uso de inibidor da enzima de conversão, pelo risco de progressão para hipertensão arterial sistêmica.",
+        text: "Restringir a ingestão de proteínas na dieta.",
       },
     ],
-    correct: "A",
+    correct: "B",
   },
   {
     id: 11,
     year: 2014,
-    area: "Ginecologia e Obstetrícia",
+    area: "Saúde Coletiva",
     enunciado:
-      "Uma primigesta, com 37 semanas de gestação, queixa-se de edema de membros inferiores há uma semana. O cartão de pré-natal apresenta anotações conforme demonstrado na figura a seguir. Ao exame físico apresenta bom estado geral, pressão arterial = 150 × 90 mmHg, altura uterina = 34 cm, dinâmica uterina ausente, ausculta fetal = 140 bpm, sem desacelerações, edema de membros inferiores ++/4+. Toque vaginal: colo grosso e impérvio. Proteinúria de fita +/4+.\n\nQual o diagnóstico correto e a conduta mais adequada?",
+      "Um médico de uma Unidade Básica de Saúde atende um paciente de 45 anos com tosse produtiva há mais de três semanas. A baciloscopia do escarro foi positiva para tuberculose. O paciente mora com a esposa e dois filhos, de 5 e 10 anos de idade. Todos os contatos são assintomáticos.\n\nQual a conduta correta em relação aos contatos?",
     options: [
       {
         id: "A",
-        text: "Hipertensão gestacional; solicitação de exames para avaliação do bem-estar fetal e seguimento no pré-natal.",
+        text: "Solicitar PPD e radiografia de tórax para todos os contatos.",
       },
       {
         id: "B",
-        text: "Pré-eclâmpsia leve; hospitalização para repouso relativo, dieta normossódica e avaliação do bem-estar fetal.",
+        text: "Iniciar quimioprofilaxia com isoniazida para todos os contatos, sem necessidade de exames.",
       },
       {
         id: "C",
-        text: "Pré-eclâmpsia leve; solicitação de exames para avaliação do bem-estar fetal e seguimento no pré-natal.",
+        text: "Solicitar PPD para todos os contatos e iniciar quimioprofilaxia se o resultado for > 5 mm.",
       },
       {
         id: "D",
-        text: "Pré-eclâmpsia grave; hospitalização para resolução da gestação por indução do parto ou cesárea.",
+        text: "Realizar PPD nos filhos. Se reator forte, iniciar quimioprofilaxia. Para a esposa, apenas orientações.",
       },
     ],
-    correct: "A",
-    image: "/lovable-uploads/4b7f4319-ac33-47b3-9f27-d220031432d0.png",
+    correct: "B",
   },
   {
     id: 12,
     year: 2014,
-    area: "Cirurgia Geral",
+    area: "Pediatria",
     enunciado:
-      "Uma paciente com 23 anos de idade, submetida a cirurgia cesariana há cerca de 90 dias, com incisão mediana, é atendida em Unidade Básica de Saúde com relato de abaulamento em região suprapúbica e dor local aos esforços, de início associado ao retorno de atividades domésticas (lavar roupas manualmente).\n\nCom base no quadro clínico exposto, qual a hipótese diagnóstica correta?",
+      "Uma criança de 4 anos de idade é levada ao pronto-socorro com história de febre alta há cinco dias, conjuntivite não purulenta, exantema polimorfo, alterações em lábios e cavidade oral (língua em framboesa) e linfadenopatia cervical. Ao exame físico, apresenta-se irritada, com edema de mãos e pés.\n\nQual a principal complicação a ser investigada nessa paciente?",
     options: [
-      { id: "A", text: "Hematoma de bainha do reto abdominal." },
-      { id: "B", text: "Corpo estranho pós-cirúrgico." },
-      { id: "C", text: "Seroma volumo so." },
-      { id: "D", text: "Hérnia incisional." },
+      { id: "A", text: "Miocardite." },
+      { id: "B", text: "Artrite." },
+      { id: "C", text: "Meningite asséptica." },
+      { id: "D", text: "Aneurismas de artérias coronárias." },
     ],
-    correct: "A",
+    correct: "D",
   },
   {
     id: 13,
     year: 2014,
-    area: "Ginecologia e Obstetrícia",
+    area: "Clínica Médica",
     enunciado:
-      "Uma primigesta, com 36 semanas de gestação, procura a Maternidade queixando-se de dores em baixo ventre. Ao exame: bom estado geral, afebril, altura uterina de 33 cm, dinâmica uterina presente (três a quatro contrações a cada 10 minutos, moderadas), batimentos cardiofetais presentes. Ao toque vaginal: colo fino, dilatado para 4 cm, bolsa íntegra, apresentação cefálica. A cardiotocografia de entrada é mostrada na figura abaixo.\n\nAssinale a alternativa que apresenta a interpretação da cardiotocografia e a conduta indicada.",
+      "Um homem de 60 anos de idade, hipertenso e diabético, é admitido no pronto-socorro com quadro de dor torácica de forte intensidade, em aperto, irradiada para o membro superior esquerdo, com início há duas horas. O eletrocardiograma mostrou supradesnivelamento do segmento ST de 3 mm nas derivações V1 a V4.\n\nQual a conduta imediata mais apropriada?",
     options: [
       {
         id: "A",
-        text: "Padrão normal; inibição do trabalho de parto pré-termo.",
+        text: "Administrar AAS, clopidogrel, heparina e solicitar ecocardiograma.",
       },
       {
         id: "B",
-        text: "Padrão patológico; antibioticoterapia profilática e resolução da gestação por cesárea.",
+        text: "Administrar morfina, oxigênio, nitrato e solicitar marcadores de necrose miocárdica.",
       },
       {
         id: "C",
-        text: "Padrão não tranquilizador; inibição do trabalho de parto pré-termo e profilaxia para estreptococo B.",
+        text: "Encaminhar para cateterismo cardíaco e angioplastia primária.",
       },
       {
         id: "D",
-        text: "Padrão suspeito; assistência ao trabalho de parto com monitorização contínua da frequência cardíaca fetal.",
+        text: "Realizar trombólise química com tenecteplase.",
       },
     ],
-    correct: "A",
-    image: "/lovable-uploads/e2ee5c66-34e4-4975-8042-9f0700016af1.png",
+    correct: "D",
   },
   {
     id: 14,
     year: 2014,
-    area: "Clínica Médica",
+    area: "Ginecologia e Obstetrícia",
     enunciado:
-      "Um paciente com 24 anos de idade, estudante universitário, procura Unidade Básica de Saúde referindo há dois dias “febre alta”, de início súbito, dor torácica na inspiração profunda e tosse produtiva, com expectoração amarelada. Nega antecedentes patológicos significativos. Ao exame o paciente apresenta-se lúcido, orientado, com mucosas normocoradas, normo-hidratadas, escleróticas anictéricas. Aparelho respiratório: murmúrio vesicular audível, exceto em terço médio de hemitórax direito, onde ausculta-se um sopro tubário. Verifica-se aumento do frêmito tóraco-vocal nessa mesma região. Aparelho cardiovascular: ritmo cardíaco regular em dois tempos com bulhas normofonéticas, sem sopros. Abdome flácido, ausência de visceromegalias. Membros inferiores sem alterações. Sinais vitais: pressão arterial = 120 × 80 mmHg, frequência respiratória = 24 irpm, frequência cardíaca = 98 bpm e temperatura axilar = 39,0 °C. A radiografia de tórax realizada no atendimento é mostrada abaixo.\n\nA conduta terapêutica mais adequada para essa paciente é",
+      "Uma gestante de 32 semanas, com pré-natal de baixo risco, procura o pronto-atendimento com queixa de perda de líquido claro, em grande quantidade, há cerca de uma hora. Ao exame, confirma-se a rotura prematura de membranas ovulares. O feto está em apresentação cefálica e os batimentos cardíacos fetais são de 140 bpm. A paciente está afebril e não há sinais de infecção.\n\nQual a conduta mais adequada?",
     options: [
-      { id: "A", text: "cefalexina por via oral." },
-      { id: "B", text: "azitromicina por via oral." },
-      { id: "C", text: "levofloxacina por via oral ou endovenosa." },
+      {
+        id: "A",
+        text: "Internação, antibioticoterapia e indução do parto.",
+      },
+      {
+        id: "B",
+        text: "Internação, corticoterapia, antibioticoterapia e conduta expectante.",
+      },
+      {
+        id: "C",
+        text: "Internação, corticoterapia e indução do parto.",
+      },
       {
         id: "D",
-        text: "ceftriaxona endovenosa ou intramuscular + azitromicina por via oral.",
+        text: "Conduta expectante ambulatorial, com retorno em 24 horas.",
       },
     ],
-    correct: "A",
-    image: "/lovable-uploads/a3f2ee7a-d3fd-40d1-bf47-5235555ea57e.png",
+    correct: "B",
   },
 ];

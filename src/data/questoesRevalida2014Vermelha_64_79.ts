@@ -40,7 +40,7 @@ export const QUESTOES_REVALIDA_2014_VERMELHA_64_79: Question[] = [
         text: "não poderá emitir atestado médico para a concessão de benefícios previdenciários, por não ter atendido a paciente no momento do acidente, sendo a emissão da CAT de responsabilidade da empresa empregadora.",
       },
     ],
-    correct: "A",
+    correct: "B",
   },
   {
     id: 66,
@@ -81,7 +81,7 @@ export const QUESTOES_REVALIDA_2014_VERMELHA_64_79: Question[] = [
         text: "abscesso hepático; o paciente deve ser encaminhado para drenagem do abscesso o mais rapidamente possível.",
       },
     ],
-    correct: "A",
+    correct: "D",
   },
   {
     id: 68,
@@ -99,7 +99,7 @@ export const QUESTOES_REVALIDA_2014_VERMELHA_64_79: Question[] = [
       { id: "C", text: "pesquisa bacteriológica a fresco." },
       { id: "D", text: "cultura de secreção da lesão." },
     ],
-    correct: "A",
+    correct: "B",
   },
   {
     id: 69,
@@ -125,7 +125,7 @@ export const QUESTOES_REVALIDA_2014_VERMELHA_64_79: Question[] = [
         text: "Transtorno de humor (depressivo) induzido pelo álcool; recomendação para se abster do uso de álcool.",
       },
     ],
-    correct: "A",
+    correct: "C",
   },
   {
     id: 70,
@@ -139,7 +139,7 @@ export const QUESTOES_REVALIDA_2014_VERMELHA_64_79: Question[] = [
       { id: "C", text: "Colibacilose." },
       { id: "D", text: "Giardíase." },
     ],
-    correct: "A",
+    correct: "B",
   },
   {
     id: 71,
@@ -191,7 +191,7 @@ export const QUESTOES_REVALIDA_2014_VERMELHA_64_79: Question[] = [
         text: "tomografia de abdome superior, para avaliação de esplenomegalia e também investigação de colelitíase, ambos comuns na anemia falciforme.",
       },
     ],
-    correct: "A",
+    correct: "B",
   },
   {
     id: 73,
@@ -237,7 +237,7 @@ export const QUESTOES_REVALIDA_2014_VERMELHA_64_79: Question[] = [
         text: "médico oncologista que conduziu o tratamento no serviço de Oncologia da capital.",
       },
     ],
-    correct: "A",
+    correct: "C",
   },
   {
     id: 75,
@@ -263,7 +263,7 @@ export const QUESTOES_REVALIDA_2014_VERMELHA_64_79: Question[] = [
         text: "síndrome de Mallory-Weiss, devendo-se fazer a reposição volêmica imediata com coloide, sendo a endoscopia digestiva alta contraindicada nessa fase.",
       },
     ],
-    correct: "A",
+    correct: "C",
   },
   {
     id: 76,
@@ -277,7 +277,7 @@ export const QUESTOES_REVALIDA_2014_VERMELHA_64_79: Question[] = [
       { id: "C", text: "prescrição de medicação de utragestan." },
       { id: "D", text: "repouso relativo no domicílio e controle ambulatorial." },
     ],
-    correct: "A",
+    correct: "D",
   },
   {
     id: 77,
@@ -317,7 +317,7 @@ export const QUESTOES_REVALIDA_2014_VERMELHA_64_79: Question[] = [
         text: "venosa (100 mL/kg de Ringer lactato em 2 horas) e suspensão da amamentação. Após a melhora, retomada da alimentação normal, sem leite de vaca e derivados.",
       },
     ],
-    correct: "A",
+    correct: "B",
   },
   {
     id: 79,
@@ -331,6 +331,6 @@ export const QUESTOES_REVALIDA_2014_VERMELHA_64_79: Question[] = [
       { id: "C", text: "Prescrever diurético." },
       { id: "D", text: "Prescrever gluconato de cálcio." },
     ],
-    correct: "A",
+    correct: "C",
   },
 ];

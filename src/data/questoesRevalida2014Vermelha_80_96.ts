@@ -14,7 +14,7 @@ export const QUESTOES_REVALIDA_2014_VERMELHA_80_96: Question[] = [
       { id: "C", text: "ancilostomíase; mebendazol." },
       { id: "D", text: "larva migrans cutânea; tiabendazol." },
     ],
-    correct: "A",
+    correct: "C",
   },
   {
     id: 81,
@@ -40,7 +40,7 @@ export const QUESTOES_REVALIDA_2014_VERMELHA_80_96: Question[] = [
         text: "internar a paciente para monitorização e corticoterapia para maturação pulmonar fetal.",
       },
     ],
-    correct: "A",
+    correct: "D",
   },
   {
     id: 82,
@@ -66,7 +66,7 @@ export const QUESTOES_REVALIDA_2014_VERMELHA_80_96: Question[] = [
         text: "claritromicina 500 mg de 12/12 horas e amoxicilina - 1g de 12/12 horas, por 10 dias.",
       },
     ],
-    correct: "A",
+    correct: "D",
   },
   {
     id: 83,
@@ -93,7 +93,7 @@ export const QUESTOES_REVALIDA_2014_VERMELHA_80_96: Question[] = [
         text: "a remoção de um segmento da unha com anestesia da região realizada através de bloqueio digital com lidocaína com vasoconstritor.",
       },
     ],
-    correct: "A",
+    correct: "C",
   },
   {
     id: 84,
@@ -119,7 +119,7 @@ export const QUESTOES_REVALIDA_2014_VERMELHA_80_96: Question[] = [
         text: "retocolite ulcerativa; dosagem do p-ANCA (anticorpo perinuclear contra estruturas citoplasmáticas do neutrófilo) e biópsia de cólon.",
       },
     ],
-    correct: "A",
+    correct: "B",
   },
   {
     id: 85,
@@ -159,7 +159,7 @@ export const QUESTOES_REVALIDA_2014_VERMELHA_80_96: Question[] = [
       { id: "C", text: "mantida sem interrupção por quatro semanas." },
       { id: "D", text: "é contra-indicada pelo tempo já decorrido." },
     ],
-    correct: "A",
+    correct: "C",
   },
   {
     id: 87,
@@ -173,7 +173,7 @@ export const QUESTOES_REVALIDA_2014_VERMELHA_80_96: Question[] = [
       { id: "C", text: "Iniciar uma campanha para lavagem das mãos." },
       { id: "D", text: "Escalar duas circulantes em cada sala cirúrgica." },
     ],
-    correct: "A",
+    correct: "C",
   },
   {
     id: 88,
@@ -193,7 +193,7 @@ export const QUESTOES_REVALIDA_2014_VERMELHA_80_96: Question[] = [
         text: "Ausência de elevação de CK MB e troponina em 12 horas.",
       },
     ],
-    correct: "A",
+    correct: "D",
   },
   {
     id: 89,
@@ -245,7 +245,7 @@ export const QUESTOES_REVALIDA_2014_VERMELHA_80_96: Question[] = [
         text: "cefaleia em salvas, devendo o paciente ser encaminhado para avaliação do neurologista.",
       },
     ],
-    correct: "A",
+    correct: "D",
   },
   {
     id: 91,
@@ -268,7 +268,7 @@ export const QUESTOES_REVALIDA_2014_VERMELHA_80_96: Question[] = [
         text: "evitar líquidos durante as refeições, dando preferência à sua ingestão nos intervalos das refeições.",
       },
     ],
-    correct: "A",
+    correct: "D",
   },
   {
     id: 92,
@@ -288,7 +288,7 @@ export const QUESTOES_REVALIDA_2014_VERMELHA_80_96: Question[] = [
         text: "pré-eclâmpsia grave; administração de hidralazina endovenosa.",
       },
     ],
-    correct: "A",
+    correct: "C",
   },
   {
     id: 93,
@@ -314,7 +314,7 @@ export const QUESTOES_REVALIDA_2014_VERMELHA_80_96: Question[] = [
         text: "Sedação pelo choque emocional, acesso venoso bilateral, infusão imediata de dois litros de soro fisiológico ou Ringer e tomografia de abdome.",
       },
     ],
-    correct: "A",
+    correct: "C",
   },
   {
     id: 94,
@@ -340,7 +340,7 @@ export const QUESTOES_REVALIDA_2014_VERMELHA_80_96: Question[] = [
         text: "Fluticasona 250 mcg, aplicada por via inalatória duas vezes ao dia, e salmeterol spray caso tenha crises.",
       },
     ],
-    correct: "A",
+    correct: "C",
   },
   {
     id: 95,
@@ -355,7 +355,7 @@ export const QUESTOES_REVALIDA_2014_VERMELHA_80_96: Question[] = [
       { id: "C", text: "Tuberculose." },
       { id: "D", text: "AIDS." },
     ],
-    correct: "A",
+    correct: "D",
   },
   {
     id: 96,
@@ -369,6 +369,6 @@ export const QUESTOES_REVALIDA_2014_VERMELHA_80_96: Question[] = [
       { id: "C", text: "encaminhamento para tratamento em posto de saúde." },
       { id: "D", text: "solicitação de radiografia de tórax e baciloscopia de escarro." },
     ],
-    correct: "A",
+    correct: "D",
   },
 ];

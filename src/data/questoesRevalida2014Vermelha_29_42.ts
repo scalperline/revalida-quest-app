@@ -26,7 +26,7 @@ export const QUESTOES_REVALIDA_2014_VERMELHA_29_42: Question[] = [
         text: "Diarreia moderada com desidratação; referir urgentemente para o hospital.",
       },
     ],
-    correct: "A",
+    correct: "C",
   },
   {
     id: 30,
@@ -52,14 +52,14 @@ export const QUESTOES_REVALIDA_2014_VERMELHA_29_42: Question[] = [
         text: "nos contatos sintomáticos adultos, o diagnóstico de tuberculose é estabelecido pela cultura de escarro positiva para Bacilo de Koch (BK).",
       },
     ],
-    correct: "A",
+    correct: "B",
   },
   {
     id: 31,
     year: 2014,
     area: "Ginecologia e Obstetrícia",
     enunciado:
-      "Uma paciente com 29 anos de idade, nuligesta, que apresenta ciclos menstruais regulares, comparece à consulta de rotina na Unidade Básica de Saúde. Nega corrimento vaginal, prurido ou outras queixas. Ao exame especular apresenta colo uterino rosado, sem lesões aparentes. O exame a fresco do conteúdo vaginal não apresenta anormalidades. O exame citopatológico do colo uterino demonstrou “atipias de significado indeterminado em células glandulares, possivelmente não neoplásicas”.\n\nSeguindo as recomendações das Diretrizes Brasileiras para o Rastreamento do Câncer do Colo do Útero, a conduta recomendada é",
+      "Uma paciente com 29 anos de idade, nuligesta, que apresenta ciclos menstruais regulares, comparece à consulta de rotina na Unidade Básica de Saúde. Nega corrimento vaginal, prurido ou outras queixas. Ao exame specular apresenta colo uterino rosado, sem lesões aparentes. O exame a fresco do conteúdo vaginal não apresenta anormalidades. O exame citopatológico do colo uterino demonstrou “atipias de significado indeterminado em células glandulares, possivelmente não neoplásicas”.\n\nSeguindo as recomendações das Diretrizes Brasileiras para o Rastreamento do Câncer do Colo do Útero, a conduta recomendada é",
     options: [
       {
         id: "A",
@@ -78,7 +78,7 @@ export const QUESTOES_REVALIDA_2014_VERMELHA_29_42: Question[] = [
         text: "encaminhar para colposcopia e escovado endocervical.",
       },
     ],
-    correct: "A",
+    correct: "D",
   },
   {
     id: 32,
@@ -104,7 +104,7 @@ export const QUESTOES_REVALIDA_2014_VERMELHA_29_42: Question[] = [
         text: "deve ser realizada, através do consentimento expresso do paciente, da parceira e dos pais.",
       },
     ],
-    correct: "A",
+    correct: "C",
   },
   {
     id: 33,
@@ -130,7 +130,7 @@ export const QUESTOES_REVALIDA_2014_VERMELHA_29_42: Question[] = [
         text: "hérnia inguinal encarcerada à direita; recomendar evitar esforço físico e encaminhamento ao Ambulatório de Cirurgia.",
       },
     ],
-    correct: "A",
+    correct: "D",
   },
   {
     id: 34,
@@ -156,7 +156,7 @@ export const QUESTOES_REVALIDA_2014_VERMELHA_29_42: Question[] = [
         text: "prescrever terapia hormonal por 6 meses e, se não houver resposta, solicitar exames de imagem para tomada de decisão.",
       },
     ],
-    correct: "A",
+    correct: "B",
   },
   {
     id: 35,
@@ -199,7 +199,7 @@ export const QUESTOES_REVALIDA_2014_VERMELHA_29_42: Question[] = [
         text: "pré-eclâmpsia leve superposta à hipertensão arterial crônica.",
       },
     ],
-    correct: "A",
+    correct: "B",
   },
   {
     id: 37,
@@ -256,7 +256,7 @@ export const QUESTOES_REVALIDA_2014_VERMELHA_29_42: Question[] = [
         text: "encaminhar para o serviço de Obstetrícia de referência, devido ao risco obstétrico desta gestação e da especificidade da solicitação.",
       },
     ],
-    correct: "A",
+    correct: "B",
   },
   {
     id: 40,
@@ -273,7 +273,7 @@ export const QUESTOES_REVALIDA_2014_VERMELHA_29_42: Question[] = [
         text: "dosagem de T3 livre e pesquisa de anticorpo antirreceptor do TSH.",
       },
     ],
-    correct: "A",
+    correct: "B",
   },
   {
     id: 41,
@@ -287,7 +287,7 @@ export const QUESTOES_REVALIDA_2014_VERMELHA_29_42: Question[] = [
       { id: "C", text: "glibenclamida - 5 mg 2 vezes ao dia." },
       { id: "D", text: "insulina NPH - 10 U ao deitar." },
     ],
-    correct: "A",
+    correct: "D",
   },
   {
     id: 42,

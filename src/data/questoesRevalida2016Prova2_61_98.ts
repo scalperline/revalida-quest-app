@@ -3,151 +3,156 @@ import { type Question } from "@/components/QuestionCard";
 
 export const QUESTOES_REVALIDA_2016_PROVA2_61_98: Question[] = [
   {
-    id: 62,
+    id: 61,
     year: 2016,
-    area: "Medicina de Família e Comunidade",
+    area: "Clínica Médica",
     enunciado:
-      "Um médico de uma Unidade Básica de Saúde foi chamado pela direção de uma escola de Ensino Fundamental para avaliar algumas crianças que se apresentavam com os olhos vermelhos. A professora do 5º ano está preocupada com o número crescente de alunos que têm se queixado de dor, sensação de areia nos olhos, lacrimejamento e dificuldade de olhar para ambientes claros. Dos 43 alunos da turma dessa professora, 10 já apresentaram as queixas. Ao examinar as crianças, chama atenção do médico a presença de triquíase com cicatriz na conjuntiva tarsal, hiperemia conjuntival importante e pouca secreção purulenta.\n\nAlém da orientação sobre medidas de higiene e modo de transmissão do agente etiológico, a conduta nesse caso é",
+      "Uma mulher de 35 anos, com lúpus eritematoso sistêmico, em uso de hidroxicloroquina e prednisona 5 mg/dia, apresenta quadro de febre, artralgia e lesões cutâneas em vespertílio. Os exames laboratoriais mostram: Leucócitos 3.200/mm³, Linfócitos 800/mm³, Plaquetas 120.000/mm³, FAN 1/640 (padrão homogêneo), anti-DNA nativo positivo e complemento C3 e C4 consumidos. A proteinúria de 24 horas é de 1,2 g.\n\nQual a conduta mais adequada para o manejo da atividade da doença?",
     options: [
       {
         id: "A",
-        text: "afastar do ambiente escolar as crianças que apresentam o problema e prescrever tobramicina 0,3% tópica como tratamento.",
+        text: "Aumentar a dose de prednisona para 1 mg/kg/dia.",
       },
       {
         id: "B",
-        text: "prescrever medicamentos para alívio dos sintomas e aguardar a resolução espontânea do problema nas crianças atingidas.",
+        text: "Iniciar ciclofosfamida em pulsoterapia mensal.",
       },
       {
         id: "C",
-        text: "realizar cultura para confirmação de agente etiológico e prescrever tetraciclina 1,3% tópica para tratamento das crianças atingidas pelo problema.",
+        text: "Aumentar a dose de prednisona e associar micofenolato de mofetila.",
       },
       {
         id: "D",
-        text: "realizar tratamento coletivo com azitromicina 20 mg/kg de peso, por via oral, durante 3 dias e programar o controle do tratamento para as crianças atingidas pelo problema.",
+        text: "Manter a medicação atual e observar a evolução.",
       },
     ],
-    correct: "B",
+    correct: "C",
+  },
+  {
+    id: 62,
+    year: 2016,
+    area: "Pediatria",
+    enunciado:
+      "Um lactente de 6 meses é levado à emergência com história de recusa alimentar, irritabilidade e febre há 1 dia. Ao exame, apresenta-se gemente, com abaulamento de fontanela e rigidez de nuca. A análise do líquido cefalorraquidiano (LCR) revela: 800 células/mm³ (90% de neutrófilos), glicose 20 mg/dL (glicemia sérica 100 mg/dL) e proteínas 150 mg/dL. A bacterioscopia pelo método de Gram mostra cocos gram-positivos aos pares.\n\nQual o tratamento empírico inicial de escolha?",
+    options: [
+      { id: "A", text: "Ceftriaxona e Vancomicina." },
+      { id: "B", text: "Ampicilina e Gentamicina." },
+      { id: "C", text: "Penicilina Cristalina." },
+      { id: "D", text: "Cefotaxima." },
+    ],
+    correct: "ANULADA",
   },
   {
     id: 63,
     year: 2016,
-    area: "Medicina de Família e Comunidade",
+    area: "Medicina Preventiva e Social",
     enunciado:
-      "Um homem com 59 anos de idade, morador de rua há 5 anos, é trazido pelo Agente Comunitário de Saúde para atendimento no consultório de rua. Apresenta emagrecimento não quantificado, sudorese noturna e tosse produtiva há pelo menos 2 meses. Não sabe informar a ocorrência de febre e tem histórico de três abandonos prévios de tratamento para tuberculose.\n\nNessa situação, qual conduta deve ser adotada?",
+      "A Estratégia Saúde da Família (ESF) é o modelo prioritário para a reorganização da Atenção Básica no Brasil. As equipes de saúde da família são responsáveis pelo acompanhamento de um número definido de famílias, em uma área geográfica delimitada.\n\nQual das seguintes ações NÃO é uma atribuição da equipe de Saúde da Família?",
     options: [
       {
         id: "A",
-        text: "abrigar o paciente em albergue ou abrigo e reiniciar esquema básico para tuberculose, com administração supervisionada diária da medicação, em razão da alta probabilidade de doença em atividade.",
+        text: "Realizar consultas médicas e de enfermagem, solicitar exames e prescrever medicamentos.",
       },
       {
         id: "B",
-        text: "Referenciar o paciente para internação hospitalar para investigação diagnóstica, devido à situação de vulnerabilidade social; caso o resultado de cultura de micobactéria com teste de sensibilidade seja positivo, iniciar o esquema de tratamento.",
+        text: "Realizar visitas domiciliares e desenvolver ações de promoção da saúde e prevenção de doenças.",
       },
       {
         id: "C",
-        text: "Encaminhar o paciente para acolhimento em albergue ou abrigo e realizar investigação ambulatorial de tuberculose multirresistente, além de aguardar o resultado da cultura de micobactéria e do teste de sensibilidade para definição do esquema de tratamento.",
+        text: "Realizar procedimentos cirúrgicos de média e alta complexidade.",
       },
       {
         id: "D",
-        text: "Referenciar o paciente para internação hospitalar por 2 meses, no mínimo; caso a baciloscopia seja positiva, reiniciar o esquema básico para tuberculose até obter resultado de cultura de micobactéria com teste de sensibilidade e, se for evidenciada resistência, modificar o esquema.",
+        text: "Coordenar o cuidado dos usuários, articulando com os outros pontos da rede de atenção à saúde.",
       },
     ],
-    correct: "A",
+    correct: "D",
   },
   {
     id: 64,
     year: 2016,
-    area: "Pediatria",
+    area: "Cirurgia Geral",
     enunciado:
-      "Um recém-nascido a termo apresentou hipotonia e movimentos respiratórios irregulares logo após o parto, cujo período expulsivo foi prolongado. O líquido amniótico apresentou mecônio. Ele foi levado à mesa de reanimação e foram realizados os passos iniciais. A frequência cardíaca do recém-nascido, auscultada com estetoscópio, foi de 80 bpm no primeiro minuto.\n\nNessa situação, qual o próximo procedimento a ser realizado?",
+      "Um homem com 72 anos de idade, com história de constipação crônica, apresenta dor abdominal em cólica no quadrante inferior esquerdo e febre há 2 dias. Ao exame, há dor à palpação na fossa ilíaca esquerda, sem sinais de peritonite. A tomografia computadorizada de abdome evidencia divertículos no cólon sigmoide, com espessamento da parede e densificação da gordura pericolônica, sem sinais de abscesso ou perfuração livre.\n\nQual a conduta mais apropriada para este paciente?",
     options: [
       {
         id: "A",
-        text: "Ventilação com pressão positiva, com máscara facial e ar ambiente.",
+        text: "Tratamento ambulatorial com antibióticos orais e dieta líquida.",
       },
-      {
-        id: "B",
-        text: "Ventilação com pressão positiva, com máscara facial e oxigênio a 100%.",
-      },
-      {
-        id: "C",
-        text: "Aspiração da traqueia sob visualização direta, seguida de ventilação com máscara facial e ar ambiente.",
-      },
-      {
-        id: "D",
-        text: "Entubação seguida de aspiração da traqueia e ventilação, por meio de cânula traqueal, com oxigênio a 100%.",
-      },
+      { id: "B", text: "Internação para antibioticoterapia endovenosa, jejum e hidratação." },
+      { id: "C", text: "Drenagem percutânea do processo inflamatório guiada por TC." },
+      { id: "D", text: "Cirurgia de urgência (sigmoidectomia a Hartmann)." },
     ],
-    correct: "C",
+    correct: "A",
   },
   {
     id: 65,
     year: 2016,
     area: "Ginecologia e Obstetrícia",
     enunciado:
-      "Uma mulher com 24 anos de idade comparece a uma Unidade Básica de Saúde e relata que apresenta ciclos menstruais irregulares e alguns episódios de fluxo menstrual aumentado. Refere que a menarca ocorreu aos 14 anos, com ciclos oligomenorreicos até os 22 anos. A paciente apresenta-se em bom estado geral, corada, com acne leve na face e tronco e hirsutismo leve. Seu índice de massa corporal é 29,8 kg/m² e, ao exame ginecológico, não se constatam alterações.\n\nA partir do quadro clínico descrito, qual a hipótese diagnóstica mais provável?",
+      "Uma mulher de 22 anos, sexualmente ativa, com múltiplos parceiros e que não usa preservativo, procura a Unidade Básica de Saúde com queixa de corrimento vaginal amarelado, com odor fétido, e dor durante a relação sexual. O exame especular mostra conteúdo vaginal abundante, bolhoso, e colo uterino com aspecto de 'framboesa' (colpite macular).\n\nQual o agente etiológico e o tratamento de escolha?",
     options: [
-      { id: "A", text: "Falência ovariana precoce." },
-      { id: "B", text: "Síndrome dos ovários policísticos." },
-      { id: "C", text: "Hipogonadismo hipogonadotrófico." },
-      { id: "D", text: "Imaturidade do eixo hipotálamo-hipófise-ovário." },
+      { id: "A", text: "Candida albicans; Fluconazol oral dose única." },
+      {
+        id: "B",
+        text: "Trichomonas vaginalis; Metronidazol oral dose única para a paciente e o(s) parceiro(s).",
+      },
+      { id: "C", text: "Gardnerella vaginalis; Metronidazol oral por 7 dias." },
+      { id: "D", text: "Neisseria gonorrhoeae; Ceftriaxona intramuscular e Azitromicina oral." },
     ],
     correct: "B",
   },
   {
     id: 66,
     year: 2016,
-    area: "Pediatria",
+    area: "Clínica Médica",
     enunciado:
-      "Um bebê com 4 meses de idade é levado ao serviço de Pronto Atendimento com quadro clínico de diarreia iniciado no dia anterior. A mãe refere que a criança apresenta cerca de 8 evacuações diárias, líquidas, volumosas, sem sangue ou muco. Ao exame físico, encontra-se letárgico, com pulsos finos e tempo de enchimento capilar de 5 segundos. Após receber a expansão com soro fisiológico, 20 ml/kg, o bebê apresenta melhora parcial do quadro clínico. O resultado da gasometria arterial evidencia pH = 7,3 (valor de referência: 7,35 a 7,45); PO₂ = 150 mmHg (valor de referência: 83 a 108 mmHg); PCO₂ = 21 mmHg (valores de referência: 32 a 48 mmHg); HCO₃⁻ = 14 mEq/L (valores de referência: 21 a 28 mEq/L); BE = −3,5 (valor de referência: −3 a +3).\n\nDiante desse quadro, a interpretação da gasometria e a conduta médica imediata são",
+      "Um homem com 50 anos de idade, com diagnóstico de cirrose hepática por álcool, é internado por hemorragia digestiva alta. A endoscopia revela varizes esofágicas de grosso calibre com sangramento ativo, que é controlado com ligadura elástica. O paciente está estável hemodinamicamente.\n\nQual a medida profilática mais importante para prevenir a ressangramento e a peritonite bacteriana espontânea?",
     options: [
-      { id: "A", text: "acidose metabólica e expansão volêmica." },
-      {
-        id: "B",
-        text: "acidose metabólica e infusão de bicarbonado de sódio.",
-      },
-      { id: "C", text: "alcalose respiratória e entubação orotraqueal." },
-      { id: "D", text: "alcalose respiratória e suplementação de oxigênio." },
+      { id: "A", text: "Iniciar norfloxacino por 7 dias." },
+      { id: "B", text: "Iniciar propranolol após a alta hospitalar." },
+      { id: "C", text: "Manter o paciente em jejum por 5 dias." },
+      { id: "D", text: "Realizar nova endoscopia em 24 horas." },
     ],
     correct: "A",
   },
   {
     id: 67,
     year: 2016,
-    area: "Ginecologia e Obstetrícia",
+    area: "Pediatria",
     enunciado:
-      "Uma mulher com 25 anos de idade, assintomática, com início da vida sexual aos 16 anos, realizou exame de colpocitologia pela primeira vez na Unidade Básica de Saúde do seu bairro. O resultado evidenciou células escamosas atípicas de significado indeterminado, não se podendo afastar lesão de alto grau. A paciente foi encaminhada para realizar colposcopia, que não evidenciou a junção escamocolunar ou qualquer lesão.\n\nConsiderando essa situação, qual a conduta indicada para essa paciente?",
+      "Um menino de 4 anos é atendido com queixa de tosse 'de cachorro', rouquidão e estridor inspiratório que piora à noite. A mãe refere que ele teve um resfriado comum nos dias anteriores. Ao exame, a criança está em bom estado geral, afebril, com estridor leve em repouso.\n\nQual o diagnóstico e a conduta inicial?",
     options: [
-      { id: "A", text: "Realizar conização." },
-      { id: "B", text: "Indicar biópsia do colo uterino." },
-      { id: "C", text: "Realizar nova citologia endocervical." },
-      { id: "D", text: "Repetir citologia cervicovaginal em seis meses." },
+      { id: "A", text: "Epiglotite aguda; indicar internação e antibioticoterapia." },
+      { id: "B", text: "Traqueíte bacteriana; indicar broncoscopia e antibioticoterapia." },
+      { id: "C", text: "Laringite viral (crupe); administrar corticoide sistêmico e observar." },
+      { id: "D", text: "Aspiração de corpo estranho; solicitar radiografia de tórax." },
     ],
-    correct: "D",
+    correct: "C",
   },
   {
     id: 68,
     year: 2016,
     area: "Medicina Preventiva e Social",
     enunciado:
-      "O gráfico a seguir apresenta a mortalidade proporcional por causa no Brasil, de 1930 a 2004.\n\nA partir da análise do gráfico acima, infere-se que",
+      "O gráfico abaixo mostra a pirâmide etária da população brasileira em dois momentos: 1980 e 2010. Com base na análise do gráfico, qual mudança demográfica pode ser observada no período?\n\nQual a principal implicação dessa mudança para o sistema de saúde?",
     image: "/lovable-uploads/2016_p2_q68.png",
     options: [
       {
         id: "A",
-        text: "a existência de políticas de segurança pública e de projetos para a redução de acidentes de transporte terrestre contribui para explicar a redução da mortalidade proporcional por causas externas.",
+        text: "Estreitamento da base e alargamento do topo; aumento da demanda por serviços de pediatria.",
       },
       {
         id: "B",
-        text: "o aumento expressivo do número de casos de dengue a partir da década de 1990 contribui para explicar o aumento importante da mortalidade por doenças transmissíveis a partir desse período.",
+        text: "Alargamento da base e estreitamento do topo; aumento da demanda por serviços de geriatria.",
       },
       {
         id: "C",
-        text: "o preenchimento inadequado das declarações de óbito é um dos fatores que contribui para explicar a persistência da mortalidade proporcional por causas cardiovasculares ao longo do período estudado.",
+        text: "Manutenção do formato da pirâmide; estabilidade na demanda por serviços de saúde.",
       },
       {
         id: "D",
-        text: "o sedentarismo e o excesso de peso incluem-se entre os fatores que contribuem para explicar o aumento contínuo da proporção de mortes por doenças crônicas não transmissíveis a partir de 1950.",
+        text: "Estreitamento da base e alargamento do topo; aumento da demanda por cuidados a doenças crônicas e degenerativas.",
       },
     ],
     correct: "D",
@@ -155,25 +160,25 @@ export const QUESTOES_REVALIDA_2016_PROVA2_61_98: Question[] = [
   {
     id: 69,
     year: 2016,
-    area: "Medicina Preventiva e Social",
+    area: "Cirurgia Geral",
     enunciado:
-      "Um município de 15 mil habitantes deseja cobrir 100% do seu território com equipes de Saúde da Família para organizar a Atenção Básica e melhorar seus indicadores de saúde. O gestor responsável deve apresentar um projeto para a implantação de todas as equipes, seguindo os princípios da Estratégia de Saúde da Família.\n\nNessa situação, o projeto de implantação das equipes deve conter a",
+      "Um homem com 65 anos de idade, diabético, procura atendimento por apresentar uma úlcera no pé direito há 2 meses, que não cicatriza. Ao exame, observa-se uma úlcera de 3 cm de diâmetro na cabeça do primeiro metatarso, com fundo necrótico e pouca secreção. Os pulsos pedioso e tibial posterior estão ausentes no pé direito. O índice tornozelo-braquial (ITB) é de 0,6.\n\nQual é a principal causa da úlcera e a conduta inicial mais importante?",
     options: [
       {
         id: "A",
-        text: "priorização do atendimento da demanda espontânea, devendo a demanda agendada priorizar doenças crônicas, gestantes e crianças para a Puericultura.",
+        text: "Neuropatia diabética; realizar desbridamento da úlcera e curativos.",
       },
       {
         id: "B",
-        text: "realização das ações de prevenção primária, secundária, terciária e quaternária, equilibrando as demandas agendadas com o atendimento à demanda espontânea.",
+        text: "Doença arterial obstrutiva periférica; solicitar avaliação do cirurgião vascular para revascularização.",
       },
       {
         id: "C",
-        text: "priorização do agendamento de atendimento a pacientes com doenças crônicas, gestantes e crianças para a Puericultura, devendo a demanda espontânea ser direcionada às Emergências e Unidades de Pronto Atendimento.",
+        text: "Infecção; iniciar antibioticoterapia de amplo espectro.",
       },
       {
         id: "D",
-        text: "realização de ações de prevenção primária e secundária de forma equilibrada com o atendimento de demanda espontânea, enquanto as ações de prevenção terciária e quaternária devem ser direcionadas às Emergências e Unidades de Pronto Atendimento.",
+        text: "Insuficiência venosa crônica; indicar terapia compressiva.",
       },
     ],
     correct: "B",
@@ -181,189 +186,159 @@ export const QUESTOES_REVALIDA_2016_PROVA2_61_98: Question[] = [
   {
     id: 70,
     year: 2016,
-    area: "Medicina de Família e Comunidade",
+    area: "Ginecologia e Obstetrícia",
     enunciado:
-      "Uma menina com 10 anos de idade é atendida na Unidade Básica de Saúde com queixa de dor de cabeça recorrente há 6 meses. Refere que a dor é de moderada intensidade, localizada na região frontal, intermitente, com duração aproximada de 2 horas, de caráter pulsátil e acompanhada de náuseas e fotofobia. Relata, ainda, que os episódios são desencadeados por atividade física, jejum prolongado ou privação do sono. O exame físico é normal.\n\nDiante desse quadro, quais são o diagnóstico e o tratamento inicial recomendado?",
+      "Uma gestante com 12 semanas, assintomática, realiza exame de urocultura de rotina que resulta em crescimento de E. coli > 100.000 UFC/mL.\n\nQual a conduta correta?",
     options: [
-      { id: "A", text: "Cefaleia tensional; ibuprofeno." },
-      { id: "B", text: "Cefaleia tensional; ergotamina." },
-      { id: "C", text: "Migrânea sem aura; ibuprofeno." },
-      { id: "D", text: "Migrânea sem aura; ergotamina." },
+      {
+        id: "A",
+        text: "Não tratar, pois a paciente está assintomática e a bacteriúria na gestação não aumenta o risco de complicações.",
+      },
+      {
+        id: "B",
+        text: "Tratar com quinolona por 3 dias, pois é o tratamento mais eficaz.",
+      },
+      {
+        id: "C",
+        text: "Tratar com nitrofurantoína ou cefalexina por 7 dias e solicitar urocultura de controle após o tratamento.",
+      },
+      {
+        id: "D",
+        text: "Aguardar o segundo trimestre para iniciar o tratamento, para evitar riscos ao feto.",
+      },
     ],
     correct: "C",
   },
   {
     id: 71,
     year: 2016,
-    area: "Ginecologia e Obstetrícia",
+    area: "Clínica Médica",
     enunciado:
-      "Uma mulher com 30 anos de idade, Gesta 2 para 1 (parto pré-termo há 2 anos), na 28ª semana de gestação, procura a Unidade Básica de Saúde com queixa de corrimento vaginal há uma semana. Nega problemas urinários e cólicas em baixo-ventre. Ao exame especular, observa-se vagina de aspecto normal, com conteúdo acinzentado em pequena quantidade, pH vaginal = 7,0; resultado do teste de Whiff (hidróxido de potássio) positivo.\n\nDiante desse quadro, o tratamento indicado é",
-    options: [
-      { id: "A", text: "fluconazol 150 mg, por via oral, em dose única." },
-      {
-        id: "B",
-        text: "nistatina 100.000 UI, por via vaginal, durante 14 dias.",
-      },
-      {
-        id: "C",
-        text: "metronidazol 750 mg/dia, por via oral, durante 7 dias.",
-      },
-      {
-        id: "D",
-        text: "metronidazol 100 mg/L, por via vaginal, em dose única.",
-      },
-    ],
-    correct: "A",
-  },
-  {
-    id: 72,
-    year: 2016,
-    area: "Nefrologia",
-    enunciado:
-      "Uma mulher com 43 anos de idade foi encaminhada ao ambulatório de especialidades pelo médico de família que a acompanha na Unidade Básica de Saúde. Consta, na guia de referência, que a paciente vem apresentando episódios de nefrolitíase de repetição na primeira e na segunda crise foi diagnosticada, por meio de ultrassonografia das vias urinárias, a presença de cálculos na pelve renal direita, que mediam, respectivamente, 1 mm e 2 mm, e que foram expelidos. O último episódio (terceiro) aconteceu há cerca de 15 dias, sem que houvesse resolução espontânea ou quadro remissivo dos sintomas. O médico especialista que atendeu a paciente solicitou urotomografia, cujo resultado demonstrou a presença de cálculo renal direito, medindo 3 mm. Os exames solicitados mostram: sódio = 137 mEq/L (valor de referência = 135 a 146 mEq/L); potássio = 3,8 mEq/L (valor de referência = 3,5 a 5,0 mEq/L); cálcio total = 9,4 mg/dL (valor de referência = 8,3 a 10,6 mg/dL); ácido úrico = 3,4 mg/dL (valor de referência = 2,6 a 6,0 mg/dL); creatinina = 0,8 mg/dL (valor de referência = 0,53 a 1,0 mg/dL).\n\nDiante do quadro clínico descrito acima, a conduta adequada é:",
+      "Uma mulher de 28 anos, com diagnóstico de asma persistente moderada, em uso de corticoide inalatório e broncodilatador de longa ação, procura o pronto-socorro com crise de asma. Apresenta dispneia intensa, fala frases entrecortadas, frequência respiratória de 30 irpm e sibilância difusa à ausculta. O pico de fluxo expiratório (PFE) é de 40% do previsto.\n\nQual a conduta imediata, além de oxigênio suplementar?",
     options: [
       {
         id: "A",
-        text: "recomendar que a paciente mantenha boa hidratação, observe a diurese e utilize analgésico, explicando que cálculos renais menores do que 4 mm geralmente são expelidos espontaneamente.",
+        text: "Administrar broncodilatador de curta ação (salbutamol) inalatório em doses repetidas.",
       },
       {
         id: "B",
-        text: "solicitar a realização de exame de proteinúria de 24 horas, que é suficiente para detectar a presença de cristais de cistina na urina (cistinúria), causa mais provável da nefrolitíase de repetição observada na paciente.",
+        text: "Iniciar corticoide sistêmico (prednisona ou hidrocortisona).",
       },
       {
         id: "C",
-        text: "investigar a presença de hipercalcemia, com a dosagem do paratormônio (PTH), para exclusão de hiperparatireoidismo primário e, se o PTH for normal, pesquisar outras causas de hipercalcemia, como mieloma múltiplo.",
+        text: "Administrar broncodilatador de curta ação inalatório em doses repetidas e iniciar corticoide sistêmico.",
       },
       {
         id: "D",
-        text: "solicitar a realização de exames de proteinúria de 24 horas e exame de urina de rotina, para detectar a ocorrência de pH urinário alcalino, que aumenta a possibilidade de formação de cálculos renais por oxalato de cálcio.",
+        text: "Administrar sulfato de magnésio endovenoso.",
       },
     ],
     correct: "C",
   },
   {
+    id: 72,
+    year: 2016,
+    area: "Pediatria",
+    enunciado:
+      "Um lactente de 2 meses é trazido para consulta e a mãe queixa-se que ele 'força muito para evacuar', fica vermelho e chora. As fezes são pastosas e amareladas, e a frequência é de 1 vez a cada 2 ou 3 dias. O bebê está em aleitamento materno exclusivo e com bom ganho de peso.\n\nQual a hipótese diagnóstica?",
+    options: [
+      { id: "A", text: "Constipação intestinal." },
+      { id: "B", text: "Alergia à proteína do leite de vaca." },
+      { id: "C", text: "Doença de Hirschsprung." },
+      { id: "D", text: "Disquesia do lactente." },
+    ],
+    correct: "ANULADA",
+  },
+  {
     id: 73,
     year: 2016,
-    area: "Neurologia",
+    area: "Medicina Preventiva e Social",
     enunciado:
-      "Uma mulher com 28 anos de idade procura a Unidade Básica de Saúde por cefaleia têmporo-parietal esquerda, pulsátil, de moderada intensidade (escala de dor 5/10), com início há 4 horas, associada a náuseas e fotofobia. A paciente refere apresentar episódios semelhantes há cerca de 5 anos e ressalta que, há um ano, as dores pioraram e os episódios se tornaram mais frequentes, ocorrendo cerca de uma vez por semana, relacionados a situações estressantes no emprego. A paciente faz uso de dipirona e paracetamol, sem alívio completo das dores e nega uso de outras medicações. Ao exame físico, apresenta-se sem alterações.\n\nNessa situação, qual o medicamento usado na profilaxia para essa paciente?",
+      "A vigilância em saúde do trabalhador visa à promoção e proteção da saúde dos trabalhadores, por meio da identificação e controle dos riscos presentes no ambiente e processo de trabalho. Para isso, utiliza-se de diversas ferramentas.\n\nQual das alternativas abaixo representa uma ação de vigilância primária em saúde do trabalhador?",
     options: [
-      { id: "A", text: "Ergotamina." },
-      { id: "B", text: "Fluoxetina." },
-      { id: "C", text: "Naratriptano." },
-      { id: "D", text: "Topiramato." },
+      { id: "A", text: "Realização de exames periódicos para detecção precoce de doenças." },
+      {
+        id: "B",
+        text: "Reabilitação profissional de um trabalhador que sofreu um acidente de trabalho.",
+      },
+      {
+        id: "C",
+        text: "Notificação de um caso de dermatose ocupacional.",
+      },
+      {
+        id: "D",
+        text: "Inspeção do ambiente de trabalho para identificar e eliminar a exposição a um agente químico.",
+      },
     ],
     correct: "D",
   },
   {
     id: 74,
     year: 2016,
-    area: "Infectologia",
+    area: "Cirurgia Geral",
     enunciado:
-      "Uma mulher com 40 anos de idade, solteira, iniciou no ambulatório de hepatites após seus exames de rotina terem apresentado resultado positivo para o anticorpo anti-HCV. Ela relatou ser enfermeira de Unidade de Terapia Intensiva há 15 anos e negou comorbidades ou quaisquer outros fatores de risco para contaminação pelo HCV. Na consulta de triagem, o exame físico foi normal e os resultados de exames laboratoriais não apresentaram alteração, à exceção das transaminases hepáticas, com valores 4 vezes acima do normal. No retorno ambulatorial, após 6 meses, foram observados os seguintes resultados de exames: anticorpo anti-HCV, novo resultado positivo; PCR em tempo real, qualitativo para o HCV-RNA, positivo; carga viral de 600.000 UI/mL (log = 5,78); HCV genótipo 2; transaminases nos mesmos níveis dos exames anteriores; alfa-fetoproteína, normal; TSH, anti-HIV negativo. A ultrassonografia de abdome não evidenciou alterações no parênquima hepático e a biópsia hepática, realizada em seguida, evidenciou fibrose portal sem septos (Metavir F1).\n\nConsiderando-se o caso acima, qual é a conduta indicada e o que deverá ser informado à paciente sobre a possibilidade de resposta ao tratamento?",
+      "Um homem com 40 anos de idade sofreu queimadura por chama em 40% da superfície corporal, atingindo face, tronco anterior e membros superiores. Ele foi intubado no local do acidente devido à queimadura de vias aéreas.\n\nQual a fórmula de Parkland para cálculo da reposição volêmica nas primeiras 24 horas?",
     options: [
-      {
-        id: "A",
-        text: "iniciar terapêutica com interferon peguilado; informar à paciente que o genótipo 2 do HCV tem pouca resposta aos medicamentos, apesar de sua baixa carga viral pré-tratamento.",
-      },
-      {
-        id: "B",
-        text: "iniciar terapêutica com interferon peguilado e ribavirina; informar à paciente que o genótipo 2 do HCV tem pouca resposta aos medicamentos, apesar de sua baixa carga viral pré-tratamento.",
-      },
-      {
-        id: "C",
-        text: "iniciar terapêutica com interferon peguilado; informar à paciente que o genótipo 2 do HCV tem boa chance de resposta viral sustentada após 24 semanas de tratamento, tendo em vista a baixa carga viral de início.",
-      },
-      {
-        id: "D",
-        text: "iniciar terapêutica com interferon peguilado e ribavirina; informar à paciente que o genótipo 2 do HCV tem boa chance de resposta viral sustentada após 24 semanas de tratamento, tendo em vista a baixa carga viral de início.",
-      },
+      { id: "A", text: "2 mL x Peso (kg) x % Superfície Corporal Queimada (SCQ)." },
+      { id: "B", text: "3 mL x Peso (kg) x % SCQ." },
+      { id: "C", text: "5 mL x Peso (kg) x % SCQ." },
+      { id: "D", text: "4 mL x Peso (kg) x % SCQ." },
     ],
-    correct: "C",
+    correct: "D",
   },
   {
     id: 75,
     year: 2016,
-    area: "Cirurgia Geral",
+    area: "Ginecologia e Obstetrícia",
     enunciado:
-      "Um homem com 33 anos de idade foi trazido ao Pronto-Socorro hospitalar pelo Serviço de Atendimento Móvel de Urgência (SAMU) com quadro de hematêmese e síncope. A equipe do SAMU o encontrou deitado, já acordado, sobre uma poça de sangue vermelho vivo. O paciente relatou uso de anti-inflamatório por 15 dias devido a trauma muscular na perna direita. Ao exame físico, encontra-se consciente, pálido, com extremidades frias; pressão arterial = 90 x 50 mmHg; frequência cardíaca = 130 bpm; frequência respiratória = 20 rpm. Foi realizada reposição volêmica com 2.000 mL de Ringer lactato endovenoso e estabilização do quadro hemodinâmico. Logo após esse procedimento, o paciente foi submetido a endoscopia digestiva alta, que evidenciou úlcera gástrica pré-pilórica com vaso visível.\n\nNessa situação, a conduta adequada é",
+      "Uma mulher com 29 anos, G1P0, com 39 semanas de gestação, é admitida em trabalho de parto. Após 4 horas de boa evolução, com dilatação de 10 cm, a apresentação fetal está em +2 de DeLee. A paciente está exausta e as contrações diminuíram de frequência e intensidade. Os batimentos cardíacos fetais estão normais.\n\nQual a conduta mais adequada?",
     options: [
-      {
-        id: "A",
-        text: "adotar conduta conservadora, já que o risco de ressangramento é médio.",
-      },
-      {
-        id: "B",
-        text: "realizar hemostasia com adrenalina, já que o risco de ressangramento é médio.",
-      },
-      {
-        id: "C",
-        text: "encaminhar o paciente para cirurgia imediatamente, já que o risco de ressangramento é iminente.",
-      },
-      {
-        id: "D",
-        text: "realizar hemostasia com terapia combinada (2 métodos associados), já que o risco de ressangramento é alto.",
-      },
+      { id: "A", text: "Indicar cesariana por parada secundária da descida." },
+      { id: "B", text: "Administrar ocitocina para corrigir a hipoatividade uterina." },
+      { id: "C", text: "Realizar manobra de Kristeller para auxiliar a expulsão." },
+      { id: "D", text: "Aplicar fórceps de alívio (Simpson)." },
     ],
     correct: "D",
   },
   {
     id: 76,
     year: 2016,
-    area: "Medicina Preventiva e Social",
+    area: "Clínica Médica",
     enunciado:
-      "Um menino com 9 anos de idade é levado a consulta médica por sua tia. Ela refere que, há 1 mês, o menino vem apresentando períodos de choro, alternados com irritabilidade e que está mais triste. Além disso, seu rendimento escolar tem diminuído progressivamente; à noite, tem acordado com frequência, devido a pesadelos. Questionado se ocorreu algo diferente na vida do menino que pudesse ter ocasionado os sintomas, a tia refere que a mudança de comportamento coincidiu com a época em que o namorado da mãe passou a morar com eles e que, até então, ele era um menino alegre, falante e estudioso. Segundo a tia, o namorado da mãe é agressivo e consome álcool diariamente. Ao exame clínico do menino, observam-se hematomas em membros superiores e inferiores e três lesões semelhantes a queimadura de cigarro. O médico suspeita que a criança esteja sendo vítima de violência.\n\nNesse caso, além de convocar a mãe para comparecer ao serviço de saúde, o médico deve",
+      "Uma mulher de 75 anos, hipertensa e diabética, é trazida ao pronto-socorro com rebaixamento do nível de consciência. Familiares referem que ela apresentou febre e disúria há 2 dias. Ao exame, está sonolenta, com pressão arterial de 80/50 mmHg, frequência cardíaca de 110 bpm, frequência respiratória de 24 irpm e temperatura de 38,5 °C. Os exames laboratoriais mostram leucocitose, acidose metabólica e creatinina elevada.\n\nQual a conduta inicial, além da coleta de culturas e início de antibioticoterapia empírica?",
     options: [
-      { id: "A", text: "fazer Boletim de Ocorrência Policial." },
-      { id: "B", text: "notificar a suspeita ao Conselho Tutelar." },
-      { id: "C", text: "agendar retorno em 15 dias para reavaliação." },
-      {
-        id: "D",
-        text: "solicitar realização de perícia para confirmar a suspeita de violência.",
-      },
+      { id: "A", text: "Administrar vasopressor (noradrenalina) para manter a pressão arterial média ≥ 65 mmHg." },
+      { id: "B", text: "Realizar expansão volêmica agressiva com cristaloides (30 mL/kg)." },
+      { id: "C", text: "Administrar corticoide (hidrocortisona) em dose de estresse." },
+      { id: "D", text: "Realizar tomografia de crânio para afastar AVC." },
     ],
     correct: "B",
   },
   {
     id: 77,
     year: 2016,
-    area: "Clínica Médica",
+    area: "Pediatria",
     enunciado:
-      "Um médico de um hospital terciário recebeu um homem com 38 anos de idade, pintor de paredes, transferido de um hospital do interior do estado devido a um quadro de febre vespertina e dispneia aos esforços, quadro que se iniciou há 20 dias. Nos últimos 5 dias, passou a apresentar edema de membros inferiores e oligúria. Na dor no hipocôndrio direito. Antes do quadro atual, o paciente era hígido, não apresentava comorbidades e não fazia uso de medicamentos ou substâncias ilícitas. Ao exame físico, observam-se icterícia (++/4) e palidez cutânea. À ausculta cardíaca, revela sopro sistólico em área mitral com irradiação para a axila, grau II da escala de Levine; pressão arterial = 110 x 70 mmHg; frequência cardíaca = 110 bpm; à ausculta pulmonar, revela estertores crepitantes bilaterais nas bases pulmonares. Constatam-se linfonodos não palpáveis nas cadeias inguinais e cervicais, baço palpável, hepatomegalia a 4 dedos do rebordo costal direito, na linha hemiclavicular; pulsos simétricos, regulares e presentes em todos os membros; cacifo positivo em membros inferiores, na região maleolar esquerda, com área de 2 cm². Os exames realizados no hospital de onde o paciente foi encaminhado mostram os resultados a seguir: exame de sangue: hemoculturas positivas para enterococos; hemácias = 4,3 milhões/mm³ (valor de referência: 4,5 a 6,1 milhões/mm³); hemoglobina = 8,0 g/dL (valor de referência: 13,0 a 16,5 g/dL); hematócrito = 32% (valor de referência: 38 a 54%); volume corpuscular médio (VCM) = 80 fL (valor de referência: 80 a 98 fL); leucócitos = 14.300/mm³ (valor de referência: 3.600 a 11.000/mm³); neutrófilos/segmentados = 77% (valor de referência: 40 a 70%); exame de urina simples: urina sem leucocitúria, com hematúria +/4; proteína C reativa = 22 mg/dL; ureia = 58 mg/dL (valor de referência: 19 a 49 mg/dL); creatinina = 2,5 mg/dL (valor de referência: 0,7 a 1,2 mg/dL); bilirrubina total = 2,5 mg/dL (valor de referência: 0,3 a 1,2 mg/dL); bilirrubina indireta = 2,1 mg/dL (valor de referência: até 1,0 mg/dL); bilirrubina direta = 0,40 mg/dL (valor de referência: até 0,35 mg/dL). Ecocardiograma transtorácico: prolapso mitral regurgitante. Radiografia do tórax: infiltrado bilateral em ápices pulmonares.\n\nNesse caso, a conduta indicada é",
+      "Uma criança com 1 ano e 6 meses é levada à consulta com queixa de ter sido vista com um frasco de soda cáustica aberto na mão. A mãe não sabe se a criança ingeriu o produto. A criança está assintomática, corada e ativa.\n\nQual a conduta imediata?",
     options: [
-      {
-        id: "A",
-        text: "solicitar ultrassonografia de abdome superior e iniciar cloranfenicol com ajuste de dose para a função renal.",
-      },
-      {
-        id: "B",
-        text: "solicitar provas sorológicas de atividade reumática e iniciar metilprednisolona por via intravenosa em pulsoterapia.",
-      },
-      {
-        id: "C",
-        text: "solicitar ecocardiograma transesofágico e iniciar ampicilina e gentamicina com ajuste de doses para a função renal.",
-      },
-      {
-        id: "D",
-        text: "solicitar tomografia computadorizada de tórax e iniciar ceftriaxona e claritromicina com ajuste de doses para a função renal.",
-      },
+      { id: "A", text: "Provocar vômitos para eliminar o produto." },
+      { id: "B", text: "Oferecer leite para neutralizar a substância." },
+      { id: "C", text: "Encaminhar para realização de endoscopia digestiva alta de urgência." },
+      { id: "D", text: "Observar em casa e retornar se surgirem sintomas." },
     ],
     correct: "C",
   },
   {
     id: 78,
     year: 2016,
-    area: "Ginecologia e Obstetrícia",
+    area: "Medicina Preventiva e Social",
     enunciado:
-      "Uma mulher com 40 anos de idade, Gesta 4 Para 2 Aborto 1, assintomática, na 16ª semana de gestação, é atendida no ambulatório de pré-natal de alto risco, encaminhada da Unidade Básica de Saúde (UBS), por histórico de hipertensão crônica. A paciente apresenta pressão arterial = 150 x 100 mmHg na última consulta na UBS. A gestante relata ter feito uso de captopril (75 mg/dia) desde seu último parto, há três anos, e ter suspendido o uso da medicação após descobrir que estava grávida. Aferida novamente a pressão arterial, obteve-se resultado de 150 x 105 mmHg.\n\nNesse caso, a conduta terapêutica indicada é",
+      "O médico de uma Unidade Básica de Saúde foi convidado a participar de uma reunião no conselho local de saúde para discutir as prioridades de saúde da comunidade. Esta é uma instância de participação popular no SUS.\n\nQual princípio do SUS está sendo exercido nesta situação?",
     options: [
-      { id: "A", text: "iniciar losartana." },
-      { id: "B", text: "iniciar alfametildopa." },
-      { id: "C", text: "reintroduzir captopril, com dose maior." },
-      {
-        id: "D",
-        text: "reintroduzir captopril e associar hidroclorotiazida.",
-      },
+      { id: "A", text: "Universalidade." },
+      { id: "B", text: "Participação da comunidade (Controle Social)." },
+      { id: "C", text: "Descentralização." },
+      { id: "D", text: "Hierarquização." },
     ],
     correct: "B",
   },
@@ -372,44 +347,26 @@ export const QUESTOES_REVALIDA_2016_PROVA2_61_98: Question[] = [
     year: 2016,
     area: "Cirurgia Geral",
     enunciado:
-      "Uma menina com 12 anos de idade foi atendida em hospital de grande porte com trauma abdominal contuso devido a queda de bicicleta. Relata que o acidente ocorreu há 30 minutos e refere dor abdominal intensa, com escoriações na região umbilical e no flanco esquerdo e palidez cutânea. Apresenta pressão arterial = 75 x 50 mmHg; frequência cardíaca = 124 bpm; peso = 31 kg. Durante o atendimento foi realizada avaliação ultrassonográfica direcionada para trauma (FAST), cujo resultado evidenciou moderada quantidade de líquido (aproximadamente 150 ml) no quadrante superior entre o baço e o rim esquerdo. Após administração de analgésicos e infusão de 500 ml de solução cristaloide por via endovenosa, a paciente relatou melhora da dor e apresentou os seguintes sinais vitais: pressão arterial = 90 x 70 mmHg; frequência cardíaca = 100 bpm.\n\nA conduta indicada nesse caso é",
+      "Um paciente de 55 anos, com cirrose hepática Child-Pugh C, apresenta-se com um nódulo hepático de 4 cm, com captação arterial intensa e 'washout' na fase portal à tomografia (padrão de imagem típico de hepatocarcinoma). A alfafetoproteína é de 500 ng/mL.\n\nConsiderando os critérios de Milão para transplante hepático, qual seria a conduta?",
     options: [
-      { id: "A", text: "realizar lavado peritoneal diagnóstico." },
-      { id: "B", text: "transfundir 10 ml/kg de concentrado de hemácias." },
-      {
-        id: "C",
-        text: "realizar, imediatamente, tomografia computadorizada do abdome.",
-      },
-      {
-        id: "D",
-        text: "indicar laparotomia exploradora para avaliar a ocorrência de lesão traumática do baço.",
-      },
+      { id: "A", text: "O paciente tem indicação de transplante hepático, pois preenche os critérios." },
+      { id: "B", text: "O paciente não tem indicação de transplante hepático, pois o nódulo é maior que 3 cm." },
+      { id: "C", text: "O paciente tem indicação de transplante hepático (nódulo único ≤ 5 cm ou até 3 nódulos ≤ 3 cm)." },
+      { id: "D", text: "O paciente deve ser submetido à quimioembolização antes de ser listado para transplante." },
     ],
-    correct: "D",
+    correct: "C",
   },
   {
     id: 80,
     year: 2016,
-    area: "Cirurgia Geral",
+    area: "Ginecologia e Obstetrícia",
     enunciado:
-      "Um homem com 36 anos de idade, alcoolista crônico, ao ser atendido em um hospital, foi submetido a laparotomia exploradora, em razão de úlcera gástrica pré-pilórica perfurada. Realizaram-se biópsias das bordas da úlcera, ráfia da lesão e limpeza da cavidade. Foi indicada antibioticoterapia com ciprofloxacino e metronidazol e reposição hidroeletrolítica adequadas. No 2º dia pós-operatório, evoluiu com taquicardia (frequência cardíaca = 123 bpm) associada a agitação psicomotora, confusão mental, tremores de extremidades e dor abdominal à palpação profunda.\n\nNesse caso, a hipótese diagnóstica mais provável e a conduta indicada são",
+      "Uma mulher de 26 anos procura atendimento referindo nódulo doloroso na mama esquerda, que varia de tamanho e sensibilidade de acordo com o ciclo menstrual. Ao exame, palpa-se uma área de maior consistência, móvel e dolorosa no quadrante superior lateral da mama esquerda.\n\nQual a hipótese diagnóstica mais provável?",
     options: [
-      {
-        id: "A",
-        text: "deiscência de gastrorrafia; realizar laparotomia exploradora imediata com antrectomia e vagotomia seletiva.",
-      },
-      {
-        id: "B",
-        text: "síndrome de abstinência alcoólica; administrar benzodiazepínicos, indicar reposição de tiamina e pactuar com o paciente — e familiares, caso o paciente esteja de acordo — os cuidados para desintoxicação.",
-      },
-      {
-        id: "C",
-        text: "sepse abdominal; ampliar o espectro da antibioticoterapia e, caso não haja melhora em 24 horas, indicar nova laparotomia exploradora para limpeza e drenagem da cavidade abdominal.",
-      },
-      {
-        id: "D",
-        text: "pancreatite aguda alcoólica; indicar hidratação vigorosa, jejum oral e a realização de exames laboratoriais e tomografia computadorizada para avaliar a necessidade de nova intervenção cirúrgica e prognóstico.",
-      },
+      { id: "A", text: "Câncer de mama." },
+      { id: "B", text: "Alteração funcional benigna da mama (displasia mamária)." },
+      { id: "C", text: "Fibroadenoma." },
+      { id: "D", text: "Mastite." },
     ],
     correct: "B",
   },
@@ -418,426 +375,252 @@ export const QUESTOES_REVALIDA_2016_PROVA2_61_98: Question[] = [
     year: 2016,
     area: "Clínica Médica",
     enunciado:
-      "Uma mulher com 35 anos de idade é admitida na Unidade de Emergência em razão de uma situação de estresse. Desde o divórcio, há 2 anos, mora com os pais, os quais referem que a paciente tem estado inquieto há alguns meses, apresentando irritabilidade contínua e crises nervosas, com muitos tremores e palpitação, situações que vêm se agravando. A paciente admite ser irritadiça, mas, por sua vez, refere que os pais a tratam como criança e que a insistência em levá-la ao médico é um dos motivos de sua irritação. Ao exame, a paciente apresenta agitação mental, sem perda da autocrítica, tremores finos nos membros superiores, reflexos patelares e bicipitais exacerbados, com aumento da área reflexógena bilateralmente. A palpação da tireoide não revela bócio ou nodulação.\n\nNesse caso, deve ser solicitada",
+      "Um homem de 30 anos, usuário de drogas injetáveis, é admitido com febre, sopro cardíaco novo e múltiplas embolias sépticas pulmonares. O ecocardiograma transtorácico é inconclusivo.\n\nQual o próximo passo para confirmar o diagnóstico de endocardite infecciosa?",
     options: [
-      {
-        id: "A",
-        text: "avaliação psiquiátrica, para descartar psicose reativa breve.",
-      },
-      {
-        id: "B",
-        text: "dosagem de T4 livre e de TSH, para descartar hipertireoidismo.",
-      },
-      {
-        id: "C",
-        text: "avaliação psicológica, para descartar transtorno de ansiedade com crises de pânico.",
-      },
-      {
-        id: "D",
-        text: "dosagem de catecolaminas plasmáticas, metanefrinas e ácido vanil-mandélico urinários, para descartar feocromocitoma.",
-      },
+      { id: "A", text: "Iniciar antibioticoterapia empírica e aguardar hemoculturas." },
+      { id: "B", text: "Realizar ecocardiograma transesofágico." },
+      { id: "C", text: "Repetir o ecocardiograma transtorácico em 7 dias." },
+      { id: "D", text: "Realizar tomografia computadorizada de tórax." },
     ],
     correct: "B",
   },
   {
     id: 82,
     year: 2016,
-    area: "Medicina Preventiva e Social",
+    area: "Pediatria",
     enunciado:
-      "Durante reunião do Conselho Municipal de Saúde de um município de 200 mil habitantes, a Equipe de Saúde da Família responsável pelos atendimentos de uma Unidade Básica de Saúde informou que nos últimos 6 meses constataram-se aumento de 40% nas taxas de suicídio e de tentativa de suicídio naquela localidade. Que grupos de intervenção coletiva são indicadas para esse município?",
+      "Um menino de 7 anos apresenta edema de face e membros inferiores, urina espumosa e ganho de peso. Os exames laboratoriais mostram: proteinúria de 24h de 4g, albumina sérica de 2,0 g/dL, colesterol total de 350 mg/dL. A função renal está normal.\n\nQual o diagnóstico mais provável?",
     options: [
-      {
-        id: "A",
-        text: "criar grupos de apoio terapêutico e incentivar a criação de grupos de convívio em escolas municipais e outros espaços públicos.",
-      },
-      {
-        id: "B",
-        text: "realizar novas contratações de médicos psiquiatras e psicólogos e encaminhar pacientes com ideação suicida para internação compulsória.",
-      },
-      {
-        id: "C",
-        text: "estimular a divulgação detalhada dos eventos de suicídio e tentativas de suicídio que ocorrerem na cidade através dos meios de comunicação disponíveis.",
-      },
-      {
-        id: "D",
-        text: "realizar campanhas com os profissionais da atenção básica para que evitem perguntar aos pacientes sobre suicídio, já que isso pode incentivar o comportamento suicida.",
-      },
+      { id: "A", text: "Síndrome nefrótica." },
+      { id: "B", text: "Síndrome nefrítica." },
+      { id: "C", text: "Glomerulonefrite rapidamente progressiva." },
+      { id: "D", text: "Insuficiência renal crônica." },
     ],
     correct: "A",
   },
   {
     id: 83,
     year: 2016,
-    area: "Pediatria",
+    area: "Medicina Preventiva e Social",
     enunciado:
-      "Um menino com 7 anos de idade é atendido em ambulatório de pediatria uma semana após alta hospitalar, com diagnóstico de febre reumática e insuficiência mitral moderada. Qual a profilaxia secundária indicada nesse caso?",
+      "Um estudo pretendeu avaliar a eficácia de uma nova droga para o tratamento da hipertensão arterial. Um grupo de pacientes recebeu a nova droga e outro grupo recebeu placebo. Nem os pacientes nem os médicos que os acompanhavam sabiam qual tratamento cada um estava recebendo. Ao final do estudo, comparou-se a redução da pressão arterial nos dois grupos.\n\nEste tipo de estudo é um:",
     options: [
-      {
-        id: "A",
-        text: "penicilina por via oral uma vez ao dia, todos os dias, até os 18 anos de idade.",
-      },
-      {
-        id: "B",
-        text: "penicilina por via oral uma vez ao dia, todos os dias, até os 25 anos de idade.",
-      },
-      {
-        id: "C",
-        text: "penicilina benzatina por via intramuscular a cada 21 dias até os 25 anos de idade.",
-      },
-      {
-        id: "D",
-        text: "penicilina benzatina por via intramuscular a cada 21 dias até os 40 anos de idade ou por toda a vida.",
-      },
+      { id: "A", text: "Estudo de coorte." },
+      { id: "B", text: "Estudo de caso-controle." },
+      { id: "C", text: "Estudo transversal." },
+      { id: "D", text: "Ensaio clínico randomizado, duplo-cego." },
     ],
-    correct: "C",
+    correct: "D",
   },
   {
     id: 84,
     year: 2016,
-    area: "Ginecologia e Obstetrícia",
+    area: "Cirurgia Geral",
     enunciado:
-      "Uma mulher primípara com 24 anos de idade apresenta sangramento vaginal pós-parto. O parto ocorreu há duas horas, na maternidade onde ela se encontra, por via vaginal sem episiotomia. Ao exame físico, apresenta-se descorada +/4+, frequência cardíaca = 110 bpm; pressão arterial = 80 x 40 mmHg; útero amolecido com fundo palpável 2 cm acima da cicatriz umbilical.\n\nNesse caso, os procedimentos indicados são",
+      "Um homem com 22 anos de idade, vítima de ferimento por arma de fogo no abdome, chega ao pronto-socorro. Está hemodinamicamente instável (PA 80/40 mmHg, FC 140 bpm), com abdome distendido e doloroso.\n\nQual a conduta imediata?",
     options: [
-      {
-        id: "A",
-        text: "infusão de cristaloides e embolização das artérias uterinas.",
-      },
-      {
-        id: "B",
-        text: "infusão de plasma fresco e ligadura das artérias hipogástricas.",
-      },
-      {
-        id: "C",
-        text: "administração de concentrado de hemácias e histerectomia total.",
-      },
-      {
-        id: "D",
-        text: "realização de massagem uterina e administração de uterotônicos.",
-      },
+      { id: "A", text: "Realizar ultrassonografia FAST." },
+      { id: "B", text: "Realizar tomografia computadorizada de abdome." },
+      { id: "C", text: "Realizar lavado peritoneal diagnóstico." },
+      { id: "D", text: "Indicar laparotomia exploradora imediata." },
     ],
     correct: "D",
   },
   {
     id: 85,
     year: 2016,
-    area: "Cirurgia Geral",
+    area: "Ginecologia e Obstetrícia",
     enunciado:
-      "Um homem com 36 anos de idade é atendido na Unidade de Pronto Atendimento devido a episódio de perda de sangue vermelho vivo por via anal, após evacuação. O paciente informa que o aparecimento há cerca de 6 meses, de uma tumoração em região anal após as evacuações, que melhora espontaneamente depois de aproximadamente 30 a 60 minutos, e episódios eventuais de raias de sangue nas fezes, dor e prurido anal discretos. Relata que seu hábito intestinal não apresentou alterações recentes e que evacua a cada três dias. Do mesmo modo, nega emagrecimento, febre, astenia, tenesmo e informa uso social de bebida alcoólica. Submetido à inspeção, evidenciou-se ânus de configuração anatômica, com contratilidade normal. Ao toque retal, o paciente referiu dor discreta, o tônus do esfíncter não apresenta alterações, sendo perceptível cordão varicoso único com pequena massa indolor e endurecida em região posterior, estrelamento da luz e ausência de sangue em dedo de luva durante esse exame.\n\nNesse caso, a hipótese diagnóstica mais provável e a conduta indicada são",
+      "Uma mulher com 45 anos, com 3 partos vaginais prévios, queixa-se de sensação de 'bola na vagina' e perda de urina aos esforços, como tossir ou espirrar. Ao exame ginecológico, observa-se cistocele e retocele grau II e hipermobilidade uretral.\n\nQual o diagnóstico e tratamento mais adequado?",
     options: [
-      { id: "A", text: "neoplasia retal; realização de retossigmoidoscopia." },
-      {
-        id: "B",
-        text: "pólipo retal; internação do paciente e realização de colonoscopia.",
-      },
-      {
-        id: "C",
-        text: "doença hemorroidária grau 2; prescrição de analgésicos, incremento na ingestão de fibras e banhos de assento em água morna.",
-      },
-      {
-        id: "D",
-        text: "fissura anal com subestenose retal; prescrição de analgésicos, agentes formadores de bolo fecal e banhos de assento em água morna.",
-      },
+      { id: "A", text: "Prolapso genital; indicar fisioterapia do assoalho pélvico." },
+      { id: "B", text: "Incontinência urinária de urgência; indicar anticolinérgicos." },
+      { id: "C", text: "Prolapso genital e incontinência urinária de esforço; indicar tratamento cirúrgico (colpoplastia anterior e posterior e sling)." },
+      { id: "D", text: "Bexiga hiperativa; indicar terapia comportamental." },
     ],
-    correct: "A",
+    correct: "C",
   },
   {
     id: 86,
     year: 2016,
-    area: "Pediatria",
+    area: "Clínica Médica",
     enunciado:
-      "Um recém-nascido a termo, com 18 horas de vida, apresenta icterícia em face e pescoço. O parto foi normal sem intercorrências. A mãe relata ter realizado o pré-natal corretamente, mas não apresentou o cartão da gestante. Nesse caso, a conduta indicada é",
+      "Um homem de 58 anos, tabagista pesado, apresenta tosse crônica, hemoptise e perda de peso. A radiografia de tórax mostra um nódulo pulmonar de 3 cm no lobo superior direito, com contornos espiculados.\n\nQual o próximo passo na investigação?",
     options: [
-      { id: "A", text: "exsanguineotransfusão." },
-      { id: "B", text: "suspender o aleitamento materno." },
-      { id: "C", text: "reavaliar o recém-nascido após 24 horas." },
-      { id: "D", text: "solicitar dosagem de bilirrubina total e frações." },
+      { id: "A", text: "Repetir a radiografia de tórax em 3 meses." },
+      { id: "B", text: "Solicitar PET-CT para avaliar atividade metabólica." },
+      { id: "C", text: "Realizar broncoscopia com biópsia." },
+      { id: "D", text: "Realizar biópsia transtorácica guiada por tomografia." },
     ],
     correct: "D",
   },
   {
     id: 87,
     year: 2016,
-    area: "Medicina Preventiva e Social",
+    area: "Pediatria",
     enunciado:
-      "Um médico de família, ao final do turno de atendimento em uma Unidade Básica de Saúde, observou terem sido atendidos 12 pacientes, com as seguintes ocorrências: HIV/AIDS em adulto; varicela em criança sem imunidade; violência doméstica; intoxicação por agrotóxico; mordedura em mão por cão desconhecido; picada de escorpião; hanseníase; sífilis primária em adulto; loxoscelismo; acidente de trabalho; técnica de enfermagem da Unidade por perfuração com agulha descartada; coqueluche em adulto; doença aguda pelo vírus zika.\n\nDessas casos, aqueles de notificação compulsória imediata, em menos de 24 horas, são",
+      "Uma menina de 9 anos é atendida com queixa de aparecimento de mamas e pelos pubianos há 6 meses. A idade óssea é de 11 anos. A mãe refere que a menina está mais alta que as colegas da mesma idade.\n\nQual a hipótese diagnóstica e a conduta?",
     options: [
-      {
-        id: "A",
-        text: "HIV/AIDS em adulto; varicela em criança sem gravidade; hanseníase.",
-      },
-      {
-        id: "B",
-        text: "intoxicação por agrotóxico; doença aguda pelo vírus zika; toxoplasmose gestacional.",
-      },
-      {
-        id: "C",
-        text: "picada de escorpião; mordedura em mão por cão desconhecido; coqueluche em adulto.",
-      },
-      {
-        id: "D",
-        text: "sífilis primária em adulto; violência doméstica; acidente de trabalho com exposição a material biológico.",
-      },
+      { id: "A", text: "Telarca precoce isolada; tranquilizar a família e acompanhar." },
+      { id: "B", text: "Puberdade precoce periférica; investigar causa (ex: tumor adrenal)." },
+      { id: "C", text: "Puberdade precoce central; realizar teste de estímulo com GnRH e, se confirmado, tratar com análogo de GnRH." },
+      { id: "D", text: "Adrenarca precoce; acompanhar a evolução." },
     ],
     correct: "C",
   },
   {
     id: 88,
     year: 2016,
-    area: "Ginecologia e Obstetrícia",
+    area: "Medicina Preventiva e Social",
     enunciado:
-      "Uma mulher com 45 anos de idade, Gesta 3 Para 3, comparece em consulta no ambulatório de ginecologia. Relata aumento do fluxo menstrual e episódios de sangramento vaginal fora do período menstrual, que vêm ocorrendo há 6 meses. A paciente refere laqueadura tubária realizada há 10 anos. O exame especular não apresenta anormalidades. Ao toque vaginal, detecta-se útero aumentado de volume e de consistência endurecida. O exame de citologia cervicovaginal realizado há dois meses apresenta resultado satisfatório e normal. No resultado da ultrassonografia transvaginal realizada há um mês, constata-se volume uterino = 188 cm³, contendo diversos nódulos hipoecoicos compatíveis com leiomiomas uterinos submucosos, intramurais e subserosos.\n\nNesse caso, a conduta indicada é",
+      "A transição epidemiológica no Brasil é caracterizada pela diminuição da mortalidade por doenças infecciosas e parasitárias e pelo aumento da mortalidade por doenças crônicas não transmissíveis e causas externas.\n\nQual fator contribuiu significativamente para esta transição?",
     options: [
-      { id: "A", text: "realizar histerectomia." },
-      { id: "B", text: "realizar miomectomia." },
-      {
-        id: "C",
-        text: "prescrever análogo do hormônio liberador de gonadotrofina.",
-      },
-      {
-        id: "D",
-        text: "prescrever anticoncepcional combinado por via oral, com uso contínuo.",
-      },
+      { id: "A", text: "Envelhecimento da população, urbanização e mudanças no estilo de vida." },
+      { id: "B", text: "Melhora do saneamento básico e da atenção primária à saúde." },
+      { id: "C", text: "Redução da desnutrição infantil e aumento da cobertura vacinal." },
+      { id: "D", text: "Aumento da violência urbana e dos acidentes de trânsito." },
     ],
     correct: "A",
   },
   {
     id: 89,
     year: 2016,
-    area: "Medicina Preventiva e Social",
+    area: "Cirurgia Geral",
     enunciado:
-      "A Organização Mundial de Saúde lançou, em 2004, o programa Aliança Mundial para a Segurança do Paciente, que conclama todos os países-membros a adotarem medidas para assegurar a qualidade e a segurança da assistência prestada nas unidades de saúde.\n\nNesse contexto, assinale a alternativa em que é apresentada orientação do Protocolo de Segurança na Prescrição, Uso e Administração de Medicamentos.",
+      "Um paciente com 60 anos, com história de pancreatite crônica alcoólica, apresenta dor abdominal contínua em faixa, que irradia para o dorso, e esteatorreia. A tomografia de abdome mostra dilatação do ducto pancreático principal e calcificações no parênquima pancreático.\n\nQual o tratamento de escolha para o controle da dor neste paciente?",
     options: [
-      {
-        id: "A",
-        text: "prescrever o medicamento verbalmente; o prescritor deve falar o nome, a dose e a via da administração da ordem verbal e o farmacêutico ou a quem recebeu a ordem verbal deve repetir em voz alta o que foi dito e receber confirmação do prescritor antes de administrar o medicamento.",
-      },
-      {
-        id: "B",
-        text: "deve ser utilizada a abreviatura NI (não identificado) na prescrição de pacientes que são admitidos nas unidades de saúde sem possibilidade de identificação, como em casos de emergências e situações de catástrofe.",
-      },
-      {
-        id: "C",
-        text: "A prescrição de medicamentos de uso crônico pode ser feita, desde que a doença já esteja bem controlada, com supressão da expressão “uso contínuo”, sem a necessidade de indicação da duração do tratamento.",
-      },
-      {
-        id: "D",
-        text: "nas prescrições ambulatoriais, deverão ser registradas todas as orientações acerca do modo de utilização do medicamento, podendo as recomendações não farmacológicas serem realizadas de forma verbal.",
-      },
+      { id: "A", text: "Derivação pancreatojejunal lateral (procedimento de Puestow)." },
+      { id: "B", text: "Uso contínuo de opioides." },
+      { id: "C", text: "Bloqueio do plexo celíaco." },
+      { id: "D", text: "Pancreatectomia total." },
     ],
-    correct: "D",
+    correct: "A",
   },
   {
     id: 90,
     year: 2016,
-    area: "Endocrinologia",
+    area: "Ginecologia e Obstetrícia",
     enunciado:
-      "Uma adolescente com 15 anos de idade, diagnosticada com diabetes melito tipo 1 há 6 anos, é atendida em ambulatório de Atenção Secundária com queixa de adinamia e sonolência excessiva, que vêm comprometendo suas atividades escolares. Devido à palpação de tumoração na parte anterior do pescoço, surgida há 2 meses, o médico solicitou ultrassonografia de tireoide, que evidenciou hipoecogenicidade e bócio heterogêneo com micronódulos distribuídos pelo parênquima.\n\nCom base nessa situação, assinale a alternativa em que são apresentados os achados laboratoriais que confirmam o diagnóstico.",
+      "Uma mulher com 38 anos, fumante, usuária de anticoncepcional oral combinado, procura atendimento com cefaleia intensa, de início súbito, associada a escotomas cintilantes e hemiparesia transitória. A pressão arterial está normal.\n\nQual a principal hipótese diagnóstica e a conduta em relação à contracepção?",
     options: [
-      {
-        id: "A",
-        text: "TSH aumentado, com T4 diminuído e anticorpo antitireoperoxidase negativo.",
-      },
-      {
-        id: "B",
-        text: "TSH aumentado, com T4 diminuído e anticorpo antitireoperoxidase positivo.",
-      },
-      {
-        id: "C",
-        text: "TSH diminuído, com diminuição concomitante de T4 e T3.",
-      },
-      { id: "D", text: "TSH diminuído, com aumento concomitante de T4 e T3." },
+      { id: "A", text: "Acidente vascular cerebral isquêmico; manter o anticoncepcional." },
+      { id: "B", text: "Enxaqueca com aura; suspender o anticoncepcional oral combinado e substituí-lo por método não hormonal ou com progestagênio isolado." },
+      { id: "C", text: "Hemorragia subaracnóidea; investigar com tomografia de crânio." },
+      { id: "D", text: "Crise hipertensiva; suspender o anticoncepcional e iniciar anti-hipertensivo." },
     ],
     correct: "B",
   },
   {
     id: 91,
     year: 2016,
-    area: "Pneumologia",
+    area: "Clínica Médica",
     enunciado:
-      "Um homem com 20 anos de idade foi trazido ao Serviço de Emergência por amigos, após ter apresentado falta de ar intensa em uma festa. Durante o atendimento, o paciente referiu que, nos últimos 6 meses, tem apresentado sintomas diurnos similares 2 ou 3 vezes por semana, acordado à noite com dispneia 2 ou 3 vezes por semana e utilizado medicação de alívio para dispneia mais de 2 vezes por semana. Informou, ainda, que essa é a terceira vez que precisa procurar o Serviço de Emergência desde que começou a apresentar os sintomas. Ao dar entrada no Serviço de Emergência, o paciente apresentava dispneia moderada, com sibilos difusos; frequência respiratória = 30 ipm; frequência cardíaca = 130 bpm; pico do fluxo expiratório = 40% do previsto; saturação periférica de oxigênio de 91% em ar ambiente.\n\nApós a inalação de broncodilatador de curta de duração (3 doses com 1 dose a cada 20 minutos), o paciente refere melhora da dispneia; contudo, apresenta sibilância leve; pico de fluxo expiratório = 60% do previsto; frequência respiratória = 25 ipm; frequência cardíaca = 110 bpm; saturação periférica de oxigênio de 93% em ar ambiente.\n\nA conduta indicada nesse caso é",
+      "Um homem com 22 anos de idade, previamente hígido, apresenta febre, faringite exsudativa e linfadenopatia cervical posterior bilateral. O hemograma revela leucocitose com linfocitose atípica. O teste rápido para estreptococo é negativo.\n\nQual o exame mais adequado para confirmar a principal hipótese diagnóstica?",
     options: [
-      {
-        id: "A",
-        text: "iniciar terbutalina por via subcutânea, aminofilina por via endovenosa e continuar a nebulização a cada 20 minutos.",
-      },
-      {
-        id: "B",
-        text: "adicionar prednisona por via oral, dose de 1 a 2 mg/kg/dia, e continuar a nebulização a cada 20 minutos, com reavaliação em 1 hora.",
-      },
-      {
-        id: "C",
-        text: "indicar internação hospitalar, adicionar prednisona por via oral, dose de 1-2 mg/kg/dia, e continuar a nebulização a cada 20 minutos.",
-      },
-      {
-        id: "D",
-        text: "aumentar o intervalo de nebulização para 2 horas e orientar alta com broncodilatador de longa duração de horário e de curta duração de demanda.",
-      },
+      { id: "A", text: "Hemocultura." },
+      { id: "B", text: "Sorologia para mononucleose infecciosa (anticorpos heterófilos)." },
+      { id: "C", text: "Sorologia para toxoplasmose." },
+      { id: "D", text: "Sorologia para citomegalovírus." },
     ],
     correct: "B",
   },
   {
     id: 92,
     year: 2016,
-    area: "Medicina Preventiva e Social",
+    area: "Pediatria",
     enunciado:
-      "Como estratégia de enfrentamento ao grande número de casos de acidente vascular encefálico nos idosos moradores de uma determinada área de abrangência da Estratégia de Saúde da Família, propôs-se projeto de intervenção coletiva centrado na prevenção primária de tal adoecimento.\n\nDas ações específicas listadas abaixo, aquela que deve ser priorizada nesse projeto de prevenção primária é",
+      "Um recém-nascido de termo, com 12 horas de vida, apresenta taquipneia (FR 70 irpm), gemência e tiragem intercostal. A mãe é diabética e fez uso de corticoide antenatal. A radiografia de tórax mostra infiltrado reticulogranular difuso e broncogramas aéreos.\n\nQual o diagnóstico mais provável?",
     options: [
-      {
-        id: "A",
-        text: "buscar um controle efetivo da hipertensão arterial sistêmica nos pacientes idosos da região, sendo alvos do tratamento anti-hipertensivo os níveis tensionais menores ou iguais a 120 x 80 mmHg.",
-      },
-      {
-        id: "B",
-        text: "realizar palestras e outras atividades educativas, com destaque para a adesão a um cardápio saudável, pobre em sal e rico em verduras, legumes e frutas, bem como para o combate ao sedentarismo e o tabagismo.",
-      },
-      {
-        id: "C",
-        text: "realizar rastreamento primário na população idosa local através da realização de ultrassonografia com Doppler de artérias carótidas e vertebrais, com o objetivo de avaliar ocorrência de placas ateroscleróticas clinicamente silenciosas.",
-      },
-      {
-        id: "D",
-        text: "prescrever anticoagulação crônica adequada, associada a controle laboratorial de acordo com o fármaco utilizado, para indivíduos portadores de fibrilação atrial crônica cuja pontuação no escore CHADS2 seja maior ou igual a 2 pontos.",
-      },
+      { id: "A", text: "Taquipneia transitória do recém-nascido." },
+      { id: "B", text: "Síndrome de aspiração de mecônio." },
+      { id: "C", text: "Pneumonia neonatal." },
+      { id: "D", text: "Doença da membrana hialina." },
     ],
-    correct: "B",
+    correct: "D",
   },
   {
     id: 93,
     year: 2016,
-    area: "Medicina de Família e Comunidade",
+    area: "Medicina Preventiva e Social",
     enunciado:
-      "Um homem com 50 anos de idade, sedentário, tabagista há 20 anos, com consumo médio de 1 maço de cigarros por dia e índice de massa corporal = 29 kg/m², inicia acompanhamento na Unidade Básica de Saúde (UBS). Relata ter sido avaliado há 3 meses por cardiologista, o qual solicitou exames e prescreveu sinvastatina 20 mg/dia e ácido acetilsalicílico (AAS) 100 mg/dia. Além disso, o cardiologista recomendou perda de peso e cessação do tabagismo. O paciente afirma ter tentado parar de fumar, sem êxito. Na consulta na UBS, verifica-se pressão arterial = 160 x 96 mmHg. Os resultados de exames laboratoriais realizados há 5 meses revelam: colesterol total = 200 mg/dL (valor de referência: < 200 mg/dL); colesterol HDL = 36 mg/dL (valor de referência desejável: superior a 60 mg/dL); triglicérides = 300 mg/dL (valor de referência: < 150 a 199 mg/dL); glicemia de jejum = 120 mg/dL (valor de referência normal: < 110 mg/dL).\n\nConsiderando o quadro clínico exposto acima e a relação entre a UBS e o Núcleo de Apoio à Saúde da Família (NASF), assinale a alternativa em que é descrito o plano terapêutico adequado ao paciente.",
+      "A Política Nacional de Atenção Básica (PNAB) define as atribuições das equipes que atuam neste nível de atenção. O trabalho em equipe é fundamental para a qualidade do cuidado.\n\nQual profissional NÃO compõe a equipe mínima da Estratégia Saúde da Família?",
     options: [
-      {
-        id: "A",
-        text: "manter a terapia farmacológica vigente e discutir plano de ação com a equipe do NASF.",
-      },
-      {
-        id: "B",
-        text: "manter a terapia farmacológica vigente e encaminhar o paciente aos profissionais da equipe do NASF.",
-      },
-      {
-        id: "C",
-        text: "aumentar a dose de sinvastatina, associar anti-hipertensivo e discutir plano de ação com a equipe do NASF.",
-      },
-      {
-        id: "D",
-        text: "aumentar a dose da sinvastatina, associar anti-hipertensivo e encaminhar o paciente aos profissionais da equipe do NASF.",
-      },
+      { id: "A", text: "Fisioterapeuta." },
+      { id: "B", text: "Médico." },
+      { id: "C", text: "Enfermeiro." },
+      { id: "D", text: "Agente Comunitário de Saúde." },
     ],
     correct: "A",
   },
   {
     id: 94,
     year: 2016,
-    area: "Ginecologia e Obstetrícia",
+    area: "Cirurgia Geral",
     enunciado:
-      "Uma mulher com 40 anos de idade comparece ao hospital com queixa de caroço na mama esquerda, surgido há 3 meses após trauma no local. Ao exame físico, palpa-se nódulo de 5 cm no quadrante superior externo da mama esquerda, de consistência endurecida, acompanhado de retração de pele e equimose, sem sinais flogísticos.\n\nNesse caso, o diagnóstico diferencial do carcinoma mamário é",
+      "Um homem com 28 anos, vítima de queda de altura, chega ao pronto-socorro com dor torácica e dispneia. Ao exame, está consciente, com PA 100/70 mmHg, FC 110 bpm, FR 28 irpm. A percussão do hemitórax esquerdo é timpânica e a ausculta revela murmúrio vesicular abolido. A traqueia está desviada para a direita.\n\nQual a conduta imediata?",
     options: [
-      { id: "A", text: "fibroadenoma." },
-      { id: "B", text: "necrose gordurosa." },
-      { id: "C", text: "abscesso mamário." },
-      { id: "D", text: "tumor Phylodes de mama." },
+      { id: "A", text: "Realizar radiografia de tórax em AP." },
+      { id: "B", text: "Realizar toracocentese de alívio no 2º espaço intercostal, linha hemiclavicular esquerda." },
+      { id: "C", text: "Realizar intubação orotraqueal." },
+      { id: "D", text: "Realizar drenagem torácica em selo d'água." },
     ],
     correct: "B",
   },
   {
     id: 95,
     year: 2016,
-    area: "Ortopedia",
+    area: "Ginecologia e Obstetrícia",
     enunciado:
-      "Um menino com 6 anos de idade deu entrada em uma Unidade de Pronto Atendimento, acompanhado pela mãe. Relata que caiu do beliche, de uma altura aproximada de 1 metro, há 3 horas. Na admissão, apresenta-se choroso, com impotência funcional no punho direito e com dor local intensa. O resultado da radiografia do punho direito da criança é apresentado na imagem a seguir.\n\nNesse caso, o diagnóstico e a conduta são",
+      "Uma mulher com 34 anos, com infertilidade primária há 3 anos, realiza histerossalpingografia como parte da investigação. O exame mostra trompas dilatadas, com ausência de passagem do contraste para a cavidade peritoneal.\n\nQual a principal causa de infertilidade nesta paciente?",
     image: "/lovable-uploads/2016_p2_q95.png",
     options: [
-      {
-        id: "A",
-        text: "fratura do rádio distal através da placa de crescimento e metáfise, poupando a epífise; redução local fechada, com colocação de gesso.",
-      },
-      {
-        id: "B",
-        text: "fratura da ulna distal através da placa de crescimento e metáfise; redução local fechada, com colocação de gesso.",
-      },
-      {
-        id: "C",
-        text: "fratura do rádio distal, acometendo a epífise; imobilização com tala e administração de anti-inflamatório por via oral.",
-      },
-      {
-        id: "D",
-        text: "fratura da ulna distal através da placa de crescimento e metáfise; redução aberta da lesão, com colocação de fixador externo.",
-      },
+      { id: "A", text: "Fator tuboperitoneal." },
+      { id: "B", text: "Fator ovariano." },
+      { id: "C", text: "Fator uterino." },
+      { id: "D", text: "Fator masculino." },
     ],
     correct: "A",
   },
   {
     id: 96,
     year: 2016,
-    area: "Cirurgia Geral",
+    area: "Clínica Médica",
     enunciado:
-      "Uma mulher com 45 anos de idade, sem comorbidades, foi submetida a colecistectomia videolaparoscópica eletiva para colelitíase. Porém, devido a aderências intra-abdominais de uma cirurgia anterior, o procedimento foi convertido para um acesso laparotômico, que transcorreu sem incidentes. Dado que a cirurgia é considerada potencialmente contaminada, não foi realizada colangiografia transoperatória, procedendo-se a antibioticoprofilaxia, com uma dose na indução anestésica. No terceiro dia de pós-operatório, a paciente recebeu alta hospitalar. Uma semana após a alta, retornou ao ambulatório de cirurgia, apresentando-se com bom estado geral, disposta, porém com queixa de dor, abaulamento e hiperemia na ferida operatória. O cirurgião assistente examinou a ferida e, após a retirada de um ponto da sutura da pele da paciente, observou-se saída de moderada quantidade de material purulento.\n\nCom relação a esse caso, o médico, além de retirar os demais pontos da sutura, drenar e lavar a ferida operatória, deve",
+      "Um homem de 65 anos, hipertenso, em uso de enalapril, apresenta tosse seca e persistente há 2 meses, que se iniciou após o começo do tratamento. A radiografia de tórax é normal.\n\nQual a conduta mais adequada?",
     options: [
-      {
-        id: "A",
-        text: "ressuturar a ferida operatória e internar a paciente para antibioticoterapia por via venosa.",
-      },
-      {
-        id: "B",
-        text: "acompanhar a paciente em retornos ambulatoriais, sem uso de antibióticos.",
-      },
-      {
-        id: "C",
-        text: "iniciar antibioticoterapia por via oral, solicitando retornos ambulatoriais.",
-      },
-      {
-        id: "D",
-        text: "internar a paciente para iniciar antibioticoterapia por via venosa.",
-      },
+      { id: "A", text: "Adicionar um antitussígeno, como a codeína." },
+      { id: "B", text: "Substituir o enalapril por um bloqueador do receptor da angiotensina (BRA), como a losartana." },
+      { id: "C", text: "Realizar espirometria para investigar asma." },
+      { id: "D", text: "Suspender o enalapril e observar se a tosse melhora." },
     ],
-    correct: "A",
+    correct: "B",
   },
   {
     id: 97,
     year: 2016,
     area: "Pediatria",
     enunciado:
-      "Um menino com 7 anos de idade é trazido por sua mãe à Unidade Básica de Saúde, apresentando dor abdominal em cólica e diarreia intermitente há 2 meses. A mãe relata que o filho está apático, pálido, com vontade de brincar e que apresenta, ainda, episódios de tosse e sibilância, sem antecedentes de atopia. Informa, ainda, que foi realizado um hemograma na semana anterior, cujo resultado demonstra hemoglobina = 8 g/dL (valor de referência: 10,5 a 14,0 g/dL).\n\nNesse caso, a conduta adequada é",
+      "Um lactente de 10 meses de idade apresenta febre alta há 3 dias (39-40°C), irritabilidade e bom estado geral. No quarto dia, a febre cessa subitamente e surge um exantema maculopapular róseo, não pruriginoso, que se inicia no tronco e se espalha para o pescoço e membros.\n\nQual a principal hipótese diagnóstica?",
     options: [
-      {
-        id: "A",
-        text: "solicitar teste da fita adesiva, para pesquisar Enterobius vermicularis.",
-      },
-      {
-        id: "B",
-        text: "solicitar aspirado duodenal para pesquisa de protozoários.",
-      },
-      {
-        id: "C",
-        text: "solicitar exame parasitológico de fezes, para detecção de helmintos.",
-      },
-      {
-        id: "D",
-        text: "solicitar exame de fezes por centrifugação, para detecção de trofozoítos.",
-      },
+      { id: "A", text: "Sarampo." },
+      { id: "B", text: "Rubéola." },
+      { id: "C", text: "Exantema súbito (roséola infantum)." },
+      { id: "D", text: "Escarlatina." },
     ],
     correct: "C",
   },
   {
     id: 98,
     year: 2016,
-    area: "Ginecologia e Obstetrícia",
+    area: "Medicina Preventiva e Social",
     enunciado:
-      "Uma mulher com 36 anos de idade, Gesta 2 Para 2, procura a Unidade Básica de Saúde solicitando informações para utilização de método contraceptivo. Está assintomática, faz acompanhamento médico regular e apresenta resultado normal de citologia cervicovaginal colhida há 2 meses. Registra-se, como antecedente, colecistectomia há 2 anos, que cursou com trombose venosa profunda no membro inferior direito no pós-operatório. A paciente relata que, atualmente, não faz uso de qualquer medicação e nega tabagismo e outras doenças.\n\nUma opção contraceptiva adequada para essa paciente é o uso de anticoncepcional à base de",
+      "Em um estudo sobre a prevalência de diabetes em uma cidade, foram examinados 2.000 adultos selecionados aleatoriamente. Desses, 200 foram diagnosticados com diabetes. \n\nQual foi a prevalência de diabetes nesta população?",
     options: [
-      { id: "A", text: "etinilestradiol 50 mcg, por via oral, mensal." },
-      { id: "B", text: "noretisterona 0,35 mg, por via oral, de uso contínuo." },
-      {
-        id: "C",
-        text: "etinilestradiol 30 mcg + levonorgestrel 0,15 mg, por via oral, mensal.",
-      },
-      {
-        id: "D",
-        text: "enantato de noretisterona 50 mg + valerato de estradiol 5 mg, injetável, mensal.",
-      },
+      { id: "A", text: "20%" },
+      { id: "B", text: "10%" },
+      { id: "C", text: "1%" },
+      { id: "D", text: "Não é possível calcular com os dados fornecidos." },
     ],
-    correct: "C",
+    correct: "B",
   },
 ];

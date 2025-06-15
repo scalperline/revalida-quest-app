@@ -4,6 +4,7 @@ import { QUESTOES_REVALIDA_2017_PROVA1_1_26 } from "./questoesRevalida2017Prova1
 import { QUESTOES_REVALIDA_2017_PROVA1_27_42 } from "./questoesRevalida2017Prova1_27_42";
 import { QUESTOES_REVALIDA_2017_PROVA1_43_58 } from "./questoesRevalida2017Prova1_43_58";
 import { QUESTOES_REVALIDA_2017_PROVA1_59_76 } from "./questoesRevalida2017Prova1_59_76";
+import { QUESTOES_REVALIDA_2017_PROVA1_77_78 } from "./questoesRevalida2017Prova1_77_78";
 import { QUESTOES_REVALIDA_2017_PROVA1_79_90 } from "./questoesRevalida2017Prova1_79_90";
 import { QUESTOES_REVALIDA_2017_PROVA1_91_100 } from "./questoesRevalida2017Prova1_91_100";
 
@@ -12,7 +13,7 @@ export const QUESTOES_REVALIDA_2017_PROVA1: Question[] = [
   ...QUESTOES_REVALIDA_2017_PROVA1_27_42,
   ...QUESTOES_REVALIDA_2017_PROVA1_43_58,
   ...QUESTOES_REVALIDA_2017_PROVA1_59_76,
-  // Faltam as questões 77 e 78
+  ...QUESTOES_REVALIDA_2017_PROVA1_77_78,
   ...QUESTOES_REVALIDA_2017_PROVA1_79_90,
   ...QUESTOES_REVALIDA_2017_PROVA1_91_100,
 ];

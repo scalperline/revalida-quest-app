@@ -1,4 +1,3 @@
-
 import { type Question } from "@/components/QuestionCard";
 
 export const QUESTOES_REVALIDA_2016_PROVA2_1_25: Question[] = [
@@ -26,7 +25,7 @@ export const QUESTOES_REVALIDA_2016_PROVA2_1_25: Question[] = [
         text: "prescrever medicação antipsicótica de depósito, em razão dos indícios de esquizofrenia; informar à família do paciente sobre os riscos atribuídos ao uso de drogas e encaminhar para acompanhamento na Unidade Básica de Saúde do seu município.",
       },
     ],
-    correct: "",
+    correct: "B",
   },
   {
     id: 2,
@@ -52,7 +51,7 @@ export const QUESTOES_REVALIDA_2016_PROVA2_1_25: Question[] = [
         text: "prescrever penicilina G cristalina aquosa 3 milhões UI por via endovenosa, a cada 4 horas por 14 dias, para a paciente, e penicilina benzatina 2,4 milhões UI, por via intramuscular, em dose única, para o parceiro.",
       },
     ],
-    correct: "",
+    correct: "C",
   },
   {
     id: 3,
@@ -67,7 +66,7 @@ export const QUESTOES_REVALIDA_2016_PROVA2_1_25: Question[] = [
       { id: "C", text: "Hemorragia intraparenquimatosa." },
       { id: "D", text: "Contusões cerebrais coalescentes." },
     ],
-    correct: "",
+    correct: "A",
   },
   {
     id: 4,
@@ -75,12 +74,12 @@ export const QUESTOES_REVALIDA_2016_PROVA2_1_25: Question[] = [
     area: "Pediatria",
     enunciado: "Uma menina, com 3 anos de idade, é atendida em uma Unidade Básica de Saúde. A mãe refere que, há 2 semanas, a filha havia apresentado febre de 39 °C, inapetência e episódios esporádicos de vômitos, ocasião em que foi atendida em Serviço de Pronto Atendimento, sendo coletada urina por sondagem vesical. A análise do sedimento urinário mostrou 50 leucócitos por campo (valor de referência: 5/campo) e a urocultura apresentou crescimento de Escherichia coli 80.000 ufc/mL. Foi prescrita amoxacilina + clavulanato por 10 dias, com melhora clínica. A mãe alega ter sido esse o segundo episódio de infecção urinária nos últimos 6 meses e que a criança permaneceu assintomática nesse intervalo de tempo, não tendo sido realizada nenhuma investigação adicional. A criança apresenta crescimento normal e, ao exame físico, não foram detectadas alterações.\n\nCom o objetivo de se obter a confirmação diagnóstica desse caso, a conduta adequada é solicitar",
     options: [
-        { id: "A", text: "cintilografia com DMSA para investigar a função renal." },
+        { id: "ANULADA", text: "cintilografia com DMSA para investigar a função renal." },
         { id: "B", text: "cintilografia com DTPA para investigar possíveis alterações do trato urinário." },
         { id: "C", text: "ultrassonografia de rins e vias urinárias para investigar possíveis alterações do trato urinário." },
         { id: "D", text: "exame simples de urina e urocultura por saco coletor para investigar se o tratamento foi adequado." },
     ],
-    correct: "",
+    correct: "ANULADA",
   },
   {
       id: 5,
@@ -94,7 +93,7 @@ export const QUESTOES_REVALIDA_2016_PROVA2_1_25: Question[] = [
         { id: "C", text: "metoprolol por via endovenosa." },
         { id: "D", text: "nitroglicerina por via endovenosa." },
       ],
-      correct: "",
+      correct: "B",
   },
   {
       id: 6,
@@ -107,7 +106,7 @@ export const QUESTOES_REVALIDA_2016_PROVA2_1_25: Question[] = [
           { id: "C", text: "recomendar a redução do peso e, caso a hipertensão persista após a redução de peso, iniciar o tratamento medicamentoso para controle da pressão arterial." },
           { id: "D", text: "estimular e orientar mudanças nos hábitos de vida, fazer acompanhamento rigoroso com medições diárias da pressão arterial e aguardar resultados para iniciar o tratamento medicamentoso." },
       ],
-      correct: "",
+      correct: "B",
   },
   {
       id: 7,
@@ -120,7 +119,7 @@ export const QUESTOES_REVALIDA_2016_PROVA2_1_25: Question[] = [
           { id: "C", text: "Isolar os casos suspeitos em celas individuais, evitar trânsito de profissionais entre alas com e sem doentes e programar vacinação anual." },
           { id: "D", text: "Isolar os casos suspeitos em celas individuais e solicitar sorologia para diagnóstico de Influenza em casos suspeitos até a confirmação de três casos." },
       ],
-      correct: "",
+      correct: "C",
   },
   {
       id: 8,
@@ -133,7 +132,7 @@ export const QUESTOES_REVALIDA_2016_PROVA2_1_25: Question[] = [
           { id: "C", text: "corticoterapia para maturação pulmonar fetal; profilaxia para sepse neonatal por estreptococo beta-hemolítico; aguardo do trabalho de parto." },
           { id: "D", text: "indução do trabalho de parto; profilaxia para sepse neonatal por estreptococo beta-hemolítico; antibioticoterapia de largo espectro." },
       ],
-      correct: "",
+      correct: "D",
   },
   {
       id: 9,
@@ -146,7 +145,7 @@ export const QUESTOES_REVALIDA_2016_PROVA2_1_25: Question[] = [
           { id: "C", text: "Manter o paciente internado e suspender a cirurgia até que haja avaliação e liberação pela equipe da cardiologia." },
           { id: "D", text: "Manter a cirurgia para o dia seguinte; administrar vitamina K e, se necessário, transfundir plasma fresco congelado no transoperatório." },
       ],
-      correct: "",
+      correct: "A",
   },
   {
       id: 10,
@@ -160,7 +159,7 @@ export const QUESTOES_REVALIDA_2016_PROVA2_1_25: Question[] = [
         { id: "C", text: "encaminhar a paciente a centro especializado, para biópsia excisional e posterior complementação cirúrgica de acordo com resultado do exame histopatológico." },
         { id: "D", text: "reavaliar a paciente em 6 meses, para observar a evolução da lesão pigmentada sob dermatoscopia e, caso não apresente alterações, acompanhar a paciente anualmente." },
       ],
-      correct: "",
+      correct: "C",
   },
   {
     id: 11,
@@ -172,7 +171,7 @@ export const QUESTOES_REVALIDA_2016_PROVA2_1_25: Question[] = [
         { id: "B", text: "adenite bacteriana." },
         { id: "C", text: "mononucleose infecciosa." },
     ],
-    correct: "",
+    correct: "C",
   },
   {
     id: 12,
@@ -185,7 +184,7 @@ export const QUESTOES_REVALIDA_2016_PROVA2_1_25: Question[] = [
       { id: "C", text: "prescrever sulfametoxazol-trimetoprima 1.600/320 mg, a cada 24 horas, durante 7 dias; repetir urocultura duas semanas após o tratamento." },
       { id: "D", text: "acompanhar mensalmente a gestante, sem prescrição imediata de medicamentos; solicitar uroculturas de controle até a definição do caso." },
     ],
-    correct: "",
+    correct: "B",
   },
   {
     id: 13,
@@ -198,7 +197,7 @@ export const QUESTOES_REVALIDA_2016_PROVA2_1_25: Question[] = [
         { id: "C", text: "um provável atraso no desenvolvimento neuropsicomotor, devendo ser estimulada e reavaliada em 15 dias." },
         { id: "D", text: "um provável atraso no desenvolvimento neuropsicomotor, sendo necessário encaminhá-la para avaliação pelo neurologista." },
     ],
-    correct: "",
+    correct: "A",
   },
   {
     id: 14,
@@ -211,7 +210,7 @@ export const QUESTOES_REVALIDA_2016_PROVA2_1_25: Question[] = [
         { id: "C", text: "retirar o DIU e encaminhar a paciente para antibioticoterapia em nível hospitalar." },
         { id: "D", text: "manter o DIU e encaminhar a paciente para antibioticoterapia em nível hospitalar." },
     ],
-    correct: "",
+    correct: "B",
   },
   {
     id: 15,
@@ -224,7 +223,7 @@ export const QUESTOES_REVALIDA_2016_PROVA2_1_25: Question[] = [
         { id: "C", text: "a realização de teste de genotipagem para o HCV." },
         { id: "D", text: "a solicitação de teste de quantificação da carga viral do HCV." },
     ],
-    correct: "",
+    correct: "D",
   },
   {
     id: 16,
@@ -238,7 +237,7 @@ export const QUESTOES_REVALIDA_2016_PROVA2_1_25: Question[] = [
         { id: "C", text: "situação epidemiológica controlada, sendo o aumento verificado na taxa de incidência da doença nos últimos anos devido à melhora no sistema de notificação compulsória da doença." },
         { id: "D", text: "situação epidemiológica controlada, sendo o aumento verificado na taxa de incidência da doença nos últimos anos devido ao aumento na captação e diagnóstico das gestantes a partir da expansão da cobertura de atenção primária." },
     ],
-    correct: "",
+    correct: "B",
   },
   {
     id: 17,
@@ -251,7 +250,7 @@ export const QUESTOES_REVALIDA_2016_PROVA2_1_25: Question[] = [
         { id: "C", text: "lúpus eritematoso sistêmico." },
         { id: "D", text: "tuberculose de sistema nervoso central." },
     ],
-    correct: "",
+    correct: "C",
   },
   {
     id: 18,
@@ -264,7 +263,7 @@ export const QUESTOES_REVALIDA_2016_PROVA2_1_25: Question[] = [
         { id: "C", text: "realização de exame otológico com retirada do animal ainda vivo, utilizando-se pinça." },
         { id: "D", text: "colocação de tampão com algodão e encaminhamento imediato do paciente para consulta com o especialista." },
     ],
-    correct: "",
+    correct: "ANULADA",
   },
   {
     id: 19,
@@ -277,7 +276,7 @@ export const QUESTOES_REVALIDA_2016_PROVA2_1_25: Question[] = [
         { id: "C", text: "selecionar um grupo de pessoas doentes e um grupo de pessoas não doentes para identificar as características que ocorrem com maior frequência entre os doentes." },
         { id: "D", text: "selecionar um grupo de pessoas não doentes, classificar os participantes quanto às exposições de interesse e acompanhá-los ao longo do tempo para avaliar a ocorrência de casos novos de doenças nos grupos." },
     ],
-    correct: "",
+    correct: "B",
   },
   {
     id: 20,
@@ -290,7 +289,7 @@ export const QUESTOES_REVALIDA_2016_PROVA2_1_25: Question[] = [
       { id: "C", text: "Denunciar o paciente à comissão de ética do hospital, considerando quebra do princípio da beneficência e não maleficência do ato médico, ancorado nas evidências científicas da medicina, pois caracteriza-se o risco elevado de novo episódio de pancreatite aguda grave com risco de morte." },
       { id: "D", text: "Conversar com a família sobre a necessidade de ser realizada tal cirurgia, explicar os riscos e os benefícios para o paciente, caso seja operado ou não, e solicitar que ela autorize a cirurgia, mesmo contra a vontade do paciente, com base no princípio da ação persuasiva e no da beneficência e não maleficência do ato médico." },
     ],
-    correct: "",
+    correct: "B",
   },
   {
     id: 21,
@@ -303,7 +302,7 @@ export const QUESTOES_REVALIDA_2016_PROVA2_1_25: Question[] = [
         { id: "C", text: "amigdalite bacteriana." },
         { id: "D", text: "mononucleose infecciosa." },
     ],
-    correct: "",
+    correct: "D",
   },
   {
     id: 22,
@@ -316,7 +315,7 @@ export const QUESTOES_REVALIDA_2016_PROVA2_1_25: Question[] = [
         { id: "C", text: "permitem que o casal conheça a identidade do doador de sêmen." },
         { id: "D", text: "são passíveis de aplicação quando há intenção de selecionar o sexo do filho." },
     ],
-    correct: "",
+    correct: "A",
   },
   {
     id: 23,
@@ -330,7 +329,7 @@ export const QUESTOES_REVALIDA_2016_PROVA2_1_25: Question[] = [
         { id: "C", text: "Neoplasia de cabeça de pâncreas; esclarecer o paciente sobre a doença e seu prognóstico e indicar cirurgia (hepaticojejunostomia e gastrojejunostomia)." },
         { id: "D", text: "Neoplasia de cabeça de pâncreas; indicar cirurgia (gastroduodenopancreatectomia com ressecção de artéria mesentérica superior e anastomose primária) e discutir prognóstico com o paciente." },
     ],
-    correct: "",
+    correct: "C",
   },
   {
     id: 24,
@@ -343,7 +342,7 @@ export const QUESTOES_REVALIDA_2016_PROVA2_1_25: Question[] = [
         { id: "C", text: "evitar luzes acesas durante a madrugada, o que torna o sono mais instável, facilitando o despertar nesse período." },
         { id: "D", text: "evitar a colocação de tapetes soltos, especialmente os de tecido, pois não permitem firmeza do idoso ao caminhar." },
     ],
-    correct: "",
+    correct: "D",
   },
   {
     id: 25,
@@ -356,6 +355,6 @@ export const QUESTOES_REVALIDA_2016_PROVA2_1_25: Question[] = [
         { id: "C", text: "aguardar a presença do marido da paciente à UBS para realizar consulta médica, exames laboratoriais e instituir o tratamento do casal simultaneamente." },
         { id: "D", text: "aguardar a presença do marido da paciente à UBS para instituir o tratamento do casal e, caso ele não compareça espontaneamente à consulta, solicitar novamente seu comparecimento na próxima consulta da paciente ao pré-natal." },
     ],
-    correct: "",
+    correct: "B",
   },
 ];

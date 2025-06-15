@@ -1,4 +1,3 @@
-
 /**
  * Banco de questões oficiais Revalida INEP 2011
  * Estrutura organizada com enunciado, alternativas, resposta correta, feedback e referência
@@ -193,7 +192,154 @@ Com base na história clínica e nos exames complementares, o diagnóstico princ
     ],
     correct: "D",
     referencia: "Prova Revalida INEP 2011, Q10. Adicionar referência oficial."
-  }
-  // Para as próximas questões, adicione da mesma maneira
-];
+  },
+  {
+    id: 41,
+    year: 2011,
+    area: "Clínica Médica",
+    enunciado: `Paciente, com 57 anos de idade, sexo masculino, chega ao pronto atendimento queixando-se de palpitações que se iniciaram há três dias, associadas à tontura e à dispneia. Relata fazer uso de metimazol 10 mg/dia há um mês por diagnóstico de hipertireoidismo. Faz uso ainda de enalapril 20 mg para hipertensão arterial desde os 45 anos de idade. 
+Ao exame: Pressão arterial = 110 x 70 mmHg; Frequência cardíaca = 160 BPM; Frequência respiratória = 26 irpm; ritmo cardíaco taquicárdico, irregular, em dois tempos, sem sopros; murmúrio vesicular fisiológico com crepitações bibasais; abdome livre, indolor, ruídos hidroaéreos positivos; aparelho locomotor sem alterações. Saturação periférica de oxigênio de 87%. Solicitado ECG:`,
+    imagemEnunciado: "/questao_images/2011_q41_ecg.png",
+    options: [
+      {
+        id: "A",
+        text: "Flutter atrial e amiodarona.",
+        feedbackCorreta: "O ECG mostra padrão característico de flutter atrial (ondas F serrilhadas e resposta ventricular rápida e regular), e a amiodarona é antiarrítmico seguro na emergência. Em hipertireoidismo, é preferível à digoxina, pois controla melhor a FC.",
+        feedbackErrada: ""
+      },
+      {
+        id: "B",
+        text: "Taquicardia supra ventricular paroxística e procainamida.",
+        feedbackErrada: "O ECG não mostra P' retrógradas nem complexos QRS anormais, além do ritmo não ser de dissociação AV. Procainamida não seria antiarrítmico de escolha."
+      },
+      {
+        id: "C",
+        text: "Síndrome de Wolff-Parkinson-White e beta bloqueador.",
+        feedbackErrada: "Não há sopro tipo delta wave nem PR curto; além disso, o uso de betabloqueador pode ser arriscado em pacientes com via acessória no contexto de WPW."
+      },
+      {
+        id: "D",
+        text: "Taquicardia atrial multifocal e bloqueadores de canais de cálcio.",
+        feedbackErrada: "O ECG não mostra várias ondas P de morfologias distintas, como esperado em taquicardia atrial multifocal."
+      },
+      {
+        id: "E",
+        text: "Fibrilação atrial e digitálico.",
+        feedbackErrada: "Embora a apresentação clínica seja compatível, o traçado revela flutter, não fibrilação. Digitálico não é a melhor escolha no contexto de hipertireoidismo."
+      }
+    ],
+    correct: "A",
+    referencia: "Prova Revalida INEP 2011, Q41. Referência: Goldman's Cecil Medicina, 25ª ed., Cap. 54; UpToDate – Management of supraventricular arrhythmias."
+  },
+  {
+    id: 42,
+    year: 2011,
+    area: "Cirurgia",
+    enunciado: `Mulher, com 35 anos de idade, procura atendimento médico por apresentar quadro de dor de início súbito, com localização inicial na região epigástrica, inicialmente acompanhada de vômitos, com rápida expansão para o flanco e a fossa ilíaca direita e, posteriormente, para todo o abdome. A paciente apresenta extremidades frias e respiração superficial; busca manter-se imóvel e adota posição antálgica, com pernas fletidas sobre o tronco.
+O abdome é difusamente doloroso, sendo evidentes a contratura abdominal e a rigidez da musculatura abdominal à palpação e à respiração. A radiografia de tórax e a radiografia simples de abdome, ambas realizadas em ortostase, mostram pneumoperitônio.
 
+Com relação à complicação apresentada pela paciente, é correto afirmar que`,
+    options: [
+      {
+        id: "A",
+        text: "A figura entra as causas mais frequentes de abdome agudo não traumático e metade dos casos ocorrem em pacientes com idade entre 20 e 40 anos.",
+        feedbackErrada: "A maior incidência é realmente nessa faixa etária, porém o enunciado se refere à incidência de úlceras perfuradas, não apenas ao pneumoperitônio."
+      },
+      {
+        id: "B",
+        text: "Nas úlceras duodenais as perfurações ocorrem, de um modo geral, na parede posterior e na curvatura do duodeno.",
+        feedbackErrada: "A maioria das perfurações de úlcera duodenal ocorre na parede anterior do bulbo duodenal, não na posterior."
+      },
+      {
+        id: "C",
+        text: "Nas úlceras gástricas as perfurações ocorrem, usualmente, na parede posterior do antro e da região pré-pilórica.",
+        feedbackErrada: "O mais comum é a perfuração pela parede anterior do antro gástrico e não da posterior."
+      },
+      {
+        id: "D",
+        text: "A área mais acometida por perfurações de úlceras pépticas é o estômago, na proporção de 14:1 em relação ao duodeno.",
+        feedbackErrada: "A incidência é inversa: a perfuração ocorre 14 vezes mais no duodeno do que no estômago."
+      },
+      {
+        id: "E",
+        text: "A mortalidade é proporcionalmente maior nas perfurações duodenais, em torno de 20%, talvez porque acometam pacientes mais idosos.",
+        feedbackCorreta: "A letalidade das perfurações é de fato maior nos quadros de úlcera duodenal em pacientes idosos e a mortalidade pode chegar a 20%."
+      }
+    ],
+    correct: "E",
+    referencia: "Prova Revalida INEP 2011, Q42. Referência: Sabiston – Tratado de Cirurgia, 18ª ed., Cap. 49."
+  },
+  {
+    id: 43,
+    year: 2011,
+    area: "Clínica Médica",
+    enunciado: `Paciente, com 35 anos de idade, sexo masculino, etilista, é trazido por familiares ao hospital após ter apresentado crise convulsiva generalizada e perda de consciência. Esposa relata que o paciente não fazia uso de medicamentos, tendo realizado consulta médica recente. Nega que tenham ocorrido quedas ou traumatismos antecedendo o início do quadro. Ao exame: Pressão arterial = 190 x 100 mmHg, Frequência cardíaca = 50 bpm ritmo cardíaco regular em dois tempos, sem sopros; murmúrio vesicular fisiológico sem ruídos adventícios. Escala de coma de Glasgow: 7, pupilas anisocóricas (maior à direita) e fotorreagentes; hemiplegia à esquerda. Saturação periférica de oxigênio de 98 %.
+
+Qual a conduta a ser tomada para esse paciente no momento da admissão?`,
+    options: [
+      {
+        id: "A",
+        text: "Entubação orotraqueal + hiperventilação mecânica; manitol.",
+        feedbackCorreta: "A escala de Glasgow menor que 8 indica rebaixamento do nível de consciência, exigindo proteção de vias aéreas e controle da hipertensão intracraniana com manitol.",
+        feedbackErrada: ""
+      },
+      {
+        id: "B",
+        text: "Ventilação não invasiva; manitol e solução hipertônica.",
+        feedbackErrada: "Ventilação não invasiva está contraindicada em pacientes com rebaixamento do nível de consciência devido ao risco de aspiração."
+      },
+      {
+        id: "C",
+        text: "Suplementação de oxigênio por máscara; manitol.",
+        feedbackErrada: "Apenas a suplementação de oxigênio não é suficiente para proteger vias aéreas e evitar aspiração."
+      },
+      {
+        id: "D",
+        text: "Entubação orotraqueal + ventilação mecânica.",
+        feedbackErrada: "O tratamento ideal inclui, além da ventilação, o uso de manitol para controle da hipertensão intracraniana."
+      },
+      {
+        id: "E",
+        text: "Entubação orotraqueal + ventilação mecânica + anti-hipertensivo.",
+        feedbackErrada: "Apesar da PA elevada, o tratamento com anti-hipertensivos deve ser criterioso para não induzir redução crítica da perfusão cerebral."
+      }
+    ],
+    correct: "A",
+    referencia: "Prova Revalida INEP 2011, Q43. Referência: Adams & Victor – Princípios de Neurologia, 8ª ed., Cap. 34."
+  },
+  {
+    id: 44,
+    year: 2011,
+    area: "Clínica Médica",
+    enunciado: `Homem, assintomático, com 45 anos de idade e que apresenta tumor renal, procura atendimento em consultório médico portando documento que o identifica como Testemunha de Jeová, informando que não deverá ser submetido à transfusão de sangue. O documento foi registrado em cartório e enumera todos os motivos pelos quais o mesmo tem o direito de não receber transfusão de sangue. É provável que este paciente seja submetido a tratamento cirúrgico, pois esta alternativa terapêutica aponta melhor sobrevida. Ele se nega veementemente a receber transfusão, caso seja necessário. Qual a conduta baseada nos princípios éticos positivos na última versão do Código de Ética Médica brasileiro?`,
+    options: [
+      {
+        id: "A",
+        text: "Não dar certeza ao paciente que não transfundirá o sangue e realizar o procedimento cirúrgico.",
+        feedbackErrada: "O respeito à autonomia exige que se siga a vontade expressa do paciente; não há justificativa para descumprir decisão fundamentada."
+      },
+      {
+        id: "B",
+        text: "Garantir ao paciente que tentará ao máximo não transfundir, mas transfundir se necessário.",
+        feedbackErrada: "Mesmo tentando respeitar a autonomia, o correto é respeitar integralmente decisão do paciente habilitado e consciente."
+      },
+      {
+        id: "C",
+        text: "Tentar dissuadir o paciente da sua crença religiosa para o bem da sua saúde.",
+        feedbackErrada: "Não se deve tentar impor crenças ou pressões pessoais sobre decisões de foro íntimo do paciente consciente e bem orientado."
+      },
+      {
+        id: "D",
+        text: "Realizar o procedimento cirúrgico e, se necessário, transfundir, informando a família.",
+        feedbackErrada: "Família não pode substituir manifestação expressa de vontade do próprio paciente lúcido e emancipado."
+      },
+      {
+        id: "E",
+        text: "Negar-se a realizar o procedimento e orientar o paciente a procurar outro médico.",
+        feedbackCorreta: "O princípio da autonomia exige o respeito à decisão do paciente, inclusive em situações de risco; não se pode obrigar ou coagir a conduta."
+      }
+    ],
+    correct: "E",
+    referencia: "Prova Revalida INEP 2011, Q44. Referência: Código de Ética Médica 2010, Cap. I (Princípios Fundamentais), Resolução CFM 1931/09."
+  }
+];

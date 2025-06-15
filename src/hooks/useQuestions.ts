@@ -13,11 +13,12 @@ import { QUESTOES_REVALIDA_2016_PROVA1 } from "@/data/questoesRevalida2016Prova1
 import { QUESTOES_REVALIDA_2016_PROVA2 } from "@/data/questoesRevalida2016Prova2";
 import { QUESTOES_REVALIDA_2017_PROVA1 } from "@/data/questoesRevalida2017Prova1";
 import { QUESTOES_REVALIDA_2017_PROVA2 } from "@/data/questoesRevalida2017Prova2";
+import { QUESTOES_REVALIDA_2020 } from "@/data/questoesRevalida2020";
 
 const QUESTOES_POR_PAGINA = 10;
 
 export function useQuestions() {
-  const [anoSelecionado, setAnoSelecionado] = useState<number>(2017);
+  const [anoSelecionado, setAnoSelecionado] = useState<number>(2020);
   const [tipoProva, setTipoProva] = useState<string>("Prova 1");
   const [paginaAtual, setPaginaAtual] = useState(1);
 
@@ -52,6 +53,9 @@ export function useQuestions() {
       return tipoProva === "Prova 2"
         ? QUESTOES_REVALIDA_2017_PROVA2
         : QUESTOES_REVALIDA_2017_PROVA1;
+    }
+    if (anoSelecionado === 2020) {
+      return QUESTOES_REVALIDA_2020;
     }
     return [];
   }, [anoSelecionado, tipoProva]);

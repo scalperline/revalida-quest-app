@@ -1,4 +1,3 @@
-
 import { type Question } from "@/components/QuestionCard";
 
 export const QUESTOES_REVALIDA_2017_PROVA1_1_26: Question[] = [
@@ -16,7 +15,7 @@ export const QUESTOES_REVALIDA_2017_PROVA1_1_26: Question[] = [
       { id: "D", text: "Hipertensão pulmonar." },
       { id: "E", text: "Doença arterial coronariana." },
     ],
-    correct: "E",
+    correct: "ANULADA",
   },
   {
     id: 2,
@@ -32,7 +31,7 @@ export const QUESTOES_REVALIDA_2017_PROVA1_1_26: Question[] = [
       { id: "D", text: "Anemia perniciosa." },
       { id: "E", text: "Anemia aplástica." },
     ],
-    correct: "A",
+    correct: "B",
   },
   {
     id: 3,
@@ -48,7 +47,7 @@ export const QUESTOES_REVALIDA_2017_PROVA1_1_26: Question[] = [
       { id: "D", text: "Inibidor da DPP-4." },
       { id: "E", text: "Inibidor da SGLT2." },
     ],
-    correct: "B",
+    correct: "C",
   },
   {
     id: 4,
@@ -79,7 +78,7 @@ export const QUESTOES_REVALIDA_2017_PROVA1_1_26: Question[] = [
         text: "Encaminhar a criança para avaliação de um otorrinolaringologista para possível drenagem de abscesso periamigdaliano.",
       },
     ],
-    correct: "A",
+    correct: "B",
   },
   {
     id: 5,
@@ -95,7 +94,7 @@ export const QUESTOES_REVALIDA_2017_PROVA1_1_26: Question[] = [
       { id: "D", text: "Artéria basilar." },
       { id: "E", text: "Artéria vertebral esquerda." },
     ],
-    correct: "B",
+    correct: "A",
   },
   {
     id: 6,
@@ -126,7 +125,7 @@ export const QUESTOES_REVALIDA_2017_PROVA1_1_26: Question[] = [
         text: "Administrar sulfato de magnésio para prevenir convulsões e анти-hipertensivos para controlar a pressão arterial.",
       },
     ],
-    correct: "E",
+    correct: "B",
   },
   {
     id: 7,
@@ -148,7 +147,7 @@ export const QUESTOES_REVALIDA_2017_PROVA1_1_26: Question[] = [
         text: "Encaminhar o paciente para internação hospitalar e ventilação mecânica.",
       },
     ],
-    correct: "A",
+    correct: "B",
   },
   {
     id: 8,
@@ -164,7 +163,7 @@ export const QUESTOES_REVALIDA_2017_PROVA1_1_26: Question[] = [
       { id: "D", text: "Iodo radioativo." },
       { id: "E", text: "Corticoides." },
     ],
-    correct: "A",
+    correct: "D",
   },
   {
     id: 9,
@@ -186,7 +185,7 @@ export const QUESTOES_REVALIDA_2017_PROVA1_1_26: Question[] = [
         text: "Antagonistas dos receptores da angiotensina II (BRA).",
       },
     ],
-    correct: "A",
+    correct: "C",
   },
   {
     id: 10,
@@ -211,7 +210,7 @@ export const QUESTOES_REVALIDA_2017_PROVA1_1_26: Question[] = [
         text: "Encaminhar a criança para internação hospitalar e administrar ribavirina.",
       },
     ],
-    correct: "D",
+    correct: "A",
   },
   {
     id: 11,
@@ -242,7 +241,7 @@ export const QUESTOES_REVALIDA_2017_PROVA1_1_26: Question[] = [
         text: "Não há necessidade de iniciar a TARV em pacientes assintomáticos com níveis de CD4 acima de 500 células/mm³.",
       },
     ],
-    correct: "A",
+    correct: "C",
   },
   {
     id: 12,
@@ -261,7 +260,7 @@ export const QUESTOES_REVALIDA_2017_PROVA1_1_26: Question[] = [
       },
       { id: "E", text: "Denosumabe." },
     ],
-    correct: "A",
+    correct: "D",
   },
   {
     id: 13,
@@ -293,7 +292,7 @@ export const QUESTOES_REVALIDA_2017_PROVA1_1_26: Question[] = [
       { id: "D", text: "Lubrificantes vaginais." },
       { id: "E", text: "Exercícios físicos." },
     ],
-    correct: "A",
+    correct: "C",
   },
   {
     id: 15,
@@ -309,7 +308,7 @@ export const QUESTOES_REVALIDA_2017_PROVA1_1_26: Question[] = [
       { id: "D", text: "Etambutol." },
       { id: "E", text: "Estreptomicina." },
     ],
-    correct: "D",
+    correct: "C",
   },
   {
     id: 16,
@@ -325,7 +324,7 @@ export const QUESTOES_REVALIDA_2017_PROVA1_1_26: Question[] = [
       { id: "D", text: "Metronidazol." },
       { id: "E", text: "Nistatina." },
     ],
-    correct: "A",
+    correct: "B",
   },
   {
     id: 17,
@@ -341,7 +340,7 @@ export const QUESTOES_REVALIDA_2017_PROVA1_1_26: Question[] = [
       { id: "D", text: "Vancomicina." },
       { id: "E", text: "Meropenem." },
     ],
-    correct: "A",
+    correct: "B",
   },
   {
     id: 18,
@@ -357,7 +356,7 @@ export const QUESTOES_REVALIDA_2017_PROVA1_1_26: Question[] = [
       { id: "D", text: "Micofenolato de mofetila." },
       { id: "E", text: "Rituximab." },
     ],
-    correct: "C",
+    correct: "A",
   },
   {
     id: 19,
@@ -373,7 +372,7 @@ export const QUESTOES_REVALIDA_2017_PROVA1_1_26: Question[] = [
       { id: "D", text: "Procainamida." },
       { id: "E", text: "Adenosina." },
     ],
-    correct: "A",
+    correct: "C",
   },
   {
     id: 20,
@@ -389,7 +388,7 @@ export const QUESTOES_REVALIDA_2017_PROVA1_1_26: Question[] = [
       { id: "D", text: "Ceftriaxona." },
       { id: "E", text: "Doxiciclina." },
     ],
-    correct: "D",
+    correct: "C",
   },
   {
     id: 21,
@@ -405,7 +404,7 @@ export const QUESTOES_REVALIDA_2017_PROVA1_1_26: Question[] = [
       { id: "D", text: "Infliximabe." },
       { id: "E", text: "Ciclosporina." },
     ],
-    correct: "A",
+    correct: "B",
   },
   {
     id: 22,
@@ -421,7 +420,7 @@ export const QUESTOES_REVALIDA_2017_PROVA1_1_26: Question[] = [
       { id: "D", text: "Punção lombar com análise do líquor." },
       { id: "E", text: "Hemocultura." },
     ],
-    correct: "D",
+    correct: "B",
   },
   {
     id: 23,
@@ -437,7 +436,7 @@ export const QUESTOES_REVALIDA_2017_PROVA1_1_26: Question[] = [
       { id: "D", text: "Agonistas alfa-adrenérgicos." },
       { id: "E", text: "Mióticos." },
     ],
-    correct: "A",
+    correct: "B",
   },
   {
     id: 24,
@@ -469,6 +468,6 @@ export const QUESTOES_REVALIDA_2017_PROVA1_1_26: Question[] = [
       { id: "D", text: "Terapia hormonal." },
       { id: "E", text: "Observação vigilante." },
     ],
-    correct: "A",
+    correct: "B",
   },
 ];

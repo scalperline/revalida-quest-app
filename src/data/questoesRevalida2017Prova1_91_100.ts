@@ -1,4 +1,3 @@
-
 import { type Question } from "@/components/QuestionCard";
 
 export const QUESTOES_REVALIDA_2017_PROVA1_91_100: Question[] = [
@@ -14,7 +13,7 @@ export const QUESTOES_REVALIDA_2017_PROVA1_91_100: Question[] = [
       { id: "C", text: "acompanhamento na Unidade de Atenção Básica; início de tratamento sintomático e antibioticoterapia por via oral." },
       { id: "D", text: "internação hospitalar para antibioticoterapia e hidratação endovenosas; administração de analgésicos, antiespasmódicos e antieméticos." },
     ],
-    correct: "A",
+    correct: "D",
   },
   {
     id: 92,
@@ -56,7 +55,7 @@ export const QUESTOES_REVALIDA_2017_PROVA1_91_100: Question[] = [
       { id: "C", text: "A cada ano; dosagem da glicemia em jejum." },
       { id: "D", text: "A cada 6 meses; dosagem da hemoglobina glicada." },
     ],
-    correct: "B",
+    correct: "C",
   },
   {
     id: 95,
@@ -98,7 +97,7 @@ export const QUESTOES_REVALIDA_2017_PROVA1_91_100: Question[] = [
       { id: "C", text: "laparotomia exploradora com esplenectomia e rafia da lesão hepática." },
       { id: "D", text: "laparotomia exploradora com esplenectomia, packing hepático e peritoniostomia." },
     ],
-    correct: "C",
+    correct: "D",
   },
   {
     id: 98,
@@ -112,7 +111,7 @@ export const QUESTOES_REVALIDA_2017_PROVA1_91_100: Question[] = [
       { id: "C", text: "a suspensão da insulina NPH quando a glicemia de jejum for menor que 100 mg/dL, devido ao risco de hipoglicemia." },
       { id: "D", text: "o adiamento do início de atividade física, pois existe o risco de o paciente desenvolver cetoacidose glicêmica nesse momento." },
     ],
-    correct: "A",
+    correct: "D",
   },
   {
     id: 99,

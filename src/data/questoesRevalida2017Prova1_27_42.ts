@@ -1,4 +1,3 @@
-
 import { type Question } from "@/components/QuestionCard";
 
 export const QUESTOES_REVALIDA_2017_PROVA1_27_42: Question[] = [
@@ -58,7 +57,7 @@ export const QUESTOES_REVALIDA_2017_PROVA1_27_42: Question[] = [
       { id: "C", text: "básica, com observação do seu desenvolvimento." },
       { id: "D", text: "especializada, para tratamento específico de otite crônica." },
     ],
-    correct: "A",
+    correct: "C",
   },
   {
     id: 31,
@@ -128,7 +127,7 @@ export const QUESTOES_REVALIDA_2017_PROVA1_27_42: Question[] = [
       { id: "C", text: "radiografia de punhos." },
       { id: "D", text: "dosagem de LH/FSH." },
     ],
-    correct: "D",
+    correct: "ANULADA",
   },
   {
     id: 36,

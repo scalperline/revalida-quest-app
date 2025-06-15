@@ -1,4 +1,3 @@
-
 import { type Question } from "@/components/QuestionCard";
 
 export const QUESTOES_REVALIDA_2017_PROVA1_43_58: Question[] = [
@@ -14,7 +13,7 @@ export const QUESTOES_REVALIDA_2017_PROVA1_43_58: Question[] = [
       { id: "C", text: "O médico da UPA deveria ter referenciado o paciente para seguimento na Atenção Primária, pois esse nível de atenção é o responsável pela coordenação do cuidado." },
       { id: "D", text: "Como há pouca disponibilidade de exames complementares na Atenção Primária, o médico da UPA seguiu os trâmites da regionalização em saúde para a Atenção Terciária." },
     ],
-    correct: "B",
+    correct: "C",
   },
   {
     id: 44,
@@ -42,7 +41,7 @@ export const QUESTOES_REVALIDA_2017_PROVA1_43_58: Question[] = [
       { id: "C", text: "hidratação oral com solução de reidratação oral e o restante com regime ambulatorial com reavaliação diária do quadro clínico." },
       { id: "D", text: "hidratação oral da paciente com 80 mL/kg/dia; sendo 1/3 com solução de reidratação oral e o restante com líquidos caseiros; tratamento da paciente em regime ambulatorial com reavaliação após melhora da febre." },
     ],
-    correct: "A",
+    correct: "B",
   },
   {
     id: 46,
@@ -155,7 +154,7 @@ export const QUESTOES_REVALIDA_2017_PROVA1_43_58: Question[] = [
       { id: "C", text: "evolução para insuficiência renal crônica terminal por alteração da função renal, presença de hipertensão arterial e proteinúria nefrótica." },
       { id: "D", text: "evolução para insuficiência renal crônica terminal por alteração da função renal, persistência da hiperglicemia e alterações do metabolismo de lipídios." },
     ],
-    correct: "C",
+    correct: "ANULADA",
   },
   {
     id: 54,
@@ -170,7 +169,7 @@ export const QUESTOES_REVALIDA_2017_PROVA1_43_58: Question[] = [
       { id: "C", text: "Intensificação da vacinação em municípios afetados pela febre amarela no estado do Rio de Janeiro, mantido como área com recomendação permanente de vacinação." },
       { id: "D", text: "Determinação da maioria dos municípios do estado do Espírito Santo como áreas indicadas para a recomendação temporária de vacinação contra a febre amarela." },
     ],
-    correct: "A",
+    correct: "D",
   },
   {
     id: 55,
@@ -198,7 +197,7 @@ export const QUESTOES_REVALIDA_2017_PROVA1_43_58: Question[] = [
       { id: "C", text: "administração de sulfonilureia." },
       { id: "D", text: "insulinoterapia." },
     ],
-    correct: "A",
+    correct: "D",
   },
   {
     id: 57,

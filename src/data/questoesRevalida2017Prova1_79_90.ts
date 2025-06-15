@@ -1,4 +1,3 @@
-
 import { type Question } from "@/components/QuestionCard";
 
 export const QUESTOES_REVALIDA_2017_PROVA1_79_90: Question[] = [
@@ -43,7 +42,7 @@ export const QUESTOES_REVALIDA_2017_PROVA1_79_90: Question[] = [
         { id: "C", text: "(C) prescrever método hormonal que contenha apenas progestogênio." },
         { id: "D", text: "(D) encaminhar a paciente para realização imediata de laqueadura tubária." }
     ],
-    correct: "A"
+    correct: "C"
   },
   {
     id: 82,
@@ -85,7 +84,7 @@ export const QUESTOES_REVALIDA_2017_PROVA1_79_90: Question[] = [
         { id: "C", text: "(C) parada secundária da descida." },
         { id: "D", text: "(D) parto taquitócico." }
     ],
-    correct: "B"
+    correct: "A"
   },
   {
     id: 85,
@@ -141,7 +140,7 @@ export const QUESTOES_REVALIDA_2017_PROVA1_79_90: Question[] = [
         { id: "C", text: "(C) Heparina; angiotomografia pulmonar." },
         { id: "D", text: "(D) Alteplase; angiografia pulmonar por cateterismo." }
     ],
-    correct: "D"
+    correct: "C"
   },
   {
     id: 89,
@@ -169,6 +168,6 @@ export const QUESTOES_REVALIDA_2017_PROVA1_79_90: Question[] = [
         { id: "C", text: "(C) intraósseo; soro glicofisiológico a 20 mL/kg." },
         { id: "D", text: "(D) intraósseo; soro fisiológico a 20 mL/kg." }
     ],
-    correct: "C"
+    correct: "D"
   }
 ];

@@ -10,13 +10,14 @@ import {
 } from "@/components/ui/pagination";
 import { QuestionCard } from "@/components/QuestionCard";
 import { useState } from "react";
-import { QUESTOES_REVALIDA_2011, type Question } from "@/data/questoesRevalida2011";
+import { QUESTOES_REVALIDA_2011 } from "@/data/questoesRevalida2011";
 import { QUESTOES_REVALIDA_2012 } from "@/data/questoesRevalida2012";
 import { QUESTOES_REVALIDA_2013 } from "@/data/questoesRevalida2013";
 import { QUESTOES_REVALIDA_2013_VERMELHA } from "@/data/questoesRevalida2013Vermelha";
 import { QUESTOES_REVALIDA_2014 } from "@/data/questoesRevalida2014";
 import { QuestionsHeader } from "@/components/QuestionsHeader";
 import { QUESTOES_REVALIDA_2014_VERMELHA } from "@/data/questoesRevalida2014Vermelha";
+import { type Question } from "@/components/QuestionCard";
 
 const QUESTOES_POR_PAGINA = 10;
 

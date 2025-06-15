@@ -1,9 +1,15 @@
 
-import { type Question } from "./questoesRevalida2011";
+import { type Question } from "@/components/QuestionCard";
 import { QUESTOES_REVALIDA_2014_VERMELHA_1_14 } from "./questoesRevalida2014Vermelha_1_14";
 import { QUESTOES_REVALIDA_2014_VERMELHA_15_28 } from "./questoesRevalida2014Vermelha_15_28";
+import { QUESTOES_REVALIDA_2014_VERMELHA_29_42 } from "./questoesRevalida2014Vermelha_29_42";
+import { QUESTOES_REVALIDA_2014_VERMELHA_43_57 } from "./questoesRevalida2014Vermelha_43_57";
+import { QUESTOES_REVALIDA_2014_VERMELHA_58_63 } from "./questoesRevalida2014Vermelha_58_63";
 
 export const QUESTOES_REVALIDA_2014_VERMELHA: Question[] = [
   ...QUESTOES_REVALIDA_2014_VERMELHA_1_14,
   ...QUESTOES_REVALIDA_2014_VERMELHA_15_28,
+  ...QUESTOES_REVALIDA_2014_VERMELHA_29_42,
+  ...QUESTOES_REVALIDA_2014_VERMELHA_43_57,
+  ...QUESTOES_REVALIDA_2014_VERMELHA_58_63,
 ];

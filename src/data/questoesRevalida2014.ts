@@ -1,5 +1,5 @@
 
-import { type Question } from "./questoesRevalida2011";
+import { type Question } from "@/components/QuestionCard";
 import { QUESTOES_REVALIDA_2014_1_14 } from "./questoesRevalida2014_1_14";
 import { QUESTOES_REVALIDA_2014_15_28 } from "./questoesRevalida2014_15_28";
 import { QUESTOES_REVALIDA_2014_29_42 } from "./questoesRevalida2014_29_42";

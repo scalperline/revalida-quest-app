@@ -1,14 +1,14 @@
 
 import { useState } from "react";
 
-type Option = {
+export type Option = {
   id: string;
   text: string;
   feedbackCorreta?: string;
   feedbackErrada?: string;
 };
 
-type Question = {
+export type Question = {
   id: number;
   year: number;
   area: string;

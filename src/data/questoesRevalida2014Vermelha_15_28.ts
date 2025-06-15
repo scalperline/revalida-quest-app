@@ -1,5 +1,5 @@
 
-import { type Question } from "./questoesRevalida2011";
+import { type Question } from "@/components/QuestionCard";
 
 export const QUESTOES_REVALIDA_2014_VERMELHA_15_28: Question[] = [
   {
@@ -294,12 +294,25 @@ export const QUESTOES_REVALIDA_2014_VERMELHA_15_28: Question[] = [
     year: 2014,
     area: "Clínica Médica",
     enunciado:
-      "Um paciente com 50 anos de idade, com diagnóstico de hipertensão pulmonar idiopática, com antecedente de internação prévia há um ano, devido a dispneia aos esforços e anasarca, deu entrada no Pronto-Socorro por ter apresentado episódio de síncope durante relação sexual. Refere fazer uso de diltiazem regularmente e informa que nos últimos dois meses houve evolução da dispneia para pequenos esforços e surgimento de letargia. Nas últimas duas semanas, vem evoluindo com dor abdominal em hipocôndrio direito e edema de membros inferiores e apresentou ainda três episódios de dor precordial em aperto, sem irradiação, desencadeados por grandes esforços. Ao exame físico mostra-se com estado geral regular, eupneico em repouso, orientado, sem déficits neurológicos. A ausculta cardíaca revela ritmo regular, com hiperfonese de B2, sem sopros, frequência cardíaca = 92 bpm, pressão arterial = 100x65 mmHg. Observa-se turgência jugular a 45° e a ausculta pulmonar é normal. A palpação da borda hepática a cerca de 5 cm do rebordo costal direito, é levemente dolorosa. Há edema de membros inferiores, atingindo até a coxa e parede abdominal, +++/4+, frio e indolor. Foram realizados radiografia de tórax (incidência póstero-anterior) e eletrocardiograma (ECG), mostrados a seguir.",
+      "Um paciente com 50 anos de idade, com diagnóstico de hipertensão pulmonar idiopática, com antecedente de internação prévia há um ano, devido a dispneia aos esforços e anasarca, deu entrada no Pronto-Socorro por ter apresentado episódio de síncope durante relação sexual. Refere fazer uso de diltiazem regularmente e informa que nos últimos dois meses houve evolução da dispneia para pequenos esforços e surgimento de letargia. Nas últimas duas semanas, vem evoluindo com dor abdominal em hipocôndrio direito e edema de membros inferiores e apresentou ainda três episódios de dor precordial em aperto, sem irradiação, desencadeados por grandes esforços. Ao exame físico mostra-se com estado geral regular, eupneico em repouso, orientado, sem déficits neurológicos. A ausculta cardíaca revela ritmo regular, com hiperfonese de B2, sem sopros, frequência cardíaca = 92 bpm, pressão arterial = 100x65 mmHg. Observa-se turgência jugular a 45° e a ausculta pulmonar é normal. A palpação da borda hepática a cerca de 5 cm do rebordo costal direito, é levemente dolorosa. Há edema de membros inferiores, atingindo até a coxa e parede abdominal, +++/4+, frio e indolor. Foram realizados radiografia de tórax (incidência póstero-anterior) e eletrocardiograma (ECG), mostrados a seguir.\n\nOs achados desses exames são",
+    image: "/lovable-uploads/93f30e8b-4471-4a38-b010-c038cf05c385.png",
     options: [
-      { id: "A", text: "Opção A (placeholder)" },
-      { id: "B", text: "Opção B (placeholder)" },
-      { id: "C", text: "Opção C (placeholder)" },
-      { id: "D", text: "Opção D (placeholder)" },
+      {
+        id: "A",
+        text: "radiografia de tórax: abaulamento do tronco da artéria pulmonar e redução da trama vascular periférica pulmonar; ECG: bloqueio de ramo direito, desvio do eixo cardíaco para a direita e padrão de repolarização ventricular do tipo strain.",
+      },
+      {
+        id: "B",
+        text: "radiografia de tórax: abaulamento do tronco da artéria pulmonar e redistribuição da trama vascular para os ápices pulmonares; ECG: bloqueio de ramo esquerdo, desvio do eixo cardíaco para a direita e padrão de repolarização ventricular do tipo strain.",
+      },
+      {
+        id: "C",
+        text: "radiografia de tórax: aumento de ambos os ventrículos cardíacos e redução da trama vascular periférica pulmonar; ECG: bloqueio de ramo esquerdo, desvio do eixo cardíaco para a direita e alterações inespecíficas da repolarização ventricular.",
+      },
+      {
+        id: "D",
+        text: "radiografia de tórax: aumento de ambos os ventrículos e redistribuição da trama vascular para os ápices pulmonares; ECG: bloqueio de ramo direito, desvio do eixo cardíaco para a direita e alterações inespecíficas da repolarização ventricular.",
+      },
     ],
     correct: "A",
   },

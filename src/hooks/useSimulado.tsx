@@ -1,7 +1,8 @@
 
 import { useState } from "react";
+import { type Question } from "@/components/QuestionCard";
 
-export function useSimulado(questoes: any[], quantidade: number = 5) {
+export function useSimulado(questoes: Question[], quantidade: number = 5) {
   // Simples: sorteia N questões
   const [questoesSelecionadas] = useState(() => {
     let copy = [...questoes];

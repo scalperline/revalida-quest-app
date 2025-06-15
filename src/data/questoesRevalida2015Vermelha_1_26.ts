@@ -14,7 +14,7 @@ export const QUESTOES_REVALIDA_2015_VERMELHA_1_26: Question[] = [
       { id: "C", text: "ocorrem em razão do aumento do volume uterino e os sintomas são progressivos na gestação. Deve-se evitar alimentos no período da manhã e recomendar repouso após as refeições." },
       { id: "D", text: "constituem manifestações frequentes no início da gravidez, que se dão em razão de alterações hormonais, de forma que os sintomas reduzirão com o tempo. A alimentação deve ser em pequenas quantidades e várias vezes ao dia." },
     ],
-    correct: "",
+    correct: "D",
   },
   {
     id: 2,
@@ -29,7 +29,7 @@ export const QUESTOES_REVALIDA_2015_VERMELHA_1_26: Question[] = [
       { id: "C", text: "isquemia mesentérica." },
       { id: "D", text: "obstrução intestinal mecânica" },
     ],
-    correct: "",
+    correct: "ANULADA",
   },
   {
     id: 3,
@@ -43,7 +43,7 @@ export const QUESTOES_REVALIDA_2015_VERMELHA_1_26: Question[] = [
       { id: "C", text: "apresenta novo episódio de febre reumática, pois estão presentes os seguintes critérios maiores: artralgia, febre e intervalo PR prolongado no ECG." },
       { id: "D", text: "apresenta recorrência de febre reumática, com doença cardíaca reumática estabelecida e mais dois critérios menores, além da evidência de infecção estreptocócica anterior." },
     ],
-    correct: "",
+    correct: "D",
   },
   {
     id: 4,
@@ -58,7 +58,7 @@ export const QUESTOES_REVALIDA_2015_VERMELHA_1_26: Question[] = [
       { id: "C", text: "Exposição múltipla, epidemia progressiva ou propagada." },
       { id: "D", text: "Exposição maciça, de fonte múltipla, seguida de casos secundários." },
     ],
-    correct: "",
+    correct: "B",
   },
   {
     id: 5,
@@ -72,7 +72,7 @@ export const QUESTOES_REVALIDA_2015_VERMELHA_1_26: Question[] = [
       { id: "C", text: "Radiograma de crânio; microcefalia e suturas cranianas parcialmente soldadas." },
       { id: "D", text: "Radiograma de ossos longos; lesões osteolíticas em epífise e espessamento periosteal." },
     ],
-    correct: "",
+    correct: "D",
   },
   {
     id: 6,
@@ -86,7 +86,7 @@ export const QUESTOES_REVALIDA_2015_VERMELHA_1_26: Question[] = [
       { id: "C", text: "Dosagem de estradiol e progesterona." },
       { id: "D", text: "Dosagem de androstenediona e testosterona livre." },
     ],
-    correct: "",
+    correct: "B",
   },
   {
     id: 7,
@@ -100,7 +100,7 @@ export const QUESTOES_REVALIDA_2015_VERMELHA_1_26: Question[] = [
       { id: "C", text: "Inibidor da bomba de prótons, amoxicilina e claritromicina." },
       { id: "D", text: "Antagonistas do receptor H2 de histamina, claritromicina e amoxicilina." },
     ],
-    correct: "",
+    correct: "C",
   },
   {
     id: 8,
@@ -114,7 +114,7 @@ export const QUESTOES_REVALIDA_2015_VERMELHA_1_26: Question[] = [
       { id: "C", text: "FTA-abs: se positivo, fazer penicilina benzatina em dose única." },
       { id: "D", text: "Teste rápido para sífilis: se positivo, fazer penicilina benzatina em dose única." },
     ],
-    correct: "",
+    correct: "B",
   },
   {
     id: 9,
@@ -128,7 +128,7 @@ export const QUESTOES_REVALIDA_2015_VERMELHA_1_26: Question[] = [
       { id: "C", text: "garantir atendimento e cadastramento a todos os indivíduos que procuram a USF, independentemente do seu local de moradia." },
       { id: "D", text: "oferecer serviços com densidade tecnológica variada e de baixa complexidade, capazes de captar usuários mais resistentes e garantir resolutividade." },
     ],
-    correct: "",
+    correct: "B",
   },
   {
     id: 10,
@@ -142,7 +142,7 @@ export const QUESTOES_REVALIDA_2015_VERMELHA_1_26: Question[] = [
       { id: "C", text: "Prescrever antibiótico por via oral, a ser administrado em casa, e solicitar uretrocistografia miccional após 48 horas do início do tratamento." },
       { id: "D", text: "Prescrever antibiótico por via oral, a ser administrado em casa, e solicitar ultrassonografia de rins e vias urinárias após resultado da urocultura e término do tratamento." },
     ],
-    correct: "",
+    correct: "D",
   },
   {
     id: 11,
@@ -156,7 +156,7 @@ export const QUESTOES_REVALIDA_2015_VERMELHA_1_26: Question[] = [
       { id: "C", text: "Aguardar evolução espontânea do período expulsivo." },
       { id: "D", text: "Abreviar o período expulsivo com fórceps ou vácuo-extrator." },
     ],
-    correct: "",
+    correct: "B",
   },
   {
     id: 12,
@@ -170,7 +170,7 @@ export const QUESTOES_REVALIDA_2015_VERMELHA_1_26: Question[] = [
       { id: "C", text: "Encaminhar ao serviço de urgência para correção cirúrgica devido ao risco de estrangulamento e isquemia intestinal." },
       { id: "D", text: "Tranquilizar o paciente, orientar a evitar esforços físicos, tais como carregar peso e ensinar a reduzir manualmente a hérnia." },
     ],
-    correct: "",
+    correct: "A",
   },
   {
     id: 13,
@@ -184,7 +184,7 @@ export const QUESTOES_REVALIDA_2015_VERMELHA_1_26: Question[] = [
       { id: "C", text: "Doença hemorroidária." },
       { id: "D", text: "Doença diverticular do cólon." },
     ],
-    correct: "",
+    correct: "ANULADA",
   },
   {
     id: 14,
@@ -198,7 +198,7 @@ export const QUESTOES_REVALIDA_2015_VERMELHA_1_26: Question[] = [
       { id: "C", text: "aumento da prevalência das doenças crônicas e não transmissíveis, acompanhado de aumento das doenças transmissíveis e de deficiências nutricionais." },
       { id: "D", text: "redução da desnutrição infantil em quase todo o país, exceto na região Norte, onde houve aumento da prevalência de desnutrição crônica associada a déficit de estatura para a idade." },
     ],
-    correct: "",
+    correct: "A",
   },
   {
     id: 15,
@@ -212,7 +212,7 @@ export const QUESTOES_REVALIDA_2015_VERMELHA_1_26: Question[] = [
       { id: "C", text: "Vacinar o RN com a BCG, iniciar isoniazida, rifampicina, pirazinamida e etambutol, e mantê-los por 3 meses. Após este período, realizar PPD. Se o resultado for maior que 5 mm, manter as medicações por mais 3 meses. Se for menor que 5 mm, suspender as medicações e vacinar com BCG." },
       { id: "D", text: "Vacinar o RN com a BCG, iniciar isoniazida e mantê-la por 3 meses. Após esse período, realizar PPD e radiografia de tórax. Se o resultado for maior que 5 mm e a radiografia suspeita, manter a medicação por mais 3 meses. Se for menor que 5 mm, suspender a medicação e vacinar com BCG." },
     ],
-    correct: "",
+    correct: "A",
   },
   {
     id: 16,
@@ -226,7 +226,7 @@ export const QUESTOES_REVALIDA_2015_VERMELHA_1_26: Question[] = [
       { id: "C", text: "Encaminhar a gestante a uma maternidade de alto risco, devido à desproporção feto-pélvica, pois o feto está encaixado e o trabalho de parto não se iniciou espontaneamente." },
       { id: "D", text: "Liberar a gestante para casa, informando que o concepto está a termo e orientá-la a procurar uma maternidade somente em caso de perda de líquido ou contrações rítmicas dolorosas." },
     ],
-    correct: "",
+    correct: "A",
   },
   {
     id: 17,
@@ -240,7 +240,7 @@ export const QUESTOES_REVALIDA_2015_VERMELHA_1_26: Question[] = [
       { id: "C", text: "reabordagem cirúrgica imediata, coleta de cultura da secreção peritoneal e antibioticoterapia após resultado." },
       { id: "D", text: "coleta de hemocultura, início imediato de antibioticoterapia de forma empírica e exploração da ferida operatória." },
     ],
-    correct: "",
+    correct: "D",
   },
   {
     id: 18,
@@ -254,7 +254,7 @@ export const QUESTOES_REVALIDA_2015_VERMELHA_1_26: Question[] = [
       { id: "C", text: "Moraxella catarrhalis; encaminhamento à emergência para macronebulização com O₂ e tratamento ambulatorial." },
       { id: "D", text: "Pneumocystis jirovecii; encaminhamento para internação hospitalar e realização de hemoculturas antes do início da antibioticoterapia." },
     ],
-    correct: "",
+    correct: "A",
   },
   {
     id: 19,
@@ -268,7 +268,7 @@ export const QUESTOES_REVALIDA_2015_VERMELHA_1_26: Question[] = [
       { id: "C", text: "demência de Alzheimer; encaminhamento para neurologista para realização de exames de imagem." },
       { id: "D", text: "distúrbio de comportamento por transtorno psicótico; prescrição de antipsicótico e encaminhamento para psiquiatra." },
     ],
-    correct: "",
+    correct: "B",
   },
   {
     id: 20,
@@ -282,7 +282,7 @@ export const QUESTOES_REVALIDA_2015_VERMELHA_1_26: Question[] = [
       { id: "C", text: "Iniciar solução de manutenção com potássio após controle da desidratação, com expansão volumétrica com soro fisiológico a 0,9%." },
       { id: "D", text: "Iniciar reposição em Y de bicarbonato endovenoso e a expansão volumétrica com soro fisiológico a 0,9% para controle da desidratação." },
     ],
-    correct: "",
+    correct: "C",
   },
   {
     id: 21,
@@ -296,7 +296,7 @@ export const QUESTOES_REVALIDA_2015_VERMELHA_1_26: Question[] = [
       { id: "C", text: "fosse aplicada metilergonovina intramuscular antes da dequitação." },
       { id: "D", text: "tivesse sido transfundida com concentrado de hemácias antes do parto." },
     ],
-    correct: "",
+    correct: "B",
   },
   {
     id: 22,
@@ -310,7 +310,7 @@ export const QUESTOES_REVALIDA_2015_VERMELHA_1_26: Question[] = [
       { id: "C", text: "o procedimento deveria ter passado por fase experimental com obtenção de resultados que comprovem a não maleficência e o potencial de beneficência." },
       { id: "D", text: "a prestação de toda a assistência pelo médico, os diagnósticos estabelecidos e as condutas tomadas são de sua livre convicção." },
     ],
-    correct: "",
+    correct: "C",
   },
   {
     id: 23,
@@ -325,7 +325,7 @@ export const QUESTOES_REVALIDA_2015_VERMELHA_1_26: Question[] = [
       { id: "C", text: "Administrar corticosteroides e broncodilatadores e manter em observação no Pronto-Socorro." },
       { id: "D", text: "Recomendar retorno ao domicílio, tendo em vista que a família possui inalador para uso da medicação." },
     ],
-    correct: "",
+    correct: "A",
   },
   {
     id: 24,
@@ -339,7 +339,7 @@ export const QUESTOES_REVALIDA_2015_VERMELHA_1_26: Question[] = [
       { id: "C", text: "Candidíase vulvovaginal; receitar antifúngico tópico." },
       { id: "D", text: "Vulvovaginite bacteriana inespecífica; orientar higiene." },
     ],
-    correct: "",
+    correct: "A",
   },
   {
     id: 25,
@@ -353,7 +353,7 @@ export const QUESTOES_REVALIDA_2015_VERMELHA_1_26: Question[] = [
       { id: "C", text: "Agendamento de colangiografia endoscópica retrógrada para avaliação do colédoco como preparo para colecistectomia." },
       { id: "D", text: "Alta hospitalar com retorno ambulatorial e colecistectomia, se houver mais um episódio de pancreatite aguda nos próximos doze meses." },
     ],
-    correct: "",
+    correct: "A",
   },
   {
     id: 26,
@@ -367,6 +367,6 @@ export const QUESTOES_REVALIDA_2015_VERMELHA_1_26: Question[] = [
       { id: "C", text: "Teste de solubilidade da hemoglobina." },
       { id: "D", text: "Cromatografia líquida de alto desempenho." },
     ],
-    correct: "",
+    correct: "D",
   },
 ];

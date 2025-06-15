@@ -14,7 +14,7 @@ export const QUESTOES_REVALIDA_2015_VERMELHA_90_110: Question[] = [
       { id: "C", text: "Alteplase, enoxaparina e valsartana." },
       { id: "D", text: "Heparina, estreptoquinase e esmolol." },
     ],
-    correct: "",
+    correct: "B",
   },
   {
     id: 91,
@@ -27,7 +27,7 @@ export const QUESTOES_REVALIDA_2015_VERMELHA_90_110: Question[] = [
       { id: "C", text: "Terciária." },
       { id: "D", text: "Quaternária." },
     ],
-    correct: "",
+    correct: "A",
   },
   {
     id: 92,
@@ -40,7 +40,7 @@ export const QUESTOES_REVALIDA_2015_VERMELHA_90_110: Question[] = [
       { id: "C", text: "a mãe deverá ser vacinada com, no mínimo, cinco dias de antecedência em relação à viagem e a amamentação deverá ser suspensa por 8 dias." },
       { id: "D", text: "a vacina é constituída de fragmentos de vírus mortos, não havendo, portanto, contraindicações à aplicação no recém-nascido e na puérpera, o que justifica a manutenção da amamentação." },
     ],
-    correct: "",
+    correct: "B",
   },
   {
     id: 93,
@@ -53,7 +53,7 @@ export const QUESTOES_REVALIDA_2015_VERMELHA_90_110: Question[] = [
       { id: "C", text: "Tricomoníase vulvovaginal." },
       { id: "D", text: "Infecção pelo papilomavírus humano." },
     ],
-    correct: "",
+    correct: "C",
   },
   {
     id: 94,
@@ -66,7 +66,7 @@ export const QUESTOES_REVALIDA_2015_VERMELHA_90_110: Question[] = [
       { id: "C", text: "A vacinação deve ser feita apenas para o filho mais velho." },
       { id: "D", text: "A vacinação deve ser feita igualmente para os dois filhos." },
     ],
-    correct: "",
+    correct: "C",
   },
   {
     id: 95,
@@ -80,7 +80,7 @@ export const QUESTOES_REVALIDA_2015_VERMELHA_90_110: Question[] = [
       { id: "C", text: "Curetagem simples com eletrodessecação e recomendação de utilização diária de filtro solar." },
       { id: "D", text: "Exérese da lesão com sutura simples e recomendação de uso contínuo de boné ou similares, além de uso diário de filtro solar." },
     ],
-    correct: "",
+    correct: "ANULADA",
   },
   {
     id: 96,
@@ -93,7 +93,7 @@ export const QUESTOES_REVALIDA_2015_VERMELHA_90_110: Question[] = [
       { id: "C", text: "Elaboração de dieta individualizada contendo preferencialmente frutas, legumes e verduras, proibindo alimentos ricos em açúcar e gorduras." },
       { id: "D", text: "Estímulo à ingestão de alimentos sob forma de livre demanda, evitando-se o estabelecimento de horários ou de rotina para se alimentar, garantindo, contudo a prática de atividade física." },
     ],
-    correct: "",
+    correct: "B",
   },
   {
     id: 97,
@@ -106,7 +106,7 @@ export const QUESTOES_REVALIDA_2015_VERMELHA_90_110: Question[] = [
       { id: "C", text: "Prescrever ferro elementar, via oral, na dose 4 mg/kg/dia durante 3-4 meses." },
       { id: "D", text: "Providenciar internação para transfusão sanguínea de hemácias em razão do nível de hemoglobina." },
     ],
-    correct: "",
+    correct: "C",
   },
   {
     id: 98,
@@ -119,7 +119,7 @@ export const QUESTOES_REVALIDA_2015_VERMELHA_90_110: Question[] = [
       { id: "C", text: "Manter avaliação dos parâmetros maternos e fetais e aguardar a evolução do parto." },
       { id: "D", text: "Aplicar o fórceps de Simpson para corrigir a distocia e reduzir o risco de anoxia fetal." },
     ],
-    correct: "",
+    correct: "C",
   },
   {
     id: 99,
@@ -132,7 +132,7 @@ export const QUESTOES_REVALIDA_2015_VERMELHA_90_110: Question[] = [
       { id: "C", text: "Encaminhar para agendamento de ultrassonografia abdominal e agendamento ambulatorial, de acordo com o tamanho do aneurisma." },
       { id: "D", text: "Encaminhar para programação de cirurgia em um período de até trinta dias, e orientar ao paciente que permaneça em repouso absoluto." },
     ],
-    correct: "",
+    correct: "C",
   },
   {
     id: 100,
@@ -145,7 +145,7 @@ export const QUESTOES_REVALIDA_2015_VERMELHA_90_110: Question[] = [
       { id: "C", text: "Realizar endoscopia digestiva alta, com biópsias da mucosa gástrica e pesquisa de Helicobacter pylori, e instituir tratamento com antimicrobianos e inibidores de bomba de prótons, se confirmada presença de H. pylori." },
       { id: "D", text: "Submeter o paciente a testes não invasivos para Helicobacter pylori — se forem positivos, instituir tratamento específico, confirmar erradicação após tratamento e referenciar a especialista, se os sintomas persistirem." },
     ],
-    correct: "",
+    correct: "C",
   },
   {
     id: 101,
@@ -158,7 +158,7 @@ export const QUESTOES_REVALIDA_2015_VERMELHA_90_110: Question[] = [
       { id: "C", text: "Encaminhamento ao obstetra na Unidade Básica de Saúde, agendamento dos exames laboratoriais, estabelecimento de contato com o Serviço Social do Centro Regional de Assistência Social para que este ajude a identificar a família da paciente e assuma o cuidado da menor." },
       { id: "D", text: "Encaminhamento imediato a ambulatório de especialidades para iniciar o acompanhamento pré-natal, estabelecimento de contato com o Núcleo de Apoio à Saúde da Família para encaminhar o caso e fazer comunicação com o Juizado de Menores para acompanhamento do caso." },
     ],
-    correct: "",
+    correct: "B",
   },
   {
     id: 102,
@@ -171,7 +171,7 @@ export const QUESTOES_REVALIDA_2015_VERMELHA_90_110: Question[] = [
       { id: "C", text: "Estrófulo; prescrever antibiótico tópico para a mãe e a criança, além de recomendar que evitem o contato com insetos, e dizer que a criança poderá frequentar normalmente a creche." },
       { id: "D", text: "Escabiose; prescrever anti-histamínicos para a criança e a mãe, além de reforçar a necessidade de higiene corporal para a criança, a qual poderá frequentar a creche sem problemas desde então." },
     ],
-    correct: "",
+    correct: "B",
   },
   {
     id: 103,
@@ -184,7 +184,7 @@ export const QUESTOES_REVALIDA_2015_VERMELHA_90_110: Question[] = [
       { id: "C", text: "Orientar dieta e solicitar teste oral de tolerância à glicose, caso apresente aumento de peso superior a 500g/semana." },
       { id: "D", text: "Tranquilizar a gestante, pois o resultado de glicemia de jejum < 85mg/dL e a ausência de diabetes na família descartam a possibilidade de diabetes gestacional." },
     ],
-    correct: "",
+    correct: "A",
   },
   {
     id: 104,
@@ -197,7 +197,7 @@ export const QUESTOES_REVALIDA_2015_VERMELHA_90_110: Question[] = [
       { id: "C", text: "infiltrar o tecido subcutâneo por dentro da lesão, utilizando lidocaína a 1% com vasoconstritor." },
       { id: "D", text: "infiltrar o tecido subcutâneo por dentro da lesão, utilizando lidocaína a 1% sem vasoconstritor." },
     ],
-    correct: "",
+    correct: "B",
   },
   {
     id: 105,
@@ -210,7 +210,7 @@ export const QUESTOES_REVALIDA_2015_VERMELHA_90_110: Question[] = [
       { id: "C", text: "Ventilação mecânica não invasiva e corticosteroides intravenosos." },
       { id: "D", text: "Administração por via intravenosa de corticosteroides, xantinas e antibiótico de amplo espectro." },
     ],
-    correct: "",
+    correct: "B",
   },
   {
     id: 106,
@@ -223,7 +223,7 @@ export const QUESTOES_REVALIDA_2015_VERMELHA_90_110: Question[] = [
       { id: "C", text: "Betabloqueadores, por redução da frequência cardíaca e da contratilidade." },
       { id: "D", text: "Bloqueadores de canais de cálcio, por redução da resistência vascular periférica." },
     ],
-    correct: "",
+    correct: "B",
   },
   {
     id: 107,
@@ -236,7 +236,7 @@ export const QUESTOES_REVALIDA_2015_VERMELHA_90_110: Question[] = [
       { id: "C", text: "solicitar a dosagem de renina plasmática e lipidograma." },
       { id: "D", text: "orientar mudança de hábitos de vida e investigar a hipertensão arterial." },
     ],
-    correct: "",
+    correct: "D",
   },
   {
     id: 108,
@@ -249,7 +249,7 @@ export const QUESTOES_REVALIDA_2015_VERMELHA_90_110: Question[] = [
       { id: "C", text: "o Coombs direto negativo indica que a imunoglobulina anti-D deve ser administrada em dose dupla." },
       { id: "D", text: "o teste de Coombs indireto positivo é esperado e a imunoglobulina anti-D deve ser administrada." },
     ],
-    correct: "",
+    correct: "D",
   },
   {
     id: 109,
@@ -262,7 +262,7 @@ export const QUESTOES_REVALIDA_2015_VERMELHA_90_110: Question[] = [
       { id: "C", text: "solicitar o encaminhamento do corpo para o Instituto Médico Legal, pois a morte ocorreu em decorrência de uma causa externa." },
       { id: "D", text: "liberar o corpo para funerária com a assinatura do atestado de óbito tendo como causa principal a insuficiência de múltiplos órgãos e sistemas." },
     ],
-    correct: "",
+    correct: "C",
   },
   {
     id: 110,
@@ -275,6 +275,6 @@ export const QUESTOES_REVALIDA_2015_VERMELHA_90_110: Question[] = [
       { id: "C", text: "o quadro clínico de entrada na UPA é característico de reação adversa a antagonistas do receptor da angiotensina II." },
       { id: "D", text: "o quadro clínico de entrada na UPA é característico de reação adversa a inibidores da enzima de conversão da angiotensina." },
     ],
-    correct: "",
+    correct: "D",
   },
 ];

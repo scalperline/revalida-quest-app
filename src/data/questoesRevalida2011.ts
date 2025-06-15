@@ -195,6 +195,168 @@ Com base na história clínica e nos exames complementares, o diagnóstico princ
     referencia: "Prova Revalida INEP 2011, Q10. Adicionar referência oficial."
   },
   {
+    id: 11,
+    year: 2011,
+    area: "Pediatria",
+    enunciado: `Uma senhora comparece à Unidade Básica de Saúde com seu filho de seis meses de idade, dizendo-se preocupada com o desenvolvimento da criança, e sem qualquer outra queixa. O peso da criança ao nascer foi de 3.400g. Em sua alimentação atual estão sendo introduzidos alimentos sólidos e o calendário de vacinação vem sendo cumprido. O exame físico da criança é inteiramente normal.
+
+Como indicador do desenvolvimento neuropsicomotor normal para criança nessa faixa etária (6 meses), o médico deverá observar se a criança`,
+    options: [
+      { id: "A", text: "apresenta choro excessivo e faz o acompanhamento com o olhar.", feedbackErrada: "Choro excessivo não é esperado, acompanhamento com o olhar é esperado para meses anteriores." },
+      { id: "B", text: "faz a preensão de objetos com a mão e apresenta sorriso social.", feedbackCorreta: "A preensão voluntária de objetos e sorriso social são esperados no desenvolvimento de 6 meses." },
+      { id: "C", text: "senta-se sem apoio e fala sílabas.", feedbackErrada: "Sentar sem apoio e falar sílabas são marcos de maturidade um pouco mais avançada." },
+      { id: "D", text: "rola sem auxílio e reconhece pessoas.", feedbackErrada: "Rolar e reconhecer pessoas normalmente aparecem antes dos 6 meses." },
+      { id: "E", text: "firma a cabeça e apanha objetos.", feedbackErrada: "Firmar a cabeça é esperado já nos primeiros meses de vida." }
+    ],
+    correct: "B",
+    referencia: "Prova Revalida INEP 2011, Q11."
+  },
+  {
+    id: 12,
+    year: 2011,
+    area: "Pediatria",
+    enunciado: `Você é chamado para prestar assistência neonatal durante um parto no qual foi constatado sofrimento fetal com líquido amniótico meconial. O Recém Nascido nasceu com Apgar 2 (Frequência cardíaca = 1 e Frequência Respiratória = 1). A conduta inicial, conforme as normas vigentes de Reanimação Neonatal, é`,
+    options: [
+      { id: "A", text: "iniciar ventilação com ambu e máscara, aspirando o Recém Nascido após a recuperação da frequência cardíaca.", feedbackErrada: "A aspiração deve ser realizada previamente à ventilação para evitar maiores complicações." },
+      { id: "B", text: "iniciar ventilação com tubo oro-traqueal e aspirar o Recém Nascido após recuperação da frequência cardíaca.", feedbackErrada: "A aspiração nas normas atuais é indicada antes da ventilação, especialmente em RN deprimido." },
+      { id: "C", text: "iniciar ventilação com pressão positiva e administrar adrenalina e massagem cardíaca.", feedbackErrada: "A prioridade inicial não é adrenalina, e sim desobstrução das vias aéreas se presença de líquido meconial." },
+      { id: "D", text: "aspirar laringe e traquéia do Recém Nascido e ventilar com pressão positiva ao ambiente.", feedbackCorreta: "RN deprimido com líquido meconial: aspiração traqueal e ventilação são prioridades." },
+      { id: "E", text: "aspirar laringe e traquéia do Recém Nascido e oferecer oxigênio inalatório a 100%.", feedbackErrada: "O mais importante é ventilar com pressão positiva se indicado." }
+    ],
+    correct: "D",
+    referencia: "Prova Revalida INEP 2011, Q12."
+  },
+  {
+    id: 13,
+    year: 2011,
+    area: "Saúde Coletiva",
+    enunciado: `Paciente do sexo masculino, com 45 anos de idade, é dependente químico de cocaína, com uso por via inalatória e procurou o serviço especializado do CAPS (Centro de Apoio Psicossocial) para tratamento. A oferta desse atendimento no Sistema Único de Saúde caracteriza ações de que tipo?`,
+    options: [
+      { id: "A", text: "Prevenção primordial.", feedbackErrada: "A prevenção primordial visa impedir o surgimento de fatores de risco e não é o caso aqui." },
+      { id: "B", text: "Prevenção quaternária.", feedbackErrada: "Prevenção quaternária está relacionada a evitar excessos médicos desnecessários, não aplicação aqui." },
+      { id: "C", text: "Prevenção terciária.", feedbackCorreta: "Atendimento no CAPS caracteriza ação de prevenção terciária (minimizar danos e reabilitação de pacientes adoecidos)." },
+      { id: "D", text: "Prevenção secundária.", feedbackErrada: "A prevenção secundária refere-se a diagnóstico e tratamento precoce, não se enquadra." },
+      { id: "E", text: "Prevenção primária.", feedbackErrada: "Aqui não se trata da prevenção primária, pois o paciente já está adoecido." }
+    ],
+    correct: "C",
+    referencia: "Prova Revalida INEP 2011, Q13."
+  },
+  {
+    id: 14,
+    year: 2011,
+    area: "Clínica Médica",
+    enunciado: `Homem, com 58 anos de idade, é atendido em serviço de urgência e relata a ocorrência, há cerca de seis meses, de modificação de seu hábito intestinal - períodos de constipação intercalados por evacuações de fezes pastosas, às vezes acompanhadas da eliminação de muco e sangue. Nesse período foi visto em consultas, nas quais foi prescrito tratamento antiparasitário, não havendo melhora da sintomatologia. O paciente informa ainda que há cerca de um mês, vem apresentando intensificação do esforço evacuatório. Nesse período as fezes têm se tornado cada vez mais afiladas e há dois dias vem observando a diminuição quase completa da eliminação de flatos e fezes, relatando também a ocorrência de náuseas e um episódio de vômitos de conteúdo biliar.
+
+Com base nessa história, qual a conduta imediata a ser seguida?`,
+    options: [
+      { id: "A", text: "Instalar sonda nasogástrica, prescrever hidratação parenteral, lactulona e antieméticos e manter paciente em observação.", feedbackErrada: "Lactulona pode ser prejudicial se houver obstrução intestinal; caso suspeito de obstrução, não é recomendado." },
+      { id: "B", text: "Instalar sonda nasogástrica, prescrever hidratação parenteral, clister com solução glicerinada e manter paciente em observação.", feedbackCorreta: "Medidas de suporte e desimpactação precedem avaliação invasiva/cirurgia em obstrução de ID por neoplasia." },
+      { id: "C", text: "Instalar sonda nasogástrica, prescrever hidratação parenteral e clister com solução glicerinada. A posteriori instalar sonda retal e manter paciente em observação.", feedbackErrada: "Excesso de procedimentos pode não ser seguro na apresentação clínica descrita." },
+      { id: "D", text: "Prescrever antiespasmódicos, dimeticona e solicitar colonoscopia com biópsia e dosagem de antígeno carcino-embrionário.", feedbackErrada: "Colonoscopia não é conduta imediata em suspeita de obstrução intestinal aguda." },
+      { id: "E", text: "Encaminhar imediatamente o paciente para avaliação cirúrgica.", feedbackErrada: "Nem todos pacientes requerem cirurgia de imediato se não há instabilidade ou sinais de sofrimento visceral iminente." }
+    ],
+    correct: "B",
+    referencia: "Prova Revalida INEP 2011, Q14."
+  },
+  {
+    id: 15,
+    year: 2011,
+    area: "Pediatria",
+    enunciado: `Uma criança que nasceu prematura, com 32 semanas de idade gestacional e peso de 1850g, foi encaminhada à Unidade de Saúde para iniciar as imunizações. Atualmente, com um mês de vida, pesa 1900g e recebe aleitamento materno exclusivo.
+
+Para essa situação, qual a alternativa que indica o esquema inicial de vacinação recomendado?`,
+    options: [
+      { id: "A", text: "Iniciar o esquema vacinal aplicando a vacina BCG e a primeira dose da vacina contra a Hepatite B.", feedbackErrada: "A vacina BCG é indicada com peso mínimo de 2.000g. Jar a Hepatite B pode ser feita em neonatos de baixo peso." },
+      { id: "B", text: "Aplicar a primeira dose da vacina contra a Hepatite B e aguardar a criança atingir 2000g para programar a vacina BCG.", feedbackCorreta: "BCG: indicada >2.000g; Hepatite B: pode ser aplicada antes. Essa é a conduta correta para prematuros." },
+      { id: "C", text: "Aguardar a criança atingir 2500g para aplicar a vacina BCG e contra a Hepatite B (primeira dose).", feedbackErrada: "Peso mínimo para BCG é 2.000g; Hepatite B pode e deve ser aplicada logo ao nascimento." },
+      { id: "D", text: "Aguardar a criança atingir 2000g para aplicar a vacina contra a Hepatite B (primeira dose) e 2500g para aplicar a vacina BCG.", feedbackErrada: "Vacina de Hepatite B não necessita peso mínimo." },
+      { id: "E", text: "Aplicar as vacinas BCG e contra a Hepatite B (primeira dose) e programar a segunda dose desta última para 15 dias depois.", feedbackErrada: "A segunda dose de Hepatite B segue cronograma padrão." }
+    ],
+    correct: "B",
+    referencia: "Prova Revalida INEP 2011, Q15."
+  },
+  {
+    id: 16,
+    year: 2011,
+    area: "Clínica Médica",
+    enunciado: `Homem, com 43 anos de idade, é atendido na Unidade Básica de Saúde com queixa de dispneia aos grandes esforços, há seis meses. Não relata dor precordial, síncope ou palpitações. No exame, encontra-se em bom estado geral, eupneico, hidratado, corado. Pressão arterial = 100x70 mmHg, Frequência cardíaca = 112bpm, Frequência respiratória = 18irpm; temperatura axilar = 36,5°C. Murmúrio vesicular presente e simétrico bilateralmente. Ritmo cardíaco regular, em dois tempos, bulhas hipofonéticas, com sopro sistólico de regurgitação mitral discreto. Abdome flácido, sem visceromegalias, ruídos hidroaéreos presentes e regularmente distribuídos. Sem edema de membros inferiores. Radiografia de tórax atual mostra aumento global da área cardíaca, sem congestão pulmonar. Ecocardiograma transtorácico mostra a fração de ejeção do ventrículo esquerdo igual a 35%.
+
+Com base nas evidências científicas indique a opção terapêutica para o caso.`,
+    options: [
+      { id: "A", text: "Hidroclorotiazida e carvedilol.", feedbackErrada: "Não há indicação de tiazídico nesse contexto. Carvedilol isoladamente é correto." },
+      { id: "B", text: "Carvedilol e digoxina.", feedbackCorreta: "Carvedilol é primeira linha em insuficiência cardíaca com fração de ejeção reduzida." },
+      { id: "C", text: "Enalapril e metoprolol.", feedbackErrada: "Enalapril isoladamente pode não ser suficiente; angiotensina e carvedilol são preferidos aqui." },
+      { id: "D", text: "Espironolactona e enalapril.", feedbackErrada: "Pode ser útil, mas carvedilol está mais indicado." },
+      { id: "E", text: "Digoxina e hidroclorotiazida.", feedbackErrada: "Digoxina pode ser coadjuvante, não de primeira escolha nesse contexto." }
+    ],
+    correct: "B",
+    referencia: "Prova Revalida INEP 2011, Q16."
+  },
+  {
+    id: 17,
+    year: 2011,
+    area: "Pediatria",
+    enunciado: `O Agente Comunitário de Saúde lhe solicita explicações sobre um recém-nascido que apresenta coloração amarelada da pele. Você colhe, junto ao Agente Comunitário de Saúde, informações sobre a duração da gestação, as condições do parto e da criança ao nascer, o tempo de aparecimento do sintoma específico e verifica também resultados de exames do recém-nascido, realizados na maternidade: hemograma, dosagem de bilirrubinas e teste de Coombs. Diante dos dados clínicos e do resultado de exames, você conclui que trata-se de Icterícia Fisiológica do Recém-Nascido.
+
+O que seria correto você informar ao Agente Comunitário de Saúde sobre a Icterícia Fisiológica do Recém-Nascido?`,
+    options: [
+      { id: "A", text: "Desaparece após três semanas do início da manifestação em neonatos nascidos a termo.", feedbackCorreta: "A icterícia fisiológica desaparece em até 3 semanas em recém-nascidos a termo." },
+      { id: "B", text: "Desaparece após a primeira semana de vida em neonatos nascidos a termo.", feedbackErrada: "Icterícia fisiológica pode persistir até 3 semanas." },
+      { id: "C", text: "Atinge níveis de bilirrubinemia bastante elevados, superiores a 14 mg%.", feedbackErrada: "Níveis tão altos sugerem patologia grave, não icterícia fisiológica." },
+      { id: "D", text: "Deve-se a anemia hemolítica por incompatibilidade RH.", feedbackErrada: "Icterícia fisiológica não é anêmica ou patológica." },
+      { id: "E", text: "Está presente desde o nascimento na hiperuricémia fetal.", feedbackErrada: "Não aparece logo ao nascer; manifesta-se após 24h de vida normal." }
+    ],
+    correct: "A",
+    referencia: "Prova Revalida INEP 2011, Q17."
+  },
+  {
+    id: 18,
+    year: 2011,
+    area: "Clínica Médica",
+    enunciado: `Homem, com 26 anos de idade, foi internado há dois dias com o diagnóstico de doença inflamatória intestinal na forma fulminante com megacólon tóxico. Há cerca de uma hora apresentou piora súbita da dor abdominal, vômitos e desconforto respiratório. O exame físico revela paciente taquicárdico, taquidispneico e com abdome muito doloroso difusamente. A complicação é frequente e o principal recurso diagnóstico para demonstrá-la são`,
+    options: [
+      { id: "A", text: "perfuração intestinal; radiografia de tórax e de abdome em ortostase e decúbito dorsal.", feedbackCorreta: "A principal complicação de megacólon tóxico fulminante é a perfuração intestinal, diagnosticada por RX." },
+      { id: "B", text: "pneumotórax intestinal; enema opaco com contraste iodado.", feedbackErrada: "Enema opaco está contraindicado pelo risco de perfuração." },
+      { id: "C", text: "abscesso perirretal; tomografia computadorizada de abdome.", feedbackErrada: "Abscesso perirretal é possível, mas não o principal risco imediato." },
+      { id: "D", text: "vólvulo de sigmoide; colonoscopia.", feedbackErrada: "Vólvulo não é a causa mais comum neste contexto e colonoscopia pode ser perigosa." },
+      { id: "E", text: "hematoma intraluminal; colonoscopia.", feedbackErrada: "Hematoma não é esperado como complicação principal." }
+    ],
+    correct: "A",
+    referencia: "Prova Revalida INEP 2011, Q18."
+  },
+  {
+    id: 19,
+    year: 2011,
+    area: "Pediatria",
+    enunciado: `Criança do sexo feminino, com sete anos de idade, é trazida pela mãe à Unidade Básica de Saúde, porque há três dias apresenta-se com adinamia, urina escura (cor de “coca-cola”) e inchaço nos olhos pela manhã. A mãe informa que há 15 dias a criança apresentou febre elevada e “dor de garganta” que regrediram com uso de antitérmico e de anti-inflamatório não hormonal (ibuprofeno). Na consulta o médico observa que a criança encontra-se em regular estado geral, afebril, eupneica, hipocorada (+/4), com frequência cardíaca de 116 bpm, Pressão arterial=118x82 mmHg, edema de face (+/4) e de membros inferiores (+/4). Os demais aspectos do exame físico são normais.
+
+Na síndrome que a criança apresenta, a resposta inflamatória responsável pela instalação da lesão nefrítica`,
+    options: [
+      { id: "A", text: "é consequência da ativação de complemento, da liberação de fatores quimiotáticos e do recrutamento de neutrófilos.", feedbackErrada: "Complemento e quimiotaxia estão presentes, mas a lesão característica é infiltrado celular pelas alças glomerulares." },
+      { id: "B", text: "decorre da fixação de estreptococos beta-hemolíticos nas alças capilares glomerulares e da consequente infiltração celular.", feedbackCorreta: "A fisiopatologia clássica é infiltrado celular após infecção estreptocócica." },
+      { id: "C", text: "deve-se a modificações de uma IgM que, no contexto de uma infecção, torna-se imunogênica e desenvolve afinidade pelo glomérulo renal.", feedbackErrada: "Não é o mecanismo principal da glomerulonefrite." },
+      { id: "D", text: "depende da deposição mesangial de C3, fibrina e IgA, e da proliferação de células mesangiais com expansão da matriz.", feedbackErrada: "Esse mecanismo é mais relacionado à nefropatia por IgA e não a pós-estreptocócica." },
+      { id: "E", text: "manifesta-se por hipercelularidade glomerular, expansão da matriz mesangial e duplicação da membrana basal glomerular.", feedbackErrada: "A duplicação da membrana basal é característica de glomerulonefrite membranoproliferativa." }
+    ],
+    correct: "B",
+    referencia: "Prova Revalida INEP 2011, Q19."
+  },
+  {
+    id: 20,
+    year: 2011,
+    area: "Outros",
+    enunciado: `Uma médica, durante plantão em serviço de emergência, atendeu um paciente com múltiplas lesões no antebraço direito, vítima de mordedura de cão que ocorrera há 3 horas. O acidente ocorreu na rua, mas o dono do animal foi identificado. O caso deverá ser conduzido por ela de acordo com o protocolo do Ministério da Saúde, que recomenda`,
+    options: [
+      { id: "A", text: "iniciar o esquema de vacinação e observar o animal por 10 dias.", feedbackCorreta: "Esse é o protocolo do Ministério da Saúde para animais identificados e saudáveis." },
+      { id: "B", text: "aplicar o soro antirrábico e a vacina por 10 dias.", feedbackErrada: "Soro não é necessário se animal foi identificado e está sob observação." },
+      { id: "C", text: "observar o cão durante 10 dias após a exposição, para iniciar a vacinação antirrábica.", feedbackErrada: "Deve-se iniciar já o esquema." },
+      { id: "D", text: "aplicar soro antirrábico (dose única) no 10º dia de observação do animal.", feedbackErrada: "O protocolo recomenda iniciar o esquema imediatamente, não esperar 10 dias." },
+      { id: "E", text: "sacrificar o animal imediatamente para evitar contaminação.", feedbackErrada: "Sacrifício é procedimento extremo e não faz parte do protocolo para animal conhecido e saudável." }
+    ],
+    correct: "A",
+    referencia: "Prova Revalida INEP 2011, Q20."
+  },
+  {
     id: 41,
     year: 2011,
     area: "Clínica Médica",

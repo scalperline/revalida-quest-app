@@ -1,4 +1,3 @@
-
 import { type Question } from "@/components/QuestionCard";
 
 export const QUESTOES_REVALIDA_2015_90_110: Question[] = [
@@ -44,7 +43,7 @@ export const QUESTOES_REVALIDA_2015_90_110: Question[] = [
       { id: "C", text: "Curetagem simples com eletrodessecação e recomendação de utilização diária de filtro solar." },
       { id: "D", text: "Exérese da lesão com sutura simples e recomendação de uso contínuo de boné ou similares, além de uso diário de filtro solar." },
     ],
-    correct: "D",
+    correct: "",
   },
   {
     id: 93,
@@ -58,7 +57,7 @@ export const QUESTOES_REVALIDA_2015_90_110: Question[] = [
       { id: "C", text: "Terciária." },
       { id: "D", text: "Quarternária." },
     ],
-    correct: "C",
+    correct: "A",
   },
   {
     id: 94,
@@ -72,7 +71,7 @@ export const QUESTOES_REVALIDA_2015_90_110: Question[] = [
       { id: "C", text: "a mãe deverá ser vacinada com, no mínimo, cinco dias de antecedência em relação à viagem e a amamentação deverá ser suspensa por 10 dias." },
       { id: "D", text: "a vacina é constituída de fragmentos de vírus mortos, não havendo, portanto, contraindicações à aplicação no recém-nascido e na puérpera, o que justifica a manutenção da amamentação." },
     ],
-    correct: "C",
+    correct: "B",
   },
   {
     id: 95,
@@ -203,7 +202,7 @@ export const QUESTOES_REVALIDA_2015_90_110: Question[] = [
       { id: "C", text: "Estrófulo; prescrever antibiótico tópico para a mãe e a criança, além de tratar o pai e evitar que a criança possa frequentar normalmente a creche." },
       { id: "D", text: "Escabiose; prescrever anti-histamínicos para a criança e a mãe, além de reforçar a necessidade de higiene corporal para a criança, a qual poderá frequentar a creche sem problemas desde então." }
     ],
-    correct: "A"
+    correct: "B"
   },
   {
     id: 105,
@@ -216,7 +215,7 @@ export const QUESTOES_REVALIDA_2015_90_110: Question[] = [
       { id: "C", text: "Orientar dieta e solicitar teste oral de tolerância à glicose, caso apresente aumento de peso superior a 500g/semana." },
       { id: "D", text: "Tranquilizar a gestante, pois o resultado de glicemia de jejum < 85mg/dL e a ausência de diabetes na família descartam a possibilidade de diabetes gestacional." }
     ],
-    correct: "B"
+    correct: "A"
   },
   {
     id: 106,

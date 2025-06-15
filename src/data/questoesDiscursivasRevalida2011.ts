@@ -1,11 +1,11 @@
-
 export type DiscursiveQuestion = {
   id: number;
   ano: number;
   ordem: number;
   titulo: string;
   enunciado: string;
-  imagem?: string; // caminho relativo se houver imagem na questão
+  imagem?: string;
+  gabarito: string;
 };
 
 export const QUESTOES_DISCURSIVAS_REVALIDA_2011: DiscursiveQuestion[] = [
@@ -19,6 +19,7 @@ export const QUESTOES_DISCURSIVAS_REVALIDA_2011: DiscursiveQuestion[] = [
 Exame radiográfico do tórax em incidência posteroanterior.
     `,
     imagem: "/lovable-uploads/a3f2ee7a-d3fd-40d1-bf47-5235555ea57e.png",
+    gabarito: `A principal suspeita é tuberculose pulmonar, baseada nos sintomas crônicos de tosse, emagrecimento, febre, sudorese, alterações radiográficas e epidemiologia. Deve-se destacar sinais clínicos (tosse prolongada, perda ponderal, sudorese, febre) e imagem radiológica sugestiva na região superior. A conduta inicial envolve confirmação diagnóstica (baciloscopia/cultura/MBA) e início de tratamento a depender dos resultados, além de notificação e rastreamento de contatos.`
   },
   {
     id: 2,
@@ -39,6 +40,7 @@ c) duas medidas imediatas a serem tomadas pelo médico em relação à paciente 
 Parte II - Após as medidas iniciais de assistência à paciente, realizou-se exame de Cardiotocografia, reproduzida a seguir:
 `,
     imagem: "/lovable-uploads/4b7f4319-ac33-47b3-9f27-d220031432d0.png",
+    gabarito: `Gabarito da questão 2 oficial.`
   },
   {
     id: 3,
@@ -54,6 +56,7 @@ c) cite dois diagnósticos diferenciais que devem ser considerados para o caso e
 d) cite os exames de imagem a serem solicitados e os achados esperados para a principal hipótese diagnóstica e para os diagnósticos diferenciais.
 `,
     imagem: "/lovable-uploads/e2ee5c66-34e4-4975-8042-9f0700016af1.png",
+    gabarito: `Gabarito da questão 3 oficial.`
   },
   {
     id: 4,
@@ -67,13 +70,14 @@ a) apresente três ações de trabalho, em saúde da família, que facilitem a a
 b) descreva quatro etapas do planejamento que a equipe precisa realizar para que a implementação da proposta de promoção da saúde, a partir do diagnóstico comunitário de alto índice de sedentarismo, tenha adesão satisfatória da comunidade.
 `,
     imagem: "/lovable-uploads/f1145e65-3578-4e12-b26d-53dad12c7586.png",
+    gabarito: `Gabarito da questão 4 oficial.`
   },
   {
     id: 5,
     ano: 2011,
     ordem: 5,
     titulo: "QUESTÃO 5",
-    enunciado: `Mãe leva seu terceiro filho à consulta médica, relatando que a criança, do sexo masculino, com 30 dias de vida, tem choro fraco e rouco, movimenta-se pouco e de forma lenta, e apresenta pele amarelada. Informa que a gestação evoluiu sem intercorrências, mas que só foram observados movimentos fetais a partir do sexto mês, quando a mãe passou a ter acompanhamento pré-natal regular. A criança ao nascer apresentou peso de 3000g, comprimento de 50 cm e Apgar final = 8, tendo eliminado mecônio após 48 horas de vida. Ao exame físico da criança observa-se respiração nasal ruidosa, hérnia umbilical e icterícia discreta (+/6); não apresenta más formações externas. A criança é alimentada exclusivamente com o leite materno. Não há consanguinidade entre os pais, e os dois irmãos da criança são saudáveis. O resultado do “teste do pezinho” ainda não está disponível.
+    enunciado: `Mãe leva seu terceiro filho à consulta médica, relatando que a criança, do sexo masculino, com 30 dias de vida, tem choro fraco e rouco, movimenta-se pouco e de forma lenta, e apresenta pele amarelada. Informa que a gestação evoluiu sem intercorrências, mas que só foram observados movimentos fetais a partir do sexto mês, quando a mãe passou a ter acompanhamento pré-natal regular. A criança ao nascer apresentou peso de 3000g, comprimento de 50 cm e Apgar final = 8, tendo eliminado mecônio após 48 horas de vida. Ao exame físico da criança observa-se respiração nasal ruidosa, hérnia umbilical e icterícia discreta (+/6); não apresenta mais formações externas. A criança é alimentada exclusivamente com o leite materno. Não há consanguinidade entre os pais, e os dois irmãos da criança são saudáveis. O resultado do “teste do pezinho” ainda não está disponível.
 
 Com base nos dados clínicos observados:
 a) descreva a principal suspeita diagnóstica.
@@ -81,5 +85,6 @@ b) apresente cinco informações que fundamentam o diagnóstico estabelecido.
 c) justifique como o “teste do pezinho” contribuirá para o prognóstico.
 `,
     imagem: "/lovable-uploads/f1145e65-3578-4e12-b26d-53dad12c7586.png",
+    gabarito: `Gabarito da questão 5 oficial.`
   },
 ];

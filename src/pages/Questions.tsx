@@ -128,6 +128,7 @@ export default function Questions() {
                     titulo={q.titulo}
                     enunciado={q.enunciado}
                     imagem={q.imagem}
+                    gabarito={q.gabarito}
                   />
                 ))}
           </div>

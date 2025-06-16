@@ -1,5 +1,5 @@
 
-import { Question } from "./questoesRevalida2011";
+import { Question } from "@/components/QuestionCard";
 
 export const QUESTOES_REVALIDA_2023_2_75_100: Question[] = [
   {

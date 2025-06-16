@@ -19,11 +19,12 @@ import { QUESTOES_REVALIDA_2022_1 } from "@/data/questoesRevalida2022_1";
 import { QUESTOES_REVALIDA_2022_2 } from "@/data/questoesRevalida2022_2";
 import { QUESTOES_REVALIDA_2023_1 } from "@/data/questoesRevalida2023_1";
 import { QUESTOES_REVALIDA_2023_2 } from "@/data/questoesRevalida2023_2";
+import { QUESTOES_REVALIDA_2024_1 } from "@/data/questoesRevalida2024_1";
 
 const QUESTOES_POR_PAGINA = 10;
 
 export function useQuestions() {
-  const [anoSelecionado, setAnoSelecionado] = useState<number>(2023);
+  const [anoSelecionado, setAnoSelecionado] = useState<number>(2024);
   const [tipoProva, setTipoProva] = useState<string>("Prova 1");
   const [paginaAtual, setPaginaAtual] = useState(1);
 
@@ -74,6 +75,9 @@ export function useQuestions() {
       return tipoProva === "Prova 2"
         ? QUESTOES_REVALIDA_2023_2
         : QUESTOES_REVALIDA_2023_1;
+    }
+    if (anoSelecionado === 2024) {
+      return QUESTOES_REVALIDA_2024_1;
     }
     return [];
   }, [anoSelecionado, tipoProva]);

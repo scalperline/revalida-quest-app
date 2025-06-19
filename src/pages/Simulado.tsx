@@ -1,6 +1,6 @@
-
 import { useState } from "react";
 import { useSimulado } from "@/hooks/useSimulado";
+import { useGamification } from "@/hooks/useGamification";
 import { SimuladoTimer } from "@/components/SimuladoTimer";
 import { QuestionCard } from "@/components/QuestionCard";
 
@@ -40,6 +40,7 @@ export default function Simulado() {
   const [iniciado, setIniciado] = useState(false);
   const [finalizado, setFinalizado] = useState(false);
   const simulado = useSimulado(QUESTOES, 2);
+  const { completeSimulado } = useGamification();
 
   function iniciar() {
     setIniciado(true);
@@ -48,6 +49,13 @@ export default function Simulado() {
 
   function encerrar() {
     setFinalizado(true);
+    
+    // Calculate score and update gamification
+    const acertos = simulado.questoesSelecionadas.filter(
+      (q) => simulado.respostas[q.id] === q.correct
+    ).length;
+    
+    completeSimulado(acertos, simulado.total);
   }
 
   if (!iniciado)
@@ -67,7 +75,6 @@ export default function Simulado() {
     );
 
   if (finalizado || simulado.terminou) {
-    // calcular resultado
     const acertos = simulado.questoesSelecionadas.filter(
       (q, idx) => simulado.respostas[q.id] === q.correct
     ).length;

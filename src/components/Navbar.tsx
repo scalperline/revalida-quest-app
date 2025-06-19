@@ -1,6 +1,6 @@
 
 import { Link, useLocation } from "react-router-dom";
-import { Book, Timer, BarChartBig, Stethoscope, User } from "lucide-react";
+import { Book, Timer, BarChartBig, User } from "lucide-react";
 import { ProgressBar } from "./ProgressBar";
 import { useGamification } from "@/hooks/useGamification";
 
@@ -18,8 +18,12 @@ export function Navbar() {
   return (
     <nav className="w-full bg-background border-b border-border px-3 md:px-7 py-2 flex items-center gap-4 shadow-sm z-30 sticky top-0">
       <Link to="/" className="flex items-center gap-2 text-primary font-bold text-xl md:text-2xl mr-6 hover:opacity-80 transition-opacity hover-scale">
-        <Stethoscope size={28} className="text-blue-500" />
-        <span className="tracking-tighter">Revalida App</span>
+        <img 
+          src="/lovable-uploads/0a0dc004-3774-4149-a327-6379da2b1bde.png" 
+          alt="Revalida Quest Logo" 
+          className="w-8 h-8 object-contain"
+        />
+        <span className="tracking-tighter">Revalida Quest</span>
       </Link>
       
       <ul className="flex gap-1 sm:gap-2 md:gap-4 flex-1">

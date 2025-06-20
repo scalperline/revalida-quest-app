@@ -1,6 +1,7 @@
 
 import { QuestionCard } from "@/components/QuestionCard";
 import { GamifiedQuestionsHeader } from "@/components/GamifiedQuestionsHeader";
+import { NavigationButtons } from "@/components/NavigationButtons";
 import { useQuestions } from "@/hooks/useQuestions";
 import { useQuestionsFilters } from "@/hooks/useQuestionsFilters";
 import { QuestionsPagination } from "@/components/QuestionsPagination";
@@ -40,6 +41,9 @@ export default function Questions() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 px-1 md:px-2 py-10 flex flex-col">
       <div className="max-w-6xl mx-auto w-full">
+        {/* Navigation Buttons */}
+        <NavigationButtons />
+
         <GamifiedQuestionsHeader
           anoSelecionado={anoSelecionado}
           setAnoSelecionado={handleAnoSelecionado}

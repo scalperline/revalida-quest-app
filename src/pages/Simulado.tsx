@@ -119,7 +119,7 @@ export default function Simulado() {
             <div className="pt-8">
               <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 border border-blue-100 dark:border-gray-700">
                 <div className="text-center mb-8">
-                  <div className="w-20 h-20 bg-gradient-to-br from-blue-500 via-purple-600 to-blue-700 rounded-full flex items-center justify-center mx-auto mb-6 animate-pulse">
+                  <div className="w-20 h-20 bg-gradient-to-br from-blue-500 via-purple-600 to-blue-700 rounded-full flex items-center justify-center mx-auto mb-6">
                     <Trophy className="w-10 h-10 text-white" />
                   </div>
                   <h1 className="text-4xl font-bold mb-4 text-gray-900 dark:text-white">
@@ -152,7 +152,7 @@ export default function Simulado() {
                 <div className="text-center">
                   <button
                     onClick={iniciar}
-                    className="px-12 py-4 bg-gradient-to-r from-blue-600 via-purple-600 to-blue-700 text-white rounded-2xl hover:from-blue-700 hover:via-purple-700 hover:to-blue-800 font-bold text-xl transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-3xl animate-pulse"
+                    className="px-12 py-4 bg-gradient-to-r from-blue-600 via-purple-600 to-blue-700 text-white rounded-2xl hover:from-blue-700 hover:via-purple-700 hover:to-blue-800 font-bold text-xl transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-3xl"
                   >
                     🚀 Iniciar Missão Épica
                   </button>
@@ -265,7 +265,7 @@ export default function Simulado() {
             <div className="text-center mt-12">
               <button
                 onClick={encerrar}
-                className="px-12 py-4 bg-gradient-to-r from-green-600 via-emerald-600 to-green-700 text-white rounded-2xl hover:from-green-700 hover:via-emerald-700 hover:to-green-800 font-bold text-xl transition-all duration-300 transform hover:scale-105 shadow-2xl animate-pulse"
+                className="px-12 py-4 bg-gradient-to-r from-green-600 via-emerald-600 to-green-700 text-white rounded-2xl hover:from-green-700 hover:via-emerald-700 hover:to-green-800 font-bold text-xl transition-all duration-300 transform hover:scale-105 shadow-2xl"
               >
                 🏆 Ver Recompensas
               </button>

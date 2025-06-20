@@ -1,5 +1,6 @@
 
 import { Navbar } from "@/components/Navbar";
+import { NavigationButtons } from "@/components/NavigationButtons";
 import PerformanceChart from "@/components/PerformanceChart";
 import { useGamification } from "@/hooks/useGamification";
 import { TrendingUp, Target, Award, Calendar } from "lucide-react";
@@ -20,6 +21,11 @@ export default function Stats() {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
       <Navbar />
       <div className="container mx-auto px-4 py-8">
+        {/* Navigation Buttons */}
+        <div className="mb-8">
+          <NavigationButtons />
+        </div>
+
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
             <h1 className="text-4xl font-bold mb-4 text-gray-900 dark:text-white">Estatísticas e Performance</h1>

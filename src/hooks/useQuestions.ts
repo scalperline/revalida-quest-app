@@ -132,6 +132,5 @@ export function useQuestions() {
     handleAnoSelecionado,
     handleTipoProva,
     handlePageChange,
-    questoesAnoSelecionado,
   };
 }

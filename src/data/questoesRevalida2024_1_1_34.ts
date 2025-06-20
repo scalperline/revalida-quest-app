@@ -1,4 +1,3 @@
-
 import { type Question } from "@/components/QuestionCard";
 
 export const QUESTOES_REVALIDA_2024_1_1_34: Question[] = [
@@ -222,7 +221,7 @@ export const QUESTOES_REVALIDA_2024_1_1_34: Question[] = [
       { id: "C", text: "otite externa subaguda viral; antibioticoterapia tópica por 15 dias, anti-inflamatórios sistêmicos." },
       { id: "D", text: "otite média aguda bacteriana; amoxicilina e clavulanato por 10 dias; descongestionantes e anti-histamínicos." }
     ],
-    correct: "-"
+    correct: "D"
   },
   {
     id: 18,
@@ -391,7 +390,7 @@ export const QUESTOES_REVALIDA_2024_1_1_34: Question[] = [
       { id: "C", text: "Organização de comitês nos bairros para regulação da venda e do uso de tabaco e promoção de ações em eventos para chamar atenção aos fatores de risco do uso de fumo." },
       { id: "D", text: "Encaminhamento dos fumantes para o nível de maior densidade tecnológica, considerando o difícil controle do tabagismo e a necessidade de melhores estratégias para essa ação." }
     ],
-    correct: "C"
+    correct: "B"
   },
   {
     id: 31,
@@ -417,7 +416,7 @@ export const QUESTOES_REVALIDA_2024_1_1_34: Question[] = [
       { id: "C", text: "Não administrar dose de reforço de vacina antitetânica e indicar o uso de soro antitetânico." },
       { id: "D", text: "Não administrar dose de reforço de vacina antitetânica e não indicar o uso de soro antitetânico." }
     ],
-    correct: "A"
+    correct: "D"
   },
   {
     id: 33,

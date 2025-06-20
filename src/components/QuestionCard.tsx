@@ -35,19 +35,23 @@ export function QuestionCard({ question, showAnswer }: Props) {
   const handleAnswer = (optionId: string) => {
     setSelected(optionId);
     const correct = optionId === question.correct;
+    
+    console.log('Answering question:', { correct, optionId, correctAnswer: question.correct });
     answerQuestion(correct);
 
-    // Check for new achievements with proper Date handling
-    const newAchievements = userProgress.achievements.filter(a => {
-      if (!a.unlocked) return false;
-      if (!a.unlockedAt) return true; // Just unlocked
-      const unlockedTime = a.unlockedAt instanceof Date ? a.unlockedAt.getTime() : new Date(a.unlockedAt).getTime();
-      return Date.now() - unlockedTime < 1000;
-    });
-    
-    if (newAchievements.length > 0) {
-      setAchievementToShow(newAchievements[0]);
-    }
+    // Check for newly unlocked achievements
+    setTimeout(() => {
+      const newlyUnlocked = userProgress.achievements.find(a => {
+        if (!a.unlocked || !a.unlockedAt) return false;
+        const timeDiff = Date.now() - (a.unlockedAt instanceof Date ? a.unlockedAt.getTime() : new Date(a.unlockedAt).getTime());
+        return timeDiff < 2000; // Within 2 seconds
+      });
+      
+      if (newlyUnlocked) {
+        console.log('Showing achievement:', newlyUnlocked);
+        setAchievementToShow(newlyUnlocked);
+      }
+    }, 100);
   };
 
   return (

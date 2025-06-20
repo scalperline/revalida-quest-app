@@ -73,13 +73,20 @@ export function useGamification() {
       try {
         const parsed = JSON.parse(saved);
         // Convert unlockedAt strings back to Date objects
-        const achievements = parsed.achievements || ACHIEVEMENTS;
+        const achievements = parsed.achievements || [...ACHIEVEMENTS];
         achievements.forEach((achievement: Achievement) => {
           if (achievement.unlockedAt && typeof achievement.unlockedAt === 'string') {
             achievement.unlockedAt = new Date(achievement.unlockedAt);
           }
         });
         return {
+          level: 1,
+          xp: 0,
+          xpToNextLevel: 100,
+          totalQuestions: 0,
+          correctAnswers: 0,
+          simuladosCompletos: 0,
+          streakDias: 0,
           ...parsed,
           achievements
         };
@@ -138,6 +145,7 @@ export function useGamification() {
         if (achievement && !achievement.unlocked) {
           achievement.unlocked = true;
           achievement.unlockedAt = new Date();
+          console.log('Achievement unlocked: first_question');
         }
       }
       
@@ -146,6 +154,7 @@ export function useGamification() {
         if (achievement && !achievement.unlocked) {
           achievement.unlocked = true;
           achievement.unlockedAt = new Date();
+          console.log('Achievement unlocked: first_correct');
         }
       }
       
@@ -154,6 +163,7 @@ export function useGamification() {
         if (achievement && !achievement.unlocked) {
           achievement.unlocked = true;
           achievement.unlockedAt = new Date();
+          console.log('Achievement unlocked: questions_50');
         }
       }
       
@@ -162,6 +172,7 @@ export function useGamification() {
         if (achievement && !achievement.unlocked) {
           achievement.unlocked = true;
           achievement.unlockedAt = new Date();
+          console.log('Achievement unlocked: accuracy_80');
         }
       }
 
@@ -187,6 +198,7 @@ export function useGamification() {
         if (achievement && !achievement.unlocked) {
           achievement.unlocked = true;
           achievement.unlockedAt = new Date();
+          console.log('Achievement unlocked: first_simulado');
         }
       }
 

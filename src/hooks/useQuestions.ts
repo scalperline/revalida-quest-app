@@ -132,5 +132,6 @@ export function useQuestions() {
     handleAnoSelecionado,
     handleTipoProva,
     handlePageChange,
+    questoesAnoSelecionado, // Expose this for filters
   };
 }

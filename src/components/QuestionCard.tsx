@@ -37,11 +37,13 @@ export function QuestionCard({ question, showAnswer }: Props) {
     const correct = optionId === question.correct;
     answerQuestion(correct);
 
-    // Check for new achievements
-    const newAchievements = userProgress.achievements.filter(a => 
-      a.unlocked && !a.unlockedAt || 
-      (a.unlockedAt && Date.now() - a.unlockedAt.getTime() < 1000)
-    );
+    // Check for new achievements with proper Date handling
+    const newAchievements = userProgress.achievements.filter(a => {
+      if (!a.unlocked) return false;
+      if (!a.unlockedAt) return true; // Just unlocked
+      const unlockedTime = a.unlockedAt instanceof Date ? a.unlockedAt.getTime() : new Date(a.unlockedAt).getTime();
+      return Date.now() - unlockedTime < 1000;
+    });
     
     if (newAchievements.length > 0) {
       setAchievementToShow(newAchievements[0]);

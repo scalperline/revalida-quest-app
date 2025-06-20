@@ -70,11 +70,22 @@ export function useGamification() {
   const [userProgress, setUserProgress] = useState<UserProgress>(() => {
     const saved = localStorage.getItem('revalida-progress');
     if (saved) {
-      const parsed = JSON.parse(saved);
-      return {
-        ...parsed,
-        achievements: parsed.achievements || ACHIEVEMENTS
-      };
+      try {
+        const parsed = JSON.parse(saved);
+        // Convert unlockedAt strings back to Date objects
+        const achievements = parsed.achievements || ACHIEVEMENTS;
+        achievements.forEach((achievement: Achievement) => {
+          if (achievement.unlockedAt && typeof achievement.unlockedAt === 'string') {
+            achievement.unlockedAt = new Date(achievement.unlockedAt);
+          }
+        });
+        return {
+          ...parsed,
+          achievements
+        };
+      } catch (error) {
+        console.error('Error parsing saved progress:', error);
+      }
     }
     return {
       level: 1,

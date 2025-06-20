@@ -49,6 +49,7 @@ export function QuestionsHeader({
               <SelectItem value="2022">Revalida 2022</SelectItem>
               <SelectItem value="2023">Revalida 2023</SelectItem>
               <SelectItem value="2024">Revalida 2024</SelectItem>
+              <SelectItem value="2025">Revalida 2025</SelectItem>
             </SelectContent>
           </Select>
           {[2013, 2014, 2015, 2016, 2017, 2022, 2023].includes(anoSelecionado) &&

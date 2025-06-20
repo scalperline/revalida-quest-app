@@ -1,4 +1,3 @@
-
 import { useCallback } from 'react';
 
 type SoundType = 'correct' | 'incorrect' | 'achievement' | 'click' | 'levelup';
@@ -56,9 +55,9 @@ export function useAudio() {
         break;
         
       case 'click':
-        // Touch tap sound - short and crisp like screen touch
-        createTone(1200, 0.05, 'sine');
-        setTimeout(() => createTone(800, 0.03, 'sine'), 20);
+        // Deep touch tap sound - low frequencies for bass effect
+        createTone(150, 0.08, 'sine');
+        setTimeout(() => createTone(100, 0.06, 'sine'), 30);
         break;
     }
   }, []);

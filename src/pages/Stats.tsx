@@ -1,4 +1,3 @@
-
 import { Navbar } from "@/components/Navbar";
 import PerformanceChart from "@/components/PerformanceChart";
 import { useGamification } from "@/hooks/useGamification";

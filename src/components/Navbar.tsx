@@ -1,6 +1,6 @@
 
 import { Link, useLocation } from "react-router-dom";
-import { Book, Timer, BarChartBig, User, Search } from "lucide-react";
+import { Book, Timer, BarChartBig, User, Stethoscope } from "lucide-react";
 import { ProgressBar } from "./ProgressBar";
 import { useGamification } from "@/hooks/useGamification";
 import { useAudio } from "@/hooks/useAudio";
@@ -24,7 +24,7 @@ export function Navbar() {
         className="flex items-center gap-1 text-blue-600 font-bold text-lg md:text-xl mr-6 hover:opacity-80 transition-opacity hover-scale whitespace-nowrap"
         onClick={() => playSound('click')}
       >
-        <Search className="w-8 h-8 text-blue-600" />
+        <Stethoscope className="w-8 h-8 text-blue-600" />
         <span className="tracking-tight">Revalida Quest</span>
       </Link>
       

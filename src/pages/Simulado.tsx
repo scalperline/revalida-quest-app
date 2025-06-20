@@ -1,11 +1,10 @@
-
 import { useState } from "react";
 import { useSimulado } from "@/hooks/useSimulado";
 import { useGamification } from "@/hooks/useGamification";
 import { useAudio } from "@/hooks/useAudio";
 import { SimuladoTimer } from "@/components/SimuladoTimer";
 import { QuestionCard } from "@/components/QuestionCard";
-import { NavigationButtons } from "@/components/NavigationButtons";
+import { Navbar } from "@/components/Navbar";
 
 // Usando o mesmo banco fictício
 const QUESTOES = [
@@ -72,12 +71,8 @@ export default function Simulado() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
+      <Navbar />
       <div className="container mx-auto px-4 py-8">
-        {/* Navigation Buttons */}
-        <div className="max-w-6xl mx-auto">
-          <NavigationButtons />
-        </div>
-
         {!iniciado && (
           <div className="max-w-2xl mx-auto pt-16 text-center">
             <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 border border-blue-100 dark:border-gray-700">

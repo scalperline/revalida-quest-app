@@ -1,3 +1,4 @@
+
 import { Link, useLocation } from "react-router-dom";
 import { Book, Timer, BarChartBig, User, Search } from "lucide-react";
 import { ProgressBar } from "./ProgressBar";
@@ -20,10 +21,10 @@ export function Navbar() {
     <nav className="w-full bg-background border-b border-border px-3 md:px-7 py-2 flex items-center gap-4 shadow-sm z-30 sticky top-0">
       <Link 
         to="/" 
-        className="flex items-center gap-1 text-primary font-bold text-lg md:text-xl mr-6 hover:opacity-80 transition-opacity hover-scale whitespace-nowrap"
+        className="flex items-center gap-1 text-blue-600 font-bold text-lg md:text-xl mr-6 hover:opacity-80 transition-opacity hover-scale whitespace-nowrap"
         onClick={() => playSound('click')}
       >
-        <Search className="w-8 h-8 text-primary" />
+        <Search className="w-8 h-8 text-blue-600" />
         <span className="tracking-tight">Revalida Quest</span>
       </Link>
       

@@ -56,8 +56,9 @@ export function useAudio() {
         break;
         
       case 'click':
-        // Simple click sound with lower frequency for deeper tone
-        createTone(300, 0.1, 'square');
+        // Touch tap sound - short and crisp like screen touch
+        createTone(1200, 0.05, 'sine');
+        setTimeout(() => createTone(800, 0.03, 'sine'), 20);
         break;
     }
   }, []);

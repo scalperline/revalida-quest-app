@@ -56,8 +56,8 @@ export function useAudio() {
         break;
         
       case 'click':
-        // Simple click sound
-        createTone(800, 0.1, 'square');
+        // Simple click sound with lower frequency for deeper tone
+        createTone(300, 0.1, 'square');
         break;
     }
   }, []);

@@ -1,6 +1,7 @@
 
 import { useState } from "react";
 import { useGamification } from "@/hooks/useGamification";
+import { useAudio } from "@/hooks/useAudio";
 import { AchievementNotification } from "./AchievementNotification";
 
 export type Option = {
@@ -30,14 +31,30 @@ export function QuestionCard({ question, showAnswer }: Props) {
   const [selected, setSelected] = useState<string | null>(null);
   const [achievementToShow, setAchievementToShow] = useState(null);
   const { answerQuestion, userProgress } = useGamification();
+  const { playSound } = useAudio();
   const respostaRevelada = selected || showAnswer;
 
   const handleAnswer = (optionId: string) => {
     setSelected(optionId);
     const correct = optionId === question.correct;
     
+    // Play sound based on answer
+    if (correct) {
+      playSound('correct');
+    } else {
+      playSound('incorrect');
+    }
+    
     console.log('Answering question:', { correct, optionId, correctAnswer: question.correct });
+    const previousLevel = userProgress.level;
     answerQuestion(correct);
+
+    // Check for level up
+    setTimeout(() => {
+      if (userProgress.level > previousLevel) {
+        playSound('levelup');
+      }
+    }, 100);
 
     // Check for newly unlocked achievements
     setTimeout(() => {
@@ -49,6 +66,7 @@ export function QuestionCard({ question, showAnswer }: Props) {
       
       if (newlyUnlocked) {
         console.log('Showing achievement:', newlyUnlocked);
+        playSound('achievement');
         setAchievementToShow(newlyUnlocked);
       }
     }, 100);
@@ -92,13 +110,13 @@ export function QuestionCard({ question, showAnswer }: Props) {
               return (
                 <button
                   key={opt.id}
-                  className={`flex items-center gap-3 px-4 py-2 rounded-lg border text-left transition-colors text-base font-normal
+                  className={`flex items-center gap-3 px-4 py-2 rounded-lg border text-left transition-all text-base font-normal hover:scale-[1.02]
                   ${
                     marcado
                       ? acerto
-                        ? "bg-green-100 border-green-500 text-green-800"
+                        ? "bg-green-100 border-green-500 text-green-800 animate-pulse"
                         : erro
-                        ? "bg-red-100 border-red-400 text-red-700"
+                        ? "bg-red-100 border-red-400 text-red-700 animate-pulse"
                         : "border-primary"
                       : showHighlight
                       ? "bg-green-50 border-green-400 text-green-800"
@@ -114,13 +132,13 @@ export function QuestionCard({ question, showAnswer }: Props) {
                   onClick={() => handleAnswer(opt.id)}
                 >
                   <span
-                    className={`w-8 h-8 flex items-center justify-center rounded-full border  text-lg font-semibold
+                    className={`w-8 h-8 flex items-center justify-center rounded-full border text-lg font-semibold transition-all
                     ${
                       marcado
                         ? acerto
-                          ? "bg-green-500 text-white border-green-600"
+                          ? "bg-green-500 text-white border-green-600 animate-bounce"
                           : erro
-                          ? "bg-red-400 text-white border-red-700"
+                          ? "bg-red-400 text-white border-red-700 animate-bounce"
                           : "border-primary"
                         : "bg-white border-muted"
                     }

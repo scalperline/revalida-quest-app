@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { useSimulado } from "@/hooks/useSimulado";
 import { useGamification } from "@/hooks/useGamification";
+import { useAudio } from "@/hooks/useAudio";
 import { SimuladoTimer } from "@/components/SimuladoTimer";
 import { QuestionCard } from "@/components/QuestionCard";
 
@@ -42,10 +43,12 @@ export default function Simulado() {
   const [finalizado, setFinalizado] = useState(false);
   const simulado = useSimulado(QUESTOES, 2);
   const { completeSimulado } = useGamification();
+  const { playSound } = useAudio();
 
   function iniciar() {
     setIniciado(true);
     setFinalizado(false);
+    playSound('click');
   }
 
   function encerrar() {
@@ -57,6 +60,13 @@ export default function Simulado() {
     ).length;
     
     completeSimulado(acertos, simulado.total);
+    
+    // Play completion sound
+    if (acertos / simulado.total >= 0.7) {
+      playSound('achievement');
+    } else {
+      playSound('click');
+    }
   }
 
   if (!iniciado)
@@ -68,7 +78,7 @@ export default function Simulado() {
         </p>
         <button
           onClick={iniciar}
-          className="px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 font-semibold text-lg transition"
+          className="px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 font-semibold text-lg transition hover:scale-105"
         >
           Iniciar Simulado
         </button>
@@ -127,8 +137,9 @@ export default function Simulado() {
               {simulado.atual.options.map(opt => (
                 <button
                   key={opt.id}
-                  className="mx-2 px-4 py-2 bg-secondary hover:bg-primary text-gray-700 rounded border transition"
+                  className="mx-2 px-4 py-2 bg-secondary hover:bg-primary text-gray-700 rounded border transition hover:scale-105"
                   onClick={() => {
+                    playSound('click');
                     simulado.responder(opt.id);
                     setTimeout(() => simulado.proxima(), 650);
                   }}
@@ -145,7 +156,7 @@ export default function Simulado() {
         <div className="text-center mt-8">
           <button
             onClick={encerrar}
-            className="px-6 py-2 bg-primary text-white rounded-lg"
+            className="px-6 py-2 bg-primary text-white rounded-lg hover:scale-105 transition"
           >
             Ver Resultado
           </button>

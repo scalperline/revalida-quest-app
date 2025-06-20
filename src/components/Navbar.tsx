@@ -1,8 +1,8 @@
-
 import { Link, useLocation } from "react-router-dom";
 import { Book, Timer, BarChartBig, User, Search } from "lucide-react";
 import { ProgressBar } from "./ProgressBar";
 import { useGamification } from "@/hooks/useGamification";
+import { useAudio } from "@/hooks/useAudio";
 
 const links = [
   { label: "Questões", to: "/questoes", icon: Book },
@@ -14,10 +14,15 @@ const links = [
 export function Navbar() {
   const { pathname } = useLocation();
   const { userProgress } = useGamification();
+  const { playSound } = useAudio();
   
   return (
     <nav className="w-full bg-background border-b border-border px-3 md:px-7 py-2 flex items-center gap-4 shadow-sm z-30 sticky top-0">
-      <Link to="/" className="flex items-center gap-1 text-primary font-bold text-lg md:text-xl mr-6 hover:opacity-80 transition-opacity hover-scale whitespace-nowrap">
+      <Link 
+        to="/" 
+        className="flex items-center gap-1 text-primary font-bold text-lg md:text-xl mr-6 hover:opacity-80 transition-opacity hover-scale whitespace-nowrap"
+        onClick={() => playSound('click')}
+      >
         <Search className="w-8 h-8 text-primary" />
         <span className="tracking-tight">Revalida Quest</span>
       </Link>
@@ -27,6 +32,7 @@ export function Navbar() {
           <li key={label}>
             <Link
               to={to}
+              onClick={() => playSound('click')}
               className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-all hover:scale-105 font-medium border border-transparent ${
                 pathname.startsWith(to)
                   ? "bg-primary/70 text-primary-foreground shadow"

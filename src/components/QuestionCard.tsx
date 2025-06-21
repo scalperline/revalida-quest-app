@@ -1,5 +1,4 @@
-
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useGamification } from "@/hooks/useGamification";
 import { useAudio } from "@/hooks/useAudio";
 import { AchievementNotification } from "./AchievementNotification";
@@ -31,13 +30,20 @@ interface Props {
 
 export function QuestionCard({ question, showAnswer }: Props) {
   const [selected, setSelected] = useState<string | null>(null);
-  const [achievementToShow, setAchievementToShow] = useState(null);
   const [showLevelUp, setShowLevelUp] = useState(false);
   const [newLevel, setNewLevel] = useState(0);
   const [showConfetti, setShowConfetti] = useState(false);
-  const { answerQuestion, userProgress } = useGamification();
+  const { 
+    answerQuestion, 
+    userProgress, 
+    getNewlyUnlockedAchievement, 
+    clearNewlyUnlockedAchievement 
+  } = useGamification();
   const { playSound } = useAudio();
   const respostaRevelada = selected || showAnswer;
+
+  // Check for newly unlocked achievements
+  const newlyUnlockedAchievement = getNewlyUnlockedAchievement();
 
   const handleAnswer = (optionId: string) => {
     setSelected(optionId);
@@ -63,22 +69,14 @@ export function QuestionCard({ question, showAnswer }: Props) {
         playSound('levelup');
       }
     }, 100);
-
-    // Check for newly unlocked achievements
-    setTimeout(() => {
-      const newlyUnlocked = userProgress.achievements.find(a => {
-        if (!a.unlocked || !a.unlockedAt) return false;
-        const timeDiff = Date.now() - (a.unlockedAt instanceof Date ? a.unlockedAt.getTime() : new Date(a.unlockedAt).getTime());
-        return timeDiff < 2000;
-      });
-      
-      if (newlyUnlocked) {
-        console.log('Showing achievement:', newlyUnlocked);
-        playSound('achievement');
-        setAchievementToShow(newlyUnlocked);
-      }
-    }, 100);
   };
+
+  // Handle achievement notification
+  useEffect(() => {
+    if (newlyUnlockedAchievement) {
+      playSound('achievement');
+    }
+  }, [newlyUnlockedAchievement, playSound]);
 
   return (
     <>
@@ -216,8 +214,8 @@ export function QuestionCard({ question, showAnswer }: Props) {
       </div>
       
       <AchievementNotification
-        achievement={achievementToShow}
-        onClose={() => setAchievementToShow(null)}
+        achievement={newlyUnlockedAchievement}
+        onClose={clearNewlyUnlockedAchievement}
       />
       
       <LevelUpNotification

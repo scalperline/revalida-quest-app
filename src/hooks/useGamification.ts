@@ -19,6 +19,7 @@ export interface UserProgress {
   simuladosCompletos: number;
   streakDias: number;
   achievements: Achievement[];
+  newlyUnlockedAchievements: string[]; // Track newly unlocked achievements
 }
 
 const ACHIEVEMENTS: Achievement[] = [
@@ -87,6 +88,7 @@ export function useGamification() {
           correctAnswers: 0,
           simuladosCompletos: 0,
           streakDias: 0,
+          newlyUnlockedAchievements: [],
           ...parsed,
           achievements
         };
@@ -102,7 +104,8 @@ export function useGamification() {
       correctAnswers: 0,
       simuladosCompletos: 0,
       streakDias: 0,
-      achievements: [...ACHIEVEMENTS]
+      achievements: [...ACHIEVEMENTS],
+      newlyUnlockedAchievements: []
     };
   });
 
@@ -132,57 +135,95 @@ export function useGamification() {
     });
   };
 
+  const unlockAchievement = (achievementId: string) => {
+    setUserProgress(prev => {
+      const achievement = prev.achievements.find(a => a.id === achievementId);
+      if (!achievement || achievement.unlocked) {
+        return prev; // Achievement already unlocked or doesn't exist
+      }
+
+      const updatedAchievements = prev.achievements.map(a => 
+        a.id === achievementId 
+          ? { ...a, unlocked: true, unlockedAt: new Date() }
+          : a
+      );
+
+      console.log('Achievement unlocked:', achievementId);
+
+      return {
+        ...prev,
+        achievements: updatedAchievements,
+        newlyUnlockedAchievements: [...prev.newlyUnlockedAchievements, achievementId]
+      };
+    });
+  };
+
+  const getNewlyUnlockedAchievement = () => {
+    if (userProgress.newlyUnlockedAchievements.length === 0) return null;
+    
+    const achievementId = userProgress.newlyUnlockedAchievements[0];
+    const achievement = userProgress.achievements.find(a => a.id === achievementId);
+    
+    return achievement || null;
+  };
+
+  const clearNewlyUnlockedAchievement = () => {
+    setUserProgress(prev => ({
+      ...prev,
+      newlyUnlockedAchievements: prev.newlyUnlockedAchievements.slice(1)
+    }));
+  };
+
   const answerQuestion = (correct: boolean) => {
     setUserProgress(prev => {
       const newTotal = prev.totalQuestions + 1;
       const newCorrect = correct ? prev.correctAnswers + 1 : prev.correctAnswers;
       
-      // Check for achievements
-      const updatedAchievements = [...prev.achievements];
-      
-      if (newTotal === 1) {
-        const achievement = updatedAchievements.find(a => a.id === 'first_question');
-        if (achievement && !achievement.unlocked) {
-          achievement.unlocked = true;
-          achievement.unlockedAt = new Date();
-          console.log('Achievement unlocked: first_question');
-        }
-      }
-      
-      if (correct && newCorrect === 1) {
-        const achievement = updatedAchievements.find(a => a.id === 'first_correct');
-        if (achievement && !achievement.unlocked) {
-          achievement.unlocked = true;
-          achievement.unlockedAt = new Date();
-          console.log('Achievement unlocked: first_correct');
-        }
-      }
-      
-      if (newTotal >= 50) {
-        const achievement = updatedAchievements.find(a => a.id === 'questions_50');
-        if (achievement && !achievement.unlocked) {
-          achievement.unlocked = true;
-          achievement.unlockedAt = new Date();
-          console.log('Achievement unlocked: questions_50');
-        }
-      }
-      
-      if (newCorrect / newTotal >= 0.8 && newTotal >= 10) {
-        const achievement = updatedAchievements.find(a => a.id === 'accuracy_80');
-        if (achievement && !achievement.unlocked) {
-          achievement.unlocked = true;
-          achievement.unlockedAt = new Date();
-          console.log('Achievement unlocked: accuracy_80');
-        }
-      }
-
       return {
         ...prev,
         totalQuestions: newTotal,
-        correctAnswers: newCorrect,
-        achievements: updatedAchievements
+        correctAnswers: newCorrect
       };
     });
+
+    // Check for achievements after state update
+    setTimeout(() => {
+      setUserProgress(prev => {
+        const newTotal = prev.totalQuestions;
+        const newCorrect = prev.correctAnswers;
+        
+        // Check achievements
+        if (newTotal === 1) {
+          const achievement = prev.achievements.find(a => a.id === 'first_question');
+          if (achievement && !achievement.unlocked) {
+            unlockAchievement('first_question');
+          }
+        }
+        
+        if (correct && newCorrect === 1) {
+          const achievement = prev.achievements.find(a => a.id === 'first_correct');
+          if (achievement && !achievement.unlocked) {
+            unlockAchievement('first_correct');
+          }
+        }
+        
+        if (newTotal >= 50) {
+          const achievement = prev.achievements.find(a => a.id === 'questions_50');
+          if (achievement && !achievement.unlocked) {
+            unlockAchievement('questions_50');
+          }
+        }
+        
+        if (newCorrect / newTotal >= 0.8 && newTotal >= 10) {
+          const achievement = prev.achievements.find(a => a.id === 'accuracy_80');
+          if (achievement && !achievement.unlocked) {
+            unlockAchievement('accuracy_80');
+          }
+        }
+
+        return prev;
+      });
+    }, 0);
 
     // Add XP based on performance
     addXP(correct ? 10 : 5);
@@ -191,23 +232,25 @@ export function useGamification() {
   const completeSimulado = (score: number, total: number) => {
     setUserProgress(prev => {
       const newSimulados = prev.simuladosCompletos + 1;
-      const updatedAchievements = [...prev.achievements];
       
-      if (newSimulados === 1) {
-        const achievement = updatedAchievements.find(a => a.id === 'first_simulado');
-        if (achievement && !achievement.unlocked) {
-          achievement.unlocked = true;
-          achievement.unlockedAt = new Date();
-          console.log('Achievement unlocked: first_simulado');
-        }
-      }
-
       return {
         ...prev,
-        simuladosCompletos: newSimulados,
-        achievements: updatedAchievements
+        simuladosCompletos: newSimulados
       };
     });
+
+    // Check for simulado achievement
+    setTimeout(() => {
+      setUserProgress(prev => {
+        if (prev.simuladosCompletos === 1) {
+          const achievement = prev.achievements.find(a => a.id === 'first_simulado');
+          if (achievement && !achievement.unlocked) {
+            unlockAchievement('first_simulado');
+          }
+        }
+        return prev;
+      });
+    }, 0);
 
     // Bonus XP for simulados
     const percentage = score / total;
@@ -230,6 +273,8 @@ export function useGamification() {
     answerQuestion,
     completeSimulado,
     getAccuracy,
-    getProgressPercentage
+    getProgressPercentage,
+    getNewlyUnlockedAchievement,
+    clearNewlyUnlockedAchievement
   };
 }

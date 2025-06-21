@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSimulado } from "@/hooks/useSimulado";
 import { useGamification } from "@/hooks/useGamification";
 import { useAudio } from "@/hooks/useAudio";
@@ -48,12 +48,26 @@ export default function Simulado() {
   const [finalizado, setFinalizado] = useState(false);
   const [showLevelUp, setShowLevelUp] = useState(false);
   const [newLevel, setNewLevel] = useState(0);
-  const [achievementToShow, setAchievementToShow] = useState(null);
   const [showConfetti, setShowConfetti] = useState(false);
   
   const simulado = useSimulado(QUESTOES, 2);
-  const { completeSimulado, userProgress } = useGamification();
+  const { 
+    completeSimulado, 
+    userProgress, 
+    getNewlyUnlockedAchievement, 
+    clearNewlyUnlockedAchievement 
+  } = useGamification();
   const { playSound } = useAudio();
+
+  // Check for newly unlocked achievements
+  const newlyUnlockedAchievement = getNewlyUnlockedAchievement();
+
+  // Handle achievement notification
+  useEffect(() => {
+    if (newlyUnlockedAchievement) {
+      playSound('achievement');
+    }
+  }, [newlyUnlockedAchievement, playSound]);
 
   function iniciar() {
     setIniciado(true);
@@ -83,20 +97,6 @@ export default function Simulado() {
         playSound('levelup');
       }
     }, 500);
-    
-    // Check for achievements
-    setTimeout(() => {
-      const newlyUnlocked = userProgress.achievements.find(a => {
-        if (!a.unlocked || !a.unlockedAt) return false;
-        const timeDiff = Date.now() - (a.unlockedAt instanceof Date ? a.unlockedAt.getTime() : new Date(a.unlockedAt).getTime());
-        return timeDiff < 2000;
-      });
-      
-      if (newlyUnlocked) {
-        playSound('achievement');
-        setAchievementToShow(newlyUnlocked);
-      }
-    }, 1000);
     
     // Play completion sound
     if (acertos / simulado.total >= 0.7) {
@@ -285,8 +285,8 @@ export default function Simulado() {
       />
       
       <AchievementNotification
-        achievement={achievementToShow}
-        onClose={() => setAchievementToShow(null)}
+        achievement={newlyUnlockedAchievement}
+        onClose={clearNewlyUnlockedAchievement}
       />
     </div>
   );

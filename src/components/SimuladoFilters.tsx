@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -231,7 +230,7 @@ export function SimuladoFilters({ onStart }: SimuladoFiltersProps) {
           size="lg"
         >
           <Play className="w-6 h-6 mr-2" />
-          🚀 Iniciar Quest Personalizada
+          🎯 Iniciar Simulado
         </Button>
       </CardContent>
     </Card>

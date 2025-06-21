@@ -98,7 +98,7 @@ export default function Simulado() {
             <div className="pt-8">
               <div className="text-center mb-8">
                 <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent">
-                  🎯 Simulado Personalizado Revalida
+                  🚩 Simulado Personalizado
                 </h1>
                 <p className="text-xl text-muted-foreground">
                   Configure sua quest do jeito que quiser e conquiste XP, badges e cartas médicas!

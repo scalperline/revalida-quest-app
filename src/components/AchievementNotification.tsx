@@ -38,34 +38,34 @@ export function AchievementNotification({ achievement, onClose }: AchievementNot
       <div className={`fixed inset-0 z-50 flex items-center justify-center bg-black/50 transition-all duration-500 ${
         visible ? 'opacity-100' : 'opacity-0'
       }`}>
-        <div className={`bg-gradient-to-br from-yellow-400 via-orange-500 to-red-500 text-white p-6 rounded-2xl shadow-2xl max-w-sm mx-4 text-center transform transition-all duration-500 ${
+        <div className={`bg-gradient-to-br from-yellow-400 via-orange-500 to-red-500 text-white p-8 rounded-2xl shadow-2xl max-w-sm mx-4 text-center transform transition-all duration-500 border-2 border-white/20 ${
           visible ? 'scale-100 rotate-0' : 'scale-75 rotate-12'
         }`}>
-          <div className="mb-4">
-            <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-3 animate-bounce">
-              <Trophy className="w-8 h-8 text-yellow-200" />
+          <div className="mb-6">
+            <div className="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4 shadow-inner">
+              <Trophy className="w-10 h-10 text-yellow-200" />
             </div>
             
-            <div className="text-4xl mb-2 animate-pulse">
+            <div className="text-5xl mb-3">
               {achievement.icon}
             </div>
             
-            <h3 className="text-xl font-bold mb-1">
+            <h3 className="text-2xl font-bold mb-2">
               Conquista Desbloqueada! 🎉
             </h3>
             
-            <h4 className="text-lg font-semibold mb-2 text-yellow-200">
+            <h4 className="text-xl font-semibold mb-3 text-yellow-100">
               {achievement.title}
             </h4>
             
-            <p className="text-sm opacity-90">
+            <p className="text-sm opacity-90 leading-relaxed">
               {achievement.description}
             </p>
           </div>
           
-          <div className="flex items-center justify-center gap-2 bg-white/20 rounded-lg p-2">
-            <Zap className="w-4 h-4 text-yellow-200" />
-            <span className="font-semibold text-sm">Nova conquista!</span>
+          <div className="flex items-center justify-center gap-2 bg-white/20 rounded-lg p-3 backdrop-blur-sm">
+            <Zap className="w-5 h-5 text-yellow-200" />
+            <span className="font-semibold">Nova conquista desbloqueada!</span>
           </div>
         </div>
       </div>

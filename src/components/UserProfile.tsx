@@ -72,10 +72,10 @@ export function UserProfile() {
               {userData.name}
             </h1>
           </div>
-          <Badge variant="secondary" className="mb-2 bg-gradient-to-r from-blue-100 to-purple-100 text-blue-800">
+          <Badge variant="secondary" className="mb-2 bg-gradient-to-r from-blue-100 to-purple-100 text-blue-800 dark:from-blue-900/30 dark:to-purple-900/30 dark:text-blue-200">
             {getRankTitle(userProgress.level)}
           </Badge>
-          <p className="text-muted-foreground flex items-center gap-2">
+          <p className="text-muted-foreground flex items-center gap-2 justify-center md:justify-start">
             <Calendar className="w-4 h-4" />
             Jornada iniciada em {new Date(userData.joinDate).toLocaleDateString('pt-BR')}
           </p>
@@ -84,7 +84,7 @@ export function UserProfile() {
 
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-        <Card className="bg-gradient-to-br from-blue-500 to-blue-600 text-white">
+        <Card className="bg-gradient-to-br from-blue-500 to-blue-600 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-200">
           <CardContent className="p-4 text-center">
             <div className="text-3xl font-bold mb-1">{userProgress.level}</div>
             <div className="text-sm opacity-90">Nível Atual</div>
@@ -92,7 +92,7 @@ export function UserProfile() {
           </CardContent>
         </Card>
 
-        <Card className="bg-gradient-to-br from-green-500 to-green-600 text-white">
+        <Card className="bg-gradient-to-br from-green-500 to-green-600 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-200">
           <CardContent className="p-4 text-center">
             <div className="text-3xl font-bold mb-1">{getAccuracy()}%</div>
             <div className="text-sm opacity-90">Taxa de Sucesso</div>
@@ -102,7 +102,7 @@ export function UserProfile() {
           </CardContent>
         </Card>
 
-        <Card className="bg-gradient-to-br from-purple-500 to-purple-600 text-white">
+        <Card className="bg-gradient-to-br from-purple-500 to-purple-600 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-200">
           <CardContent className="p-4 text-center">
             <div className="text-3xl font-bold mb-1">
               {userProgress.achievements.filter(a => a.unlocked).length}
@@ -114,7 +114,7 @@ export function UserProfile() {
           </CardContent>
         </Card>
 
-        <Card className="bg-gradient-to-br from-orange-500 to-orange-600 text-white">
+        <Card className="bg-gradient-to-br from-orange-500 to-orange-600 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-200">
           <CardContent className="p-4 text-center">
             <div className="text-3xl font-bold mb-1">{userProgress.xp}</div>
             <div className="text-sm opacity-90">XP Total</div>
@@ -127,10 +127,10 @@ export function UserProfile() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Profile Information */}
-        <Card>
+        <Card className="border border-blue-100 dark:border-gray-700 shadow-lg hover:shadow-xl transition-all duration-200">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <User className="w-5 h-5" />
+            <CardTitle className="flex items-center gap-2 text-gray-900 dark:text-white">
+              <User className="w-5 h-5 text-blue-600" />
               Informações do Perfil
             </CardTitle>
           </CardHeader>
@@ -143,6 +143,7 @@ export function UserProfile() {
                     id="name"
                     value={editData.name}
                     onChange={(e) => setEditData({...editData, name: e.target.value})}
+                    className="border-blue-200 dark:border-gray-600 focus:border-blue-500"
                   />
                 </div>
                 <div>
@@ -152,13 +153,14 @@ export function UserProfile() {
                     type="email"
                     value={editData.email}
                     onChange={(e) => setEditData({...editData, email: e.target.value})}
+                    className="border-blue-200 dark:border-gray-600 focus:border-blue-500"
                   />
                 </div>
                 <div className="flex gap-2">
-                  <Button onClick={handleSave} className="flex-1">
+                  <Button onClick={handleSave} className="flex-1 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
                     Salvar
                   </Button>
-                  <Button variant="outline" onClick={() => setIsEditing(false)} className="flex-1">
+                  <Button variant="outline" onClick={() => setIsEditing(false)} className="flex-1 border-blue-200 dark:border-gray-600">
                     Cancelar
                   </Button>
                 </div>
@@ -167,13 +169,13 @@ export function UserProfile() {
               <>
                 <div>
                   <Label>Nome</Label>
-                  <p className="font-medium">{userData.name}</p>
+                  <p className="font-medium text-gray-900 dark:text-white">{userData.name}</p>
                 </div>
                 <div>
                   <Label>Email</Label>
-                  <p className="font-medium">{userData.email}</p>
+                  <p className="font-medium text-gray-900 dark:text-white">{userData.email}</p>
                 </div>
-                <Button onClick={() => setIsEditing(true)} className="w-full">
+                <Button onClick={() => setIsEditing(true)} className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
                   Editar Perfil
                 </Button>
               </>
@@ -182,9 +184,9 @@ export function UserProfile() {
         </Card>
 
         {/* Recent Achievements */}
-        <Card>
+        <Card className="border border-blue-100 dark:border-gray-700 shadow-lg hover:shadow-xl transition-all duration-200">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2">
+            <CardTitle className="flex items-center gap-2 text-gray-900 dark:text-white">
               <Trophy className="w-5 h-5 text-yellow-500" />
               Conquistas Recentes
             </CardTitle>
@@ -200,7 +202,7 @@ export function UserProfile() {
                 })
                 .slice(0, 5)
                 .map(achievement => (
-                  <div key={achievement.id} className="flex items-center gap-3 p-2 bg-yellow-50 dark:bg-yellow-900/20 rounded-lg border border-yellow-200 dark:border-yellow-800">
+                  <div key={achievement.id} className="flex items-center gap-3 p-3 bg-gradient-to-r from-yellow-50 to-orange-50 dark:from-yellow-900/20 dark:to-orange-900/20 rounded-lg border border-yellow-200 dark:border-yellow-800 shadow-sm hover:shadow-md transition-all duration-200">
                     <div className="text-2xl">{achievement.icon}</div>
                     <div className="flex-1">
                       <div className="font-semibold text-sm text-yellow-800 dark:text-yellow-200">
@@ -216,7 +218,7 @@ export function UserProfile() {
               {userProgress.achievements.filter(a => a.unlocked).length === 0 && (
                 <div className="text-center text-muted-foreground py-8">
                   <Trophy className="w-12 h-12 mx-auto mb-2 opacity-50" />
-                  <p>Nenhuma conquista ainda.</p>
+                  <p className="font-medium">Nenhuma conquista ainda.</p>
                   <p className="text-sm">Continue respondendo questões!</p>
                 </div>
               )}
@@ -226,9 +228,9 @@ export function UserProfile() {
       </div>
 
       {/* Progress Details */}
-      <Card>
+      <Card className="border border-blue-100 dark:border-gray-700 shadow-lg hover:shadow-xl transition-all duration-200">
         <CardHeader>
-          <CardTitle className="flex items-center gap-2">
+          <CardTitle className="flex items-center gap-2 text-gray-900 dark:text-white">
             <Zap className="w-5 h-5 text-blue-500" />
             Progresso Detalhado
           </CardTitle>
@@ -237,7 +239,7 @@ export function UserProfile() {
           <div className="space-y-4">
             <div>
               <div className="flex justify-between items-center mb-2">
-                <span className="font-medium">Experiência para Próximo Nível</span>
+                <span className="font-medium text-gray-900 dark:text-white">Experiência para Próximo Nível</span>
                 <span className="text-sm text-muted-foreground">
                   {userProgress.xp} / {userProgress.xpToNextLevel} XP
                 </span>
@@ -246,17 +248,17 @@ export function UserProfile() {
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
-              <div className="p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
-                <div className="text-2xl font-bold text-blue-600">{userProgress.totalQuestions}</div>
-                <div className="text-sm text-muted-foreground">Questões Respondidas</div>
+              <div className="p-4 bg-gradient-to-r from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 rounded-lg border border-blue-200 dark:border-blue-700">
+                <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">{userProgress.totalQuestions}</div>
+                <div className="text-sm text-gray-600 dark:text-gray-400">Questões Respondidas</div>
               </div>
-              <div className="p-3 bg-green-50 dark:bg-green-900/20 rounded-lg">
-                <div className="text-2xl font-bold text-green-600">{userProgress.correctAnswers}</div>
-                <div className="text-sm text-muted-foreground">Acertos</div>
+              <div className="p-4 bg-gradient-to-r from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/20 rounded-lg border border-green-200 dark:border-green-700">
+                <div className="text-2xl font-bold text-green-600 dark:text-green-400">{userProgress.correctAnswers}</div>
+                <div className="text-sm text-gray-600 dark:text-gray-400">Acertos</div>
               </div>
-              <div className="p-3 bg-purple-50 dark:bg-purple-900/20 rounded-lg">
-                <div className="text-2xl font-bold text-purple-600">{userProgress.simuladosCompletos}</div>
-                <div className="text-sm text-muted-foreground">Simulados</div>
+              <div className="p-4 bg-gradient-to-r from-purple-50 to-purple-100 dark:from-purple-900/20 dark:to-purple-800/20 rounded-lg border border-purple-200 dark:border-purple-700">
+                <div className="text-2xl font-bold text-purple-600 dark:text-purple-400">{userProgress.simuladosCompletos}</div>
+                <div className="text-sm text-gray-600 dark:text-gray-400">Simulados</div>
               </div>
             </div>
           </div>

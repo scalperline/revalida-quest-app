@@ -1,9 +1,11 @@
+
 import { useState, useEffect } from "react";
 import { useSimulado, type SimuladoConfig } from "@/hooks/useSimulado";
 import { useGamification } from "@/hooks/useGamification";
 import { useAudio } from "@/hooks/useAudio";
 import { useQuestions } from "@/hooks/useQuestions";
-import { SimuladoTimer } from "@/components/SimuladoTimer";
+import { FloatingTimer } from "@/components/FloatingTimer";
+import { SimuladoProgress } from "@/components/SimuladoProgress";
 import { SimuladoFilters } from "@/components/SimuladoFilters";
 import { QuestionCard } from "@/components/QuestionCard";
 import { Navbar } from "@/components/Navbar";
@@ -20,6 +22,8 @@ export default function Simulado() {
   const [showLevelUp, setShowLevelUp] = useState(false);
   const [newLevel, setNewLevel] = useState(0);
   const [showConfetti, setShowConfetti] = useState(false);
+  const [timeElapsed, setTimeElapsed] = useState(0);
+  const [startTime, setStartTime] = useState<number | null>(null);
   
   const { questoesAnoSelecionado } = useQuestions();
   const simulado = useSimulado(questoesAnoSelecionado, configuracao || undefined);
@@ -34,6 +38,16 @@ export default function Simulado() {
   // Check for newly unlocked achievements
   const newlyUnlockedAchievement = getNewlyUnlockedAchievement();
 
+  // Track time elapsed
+  useEffect(() => {
+    if (iniciado && !finalizado && !simulado.terminou && startTime) {
+      const interval = setInterval(() => {
+        setTimeElapsed(Math.floor((Date.now() - startTime) / 1000));
+      }, 1000);
+      return () => clearInterval(interval);
+    }
+  }, [iniciado, finalizado, simulado.terminou, startTime]);
+
   // Handle achievement notification
   useEffect(() => {
     if (newlyUnlockedAchievement) {
@@ -45,6 +59,8 @@ export default function Simulado() {
     setConfiguracao(config);
     setIniciado(true);
     setFinalizado(false);
+    setStartTime(Date.now());
+    setTimeElapsed(0);
     playSound('click');
   }
 
@@ -83,8 +99,13 @@ export default function Simulado() {
     setConfiguracao(null);
     setIniciado(false);
     setFinalizado(false);
+    setStartTime(null);
+    setTimeElapsed(0);
     window.scrollTo({top:0,behavior:"smooth"});
   }
+
+  // Count answered questions
+  const answeredCount = Object.keys(simulado.respostas).length;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-100 dark:from-gray-900 dark:to-gray-800">
@@ -128,8 +149,8 @@ export default function Simulado() {
                     ).length} de {simulado.total} questões!
                   </div>
                   
-                  {/* Resumo da Configuração */}
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+                  {/* Resumo da Performance */}
+                  <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
                     <div className="bg-gradient-to-r from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 p-4 rounded-xl border border-blue-200 dark:border-blue-700 shadow-sm">
                       <div className="text-2xl font-bold text-blue-700 dark:text-blue-400">
                         +{Math.floor((simulado.questoesSelecionadas.filter(q => simulado.respostas[q.id] === q.correct).length / simulado.total) * (simulado.config.quantidade * 2.5))} XP
@@ -144,9 +165,15 @@ export default function Simulado() {
                     </div>
                     <div className="bg-gradient-to-r from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/20 p-4 rounded-xl border border-green-200 dark:border-green-700 shadow-sm">
                       <div className="text-2xl font-bold text-green-700 dark:text-green-400">
-                        {simulado.config.tempoMinutos}min
+                        {Math.floor(timeElapsed / 60)}min
                       </div>
-                      <div className="text-green-600 dark:text-green-500">Tempo Configurado</div>
+                      <div className="text-green-600 dark:text-green-500">Tempo Utilizado</div>
+                    </div>
+                    <div className="bg-gradient-to-r from-orange-50 to-orange-100 dark:from-orange-900/20 dark:to-orange-800/20 p-4 rounded-xl border border-orange-200 dark:border-orange-700 shadow-sm">
+                      <div className="text-2xl font-bold text-orange-700 dark:text-orange-400">
+                        {Math.round(timeElapsed / simulado.total)}s
+                      </div>
+                      <div className="text-orange-600 dark:text-orange-500">Média por Questão</div>
                     </div>
                   </div>
                 </div>
@@ -182,24 +209,16 @@ export default function Simulado() {
                   <ArrowLeft className="w-4 h-4" />
                   Voltar às Configurações
                 </Button>
-                
-                <div className="text-center">
-                  <div className="text-sm text-muted-foreground">
-                    {configuracao.areas.length > 1 ? 
-                      `${configuracao.areas.length} áreas selecionadas` : 
-                      configuracao.areas[0]
-                    }
-                  </div>
-                </div>
               </div>
 
-              <div className="mb-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4 border border-blue-100 dark:border-gray-700">
-                <SimuladoTimer
-                  running={!finalizado && iniciado && !simulado.terminou}
-                  onFinish={encerrar}
-                  initialMinutes={configuracao.tempoMinutos}
-                />
-              </div>
+              {/* Progress Component */}
+              <SimuladoProgress
+                currentIndex={simulado.index}
+                totalQuestions={simulado.total}
+                timeElapsed={timeElapsed}
+                answeredCount={answeredCount}
+                config={simulado.config}
+              />
               
               <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 border border-blue-100 dark:border-gray-700">
                 <div className="text-center mb-6">
@@ -236,6 +255,16 @@ export default function Simulado() {
                   </div>
                 )}
               </div>
+
+              {/* Floating Timer */}
+              <FloatingTimer
+                running={!finalizado && iniciado && !simulado.terminou}
+                onFinish={encerrar}
+                initialMinutes={configuracao.tempoMinutos}
+                currentQuestion={simulado.index + 1}
+                totalQuestions={simulado.total}
+                onForceFinish={encerrar}
+              />
             </div>
           )}
 

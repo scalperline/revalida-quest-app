@@ -1,6 +1,7 @@
 
 import { useState, useMemo } from "react";
 import { type Question } from "@/components/QuestionCard";
+import { useQuestions } from "./useQuestions";
 
 interface UseQuestionsFiltersParams {
   ano: number;
@@ -19,13 +20,11 @@ export function useQuestionsFilters({
   difficulty,
   page
 }: UseQuestionsFiltersParams) {
-  // This is a mock implementation - in a real app, you'd fetch questions based on ano and tipo
-  const questions: Question[] = []; // Replace with actual questions data
-  
+  const { questoesAnoSelecionado } = useQuestions();
   const questionsPerPage = 10;
 
   const filteredQuestions = useMemo(() => {
-    let filtered = [...questions];
+    let filtered = [...questoesAnoSelecionado];
 
     // Filter by search term
     if (searchTerm.trim()) {
@@ -63,7 +62,7 @@ export function useQuestionsFilters({
     }
 
     return filtered;
-  }, [questions, searchTerm, area, difficulty]);
+  }, [questoesAnoSelecionado, searchTerm, area, difficulty]);
 
   const totalQuestions = filteredQuestions.length;
   const startIndex = (page - 1) * questionsPerPage;

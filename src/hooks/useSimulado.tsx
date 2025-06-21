@@ -58,6 +58,6 @@ export function useSimulado(questoes: Question[], config?: SimuladoConfig) {
     responder,
     proxima,
     terminou: index >= questoesSelecionadas.length,
-    config: config || { quantidade: 5, areas: [], tempoMinutos: 20 }
+    config: config || { quantidade: 5, areas: [], tempoMinutos: 120 }
   };
 }

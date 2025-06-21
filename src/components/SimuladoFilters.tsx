@@ -40,19 +40,19 @@ const AREAS_DISPONIVEIS = [
 ];
 
 const TEMPOS_PREDEFINIDOS = [
-  { valor: 5, label: '5 minutos (Relâmpago)' },
-  { valor: 10, label: '10 minutos (Express)' },
-  { valor: 15, label: '15 minutos (Rápido)' },
-  { valor: 20, label: '20 minutos (Padrão)' },
-  { valor: 30, label: '30 minutos (Completo)' },
-  { valor: 45, label: '45 minutos (Extenso)' },
-  { valor: 60, label: '60 minutos (Maratona)' }
+  { valor: 30, label: '30 minutos (Revisão Rápida)' },
+  { valor: 60, label: '1 hora (Treino Focado)' },
+  { valor: 90, label: '1h30 (Simulado Médio)' },
+  { valor: 120, label: '2 horas (Simulado Longo)' },
+  { valor: 180, label: '3 horas (Simulado Extenso)' },
+  { valor: 240, label: '4 horas (Quase Real)' },
+  { valor: 300, label: '5 horas (Tempo Real INEP)' }
 ];
 
 export function SimuladoFilters({ onStart }: SimuladoFiltersProps) {
   const [quantidade, setQuantidade] = useState(10);
   const [areasSelecionadas, setAreasSelecionadas] = useState<string[]>(['Clínica Médica']);
-  const [tempoMinutos, setTempoMinutos] = useState(20);
+  const [tempoMinutos, setTempoMinutos] = useState(120);
   const [tempoCustomizado, setTempoCustomizado] = useState(false);
 
   const handleAreaChange = (area: string, checked: boolean) => {
@@ -71,6 +71,11 @@ export function SimuladoFilters({ onStart }: SimuladoFiltersProps) {
     
     if (quantidade < 1 || quantidade > 100) {
       alert('A quantidade deve estar entre 1 e 100 questões!');
+      return;
+    }
+
+    if (tempoMinutos < 10 || tempoMinutos > 360) {
+      alert('O tempo deve estar entre 10 minutos e 6 horas!');
       return;
     }
 
@@ -157,6 +162,12 @@ export function SimuladoFilters({ onStart }: SimuladoFiltersProps) {
             Tempo do Cronômetro
           </Label>
           
+          <div className="bg-blue-50 dark:bg-blue-900/20 p-3 rounded-lg border border-blue-200 dark:border-blue-700 mb-3">
+            <p className="text-sm text-blue-700 dark:text-blue-300">
+              ℹ️ <strong>Referência INEP:</strong> A primeira prova objetiva do Revalida tem duração oficial de 5 horas (300 minutos)
+            </p>
+          </div>
+          
           <div className="flex items-center space-x-2 mb-3">
             <Checkbox
               id="tempo-customizado"
@@ -170,14 +181,14 @@ export function SimuladoFilters({ onStart }: SimuladoFiltersProps) {
             <div className="flex items-center gap-4">
               <Input
                 type="number"
-                min="1"
-                max="180"
+                min="10"
+                max="360"
                 value={tempoMinutos}
-                onChange={(e) => setTempoMinutos(parseInt(e.target.value) || 1)}
+                onChange={(e) => setTempoMinutos(parseInt(e.target.value) || 10)}
                 className="w-32"
               />
               <span className="text-sm text-muted-foreground">
-                minutos (entre 1 e 180)
+                minutos (entre 10 min e 6 horas)
               </span>
             </div>
           ) : (
@@ -207,7 +218,8 @@ export function SimuladoFilters({ onStart }: SimuladoFiltersProps) {
           <ul className="space-y-1 text-sm text-blue-700 dark:text-blue-300">
             <li>• <strong>{quantidade}</strong> questões selecionadas</li>
             <li>• <strong>{areasSelecionadas.length}</strong> áreas médicas</li>
-            <li>• <strong>{tempoMinutos}</strong> minutos no cronômetro</li>
+            <li>• <strong>{Math.floor(tempoMinutos / 60)}h {tempoMinutos % 60}min</strong> no cronômetro</li>
+            <li>• Tempo médio por questão: <strong>{Math.round(tempoMinutos / quantidade)} min</strong></li>
             <li>• XP estimado: <strong>+{Math.floor(quantidade * 2.5)} XP</strong></li>
           </ul>
         </div>

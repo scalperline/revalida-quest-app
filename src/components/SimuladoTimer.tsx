@@ -7,7 +7,7 @@ interface Props {
   initialMinutes?: number;
 }
 
-export function SimuladoTimer({ running, onFinish, initialMinutes = 20 }: Props) {
+export function SimuladoTimer({ running, onFinish, initialMinutes = 120 }: Props) {
   const [seconds, setSeconds] = useState(initialMinutes * 60);
 
   useEffect(() => {
@@ -20,12 +20,20 @@ export function SimuladoTimer({ running, onFinish, initialMinutes = 20 }: Props)
     return () => clearTimeout(t);
   }, [running, seconds, onFinish]);
 
-  const min = Math.floor(seconds / 60);
+  const hours = Math.floor(seconds / 3600);
+  const min = Math.floor((seconds % 3600) / 60);
   const sec = seconds % 60;
+
+  const formatTime = () => {
+    if (hours > 0) {
+      return `${hours}:${min.toString().padStart(2, "0")}:${sec.toString().padStart(2, "0")}`;
+    }
+    return `${min.toString().padStart(2, "0")}:${sec.toString().padStart(2, "0")}`;
+  };
 
   return (
     <div className="text-center font-mono text-lg text-primary">
-      ⏱️ Tempo restante: {min.toString().padStart(2, "0")}:{sec.toString().padStart(2, "0")}
+      ⏱️ Tempo restante: {formatTime()}
     </div>
   );
 }

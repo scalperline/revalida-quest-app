@@ -13,6 +13,7 @@ export function useSimulado(questoes: Question[], config?: SimuladoConfig) {
   const [questoesSelecionadas] = useState(() => {
     let questoesFiltradas = [...questoes];
     
+    console.log('=== DEBUG USESIMULADO ===');
     console.log('Questões totais disponíveis:', questoesFiltradas.length);
     console.log('Configuração recebida:', config);
     
@@ -22,25 +23,25 @@ export function useSimulado(questoes: Question[], config?: SimuladoConfig) {
         config.areas.includes(q.area)
       );
       console.log('Questões após filtro por área:', questoesFiltradas.length);
+      console.log('Áreas selecionadas:', config.areas);
     }
     
-    // Sorteia a quantidade especificada
-    const quantidade = config?.quantidade || 5;
-    console.log('Quantidade solicitada:', quantidade);
+    // Determina a quantidade solicitada
+    const quantidadeSolicitada = config?.quantidade || 5;
+    console.log('Quantidade solicitada:', quantidadeSolicitada);
     
-    let sorteadas = [];
-    let copy = [...questoesFiltradas];
+    // Embaralha as questões disponíveis
+    const questoesEmbaralhadas = [...questoesFiltradas].sort(() => Math.random() - 0.5);
     
-    // Pega todas as questões disponíveis até o limite solicitado
-    const maxQuestoes = Math.min(quantidade, questoesFiltradas.length);
+    // Pega exatamente a quantidade solicitada (ou todas disponíveis se for menor)
+    const quantidadeFinal = Math.min(quantidadeSolicitada, questoesEmbaralhadas.length);
+    const questoesSorteadas = questoesEmbaralhadas.slice(0, quantidadeFinal);
     
-    while (sorteadas.length < maxQuestoes && copy.length > 0) {
-      const idx = Math.floor(Math.random() * copy.length);
-      sorteadas.push(copy.splice(idx, 1)[0]);
-    }
+    console.log('Questões finais selecionadas:', questoesSorteadas.length);
+    console.log('IDs das questões selecionadas:', questoesSorteadas.map(q => q.id));
+    console.log('=== FIM DEBUG ===');
     
-    console.log('Questões sorteadas:', sorteadas.length);
-    return sorteadas;
+    return questoesSorteadas;
   });
 
   const [respostas, setRespostas] = useState<{[id: number]: string}>({});

@@ -4,7 +4,6 @@ import { useGamification } from "@/hooks/useGamification";
 import { useAudio } from "@/hooks/useAudio";
 import { useQuestions } from "@/hooks/useQuestions";
 import { FloatingTimer } from "@/components/FloatingTimer";
-import { SimuladoProgress } from "@/components/SimuladoProgress";
 import { SimuladoFilters } from "@/components/SimuladoFilters";
 import { QuestionCard } from "@/components/QuestionCard";
 import { Navbar } from "@/components/Navbar";
@@ -257,15 +256,6 @@ export default function Simulado() {
                   Voltar às Configurações
                 </Button>
               </div>
-
-              {/* Progress Component */}
-              <SimuladoProgress
-                currentIndex={simulado.index}
-                totalQuestions={simulado.total}
-                timeElapsed={timeElapsed}
-                answeredCount={answeredCount}
-                config={simulado.config}
-              />
               
               <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 border border-blue-100 dark:border-gray-700">
                 <div className="text-center mb-6">

@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { useSimulado, type SimuladoConfig } from "@/hooks/useSimulado";
 import { useGamification } from "@/hooks/useGamification";
@@ -22,8 +21,8 @@ export default function Simulado() {
   const [newLevel, setNewLevel] = useState(0);
   const [showConfetti, setShowConfetti] = useState(false);
   
-  const { questoesDisponiveis } = useQuestions();
-  const simulado = useSimulado(questoesDisponiveis, configuracao || undefined);
+  const { questoesAnoSelecionado } = useQuestions();
+  const simulado = useSimulado(questoesAnoSelecionado, configuracao || undefined);
   const { 
     completeSimulado, 
     userProgress, 

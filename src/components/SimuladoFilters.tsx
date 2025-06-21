@@ -161,7 +161,7 @@ export function SimuladoFilters({ onStart }: SimuladoFiltersProps) {
             <Checkbox
               id="tempo-customizado"
               checked={tempoCustomizado}
-              onCheckedChange={setTempoCustomizado}
+              onCheckedChange={(checked) => setTempoCustomizado(!!checked)}
             />
             <Label htmlFor="tempo-customizado">Tempo personalizado</Label>
           </div>

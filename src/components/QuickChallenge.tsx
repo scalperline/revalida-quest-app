@@ -17,14 +17,14 @@ export function QuickChallenge({ onStart, className }: QuickChallengeProps) {
 
   const challenges = [
     {
-      duration: 5,
+      duration: 5 as const,
       title: 'Desafio Relâmpago',
       description: '5 questões em 5 minutos',
       reward: '+30 XP',
       icon: <Zap className="w-5 h-5 text-yellow-500" />
     },
     {
-      duration: 10,
+      duration: 10 as const,
       title: 'Maratona Express',
       description: '10 questões em 10 minutos',
       reward: '+60 XP',

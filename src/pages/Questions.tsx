@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Navbar } from "@/components/Navbar";
 import { QuestionCard } from "@/components/QuestionCard";
@@ -27,7 +28,7 @@ export default function Questions() {
     page: currentPage,
   });
 
-  const { questions } = useQuestions(anoSelecionado, tipoProva);
+  const questionsHook = useQuestions();
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-100 dark:from-gray-900 dark:to-gray-800">
@@ -53,10 +54,9 @@ export default function Questions() {
           ))}
 
           <QuestionsPagination
-            currentPage={currentPage}
-            setCurrentPage={setCurrentPage}
-            questionsPerPage={questionsPerPage}
-            totalQuestions={totalQuestions}
+            paginaAtual={currentPage}
+            totalPaginas={Math.ceil(totalQuestions / questionsPerPage)}
+            onPageChange={setCurrentPage}
           />
         </div>
       </div>

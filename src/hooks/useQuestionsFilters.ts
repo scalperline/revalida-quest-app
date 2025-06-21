@@ -2,10 +2,27 @@
 import { useState, useMemo } from "react";
 import { type Question } from "@/components/QuestionCard";
 
-export function useQuestionsFilters(questions: Question[]) {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [selectedArea, setSelectedArea] = useState("Todos");
-  const [selectedDifficulty, setSelectedDifficulty] = useState("Todas");
+interface UseQuestionsFiltersParams {
+  ano: number;
+  tipo: string | null;
+  searchTerm: string;
+  area: string;
+  difficulty: string;
+  page: number;
+}
+
+export function useQuestionsFilters({
+  ano,
+  tipo,
+  searchTerm,
+  area,
+  difficulty,
+  page
+}: UseQuestionsFiltersParams) {
+  // This is a mock implementation - in a real app, you'd fetch questions based on ano and tipo
+  const questions: Question[] = []; // Replace with actual questions data
+  
+  const questionsPerPage = 10;
 
   const filteredQuestions = useMemo(() => {
     let filtered = [...questions];
@@ -23,22 +40,22 @@ export function useQuestionsFilters(questions: Question[]) {
     }
 
     // Filter by area
-    if (selectedArea !== "Todos") {
-      filtered = filtered.filter((q) => q.area === selectedArea);
+    if (area !== "Todos") {
+      filtered = filtered.filter((q) => q.area === area);
     }
 
     // Filter by difficulty (mock implementation based on question characteristics)
-    if (selectedDifficulty !== "Todas") {
+    if (difficulty !== "Todas") {
       filtered = filtered.filter((q) => {
         const textLength = q.enunciado.length;
         const hasImage = !!q.image;
         
         // Simple heuristic for difficulty
-        if (selectedDifficulty === "Fácil") {
+        if (difficulty === "Fácil") {
           return textLength < 300 && !hasImage;
-        } else if (selectedDifficulty === "Médio") {
+        } else if (difficulty === "Médio") {
           return textLength >= 300 && textLength < 600;
-        } else if (selectedDifficulty === "Difícil") {
+        } else if (difficulty === "Difícil") {
           return textLength >= 600 || hasImage;
         }
         return true;
@@ -46,15 +63,15 @@ export function useQuestionsFilters(questions: Question[]) {
     }
 
     return filtered;
-  }, [questions, searchTerm, selectedArea, selectedDifficulty]);
+  }, [questions, searchTerm, area, difficulty]);
+
+  const totalQuestions = filteredQuestions.length;
+  const startIndex = (page - 1) * questionsPerPage;
+  const paginatedQuestions = filteredQuestions.slice(startIndex, startIndex + questionsPerPage);
 
   return {
-    searchTerm,
-    setSearchTerm,
-    selectedArea,
-    setSelectedArea,
-    selectedDifficulty,
-    setSelectedDifficulty,
-    filteredQuestions,
+    filteredQuestions: paginatedQuestions,
+    totalQuestions,
+    questionsPerPage,
   };
 }

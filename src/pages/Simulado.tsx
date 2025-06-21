@@ -12,7 +12,7 @@ import { Navbar } from "@/components/Navbar";
 import { LevelUpNotification } from "@/components/LevelUpNotification";
 import { AchievementNotification } from "@/components/AchievementNotification";
 import { ConfettiAnimation } from "@/components/ConfettiAnimation";
-import { Trophy, Clock, Target, Zap, ArrowLeft } from "lucide-react";
+import { Trophy, Clock, Target, Zap, ArrowLeft, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export default function Simulado() {
@@ -24,6 +24,7 @@ export default function Simulado() {
   const [showConfetti, setShowConfetti] = useState(false);
   const [timeElapsed, setTimeElapsed] = useState(0);
   const [startTime, setStartTime] = useState<number | null>(null);
+  const [questaoRespondida, setQuestaoRespondida] = useState(false);
   
   const { questoesAnoSelecionado } = useQuestions();
   const simulado = useSimulado(questoesAnoSelecionado, configuracao || undefined);
@@ -48,6 +49,11 @@ export default function Simulado() {
     }
   }, [iniciado, finalizado, simulado.terminou, startTime]);
 
+  // Reset questão respondida quando mudar de questão
+  useEffect(() => {
+    setQuestaoRespondida(!!simulado.respostaAtual());
+  }, [simulado.index, simulado.respostaAtual]);
+
   // Handle achievement notification
   useEffect(() => {
     if (newlyUnlockedAchievement) {
@@ -61,7 +67,22 @@ export default function Simulado() {
     setFinalizado(false);
     setStartTime(Date.now());
     setTimeElapsed(0);
+    setQuestaoRespondida(false);
     playSound('click');
+  }
+
+  function handleResposta(optionId: string) {
+    playSound('click');
+    simulado.responder(optionId);
+    setQuestaoRespondida(true);
+  }
+
+  function handleContinuar() {
+    playSound('click');
+    simulado.proxima();
+    setQuestaoRespondida(false);
+    // Scroll to top smoothly
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   function encerrar() {
@@ -101,11 +122,15 @@ export default function Simulado() {
     setFinalizado(false);
     setStartTime(null);
     setTimeElapsed(0);
+    setQuestaoRespondida(false);
     window.scrollTo({top:0,behavior:"smooth"});
   }
 
   // Count answered questions
   const answeredCount = Object.keys(simulado.respostas).length;
+
+  // Verificar se a quantidade de questões condiz com a configuração
+  const questoesInsuficientes = configuracao && simulado.total < configuracao.quantidade;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-100 dark:from-gray-900 dark:to-gray-800">
@@ -127,6 +152,21 @@ export default function Simulado() {
               </div>
               
               <SimuladoFilters onStart={handleConfiguracao} />
+            </div>
+          )}
+
+          {/* Alerta de questões insuficientes */}
+          {questoesInsuficientes && iniciado && !finalizado && (
+            <div className="mb-6 p-4 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-xl">
+              <div className="flex items-center gap-2 text-yellow-800 dark:text-yellow-200">
+                <div className="w-5 h-5 text-yellow-600">⚠️</div>
+                <div>
+                  <div className="font-semibold">Atenção: Questões limitadas</div>
+                  <div className="text-sm">
+                    Você configurou {configuracao.quantidade} questões, mas só há {simulado.total} questões disponíveis nas áreas selecionadas.
+                  </div>
+                </div>
+              </div>
             </div>
           )}
 
@@ -232,20 +272,32 @@ export default function Simulado() {
                   <div>
                     <QuestionCard
                       question={simulado.atual}
-                      showAnswer={!!simulado.respostaAtual()}
+                      showAnswer={questaoRespondida}
+                      onAnswer={handleResposta}
+                      disabled={questaoRespondida}
                     />
-                    {!simulado.respostaAtual() && (
+                    
+                    {/* Botão Continuar */}
+                    {questaoRespondida && (
+                      <div className="flex justify-center mt-8">
+                        <Button
+                          onClick={handleContinuar}
+                          className="px-8 py-4 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white rounded-xl font-bold text-lg transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center gap-2"
+                        >
+                          Continuar
+                          <ArrowRight className="w-5 h-5" />
+                        </Button>
+                      </div>
+                    )}
+                    
+                    {/* Opções de resposta quando não respondida */}
+                    {!questaoRespondida && (
                       <div className="flex justify-center mt-6 gap-3 flex-wrap">
                         {simulado.atual.options.map(opt => (
                           <button
                             key={opt.id}
                             className="px-8 py-4 bg-white dark:bg-gray-700 hover:bg-blue-50 dark:hover:bg-blue-900/30 text-gray-700 dark:text-gray-200 rounded-xl border border-gray-200 dark:border-gray-600 transition-all duration-200 hover:scale-105 hover:border-blue-300 dark:hover:border-blue-500 font-bold text-lg shadow-md hover:shadow-lg"
-                            onClick={() => {
-                              playSound('click');
-                              simulado.responder(opt.id);
-                              setTimeout(() => simulado.proxima(), 650);
-                            }}
-                            disabled={!!simulado.respostaAtual()}
+                            onClick={() => handleResposta(opt.id)}
                           >
                             {opt.id}
                           </button>

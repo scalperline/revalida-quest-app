@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { useGamification } from "@/hooks/useGamification";
 import { useAudio } from "@/hooks/useAudio";
@@ -26,9 +27,11 @@ export type Question = {
 interface Props {
   question: Question;
   showAnswer?: boolean;
+  onAnswer?: (optionId: string) => void;
+  disabled?: boolean;
 }
 
-export function QuestionCard({ question, showAnswer }: Props) {
+export function QuestionCard({ question, showAnswer, onAnswer, disabled }: Props) {
   const [selected, setSelected] = useState<string | null>(null);
   const [showLevelUp, setShowLevelUp] = useState(false);
   const [newLevel, setNewLevel] = useState(0);
@@ -46,6 +49,8 @@ export function QuestionCard({ question, showAnswer }: Props) {
   const newlyUnlockedAchievement = getNewlyUnlockedAchievement();
 
   const handleAnswer = (optionId: string) => {
+    if (disabled) return;
+    
     setSelected(optionId);
     const correct = optionId === question.correct;
     const previousLevel = userProgress.level;
@@ -60,6 +65,11 @@ export function QuestionCard({ question, showAnswer }: Props) {
     
     console.log('Answering question:', { correct, optionId, correctAnswer: question.correct });
     answerQuestion(correct);
+    
+    // Call parent callback if provided
+    if (onAnswer) {
+      onAnswer(optionId);
+    }
 
     // Check for level up after a short delay
     setTimeout(() => {
@@ -146,12 +156,12 @@ export function QuestionCard({ question, showAnswer }: Props) {
                       : "bg-white dark:bg-gray-700 hover:bg-blue-50 dark:hover:bg-gray-600 border-gray-200 dark:border-gray-600 hover:border-blue-300 dark:hover:border-blue-500"
                   }
                   ${
-                    respostaRevelada
+                    respostaRevelada || disabled
                       ? "cursor-not-allowed opacity-90"
                       : "hover:ring-2 hover:ring-blue-500/30 cursor-pointer"
                   }
                 `}
-                  disabled={!!selected || showAnswer}
+                  disabled={!!selected || showAnswer || disabled}
                   onClick={() => handleAnswer(opt.id)}
                 >
                   <span

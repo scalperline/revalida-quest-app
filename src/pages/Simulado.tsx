@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { useSimulado, type SimuladoConfig } from "@/hooks/useSimulado";
 import { useGamification } from "@/hooks/useGamification";
@@ -62,6 +61,7 @@ export default function Simulado() {
   }, [newlyUnlockedAchievement, playSound]);
 
   function handleConfiguracao(config: SimuladoConfig) {
+    console.log('Configuração recebida:', config);
     setConfiguracao(config);
     setIniciado(true);
     setFinalizado(false);
@@ -131,6 +131,13 @@ export default function Simulado() {
 
   // Verificar se a quantidade de questões condiz com a configuração
   const questoesInsuficientes = configuracao && simulado.total < configuracao.quantidade;
+
+  console.log('Debug simulado:', {
+    configuracao: configuracao?.quantidade,
+    totalQuestoes: simulado.total,
+    questoesSelecionadas: simulado.questoesSelecionadas.length,
+    questoesInsuficientes
+  });
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-100 dark:from-gray-900 dark:to-gray-800">
@@ -277,7 +284,7 @@ export default function Simulado() {
                       disabled={questaoRespondida}
                     />
                     
-                    {/* Botão Continuar */}
+                    {/* Botão Continuar - só aparece quando respondida */}
                     {questaoRespondida && (
                       <div className="flex justify-center mt-8">
                         <Button
@@ -287,21 +294,6 @@ export default function Simulado() {
                           Continuar
                           <ArrowRight className="w-5 h-5" />
                         </Button>
-                      </div>
-                    )}
-                    
-                    {/* Opções de resposta quando não respondida */}
-                    {!questaoRespondida && (
-                      <div className="flex justify-center mt-6 gap-3 flex-wrap">
-                        {simulado.atual.options.map(opt => (
-                          <button
-                            key={opt.id}
-                            className="px-8 py-4 bg-white dark:bg-gray-700 hover:bg-blue-50 dark:hover:bg-blue-900/30 text-gray-700 dark:text-gray-200 rounded-xl border border-gray-200 dark:border-gray-600 transition-all duration-200 hover:scale-105 hover:border-blue-300 dark:hover:border-blue-500 font-bold text-lg shadow-md hover:shadow-lg"
-                            onClick={() => handleResposta(opt.id)}
-                          >
-                            {opt.id}
-                          </button>
-                        ))}
                       </div>
                     )}
                   </div>

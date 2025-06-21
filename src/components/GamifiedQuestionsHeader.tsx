@@ -1,8 +1,6 @@
 
 import { useState } from "react";
-import { Trophy, Target, Zap, BookOpen, Search, Filter } from "lucide-react";
-import { useGamification } from "@/hooks/useGamification";
-import { Progress } from "@/components/ui/progress";
+import { BookOpen, Search, Filter } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import {
   Select,
@@ -62,75 +60,10 @@ export function GamifiedQuestionsHeader({
   selectedDifficulty,
   setSelectedDifficulty,
 }: GamifiedQuestionsHeaderProps) {
-  const { userProgress, getAccuracy, getProgressPercentage } = useGamification();
   const [showFilters, setShowFilters] = useState(false);
 
   return (
     <div className="bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 border border-blue-100 dark:border-gray-700 rounded-2xl p-6 mb-8 shadow-xl">
-      {/* Stats Cards */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-        <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl p-4 border border-blue-100 dark:border-gray-700">
-          <div className="flex items-center gap-3">
-            <div className="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-lg">
-              <Trophy className="w-5 h-5 text-blue-600" />
-            </div>
-            <div>
-              <p className="text-sm text-muted-foreground">Nível</p>
-              <p className="text-lg font-bold text-blue-600">{userProgress.level}</p>
-            </div>
-          </div>
-        </div>
-
-        <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl p-4 border border-green-100 dark:border-gray-700">
-          <div className="flex items-center gap-3">
-            <div className="p-2 bg-green-100 dark:bg-green-900/30 rounded-lg">
-              <Target className="w-5 h-5 text-green-600" />
-            </div>
-            <div>
-              <p className="text-sm text-muted-foreground">Precisão</p>
-              <p className="text-lg font-bold text-green-600">{getAccuracy()}%</p>
-            </div>
-          </div>
-        </div>
-
-        <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl p-4 border border-purple-100 dark:border-gray-700">
-          <div className="flex items-center gap-3">
-            <div className="p-2 bg-purple-100 dark:bg-purple-900/30 rounded-lg">
-              <Zap className="w-5 h-5 text-purple-600" />
-            </div>
-            <div>
-              <p className="text-sm text-muted-foreground">XP</p>
-              <p className="text-lg font-bold text-purple-600">{userProgress.xp}</p>
-            </div>
-          </div>
-        </div>
-
-        <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl p-4 border border-orange-100 dark:border-gray-700">
-          <div className="flex items-center gap-3">
-            <div className="p-2 bg-orange-100 dark:bg-orange-900/30 rounded-lg">
-              <BookOpen className="w-5 h-5 text-orange-600" />
-            </div>
-            <div>
-              <p className="text-sm text-muted-foreground">Questões</p>
-              <p className="text-lg font-bold text-orange-600">{userProgress.totalQuestions}</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Progress Bar */}
-      <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl p-4 mb-6 border border-blue-100 dark:border-gray-700">
-        <div className="flex items-center justify-between mb-2">
-          <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-            Progresso para o próximo nível
-          </span>
-          <span className="text-sm text-muted-foreground">
-            {userProgress.xp} / {userProgress.xpToNextLevel} XP
-          </span>
-        </div>
-        <Progress value={getProgressPercentage()} className="h-3" />
-      </div>
-
       {/* Title and Year/Type Selectors */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
         <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">

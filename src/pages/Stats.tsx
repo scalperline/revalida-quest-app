@@ -1,6 +1,5 @@
 
 import { Navbar } from "@/components/Navbar";
-import { GamifiedHeader } from "@/components/GamifiedHeader";
 import PerformanceChart from "@/components/PerformanceChart";
 import { useGamification } from "@/hooks/useGamification";
 import { TrendingUp, Target, Award, Calendar, Trophy, Star } from "lucide-react";
@@ -22,9 +21,6 @@ export default function Stats() {
       <Navbar />
       <div className="container mx-auto px-4 py-8">
         <div className="max-w-6xl mx-auto">
-          {/* Gamified Header */}
-          <GamifiedHeader />
-          
           <div className="text-center mb-12">
             <h1 className="text-4xl font-bold mb-4 text-gray-900 dark:text-white flex items-center justify-center gap-3">
               <Trophy className="w-10 h-10 text-yellow-500" />

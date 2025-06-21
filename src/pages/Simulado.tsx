@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { useSimulado } from "@/hooks/useSimulado";
 import { useGamification } from "@/hooks/useGamification";
@@ -5,7 +6,6 @@ import { useAudio } from "@/hooks/useAudio";
 import { SimuladoTimer } from "@/components/SimuladoTimer";
 import { QuestionCard } from "@/components/QuestionCard";
 import { Navbar } from "@/components/Navbar";
-import { GamifiedHeader } from "@/components/GamifiedHeader";
 import { LevelUpNotification } from "@/components/LevelUpNotification";
 import { AchievementNotification } from "@/components/AchievementNotification";
 import { ConfettiAnimation } from "@/components/ConfettiAnimation";
@@ -112,7 +112,6 @@ export default function Simulado() {
       
       <div className="container mx-auto px-4 py-6">
         <div className="max-w-4xl mx-auto">
-          <GamifiedHeader />
           
           {!iniciado && (
             <div className="pt-8">

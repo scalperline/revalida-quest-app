@@ -25,7 +25,13 @@ export default function Simulado() {
   const [questaoRespondida, setQuestaoRespondida] = useState(false);
   
   const { questoesAnoSelecionado } = useQuestions();
-  const simulado = useSimulado(questoesAnoSelecionado, configuracao || undefined);
+  
+  // Só chama useSimulado quando há configuração ou quando está na tela inicial
+  const simulado = useSimulado(
+    questoesAnoSelecionado, 
+    configuracao || undefined
+  );
+  
   const { 
     completeSimulado, 
     userProgress, 
@@ -61,6 +67,18 @@ export default function Simulado() {
 
   function handleConfiguracao(config: SimuladoConfig) {
     console.log('Configuração sendo definida:', config);
+    
+    // Garante que a configuração seja válida antes de prosseguir
+    if (!config.areas || config.areas.length === 0) {
+      alert('Selecione pelo menos uma área para continuar!');
+      return;
+    }
+    
+    if (!config.quantidade || config.quantidade < 1) {
+      alert('Selecione uma quantidade válida de questões!');
+      return;
+    }
+    
     setConfiguracao(config);
     setIniciado(true);
     setFinalizado(false);
@@ -136,7 +154,9 @@ export default function Simulado() {
     totalQuestoes: simulado.total,
     questoesSelecionadas: simulado.questoesSelecionadas.length,
     questoesInsuficientes,
-    configObject: configuracao
+    configObject: configuracao,
+    areas: configuracao?.areas,
+    tempoMinutos: configuracao?.tempoMinutos
   });
 
   return (

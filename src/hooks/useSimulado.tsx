@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { type Question } from "@/components/QuestionCard";
 
 export interface SimuladoConfig {
@@ -9,32 +9,43 @@ export interface SimuladoConfig {
 }
 
 export function useSimulado(questoes: Question[], config?: SimuladoConfig) {
-  // Filtra questões baseado na configuração
-  const [questoesSelecionadas] = useState(() => {
+  // Usa useMemo para evitar recalculo desnecessário das questões quando a config não muda
+  const questoesSelecionadas = useMemo(() => {
     let questoesFiltradas = [...questoes];
     
     console.log('=== DEBUG USESIMULADO ===');
     console.log('Questões totais disponíveis:', questoesFiltradas.length);
     console.log('Configuração recebida:', config);
     
+    // Se não há configuração, usar padrões
+    if (!config) {
+      console.log('Sem configuração, usando padrões');
+      const questoesEmbaralhadas = [...questoesFiltradas].sort(() => Math.random() - 0.5);
+      const questoesSorteadas = questoesEmbaralhadas.slice(0, 10);
+      console.log('Questões finais selecionadas (padrão):', questoesSorteadas.length);
+      console.log('=== FIM DEBUG ===');
+      return questoesSorteadas;
+    }
+    
     // Filtra por áreas se especificado
-    if (config?.areas && config.areas.length > 0) {
+    if (config.areas && config.areas.length > 0) {
+      const questoesAntesDoFiltro = questoesFiltradas.length;
       questoesFiltradas = questoesFiltradas.filter(q => 
         config.areas.includes(q.area)
       );
-      console.log('Questões após filtro por área:', questoesFiltradas.length);
+      console.log(`Questões após filtro por área: ${questoesFiltradas.length} (eram ${questoesAntesDoFiltro})`);
       console.log('Áreas selecionadas:', config.areas);
+      
+      // Se não há questões nas áreas selecionadas, usar todas
+      if (questoesFiltradas.length === 0) {
+        console.log('Nenhuma questão encontrada nas áreas selecionadas, usando todas as questões');
+        questoesFiltradas = [...questoes];
+      }
     }
     
-    // Determina a quantidade solicitada - CORRIGINDO AQUI
-    const quantidadeSolicitada = config?.quantidade || 10; // Mudando de 5 para 10 como padrão
+    // Determina a quantidade solicitada
+    const quantidadeSolicitada = config.quantidade || 10;
     console.log('Quantidade solicitada:', quantidadeSolicitada);
-    
-    // Se não há questões suficientes nas áreas selecionadas, usar todas as questões disponíveis
-    if (questoesFiltradas.length === 0) {
-      console.log('Nenhuma questão encontrada nas áreas selecionadas, usando todas as questões');
-      questoesFiltradas = [...questoes];
-    }
     
     // Embaralha as questões disponíveis
     const questoesEmbaralhadas = [...questoesFiltradas].sort(() => Math.random() - 0.5);
@@ -48,7 +59,7 @@ export function useSimulado(questoes: Question[], config?: SimuladoConfig) {
     console.log('=== FIM DEBUG ===');
     
     return questoesSorteadas;
-  });
+  }, [questoes, config?.quantidade, config?.areas?.join(',')]); // Dependências específicas
 
   const [respostas, setRespostas] = useState<{[id: number]: string}>({});
   const [index, setIndex] = useState(0);
@@ -58,7 +69,9 @@ export function useSimulado(questoes: Question[], config?: SimuladoConfig) {
   }
   
   function responder(resp: string) {
-    setRespostas(r => ({ ...r, [questoesSelecionadas[index].id]: resp }));
+    if (questoesSelecionadas[index]) {
+      setRespostas(r => ({ ...r, [questoesSelecionadas[index].id]: resp }));
+    }
   }
   
   function proxima() {
@@ -75,6 +88,6 @@ export function useSimulado(questoes: Question[], config?: SimuladoConfig) {
     responder,
     proxima,
     terminou: index >= questoesSelecionadas.length,
-    config: config || { quantidade: 10, areas: [], tempoMinutos: 120 } // Mudando padrão de 5 para 10
+    config: config || { quantidade: 10, areas: [], tempoMinutos: 120 }
   };
 }

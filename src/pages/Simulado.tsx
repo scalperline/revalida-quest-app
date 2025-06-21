@@ -1,56 +1,29 @@
 
 import { useState, useEffect } from "react";
-import { useSimulado } from "@/hooks/useSimulado";
+import { useSimulado, type SimuladoConfig } from "@/hooks/useSimulado";
 import { useGamification } from "@/hooks/useGamification";
 import { useAudio } from "@/hooks/useAudio";
+import { useQuestions } from "@/hooks/useQuestions";
 import { SimuladoTimer } from "@/components/SimuladoTimer";
+import { SimuladoFilters } from "@/components/SimuladoFilters";
 import { QuestionCard } from "@/components/QuestionCard";
 import { Navbar } from "@/components/Navbar";
 import { LevelUpNotification } from "@/components/LevelUpNotification";
 import { AchievementNotification } from "@/components/AchievementNotification";
 import { ConfettiAnimation } from "@/components/ConfettiAnimation";
-import { Trophy, Clock, Target, Zap } from "lucide-react";
-
-// Usando o mesmo banco fictício
-const QUESTOES = [
-  {
-    id: 1,
-    year: 2022,
-    area: "Clínica Médica",
-    enunciado: `Paciente, 28 anos, apresenta febre, tosse produtiva há 3 dias. Ao exame, crepitações no pulmão direito. Assinale a alternativa correta sobre a conduta inicial:`,
-    options: [
-      { id: "A", text: "Observar em casa e prescrever antitérmico apenas." },
-      { id: "B", text: "Internar e iniciar antibiótico endovenoso." },
-      { id: "C", text: "Solicitar radiografia de tórax e prescrever antibiótico oral." },
-      { id: "D", text: "Prescrever antiviral para influenza e liberar." }
-    ],
-    correct: "C",
-    referencia: "Manual de Pneumonia INEP 2022"
-  },
-  {
-    id: 2,
-    year: 2021,
-    area: "Pediatria",
-    enunciado: `Criança de 2 anos, com desidratação grave. Qual a conduta prioritária?`,
-    options: [
-      { id: "A", text: "Indicação de antibióticos sem hidratação." },
-      { id: "B", text: "Reposição oral com soro caseiro." },
-      { id: "C", text: "Reposição venosa com solução isotônica." },
-      { id: "D", text: "Alta para cuidados domiciliares." }
-    ],
-    correct: "C",
-    referencia: "Manual de Reidratação INEP 2021"
-  }
-];
+import { Trophy, Clock, Target, Zap, ArrowLeft } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export default function Simulado() {
+  const [configuracao, setConfiguracao] = useState<SimuladoConfig | null>(null);
   const [iniciado, setIniciado] = useState(false);
   const [finalizado, setFinalizado] = useState(false);
   const [showLevelUp, setShowLevelUp] = useState(false);
   const [newLevel, setNewLevel] = useState(0);
   const [showConfetti, setShowConfetti] = useState(false);
   
-  const simulado = useSimulado(QUESTOES, 2);
+  const { questoesDisponiveis } = useQuestions();
+  const simulado = useSimulado(questoesDisponiveis, configuracao || undefined);
   const { 
     completeSimulado, 
     userProgress, 
@@ -69,7 +42,8 @@ export default function Simulado() {
     }
   }, [newlyUnlockedAchievement, playSound]);
 
-  function iniciar() {
+  function handleConfiguracao(config: SimuladoConfig) {
+    setConfiguracao(config);
     setIniciado(true);
     setFinalizado(false);
     playSound('click');
@@ -106,6 +80,13 @@ export default function Simulado() {
     }
   }
 
+  function voltarConfiguracao() {
+    setConfiguracao(null);
+    setIniciado(false);
+    setFinalizado(false);
+    window.scrollTo({top:0,behavior:"smooth"});
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-100 dark:from-gray-900 dark:to-gray-800">
       <Navbar />
@@ -113,52 +94,23 @@ export default function Simulado() {
       <div className="container mx-auto px-4 py-6">
         <div className="max-w-4xl mx-auto">
           
-          {!iniciado && (
+          {/* Tela de Configuração */}
+          {!configuracao && (
             <div className="pt-8">
-              <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 border border-blue-100 dark:border-gray-700">
-                <div className="text-center mb-8">
-                  <div className="w-20 h-20 bg-gradient-to-br from-blue-500 via-purple-600 to-blue-700 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
-                    <Trophy className="w-10 h-10 text-white" />
-                  </div>
-                  <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent">
-                    Missão Épica: Simulado Revalida! 🎯
-                  </h1>
-                  <p className="text-xl text-muted-foreground leading-relaxed mb-6">
-                    Prepare-se para uma aventura intelectual! Complete este desafio cronometrado 
-                    para ganhar XP, desbloquear conquistas e subir de nível na sua jornada rumo à aprovação.
-                  </p>
-                  
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-                    <div className="bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 p-4 rounded-xl border border-green-200 dark:border-green-700 shadow-sm hover:shadow-md transition-all duration-200">
-                      <Target className="w-8 h-8 text-green-600 mx-auto mb-2" />
-                      <div className="text-2xl font-bold text-green-700 dark:text-green-400">+50 XP</div>
-                      <div className="text-sm text-green-600 dark:text-green-500">Por completar</div>
-                    </div>
-                    <div className="bg-gradient-to-r from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/20 p-4 rounded-xl border border-blue-200 dark:border-blue-700 shadow-sm hover:shadow-md transition-all duration-200">
-                      <Clock className="w-8 h-8 text-blue-600 mx-auto mb-2" />
-                      <div className="text-2xl font-bold text-blue-700 dark:text-blue-400">2 min</div>
-                      <div className="text-sm text-blue-600 dark:text-blue-500">Cronometrado</div>
-                    </div>
-                    <div className="bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 p-4 rounded-xl border border-purple-200 dark:border-purple-700 shadow-sm hover:shadow-md transition-all duration-200">
-                      <Zap className="w-8 h-8 text-purple-600 mx-auto mb-2" />
-                      <div className="text-2xl font-bold text-purple-700 dark:text-purple-400">Bônus</div>
-                      <div className="text-sm text-purple-600 dark:text-purple-500">Por precisão</div>
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="text-center">
-                  <button
-                    onClick={iniciar}
-                    className="px-12 py-4 bg-gradient-to-r from-blue-600 via-purple-600 to-blue-700 text-white rounded-2xl hover:from-blue-700 hover:via-purple-700 hover:to-blue-800 font-bold text-xl transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-3xl"
-                  >
-                    🚀 Iniciar Missão Épica
-                  </button>
-                </div>
+              <div className="text-center mb-8">
+                <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent">
+                  🎯 Simulado Personalizado Revalida
+                </h1>
+                <p className="text-xl text-muted-foreground">
+                  Configure sua quest do jeito que quiser e conquiste XP, badges e cartas médicas!
+                </p>
               </div>
+              
+              <SimuladoFilters onStart={handleConfiguracao} />
             </div>
           )}
 
+          {/* Tela de Resultados */}
           {(finalizado || simulado.terminou) && (
             <div className="pt-8">
               <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 border border-blue-100 dark:border-gray-700">
@@ -168,7 +120,7 @@ export default function Simulado() {
                   </div>
                   
                   <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-yellow-600 via-orange-600 to-red-600 bg-clip-text text-transparent">
-                    Missão Concluída! 🎊
+                    Quest Concluída! 🎊
                   </h2>
                   
                   <div className="text-3xl font-bold text-green-600 mb-6 p-6 bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-2xl border border-green-200 dark:border-green-700 shadow-sm">
@@ -177,14 +129,25 @@ export default function Simulado() {
                     ).length} de {simulado.total} questões!
                   </div>
                   
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                  {/* Resumo da Configuração */}
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
                     <div className="bg-gradient-to-r from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 p-4 rounded-xl border border-blue-200 dark:border-blue-700 shadow-sm">
-                      <div className="text-2xl font-bold text-blue-700 dark:text-blue-400">+{Math.floor((simulado.questoesSelecionadas.filter(q => simulado.respostas[q.id] === q.correct).length / simulado.total) * 50) + 25} XP</div>
+                      <div className="text-2xl font-bold text-blue-700 dark:text-blue-400">
+                        +{Math.floor((simulado.questoesSelecionadas.filter(q => simulado.respostas[q.id] === q.correct).length / simulado.total) * (simulado.config.quantidade * 2.5))} XP
+                      </div>
                       <div className="text-blue-600 dark:text-blue-500">Experiência Ganha</div>
                     </div>
                     <div className="bg-gradient-to-r from-purple-50 to-purple-100 dark:from-purple-900/20 dark:to-purple-800/20 p-4 rounded-xl border border-purple-200 dark:border-purple-700 shadow-sm">
-                      <div className="text-2xl font-bold text-purple-700 dark:text-purple-400">Nível {userProgress.level}</div>
-                      <div className="text-purple-600 dark:text-purple-500">Rank Atual</div>
+                      <div className="text-2xl font-bold text-purple-700 dark:text-purple-400">
+                        {simulado.config.areas.length}
+                      </div>
+                      <div className="text-purple-600 dark:text-purple-500">Áreas Estudadas</div>
+                    </div>
+                    <div className="bg-gradient-to-r from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/20 p-4 rounded-xl border border-green-200 dark:border-green-700 shadow-sm">
+                      <div className="text-2xl font-bold text-green-700 dark:text-green-400">
+                        {simulado.config.tempoMinutos}min
+                      </div>
+                      <div className="text-green-600 dark:text-green-500">Tempo Configurado</div>
                     </div>
                   </div>
                 </div>
@@ -195,29 +158,47 @@ export default function Simulado() {
                   ))}
                 </div>
                 
-                <div className="text-center">
-                  <button
-                    onClick={() => {
-                      setIniciado(false); 
-                      setFinalizado(false);
-                      window.scrollTo({top:0,behavior:"smooth"});
-                    }}
+                <div className="text-center space-y-4">
+                  <Button
+                    onClick={voltarConfiguracao}
                     className="px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl hover:from-blue-700 hover:to-purple-700 font-semibold transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl"
                   >
-                    🔄 Nova Missão
-                  </button>
+                    🔄 Nova Quest Personalizada
+                  </Button>
                 </div>
               </div>
             </div>
           )}
 
-          {iniciado && !finalizado && !simulado.terminou && (
+          {/* Tela do Simulado em Andamento */}
+          {iniciado && !finalizado && !simulado.terminou && configuracao && (
             <div className="pt-8">
+              {/* Header com botão voltar */}
+              <div className="mb-6 flex items-center justify-between">
+                <Button
+                  variant="outline"
+                  onClick={voltarConfiguracao}
+                  className="flex items-center gap-2"
+                >
+                  <ArrowLeft className="w-4 h-4" />
+                  Voltar às Configurações
+                </Button>
+                
+                <div className="text-center">
+                  <div className="text-sm text-muted-foreground">
+                    {configuracao.areas.length > 1 ? 
+                      `${configuracao.areas.length} áreas selecionadas` : 
+                      configuracao.areas[0]
+                    }
+                  </div>
+                </div>
+              </div>
+
               <div className="mb-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4 border border-blue-100 dark:border-gray-700">
                 <SimuladoTimer
                   running={!finalizado && iniciado && !simulado.terminou}
                   onFinish={encerrar}
-                  initialMinutes={2}
+                  initialMinutes={configuracao.tempoMinutos}
                 />
               </div>
               
@@ -225,7 +206,7 @@ export default function Simulado() {
                 <div className="text-center mb-6">
                   <div className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 py-2 rounded-full font-bold text-lg shadow-lg">
                     <Target className="w-5 h-5" />
-                    Quest {simulado.index + 1} de {simulado.total}
+                    Questão {simulado.index + 1} de {simulado.total}
                   </div>
                 </div>
                 
@@ -259,6 +240,7 @@ export default function Simulado() {
             </div>
           )}
 
+          {/* Botão Finalizar quando terminou */}
           {iniciado && !finalizado && simulado.terminou && (
             <div className="text-center mt-12">
               <button

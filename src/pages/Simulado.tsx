@@ -60,7 +60,7 @@ export default function Simulado() {
   }, [newlyUnlockedAchievement, playSound]);
 
   function handleConfiguracao(config: SimuladoConfig) {
-    console.log('Configuração recebida:', config);
+    console.log('Configuração sendo definida:', config);
     setConfiguracao(config);
     setIniciado(true);
     setFinalizado(false);
@@ -131,11 +131,12 @@ export default function Simulado() {
   // Verificar se a quantidade de questões condiz com a configuração
   const questoesInsuficientes = configuracao && simulado.total < configuracao.quantidade;
 
-  console.log('Debug simulado:', {
+  console.log('Debug simulado Estado:', {
     configuracao: configuracao?.quantidade,
     totalQuestoes: simulado.total,
     questoesSelecionadas: simulado.questoesSelecionadas.length,
-    questoesInsuficientes
+    questoesInsuficientes,
+    configObject: configuracao
   });
 
   return (

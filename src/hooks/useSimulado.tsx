@@ -26,9 +26,15 @@ export function useSimulado(questoes: Question[], config?: SimuladoConfig) {
       console.log('Áreas selecionadas:', config.areas);
     }
     
-    // Determina a quantidade solicitada
-    const quantidadeSolicitada = config?.quantidade || 5;
+    // Determina a quantidade solicitada - CORRIGINDO AQUI
+    const quantidadeSolicitada = config?.quantidade || 10; // Mudando de 5 para 10 como padrão
     console.log('Quantidade solicitada:', quantidadeSolicitada);
+    
+    // Se não há questões suficientes nas áreas selecionadas, usar todas as questões disponíveis
+    if (questoesFiltradas.length === 0) {
+      console.log('Nenhuma questão encontrada nas áreas selecionadas, usando todas as questões');
+      questoesFiltradas = [...questoes];
+    }
     
     // Embaralha as questões disponíveis
     const questoesEmbaralhadas = [...questoesFiltradas].sort(() => Math.random() - 0.5);
@@ -69,6 +75,6 @@ export function useSimulado(questoes: Question[], config?: SimuladoConfig) {
     responder,
     proxima,
     terminou: index >= questoesSelecionadas.length,
-    config: config || { quantidade: 5, areas: [], tempoMinutos: 120 }
+    config: config || { quantidade: 10, areas: [], tempoMinutos: 120 } // Mudando padrão de 5 para 10
   };
 }

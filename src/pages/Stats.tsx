@@ -4,11 +4,15 @@ import PerformanceChart from "@/components/PerformanceChart";
 import { StatsResetDialog } from "@/components/StatsResetDialog";
 import { useGamification } from "@/hooks/useGamification";
 import { useToast } from "@/hooks/use-toast";
+import { getTotalQuestionsInSystem, getQuestionsCompletionStats } from "@/utils/questionCounter";
 import { TrendingUp, Target, Award, Calendar, Trophy, Star, BookOpen, GraduationCap, Settings2 } from "lucide-react";
 
 export default function Stats() {
   const { userProgress, getAccuracy, resetStats } = useGamification();
   const { toast } = useToast();
+  
+  // Estatísticas do sistema
+  const systemStats = getQuestionsCompletionStats(userProgress.totalQuestions);
   
   // Filtrar áreas com dados suficientes (mínimo 3 questões)
   const getReliableAreaStats = () => {
@@ -121,7 +125,13 @@ export default function Stats() {
                 <span className="text-3xl font-bold">{getAccuracy()}%</span>
               </div>
               <h3 className="font-semibold mb-1">Taxa de Acertos</h3>
-              <p className="text-sm opacity-90">{userProgress.correctAnswers} de {userProgress.totalQuestions} questões</p>
+              <div className="space-y-1">
+                <p className="text-sm opacity-90">{userProgress.correctAnswers} de {userProgress.totalQuestions} acertos</p>
+                <p className="text-xs opacity-75">
+                  {userProgress.totalQuestions} de {systemStats.totalInSystem} questões respondidas 
+                  ({systemStats.completionPercentage}%)
+                </p>
+              </div>
             </div>
 
             <div className="bg-gradient-to-br from-purple-500 to-purple-600 text-white rounded-2xl p-6 shadow-lg transform hover:scale-105 transition-all">
@@ -154,44 +164,30 @@ export default function Stats() {
               Desempenho por Área Médica
             </h2>
             
-            {hasReliableData ? (
-              <>
-                <PerformanceChart dados={chartData} />
-                <div className="text-center mt-6">
-                  <p className="text-muted-foreground">
-                    📊 Baseado em áreas com pelo menos 3 questões respondidas
-                  </p>
-                  <p className="text-sm text-muted-foreground mt-1">
-                    Mostrando {chartData.length} de {allAreasStats.length} áreas com dados confiáveis
-                  </p>
-                </div>
-              </>
-            ) : hasAnyData ? (
-              <div className="text-center space-y-4 py-8">
-                <div className="text-6xl">📊</div>
-                <div className="text-muted-foreground space-y-2">
-                  <p className="font-medium text-orange-600 dark:text-orange-400">
-                    📈 Dados insuficientes para gráfico confiável
-                  </p>
-                  <p className="text-sm">
-                    Responda pelo menos 3 questões em cada área para ver estatísticas confiáveis
-                  </p>
-                  <p className="text-xs">
-                    Progresso atual: {allAreasStats.length} área(s) com dados
-                  </p>
-                </div>
+            <PerformanceChart dados={chartData} showDemo={!hasAnyData} />
+            
+            {hasReliableData && (
+              <div className="text-center mt-6">
+                <p className="text-muted-foreground">
+                  📊 Baseado em áreas com pelo menos 3 questões respondidas
+                </p>
+                <p className="text-sm text-muted-foreground mt-1">
+                  Mostrando {chartData.length} de {allAreasStats.length} áreas com dados confiáveis
+                </p>
               </div>
-            ) : (
-              <div className="text-center space-y-4 py-8">
-                <div className="text-6xl">🎯</div>
-                <div className="text-muted-foreground space-y-2">
-                  <p className="font-medium text-blue-600 dark:text-blue-400">
-                    📈 Comece respondendo questões para ver seu desempenho
-                  </p>
-                  <p className="text-sm">
-                    Suas estatísticas aparecerão aqui conforme você responde questões
-                  </p>
-                </div>
+            )}
+            
+            {hasAnyData && !hasReliableData && (
+              <div className="text-center mt-6">
+                <p className="text-muted-foreground">
+                  📈 Dados insuficientes para gráfico confiável
+                </p>
+                <p className="text-sm text-muted-foreground mt-1">
+                  Responda pelo menos 3 questões em cada área para ver estatísticas confiáveis
+                </p>
+                <p className="text-xs text-muted-foreground">
+                  Progresso atual: {allAreasStats.length} área(s) com dados
+                </p>
               </div>
             )}
           </div>

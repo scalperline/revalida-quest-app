@@ -1,227 +1,23 @@
+
 import { useState, useEffect } from 'react';
+import { UserProgress } from '@/types/gamification';
+import { ACHIEVEMENTS } from '@/data/achievements';
+import { MEDICAL_CARDS } from '@/data/medicalCards';
+import { 
+  initializeUserProgress, 
+  calculateLevelUp, 
+  calculateStreakXP, 
+  generateQuestSuggestions,
+  checkAreaAchievements
+} from '@/utils/gamificationHelpers';
 
-export interface Achievement {
-  id: string;
-  title: string;
-  description: string;
-  icon: string;
-  unlocked: boolean;
-  unlockedAt?: Date;
-  category?: 'area' | 'streak' | 'performance' | 'general';
-  area?: string;
-}
-
-export interface Quest {
-  id: string;
-  title: string;
-  description: string;
-  area: string;
-  target: number;
-  progress: number;
-  reward: {
-    xp: number;
-    badge?: string;
-    card?: string;
-  };
-  completed: boolean;
-  type: 'area' | 'streak' | 'performance';
-}
-
-export interface MedicalCard {
-  id: string;
-  title: string;
-  area: string;
-  content: string;
-  tip: string;
-  unlocked: boolean;
-  rarity: 'comum' | 'raro' | 'épico' | 'lendário';
-}
-
-export interface UserProgress {
-  level: number;
-  xp: number;
-  xpToNextLevel: number;
-  totalQuestions: number;
-  correctAnswers: number;
-  simuladosCompletos: number;
-  streakDias: number;
-  lastActivityDate?: Date;
-  achievements: Achievement[];
-  quests: Quest[];
-  medicalCards: MedicalCard[];
-  newlyUnlockedAchievements: string[];
-  areaStats: Record<string, { correct: number; total: number }>;
-}
-
-const ACHIEVEMENTS: Achievement[] = [
-  // Conquistas Gerais
-  {
-    id: 'first_question',
-    title: 'Primeira Questão',
-    description: 'Respondeu sua primeira questão',
-    icon: '🎯',
-    unlocked: false,
-    category: 'general'
-  },
-  {
-    id: 'first_correct',
-    title: 'Primeiro Acerto',
-    description: 'Acertou sua primeira questão',
-    icon: '✅',
-    unlocked: false,
-    category: 'general'
-  },
-  
-  // Conquistas de Streak
-  {
-    id: 'streak_3',
-    title: 'Consistência Bronze',
-    description: 'Estudou por 3 dias consecutivos',
-    icon: '🥉',
-    unlocked: false,
-    category: 'streak'
-  },
-  {
-    id: 'streak_7',
-    title: 'Semana Consistente',
-    description: 'Estudou por 7 dias consecutivos',
-    icon: '🔥',
-    unlocked: false,
-    category: 'streak'
-  },
-  {
-    id: 'streak_30',
-    title: 'Mestre da Consistência',
-    description: 'Estudou por 30 dias consecutivos',
-    icon: '👑',
-    unlocked: false,
-    category: 'streak'
-  },
-  
-  // Conquistas por Área
-  {
-    id: 'clinica_master',
-    title: '🧠 Mente Clínica',
-    description: '90% de acerto em Clínica Médica',
-    icon: '🧠',
-    unlocked: false,
-    category: 'area',
-    area: 'Clínica Médica'
-  },
-  {
-    id: 'pediatria_expert',
-    title: '👶 Pediatra Expert',
-    description: '85% de acerto em Pediatria',
-    icon: '👶',
-    unlocked: false,
-    category: 'area',
-    area: 'Pediatria'
-  },
-  {
-    id: 'gineco_master',
-    title: '🌸 Gineco Master',
-    description: '85% de acerto em Ginecologia',
-    icon: '🌸',
-    unlocked: false,
-    category: 'area',
-    area: 'Ginecologia e Obstetrícia'
-  },
-  
-  // Conquistas de Performance
-  {
-    id: 'sniper_gabarito',
-    title: '🎯 Sniper do Gabarito',
-    description: '100% de acerto em um simulado',
-    icon: '🎯',
-    unlocked: false,
-    category: 'performance'
-  },
-  {
-    id: 'desbravador',
-    title: '🧭 Desbravador Revalida',
-    description: 'Respondeu questões de todos os anos (2011-2025)',
-    icon: '🧭',
-    unlocked: false,
-    category: 'performance'
-  },
-  {
-    id: 'questions_100',
-    title: 'Centenário',
-    description: 'Respondeu 100 questões',
-    icon: '💯',
-    unlocked: false,
-    category: 'performance'
-  }
-];
-
-const MEDICAL_CARDS: MedicalCard[] = [
-  {
-    id: 'card_clinica_1',
-    title: 'Diagnóstico Diferencial',
-    area: 'Clínica Médica',
-    content: 'O diagnóstico diferencial é fundamental na prática médica...',
-    tip: 'Sempre considere as hipóteses mais prováveis primeiro!',
-    unlocked: false,
-    rarity: 'comum'
-  },
-  {
-    id: 'card_pediatria_1',
-    title: 'Marcos do Desenvolvimento',
-    area: 'Pediatria',
-    content: 'Os marcos do desenvolvimento infantil são cruciais...',
-    tip: 'Memorize os marcos por faixa etária!',
-    unlocked: false,
-    rarity: 'raro'
-  }
-];
+// Re-export types for backward compatibility
+export type { Achievement, Quest, MedicalCard, UserProgress } from '@/types/gamification';
 
 export function useGamification() {
   const [userProgress, setUserProgress] = useState<UserProgress>(() => {
     const saved = localStorage.getItem('revalida-progress');
-    if (saved) {
-      try {
-        const parsed = JSON.parse(saved);
-        const achievements = parsed.achievements || [...ACHIEVEMENTS];
-        achievements.forEach((achievement: Achievement) => {
-          if (achievement.unlockedAt && typeof achievement.unlockedAt === 'string') {
-            achievement.unlockedAt = new Date(achievement.unlockedAt);
-          }
-        });
-        
-        return {
-          level: 1,
-          xp: 0,
-          xpToNextLevel: 100,
-          totalQuestions: 0,
-          correctAnswers: 0,
-          simuladosCompletos: 0,
-          streakDias: 0,
-          newlyUnlockedAchievements: [],
-          quests: [],
-          medicalCards: [...MEDICAL_CARDS],
-          areaStats: {},
-          ...parsed,
-          achievements,
-          lastActivityDate: parsed.lastActivityDate ? new Date(parsed.lastActivityDate) : undefined
-        };
-      } catch (error) {
-        console.error('Error parsing saved progress:', error);
-      }
-    }
-    return {
-      level: 1,
-      xp: 0,
-      xpToNextLevel: 100,
-      totalQuestions: 0,
-      correctAnswers: 0,
-      simuladosCompletos: 0,
-      streakDias: 0,
-      achievements: [...ACHIEVEMENTS],
-      newlyUnlockedAchievements: [],
-      quests: [],
-      medicalCards: [...MEDICAL_CARDS],
-      areaStats: {}
-    };
+    return initializeUserProgress(saved);
   });
 
   useEffect(() => {
@@ -235,7 +31,6 @@ export function useGamification() {
       correctAnswers: 0,
       simuladosCompletos: 0,
       areaStats: {},
-      // Manter XP, level e achievements para não perder progresso de gamificação
     }));
   };
 
@@ -248,7 +43,7 @@ export function useGamification() {
       const lastActivityStr = lastActivity?.toDateString();
       
       if (lastActivityStr === todayStr) {
-        return prev; // Já estudou hoje
+        return prev;
       }
       
       let newStreak = 1;
@@ -261,12 +56,7 @@ export function useGamification() {
         }
       }
       
-      // Calcular XP de streak
-      let streakXP = 10; // Base XP
-      if (newStreak >= 3) streakXP = 20;
-      if (newStreak >= 7) streakXP = 50;
-      if (newStreak >= 30) streakXP = 100;
-      
+      const streakXP = calculateStreakXP(newStreak);
       console.log(`Streak updated: ${newStreak} days, +${streakXP} XP`);
       
       return {
@@ -294,81 +84,9 @@ export function useGamification() {
     });
   };
 
-  const checkAreaAchievements = () => {
-    setUserProgress(prev => {
-      const newAchievements = [...prev.achievements];
-      let hasChanges = false;
-      
-      Object.entries(prev.areaStats).forEach(([area, stats]) => {
-        if (stats.total >= 10) { // Mínimo de questões para validar
-          const accuracy = (stats.correct / stats.total) * 100;
-          
-          // Verificar conquistas por área
-          const areaAchievements = ACHIEVEMENTS.filter(a => a.area === area);
-          areaAchievements.forEach(achievement => {
-            const existing = newAchievements.find(a => a.id === achievement.id);
-            if (existing && !existing.unlocked) {
-              let shouldUnlock = false;
-              
-              if (achievement.id === 'clinica_master' && accuracy >= 90) shouldUnlock = true;
-              if (achievement.id === 'pediatria_expert' && accuracy >= 85) shouldUnlock = true;
-              if (achievement.id === 'gineco_master' && accuracy >= 85) shouldUnlock = true;
-              
-              if (shouldUnlock) {
-                existing.unlocked = true;
-                existing.unlockedAt = new Date();
-                hasChanges = true;
-                
-                if (!prev.newlyUnlockedAchievements.includes(achievement.id)) {
-                  prev.newlyUnlockedAchievements.push(achievement.id);
-                }
-              }
-            }
-          });
-        }
-      });
-      
-      return hasChanges ? { ...prev, achievements: newAchievements } : prev;
-    });
-  };
-
-  const generateQuestSuggestions = (): Quest[] => {
-    const suggestions: Quest[] = [];
-    
-    // Analisar áreas com baixo desempenho
-    Object.entries(userProgress.areaStats).forEach(([area, stats]) => {
-      if (stats.total >= 5) {
-        const accuracy = (stats.correct / stats.total) * 100;
-        if (accuracy < 70) {
-          suggestions.push({
-            id: `improve_${area}`,
-            title: `Missão de Recuperação: ${area}`,
-            description: `Melhore seu desempenho em ${area} - responda 10 questões com 75% de acerto`,
-            area,
-            target: 10,
-            progress: 0,
-            reward: { xp: 100, badge: `Especialista ${area}` },
-            completed: false,
-            type: 'area'
-          });
-        }
-      }
-    });
-    
-    return suggestions.slice(0, 3); // Máximo 3 sugestões
-  };
-
   const addXP = (points: number) => {
     setUserProgress(prev => {
-      let newXP = prev.xp + points;
-      let newLevel = prev.level;
-      let newXPToNext = prev.xpToNextLevel;
-
-      while (newXP >= newXPToNext) {
-        newXP -= newXPToNext;
-        newLevel++;
-        newXPToNext = newLevel * 100;
-      }
+      const { newXP, newLevel, newXPToNext } = calculateLevelUp(prev.xp, prev.level, points);
 
       return {
         ...prev,
@@ -403,7 +121,6 @@ export function useGamification() {
   };
 
   const answerQuestion = (correct: boolean, area?: string) => {
-    // Atualizar streak primeiro
     updateStreak();
     
     setUserProgress(prev => {
@@ -417,30 +134,30 @@ export function useGamification() {
       };
     });
 
-    // Atualizar estatísticas por área
     if (area) {
       updateAreaStats(area, correct);
     }
 
-    // Verificar conquistas
     setTimeout(() => {
       setUserProgress(prev => {
-        // Conquistas básicas
         if (prev.totalQuestions === 1) unlockAchievement('first_question');
         if (correct && prev.correctAnswers === 1) unlockAchievement('first_correct');
         if (prev.totalQuestions >= 100) unlockAchievement('questions_100');
         
-        // Conquistas de streak
         if (prev.streakDias === 3) unlockAchievement('streak_3');
         if (prev.streakDias === 7) unlockAchievement('streak_7');
         if (prev.streakDias === 30) unlockAchievement('streak_30');
         
-        checkAreaAchievements();
-        return prev;
+        const { achievements, newlyUnlocked } = checkAreaAchievements(
+          prev.achievements, 
+          prev.areaStats, 
+          prev.newlyUnlockedAchievements
+        );
+        
+        return { ...prev, achievements, newlyUnlockedAchievements: newlyUnlocked };
       });
     }, 100);
 
-    // Adicionar XP
     addXP(correct ? 10 : 5);
   };
 
@@ -450,7 +167,6 @@ export function useGamification() {
       simuladosCompletos: prev.simuladosCompletos + 1
     }));
 
-    // Verificar conquista de 100%
     if (score === total) {
       unlockAchievement('sniper_gabarito');
     }
@@ -486,10 +202,7 @@ export function useGamification() {
   };
 
   const getStreakBonus = () => {
-    if (userProgress.streakDias >= 30) return 100;
-    if (userProgress.streakDias >= 7) return 50;
-    if (userProgress.streakDias >= 3) return 20;
-    return 10;
+    return calculateStreakXP(userProgress.streakDias);
   };
 
   return {
@@ -502,7 +215,7 @@ export function useGamification() {
     getNewlyUnlockedAchievement,
     clearNewlyUnlockedAchievement,
     getStreakBonus,
-    generateQuestSuggestions,
+    generateQuestSuggestions: () => generateQuestSuggestions(userProgress.areaStats),
     resetStats
   };
 }

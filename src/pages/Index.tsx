@@ -1,4 +1,3 @@
-
 import { Book, Timer, BarChartBig, Star, Brain } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { FeatureCard } from "@/components/FeatureCard";
@@ -53,7 +52,7 @@ export default function Index() {
         </section>
         
         <footer className="mt-20 text-sm text-muted-foreground w-full text-center border-t border-border/30 pt-8">
-          &copy; {new Date().getFullYear()} RevalidaQuest. Projeto acadêmico sem fins lucrativos.
+          &copy; {new Date().getFullYear()} RevalidaQuest. Todos os direitos reservados.
         </footer>
       </main>
     </div>

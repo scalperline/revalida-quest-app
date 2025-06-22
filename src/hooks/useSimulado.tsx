@@ -13,16 +13,18 @@ export function useSimulado(questoes: Question[], config?: SimuladoConfig) {
   const questoesSelecionadas = useMemo(() => {
     let questoesFiltradas = [...questoes];
     
-    console.log('=== DEBUG USESIMULADO ===');
+    console.log('=== DEBUG USESIMULADO - RECALCULANDO QUESTÕES ===');
     console.log('Questões totais disponíveis:', questoesFiltradas.length);
     console.log('Configuração recebida:', config);
+    console.log('Config serializada:', JSON.stringify(config));
     
     // Se não há configuração, usar padrões
     if (!config) {
-      console.log('Sem configuração, usando padrões');
+      console.log('Sem configuração, usando padrões (10 questões, todas as áreas)');
       const questoesEmbaralhadas = [...questoesFiltradas].sort(() => Math.random() - 0.5);
       const questoesSorteadas = questoesEmbaralhadas.slice(0, 10);
       console.log('Questões finais selecionadas (padrão):', questoesSorteadas.length);
+      console.log('IDs das questões selecionadas (padrão):', questoesSorteadas.map(q => q.id));
       console.log('=== FIM DEBUG ===');
       return questoesSorteadas;
     }
@@ -38,7 +40,7 @@ export function useSimulado(questoes: Question[], config?: SimuladoConfig) {
       
       // Se não há questões nas áreas selecionadas, usar todas
       if (questoesFiltradas.length === 0) {
-        console.log('Nenhuma questão encontrada nas áreas selecionadas, usando todas as questões');
+        console.log('AVISO: Nenhuma questão encontrada nas áreas selecionadas, usando todas as questões');
         questoesFiltradas = [...questoes];
       }
     }
@@ -59,23 +61,37 @@ export function useSimulado(questoes: Question[], config?: SimuladoConfig) {
     console.log('=== FIM DEBUG ===');
     
     return questoesSorteadas;
-  }, [questoes, config?.quantidade, config?.areas?.join(',')]); // Dependências específicas
+  }, [questoes, config?.quantidade, config?.areas, config?.tempoMinutos]); // Incluindo tempoMinutos para estabilidade
 
   const [respostas, setRespostas] = useState<{[id: number]: string}>({});
   const [index, setIndex] = useState(0);
 
+  console.log('=== ESTADO ATUAL DO SIMULADO ===');
+  console.log('Índice atual:', index);
+  console.log('Total de questões:', questoesSelecionadas.length);
+  console.log('Questão atual ID:', questoesSelecionadas[index]?.id);
+  console.log('Respostas registradas:', Object.keys(respostas).length);
+  console.log('=== FIM ESTADO ===');
+
   function respostaAtual() {
-    return respostas[questoesSelecionadas[index]?.id];
+    const questaoAtual = questoesSelecionadas[index];
+    const resposta = questaoAtual ? respostas[questaoAtual.id] : undefined;
+    console.log('respostaAtual() - Questão:', questaoAtual?.id, 'Resposta:', resposta);
+    return resposta;
   }
   
   function responder(resp: string) {
     if (questoesSelecionadas[index]) {
-      setRespostas(r => ({ ...r, [questoesSelecionadas[index].id]: resp }));
+      const questaoId = questoesSelecionadas[index].id;
+      console.log('Respondendo questão ID:', questaoId, 'com resposta:', resp);
+      setRespostas(r => ({ ...r, [questaoId]: resp }));
     }
   }
   
   function proxima() {
-    setIndex(i => i + 1);
+    const novoIndex = index + 1;
+    console.log('Navegando para próxima questão. Índice atual:', index, 'Novo índice:', novoIndex);
+    setIndex(novoIndex);
   }
   
   return {

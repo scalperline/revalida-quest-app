@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { useSimulado, type SimuladoConfig } from "@/hooks/useSimulado";
 import { useGamification } from "@/hooks/useGamification";
@@ -53,10 +54,19 @@ export default function Simulado() {
     }
   }, [iniciado, finalizado, simulado.terminou, startTime]);
 
-  // Reset questão respondida quando mudar de questão
+  // Reset questão respondida quando mudar de questão - CORRIGIDO
   useEffect(() => {
-    setQuestaoRespondida(!!simulado.respostaAtual());
-  }, [simulado.index, simulado.respostaAtual]);
+    console.log('=== EFFECT RESET QUESTAO RESPONDIDA ===');
+    console.log('Índice da questão:', simulado.index);
+    console.log('ID da questão atual:', simulado.atual?.id);
+    console.log('Resposta atual:', simulado.respostaAtual());
+    
+    const temResposta = !!simulado.respostaAtual();
+    setQuestaoRespondida(temResposta);
+    
+    console.log('questaoRespondida definida como:', temResposta);
+    console.log('=== FIM EFFECT ===');
+  }, [simulado.index, simulado.atual?.id]); // Dependências mais específicas
 
   // Handle achievement notification
   useEffect(() => {
@@ -66,7 +76,8 @@ export default function Simulado() {
   }, [newlyUnlockedAchievement, playSound]);
 
   function handleConfiguracao(config: SimuladoConfig) {
-    console.log('Configuração sendo definida:', config);
+    console.log('=== CONFIGURAÇÃO SENDO DEFINIDA ===');
+    console.log('Nova configuração:', config);
     
     // Garante que a configuração seja válida antes de prosseguir
     if (!config.areas || config.areas.length === 0) {
@@ -86,20 +97,47 @@ export default function Simulado() {
     setTimeElapsed(0);
     setQuestaoRespondida(false);
     playSound('click');
+    
+    console.log('Estado após configuração:', {
+      configuracao: config,
+      iniciado: true,
+      finalizado: false
+    });
+    console.log('=== FIM CONFIGURAÇÃO ===');
   }
 
   function handleResposta(optionId: string) {
+    console.log('=== RESPOSTA SELECIONADA ===');
+    console.log('ID da opção:', optionId);
+    console.log('ID da questão:', simulado.atual?.id);
+    
     playSound('click');
     simulado.responder(optionId);
     setQuestaoRespondida(true);
+    
+    console.log('questaoRespondida definida como true');
+    console.log('=== FIM RESPOSTA ===');
   }
 
   function handleContinuar() {
+    console.log('=== CONTINUANDO PARA PRÓXIMA QUESTÃO ===');
+    console.log('Índice atual antes:', simulado.index);
+    console.log('Questão atual antes:', simulado.atual?.id);
+    
     playSound('click');
-    simulado.proxima();
+    
+    // Reset ANTES de ir para próxima questão
     setQuestaoRespondida(false);
+    
+    // Navegar para próxima
+    simulado.proxima();
+    
     // Scroll to top smoothly
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    
+    console.log('questaoRespondida resetada para false');
+    console.log('Navegação executada');
+    console.log('=== FIM CONTINUAR ===');
   }
 
   function encerrar() {
@@ -134,6 +172,7 @@ export default function Simulado() {
   }
 
   function voltarConfiguracao() {
+    console.log('=== VOLTANDO PARA CONFIGURAÇÃO ===');
     setConfiguracao(null);
     setIniciado(false);
     setFinalizado(false);
@@ -141,6 +180,8 @@ export default function Simulado() {
     setTimeElapsed(0);
     setQuestaoRespondida(false);
     window.scrollTo({top:0,behavior:"smooth"});
+    console.log('Estado resetado para configuração');
+    console.log('=== FIM VOLTAR ===');
   }
 
   // Count answered questions
@@ -149,15 +190,19 @@ export default function Simulado() {
   // Verificar se a quantidade de questões condiz com a configuração
   const questoesInsuficientes = configuracao && simulado.total < configuracao.quantidade;
 
-  console.log('Debug simulado Estado:', {
+  console.log('=== DEBUG GERAL SIMULADO ===');
+  console.log('Estado atual:', {
     configuracao: configuracao?.quantidade,
     totalQuestoes: simulado.total,
     questoesSelecionadas: simulado.questoesSelecionadas.length,
     questoesInsuficientes,
-    configObject: configuracao,
-    areas: configuracao?.areas,
-    tempoMinutos: configuracao?.tempoMinutos
+    iniciado,
+    finalizado,
+    questaoRespondida,
+    indexAtual: simulado.index,
+    questaoAtualId: simulado.atual?.id
   });
+  console.log('=== FIM DEBUG GERAL ===');
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-100 dark:from-gray-900 dark:to-gray-800">
@@ -288,7 +333,9 @@ export default function Simulado() {
                 
                 {simulado.atual && (
                   <div>
+                    {/* Usando key para forçar re-render quando muda questão */}
                     <QuestionCard
+                      key={`${simulado.atual.id}-${simulado.index}`}
                       question={simulado.atual}
                       showAnswer={questaoRespondida}
                       onAnswer={handleResposta}

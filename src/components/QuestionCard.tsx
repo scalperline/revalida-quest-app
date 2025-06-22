@@ -45,11 +45,36 @@ export function QuestionCard({ question, showAnswer, onAnswer, disabled }: Props
   const { playSound } = useAudio();
   const respostaRevelada = selected || showAnswer;
 
+  // Reset estado quando questão muda - CORRIGIDO
+  useEffect(() => {
+    console.log('=== QUESTION CARD - RESET ESTADO ===');
+    console.log('Nova questão ID:', question.id);
+    console.log('showAnswer:', showAnswer);
+    console.log('disabled:', disabled);
+    
+    // Reset estado local quando questão muda
+    if (!showAnswer) {
+      setSelected(null);
+      setShowConfetti(false);
+    }
+    
+    console.log('Estado resetado - selected:', null);
+    console.log('=== FIM RESET QUESTION CARD ===');
+  }, [question.id, showAnswer]);
+
   // Check for newly unlocked achievements
   const newlyUnlockedAchievement = getNewlyUnlockedAchievement();
 
   const handleAnswer = (optionId: string) => {
-    if (disabled) return;
+    if (disabled || selected) {
+      console.log('Resposta bloqueada - disabled:', disabled, 'selected:', selected);
+      return;
+    }
+    
+    console.log('=== QUESTION CARD - RESPOSTA ===');
+    console.log('Questão ID:', question.id);
+    console.log('Opção selecionada:', optionId);
+    console.log('Resposta correta:', question.correct);
     
     setSelected(optionId);
     const correct = optionId === question.correct;
@@ -63,7 +88,7 @@ export function QuestionCard({ question, showAnswer, onAnswer, disabled }: Props
       playSound('incorrect');
     }
     
-    console.log('Answering question:', { correct, optionId, correctAnswer: question.correct });
+    console.log('Resposta correta?', correct);
     answerQuestion(correct);
     
     // Call parent callback if provided
@@ -79,6 +104,8 @@ export function QuestionCard({ question, showAnswer, onAnswer, disabled }: Props
         playSound('levelup');
       }
     }, 100);
+    
+    console.log('=== FIM RESPOSTA QUESTION CARD ===');
   };
 
   // Handle achievement notification
@@ -156,7 +183,7 @@ export function QuestionCard({ question, showAnswer, onAnswer, disabled }: Props
                       : "bg-white dark:bg-gray-700 hover:bg-blue-50 dark:hover:bg-gray-600 border-gray-200 dark:border-gray-600 hover:border-blue-300 dark:hover:border-blue-500"
                   }
                   ${
-                    respostaRevelada || disabled
+                    respostaRevelada || disabled || selected
                       ? "cursor-not-allowed opacity-90"
                       : "hover:ring-2 hover:ring-blue-500/30 cursor-pointer"
                   }

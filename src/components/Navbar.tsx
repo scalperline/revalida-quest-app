@@ -4,7 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { StreakDisplay } from "./StreakDisplay";
 import { useGamification } from "@/hooks/useGamification";
-import { Menu, X, Trophy, Target, BarChart3, User, Home } from "lucide-react";
+import { Menu, X, Trophy, Target, BarChart3, User, Home, Stethoscope } from "lucide-react";
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -26,7 +26,7 @@ export function Navbar() {
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
             <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-              <Trophy className="w-5 h-5 text-white" />
+              <Stethoscope className="w-5 h-5 text-white" />
             </div>
             <span className="font-bold text-xl bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
               Revalida Quest

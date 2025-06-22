@@ -10,7 +10,7 @@ export default function Index() {
       <main className="max-w-6xl mx-auto px-4 py-12 md:py-20 flex flex-col items-center">
         <div className="text-center mb-16">
           <h1 className="text-4xl md:text-6xl font-bold mb-6 text-center leading-tight tracking-tight">
-            O banco de questões oficiais do <span className="text-blue-600 bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">Revalida INEP</span>
+            O banco completo de questões oficiais do <span className="text-blue-600 bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">Revalida INEP</span>
           </h1>
           <p className="mb-8 text-xl md:text-2xl text-muted-foreground text-center max-w-3xl mx-auto leading-relaxed">
             Acesse todas as provas oficiais, gabaritos, estatísticas, simulados cronometrados e gráficos de desempenho — tudo o que você precisa para acelerar sua aprovação.

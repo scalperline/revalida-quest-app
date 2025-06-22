@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { UserProgress } from '@/types/gamification';
 import { ACHIEVEMENTS } from '@/data/achievements';
@@ -138,15 +137,42 @@ export function useGamification() {
       updateAreaStats(area, correct);
     }
 
+    // Check for achievements with proper unlocked status verification
     setTimeout(() => {
       setUserProgress(prev => {
-        if (prev.totalQuestions === 1) unlockAchievement('first_question');
-        if (correct && prev.correctAnswers === 1) unlockAchievement('first_correct');
-        if (prev.totalQuestions >= 100) unlockAchievement('questions_100');
+        // Check first question achievement - only if not already unlocked
+        const firstQuestionAchievement = prev.achievements.find(a => a.id === 'first_question');
+        if (prev.totalQuestions === 1 && (!firstQuestionAchievement || !firstQuestionAchievement.unlocked)) {
+          unlockAchievement('first_question');
+        }
         
-        if (prev.streakDias === 3) unlockAchievement('streak_3');
-        if (prev.streakDias === 7) unlockAchievement('streak_7');
-        if (prev.streakDias === 30) unlockAchievement('streak_30');
+        // Check first correct achievement - only if not already unlocked
+        const firstCorrectAchievement = prev.achievements.find(a => a.id === 'first_correct');
+        if (correct && prev.correctAnswers === 1 && (!firstCorrectAchievement || !firstCorrectAchievement.unlocked)) {
+          unlockAchievement('first_correct');
+        }
+        
+        // Check 100 questions achievement - only if not already unlocked
+        const questions100Achievement = prev.achievements.find(a => a.id === 'questions_100');
+        if (prev.totalQuestions >= 100 && (!questions100Achievement || !questions100Achievement.unlocked)) {
+          unlockAchievement('questions_100');
+        }
+        
+        // Check streak achievements - only if not already unlocked
+        const streak3Achievement = prev.achievements.find(a => a.id === 'streak_3');
+        if (prev.streakDias === 3 && (!streak3Achievement || !streak3Achievement.unlocked)) {
+          unlockAchievement('streak_3');
+        }
+        
+        const streak7Achievement = prev.achievements.find(a => a.id === 'streak_7');
+        if (prev.streakDias === 7 && (!streak7Achievement || !streak7Achievement.unlocked)) {
+          unlockAchievement('streak_7');
+        }
+        
+        const streak30Achievement = prev.achievements.find(a => a.id === 'streak_30');
+        if (prev.streakDias === 30 && (!streak30Achievement || !streak30Achievement.unlocked)) {
+          unlockAchievement('streak_30');
+        }
         
         const { achievements, newlyUnlocked } = checkAreaAchievements(
           prev.achievements, 

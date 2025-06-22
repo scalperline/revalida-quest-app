@@ -1,7 +1,7 @@
 
 import { useState, useMemo } from "react";
 import { type Question } from "@/components/QuestionCard";
-import { useQuestions } from "./useQuestions";
+import { getQuestionsByYearAndType } from "@/utils/questionSelector";
 
 interface UseQuestionsFiltersParams {
   ano: number;
@@ -20,8 +20,12 @@ export function useQuestionsFilters({
   difficulty,
   page
 }: UseQuestionsFiltersParams) {
-  const { questoesAnoSelecionado } = useQuestions();
   const questionsPerPage = 10;
+
+  // Get questions for the selected year and type
+  const questoesAnoSelecionado = useMemo(() => {
+    return getQuestionsByYearAndType(ano, tipo);
+  }, [ano, tipo]);
 
   const filteredQuestions = useMemo(() => {
     let filtered = [...questoesAnoSelecionado];

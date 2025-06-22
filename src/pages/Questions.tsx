@@ -4,12 +4,12 @@ import { Navbar } from "@/components/Navbar";
 import { QuestionCard } from "@/components/QuestionCard";
 import { GamifiedQuestionsHeader } from "@/components/GamifiedQuestionsHeader";
 import { QuestionsPagination } from "@/components/QuestionsPagination";
-import { useQuestions } from "@/hooks/useQuestions";
 import { useQuestionsFilters } from "@/hooks/useQuestionsFilters";
+import { getDefaultTipoProva } from "@/utils/questionSelector";
 
 export default function Questions() {
-  const [anoSelecionado, setAnoSelecionado] = useState(2022);
-  const [tipoProva, setTipoProva] = useState<string | null>(null);
+  const [anoSelecionado, setAnoSelecionado] = useState(2025);
+  const [tipoProva, setTipoProva] = useState<string | null>(getDefaultTipoProva(2025));
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedArea, setSelectedArea] = useState("Todos");
@@ -28,7 +28,18 @@ export default function Questions() {
     page: currentPage,
   });
 
-  const questionsHook = useQuestions();
+  const handleAnoChange = (ano: number) => {
+    setAnoSelecionado(ano);
+    setCurrentPage(1);
+    // Set appropriate default tipo for the selected year
+    const defaultTipo = getDefaultTipoProva(ano);
+    setTipoProva(defaultTipo);
+  };
+
+  const handleTipoChange = (tipo: string) => {
+    setTipoProva(tipo);
+    setCurrentPage(1);
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-100 dark:from-gray-900 dark:to-gray-800">
@@ -37,10 +48,10 @@ export default function Questions() {
         <div className="max-w-4xl mx-auto">
           <GamifiedQuestionsHeader
             anoSelecionado={anoSelecionado}
-            setAnoSelecionado={setAnoSelecionado}
+            setAnoSelecionado={handleAnoChange}
             totalQuestoes={totalQuestions}
             tipoProva={tipoProva || undefined}
-            setTipoProva={setTipoProva}
+            setTipoProva={handleTipoChange}
             searchTerm={searchTerm}
             setSearchTerm={setSearchTerm}
             selectedArea={selectedArea}

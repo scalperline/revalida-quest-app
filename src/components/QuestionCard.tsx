@@ -115,6 +115,27 @@ export function QuestionCard({ question, showAnswer, onAnswer, disabled }: Props
     }
   }, [newlyUnlockedAchievement, playSound]);
 
+  // Função para obter referência padrão baseada no ano
+  const getDefaultReference = (year: number): string => {
+    const references: { [key: number]: string } = {
+      2025: "INEP - Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira. Revalida 2025 - 1ª Edição.",
+      2024: "INEP - Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira. Revalida 2024 - 1ª Edição.",
+      2023: "INEP - Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira. Revalida 2023.",
+      2022: "INEP - Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira. Revalida 2022.",
+      2021: "INEP - Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira. Revalida 2021.",
+      2020: "INEP - Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira. Revalida 2020.",
+      2017: "INEP - Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira. Revalida 2017.",
+      2016: "INEP - Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira. Revalida 2016.",
+      2015: "INEP - Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira. Revalida 2015.",
+      2014: "INEP - Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira. Revalida 2014.",
+      2013: "INEP - Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira. Revalida 2013.",
+      2012: "INEP - Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira. Revalida 2012.",
+      2011: "INEP - Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira. Revalida 2011 - 1ª Edição."
+    };
+    
+    return references[year] || `INEP - Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira. Revalida ${year}.`;
+  };
+
   return (
     <>
       <ConfettiAnimation 
@@ -241,11 +262,19 @@ export function QuestionCard({ question, showAnswer, onAnswer, disabled }: Props
                     : " (Continue tentando! 💪)")}
               </span>
             )}
-            {question.referencia && (
-              <div className="mt-2 text-sm text-blue-600 dark:text-blue-400">
-                📚 {question.referencia}
+            
+            {/* Sempre mostrar referência após responder */}
+            <div className="mt-3 text-sm text-blue-600 dark:text-blue-400 bg-blue-50/50 dark:bg-blue-900/10 p-3 rounded-lg border border-blue-200 dark:border-blue-700">
+              <div className="flex items-start gap-2">
+                <span className="text-blue-500 mt-0.5">📚</span>
+                <div>
+                  <div className="font-medium text-blue-700 dark:text-blue-300 mb-1">Referência Bibliográfica:</div>
+                  <div className="text-blue-600 dark:text-blue-400 leading-relaxed">
+                    {question.referencia || getDefaultReference(question.year)}
+                  </div>
+                </div>
               </div>
-            )}
+            </div>
           </div>
         )}
       </div>

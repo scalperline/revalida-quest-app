@@ -1,4 +1,5 @@
 
+
 import { Navbar } from "@/components/Navbar";
 import { UserProfile } from '@/components/UserProfile';
 
@@ -9,8 +10,8 @@ export default function Profile() {
       <div className="container mx-auto px-4 py-8">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-8">
-            <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent">
-              Meu Perfil Revalida Quest
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 text-center leading-tight tracking-tight">
+              <span className="text-blue-600 bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">Meu Perfil Revalida Quest</span>
             </h1>
             <p className="text-xl text-muted-foreground">
               Acompanhe sua jornada épica rumo à aprovação no Revalida! 🚀

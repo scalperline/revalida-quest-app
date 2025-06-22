@@ -1,11 +1,12 @@
 
+
 import { Navbar } from "@/components/Navbar";
 import PerformanceChart from "@/components/PerformanceChart";
 import { StatsResetDialog } from "@/components/StatsResetDialog";
 import { useGamification } from "@/hooks/useGamification";
 import { useToast } from "@/hooks/use-toast";
 import { getTotalQuestionsInSystem, getQuestionsCompletionStats } from "@/utils/questionCounter";
-import { TrendingUp, Target, Award, Calendar, Trophy, Star, BookOpen, GraduationCap, Settings2 } from "lucide-react";
+import { TrendingUp, Target, Award, Calendar, Trophy, Star, BookOpen, Settings2 } from "lucide-react";
 
 export default function Stats() {
   const { userProgress, getAccuracy, resetStats } = useGamification();
@@ -76,9 +77,8 @@ export default function Stats() {
       <div className="container mx-auto px-4 py-8">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
-            <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent flex items-center justify-center gap-3">
-              <GraduationCap className="w-10 h-10 text-blue-600" />
-              Dashboard Acadêmico
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 text-center leading-tight tracking-tight">
+              <span className="text-blue-600 bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">Dashboard Acadêmico</span>
             </h1>
             <p className="text-xl text-muted-foreground">
               Acompanhe seu progresso na preparação para o Revalida 📚

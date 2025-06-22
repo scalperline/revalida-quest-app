@@ -1,34 +1,40 @@
 
 import { Navbar } from "@/components/Navbar";
 import PerformanceChart from "@/components/PerformanceChart";
+import { StatsResetDialog } from "@/components/StatsResetDialog";
 import { useGamification } from "@/hooks/useGamification";
-import { TrendingUp, Target, Award, Calendar, Trophy, Star, BookOpen, GraduationCap } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
+import { TrendingUp, Target, Award, Calendar, Trophy, Star, BookOpen, GraduationCap, Settings2 } from "lucide-react";
 
 export default function Stats() {
-  const { userProgress, getAccuracy } = useGamification();
+  const { userProgress, getAccuracy, resetStats } = useGamification();
+  const { toast } = useToast();
   
-  // Convert area stats to chart data
+  // Filtrar áreas com dados suficientes (mínimo 3 questões)
+  const getReliableAreaStats = () => {
+    return Object.entries(userProgress.areaStats).filter(([_, stats]) => stats.total >= 3);
+  };
+
+  // Convert area stats to chart data - apenas áreas com dados confiáveis
   const getChartData = () => {
-    const areas = Object.entries(userProgress.areaStats);
+    const reliableAreas = getReliableAreaStats();
     
-    if (areas.length === 0) {
-      return [
-        { nome: "Clínica Médica", valor: 0 },
-        { nome: "Pediatria", valor: 0 },  
-        { nome: "Cirurgia", valor: 0 },
-        { nome: "Preventiva", valor: 0 },
-        { nome: "Ginecologia", valor: 0 },
-      ];
+    if (reliableAreas.length === 0) {
+      return [];
     }
     
-    return areas.map(([area, stats]) => ({
+    return reliableAreas.map(([area, stats]) => ({
       nome: area,
-      valor: stats.total > 0 ? Math.round((stats.correct / stats.total) * 100) : 0
+      valor: Math.round((stats.correct / stats.total) * 100),
+      total: stats.total,
+      corretas: stats.correct
     }));
   };
 
   const chartData = getChartData();
-  const hasRealData = Object.keys(userProgress.areaStats).length > 0;
+  const hasReliableData = chartData.length > 0;
+  const allAreasStats = Object.entries(userProgress.areaStats);
+  const hasAnyData = allAreasStats.length > 0;
   
   const getMedicalRank = (level: number) => {
     if (level >= 20) return 'Especialista Sênior';
@@ -36,6 +42,28 @@ export default function Stats() {
     if (level >= 10) return 'Residente Sênior';
     if (level >= 5) return 'Residente Júnior';
     return 'Estudante de Medicina';
+  };
+
+  const handleReset = () => {
+    resetStats();
+    toast({
+      title: "Estatísticas Reiniciadas",
+      description: "Suas estatísticas de desempenho foram resetadas com sucesso.",
+    });
+  };
+
+  const getAreaReliabilityColor = (total: number) => {
+    if (total >= 10) return 'text-green-600 bg-green-50 border-green-200';
+    if (total >= 5) return 'text-yellow-600 bg-yellow-50 border-yellow-200';
+    if (total >= 3) return 'text-orange-600 bg-orange-50 border-orange-200';
+    return 'text-gray-600 bg-gray-50 border-gray-200';
+  };
+
+  const getReliabilityLabel = (total: number) => {
+    if (total >= 10) return 'Dados Confiáveis';
+    if (total >= 5) return 'Dados Moderados';
+    if (total >= 3) return 'Dados Básicos';
+    return 'Poucos Dados';
   };
 
   return (
@@ -52,6 +80,19 @@ export default function Stats() {
               Acompanhe seu progresso na preparação para o Revalida 📚
             </p>
           </div>
+
+          {/* Controls Section */}
+          {hasAnyData && (
+            <div className="bg-white dark:bg-gray-800 rounded-2xl p-4 border border-blue-100 dark:border-gray-700 shadow-xl mb-8">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <Settings2 className="w-5 h-5 text-blue-600" />
+                  <h3 className="font-semibold text-gray-900 dark:text-white">Controles</h3>
+                </div>
+                <StatsResetDialog onReset={handleReset} />
+              </div>
+            </div>
+          )}
 
           {/* Enhanced Stats Cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
@@ -112,46 +153,72 @@ export default function Stats() {
               <Star className="w-6 h-6 text-blue-600" />
               Desempenho por Área Médica
             </h2>
-            <PerformanceChart dados={chartData} />
-            <div className="text-center mt-6">
-              {hasRealData ? (
-                <p className="text-muted-foreground">
-                  📊 Baseado em {userProgress.totalQuestions} questões respondidas
-                </p>
-              ) : (
-                <div className="text-muted-foreground space-y-2">
-                  <p className="font-medium text-orange-600 dark:text-orange-400">
-                    📈 Gráfico será atualizado conforme você responde questões
+            
+            {hasReliableData ? (
+              <>
+                <PerformanceChart dados={chartData} />
+                <div className="text-center mt-6">
+                  <p className="text-muted-foreground">
+                    📊 Baseado em áreas com pelo menos 3 questões respondidas
                   </p>
-                  <p className="text-sm">
-                    Responda pelo menos 5 questões em cada área para ver seu desempenho real
+                  <p className="text-sm text-muted-foreground mt-1">
+                    Mostrando {chartData.length} de {allAreasStats.length} áreas com dados confiáveis
                   </p>
                 </div>
-              )}
-            </div>
+              </>
+            ) : hasAnyData ? (
+              <div className="text-center space-y-4 py-8">
+                <div className="text-6xl">📊</div>
+                <div className="text-muted-foreground space-y-2">
+                  <p className="font-medium text-orange-600 dark:text-orange-400">
+                    📈 Dados insuficientes para gráfico confiável
+                  </p>
+                  <p className="text-sm">
+                    Responda pelo menos 3 questões em cada área para ver estatísticas confiáveis
+                  </p>
+                  <p className="text-xs">
+                    Progresso atual: {allAreasStats.length} área(s) com dados
+                  </p>
+                </div>
+              </div>
+            ) : (
+              <div className="text-center space-y-4 py-8">
+                <div className="text-6xl">🎯</div>
+                <div className="text-muted-foreground space-y-2">
+                  <p className="font-medium text-blue-600 dark:text-blue-400">
+                    📈 Comece respondendo questões para ver seu desempenho
+                  </p>
+                  <p className="text-sm">
+                    Suas estatísticas aparecerão aqui conforme você responde questões
+                  </p>
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Detailed Performance by Area */}
-          {hasRealData && (
+          {hasAnyData && (
             <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 border border-blue-100 dark:border-gray-700 shadow-xl mb-8">
               <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white flex items-center gap-3">
                 <Target className="w-6 h-6 text-green-600" />
                 Análise Detalhada por Especialidade
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {Object.entries(userProgress.areaStats).map(([area, stats]) => {
+                {allAreasStats.map(([area, stats]) => {
                   const accuracy = stats.total > 0 ? Math.round((stats.correct / stats.total) * 100) : 0;
-                  const getStatusColor = (acc: number) => {
-                    if (acc >= 80) return 'text-green-600 bg-green-50 border-green-200';
-                    if (acc >= 60) return 'text-yellow-600 bg-yellow-50 border-yellow-200';
-                    return 'text-red-600 bg-red-50 border-red-200';
-                  };
+                  const reliabilityColor = getAreaReliabilityColor(stats.total);
+                  const reliabilityLabel = getReliabilityLabel(stats.total);
                   
                   return (
-                    <div key={area} className={`p-4 rounded-xl border-2 ${getStatusColor(accuracy)} dark:bg-gray-700 dark:border-gray-600`}>
-                      <h3 className="font-semibold text-sm mb-2">{area}</h3>
+                    <div key={area} className={`p-4 rounded-xl border-2 ${reliabilityColor} dark:bg-gray-700 dark:border-gray-600`}>
+                      <div className="flex items-center justify-between mb-2">
+                        <h3 className="font-semibold text-sm">{area}</h3>
+                        <span className="text-xs px-2 py-1 rounded-full bg-white/70 dark:bg-gray-600">
+                          {reliabilityLabel}
+                        </span>
+                      </div>
                       <div className="text-2xl font-bold mb-1">{accuracy}%</div>
-                      <div className="text-xs opacity-80">
+                      <div className="text-xs opacity-80 mb-2">
                         {stats.correct}/{stats.total} acertos
                       </div>
                       <div className="mt-2 bg-white/50 dark:bg-gray-600 rounded-full h-2">
@@ -160,6 +227,11 @@ export default function Stats() {
                           style={{ width: `${accuracy}%` }}
                         />
                       </div>
+                      {stats.total < 3 && (
+                        <p className="text-xs mt-2 opacity-70">
+                          +{3 - stats.total} questões para dados confiáveis
+                        </p>
+                      )}
                     </div>
                   );
                 })}

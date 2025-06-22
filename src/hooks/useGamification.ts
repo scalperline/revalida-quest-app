@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 
 export interface Achievement {
@@ -228,6 +227,17 @@ export function useGamification() {
   useEffect(() => {
     localStorage.setItem('revalida-progress', JSON.stringify(userProgress));
   }, [userProgress]);
+
+  const resetStats = () => {
+    setUserProgress(prev => ({
+      ...prev,
+      totalQuestions: 0,
+      correctAnswers: 0,
+      simuladosCompletos: 0,
+      areaStats: {},
+      // Manter XP, level e achievements para não perder progresso de gamificação
+    }));
+  };
 
   const updateStreak = () => {
     const today = new Date();
@@ -492,6 +502,7 @@ export function useGamification() {
     getNewlyUnlockedAchievement,
     clearNewlyUnlockedAchievement,
     getStreakBonus,
-    generateQuestSuggestions
+    generateQuestSuggestions,
+    resetStats
   };
 }

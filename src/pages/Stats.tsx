@@ -44,7 +44,7 @@ export default function Stats() {
       <div className="container mx-auto px-4 py-8">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
-            <h1 className="text-4xl font-bold mb-4 text-gray-900 dark:text-white flex items-center justify-center gap-3">
+            <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent flex items-center justify-center gap-3">
               <GraduationCap className="w-10 h-10 text-blue-600" />
               Dashboard Acadêmico
             </h1>

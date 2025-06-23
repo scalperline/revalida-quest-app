@@ -9,6 +9,7 @@ interface Props {
   currentQuestion: number;
   totalQuestions: number;
   onForceFinish: () => void;
+  timeElapsed: number; // Tempo já gasto em segundos
 }
 
 export function FloatingTimer({ 
@@ -17,7 +18,8 @@ export function FloatingTimer({
   initialMinutes = 300, 
   currentQuestion, 
   totalQuestions,
-  onForceFinish 
+  onForceFinish,
+  timeElapsed 
 }: Props) {
   const [seconds, setSeconds] = useState(initialMinutes * 60);
   const [isVisible, setIsVisible] = useState(false);
@@ -26,21 +28,36 @@ export function FloatingTimer({
   useEffect(() => {
     const handleScroll = () => {
       const scrolled = window.scrollY > 100;
-      setIsVisible(scrolled);
+      // Só mostrar se estiver rodando E com scroll
+      setIsVisible(scrolled && running);
     };
 
     window.addEventListener('scroll', handleScroll);
+    // Verificar imediatamente se deve mostrar
+    handleScroll();
+    
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [running]);
 
   useEffect(() => {
-    if (seconds === 0) {
+    // Só executar timer se estiver rodando
+    if (!running) return;
+    
+    if (seconds <= 0) {
       onFinish();
       return;
     }
-    const t = setTimeout(() => setSeconds(s => s - 1), 1000);
-    return () => clearTimeout(t);
-  }, [seconds, onFinish]);
+    
+    const timer = setTimeout(() => setSeconds(s => s - 1), 1000);
+    return () => clearTimeout(timer);
+  }, [running, seconds, onFinish]);
+
+  // Resetar timer quando iniciar novo simulado
+  useEffect(() => {
+    if (running) {
+      setSeconds(initialMinutes * 60);
+    }
+  }, [running, initialMinutes]);
 
   const hours = Math.floor(seconds / 3600);
   const min = Math.floor((seconds % 3600) / 60);
@@ -60,12 +77,23 @@ export function FloatingTimer({
     return "text-red-600";
   };
 
-  const progress = ((totalQuestions - currentQuestion + 1) / totalQuestions) * 100;
+  // Progresso baseado em questões respondidas (crescente)
+  const progress = (currentQuestion / totalQuestions) * 100;
+  
+  // Tempo médio por questão baseado no tempo já gasto
+  const averageTimePerQuestion = currentQuestion > 0 ? timeElapsed / currentQuestion : 0;
+  
+  // Tempo estimado restante baseado na média real
+  const questionsRemaining = totalQuestions - currentQuestion;
+  const estimatedRemainingTime = questionsRemaining * averageTimePerQuestion;
+
+  // Não renderizar se não estiver visível ou não rodando
+  if (!isVisible || !running) {
+    return null;
+  }
 
   return (
-    <div className={`fixed top-4 right-4 z-50 transition-all duration-300 ${
-      isVisible ? 'translate-y-0 opacity-100' : '-translate-y-4 opacity-0'
-    }`}>
+    <div className="fixed top-4 right-4 z-50 transition-all duration-300 translate-y-0 opacity-100">
       <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-blue-200 dark:border-gray-600 min-w-[200px]">
         {/* Header with minimize button */}
         <div className="flex items-center justify-between p-3 border-b border-gray-200 dark:border-gray-600">
@@ -101,7 +129,7 @@ export function FloatingTimer({
               <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-1.5">
                 <div 
                   className="bg-gradient-to-r from-blue-500 to-purple-600 h-1.5 rounded-full transition-all duration-300"
-                  style={{ width: `${100 - progress}%` }}
+                  style={{ width: `${progress}%` }}
                 />
               </div>
             </div>
@@ -110,15 +138,15 @@ export function FloatingTimer({
             <div className="grid grid-cols-2 gap-2 text-xs mb-3">
               <div className="bg-blue-50 dark:bg-blue-900/20 p-2 rounded text-center">
                 <div className="font-bold text-blue-600 dark:text-blue-400">
-                  {Math.round((initialMinutes * 60 - seconds) / 60)}min
+                  {Math.round(timeElapsed / 60)}min
                 </div>
                 <div className="text-blue-500 dark:text-blue-400 text-xs">Usado</div>
               </div>
               <div className="bg-purple-50 dark:bg-purple-900/20 p-2 rounded text-center">
                 <div className="font-bold text-purple-600 dark:text-purple-400">
-                  {currentQuestion > totalQuestions ? 0 : Math.round(seconds / (totalQuestions - currentQuestion + 1))}min
+                  {currentQuestion > 0 ? Math.round(averageTimePerQuestion / 60) : 0}min
                 </div>
-                <div className="text-purple-500 dark:text-purple-400 text-xs">Por questão</div>
+                <div className="text-purple-500 dark:text-purple-400 text-xs">Média/questão</div>
               </div>
             </div>
 

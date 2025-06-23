@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { useSimulado, type SimuladoConfig } from "@/hooks/useSimulado";
 import { useGamification } from "@/hooks/useGamification";
@@ -44,7 +43,7 @@ export default function Simulado() {
   // Check for newly unlocked achievements
   const newlyUnlockedAchievement = getNewlyUnlockedAchievement();
 
-  // Track time elapsed
+  // Track time elapsed - CORRIGIDO: só atualizar se simulado estiver rodando
   useEffect(() => {
     if (iniciado && !finalizado && !simulado.terminou && startTime) {
       const interval = setInterval(() => {
@@ -54,7 +53,7 @@ export default function Simulado() {
     }
   }, [iniciado, finalizado, simulado.terminou, startTime]);
 
-  // Reset questão respondida quando mudar de questão - CORRIGIDO
+  // Reset questão respondida quando mudar de questão
   useEffect(() => {
     console.log('=== EFFECT RESET QUESTAO RESPONDIDA ===');
     console.log('Índice da questão:', simulado.index);
@@ -66,7 +65,7 @@ export default function Simulado() {
     
     console.log('questaoRespondida definida como:', temResposta);
     console.log('=== FIM EFFECT ===');
-  }, [simulado.index, simulado.atual?.id]); // Dependências mais específicas
+  }, [simulado.index, simulado.atual?.id]);
 
   // Handle achievement notification
   useEffect(() => {
@@ -190,6 +189,9 @@ export default function Simulado() {
   // Verificar se a quantidade de questões condiz com a configuração
   const questoesInsuficientes = configuracao && simulado.total < configuracao.quantidade;
 
+  // Estado do timer: rodando apenas se iniciado, não finalizado e não terminou
+  const timerRunning = iniciado && !finalizado && !simulado.terminou;
+
   console.log('=== DEBUG GERAL SIMULADO ===');
   console.log('Estado atual:', {
     configuracao: configuracao?.quantidade,
@@ -200,7 +202,8 @@ export default function Simulado() {
     finalizado,
     questaoRespondida,
     indexAtual: simulado.index,
-    questaoAtualId: simulado.atual?.id
+    questaoAtualId: simulado.atual?.id,
+    timerRunning
   });
   console.log('=== FIM DEBUG GERAL ===');
 
@@ -358,14 +361,15 @@ export default function Simulado() {
                 )}
               </div>
 
-              {/* Floating Timer */}
+              {/* Floating Timer - CORRIGIDO: passa timeElapsed e running correto */}
               <FloatingTimer
-                running={!finalizado && iniciado && !simulado.terminou}
+                running={timerRunning}
                 onFinish={encerrar}
                 initialMinutes={configuracao.tempoMinutos}
                 currentQuestion={simulado.index + 1}
                 totalQuestions={simulado.total}
                 onForceFinish={encerrar}
+                timeElapsed={timeElapsed}
               />
             </div>
           )}

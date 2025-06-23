@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { useSimulado, type SimuladoConfig } from "@/hooks/useSimulado";
 import { useGamification } from "@/hooks/useGamification";
@@ -222,7 +223,7 @@ export default function Simulado() {
                   🚩 <span className="text-blue-600 bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">Simulado Personalizado</span>
                 </h1>
                 <p className="text-xl text-muted-foreground">
-                  Configure sua quest do jeito que quiser e conquiste XP, badges e cartas médicas!
+                  Configure seu simulado do jeito que quiser, conquiste XP e acompanhe seu progresso!
                 </p>
               </div>
               

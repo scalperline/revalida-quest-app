@@ -21,7 +21,7 @@ export default function Index() {
             Acesse todas as provas oficiais, gabaritos, estatísticas, simulados cronometrados e gráficos de desempenho — tudo o que você precisa para acelerar sua aprovação.
           </p>
           <div className="flex justify-center items-center gap-2 sm:gap-3 text-2xl sm:text-3xl md:text-4xl mb-6 sm:mb-8">
-            🎯 🏆 ⚡ 🎮 🔥 💎 🚀 ⭐
+            🎯 🏆 🚩
           </div>
         </div>
         

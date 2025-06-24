@@ -1,4 +1,5 @@
-import { Book, Timer, BarChartBig, Star, Brain } from "lucide-react";
+
+import { Book, Timer, BarChartBig, Star, Brain, Sword } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { FeatureCard } from "@/components/FeatureCard";
 import { WhyItem } from "@/components/WhyItem";
@@ -17,7 +18,7 @@ export default function Index() {
           </p>
         </div>
         
-        <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-16">
+        <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 mb-16">
           <FeatureCard
             title="Banco de Questões"
             description="Filtros avançados, feedback e referências de todas as edições."
@@ -29,6 +30,12 @@ export default function Index() {
             description="Simulados cronometrados, baseado em provas reais do Revalida."
             icon={<Timer size={40} className="text-green-500" />}
             to="/simulado"
+          />
+          <FeatureCard
+            title="Missões RPG"
+            description="Complete missões especializadas, ganhe XP e desbloqueie conquistas."
+            icon={<Sword size={40} className="text-purple-500" />}
+            to="/missions"
           />
           <FeatureCard
             title="Desempenho & Gráficos"

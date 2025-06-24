@@ -62,6 +62,7 @@ export function useGamification() {
     clearNewlyUnlockedAchievement,
     getStreakBonus,
     generateQuestSuggestions,
-    resetStats
+    resetStats,
+    unlockAchievement
   };
 }

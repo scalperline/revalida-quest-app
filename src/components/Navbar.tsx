@@ -4,7 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { StreakDisplay } from "./StreakDisplay";
 import { useGamification } from "@/hooks/useGamification";
-import { Menu, X, Trophy, Target, BarChart3, User, Home, Stethoscope } from "lucide-react";
+import { Menu, X, Trophy, Target, BarChart3, User, Home, Stethoscope, Sword } from "lucide-react";
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,6 +15,7 @@ export function Navbar() {
     { name: "Início", path: "/", icon: Home },
     { name: "Questões", path: "/questions", icon: Target },
     { name: "Simulado", path: "/simulado", icon: Trophy },
+    { name: "Missões", path: "/missions", icon: Sword },
     { name: "Estatísticas", path: "/stats", icon: BarChart3 },
     { name: "Perfil", path: "/profile", icon: User },
   ];
@@ -37,7 +38,10 @@ export function Navbar() {
           <div className="hidden md:flex items-center space-x-1">
             {navItems.map((item) => {
               const Icon = item.icon;
-              const isActive = location.pathname === item.path;
+              const isActive = location.pathname === item.path || 
+                (item.path === '/questions' && location.pathname === '/questoes') ||
+                (item.path === '/stats' && location.pathname === '/estatisticas') ||
+                (item.path === '/profile' && location.pathname === '/perfil');
               
               return (
                 <Link key={item.path} to={item.path}>
@@ -84,7 +88,10 @@ export function Navbar() {
             <div className="flex flex-col space-y-2">
               {navItems.map((item) => {
                 const Icon = item.icon;
-                const isActive = location.pathname === item.path;
+                const isActive = location.pathname === item.path || 
+                  (item.path === '/questions' && location.pathname === '/questoes') ||
+                  (item.path === '/stats' && location.pathname === '/estatisticas') ||
+                  (item.path === '/profile' && location.pathname === '/perfil');
                 
                 return (
                   <Link key={item.path} to={item.path} onClick={() => setIsOpen(false)}>

@@ -10,6 +10,7 @@ import Questions from "./pages/Questions";
 import Simulado from "./pages/Simulado";
 import Stats from "./pages/Stats";
 import Profile from "./pages/Profile";
+import Missions from "./pages/Missions";
 
 const queryClient = new QueryClient();
 
@@ -24,6 +25,8 @@ const App = () => (
           <Route path="/questions" element={<Questions />} />
           <Route path="/questoes" element={<Questions />} />
           <Route path="/simulado" element={<Simulado />} />
+          <Route path="/missions" element={<Missions />} />
+          <Route path="/missoes" element={<Missions />} />
           <Route path="/stats" element={<Stats />} />
           <Route path="/estatisticas" element={<Stats />} />
           <Route path="/profile" element={<Profile />} />

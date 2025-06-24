@@ -5,7 +5,7 @@ import { Navbar } from "@/components/Navbar";
 import { SimuladoHeader } from "@/components/SimuladoHeader";
 import { QuestionCard } from "@/components/QuestionCard";
 import { SimuladoProgress } from "@/components/SimuladoProgress";
-import { SimuladoTimer } from "@/components/SimuladoTimer";
+import { FloatingTimer } from "@/components/FloatingTimer";
 import { Button } from "@/components/ui/button";
 import { useSimulado, type SimuladoConfig } from "@/hooks/useSimulado";
 import { useQuestions } from "@/hooks/useQuestions";
@@ -22,6 +22,7 @@ export default function Simulado() {
   const [simuladoIniciado, setSimuladoIniciado] = useState(false);
   const [resultados, setResultados] = useState<{[id: number]: boolean}>({});
   const [missionId, setMissionId] = useState<string | null>(null);
+  const [timeElapsed, setTimeElapsed] = useState(0);
 
   // Check for URL parameters on mount
   useEffect(() => {
@@ -78,7 +79,11 @@ export default function Simulado() {
 
     // Se foi uma missão, atualizar progresso
     if (missionId) {
-      updateMissionProgress(missionId, simulado.total, totalCorretas);
+      updateMissionProgress(missionId, {
+        questionsAnswered: simulado.total,
+        correctAnswers: totalCorretas,
+        completed: true
+      });
     }
 
     navigate('/estatisticas', {
@@ -138,18 +143,14 @@ export default function Simulado() {
       
       <div className="container mx-auto px-4 py-4">
         <div className="flex flex-col lg:flex-row gap-6">
-          {/* Sidebar com progresso e timer */}
+          {/* Sidebar com progresso */}
           <div className="lg:w-80 space-y-4">
             <SimuladoProgress 
-              currentQuestion={simulado.index + 1} 
+              currentIndex={simulado.index} 
               totalQuestions={simulado.total}
-              userAnswers={simulado.respostas}
-              questions={simulado.questoesSelecionadas}
-            />
-            
-            <SimuladoTimer 
-              timeLimit={config?.tempoMinutos || 120}
-              onTimeUp={handleTimeUp}
+              timeElapsed={timeElapsed}
+              answeredCount={Object.keys(simulado.respostas).length}
+              config={simulado.config}
             />
           </div>
           
@@ -178,6 +179,17 @@ export default function Simulado() {
           </div>
         </div>
       </div>
+
+      {/* Floating Timer */}
+      <FloatingTimer
+        running={simuladoIniciado && !simulado.terminou}
+        onFinish={handleTimeUp}
+        initialMinutes={config?.tempoMinutos || 120}
+        currentQuestion={simulado.index + 1}
+        totalQuestions={simulado.total}
+        onForceFinish={handleFinish}
+        timeElapsed={timeElapsed}
+      />
     </div>
   );
 }

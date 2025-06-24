@@ -1,10 +1,9 @@
-
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { StreakDisplay } from "./StreakDisplay";
 import { useGamification } from "@/hooks/useGamification";
-import { Menu, X, Trophy, Target, BarChart3, User, Home, Stethoscope, Sword } from "lucide-react";
+import { Menu, X, Trophy, FileText, BarChart3, User, Home, Stethoscope, Flag } from "lucide-react";
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,9 +12,9 @@ export function Navbar() {
 
   const navItems = [
     { name: "Início", path: "/", icon: Home },
-    { name: "Questões", path: "/questions", icon: Target },
+    { name: "Provas", path: "/questions", icon: FileText },
     { name: "Simulado", path: "/simulado", icon: Trophy },
-    { name: "Missões", path: "/missions", icon: Sword },
+    { name: "Quests", path: "/missions", icon: Flag },
     { name: "Estatísticas", path: "/stats", icon: BarChart3 },
     { name: "Perfil", path: "/profile", icon: User },
   ];

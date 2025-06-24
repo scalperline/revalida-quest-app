@@ -6,7 +6,7 @@ import { MissionCompletedNotification } from '@/components/MissionCompletedNotif
 import { Navbar } from '@/components/Navbar';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Trophy, Target, CheckCircle, Sword } from 'lucide-react';
+import { Trophy, Target, CheckCircle, Flag } from 'lucide-react';
 import { Mission } from '@/types/missions';
 import { useNavigate } from 'react-router-dom';
 
@@ -45,17 +45,17 @@ export default function Missions() {
           {/* Header */}
           <div className="text-center mb-8">
             <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-yellow-600 via-orange-600 to-red-600 bg-clip-text text-transparent">
-              ⚔️ Missões do Revalida
+              🚩 Quests do Revalida
             </h1>
             <p className="text-xl text-muted-foreground mb-6">
-              Complete missões especializadas, ganhe XP e desbloqueie conquistas!
+              Complete quests especializadas, ganhe XP e desbloqueie conquistas!
             </p>
             
             {/* Stats Cards */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
               <Card>
                 <CardHeader className="pb-2">
-                  <CardTitle className="text-sm font-medium text-muted-foreground">Missões Ativas</CardTitle>
+                  <CardTitle className="text-sm font-medium text-muted-foreground">Quests Ativas</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="flex items-center gap-2">
@@ -79,7 +79,7 @@ export default function Missions() {
               
               <Card>
                 <CardHeader className="pb-2">
-                  <CardTitle className="text-sm font-medium text-muted-foreground">XP Total das Missões</CardTitle>
+                  <CardTitle className="text-sm font-medium text-muted-foreground">XP Total das Quests</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="flex items-center gap-2">
@@ -95,8 +95,8 @@ export default function Missions() {
           <Tabs defaultValue="available" className="w-full">
             <TabsList className="grid w-full grid-cols-2 mb-6">
               <TabsTrigger value="available" className="flex items-center gap-2">
-                <Sword className="w-4 h-4" />
-                Missões Ativas ({availableMissions.length})
+                <Flag className="w-4 h-4" />
+                Quests Ativas ({availableMissions.length})
               </TabsTrigger>
               <TabsTrigger value="completed" className="flex items-center gap-2">
                 <Trophy className="w-4 h-4" />
@@ -119,9 +119,9 @@ export default function Missions() {
               ) : (
                 <div className="text-center py-12">
                   <Trophy className="w-16 h-16 text-yellow-500 mx-auto mb-4" />
-                  <h3 className="text-xl font-bold mb-2">Todas as missões concluídas!</h3>
+                  <h3 className="text-xl font-bold mb-2">Todas as quests concluídas!</h3>
                   <p className="text-muted-foreground">
-                    Parabéns! Você completou todas as missões disponíveis.
+                    Parabéns! Você completou todas as quests disponíveis.
                   </p>
                 </div>
               )}
@@ -142,9 +142,9 @@ export default function Missions() {
               ) : (
                 <div className="text-center py-12">
                   <Target className="w-16 h-16 text-blue-500 mx-auto mb-4" />
-                  <h3 className="text-xl font-bold mb-2">Nenhuma missão concluída ainda</h3>
+                  <h3 className="text-xl font-bold mb-2">Nenhuma quest concluída ainda</h3>
                   <p className="text-muted-foreground">
-                    Complete sua primeira missão para ver o progresso aqui!
+                    Complete sua primeira quest para ver o progresso aqui!
                   </p>
                 </div>
               )}

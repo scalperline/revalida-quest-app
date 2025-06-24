@@ -131,7 +131,7 @@ export default function Ranking() {
               🏆 Ranking Revalida Quest
             </h1>
             <p className="text-xl text-muted-foreground mb-6">
-              Veja como você está se saindo em comparação com outros aventureiros!
+              Veja como você está se saindo em comparação com outros futuros médicos!
             </p>
             
             {/* Current User Position Stats */}
@@ -184,7 +184,7 @@ export default function Ranking() {
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <Trophy className="w-6 h-6 text-yellow-500" />
-                    Top Aventureiros - XP Total
+                    Top Estudantes - XP Total
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -194,7 +194,7 @@ export default function Ranking() {
                     <div className="text-center py-12">
                       <Trophy className="w-16 h-16 text-gray-400 mx-auto mb-4" />
                       <h3 className="text-xl font-bold mb-2 text-gray-600 dark:text-gray-400">
-                        Nenhum aventureiro no ranking ainda
+                        Nenhum estudante no ranking ainda
                       </h3>
                       <p className="text-muted-foreground">
                         Seja o primeiro a aparecer no ranking!
@@ -220,7 +220,7 @@ export default function Ranking() {
                     <div className="text-center py-12">
                       <Calendar className="w-16 h-16 text-gray-400 mx-auto mb-4" />
                       <h3 className="text-xl font-bold mb-2 text-gray-600 dark:text-gray-400">
-                        Nenhum aventureiro no ranking semanal ainda
+                        Nenhum estudante no ranking semanal ainda
                       </h3>
                       <p className="text-muted-foreground">
                         Comece a estudar para aparecer no ranking desta semana!

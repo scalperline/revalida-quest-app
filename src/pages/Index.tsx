@@ -17,12 +17,9 @@ export default function Index() {
           <h1 className="text-2xl sm:text-4xl md:text-6xl font-bold mb-4 sm:mb-6 text-center leading-tight tracking-tight px-2">
             O banco completo de questões oficiais do <span className="text-blue-600 bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">Revalida INEP</span>
           </h1>
-          <p className="mb-4 sm:mb-6 text-base sm:text-xl md:text-2xl text-muted-foreground text-center max-w-3xl mx-auto leading-relaxed px-2">
+          <p className="mb-6 sm:mb-8 text-base sm:text-xl md:text-2xl text-muted-foreground text-center max-w-3xl mx-auto leading-relaxed px-2">
             Acesse todas as provas oficiais, gabaritos, estatísticas, simulados cronometrados e gráficos de desempenho — tudo o que você precisa para acelerar sua aprovação.
           </p>
-          <div className="flex justify-center items-center gap-2 sm:gap-3 text-2xl sm:text-3xl md:text-4xl mb-6 sm:mb-8">
-            🎯 🏆 ⚡ 🎮 🔥 💎 🚀 ⭐
-          </div>
         </div>
         
         <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8 mb-12 sm:mb-16">

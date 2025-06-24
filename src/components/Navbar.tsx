@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -128,22 +127,6 @@ export function Navbar() {
                   </Link>
                 );
               })}
-              
-              {/* Ranking link for mobile */}
-              <Link to="/ranking" onClick={() => setIsOpen(false)}>
-                <Button
-                  variant={location.pathname === '/ranking' ? "default" : "ghost"}
-                  size="sm"
-                  className={`w-full justify-start gap-2 ${
-                    location.pathname === '/ranking'
-                      ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white" 
-                      : ""
-                  }`}
-                >
-                  <Trophy className="w-4 h-4" />
-                  Ranking
-                </Button>
-              </Link>
             </div>
             
             {/* Mobile Streak & Level */}

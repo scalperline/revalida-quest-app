@@ -1,4 +1,5 @@
 
+
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -39,49 +40,63 @@ export function Navbar() {
           <div className="hidden md:flex items-center space-x-8">
             <Link 
               to="/" 
-              className="text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 font-medium transition-colors flex items-center gap-2"
+              className={`text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 font-medium transition-colors flex items-center gap-2 pb-4 ${
+                location.pathname === "/" ? "border-b-2 border-blue-600" : ""
+              }`}
             >
               <Home className="w-4 h-4" />
               Início
             </Link>
             <Link 
               to="/questoes" 
-              className="text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 font-medium transition-colors flex items-center gap-2"
+              className={`text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 font-medium transition-colors flex items-center gap-2 pb-4 ${
+                location.pathname === "/questoes" ? "border-b-2 border-blue-600" : ""
+              }`}
             >
               <FileText className="w-4 h-4" />
               Questões
             </Link>
             <Link 
               to="/simulado" 
-              className="text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 font-medium transition-colors flex items-center gap-2"
+              className={`text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 font-medium transition-colors flex items-center gap-2 pb-4 ${
+                location.pathname === "/simulado" ? "border-b-2 border-blue-600" : ""
+              }`}
             >
               <Trophy className="w-4 h-4" />
               Simulado
             </Link>
             <Link 
               to="/missoes" 
-              className="text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 font-medium transition-colors flex items-center gap-2"
+              className={`text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 font-medium transition-colors flex items-center gap-2 pb-4 ${
+                location.pathname === "/missoes" ? "border-b-2 border-blue-600" : ""
+              }`}
             >
               <Flag className="w-4 h-4" />
               Quests
             </Link>
             <Link 
               to="/ranking" 
-              className="text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 font-medium transition-colors flex items-center gap-2"
+              className={`text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 font-medium transition-colors flex items-center gap-2 pb-4 ${
+                location.pathname === "/ranking" ? "border-b-2 border-blue-600" : ""
+              }`}
             >
               <Crown className="w-4 h-4" />
               Ranking
             </Link>
             <Link 
               to="/estatisticas" 
-              className="text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 font-medium transition-colors flex items-center gap-2"
+              className={`text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 font-medium transition-colors flex items-center gap-2 pb-4 ${
+                location.pathname === "/estatisticas" ? "border-b-2 border-blue-600" : ""
+              }`}
             >
               <BarChart3 className="w-4 h-4" />
               Estatísticas
             </Link>
             <Link 
               to="/perfil" 
-              className="text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 font-medium transition-colors flex items-center gap-2"
+              className={`text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 font-medium transition-colors flex items-center gap-2 pb-4 ${
+                location.pathname === "/perfil" ? "border-b-2 border-blue-600" : ""
+              }`}
             >
               <User className="w-4 h-4" />
               Perfil
@@ -153,3 +168,4 @@ export function Navbar() {
     </nav>
   );
 }
+

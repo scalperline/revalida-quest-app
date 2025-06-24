@@ -11,6 +11,7 @@ import Simulado from "./pages/Simulado";
 import Stats from "./pages/Stats";
 import Profile from "./pages/Profile";
 import Missions from "./pages/Missions";
+import Ranking from "./pages/Ranking";
 
 const queryClient = new QueryClient();
 
@@ -31,6 +32,7 @@ const App = () => (
           <Route path="/estatisticas" element={<Stats />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/perfil" element={<Profile />} />
+          <Route path="/ranking" element={<Ranking />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

@@ -9,13 +9,51 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      user_profiles: {
+        Row: {
+          created_at: string
+          display_name: string
+          id: string
+          last_xp_update: string | null
+          level: number
+          total_xp: number
+          updated_at: string
+          user_id: string
+          weekly_xp: number
+        }
+        Insert: {
+          created_at?: string
+          display_name?: string
+          id?: string
+          last_xp_update?: string | null
+          level?: number
+          total_xp?: number
+          updated_at?: string
+          user_id: string
+          weekly_xp?: number
+        }
+        Update: {
+          created_at?: string
+          display_name?: string
+          id?: string
+          last_xp_update?: string | null
+          level?: number
+          total_xp?: number
+          updated_at?: string
+          user_id?: string
+          weekly_xp?: number
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      reset_weekly_xp: {
+        Args: Record<PropertyKey, never>
+        Returns: undefined
+      }
     }
     Enums: {
       [_ in never]: never

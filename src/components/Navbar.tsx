@@ -34,31 +34,49 @@ export function Navbar() {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-1">
-            {navItems.map((item) => {
-              const Icon = item.icon;
-              const isActive = location.pathname === item.path || 
-                (item.path === '/questions' && location.pathname === '/questoes') ||
-                (item.path === '/stats' && location.pathname === '/estatisticas') ||
-                (item.path === '/profile' && location.pathname === '/perfil');
-              
-              return (
-                <Link key={item.path} to={item.path}>
-                  <Button
-                    variant={isActive ? "default" : "ghost"}
-                    size="sm"
-                    className={`flex items-center gap-2 ${
-                      isActive 
-                        ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white" 
-                        : "hover:bg-blue-50 dark:hover:bg-gray-800"
-                    }`}
-                  >
-                    <Icon className="w-4 h-4" />
-                    {item.name}
-                  </Button>
-                </Link>
-              );
-            })}
+          <div className="hidden md:flex items-center space-x-8">
+            <Link 
+              to="/" 
+              className="text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 font-medium transition-colors"
+            >
+              Início
+            </Link>
+            <Link 
+              to="/questoes" 
+              className="text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 font-medium transition-colors"
+            >
+              Questões
+            </Link>
+            <Link 
+              to="/simulado" 
+              className="text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 font-medium transition-colors"
+            >
+              Simulado
+            </Link>
+            <Link 
+              to="/missoes" 
+              className="text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 font-medium transition-colors"
+            >
+              Quests
+            </Link>
+            <Link 
+              to="/ranking" 
+              className="text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 font-medium transition-colors"
+            >
+              Ranking
+            </Link>
+            <Link 
+              to="/estatisticas" 
+              className="text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 font-medium transition-colors"
+            >
+              Estatísticas
+            </Link>
+            <Link 
+              to="/perfil" 
+              className="text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 font-medium transition-colors"
+            >
+              Perfil
+            </Link>
           </div>
 
           {/* Streak Display & Level */}

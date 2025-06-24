@@ -34,9 +34,9 @@ export function SimuladoProgress({
           Progresso do Simulado
         </h3>
         <div className="text-sm text-muted-foreground">
-          {config.areas && config.areas.length > 1 ? 
+          {config.areas.length > 1 ? 
             `${config.areas.length} áreas` : 
-            config.areas && config.areas[0] ? config.areas[0] : 'Mista'
+            config.areas[0]
           }
         </div>
       </div>
@@ -105,7 +105,7 @@ export function SimuladoProgress({
       </div>
 
       {/* Areas Summary */}
-      {config.areas && config.areas.length > 1 && (
+      {config.areas.length > 1 && (
         <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-600">
           <div className="text-sm text-muted-foreground mb-2">Áreas selecionadas:</div>
           <div className="flex flex-wrap gap-2">

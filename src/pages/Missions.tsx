@@ -1,20 +1,17 @@
 
 import { useState } from 'react';
 import { useMissions } from '@/hooks/useMissions';
-import { useOnboarding } from '@/hooks/useOnboarding';
 import { MissionCard } from '@/components/MissionCard';
 import { MissionCompletedNotification } from '@/components/MissionCompletedNotification';
 import { Navbar } from '@/components/Navbar';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Button } from '@/components/ui/button';
-import { Trophy, Target, CheckCircle, Flag, Star } from 'lucide-react';
+import { Trophy, Target, CheckCircle, Flag } from 'lucide-react';
 import { Mission } from '@/types/missions';
 import { useNavigate } from 'react-router-dom';
 
 export default function Missions() {
   const { missions, getMissionProgress, getAvailableMissions, getCompletedMissions } = useMissions();
-  const { onboardingQuest, completeOnboardingQuest } = useOnboarding();
   const [completedMission, setCompletedMission] = useState<Mission | null>(null);
   const navigate = useNavigate();
 
@@ -36,23 +33,6 @@ export default function Missions() {
     
     // Navegar para o simulado
     navigate('/simulado?mission=' + mission.id);
-  };
-
-  const handleStartOnboardingQuest = () => {
-    if (!onboardingQuest) return;
-    
-    // Navegar para o simulado com a configuração da quest de onboarding
-    const params = new URLSearchParams({
-      areas: onboardingQuest.areas.join(','),
-      quantidade: onboardingQuest.target.toString(),
-      mission: 'onboarding-quest'
-    });
-    
-    navigate(`/simulado?${params.toString()}`);
-  };
-
-  const handleCompleteOnboardingQuest = () => {
-    completeOnboardingQuest();
   };
 
   return (
@@ -80,9 +60,7 @@ export default function Missions() {
                 <CardContent>
                   <div className="flex items-center gap-2">
                     <Target className="w-5 h-5 text-blue-600" />
-                    <span className="text-2xl font-bold text-blue-600">
-                      {availableMissions.length + (onboardingQuest ? 1 : 0)}
-                    </span>
+                    <span className="text-2xl font-bold text-blue-600">{availableMissions.length}</span>
                   </div>
                 </CardContent>
               </Card>
@@ -112,69 +90,6 @@ export default function Missions() {
               </Card>
             </div>
           </div>
-
-          {/* Onboarding Quest (se existir) */}
-          {onboardingQuest && (
-            <div className="mb-8">
-              <Card className="border-2 border-gradient-to-r from-yellow-400 to-orange-500 bg-gradient-to-br from-yellow-50 to-orange-50 dark:from-yellow-900/20 dark:to-orange-900/20">
-                <CardHeader>
-                  <div className="flex items-center gap-2">
-                    <Star className="w-6 h-6 text-yellow-600" />
-                    <CardTitle className="text-xl text-yellow-800 dark:text-yellow-200">
-                      Quest Especial de Boas-vindas
-                    </CardTitle>
-                  </div>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div>
-                    <h3 className="font-bold text-lg text-yellow-900 dark:text-yellow-100 mb-2">
-                      {onboardingQuest.title}
-                    </h3>
-                    <p className="text-yellow-800 dark:text-yellow-200 mb-4">
-                      {onboardingQuest.description}
-                    </p>
-                  </div>
-                  
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {onboardingQuest.areas.map(area => (
-                      <span key={area} className="px-2 py-1 bg-yellow-200 dark:bg-yellow-800 text-yellow-800 dark:text-yellow-200 rounded-full text-sm">
-                        {area}
-                      </span>
-                    ))}
-                  </div>
-                  
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-4">
-                      <span className="text-sm text-yellow-700 dark:text-yellow-300">
-                        Recompensa: +{onboardingQuest.reward.xp} XP
-                      </span>
-                      {onboardingQuest.reward.badge && (
-                        <span className="text-sm text-yellow-700 dark:text-yellow-300">
-                          Emblema: {onboardingQuest.reward.badge}
-                        </span>
-                      )}
-                    </div>
-                    <div className="flex gap-2">
-                      <Button 
-                        onClick={handleCompleteOnboardingQuest}
-                        variant="outline"
-                        size="sm"
-                        className="border-yellow-600 text-yellow-700 hover:bg-yellow-100"
-                      >
-                        Pular
-                      </Button>
-                      <Button 
-                        onClick={handleStartOnboardingQuest}
-                        className="bg-gradient-to-r from-yellow-600 to-orange-600 hover:from-yellow-700 hover:to-orange-700"
-                      >
-                        Começar Quest 🚀
-                      </Button>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-          )}
 
           {/* Missions Tabs */}
           <Tabs defaultValue="available" className="w-full">

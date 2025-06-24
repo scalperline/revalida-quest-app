@@ -3,16 +3,11 @@ import { Book, Timer, BarChartBig, Star, Brain, Flag } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { FeatureCard } from "@/components/FeatureCard";
 import { WhyItem } from "@/components/WhyItem";
-import { Onboarding } from "@/components/Onboarding";
 import { useGamificationSync } from '@/hooks/useGamificationSync';
-import { useOnboarding } from '@/hooks/useOnboarding';
 
 export default function Index() {
   // Add gamification sync
   useGamificationSync();
-  
-  // Add onboarding logic
-  const { hasCompletedOnboarding, completeOnboarding, skipOnboarding } = useOnboarding();
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 text-foreground transition-colors">
@@ -22,12 +17,10 @@ export default function Index() {
           <h1 className="text-2xl sm:text-4xl md:text-6xl font-bold mb-4 sm:mb-6 text-center leading-tight tracking-tight px-2">
             O banco completo de questões oficiais do <span className="text-blue-600 bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">Revalida INEP</span>
           </h1>
-          <p className="mb-6 sm:mb-8 text-base sm:text-xl md:text-2xl text-muted-foreground text-center max-w-3xl mx-auto leading-relaxed px-2">
+          <p className="mb-4 sm:mb-6 text-base sm:text-xl md:text-2xl text-muted-foreground text-center max-w-3xl mx-auto leading-relaxed px-2">
             Acesse todas as provas oficiais, gabaritos, estatísticas, simulados cronometrados e gráficos de desempenho — tudo o que você precisa para acelerar sua aprovação.
           </p>
-          
-          {/* Emojis de gamificação */}
-          <div className="flex justify-center gap-2 sm:gap-3 mb-6 sm:mb-8 text-xl sm:text-2xl">
+          <div className="flex justify-center items-center gap-2 sm:gap-3 text-2xl sm:text-3xl md:text-4xl mb-6 sm:mb-8">
             🎯 🏆 ⚡ 🎮 🔥 💎 🚀 ⭐
           </div>
         </div>
@@ -76,14 +69,6 @@ export default function Index() {
           &copy; {new Date().getFullYear()} RevalidaQuest. Todos os direitos reservados.
         </footer>
       </main>
-
-      {/* Show onboarding for new users */}
-      {!hasCompletedOnboarding && (
-        <Onboarding 
-          onComplete={completeOnboarding}
-          onSkip={skipOnboarding}
-        />
-      )}
     </div>
   );
 }

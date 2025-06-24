@@ -2,6 +2,7 @@ import { Book, Timer, BarChartBig, Star, Brain, Flag } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { FeatureCard } from "@/components/FeatureCard";
 import { WhyItem } from "@/components/WhyItem";
+import { MotivationalBanner } from "@/components/MotivationalBanner";
 import { useGamificationSync } from '@/hooks/useGamificationSync';
 
 export default function Index() {
@@ -12,6 +13,11 @@ export default function Index() {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 text-foreground transition-colors">
       <Navbar />
       <main className="max-w-6xl mx-auto px-4 py-12 md:py-20 flex flex-col items-center">
+        {/* Banner Motivacional */}
+        <div className="w-full max-w-4xl">
+          <MotivationalBanner />
+        </div>
+
         <div className="text-center mb-16">
           <h1 className="text-4xl md:text-6xl font-bold mb-6 text-center leading-tight tracking-tight">
             O banco completo de questões oficiais do <span className="text-blue-600 bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">Revalida INEP</span>

@@ -136,6 +136,29 @@ export function QuestionCard({ question, showAnswer, onAnswer, disabled }: Props
     return references[year] || `INEP - Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira. Revalida ${year}.`;
   };
 
+  // Função para obter feedback da opção selecionada
+  const getFeedback = () => {
+    if (!selected) return null;
+    
+    const selectedOption = question.options.find(opt => opt.id === selected);
+    const isCorrect = selected === question.correct;
+    
+    // Se tem feedback customizado, usa ele
+    if (selectedOption?.feedbackCorreta && isCorrect) {
+      return selectedOption.feedbackCorreta;
+    }
+    if (selectedOption?.feedbackErrada && !isCorrect) {
+      return selectedOption.feedbackErrada;
+    }
+    
+    // Feedback padrão baseado na área
+    if (isCorrect) {
+      return `Excelente! Você demonstrou conhecimento sólido em ${question.area.toLowerCase()}.`;
+    } else {
+      return `Esta questão exige conhecimento específico em ${question.area.toLowerCase()}. Revise os conceitos fundamentais.`;
+    }
+  };
+
   return (
     <>
       <ConfettiAnimation 
@@ -239,6 +262,29 @@ export function QuestionCard({ question, showAnswer, onAnswer, disabled }: Props
               );
             })}
         </div>
+        
+        {/* Feedback imediato após responder */}
+        {selected && (
+          <div className={`mt-4 p-4 rounded-xl border-l-4 shadow-sm ${
+            selected === question.correct 
+              ? 'bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 border-green-500' 
+              : 'bg-gradient-to-r from-red-50 to-pink-50 dark:from-red-900/20 dark:to-pink-900/20 border-red-500'
+          }`}>
+            <div className={`flex items-center gap-2 mb-2 font-bold text-lg ${
+              selected === question.correct ? 'text-green-700 dark:text-green-300' : 'text-red-700 dark:text-red-300'
+            }`}>
+              {selected === question.correct ? '✅ Correto!' : '❌ Errado'}
+            </div>
+            <div className={`text-sm mb-3 ${
+              selected === question.correct ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'
+            }`}>
+              📘 {getFeedback()}
+            </div>
+            <div className="text-xs text-blue-600 dark:text-blue-400 font-medium">
+              📚 Fonte: Prova Revalida {question.year} – INEP
+            </div>
+          </div>
+        )}
         
         {respostaRevelada && (
           <div className="mt-4 p-4 rounded-xl bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 border-l-4 border-blue-500 shadow-md">

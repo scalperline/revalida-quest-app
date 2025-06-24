@@ -1,9 +1,10 @@
+
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { StreakDisplay } from "./StreakDisplay";
 import { useGamification } from "@/hooks/useGamification";
-import { Menu, X, Trophy, FileText, BarChart3, User, Home, Stethoscope, Flag } from "lucide-react";
+import { Menu, X, Trophy, FileText, BarChart3, User, Home, Stethoscope, Flag, Crown } from "lucide-react";
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,6 +16,7 @@ export function Navbar() {
     { name: "Provas", path: "/questions", icon: FileText },
     { name: "Simulado", path: "/simulado", icon: Trophy },
     { name: "Quests", path: "/missions", icon: Flag },
+    { name: "Ranking", path: "/ranking", icon: Crown },
     { name: "Estatísticas", path: "/stats", icon: BarChart3 },
     { name: "Perfil", path: "/profile", icon: User },
   ];
@@ -37,44 +39,51 @@ export function Navbar() {
           <div className="hidden md:flex items-center space-x-8">
             <Link 
               to="/" 
-              className="text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 font-medium transition-colors"
+              className="text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 font-medium transition-colors flex items-center gap-2"
             >
+              <Home className="w-4 h-4" />
               Início
             </Link>
             <Link 
               to="/questoes" 
-              className="text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 font-medium transition-colors"
+              className="text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 font-medium transition-colors flex items-center gap-2"
             >
+              <FileText className="w-4 h-4" />
               Questões
             </Link>
             <Link 
               to="/simulado" 
-              className="text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 font-medium transition-colors"
+              className="text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 font-medium transition-colors flex items-center gap-2"
             >
+              <Trophy className="w-4 h-4" />
               Simulado
             </Link>
             <Link 
               to="/missoes" 
-              className="text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 font-medium transition-colors"
+              className="text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 font-medium transition-colors flex items-center gap-2"
             >
+              <Flag className="w-4 h-4" />
               Quests
             </Link>
             <Link 
               to="/ranking" 
-              className="text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 font-medium transition-colors"
+              className="text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 font-medium transition-colors flex items-center gap-2"
             >
+              <Crown className="w-4 h-4" />
               Ranking
             </Link>
             <Link 
               to="/estatisticas" 
-              className="text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 font-medium transition-colors"
+              className="text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 font-medium transition-colors flex items-center gap-2"
             >
+              <BarChart3 className="w-4 h-4" />
               Estatísticas
             </Link>
             <Link 
               to="/perfil" 
-              className="text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 font-medium transition-colors"
+              className="text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 font-medium transition-colors flex items-center gap-2"
             >
+              <User className="w-4 h-4" />
               Perfil
             </Link>
           </div>
@@ -108,7 +117,8 @@ export function Navbar() {
                 const isActive = location.pathname === item.path || 
                   (item.path === '/questions' && location.pathname === '/questoes') ||
                   (item.path === '/stats' && location.pathname === '/estatisticas') ||
-                  (item.path === '/profile' && location.pathname === '/perfil');
+                  (item.path === '/profile' && location.pathname === '/perfil') ||
+                  (item.path === '/missions' && location.pathname === '/missoes');
                 
                 return (
                   <Link key={item.path} to={item.path} onClick={() => setIsOpen(false)}>

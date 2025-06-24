@@ -4,22 +4,22 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
-import { Trophy, Target, Clock, Zap, CheckCircle } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { Trophy, Target, Clock, Zap, CheckCircle, AlertTriangle } from 'lucide-react';
 
 interface MissionCardProps {
   mission: Mission;
   progress?: MissionProgress;
   onStartMission: (mission: Mission) => void;
+  availableQuestions?: number;
 }
 
-export function MissionCard({ mission, progress, onStartMission }: MissionCardProps) {
-  const navigate = useNavigate();
-  
+export function MissionCard({ mission, progress, onStartMission, availableQuestions = 0 }: MissionCardProps) {
   const progressPercentage = (mission.progress / mission.targetQuestions) * 100;
   const accuracy = progress && progress.questionsAnswered > 0 
     ? (progress.correctAnswers / progress.questionsAnswered) * 100 
     : 0;
+
+  const hasEnoughQuestions = availableQuestions >= mission.targetQuestions;
 
   const getDifficultyColor = (difficulty: Mission['difficulty']) => {
     switch (difficulty) {
@@ -76,6 +76,31 @@ export function MissionCard({ mission, progress, onStartMission }: MissionCardPr
             </p>
           </div>
 
+          {/* Questões disponíveis */}
+          <div className={`p-3 rounded-lg border ${hasEnoughQuestions 
+            ? 'bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-800' 
+            : 'bg-orange-50 dark:bg-orange-900/20 border-orange-200 dark:border-orange-800'
+          }`}>
+            <div className="flex items-center gap-2">
+              {hasEnoughQuestions ? (
+                <CheckCircle className="w-4 h-4 text-green-600" />
+              ) : (
+                <AlertTriangle className="w-4 h-4 text-orange-600" />
+              )}
+              <span className={`text-sm font-medium ${hasEnoughQuestions 
+                ? 'text-green-800 dark:text-green-200' 
+                : 'text-orange-800 dark:text-orange-200'
+              }`}>
+                Questões oficiais: {availableQuestions}/{mission.targetQuestions} disponíveis
+              </span>
+            </div>
+            {!hasEnoughQuestions && (
+              <p className="text-xs text-orange-700 dark:text-orange-300 mt-1">
+                Questões insuficientes na área {mission.area}. Selecione outro ano.
+              </p>
+            )}
+          </div>
+
           {/* Progresso */}
           <div className="space-y-2">
             <div className="flex justify-between text-sm">
@@ -113,16 +138,17 @@ export function MissionCard({ mission, progress, onStartMission }: MissionCardPr
           {!mission.completed ? (
             <Button
               onClick={() => onStartMission(mission)}
-              className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white"
+              disabled={!hasEnoughQuestions}
+              className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <Target className="w-4 h-4 mr-2" />
-              {mission.progress > 0 ? 'Continuar Missão' : 'Iniciar Missão'}
+              {mission.progress > 0 ? 'Continuar Quest' : 'Iniciar Quest'}
             </Button>
           ) : (
             <div className="text-center p-3 bg-green-100 dark:bg-green-900/20 rounded-lg">
               <div className="flex items-center justify-center gap-2 text-green-700 dark:text-green-300">
                 <Trophy className="w-5 h-5" />
-                <span className="font-bold">Missão Concluída!</span>
+                <span className="font-bold">Quest Concluída!</span>
               </div>
               {progress?.completedAt && (
                 <p className="text-xs text-green-600 dark:text-green-400 mt-1">

@@ -1,6 +1,7 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useMissions } from '@/hooks/useMissions';
+import { useQuestions } from '@/hooks/useQuestions';
 import { MissionCard } from '@/components/MissionCard';
 import { MissionCompletedNotification } from '@/components/MissionCompletedNotification';
 import { Navbar } from '@/components/Navbar';
@@ -12,14 +13,37 @@ import { useNavigate } from 'react-router-dom';
 
 export default function Missions() {
   const { missions, getMissionProgress, getAvailableMissions, getCompletedMissions } = useMissions();
+  const { questoesAnoSelecionado } = useQuestions();
   const [completedMission, setCompletedMission] = useState<Mission | null>(null);
+  const [areaQuestionsCount, setAreaQuestionsCount] = useState<Record<string, number>>({});
   const navigate = useNavigate();
+
+  // Calcular quantidade de questões disponíveis por área
+  useEffect(() => {
+    const counts: Record<string, number> = {};
+    
+    questoesAnoSelecionado.forEach(question => {
+      counts[question.area] = (counts[question.area] || 0) + 1;
+    });
+    
+    setAreaQuestionsCount(counts);
+  }, [questoesAnoSelecionado]);
 
   const availableMissions = getAvailableMissions();
   const completedMissions = getCompletedMissions();
   const totalXP = completedMissions.reduce((sum, mission) => sum + mission.reward.xp, 0);
 
   const handleStartMission = (mission: Mission) => {
+    // Verificar se há questões suficientes da área específica
+    const questoesDisponiveis = mission.area === 'Mista' 
+      ? questoesAnoSelecionado.length 
+      : areaQuestionsCount[mission.area] || 0;
+
+    if (questoesDisponiveis < mission.targetQuestions) {
+      alert(`Esta quest requer ${mission.targetQuestions} questões de ${mission.area}, mas só há ${questoesDisponiveis} questões disponíveis no banco atual (2025). Selecione outro ano com mais questões disponíveis.`);
+      return;
+    }
+
     // Navegar para o simulado com a configuração da missão
     const missionConfig = {
       quantidade: mission.targetQuestions,
@@ -48,7 +72,7 @@ export default function Missions() {
               🚩 Quests do Revalida
             </h1>
             <p className="text-xl text-muted-foreground mb-6">
-              Complete quests especializadas, ganhe XP e desbloqueie conquistas!
+              Complete quests especializadas com questões oficiais do INEP, ganhe XP e desbloqueie conquistas!
             </p>
             
             {/* Stats Cards */}
@@ -91,6 +115,24 @@ export default function Missions() {
             </div>
           </div>
 
+          {/* Aviso sobre questões disponíveis */}
+          <div className="mb-6 p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-xl">
+            <div className="flex items-center gap-2 text-blue-800 dark:text-blue-200">
+              <div className="w-5 h-5 text-blue-600">ℹ️</div>
+              <div>
+                <div className="font-semibold">Questões do banco oficial INEP 2025</div>
+                <div className="text-sm">
+                  As quests utilizam questões oficiais do banco atual. Questões disponíveis por área: {' '}
+                  {Object.entries(areaQuestionsCount).map(([area, count]) => (
+                    <span key={area} className="inline-block mr-2">
+                      <strong>{area}:</strong> {count}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+
           {/* Missions Tabs */}
           <Tabs defaultValue="available" className="w-full">
             <TabsList className="grid w-full grid-cols-2 mb-6">
@@ -113,6 +155,7 @@ export default function Missions() {
                       mission={mission}
                       progress={getMissionProgress(mission.id)}
                       onStartMission={handleStartMission}
+                      availableQuestions={mission.area === 'Mista' ? questoesAnoSelecionado.length : areaQuestionsCount[mission.area] || 0}
                     />
                   ))}
                 </div>
@@ -136,6 +179,7 @@ export default function Missions() {
                       mission={mission}
                       progress={getMissionProgress(mission.id)}
                       onStartMission={handleStartMission}
+                      availableQuestions={mission.area === 'Mista' ? questoesAnoSelecionado.length : areaQuestionsCount[mission.area] || 0}
                     />
                   ))}
                 </div>

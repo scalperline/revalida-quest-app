@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { useMissions } from '@/hooks/useMissions';
 import { MissionCard } from '@/components/MissionCard';
@@ -159,24 +158,6 @@ export default function Missions() {
                   </div>
                 </CardContent>
               </Card>
-            </div>
-          </div>
-
-          {/* Aviso sobre questões disponíveis */}
-          <div className="mb-6 p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-xl">
-            <div className="flex items-center gap-2 text-blue-800 dark:text-blue-200">
-              <div className="w-5 h-5 text-blue-600">ℹ️</div>
-              <div>
-                <div className="font-semibold">Banco completo de questões oficiais INEP (2011-2025)</div>
-                <div className="text-sm">
-                  As quests utilizam questões de todas as edições do Revalida. Total: {totalQuestionsAvailable} questões. Questões por área: {' '}
-                  {Object.entries(areaQuestionsCount).map(([area, count]) => (
-                    <span key={area} className="inline-block mr-2">
-                      <strong>{area}:</strong> {count}
-                    </span>
-                  ))}
-                </div>
-              </div>
             </div>
           </div>
 

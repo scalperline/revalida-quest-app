@@ -45,21 +45,12 @@ export function QuestionCard({ question, showAnswer, onAnswer, disabled }: Props
   const { playSound } = useAudio();
   const respostaRevelada = selected || showAnswer;
 
-  // Reset estado quando questão muda - CORRIGIDO
+  // Reset estado quando questão muda
   useEffect(() => {
-    console.log('=== QUESTION CARD - RESET ESTADO ===');
-    console.log('Nova questão ID:', question.id);
-    console.log('showAnswer:', showAnswer);
-    console.log('disabled:', disabled);
-    
-    // Reset estado local quando questão muda
     if (!showAnswer) {
       setSelected(null);
       setShowConfetti(false);
     }
-    
-    console.log('Estado resetado - selected:', null);
-    console.log('=== FIM RESET QUESTION CARD ===');
   }, [question.id, showAnswer]);
 
   // Check for newly unlocked achievements
@@ -67,14 +58,8 @@ export function QuestionCard({ question, showAnswer, onAnswer, disabled }: Props
 
   const handleAnswer = (optionId: string) => {
     if (disabled || selected) {
-      console.log('Resposta bloqueada - disabled:', disabled, 'selected:', selected);
       return;
     }
-    
-    console.log('=== QUESTION CARD - RESPOSTA ===');
-    console.log('Questão ID:', question.id);
-    console.log('Opção selecionada:', optionId);
-    console.log('Resposta correta:', question.correct);
     
     setSelected(optionId);
     const correct = optionId === question.correct;
@@ -88,7 +73,6 @@ export function QuestionCard({ question, showAnswer, onAnswer, disabled }: Props
       playSound('incorrect');
     }
     
-    console.log('Resposta correta?', correct);
     answerQuestion(correct);
     
     // Call parent callback if provided
@@ -104,8 +88,6 @@ export function QuestionCard({ question, showAnswer, onAnswer, disabled }: Props
         playSound('levelup');
       }
     }, 100);
-    
-    console.log('=== FIM RESPOSTA QUESTION CARD ===');
   };
 
   // Handle achievement notification
@@ -143,14 +125,14 @@ export function QuestionCard({ question, showAnswer, onAnswer, disabled }: Props
         onComplete={() => setShowConfetti(false)} 
       />
       
-      <div className="bg-white dark:bg-gray-800 shadow-lg hover:shadow-xl rounded-2xl px-6 py-8 mb-7 border border-blue-100 dark:border-gray-700 max-w-2xl mx-auto flex flex-col gap-4 transition-all duration-200">
+      <div className="bg-white dark:bg-gray-800 shadow-lg hover:shadow-xl rounded-2xl p-4 sm:p-6 mb-4 sm:mb-7 border border-blue-100 dark:border-gray-700 w-full max-w-2xl mx-auto flex flex-col gap-3 sm:gap-4 transition-all duration-200">
         {/* Número da questão oficial com borda em destaque */}
-        <div className="flex items-center gap-2 pb-1">
-          <div className="rounded-xl border-2 border-blue-500 bg-gradient-to-r from-blue-500 to-purple-600 text-white px-4 py-1 font-bold text-base shadow-lg select-none">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 pb-1">
+          <div className="rounded-xl border-2 border-blue-500 bg-gradient-to-r from-blue-500 to-purple-600 text-white px-3 sm:px-4 py-2 font-bold text-sm sm:text-base shadow-lg select-none min-h-[48px] flex items-center">
             Quest #{question.id}
           </div>
           {selected && (
-            <div className={`px-3 py-1 rounded-full text-sm font-medium shadow-sm ${
+            <div className={`px-2 sm:px-3 py-2 rounded-full text-xs sm:text-sm font-medium shadow-sm min-h-[48px] flex items-center ${
               selected === question.correct 
                 ? 'bg-gradient-to-r from-green-100 to-emerald-100 text-green-800 border border-green-300' 
                 : 'bg-gradient-to-r from-red-100 to-pink-100 text-red-800 border border-red-300'
@@ -160,13 +142,13 @@ export function QuestionCard({ question, showAnswer, onAnswer, disabled }: Props
           )}
         </div>
         
-        <div className="flex items-center gap-2 text-sm text-muted-foreground pb-1">
-          <span className="bg-blue-50 dark:bg-blue-900/30 px-2 py-1 rounded text-blue-700 dark:text-blue-300 font-medium">{question.year}</span>
-          <span className="mx-1 text-xs opacity-80">•</span>
-          <span className="bg-purple-50 dark:bg-purple-900/30 px-2 py-1 rounded text-purple-700 dark:text-purple-300 font-medium capitalize">{question.area}</span>
+        <div className="flex flex-col sm:flex-row sm:items-center gap-2 text-sm text-muted-foreground pb-1">
+          <span className="bg-blue-50 dark:bg-blue-900/30 px-2 py-1 rounded text-blue-700 dark:text-blue-300 font-medium text-xs sm:text-sm">{question.year}</span>
+          <span className="hidden sm:inline mx-1 text-xs opacity-80">•</span>
+          <span className="bg-purple-50 dark:bg-purple-900/30 px-2 py-1 rounded text-purple-700 dark:text-purple-300 font-medium capitalize text-xs sm:text-sm">{question.area}</span>
         </div>
         
-        <div className="font-semibold text-lg md:text-xl text-gray-900 dark:text-white whitespace-pre-line leading-relaxed">
+        <div className="font-semibold text-base sm:text-lg md:text-xl text-gray-900 dark:text-white whitespace-pre-line leading-relaxed">
           {question.enunciado}
         </div>
         
@@ -191,7 +173,7 @@ export function QuestionCard({ question, showAnswer, onAnswer, disabled }: Props
               return (
                 <button
                   key={opt.id}
-                  className={`flex items-center gap-3 px-4 py-3 rounded-xl border text-left transition-all text-base font-normal hover:scale-[1.01] transform shadow-sm hover:shadow-md
+                  className={`flex items-center gap-3 p-3 sm:p-4 rounded-xl border text-left transition-all text-sm sm:text-base font-normal hover:scale-[1.01] transform shadow-sm hover:shadow-md min-h-[48px]
                   ${
                     marcado
                       ? acerto
@@ -213,7 +195,7 @@ export function QuestionCard({ question, showAnswer, onAnswer, disabled }: Props
                   onClick={() => handleAnswer(opt.id)}
                 >
                   <span
-                    className={`w-10 h-10 flex items-center justify-center rounded-full border-2 text-lg font-bold transition-all
+                    className={`w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center rounded-full border-2 text-sm sm:text-lg font-bold transition-all flex-shrink-0
                     ${
                       marcado
                         ? acerto
@@ -229,9 +211,9 @@ export function QuestionCard({ question, showAnswer, onAnswer, disabled }: Props
                   >
                     {opt.id}
                   </span>
-                  <span className="flex-1">{opt.text}</span>
+                  <span className="flex-1 leading-relaxed">{opt.text}</span>
                   {marcado && acerto && (
-                    <div className="text-green-600">
+                    <div className="text-green-600 flex-shrink-0">
                       🎯✨
                     </div>
                   )}
@@ -241,14 +223,14 @@ export function QuestionCard({ question, showAnswer, onAnswer, disabled }: Props
         </div>
         
         {respostaRevelada && (
-          <div className="mt-4 p-4 rounded-xl bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 border-l-4 border-blue-500 shadow-md">
+          <div className="mt-4 p-3 sm:p-4 rounded-xl bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 border-l-4 border-blue-500 shadow-md">
             {question.correct === "ANULADA" ? (
-              <span className="font-semibold text-lg text-yellow-600 flex items-center gap-2">
+              <span className="font-semibold text-base sm:text-lg text-yellow-600 flex items-center gap-2">
                 ⚠️ Questão Anulada
               </span>
             ) : (
               <span
-                className={`font-semibold text-lg flex items-center gap-2 ${
+                className={`font-semibold text-base sm:text-lg flex items-center gap-2 ${
                   selected === question.correct || showAnswer
                     ? "text-green-600"
                     : "text-red-600"
@@ -264,7 +246,7 @@ export function QuestionCard({ question, showAnswer, onAnswer, disabled }: Props
             )}
             
             {/* Sempre mostrar referência após responder */}
-            <div className="mt-3 text-sm text-blue-600 dark:text-blue-400 bg-blue-50/50 dark:bg-blue-900/10 p-3 rounded-lg border border-blue-200 dark:border-blue-700">
+            <div className="mt-3 text-xs sm:text-sm text-blue-600 dark:text-blue-400 bg-blue-50/50 dark:bg-blue-900/10 p-3 rounded-lg border border-blue-200 dark:border-blue-700">
               <div className="flex items-start gap-2">
                 <span className="text-blue-500 mt-0.5">📚</span>
                 <div>

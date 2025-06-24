@@ -36,11 +36,13 @@ export function Navbar() {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-4">
             <Link 
               to="/" 
-              className={`text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 font-medium transition-colors flex items-center gap-2 pb-4 border-b-2 ${
-                location.pathname === "/" ? "text-blue-600 dark:text-blue-400 border-blue-600" : "border-transparent"
+              className={`font-medium transition-all duration-200 flex items-center gap-2 px-3 py-2 rounded-lg ${
+                location.pathname === "/" 
+                  ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg" 
+                  : "text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20"
               }`}
             >
               <Home className="w-4 h-4" />
@@ -48,8 +50,10 @@ export function Navbar() {
             </Link>
             <Link 
               to="/questoes" 
-              className={`text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 font-medium transition-colors flex items-center gap-2 pb-4 border-b-2 ${
-                location.pathname === "/questoes" ? "text-blue-600 dark:text-blue-400 border-blue-600" : "border-transparent"
+              className={`font-medium transition-all duration-200 flex items-center gap-2 px-3 py-2 rounded-lg ${
+                location.pathname === "/questoes" 
+                  ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg" 
+                  : "text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20"
               }`}
             >
               <FileText className="w-4 h-4" />
@@ -57,8 +61,10 @@ export function Navbar() {
             </Link>
             <Link 
               to="/simulado" 
-              className={`text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 font-medium transition-colors flex items-center gap-2 pb-4 border-b-2 ${
-                location.pathname === "/simulado" ? "text-blue-600 dark:text-blue-400 border-blue-600" : "border-transparent"
+              className={`font-medium transition-all duration-200 flex items-center gap-2 px-3 py-2 rounded-lg ${
+                location.pathname === "/simulado" 
+                  ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg" 
+                  : "text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20"
               }`}
             >
               <Trophy className="w-4 h-4" />
@@ -66,8 +72,10 @@ export function Navbar() {
             </Link>
             <Link 
               to="/missoes" 
-              className={`text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 font-medium transition-colors flex items-center gap-2 pb-4 border-b-2 ${
-                location.pathname === "/missoes" ? "text-blue-600 dark:text-blue-400 border-blue-600" : "border-transparent"
+              className={`font-medium transition-all duration-200 flex items-center gap-2 px-3 py-2 rounded-lg ${
+                location.pathname === "/missoes" 
+                  ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg" 
+                  : "text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20"
               }`}
             >
               <Flag className="w-4 h-4" />
@@ -75,8 +83,10 @@ export function Navbar() {
             </Link>
             <Link 
               to="/ranking" 
-              className={`text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 font-medium transition-colors flex items-center gap-2 pb-4 border-b-2 ${
-                location.pathname === "/ranking" ? "text-blue-600 dark:text-blue-400 border-blue-600" : "border-transparent"
+              className={`font-medium transition-all duration-200 flex items-center gap-2 px-3 py-2 rounded-lg ${
+                location.pathname === "/ranking" 
+                  ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg" 
+                  : "text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20"
               }`}
             >
               <Crown className="w-4 h-4" />
@@ -84,8 +94,10 @@ export function Navbar() {
             </Link>
             <Link 
               to="/estatisticas" 
-              className={`text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 font-medium transition-colors flex items-center gap-2 pb-4 border-b-2 ${
-                location.pathname === "/estatisticas" ? "text-blue-600 dark:text-blue-400 border-blue-600" : "border-transparent"
+              className={`font-medium transition-all duration-200 flex items-center gap-2 px-3 py-2 rounded-lg ${
+                location.pathname === "/estatisticas" 
+                  ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg" 
+                  : "text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20"
               }`}
             >
               <BarChart3 className="w-4 h-4" />
@@ -93,8 +105,10 @@ export function Navbar() {
             </Link>
             <Link 
               to="/perfil" 
-              className={`text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 font-medium transition-colors flex items-center gap-2 pb-4 border-b-2 ${
-                location.pathname === "/perfil" ? "text-blue-600 dark:text-blue-400 border-blue-600" : "border-transparent"
+              className={`font-medium transition-all duration-200 flex items-center gap-2 px-3 py-2 rounded-lg ${
+                location.pathname === "/perfil" 
+                  ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg" 
+                  : "text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20"
               }`}
             >
               <User className="w-4 h-4" />

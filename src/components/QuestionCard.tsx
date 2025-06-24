@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { useGamification } from "@/hooks/useGamification";
 import { useAudio } from "@/hooks/useAudio";
@@ -275,13 +274,10 @@ export function QuestionCard({ question, showAnswer, onAnswer, disabled }: Props
             }`}>
               {selected === question.correct ? '✅ Correto!' : '❌ Errado'}
             </div>
-            <div className={`text-sm mb-3 ${
+            <div className={`text-sm ${
               selected === question.correct ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'
             }`}>
               📘 {getFeedback()}
-            </div>
-            <div className="text-xs text-blue-600 dark:text-blue-400 font-medium">
-              📚 Fonte: Prova Revalida {question.year} – INEP
             </div>
           </div>
         )}

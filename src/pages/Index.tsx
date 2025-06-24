@@ -3,11 +3,16 @@ import { Book, Timer, BarChartBig, Star, Brain, Flag } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { FeatureCard } from "@/components/FeatureCard";
 import { WhyItem } from "@/components/WhyItem";
+import { Onboarding } from "@/components/Onboarding";
 import { useGamificationSync } from '@/hooks/useGamificationSync';
+import { useOnboarding } from '@/hooks/useOnboarding';
 
 export default function Index() {
   // Add gamification sync
   useGamificationSync();
+  
+  // Add onboarding logic
+  const { hasCompletedOnboarding, completeOnboarding, skipOnboarding } = useOnboarding();
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 text-foreground transition-colors">
@@ -20,6 +25,11 @@ export default function Index() {
           <p className="mb-6 sm:mb-8 text-base sm:text-xl md:text-2xl text-muted-foreground text-center max-w-3xl mx-auto leading-relaxed px-2">
             Acesse todas as provas oficiais, gabaritos, estatísticas, simulados cronometrados e gráficos de desempenho — tudo o que você precisa para acelerar sua aprovação.
           </p>
+          
+          {/* Emojis de gamificação */}
+          <div className="flex justify-center gap-2 sm:gap-3 mb-6 sm:mb-8 text-xl sm:text-2xl">
+            🎯 🏆 ⚡ 🎮 🔥 💎 🚀 ⭐
+          </div>
         </div>
         
         <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8 mb-12 sm:mb-16">
@@ -66,6 +76,14 @@ export default function Index() {
           &copy; {new Date().getFullYear()} RevalidaQuest. Todos os direitos reservados.
         </footer>
       </main>
+
+      {/* Show onboarding for new users */}
+      {!hasCompletedOnboarding && (
+        <Onboarding 
+          onComplete={completeOnboarding}
+          onSkip={skipOnboarding}
+        />
+      )}
     </div>
   );
 }

@@ -1,6 +1,8 @@
 
 import { useState } from 'react';
 import { useGamification } from '@/hooks/useGamification';
+import { useOnboarding } from '@/hooks/useOnboarding';
+import { Onboarding } from '@/components/Onboarding';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -9,7 +11,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { BadgesGrid } from '@/components/BadgesGrid';
-import { User, Trophy, Target, Calendar, Star, Crown, Zap } from 'lucide-react';
+import { User, Trophy, Target, Calendar, Star, Crown, Zap, Settings } from 'lucide-react';
 
 interface UserData {
   name: string;
@@ -20,6 +22,7 @@ interface UserData {
 
 export function UserProfile() {
   const { userProgress, getAccuracy, getProgressPercentage } = useGamification();
+  const { onboardingData, resetOnboarding } = useOnboarding();
   const [userData, setUserData] = useState<UserData>({
     name: 'Aventureiro',
     email: 'aventureiro@revalida.com',
@@ -28,10 +31,20 @@ export function UserProfile() {
 
   const [isEditing, setIsEditing] = useState(false);
   const [editData, setEditData] = useState(userData);
+  const [showOnboarding, setShowOnboarding] = useState(false);
 
   const handleSave = () => {
     setUserData(editData);
     setIsEditing(false);
+  };
+
+  const handleConfigureJourney = () => {
+    setShowOnboarding(true);
+  };
+
+  const handleOnboardingComplete = (data: any) => {
+    setShowOnboarding(false);
+    // The onboarding hook will handle saving the data
   };
 
   const getRankTitle = (level: number) => {
@@ -82,6 +95,46 @@ export function UserProfile() {
           </p>
         </div>
       </div>
+
+      {/* Journey Configuration Card */}
+      {onboardingData && (
+        <Card className="border border-blue-100 dark:border-gray-700 shadow-lg hover:shadow-xl transition-all duration-200 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-gray-900 dark:text-white">
+              <Settings className="w-5 h-5 text-blue-600" />
+              Configuração da Jornada
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label className="text-sm font-medium">Meta Semanal</Label>
+                <div className="bg-white/60 dark:bg-gray-800/60 p-3 rounded-lg">
+                  <p className="font-semibold text-blue-600 dark:text-blue-400">
+                    🎯 {onboardingData.weeklyGoal} questões por semana
+                  </p>
+                </div>
+              </div>
+              <div className="space-y-2">
+                <Label className="text-sm font-medium">Áreas de Foco</Label>
+                <div className="bg-white/60 dark:bg-gray-800/60 p-3 rounded-lg">
+                  <p className="font-semibold text-purple-600 dark:text-purple-400">
+                    🧠 {onboardingData.focusAreas.length} áreas selecionadas
+                  </p>
+                </div>
+              </div>
+            </div>
+            <Button 
+              onClick={handleConfigureJourney}
+              variant="outline"
+              className="w-full bg-white/60 dark:bg-gray-800/60 border-blue-200 dark:border-blue-700 hover:bg-blue-50 dark:hover:bg-blue-900/30"
+            >
+              <Settings className="w-4 h-4 mr-2" />
+              Configurar Jornada
+            </Button>
+          </CardContent>
+        </Card>
+      )}
 
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
@@ -228,6 +281,13 @@ export function UserProfile() {
           </Card>
         </div>
       </div>
+
+      {/* Onboarding Modal */}
+      {showOnboarding && (
+        <Onboarding 
+          onComplete={handleOnboardingComplete}
+        />
+      )}
     </div>
   );
 }

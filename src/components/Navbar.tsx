@@ -1,5 +1,4 @@
 
-
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -40,8 +39,8 @@ export function Navbar() {
           <div className="hidden md:flex items-center space-x-8">
             <Link 
               to="/" 
-              className={`text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 font-medium transition-colors flex items-center gap-2 ${
-                location.pathname === "/" ? "text-blue-600 dark:text-blue-400" : ""
+              className={`text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 font-medium transition-colors flex items-center gap-2 pb-4 border-b-2 ${
+                location.pathname === "/" ? "text-blue-600 dark:text-blue-400 border-blue-600" : "border-transparent"
               }`}
             >
               <Home className="w-4 h-4" />
@@ -49,8 +48,8 @@ export function Navbar() {
             </Link>
             <Link 
               to="/questoes" 
-              className={`text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 font-medium transition-colors flex items-center gap-2 ${
-                location.pathname === "/questoes" ? "text-blue-600 dark:text-blue-400" : ""
+              className={`text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 font-medium transition-colors flex items-center gap-2 pb-4 border-b-2 ${
+                location.pathname === "/questoes" ? "text-blue-600 dark:text-blue-400 border-blue-600" : "border-transparent"
               }`}
             >
               <FileText className="w-4 h-4" />
@@ -58,8 +57,8 @@ export function Navbar() {
             </Link>
             <Link 
               to="/simulado" 
-              className={`text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 font-medium transition-colors flex items-center gap-2 ${
-                location.pathname === "/simulado" ? "text-blue-600 dark:text-blue-400" : ""
+              className={`text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 font-medium transition-colors flex items-center gap-2 pb-4 border-b-2 ${
+                location.pathname === "/simulado" ? "text-blue-600 dark:text-blue-400 border-blue-600" : "border-transparent"
               }`}
             >
               <Trophy className="w-4 h-4" />
@@ -67,8 +66,8 @@ export function Navbar() {
             </Link>
             <Link 
               to="/missoes" 
-              className={`text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 font-medium transition-colors flex items-center gap-2 ${
-                location.pathname === "/missoes" ? "text-blue-600 dark:text-blue-400" : ""
+              className={`text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 font-medium transition-colors flex items-center gap-2 pb-4 border-b-2 ${
+                location.pathname === "/missoes" ? "text-blue-600 dark:text-blue-400 border-blue-600" : "border-transparent"
               }`}
             >
               <Flag className="w-4 h-4" />
@@ -76,8 +75,8 @@ export function Navbar() {
             </Link>
             <Link 
               to="/ranking" 
-              className={`text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 font-medium transition-colors flex items-center gap-2 ${
-                location.pathname === "/ranking" ? "text-blue-600 dark:text-blue-400" : ""
+              className={`text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 font-medium transition-colors flex items-center gap-2 pb-4 border-b-2 ${
+                location.pathname === "/ranking" ? "text-blue-600 dark:text-blue-400 border-blue-600" : "border-transparent"
               }`}
             >
               <Crown className="w-4 h-4" />
@@ -85,8 +84,8 @@ export function Navbar() {
             </Link>
             <Link 
               to="/estatisticas" 
-              className={`text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 font-medium transition-colors flex items-center gap-2 ${
-                location.pathname === "/estatisticas" ? "text-blue-600 dark:text-blue-400" : ""
+              className={`text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 font-medium transition-colors flex items-center gap-2 pb-4 border-b-2 ${
+                location.pathname === "/estatisticas" ? "text-blue-600 dark:text-blue-400 border-blue-600" : "border-transparent"
               }`}
             >
               <BarChart3 className="w-4 h-4" />
@@ -94,8 +93,8 @@ export function Navbar() {
             </Link>
             <Link 
               to="/perfil" 
-              className={`text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 font-medium transition-colors flex items-center gap-2 ${
-                location.pathname === "/perfil" ? "text-blue-600 dark:text-blue-400" : ""
+              className={`text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 font-medium transition-colors flex items-center gap-2 pb-4 border-b-2 ${
+                location.pathname === "/perfil" ? "text-blue-600 dark:text-blue-400 border-blue-600" : "border-transparent"
               }`}
             >
               <User className="w-4 h-4" />
@@ -168,4 +167,3 @@ export function Navbar() {
     </nav>
   );
 }
-

@@ -11,7 +11,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { BadgesGrid } from '@/components/BadgesGrid';
-import { User, Trophy, Target, Calendar, Star, Crown, Zap, Settings } from 'lucide-react';
+import { User, Trophy, Target, Calendar, Star, Crown, Zap, Settings, Flag } from 'lucide-react';
 
 interface UserData {
   name: string;
@@ -22,7 +22,7 @@ interface UserData {
 
 export function UserProfile() {
   const { userProgress, getAccuracy, getProgressPercentage } = useGamification();
-  const { onboardingData, resetOnboarding } = useOnboarding();
+  const { onboardingData, onboardingQuest, resetOnboarding } = useOnboarding();
   const [userData, setUserData] = useState<UserData>({
     name: 'Aventureiro',
     email: 'aventureiro@revalida.com',
@@ -124,13 +124,39 @@ export function UserProfile() {
                 </div>
               </div>
             </div>
+            
+            {onboardingData.focusAreas.length > 0 && (
+              <div className="space-y-2">
+                <Label className="text-sm font-medium">Suas Áreas de Foco:</Label>
+                <div className="flex flex-wrap gap-2">
+                  {onboardingData.focusAreas.map(area => (
+                    <Badge key={area} variant="outline" className="bg-white/60 dark:bg-gray-800/60">
+                      {area}
+                    </Badge>
+                  ))}
+                </div>
+              </div>
+            )}
+            
+            {onboardingQuest && (
+              <div className="bg-gradient-to-r from-yellow-50 to-orange-50 dark:from-yellow-900/20 dark:to-orange-900/20 p-3 rounded-lg border border-yellow-200 dark:border-yellow-700">
+                <div className="flex items-center gap-2 mb-2">
+                  <Flag className="w-4 h-4 text-yellow-600" />
+                  <span className="font-medium text-yellow-800 dark:text-yellow-200">Quest Ativa de Boas-vindas</span>
+                </div>
+                <p className="text-sm text-yellow-700 dark:text-yellow-300">
+                  {onboardingQuest.description}
+                </p>
+              </div>
+            )}
+            
             <Button 
               onClick={handleConfigureJourney}
               variant="outline"
               className="w-full bg-white/60 dark:bg-gray-800/60 border-blue-200 dark:border-blue-700 hover:bg-blue-50 dark:hover:bg-blue-900/30"
             >
               <Settings className="w-4 h-4 mr-2" />
-              Configurar Jornada
+              Reconfigurar Jornada
             </Button>
           </CardContent>
         </Card>

@@ -10,22 +10,26 @@ import { Button } from "@/components/ui/button";
 import { useSimulado, type SimuladoConfig } from "@/hooks/useSimulado";
 import { useQuestions } from "@/hooks/useQuestions";
 import { useGamification } from "@/hooks/useGamification";
+import { useMissions } from "@/hooks/useMissions";
 
 export default function Simulado() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const { questoes } = useQuestions();
+  const { questoesAnoSelecionado } = useQuestions();
   const { completeSimulado } = useGamification();
+  const { updateMissionProgress } = useMissions();
   const [config, setConfig] = useState<SimuladoConfig | undefined>();
   const [simuladoIniciado, setSimuladoIniciado] = useState(false);
   const [resultados, setResultados] = useState<{[id: number]: boolean}>({});
+  const [missionId, setMissionId] = useState<string | null>(null);
 
   // Check for URL parameters on mount
   useEffect(() => {
     const areasParam = searchParams.get('areas');
     const quantidadeParam = searchParams.get('quantidade');
+    const missionParam = searchParams.get('mission');
     
-    if (areasParam || quantidadeParam) {
+    if (areasParam || quantidadeParam || missionParam) {
       const urlConfig: SimuladoConfig = {
         quantidade: quantidadeParam ? parseInt(quantidadeParam) : 10,
         areas: areasParam ? areasParam.split(',').filter(Boolean) : [],
@@ -34,10 +38,14 @@ export default function Simulado() {
       
       setConfig(urlConfig);
       setSimuladoIniciado(true);
+      
+      if (missionParam) {
+        setMissionId(missionParam);
+      }
     }
   }, [searchParams]);
 
-  const simulado = useSimulado(questoes, config);
+  const simulado = useSimulado(questoesAnoSelecionado, config);
 
   const handleStart = (newConfig: SimuladoConfig) => {
     setConfig(newConfig);
@@ -67,6 +75,11 @@ export default function Simulado() {
       percentage: porcentagem,
       areas: config?.areas || []
     });
+
+    // Se foi uma missão, atualizar progresso
+    if (missionId) {
+      updateMissionProgress(missionId, simulado.total, totalCorretas);
+    }
 
     navigate('/estatisticas', {
       state: {
@@ -128,14 +141,14 @@ export default function Simulado() {
           {/* Sidebar com progresso e timer */}
           <div className="lg:w-80 space-y-4">
             <SimuladoProgress 
-              current={simulado.index + 1} 
-              total={simulado.total}
-              answers={simulado.respostas}
+              currentQuestion={simulado.index + 1} 
+              totalQuestions={simulado.total}
+              userAnswers={simulado.respostas}
               questions={simulado.questoesSelecionadas}
             />
             
             <SimuladoTimer 
-              tempoMinutos={config?.tempoMinutos || 120}
+              timeLimit={config?.tempoMinutos || 120}
               onTimeUp={handleTimeUp}
             />
           </div>

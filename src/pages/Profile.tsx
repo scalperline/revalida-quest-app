@@ -1,8 +1,17 @@
 
+import { useState } from "react";
 import { Navbar } from "@/components/Navbar";
 import { UserProfile } from '@/components/UserProfile';
+import { BadgeUnlockedNotification } from '@/components/BadgeUnlockedNotification';
+import { useGamification } from '@/hooks/useGamification';
 
 export default function Profile() {
+  const { getNewlyUnlockedBadge, clearNewlyUnlockedBadge } = useGamification();
+  const [showBadgeNotification, setShowBadgeNotification] = useState(false);
+  
+  // Check for newly unlocked badges
+  const newlyUnlockedBadge = getNewlyUnlockedBadge();
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-100 dark:from-gray-900 dark:to-gray-800">
       <Navbar />
@@ -23,6 +32,12 @@ export default function Profile() {
           </div>
         </div>
       </div>
+      
+      {/* Badge Unlock Notification */}
+      <BadgeUnlockedNotification
+        achievement={newlyUnlockedBadge}
+        onClose={clearNewlyUnlockedBadge}
+      />
     </div>
   );
 }

@@ -8,6 +8,7 @@ import { Label } from '@/components/ui/label';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
+import { BadgesGrid } from '@/components/BadgesGrid';
 import { User, Trophy, Target, Calendar, Star, Crown, Zap } from 'lucide-react';
 
 interface UserData {
@@ -125,145 +126,108 @@ export function UserProfile() {
         </Card>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Profile Information */}
-        <Card className="border border-blue-100 dark:border-gray-700 shadow-lg hover:shadow-xl transition-all duration-200">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-gray-900 dark:text-white">
-              <User className="w-5 h-5 text-blue-600" />
-              Informações do Perfil
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            {isEditing ? (
-              <>
-                <div>
-                  <Label htmlFor="name">Nome</Label>
-                  <Input
-                    id="name"
-                    value={editData.name}
-                    onChange={(e) => setEditData({...editData, name: e.target.value})}
-                    className="border-blue-200 dark:border-gray-600 focus:border-blue-500"
-                  />
-                </div>
-                <div>
-                  <Label htmlFor="email">Email</Label>
-                  <Input
-                    id="email"
-                    type="email"
-                    value={editData.email}
-                    onChange={(e) => setEditData({...editData, email: e.target.value})}
-                    className="border-blue-200 dark:border-gray-600 focus:border-blue-500"
-                  />
-                </div>
-                <div className="flex gap-2">
-                  <Button onClick={handleSave} className="flex-1 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
-                    Salvar
-                  </Button>
-                  <Button variant="outline" onClick={() => setIsEditing(false)} className="flex-1 border-blue-200 dark:border-gray-600">
-                    Cancelar
-                  </Button>
-                </div>
-              </>
-            ) : (
-              <>
-                <div>
-                  <Label>Nome</Label>
-                  <p className="font-medium text-gray-900 dark:text-white">{userData.name}</p>
-                </div>
-                <div>
-                  <Label>Email</Label>
-                  <p className="font-medium text-gray-900 dark:text-white">{userData.email}</p>
-                </div>
-                <Button onClick={() => setIsEditing(true)} className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
-                  Editar Perfil
-                </Button>
-              </>
-            )}
-          </CardContent>
-        </Card>
+      <div className="grid grid-cols-1 gap-6">
+        {/* Badges Section */}
+        <BadgesGrid achievements={userProgress.achievements} />
 
-        {/* Recent Achievements */}
-        <Card className="border border-blue-100 dark:border-gray-700 shadow-lg hover:shadow-xl transition-all duration-200">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-gray-900 dark:text-white">
-              <Trophy className="w-5 h-5 text-yellow-500" />
-              Conquistas Recentes
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-3 max-h-64 overflow-y-auto">
-              {userProgress.achievements
-                .filter(a => a.unlocked)
-                .sort((a, b) => {
-                  const dateA = a.unlockedAt ? new Date(a.unlockedAt).getTime() : 0;
-                  const dateB = b.unlockedAt ? new Date(b.unlockedAt).getTime() : 0;
-                  return dateB - dateA;
-                })
-                .slice(0, 5)
-                .map(achievement => (
-                  <div key={achievement.id} className="flex items-center gap-3 p-3 bg-gradient-to-r from-yellow-50 to-orange-50 dark:from-yellow-900/20 dark:to-orange-900/20 rounded-lg border border-yellow-200 dark:border-yellow-800 shadow-sm hover:shadow-md transition-all duration-200">
-                    <div className="text-2xl">{achievement.icon}</div>
-                    <div className="flex-1">
-                      <div className="font-semibold text-sm text-yellow-800 dark:text-yellow-200">
-                        {achievement.title}
-                      </div>
-                      <div className="text-xs text-yellow-600 dark:text-yellow-400">
-                        {achievement.unlockedAt && new Date(achievement.unlockedAt).toLocaleDateString('pt-BR')}
-                      </div>
-                    </div>
+        {/* Profile Information and Progress Details in a row */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          {/* Profile Information */}
+          <Card className="border border-blue-100 dark:border-gray-700 shadow-lg hover:shadow-xl transition-all duration-200">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-gray-900 dark:text-white">
+                <User className="w-5 h-5 text-blue-600" />
+                Informações do Perfil
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              {isEditing ? (
+                <>
+                  <div>
+                    <Label htmlFor="name">Nome</Label>
+                    <Input
+                      id="name"
+                      value={editData.name}
+                      onChange={(e) => setEditData({...editData, name: e.target.value})}
+                      className="border-blue-200 dark:border-gray-600 focus:border-blue-500"
+                    />
                   </div>
-                ))}
-              
-              {userProgress.achievements.filter(a => a.unlocked).length === 0 && (
-                <div className="text-center text-muted-foreground py-8">
-                  <Trophy className="w-12 h-12 mx-auto mb-2 opacity-50" />
-                  <p className="font-medium">Nenhuma conquista ainda.</p>
-                  <p className="text-sm">Continue respondendo questões!</p>
-                </div>
+                  <div>
+                    <Label htmlFor="email">Email</Label>
+                    <Input
+                      id="email"
+                      type="email"
+                      value={editData.email}
+                      onChange={(e) => setEditData({...editData, email: e.target.value})}
+                      className="border-blue-200 dark:border-gray-600 focus:border-blue-500"
+                    />
+                  </div>
+                  <div className="flex gap-2">
+                    <Button onClick={handleSave} className="flex-1 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
+                      Salvar
+                    </Button>
+                    <Button variant="outline" onClick={() => setIsEditing(false)} className="flex-1 border-blue-200 dark:border-gray-600">
+                      Cancelar
+                    </Button>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div>
+                    <Label>Nome</Label>
+                    <p className="font-medium text-gray-900 dark:text-white">{userData.name}</p>
+                  </div>
+                  <div>
+                    <Label>Email</Label>
+                    <p className="font-medium text-gray-900 dark:text-white">{userData.email}</p>
+                  </div>
+                  <Button onClick={() => setIsEditing(true)} className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
+                    Editar Perfil
+                  </Button>
+                </>
               )}
-            </div>
-          </CardContent>
-        </Card>
-      </div>
+            </CardContent>
+          </Card>
 
-      {/* Progress Details */}
-      <Card className="border border-blue-100 dark:border-gray-700 shadow-lg hover:shadow-xl transition-all duration-200">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-gray-900 dark:text-white">
-            <Zap className="w-5 h-5 text-blue-500" />
-            Progresso Detalhado
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-4">
-            <div>
-              <div className="flex justify-between items-center mb-2">
-                <span className="font-medium text-gray-900 dark:text-white">Experiência para Próximo Nível</span>
-                <span className="text-sm text-muted-foreground">
-                  {userProgress.xp} / {userProgress.xpToNextLevel} XP
-                </span>
+          {/* Progress Details */}
+          <Card className="border border-blue-100 dark:border-gray-700 shadow-lg hover:shadow-xl transition-all duration-200">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-gray-900 dark:text-white">
+                <Zap className="w-5 h-5 text-blue-500" />
+                Progresso Detalhado
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                <div>
+                  <div className="flex justify-between items-center mb-2">
+                    <span className="font-medium text-gray-900 dark:text-white">Experiência para Próximo Nível</span>
+                    <span className="text-sm text-muted-foreground">
+                      {userProgress.xp} / {userProgress.xpToNextLevel} XP
+                    </span>
+                  </div>
+                  <Progress value={getProgressPercentage()} className="h-3" />
+                </div>
+                
+                <div className="grid grid-cols-1 gap-4 text-center">
+                  <div className="p-4 bg-gradient-to-r from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 rounded-lg border border-blue-200 dark:border-blue-700">
+                    <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">{userProgress.totalQuestions}</div>
+                    <div className="text-sm text-gray-600 dark:text-gray-400">Questões Respondidas</div>
+                  </div>
+                  <div className="p-4 bg-gradient-to-r from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/20 rounded-lg border border-green-200 dark:border-green-700">
+                    <div className="text-2xl font-bold text-green-600 dark:text-green-400">{userProgress.correctAnswers}</div>
+                    <div className="text-sm text-gray-600 dark:text-gray-400">Acertos</div>
+                  </div>
+                  <div className="p-4 bg-gradient-to-r from-purple-50 to-purple-100 dark:from-purple-900/20 dark:to-purple-800/20 rounded-lg border border-purple-200 dark:border-purple-700">
+                    <div className="text-2xl font-bold text-purple-600 dark:text-purple-400">{userProgress.simuladosCompletos}</div>
+                    <div className="text-sm text-gray-600 dark:text-gray-400">Simulados</div>
+                  </div>
+                </div>
               </div>
-              <Progress value={getProgressPercentage()} className="h-3" />
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
-              <div className="p-4 bg-gradient-to-r from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 rounded-lg border border-blue-200 dark:border-blue-700">
-                <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">{userProgress.totalQuestions}</div>
-                <div className="text-sm text-gray-600 dark:text-gray-400">Questões Respondidas</div>
-              </div>
-              <div className="p-4 bg-gradient-to-r from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/20 rounded-lg border border-green-200 dark:border-green-700">
-                <div className="text-2xl font-bold text-green-600 dark:text-green-400">{userProgress.correctAnswers}</div>
-                <div className="text-sm text-gray-600 dark:text-gray-400">Acertos</div>
-              </div>
-              <div className="p-4 bg-gradient-to-r from-purple-50 to-purple-100 dark:from-purple-900/20 dark:to-purple-800/20 rounded-lg border border-purple-200 dark:border-purple-700">
-                <div className="text-2xl font-bold text-purple-600 dark:text-purple-400">{userProgress.simuladosCompletos}</div>
-                <div className="text-sm text-gray-600 dark:text-gray-400">Simulados</div>
-              </div>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
     </div>
   );
 }

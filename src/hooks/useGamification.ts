@@ -51,6 +51,15 @@ export function useGamification() {
     });
   };
 
+  // Get the newly unlocked badge for badge notification
+  const getNewlyUnlockedBadge = () => {
+    return getNewlyUnlockedAchievement();
+  };
+
+  const clearNewlyUnlockedBadge = () => {
+    clearNewlyUnlockedAchievement();
+  };
+
   return {
     userProgress,
     addXP,
@@ -60,6 +69,8 @@ export function useGamification() {
     getProgressPercentage,
     getNewlyUnlockedAchievement,
     clearNewlyUnlockedAchievement,
+    getNewlyUnlockedBadge,
+    clearNewlyUnlockedBadge,
     getStreakBonus,
     generateQuestSuggestions,
     resetStats,

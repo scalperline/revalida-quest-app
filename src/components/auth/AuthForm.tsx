@@ -84,10 +84,13 @@ export function AuthForm() {
 
   return (
     <div className="relative w-full max-w-md mx-auto">
-      {/* Medical glassmorphism card with blue border */}
+      {/* Medical glassmorphism card with enhanced shadows */}
       <div className="absolute inset-0 bg-gradient-to-r from-blue-500/30 via-blue-600/25 to-blue-700/30 rounded-3xl blur-xl"></div>
       
-      <Card className="relative bg-white/15 backdrop-blur-xl border-2 border-blue-200/30 shadow-2xl rounded-3xl overflow-hidden hover:bg-white/20 transition-all duration-500 hover:border-blue-200/40 hover:shadow-blue-500/25">
+      <Card className="relative bg-white/15 backdrop-blur-xl border-2 border-blue-200/40 rounded-3xl overflow-hidden hover:bg-white/20 transition-all duration-500 hover:border-blue-200/50 hover:shadow-blue-500/30" 
+            style={{ 
+              boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1), 0 8px 40px rgba(59, 130, 246, 0.15)' 
+            }}>
         <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-transparent"></div>
         
         <AuthFormHeader />

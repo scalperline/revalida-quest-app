@@ -33,22 +33,44 @@ export function AuthTabs({
 }: AuthTabsProps) {
   return (
     <Tabs defaultValue="login" className="w-full" onValueChange={onValueChange}>
-      <TabsList className="grid w-full grid-cols-2 bg-blue-100/25 backdrop-blur-sm rounded-xl p-1 border border-blue-200/30 h-12 sm:h-auto">
-        <TabsTrigger 
-          value="login" 
-          className="flex items-center gap-2 rounded-lg font-space-grotesk data-[state=active]:bg-blue-500/30 data-[state=active]:text-white data-[state=active]:shadow-lg transition-all duration-300 hover:bg-blue-400/20 text-blue-100 font-semibold text-sm sm:text-base py-2 sm:py-3"
-        >
-          <LogIn className="w-4 h-4" />
-          <span className="hidden xs:inline">Entrar</span>
-        </TabsTrigger>
-        <TabsTrigger 
-          value="signup" 
-          className="flex items-center gap-2 rounded-lg font-space-grotesk data-[state=active]:bg-blue-500/30 data-[state=active]:text-white data-[state=active]:shadow-lg transition-all duration-300 hover:bg-blue-400/20 text-blue-100 font-semibold text-sm sm:text-base py-2 sm:py-3"
-        >
-          <UserPlus className="w-4 h-4" />
-          <span className="hidden xs:inline">Cadastrar</span>
-        </TabsTrigger>
-      </TabsList>
+      {/* Botões separados com design responsivo */}
+      <div className="w-full mb-6">
+        {/* Mobile: botões verticais */}
+        <div className="flex flex-col gap-4 sm:hidden">
+          <TabsTrigger 
+            value="login" 
+            className="w-full flex items-center justify-center gap-2 h-14 rounded-xl font-space-grotesk bg-blue-600 hover:bg-blue-700 data-[state=active]:bg-blue-500 data-[state=active]:text-white text-white border-none shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 font-semibold text-base"
+          >
+            <LogIn className="w-5 h-5" />
+            <span>Entrar</span>
+          </TabsTrigger>
+          <TabsTrigger 
+            value="signup" 
+            className="w-full flex items-center justify-center gap-2 h-14 rounded-xl font-space-grotesk bg-transparent hover:bg-white/10 data-[state=active]:bg-white/20 data-[state=active]:text-white text-blue-100 border-2 border-white/50 hover:border-white transition-all duration-300 hover:scale-105 font-semibold text-base"
+          >
+            <UserPlus className="w-5 h-5" />
+            <span>Cadastrar</span>
+          </TabsTrigger>
+        </div>
+
+        {/* Desktop: botões lado a lado */}
+        <div className="hidden sm:flex gap-3">
+          <TabsTrigger 
+            value="login" 
+            className="flex-1 max-w-[55%] flex items-center justify-center gap-2 h-14 rounded-xl font-space-grotesk bg-blue-600 hover:bg-blue-700 data-[state=active]:bg-blue-500 data-[state=active]:text-white text-white border-none shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 font-semibold text-base"
+          >
+            <LogIn className="w-5 h-5" />
+            <span>Entrar</span>
+          </TabsTrigger>
+          <TabsTrigger 
+            value="signup" 
+            className="flex-1 max-w-[45%] flex items-center justify-center gap-2 h-14 rounded-xl font-space-grotesk bg-transparent hover:bg-white/10 data-[state=active]:bg-white/20 data-[state=active]:text-white text-blue-100 border-2 border-white/50 hover:border-white transition-all duration-300 hover:scale-105 font-semibold text-base"
+          >
+            <UserPlus className="w-5 h-5" />
+            <span>Cadastrar</span>
+          </TabsTrigger>
+        </div>
+      </div>
       
       <TabsContent value="login" className="space-y-6 mt-6">
         <LoginForm

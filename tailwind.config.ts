@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -25,6 +24,9 @@ export default {
 			screens: {
 				'xs': '375px',
 				'xxs': '320px',
+			},
+			fontFamily: {
+				'space-grotesk': ['Space Grotesk', 'system-ui', 'sans-serif'],
 			},
 			colors: {
 				border: 'hsl(var(--border))',
@@ -92,11 +94,40 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				// Stellar animations
+				'twinkle': {
+					'0%, 100%': { opacity: '0.3', transform: 'scale(1)' },
+					'50%': { opacity: '1', transform: 'scale(1.2)' }
+				},
+				'float': {
+					'0%': { transform: 'translateY(100vh) translateX(0px) rotate(0deg)' },
+					'100%': { transform: 'translateY(-100px) translateX(100px) rotate(360deg)' }
+				},
+				'drift': {
+					'0%, 100%': { transform: 'translateY(0px) translateX(0px)' },
+					'25%': { transform: 'translateY(-20px) translateX(10px)' },
+					'50%': { transform: 'translateY(-10px) translateX(-15px)' },
+					'75%': { transform: 'translateY(-30px) translateX(5px)' }
+				},
+				'slideInLeft': {
+					'0%': {
+						opacity: '0',
+						transform: 'translateX(-50px) translateY(20px)'
+					},
+					'100%': {
+						opacity: '1',
+						transform: 'translateX(0) translateY(0)'
+					}
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'twinkle': 'twinkle 2s ease-in-out infinite',
+				'float': 'float 20s linear infinite',
+				'drift': 'drift 15s ease-in-out infinite',
+				'slideInLeft': 'slideInLeft 0.8s ease-out'
 			},
 			spacing: {
 				'safe-top': 'env(safe-area-inset-top)',

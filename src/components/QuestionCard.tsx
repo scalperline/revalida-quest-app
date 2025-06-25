@@ -161,7 +161,7 @@ export function QuestionCard({
                   {getOptionIcon(option.id)}
                 </div>
                 <div className="flex-1 text-left">
-                  <span className="text-base sm:text-lg md:text-xl leading-relaxed text-gray-800 dark:text-gray-200">
+                  <span className="text-sm sm:text-base md:text-lg leading-relaxed text-gray-800 dark:text-gray-200 whitespace-normal break-words">
                     {option.text}
                   </span>
                 </div>

@@ -1,3 +1,4 @@
+
 import { Navbar } from "@/components/Navbar";
 import PerformanceChart from "@/components/PerformanceChart";
 import { StatsResetDialog } from "@/components/StatsResetDialog";
@@ -75,10 +76,10 @@ export default function Stats() {
       <div className="container mx-auto px-4 py-8">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
-            <h1 className="text-3xl font-bold mb-6 text-center leading-tight tracking-tight">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-center leading-tight tracking-tight">
               <span className="text-blue-600 bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">Dashboard Acadêmico</span>
             </h1>
-            <p className="text-xl text-muted-foreground">
+            <p className="text-lg sm:text-xl lg:text-2xl text-muted-foreground leading-relaxed">
               Acompanhe seu progresso na preparação para o Revalida 📚
             </p>
           </div>

@@ -225,6 +225,21 @@
     background: linear-gradient(135deg, hsl(var(--medical-blue-primary)) 0%, hsl(var(--medical-blue-secondary)) 100%);
   }
 
+  /* Stellar Gradient - New stellar background with multiple blue tones */
+  .stellar-gradient {
+    background: 
+      radial-gradient(ellipse at top left, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
+      radial-gradient(ellipse at top right, rgba(37, 99, 235, 0.1) 0%, transparent 50%),
+      radial-gradient(ellipse at bottom left, rgba(29, 78, 216, 0.1) 0%, transparent 50%),
+      radial-gradient(ellipse at bottom right, rgba(30, 64, 175, 0.15) 0%, transparent 50%),
+      linear-gradient(135deg, 
+        hsl(var(--medical-blue-primary)) 0%, 
+        hsl(var(--medical-blue-secondary)) 35%,
+        #1e3a8a 70%,
+        #1e40af 100%
+      );
+  }
+
   .medical-glass {
     background: hsla(var(--medical-blue-glass));
     backdrop-filter: blur(16px);

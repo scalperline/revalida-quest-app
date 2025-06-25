@@ -14,7 +14,6 @@ export function Navbar() {
   const navItems = [
     { name: "Início", path: "/", icon: Home },
     { name: "Provas", path: "/questions", icon: FileText },
-    { name: "Simulado", path: "/simulado", icon: Trophy },
     { name: "Quests", path: "/missions", icon: Flag },
     { name: "Ranking", path: "/ranking", icon: Crown },
     { name: "Estatísticas", path: "/stats", icon: BarChart3 },
@@ -58,17 +57,6 @@ export function Navbar() {
             >
               <FileText className="w-4 h-4" />
               Provas
-            </Link>
-            <Link 
-              to="/simulado" 
-              className={`font-medium transition-all duration-200 flex items-center gap-2 px-3 py-2 rounded-lg ${
-                location.pathname === "/simulado" 
-                  ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg" 
-                  : "text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20"
-              }`}
-            >
-              <Trophy className="w-4 h-4" />
-              Simulado
             </Link>
             <Link 
               to="/missoes" 

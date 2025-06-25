@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -90,7 +91,7 @@ export function SimuladoFilters({ onStart }: SimuladoFiltersProps) {
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <Settings className="w-6 h-6 text-blue-500" />
-          Configure Seu Simulado Personalizado
+          Configure Sua Quest Personalizada
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-6">
@@ -230,7 +231,7 @@ export function SimuladoFilters({ onStart }: SimuladoFiltersProps) {
           size="lg"
         >
           <Play className="w-6 h-6 mr-2" />
-          🎯 Iniciar Simulado
+          🎯 Iniciar Quest
         </Button>
       </CardContent>
     </Card>

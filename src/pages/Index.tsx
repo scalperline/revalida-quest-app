@@ -18,7 +18,7 @@ export default function Index() {
             O banco completo de questões oficiais do <span className="text-blue-600 bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">Revalida INEP</span>
           </h1>
           <p className="mb-4 sm:mb-6 text-base sm:text-xl md:text-2xl text-muted-foreground text-center max-w-3xl mx-auto leading-relaxed px-2">
-            Acesse todas as provas oficiais, gabaritos, estatísticas, simulados cronometrados e gráficos de desempenho — tudo o que você precisa para acelerar sua aprovação.
+            Acesse todas as provas oficiais, gabaritos, estatísticas, quests personalizadas e gráficos de desempenho — tudo o que você precisa para acelerar sua aprovação.
           </p>
           <div className="flex justify-center items-center gap-2 sm:gap-3 text-2xl sm:text-3xl md:text-4xl mb-6 sm:mb-8">
             🎯 🏆 🚩
@@ -33,15 +33,15 @@ export default function Index() {
             to="/questoes"
           />
           <FeatureCard
-            title="Simulados Oficiais"
-            description="Simulados cronometrados, baseado em provas reais do Revalida."
-            icon={<Timer size={32} className="text-green-500 sm:w-10 sm:h-10" />}
-            to="/simulado"
+            title="Quests RPG"
+            description="Complete quests especializadas ou crie sua própria quest personalizada."
+            icon={<Flag size={32} className="text-purple-500 sm:w-10 sm:h-10" />}
+            to="/missions"
           />
           <FeatureCard
-            title="Quests RPG"
-            description="Complete quests especializadas, ganhe XP e desbloqueie conquistas."
-            icon={<Flag size={32} className="text-purple-500 sm:w-10 sm:h-10" />}
+            title="Quests Personalizadas"
+            description="Configure questões cronometradas com áreas e dificuldades específicas."
+            icon={<Timer size={32} className="text-green-500 sm:w-10 sm:h-10" />}
             to="/missions"
           />
           <FeatureCard
@@ -61,7 +61,7 @@ export default function Index() {
           <WhyItem
             icon={<Brain size={24} className="text-purple-500 sm:w-8 sm:h-8" />}
             title="Estudo Inteligente"
-            desc="Estatísticas detalhadas e simulados para reforço dos pontos fracos."
+            desc="Estatísticas detalhadas e quests personalizadas para reforço dos pontos fracos."
           />
         </section>
         

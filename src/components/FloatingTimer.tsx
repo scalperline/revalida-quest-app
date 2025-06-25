@@ -79,13 +79,6 @@ export function FloatingTimer({
 
   // Progresso baseado em questões respondidas (crescente)
   const progress = (currentQuestion / totalQuestions) * 100;
-  
-  // Tempo médio por questão baseado no tempo já gasto
-  const averageTimePerQuestion = currentQuestion > 0 ? timeElapsed / currentQuestion : 0;
-  
-  // Tempo estimado restante baseado na média real
-  const questionsRemaining = totalQuestions - currentQuestion;
-  const estimatedRemainingTime = questionsRemaining * averageTimePerQuestion;
 
   // Não renderizar se não estiver visível ou não rodando
   if (!isVisible || !running) {
@@ -131,22 +124,6 @@ export function FloatingTimer({
                   className="bg-gradient-to-r from-blue-500 to-purple-600 h-1.5 rounded-full transition-all duration-300"
                   style={{ width: `${progress}%` }}
                 />
-              </div>
-            </div>
-
-            {/* Stats */}
-            <div className="grid grid-cols-2 gap-2 text-xs mb-3">
-              <div className="bg-blue-50 dark:bg-blue-900/20 p-2 rounded text-center">
-                <div className="font-bold text-blue-600 dark:text-blue-400">
-                  {Math.round(timeElapsed / 60)}min
-                </div>
-                <div className="text-blue-500 dark:text-blue-400 text-xs">Usado</div>
-              </div>
-              <div className="bg-purple-50 dark:bg-purple-900/20 p-2 rounded text-center">
-                <div className="font-bold text-purple-600 dark:text-purple-400">
-                  {currentQuestion > 0 ? Math.round(averageTimePerQuestion / 60) : 0}min
-                </div>
-                <div className="text-purple-500 dark:text-purple-400 text-xs">Média/questão</div>
               </div>
             </div>
 

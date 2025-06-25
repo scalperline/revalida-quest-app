@@ -13,13 +13,11 @@ import { LevelUpNotification } from "@/components/LevelUpNotification";
 import { AchievementNotification } from "@/components/AchievementNotification";
 import { ConfettiAnimation } from "@/components/ConfettiAnimation";
 import { Navbar } from '@/components/Navbar';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from "@/components/ui/button";
-import { Trophy, Target, CheckCircle, Flag, Settings, ArrowLeft, ArrowRight } from 'lucide-react';
+import { Flag, Settings, ArrowLeft, ArrowRight, Trophy } from 'lucide-react';
 import { Mission } from '@/types/missions';
 import { useNavigate } from 'react-router-dom';
-import { getTotalQuestionsInSystem } from '@/utils/questionCounter';
 
 // Import all question sets
 import { QUESTOES_REVALIDA_2011 } from "@/data/questoesRevalida2011";
@@ -42,6 +40,7 @@ import { QUESTOES_REVALIDA_2023_1 } from "@/data/questoesRevalida2023_1";
 import { QUESTOES_REVALIDA_2023_2 } from "@/data/questoesRevalida2023_2";
 import { QUESTOES_REVALIDA_2024_1 } from "@/data/questoesRevalida2024_1";
 import { QUESTOES_REVALIDA_2025_1 } from "@/data/questoesRevalida2025_1";
+import { getTotalQuestionsInSystem } from '@/utils/questionCounter';
 
 export default function Missions() {
   const { missions, getMissionProgress, getAvailableMissions, getCompletedMissions } = useMissions();
@@ -256,54 +255,9 @@ export default function Missions() {
             <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">
               🚩 Quests do Revalida
             </h1>
-            <p className="text-xl text-muted-foreground mb-6">
+            <p className="text-xl text-muted-foreground">
               Complete quests especializadas ou crie sua própria quest personalizada com questões oficiais do INEP!
             </p>
-            
-            {/* Stats Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-              <Card className="border-2 border-blue-200 shadow-lg hover:shadow-xl transition-all duration-300">
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-sm font-medium text-muted-foreground">Quests Ativas</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex items-center gap-2">
-                    <div className="p-2 rounded-full bg-blue-500 text-white">
-                      <Target className="w-5 h-5" />
-                    </div>
-                    <span className="text-2xl font-bold text-blue-600">{availableMissions.length}</span>
-                  </div>
-                </CardContent>
-              </Card>
-              
-              <Card className="border-2 border-green-200 shadow-lg hover:shadow-xl transition-all duration-300">
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-sm font-medium text-muted-foreground">Concluídas</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex items-center gap-2">
-                    <div className="p-2 rounded-full bg-green-500 text-white">
-                      <CheckCircle className="w-5 h-5" />
-                    </div>
-                    <span className="text-2xl font-bold text-green-600">{completedMissions.length}</span>
-                  </div>
-                </CardContent>
-              </Card>
-              
-              <Card className="border-2 border-yellow-200 shadow-lg hover:shadow-xl transition-all duration-300">
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-sm font-medium text-muted-foreground">XP Total das Quests</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex items-center gap-2">
-                    <div className="p-2 rounded-full bg-yellow-500 text-white">
-                      <Trophy className="w-5 h-5" />
-                    </div>
-                    <span className="text-2xl font-bold text-yellow-600">{totalXP}</span>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
           </div>
 
           {/* Quest Personalizada - Tela de Resultados */}
@@ -534,7 +488,7 @@ export default function Missions() {
                   ) : (
                     <div className="text-center py-12">
                       <div className="p-6 rounded-full bg-blue-100 w-24 h-24 mx-auto mb-4 flex items-center justify-center">
-                        <Target className="w-12 h-12 text-blue-600" />
+                        <Flag className="w-12 h-12 text-blue-600" />
                       </div>
                       <h3 className="text-xl font-bold mb-2">Nenhuma quest concluída ainda</h3>
                       <p className="text-muted-foreground">

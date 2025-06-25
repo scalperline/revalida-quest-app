@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
-import { Trophy, Target, Clock, Zap, CheckCircle, AlertTriangle } from 'lucide-react';
+import { Trophy, Target, Clock, Zap, CheckCircle, AlertTriangle, Calendar } from 'lucide-react';
 
 interface MissionCardProps {
   mission: Mission;
@@ -50,7 +50,16 @@ export function MissionCard({ mission, progress, onStartMission, availableQuesti
   };
 
   return (
-    <Card className={`transition-all duration-300 hover:scale-[1.02] ${getCardBorderClass()}`}>
+    <Card className={`transition-all duration-300 hover:scale-[1.02] ${getCardBorderClass()} relative`}>
+      {/* Completion Indicator - Small badge in top right corner */}
+      {mission.completed && (
+        <div className="absolute -top-2 -right-2 z-10">
+          <div className="bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-full p-2 shadow-lg border-2 border-white">
+            <Trophy className="w-4 h-4" />
+          </div>
+        </div>
+      )}
+
       <CardHeader className="pb-3">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
@@ -60,7 +69,11 @@ export function MissionCard({ mission, progress, onStartMission, availableQuesti
             <div>
               <CardTitle className="text-lg flex items-center gap-2">
                 {mission.title}
-                {mission.completed && <CheckCircle className="w-5 h-5 text-green-600" />}
+                {mission.completed && (
+                  <span className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full font-normal">
+                    Concluída ✓
+                  </span>
+                )}
               </CardTitle>
               <p className="text-sm text-muted-foreground">{mission.description}</p>
             </div>
@@ -162,9 +175,10 @@ export function MissionCard({ mission, progress, onStartMission, availableQuesti
                 <span className="font-bold text-lg">Quest Concluída!</span>
               </div>
               {progress?.completedAt && (
-                <p className="text-xs text-green-600 dark:text-green-400 mt-1">
-                  Finalizada em {new Date(progress.completedAt).toLocaleDateString()}
-                </p>
+                <div className="flex items-center justify-center gap-1 text-xs text-green-600 dark:text-green-400 mt-1">
+                  <Calendar className="w-3 h-3" />
+                  <span>Finalizada em {new Date(progress.completedAt).toLocaleDateString()}</span>
+                </div>
               )}
             </div>
           )}

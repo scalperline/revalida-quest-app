@@ -16,11 +16,11 @@ export const getOptionColor = (
   const isUserAnswer = optionId === (userAnswer || selectedOption);
 
   if (isCorrect) {
-    return "bg-green-100 border-green-500 dark:bg-green-900/20 dark:border-green-400";
+    return "bg-gradient-to-r from-emerald-100 to-green-100 border-emerald-500 dark:from-emerald-900/30 dark:to-green-900/30 dark:border-emerald-400 shadow-lg ring-2 ring-emerald-300 ring-offset-2";
   }
   
   if (isUserAnswer && !isCorrect) {
-    return "bg-red-100 border-red-500 dark:bg-red-900/20 dark:border-red-400";
+    return "bg-gradient-to-r from-red-100 to-pink-100 border-red-500 dark:from-red-900/30 dark:to-pink-900/30 dark:border-red-400 shadow-lg ring-2 ring-red-300 ring-offset-2";
   }
 
   return "bg-gray-50 border-gray-200 dark:bg-gray-800 dark:border-gray-600";

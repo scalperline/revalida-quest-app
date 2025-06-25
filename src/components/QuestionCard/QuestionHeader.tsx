@@ -1,6 +1,6 @@
 
 import { Badge } from "@/components/ui/badge";
-import { CheckCircle, XCircle, Trophy, Calendar, Stethoscope, Star, Zap, Crown } from "lucide-react";
+import { CheckCircle, XCircle, Trophy, Calendar, Stethoscope, Star, Zap } from "lucide-react";
 import { CardHeader } from "@/components/ui/card";
 import { Question } from "@/types/question";
 
@@ -10,13 +10,6 @@ interface QuestionHeaderProps {
   isCorrectAnswer: boolean;
 }
 
-const getDifficultyLevel = (year: number) => {
-  if (year >= 2023) return { level: "Épico", color: "from-purple-500 to-purple-700", icon: Crown };
-  if (year >= 2020) return { level: "Raro", color: "from-blue-500 to-blue-700", icon: Star };
-  if (year >= 2015) return { level: "Comum", color: "from-green-500 to-green-700", icon: Zap };
-  return { level: "Lendário", color: "from-yellow-400 to-orange-500", icon: Trophy };
-};
-
 const getAreaIcon = (area: string) => {
   const areaLower = area.toLowerCase();
   if (areaLower.includes('cirurg') || areaLower.includes('ortop')) return Trophy;
@@ -25,9 +18,7 @@ const getAreaIcon = (area: string) => {
 };
 
 export function QuestionHeader({ question, isQuestionAnswered, isCorrectAnswer }: QuestionHeaderProps) {
-  const difficulty = getDifficultyLevel(question.year);
   const AreaIcon = getAreaIcon(question.area);
-  const DifficultyIcon = difficulty.icon;
 
   return (
     <CardHeader className="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-blue-900/20 dark:via-indigo-900/20 dark:to-purple-900/20 border-b border-blue-200 dark:border-gray-600 mobile-padding relative overflow-hidden">
@@ -53,12 +44,6 @@ export function QuestionHeader({ question, isQuestionAnswered, isCorrectAnswer }
             <Badge className="bg-gradient-to-r from-emerald-500 to-teal-600 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 text-sm sm:text-base px-4 py-2 font-bold max-w-[200px] truncate">
               <AreaIcon className="w-4 h-4 mr-2 flex-shrink-0" />
               <span className="truncate">{question.area}</span>
-            </Badge>
-            
-            {/* Difficulty Badge - New */}
-            <Badge className={`bg-gradient-to-r ${difficulty.color} text-white border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 text-sm sm:text-base px-4 py-2 font-bold`}>
-              <DifficultyIcon className="w-4 h-4 mr-2" />
-              {difficulty.level}
             </Badge>
           </div>
           

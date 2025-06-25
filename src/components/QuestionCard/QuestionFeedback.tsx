@@ -1,35 +1,84 @@
 
-import { AlertCircle } from "lucide-react";
+import { AlertCircle, CheckCircle, XCircle } from "lucide-react";
 import { Question } from "@/types/question";
 
 interface QuestionFeedbackProps {
   question: Question;
   showAnswer: boolean;
+  selectedOption?: string | null;
+  userAnswer?: string;
 }
 
-export function QuestionFeedback({ question, showAnswer }: QuestionFeedbackProps) {
+export function QuestionFeedback({ question, showAnswer, selectedOption, userAnswer }: QuestionFeedbackProps) {
   if (!showAnswer) return null;
+
+  const answer = userAnswer || selectedOption;
+  const isCorrect = answer === question.correct;
+  const correctOption = question.options.find(opt => opt.id === question.correct);
+  const selectedOptionData = question.options.find(opt => opt.id === answer);
 
   return (
     <>
-      <div className="mt-6 sm:mt-8 p-4 sm:p-6 bg-blue-50 dark:bg-blue-900/10 border border-blue-200 dark:border-blue-700 rounded-lg">
-        <div className="flex items-start gap-3">
-          <AlertCircle className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600 flex-shrink-0 mt-0.5" />
-          <div>
-            <p className="font-medium text-blue-800 dark:text-blue-200 mb-2 text-lg sm:text-xl">
-              Resposta correta: {question.correct}
-            </p>
-            <p className="text-base sm:text-lg text-blue-700 dark:text-blue-300 leading-relaxed">
-              {question.options.find(opt => opt.id === question.correct)?.text}
-            </p>
+      {/* Immediate feedback for correct answers */}
+      {isCorrect ? (
+        <div className="mt-6 sm:mt-8 p-4 sm:p-6 bg-gradient-to-r from-emerald-50 to-green-50 dark:from-emerald-900/20 dark:to-green-900/20 border-2 border-emerald-200 dark:border-emerald-700 rounded-lg shadow-lg">
+          <div className="flex items-start gap-3">
+            <CheckCircle className="w-6 h-6 text-emerald-600 flex-shrink-0 mt-0.5" />
+            <div>
+              <p className="font-bold text-emerald-800 dark:text-emerald-200 mb-2 text-lg sm:text-xl">
+                🎉 Parabéns! Resposta correta!
+              </p>
+              <p className="text-base sm:text-lg text-emerald-700 dark:text-emerald-300 leading-relaxed">
+                <strong>Alternativa {question.correct}:</strong> {correctOption?.text}
+              </p>
+            </div>
           </div>
         </div>
-      </div>
+      ) : (
+        /* Immediate feedback for incorrect answers with explanation */
+        <div className="mt-6 sm:mt-8 space-y-4">
+          <div className="p-4 sm:p-6 bg-gradient-to-r from-red-50 to-pink-50 dark:from-red-900/20 dark:to-pink-900/20 border-2 border-red-200 dark:border-red-700 rounded-lg shadow-lg">
+            <div className="flex items-start gap-3">
+              <XCircle className="w-6 h-6 text-red-600 flex-shrink-0 mt-0.5" />
+              <div>
+                <p className="font-bold text-red-800 dark:text-red-200 mb-2 text-lg sm:text-xl">
+                  Resposta incorreta
+                </p>
+                <p className="text-base sm:text-lg text-red-700 dark:text-red-300 leading-relaxed mb-3">
+                  <strong>Sua resposta - Alternativa {answer}:</strong> {selectedOptionData?.text}
+                </p>
+                <div className="bg-white dark:bg-gray-800 p-3 rounded-lg border border-red-200 dark:border-red-600">
+                  <p className="font-semibold text-red-800 dark:text-red-200 mb-1">
+                    ✓ Resposta correta - Alternativa {question.correct}:
+                  </p>
+                  <p className="text-red-700 dark:text-red-300">{correctOption?.text}</p>
+                </div>
+              </div>
+            </div>
+          </div>
 
+          {/* Explanation section */}
+          <div className="p-4 sm:p-6 bg-blue-50 dark:bg-blue-900/10 border border-blue-200 dark:border-blue-700 rounded-lg">
+            <div className="flex items-start gap-3">
+              <AlertCircle className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600 flex-shrink-0 mt-0.5" />
+              <div>
+                <p className="font-medium text-blue-800 dark:text-blue-200 mb-2 text-lg sm:text-xl">
+                  💡 Explicação
+                </p>
+                <p className="text-base sm:text-lg text-blue-700 dark:text-blue-300 leading-relaxed">
+                  {correctOption?.feedbackCorreta || "A alternativa correta aborda o conceito mais adequado para esta situação clínica."}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Reference section - always show when available */}
       {question.referencia && (
         <div className="mt-4 sm:mt-6 p-3 sm:p-4 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-lg">
           <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400 leading-relaxed">
-            <strong>Referência:</strong> {question.referencia}
+            <strong>📚 Referência:</strong> {question.referencia}
           </p>
         </div>
       )}

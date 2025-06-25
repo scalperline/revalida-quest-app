@@ -14,6 +14,8 @@ import Profile from "./pages/Profile";
 import Missions from "./pages/Missions";
 import Ranking from "./pages/Ranking";
 import Auth from "./pages/Auth";
+import Pricing from "./pages/Pricing";
+import Success from "./pages/Success";
 
 const queryClient = new QueryClient();
 
@@ -26,6 +28,8 @@ const App = () => (
         <BrowserRouter>
           <Routes>
             <Route path="/auth" element={<Auth />} />
+            <Route path="/pricing" element={<Pricing />} />
+            <Route path="/success" element={<Success />} />
             <Route path="/" element={
               <ProtectedRoute>
                 <Index />

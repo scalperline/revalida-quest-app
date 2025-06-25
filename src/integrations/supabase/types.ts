@@ -9,6 +9,72 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      subscribers: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          stripe_customer_id: string | null
+          subscribed: boolean
+          subscription_end: string | null
+          subscription_tier: string | null
+          updated_at: string
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          stripe_customer_id?: string | null
+          subscribed?: boolean
+          subscription_end?: string | null
+          subscription_tier?: string | null
+          updated_at?: string
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          stripe_customer_id?: string | null
+          subscribed?: boolean
+          subscription_end?: string | null
+          subscription_tier?: string | null
+          updated_at?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
+      usage_limits: {
+        Row: {
+          created_at: string
+          daily_questions_used: number | null
+          id: string
+          last_reset_date: string | null
+          monthly_simulados_used: number | null
+          updated_at: string
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          daily_questions_used?: number | null
+          id?: string
+          last_reset_date?: string | null
+          monthly_simulados_used?: number | null
+          updated_at?: string
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          daily_questions_used?: number | null
+          id?: string
+          last_reset_date?: string | null
+          monthly_simulados_used?: number | null
+          updated_at?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       user_profiles: {
         Row: {
           achievements: Json | null
@@ -101,6 +167,14 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      reset_daily_limits: {
+        Args: Record<PropertyKey, never>
+        Returns: undefined
+      }
+      reset_monthly_limits: {
+        Args: Record<PropertyKey, never>
+        Returns: undefined
+      }
       reset_weekly_xp: {
         Args: Record<PropertyKey, never>
         Returns: undefined

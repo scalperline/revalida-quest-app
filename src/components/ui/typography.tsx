@@ -19,7 +19,7 @@ const typographyVariants = cva(
         label: "text-sm font-medium",
         button: "text-sm font-medium",
       },
-      color: {
+      textColor: {
         default: "text-foreground",
         muted: "text-muted-foreground",
         primary: "text-primary",
@@ -33,7 +33,7 @@ const typographyVariants = cva(
     },
     defaultVariants: {
       variant: "p",
-      color: "default",
+      textColor: "default",
       align: "left",
     },
   }
@@ -41,18 +41,19 @@ const typographyVariants = cva(
 
 export interface TypographyProps
   extends React.HTMLAttributes<HTMLElement>,
-    VariantProps<typeof typographyVariants> {
+    Omit<VariantProps<typeof typographyVariants>, 'color'> {
   asChild?: boolean
   as?: keyof JSX.IntrinsicElements
+  color?: "default" | "muted" | "primary" | "gradient"
 }
 
 const Typography = React.forwardRef<HTMLElement, TypographyProps>(
-  ({ className, variant, color, align, asChild = false, as, ...props }, ref) => {
+  ({ className, variant, color, textColor, align, asChild = false, as, ...props }, ref) => {
     const Comp = asChild ? Slot : (as || getDefaultElement(variant))
     
     return (
       <Comp
-        className={cn(typographyVariants({ variant, color, align, className }))}
+        className={cn(typographyVariants({ variant, textColor: color || textColor, align, className }))}
         ref={ref}
         {...props}
       />

@@ -225,18 +225,23 @@
     background: linear-gradient(135deg, hsl(var(--medical-blue-primary)) 0%, hsl(var(--medical-blue-secondary)) 100%);
   }
 
-  /* Stellar Gradient - New stellar background with multiple blue tones */
+  /* Enhanced Galactic Gradient - Dark tones with more visible gradient and galactic aspect */
   .stellar-gradient {
     background: 
-      radial-gradient(ellipse at top left, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
-      radial-gradient(ellipse at top right, rgba(37, 99, 235, 0.1) 0%, transparent 50%),
-      radial-gradient(ellipse at bottom left, rgba(29, 78, 216, 0.1) 0%, transparent 50%),
-      radial-gradient(ellipse at bottom right, rgba(30, 64, 175, 0.15) 0%, transparent 50%),
+      /* Nebula clouds */
+      radial-gradient(ellipse 800px 400px at 20% 30%, rgba(30, 64, 175, 0.3) 0%, transparent 60%),
+      radial-gradient(ellipse 600px 300px at 80% 70%, rgba(59, 130, 246, 0.25) 0%, transparent 60%),
+      radial-gradient(ellipse 400px 200px at 40% 80%, rgba(147, 51, 234, 0.2) 0%, transparent 50%),
+      radial-gradient(ellipse 300px 150px at 70% 20%, rgba(79, 70, 229, 0.25) 0%, transparent 50%),
+      
+      /* Deep space gradient */
       linear-gradient(135deg, 
-        hsl(var(--medical-blue-primary)) 0%, 
-        hsl(var(--medical-blue-secondary)) 35%,
-        #1e3a8a 70%,
-        #1e40af 100%
+        #0c1445 0%,     /* Very dark navy */
+        #1e293b 25%,    /* Dark slate */
+        #1e40af 45%,    /* Deep blue */
+        #1e3a8a 65%,    /* Navy blue */
+        #312e81 85%,    /* Dark indigo */
+        #1e1b4b 100%    /* Very dark indigo */
       );
   }
 

@@ -17,16 +17,61 @@ const getAreaIcon = (area: string) => {
   return Stethoscope; // Default medical icon
 };
 
-const getDifficultyLevel = (questionId: number) => {
-  // Simple logic to assign difficulty based on question ID
-  if (questionId <= 30) return { level: "Fácil", color: "bg-green-500" };
-  if (questionId <= 70) return { level: "Intermediária", color: "bg-orange-500" };
-  return { level: "Avançada", color: "bg-red-500" };
+const getDifficultyLevel = (question: Question) => {
+  let difficultyScore = 0;
+  
+  // Pontuação baseada na área médica (algumas áreas são mais complexas)
+  const areaLower = question.area.toLowerCase();
+  if (areaLower.includes('cardiologia') || areaLower.includes('neurologia') || 
+      areaLower.includes('oncologia') || areaLower.includes('cirurgia')) {
+    difficultyScore += 2;
+  } else if (areaLower.includes('infectologia') || areaLower.includes('endocrinologia') || 
+             areaLower.includes('nefrologia') || areaLower.includes('pneumologia')) {
+    difficultyScore += 1;
+  }
+  
+  // Pontuação baseada no ano (anos mais recentes tendem a ser mais difíceis)
+  if (question.year >= 2023) {
+    difficultyScore += 2;
+  } else if (question.year >= 2020) {
+    difficultyScore += 1;
+  }
+  
+  // Pontuação baseada na complexidade do enunciado
+  const enunciadoLength = question.enunciado.length;
+  if (enunciadoLength > 800) {
+    difficultyScore += 2;
+  } else if (enunciadoLength > 400) {
+    difficultyScore += 1;
+  }
+  
+  // Pontuação baseada na presença de imagem (geralmente mais complexas)
+  if (question.image) {
+    difficultyScore += 1;
+  }
+  
+  // Pontuação baseada no ID da questão (distribuição mais natural)
+  const idMod = question.id % 7; // Usa módulo para criar variação
+  if (idMod === 0 || idMod === 6) {
+    difficultyScore += 2; // ~28% avançadas
+  } else if (idMod === 1 || idMod === 5) {
+    difficultyScore += 1; // ~28% intermediárias  
+  }
+  // ~44% permanecem fáceis (idMod 2, 3, 4)
+  
+  // Classificação final
+  if (difficultyScore >= 5) {
+    return { level: "Avançada", color: "bg-red-500" };
+  } else if (difficultyScore >= 3) {
+    return { level: "Intermediária", color: "bg-orange-500" };
+  } else {
+    return { level: "Fácil", color: "bg-green-500" };
+  }
 };
 
 export function QuestionHeader({ question, isQuestionAnswered, isCorrectAnswer }: QuestionHeaderProps) {
   const AreaIcon = getAreaIcon(question.area);
-  const difficulty = getDifficultyLevel(question.id);
+  const difficulty = getDifficultyLevel(question);
 
   return (
     <CardHeader className="bg-gradient-to-r from-blue-50 to-violet-50 dark:from-slate-800 dark:to-slate-700 rounded-t-xl border-b border-blue-100 dark:border-slate-600 p-6 shadow-md">

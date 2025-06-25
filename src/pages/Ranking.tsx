@@ -47,9 +47,9 @@ export default function Ranking() {
           return (
             <Card 
               key={user.id} 
-              className={`transition-all duration-200 hover:shadow-md ${
+              className={`transition-all duration-200 hover:shadow-md bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm border-2 border-blue-200/50 dark:border-blue-700/50 ${
                 isCurrentUser 
-                  ? 'ring-2 ring-blue-500 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20' 
+                  ? 'ring-2 ring-blue-500 bg-gradient-to-r from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20' 
                   : ''
               }`}
             >
@@ -61,8 +61,8 @@ export default function Ranking() {
                   </div>
 
                   {/* Avatar */}
-                  <Avatar className="w-12 h-12 border-2 border-gray-200">
-                    <AvatarFallback className="bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold">
+                  <Avatar className="w-12 h-12 border-2 border-blue-200 dark:border-blue-700">
+                    <AvatarFallback className="bg-gradient-to-r from-blue-500 to-blue-600 text-white font-semibold">
                       {user.display_name.split(' ').map(n => n[0]).join('').toUpperCase()}
                     </AvatarFallback>
                   </Avatar>
@@ -74,12 +74,12 @@ export default function Ranking() {
                         {user.display_name}
                       </h3>
                       {isCurrentUser && (
-                        <Badge variant="secondary" className="bg-blue-100 text-blue-800">
+                        <Badge variant="secondary" className="bg-blue-100 text-blue-800 dark:bg-blue-900/50 dark:text-blue-200">
                           Você
                         </Badge>
                       )}
                     </div>
-                    <p className="text-sm text-muted-foreground">
+                    <p className="text-sm text-gray-700 dark:text-gray-300">
                       {getLevelTitle(user.level)} • Nível {user.level}
                     </p>
                   </div>
@@ -89,7 +89,7 @@ export default function Ranking() {
                     <div className="text-2xl font-bold text-gray-900 dark:text-white">
                       {type === 'allTime' ? user.total_xp : user.weekly_xp}
                     </div>
-                    <div className="text-xs text-muted-foreground">
+                    <div className="text-xs text-gray-600 dark:text-gray-400">
                       XP {type === 'allTime' ? 'Total' : 'Semanal'}
                     </div>
                   </div>
@@ -104,13 +104,13 @@ export default function Ranking() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-100 dark:from-gray-900 dark:to-gray-800">
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-blue-100 to-blue-200 dark:from-gray-900 dark:to-gray-800">
         <Navbar />
         <div className="container mx-auto px-4 py-8">
           <div className="flex items-center justify-center min-h-[400px]">
             <div className="text-center">
               <Trophy className="w-16 h-16 text-blue-500 mx-auto mb-4 animate-pulse" />
-              <p className="text-lg text-muted-foreground">Carregando ranking...</p>
+              <p className="text-lg text-gray-700 dark:text-gray-300">Carregando ranking...</p>
             </div>
           </div>
         </div>
@@ -119,26 +119,34 @@ export default function Ranking() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-100 dark:from-gray-900 dark:to-gray-800">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-blue-100 to-blue-200 dark:from-gray-900 dark:to-gray-800 relative overflow-hidden">
+      {/* Animated Background Elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute -top-4 -right-4 w-24 h-24 bg-blue-400 rounded-full opacity-20 animate-bounce"></div>
+        <div className="absolute top-1/4 -left-4 w-16 h-16 bg-blue-500 rounded-full opacity-20 animate-pulse"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-12 h-12 bg-blue-300 rounded-full opacity-20 animate-ping"></div>
+        <div className="absolute top-1/3 right-1/3 w-8 h-8 bg-blue-600 rounded-full opacity-20 animate-bounce delay-1000"></div>
+      </div>
+      
       <Navbar />
       
-      <div className="container mx-auto px-4 py-8">
+      <div className="relative z-10 container mx-auto px-4 py-8">
         <div className="max-w-4xl mx-auto">
           
           {/* Header */}
           <div className="text-center mb-8">
             <h1 className="text-3xl font-bold mb-6 text-center leading-tight tracking-tight">
-              <span className="text-blue-600 bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">Ranking Revalida Quest</span>
+              <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">Ranking Revalida Quest</span>
             </h1>
-            <p className="text-xl text-muted-foreground mb-6">
+            <p className="text-xl text-gray-700 dark:text-gray-300 mb-6">
               Veja como você está se saindo em comparação com outros futuros médicos!
             </p>
             
             {/* Current User Position Stats */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-              <Card>
+              <Card className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm border-2 border-blue-200/50 dark:border-blue-700/50">
                 <CardHeader className="pb-2">
-                  <CardTitle className="text-sm font-medium text-muted-foreground">Sua Posição Geral</CardTitle>
+                  <CardTitle className="text-sm font-medium text-gray-600 dark:text-gray-400">Sua Posição Geral</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="flex items-center gap-2">
@@ -150,14 +158,14 @@ export default function Ranking() {
                 </CardContent>
               </Card>
               
-              <Card>
+              <Card className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm border-2 border-blue-200/50 dark:border-blue-700/50">
                 <CardHeader className="pb-2">
-                  <CardTitle className="text-sm font-medium text-muted-foreground">Posição Semanal</CardTitle>
+                  <CardTitle className="text-sm font-medium text-gray-600 dark:text-gray-400">Posição Semanal</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="flex items-center gap-2">
-                    <Calendar className="w-5 h-5 text-green-600" />
-                    <span className="text-2xl font-bold text-green-600">
+                    <Calendar className="w-5 h-5 text-blue-600" />
+                    <span className="text-2xl font-bold text-blue-600">
                       {currentUserPosition.weekly || 'N/A'}º
                     </span>
                   </div>
@@ -168,19 +176,19 @@ export default function Ranking() {
 
           {/* Ranking Tabs */}
           <Tabs defaultValue="allTime" className="w-full">
-            <TabsList className="grid w-full grid-cols-2 mb-6">
-              <TabsTrigger value="allTime" className="flex items-center gap-2">
+            <TabsList className="grid w-full grid-cols-2 mb-6 bg-blue-50 dark:bg-gray-700">
+              <TabsTrigger value="allTime" className="flex items-center gap-2 data-[state=active]:bg-blue-600 data-[state=active]:text-white">
                 <Trophy className="w-4 h-4" />
                 Ranking Geral
               </TabsTrigger>
-              <TabsTrigger value="weekly" className="flex items-center gap-2">
+              <TabsTrigger value="weekly" className="flex items-center gap-2 data-[state=active]:bg-blue-600 data-[state=active]:text-white">
                 <Calendar className="w-4 h-4" />
                 Ranking Semanal
               </TabsTrigger>
             </TabsList>
             
             <TabsContent value="allTime" className="space-y-6">
-              <Card>
+              <Card className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm border-2 border-blue-200/50 dark:border-blue-700/50">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <Trophy className="w-6 h-6 text-yellow-500" />
@@ -196,7 +204,7 @@ export default function Ranking() {
                       <h3 className="text-xl font-bold mb-2 text-gray-600 dark:text-gray-400">
                         Nenhum estudante no ranking ainda
                       </h3>
-                      <p className="text-muted-foreground">
+                      <p className="text-gray-600 dark:text-gray-400">
                         Seja o primeiro a aparecer no ranking!
                       </p>
                     </div>
@@ -206,10 +214,10 @@ export default function Ranking() {
             </TabsContent>
             
             <TabsContent value="weekly" className="space-y-6">
-              <Card>
+              <Card className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm border-2 border-blue-200/50 dark:border-blue-700/50">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
-                    <Calendar className="w-6 h-6 text-green-500" />
+                    <Calendar className="w-6 h-6 text-blue-600" />
                     Top da Semana - XP Semanal
                   </CardTitle>
                 </CardHeader>
@@ -222,7 +230,7 @@ export default function Ranking() {
                       <h3 className="text-xl font-bold mb-2 text-gray-600 dark:text-gray-400">
                         Nenhum estudante no ranking semanal ainda
                       </h3>
-                      <p className="text-muted-foreground">
+                      <p className="text-gray-600 dark:text-gray-400">
                         Comece a estudar para aparecer no ranking desta semana!
                       </p>
                     </div>

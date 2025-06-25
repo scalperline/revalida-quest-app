@@ -20,7 +20,7 @@ export function QuestionFeedback({ question, showAnswer, selectedOption, userAns
   return (
     <>
       {/* Simple answer confirmation card */}
-      <div className="mt-6 p-4 sm:p-5 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-lg">
+      <div className="mt-4 p-4 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-lg">
         <div className="flex items-center gap-3">
           {isCorrect ? (
             <CheckCircle className="w-5 h-5 text-emerald-600" />
@@ -28,10 +28,10 @@ export function QuestionFeedback({ question, showAnswer, selectedOption, userAns
             <XCircle className="w-5 h-5 text-red-600" />
           )}
           <div>
-            <p className="font-semibold text-base sm:text-lg text-gray-800 dark:text-gray-200">
+            <p className="font-medium text-gray-800 dark:text-gray-200">
               <strong>Gabarito:</strong> Alternativa {question.correct}
             </p>
-            <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400 mt-1 leading-relaxed">
+            <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
               {correctOption?.text}
             </p>
           </div>
@@ -40,13 +40,13 @@ export function QuestionFeedback({ question, showAnswer, selectedOption, userAns
 
       {/* Enhanced feedback only for incorrect answers */}
       {!isCorrect && (
-        <div className="mt-6 sm:mt-8 space-y-6">
+        <div className="mt-6 sm:mt-8 space-y-4">
           {/* Detailed analysis of why the answer is wrong */}
-          <div className="p-5 sm:p-6 bg-gradient-to-r from-orange-50 to-amber-50 dark:from-orange-900/10 dark:to-amber-900/10 border border-orange-200 dark:border-orange-700 rounded-lg">
-            <div className="flex items-start gap-3 sm:gap-4">
-              <AlertCircle className="w-6 h-6 text-orange-600 flex-shrink-0 mt-0.5" />
+          <div className="p-4 sm:p-6 bg-gradient-to-r from-orange-50 to-amber-50 dark:from-orange-900/10 dark:to-amber-900/10 border border-orange-200 dark:border-orange-700 rounded-lg">
+            <div className="flex items-start gap-3">
+              <AlertCircle className="w-5 h-5 sm:w-6 sm:h-6 text-orange-600 flex-shrink-0 mt-0.5" />
               <div>
-                <p className="font-semibold text-orange-800 dark:text-orange-200 mb-3 text-lg sm:text-xl">
+                <p className="font-medium text-orange-800 dark:text-orange-200 mb-3 text-lg sm:text-xl">
                   🔍 Por que sua resposta está incorreta?
                 </p>
                 <div className="text-base sm:text-lg text-orange-700 dark:text-orange-300 leading-relaxed space-y-3">
@@ -54,10 +54,10 @@ export function QuestionFeedback({ question, showAnswer, selectedOption, userAns
                     <p>{selectedOptionData.feedbackErrada}</p>
                   ) : (
                     <div>
-                      <p className="mb-3">
+                      <p className="mb-2">
                         A alternativa escolhida não é a mais adequada porque pode:
                       </p>
-                      <ul className="list-disc list-inside space-y-2 ml-2">
+                      <ul className="list-disc list-inside space-y-1 ml-2">
                         <li>Não seguir as diretrizes clínicas atuais</li>
                         <li>Apresentar riscos desnecessários ao paciente</li>
                         <li>Não ser a primeira linha de tratamento</li>
@@ -71,11 +71,11 @@ export function QuestionFeedback({ question, showAnswer, selectedOption, userAns
           </div>
 
           {/* Explanation section */}
-          <div className="p-5 sm:p-6 bg-blue-50 dark:bg-blue-900/10 border border-blue-200 dark:border-blue-700 rounded-lg">
-            <div className="flex items-start gap-3 sm:gap-4">
-              <AlertCircle className="w-6 h-6 text-blue-600 flex-shrink-0 mt-0.5" />
+          <div className="p-4 sm:p-6 bg-blue-50 dark:bg-blue-900/10 border border-blue-200 dark:border-blue-700 rounded-lg">
+            <div className="flex items-start gap-3">
+              <AlertCircle className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600 flex-shrink-0 mt-0.5" />
               <div>
-                <p className="font-semibold text-blue-800 dark:text-blue-200 mb-3 text-lg sm:text-xl">
+                <p className="font-medium text-blue-800 dark:text-blue-200 mb-3 text-lg sm:text-xl">
                   💡 Por que a alternativa correta é a melhor opção?
                 </p>
                 <div className="text-base sm:text-lg text-blue-700 dark:text-blue-300 leading-relaxed space-y-3">
@@ -83,10 +83,10 @@ export function QuestionFeedback({ question, showAnswer, selectedOption, userAns
                     <p>{correctOption.feedbackCorreta}</p>
                   ) : (
                     <div>
-                      <p className="mb-3">
+                      <p className="mb-2">
                         A alternativa correta é preferível porque:
                       </p>
-                      <ul className="list-disc list-inside space-y-2 ml-2">
+                      <ul className="list-disc list-inside space-y-1 ml-2">
                         <li>Segue as diretrizes e protocolos médicos atuais</li>
                         <li>Oferece maior segurança e eficácia</li>
                         <li>É considerada primeira linha para este caso</li>
@@ -96,11 +96,11 @@ export function QuestionFeedback({ question, showAnswer, selectedOption, userAns
                   )}
                   
                   {/* Learning reinforcement */}
-                  <div className="mt-4 p-4 bg-blue-100 dark:bg-blue-800/20 rounded-lg border border-blue-200 dark:border-blue-600">
-                    <p className="text-sm sm:text-base font-semibold text-blue-800 dark:text-blue-200 mb-2">
+                  <div className="mt-4 p-3 bg-blue-100 dark:bg-blue-800/20 rounded-lg border border-blue-200 dark:border-blue-600">
+                    <p className="text-sm font-medium text-blue-800 dark:text-blue-200 mb-1">
                       📚 Para revisar:
                     </p>
-                    <p className="text-sm sm:text-base text-blue-700 dark:text-blue-300 leading-relaxed">
+                    <p className="text-sm text-blue-700 dark:text-blue-300">
                       Revise os conceitos de <strong>{question.area}</strong> e pratique mais questões similares para fortalecer seu conhecimento nesta área.
                     </p>
                   </div>
@@ -113,7 +113,7 @@ export function QuestionFeedback({ question, showAnswer, selectedOption, userAns
 
       {/* Reference section - always show when available */}
       {question.referencia && (
-        <div className="mt-6 p-4 sm:p-5 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-lg">
+        <div className="mt-4 sm:mt-6 p-3 sm:p-4 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-lg">
           <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400 leading-relaxed">
             <strong>📚 Referência:</strong> {question.referencia}
           </p>

@@ -8,7 +8,7 @@ interface QuestionContentProps {
 export function QuestionContent({ question }: QuestionContentProps) {
   return (
     <div className="mb-6 sm:mb-8">
-      <p className="text-base sm:text-lg lg:text-xl leading-relaxed text-gray-800 dark:text-gray-200 font-medium">
+      <p className="text-lg sm:text-xl leading-relaxed text-gray-800 dark:text-gray-200">
         {question.enunciado}
       </p>
       

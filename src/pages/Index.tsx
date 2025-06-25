@@ -14,7 +14,7 @@ export default function Index() {
       <Navbar />
       <main className="w-full max-w-6xl mx-auto px-3 sm:px-4 py-8 sm:py-12 md:py-20 flex flex-col items-center">
         <div className="text-center mb-12 sm:mb-16 w-full">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 text-center leading-tight tracking-tight px-2">
+          <h1 className="text-2xl sm:text-4xl md:text-6xl font-bold mb-4 sm:mb-6 text-center leading-tight tracking-tight px-2">
             O banco completo de questões oficiais do <span className="text-blue-600 bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">Revalida INEP</span>
           </h1>
           <p className="mb-4 sm:mb-6 text-base sm:text-xl md:text-2xl text-muted-foreground text-center max-w-3xl mx-auto leading-relaxed px-2">

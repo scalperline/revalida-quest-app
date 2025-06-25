@@ -20,8 +20,8 @@ import { QUESTOES_REVALIDA_2023_2 } from "@/data/questoesRevalida2023_2";
 import { QUESTOES_REVALIDA_2024_1 } from "@/data/questoesRevalida2024_1";
 import { QUESTOES_REVALIDA_2025_1 } from "@/data/questoesRevalida2025_1";
 
-const getAllQuestions = () => {
-  return [
+export function getTotalQuestionsInSystem(): number {
+  const allQuestions = [
     ...QUESTOES_REVALIDA_2011,
     ...QUESTOES_REVALIDA_2012,
     ...QUESTOES_REVALIDA_2013,
@@ -43,13 +43,12 @@ const getAllQuestions = () => {
     ...QUESTOES_REVALIDA_2024_1,
     ...QUESTOES_REVALIDA_2025_1,
   ];
-};
 
-export function getTotalQuestionsInSystem(): number {
-  const allQuestions = getAllQuestions();
+  // Remove duplicates by ID in case there are any
   const uniqueQuestions = Array.from(
     new Map(allQuestions.map(q => [q.id, q])).values()
   );
+
   return uniqueQuestions.length;
 }
 
@@ -62,12 +61,4 @@ export function getQuestionsCompletionStats(totalAnswered: number) {
     completionPercentage,
     remaining: totalInSystem - totalAnswered
   };
-}
-
-export async function getQuestionsCountByAreaAndYear(area: string, year: string): Promise<number> {
-  const allQuestions = getAllQuestions();
-  const filteredQuestions = allQuestions.filter(q => 
-    q.area === area && q.year.toString() === year
-  );
-  return filteredQuestions.length;
 }

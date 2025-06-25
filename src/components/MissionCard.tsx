@@ -67,7 +67,7 @@ export function MissionCard({ mission, progress, onStartMission, availableQuesti
               <Target className="w-5 h-5" />
             </div>
             <div>
-              <CardTitle className="text-lg sm:text-xl leading-relaxed flex items-center gap-2">
+              <CardTitle className="text-lg flex items-center gap-2">
                 {mission.title}
                 {mission.completed && (
                   <span className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full font-normal">
@@ -75,7 +75,7 @@ export function MissionCard({ mission, progress, onStartMission, availableQuesti
                   </span>
                 )}
               </CardTitle>
-              <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">{mission.description}</p>
+              <p className="text-sm text-muted-foreground">{mission.description}</p>
             </div>
           </div>
           <div className="text-right">
@@ -92,9 +92,9 @@ export function MissionCard({ mission, progress, onStartMission, availableQuesti
       <CardContent>
         <div className="space-y-4">
           <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-xl border-l-4 border-blue-500 shadow-sm">
-            <p className="font-semibold text-base sm:text-lg text-blue-800 dark:text-blue-200">🎯 Objetivo:</p>
-            <p className="text-sm sm:text-base text-blue-700 dark:text-blue-300 leading-relaxed">{mission.objective}</p>
-            <p className="text-sm sm:text-base text-blue-600 dark:text-blue-400 mt-1 leading-relaxed">
+            <p className="font-medium text-blue-800 dark:text-blue-200">🎯 Objetivo:</p>
+            <p className="text-sm text-blue-700 dark:text-blue-300">{mission.objective}</p>
+            <p className="text-sm text-blue-600 dark:text-blue-400 mt-1">
               Meta de acertos: {mission.targetAccuracy}%
               {mission.timeLimit && ` • Tempo limite: ${mission.timeLimit} min`}
             </p>
@@ -111,7 +111,7 @@ export function MissionCard({ mission, progress, onStartMission, availableQuesti
               ) : (
                 <AlertTriangle className="w-5 h-5 text-orange-600" />
               )}
-              <span className={`text-sm sm:text-base font-medium leading-relaxed ${hasEnoughQuestions 
+              <span className={`text-sm font-medium ${hasEnoughQuestions 
                 ? 'text-green-800 dark:text-green-200' 
                 : 'text-orange-800 dark:text-orange-200'
               }`}>
@@ -119,7 +119,7 @@ export function MissionCard({ mission, progress, onStartMission, availableQuesti
               </span>
             </div>
             {!hasEnoughQuestions && (
-              <p className="text-xs sm:text-sm text-orange-700 dark:text-orange-300 mt-1 leading-relaxed">
+              <p className="text-xs text-orange-700 dark:text-orange-300 mt-1">
                 Questões insuficientes na área {mission.area}. Selecione outro ano.
               </p>
             )}
@@ -127,9 +127,9 @@ export function MissionCard({ mission, progress, onStartMission, availableQuesti
 
           {/* Progresso */}
           <div className="space-y-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-xl border border-gray-200 dark:border-gray-700">
-            <div className="flex justify-between text-sm sm:text-base">
-              <span className="font-medium leading-relaxed">Progresso</span>
-              <span className={`leading-relaxed ${mission.completed ? 'text-green-600 font-bold' : 'font-medium'}`}>
+            <div className="flex justify-between text-sm">
+              <span className="font-medium">Progresso</span>
+              <span className={mission.completed ? 'text-green-600 font-bold' : 'font-medium'}>
                 {mission.progress}/{mission.targetQuestions} questões
               </span>
             </div>
@@ -138,7 +138,7 @@ export function MissionCard({ mission, progress, onStartMission, availableQuesti
               className={`h-3 ${mission.completed ? 'bg-green-100' : ''}`}
             />
             {progress && progress.questionsAnswered > 0 && (
-              <div className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
+              <div className="text-xs text-muted-foreground">
                 Aproveitamento atual: {accuracy.toFixed(1)}%
               </div>
             )}
@@ -148,12 +148,12 @@ export function MissionCard({ mission, progress, onStartMission, availableQuesti
           <div className="flex items-center justify-between p-3 bg-gradient-to-r from-yellow-50 to-amber-50 dark:from-yellow-900/20 dark:to-amber-900/20 rounded-xl border-l-4 border-yellow-500 border border-yellow-200 dark:border-yellow-800 shadow-sm">
             <div className="flex items-center gap-2 text-yellow-800 dark:text-yellow-200">
               <Zap className="w-5 h-5" />
-              <span className="font-medium text-sm sm:text-base leading-relaxed">+{mission.reward.xp} XP</span>
+              <span className="font-medium">+{mission.reward.xp} XP</span>
             </div>
             {mission.reward.badge && (
               <div className="flex items-center gap-1 text-yellow-700 dark:text-yellow-300">
                 <Trophy className="w-5 h-5" />
-                <span className="text-sm sm:text-base font-medium leading-relaxed">{mission.reward.badge}</span>
+                <span className="text-sm font-medium">{mission.reward.badge}</span>
               </div>
             )}
           </div>
@@ -163,7 +163,7 @@ export function MissionCard({ mission, progress, onStartMission, availableQuesti
             <Button
               onClick={() => onStartMission(mission)}
               disabled={!hasEnoughQuestions}
-              className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white disabled:opacity-50 disabled:cursor-not-allowed border border-blue-500 shadow-lg hover:shadow-xl transition-all duration-200 h-12 text-sm sm:text-base font-medium"
+              className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white disabled:opacity-50 disabled:cursor-not-allowed border border-blue-500 shadow-lg hover:shadow-xl transition-all duration-200"
             >
               <Target className="w-4 h-4 mr-2" />
               {mission.progress > 0 ? 'Continuar Quest' : 'Iniciar Quest'}
@@ -172,12 +172,12 @@ export function MissionCard({ mission, progress, onStartMission, availableQuesti
             <div className="text-center p-4 bg-gradient-to-r from-green-100 to-emerald-100 dark:from-green-900/20 dark:to-emerald-900/20 rounded-xl border-2 border-green-300 shadow-md">
               <div className="flex items-center justify-center gap-2 text-green-700 dark:text-green-300">
                 <Trophy className="w-6 h-6" />
-                <span className="font-bold text-lg sm:text-xl leading-relaxed">Quest Concluída!</span>
+                <span className="font-bold text-lg">Quest Concluída!</span>
               </div>
               {progress?.completedAt && (
-                <div className="flex items-center justify-center gap-1 text-xs sm:text-sm text-green-600 dark:text-green-400 mt-1">
+                <div className="flex items-center justify-center gap-1 text-xs text-green-600 dark:text-green-400 mt-1">
                   <Calendar className="w-3 h-3" />
-                  <span className="leading-relaxed">Finalizada em {new Date(progress.completedAt).toLocaleDateString()}</span>
+                  <span>Finalizada em {new Date(progress.completedAt).toLocaleDateString()}</span>
                 </div>
               )}
             </div>

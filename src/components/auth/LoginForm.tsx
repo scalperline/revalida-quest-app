@@ -25,8 +25,8 @@ export function LoginForm({
   onSubmit
 }: LoginFormProps) {
   return (
-    <form onSubmit={onSubmit} className="space-y-6">
-      <div className="space-y-2">
+    <form onSubmit={onSubmit} className="space-y-4">
+      <div className="space-y-1.5">
         <Label htmlFor="email" className="text-sm font-medium text-gray-700">
           Email <span className="text-red-500">*</span>
         </Label>
@@ -38,10 +38,10 @@ export function LoginForm({
           onChange={(e) => onEmailChange(e.target.value)}
           required
           disabled={isSubmitting || loading}
-          className="medical-input"
+          className="h-10 rounded-lg border-2 border-gray-200 focus:border-blue-500 transition-all duration-200 px-3 text-sm"
         />
       </div>
-      <div className="space-y-2">
+      <div className="space-y-1.5">
         <Label htmlFor="password" className="text-sm font-medium text-gray-700">
           Senha <span className="text-red-500">*</span>
         </Label>
@@ -53,17 +53,17 @@ export function LoginForm({
           onChange={(e) => onPasswordChange(e.target.value)}
           required
           disabled={isSubmitting || loading}
-          className="medical-input"
+          className="h-10 rounded-lg border-2 border-gray-200 focus:border-blue-500 transition-all duration-200 px-3 text-sm"
         />
       </div>
       <Button 
         type="submit" 
-        className="w-full medical-button-primary"
+        className="w-full h-10 medical-button-primary text-sm font-semibold"
         disabled={isSubmitting || loading}
       >
         {isSubmitting || loading ? (
           <div className="flex items-center gap-2">
-            <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+            <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
             Entrando...
           </div>
         ) : (

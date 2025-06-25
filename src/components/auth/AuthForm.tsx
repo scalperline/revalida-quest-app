@@ -84,11 +84,11 @@ export function AuthForm() {
   };
 
   return (
-    <div className="w-full max-w-md mx-auto">
-      <Card className="medical-card shadow-2xl border-0 overflow-hidden">
+    <div className="w-full max-w-sm mx-auto">
+      <Card className="bg-white/95 backdrop-blur-sm shadow-2xl border-0 overflow-hidden rounded-2xl">
         <AuthFormHeader />
         
-        <CardContent className="px-8 pb-8">
+        <CardContent className="px-6 pb-6">
           <AuthSuccessAlert showSuccess={showSuccess} />
           <AuthErrorAlert error={error} />
 

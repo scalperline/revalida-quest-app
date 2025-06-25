@@ -29,8 +29,8 @@ export function SignupForm({
   onSubmit
 }: SignupFormProps) {
   return (
-    <form onSubmit={onSubmit} className="space-y-6">
-      <div className="space-y-2">
+    <form onSubmit={onSubmit} className="space-y-4">
+      <div className="space-y-1.5">
         <Label htmlFor="displayName" className="text-sm font-medium text-gray-700">Nome</Label>
         <Input
           id="displayName"
@@ -39,10 +39,10 @@ export function SignupForm({
           value={displayName}
           onChange={(e) => onDisplayNameChange(e.target.value)}
           disabled={isSubmitting || loading}
-          className="medical-input"
+          className="h-10 rounded-lg border-2 border-gray-200 focus:border-blue-500 transition-all duration-200 px-3 text-sm"
         />
       </div>
-      <div className="space-y-2">
+      <div className="space-y-1.5">
         <Label htmlFor="signupEmail" className="text-sm font-medium text-gray-700">
           Email <span className="text-red-500">*</span>
         </Label>
@@ -54,10 +54,10 @@ export function SignupForm({
           onChange={(e) => onEmailChange(e.target.value)}
           required
           disabled={isSubmitting || loading}
-          className="medical-input"
+          className="h-10 rounded-lg border-2 border-gray-200 focus:border-blue-500 transition-all duration-200 px-3 text-sm"
         />
       </div>
-      <div className="space-y-2">
+      <div className="space-y-1.5">
         <Label htmlFor="signupPassword" className="text-sm font-medium text-gray-700">
           Senha <span className="text-red-500">*</span>
         </Label>
@@ -70,18 +70,18 @@ export function SignupForm({
           required
           disabled={isSubmitting || loading}
           minLength={6}
-          className="medical-input"
+          className="h-10 rounded-lg border-2 border-gray-200 focus:border-blue-500 transition-all duration-200 px-3 text-sm"
         />
-        <p className="text-xs text-gray-500 mt-1">Mínimo de 6 caracteres</p>
+        <p className="text-xs text-gray-500">Mínimo de 6 caracteres</p>
       </div>
       <Button 
         type="submit" 
-        className="w-full medical-button-primary"
+        className="w-full h-10 medical-button-primary text-sm font-semibold"
         disabled={isSubmitting || loading}
       >
         {isSubmitting || loading ? (
           <div className="flex items-center gap-2">
-            <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+            <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
             Criando conta...
           </div>
         ) : (

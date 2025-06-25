@@ -34,24 +34,24 @@ export function AuthTabs({
 }: AuthTabsProps) {
   return (
     <Tabs defaultValue="login" className="w-full" onValueChange={onResetForm}>
-      <TabsList className="grid w-full grid-cols-2 bg-gray-50 rounded-xl p-1 mb-6">
+      <TabsList className="grid w-full grid-cols-2 bg-gray-50 rounded-lg p-1 mb-4 h-9">
         <TabsTrigger 
           value="login" 
-          className="flex items-center gap-2 rounded-lg data-[state=active]:bg-white data-[state=active]:shadow-md transition-all"
+          className="flex items-center gap-1.5 rounded-md data-[state=active]:bg-white data-[state=active]:shadow-sm transition-all text-sm py-1.5"
         >
-          <LogIn className="w-4 h-4" />
+          <LogIn className="w-3.5 h-3.5" />
           Entrar
         </TabsTrigger>
         <TabsTrigger 
           value="signup" 
-          className="flex items-center gap-2 rounded-lg data-[state=active]:bg-white data-[state=active]:shadow-md transition-all"
+          className="flex items-center gap-1.5 rounded-md data-[state=active]:bg-white data-[state=active]:shadow-sm transition-all text-sm py-1.5"
         >
-          <UserPlus className="w-4 h-4" />
+          <UserPlus className="w-3.5 h-3.5" />
           Cadastrar
         </TabsTrigger>
       </TabsList>
       
-      <TabsContent value="login" className="space-y-6">
+      <TabsContent value="login" className="space-y-4">
         <LoginForm
           email={email}
           password={password}
@@ -63,7 +63,7 @@ export function AuthTabs({
         />
       </TabsContent>
       
-      <TabsContent value="signup" className="space-y-6">
+      <TabsContent value="signup" className="space-y-4">
         <SignupForm
           email={email}
           password={password}

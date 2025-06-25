@@ -60,6 +60,11 @@ export function useGamificationSupabase() {
           })) :
           [...ACHIEVEMENTS];
 
+        // Type-safe area stats parsing
+        const areaStats = profile.area_stats && typeof profile.area_stats === 'object' && !Array.isArray(profile.area_stats)
+          ? profile.area_stats as Record<string, { correct: number; total: number }>
+          : {};
+
         setUserProgress({
           level: profile.level,
           xp: profile.total_xp,
@@ -73,7 +78,7 @@ export function useGamificationSupabase() {
           newlyUnlockedAchievements: [],
           quests: [],
           medicalCards: [],
-          areaStats: profile.area_stats || {}
+          areaStats
         });
       }
     } catch (error) {
@@ -87,6 +92,18 @@ export function useGamificationSupabase() {
     if (!user) return;
 
     try {
+      // Convert achievements to JSON-compatible format
+      const achievementsJson = progress.achievements.map(ach => ({
+        id: ach.id,
+        title: ach.title,
+        description: ach.description,
+        icon: ach.icon,
+        unlocked: ach.unlocked,
+        unlockedAt: ach.unlockedAt?.toISOString(),
+        category: ach.category,
+        area: ach.area
+      }));
+
       const { error } = await supabase
         .from('user_profiles')
         .upsert({
@@ -99,8 +116,8 @@ export function useGamificationSupabase() {
           simulados_completos: progress.simuladosCompletos,
           streak_dias: progress.streakDias,
           last_activity_date: progress.lastActivityDate?.toISOString(),
-          achievements: progress.achievements,
-          area_stats: progress.areaStats,
+          achievements: achievementsJson as any,
+          area_stats: progress.areaStats as any,
           updated_at: new Date().toISOString()
         });
 

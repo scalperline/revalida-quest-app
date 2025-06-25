@@ -22,7 +22,6 @@ export const QUESTOES_REVALIDA_2014_58_63: Question[] = [
     area: "Ginecologia e Obstetrícia",
     enunciado:
       "Uma mulher com 22 anos de idade, sexualmente ativa, apresenta, há um mês, leucorreia amarelo-esverdeada, de odor fétido. Refere novo parceiro sexual há três meses. Faz uso regular de anticoncepcional combinado oral. Ao exame ginecológico observam-se as imagens mostradas acima.\n\nO agente etiológico responsável pelo quadro clínico dessa paciente é",
-    image: "/lovable-uploads/35e3da82-3e6e-4300-b5fa-37c673655f73.png",
     options: [
       { id: "A", text: "Trichomonas vaginalis." },
       { id: "B", text: "Chlamydia trachomatis." },

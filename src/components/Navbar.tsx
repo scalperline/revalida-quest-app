@@ -1,9 +1,9 @@
-
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { StreakDisplay } from "./StreakDisplay";
 import { useGamification } from "@/hooks/useGamification";
+import { cn } from "@/lib/utils";
 import { Menu, X, Trophy, FileText, BarChart3, User, Home, Stethoscope, Flag, Crown } from "lucide-react";
 
 export function Navbar() {

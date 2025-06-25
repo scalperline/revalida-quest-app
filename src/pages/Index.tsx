@@ -92,7 +92,7 @@ export default function Index() {
               
               <div className="flex items-center gap-3 px-6 py-3 bg-white dark:bg-gray-800 rounded-full shadow-lg border border-blue-200 dark:border-gray-700">
                 <Target className="w-6 h-6 text-blue-500" />
-                <span className="font-bold text-lg">{userProgress.totalXP} XP</span>
+                <span className="font-bold text-lg">{userProgress.xp} XP</span>
               </div>
             </div>
           </div>

@@ -125,7 +125,7 @@ export function QuestionCard({
       <CardContent className="mobile-padding">
         {/* Enunciado */}
         <div className="mb-6 sm:mb-8">
-          <p className="mobile-text-lg leading-relaxed text-gray-800 dark:text-gray-200">
+          <p className="text-lg sm:text-xl leading-relaxed text-gray-800 dark:text-gray-200">
             {question.enunciado}
           </p>
         </div>
@@ -161,7 +161,9 @@ export function QuestionCard({
                   {getOptionIcon(option.id)}
                 </div>
                 <div className="flex-1 text-left">
-                  <span className="mobile-text-lg leading-relaxed">{option.text}</span>
+                  <span className="text-base sm:text-lg md:text-xl leading-relaxed text-gray-800 dark:text-gray-200">
+                    {option.text}
+                  </span>
                 </div>
               </div>
             </Button>
@@ -174,10 +176,10 @@ export function QuestionCard({
             <div className="flex items-start gap-3">
               <AlertCircle className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600 flex-shrink-0 mt-0.5" />
               <div>
-                <p className="font-medium text-blue-800 dark:text-blue-200 mb-2 mobile-text-lg">
+                <p className="font-medium text-blue-800 dark:text-blue-200 mb-2 text-lg sm:text-xl">
                   Resposta correta: {question.correct}
                 </p>
-                <p className="text-sm sm:text-base text-blue-700 dark:text-blue-300 leading-relaxed">
+                <p className="text-base sm:text-lg text-blue-700 dark:text-blue-300 leading-relaxed">
                   {question.options.find(opt => opt.id === question.correct)?.text}
                 </p>
               </div>
@@ -188,7 +190,7 @@ export function QuestionCard({
         {/* Referência se existir */}
         {question.referencia && showAnswer && (
           <div className="mt-4 sm:mt-6 p-3 sm:p-4 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-lg">
-            <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+            <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400 leading-relaxed">
               <strong>Referência:</strong> {question.referencia}
             </p>
           </div>

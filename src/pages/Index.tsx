@@ -1,150 +1,74 @@
 
-import { useNavigate } from "react-router-dom";
+import { Book, Timer, BarChartBig, Star, Brain, Crown } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
-import { ResponsiveCard } from "@/components/ResponsiveCard";
-import { StreakDisplay } from "@/components/StreakDisplay";
-import { useGamification } from "@/hooks/useGamification";
-import { 
-  FileText, 
-  Trophy, 
-  Target, 
-  BarChart3, 
-  User, 
-  Stethoscope,
-  BookOpen,
-  Flag,
-  Crown
-} from "lucide-react";
+import { FeatureCard } from "@/components/FeatureCard";
+import { WhyItem } from "@/components/WhyItem";
+import { useGamificationSync } from '@/hooks/useGamificationSync';
 
 export default function Index() {
-  const navigate = useNavigate();
-  const { userProgress } = useGamification();
-
-  const features = [
-    {
-      title: "Banco de Questões",
-      description: "Acesse milhares de questões oficiais do INEP organizadas por ano e área médica",
-      icon: <BookOpen className="w-8 h-8" />,
-      path: "/questions",
-      variant: "primary" as const
-    },
-    {
-      title: "Quests Gamificadas",
-      description: "Complete missões especializadas e ganhe XP, badges e conquistas épicas",
-      icon: <Flag className="w-8 h-8" />,
-      path: "/missions",
-      variant: "secondary" as const
-    },
-    {
-      title: "Ranking Nacional",
-      description: "Compare seu desempenho com outros estudantes em tempo real",
-      icon: <Crown className="w-8 h-8" />,
-      path: "/ranking",
-      variant: "default" as const
-    },
-    {
-      title: "Estatísticas Detalhadas",
-      description: "Analise seu progresso com gráficos e métricas personalizadas",
-      icon: <BarChart3 className="w-8 h-8" />,
-      path: "/stats",
-      variant: "default" as const
-    },
-    {
-      title: "Meu Perfil",
-      description: "Gerencie suas conquistas, badges e configurações pessoais",
-      icon: <User className="w-8 h-8" />,
-      path: "/profile",
-      variant: "default" as const
-    }
-  ];
+  // Add gamification sync
+  useGamificationSync();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-100 dark:from-gray-900 dark:to-gray-800 no-scroll-x">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 text-foreground transition-colors">
       <Navbar />
-      
-      <div className="container mx-auto mobile-padding">
-        <div className="max-w-7xl mx-auto">
-          {/* Hero Section */}
-          <div className="text-center mb-12">
-            <div className="flex items-center justify-center mb-6">
-              <div className="w-20 h-20 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center shadow-xl">
-                <Stethoscope className="w-10 h-10 text-white" />
-              </div>
-            </div>
-            
-            <h1 className="mb-6 gradient-text">
-              Bem-vindo ao Revalida Quest! 🚀
-            </h1>
-            
-            <p className="text-responsive-lg text-muted-foreground max-w-3xl mx-auto mb-8">
-              Transforme sua preparação para o Revalida em uma jornada épica! 
-              Complete quests, ganhe XP, desbloqueie conquistas e domine as questões oficiais do INEP.
-            </p>
-
-            {/* User Progress Display */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 mb-12">
-              <div className="flex items-center gap-3 px-6 py-3 bg-white dark:bg-gray-800 rounded-full shadow-lg border border-blue-200 dark:border-gray-700">
-                <Trophy className="w-6 h-6 text-yellow-500" />
-                <span className="font-bold text-lg">Nível {userProgress.level}</span>
-              </div>
-              
-              <StreakDisplay />
-              
-              <div className="flex items-center gap-3 px-6 py-3 bg-white dark:bg-gray-800 rounded-full shadow-lg border border-blue-200 dark:border-gray-700">
-                <Target className="w-6 h-6 text-blue-500" />
-                <span className="font-bold text-lg">{userProgress.totalXP} XP</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Features Grid */}
-          <div className="mobile-grid max-w-6xl mx-auto">
-            {features.map((feature) => (
-              <ResponsiveCard
-                key={feature.path}
-                title={feature.title}
-                description={feature.description}
-                icon={feature.icon}
-                variant={feature.variant}
-                onClick={() => navigate(feature.path)}
-                className="mx-auto"
-              />
-            ))}
-          </div>
-
-          {/* CTA Section */}
-          <div className="text-center mt-16 mb-8">
-            <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl border-2 border-blue-200 dark:border-gray-700 p-6 sm:p-8 max-w-2xl mx-auto">
-              <h2 className="mb-4 gradient-text">
-                Pronto para começar sua jornada? ⚡
-              </h2>
-              
-              <p className="text-responsive-base text-muted-foreground mb-6">
-                Escolha como quer estudar hoje: resolva questões específicas por área 
-                ou embarque em uma quest completa com recompensas épicas!
-              </p>
-              
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <button
-                  onClick={() => navigate("/questions")}
-                  className="btn-primary"
-                >
-                  <BookOpen className="w-5 h-5" />
-                  Explorar Questões
-                </button>
-                
-                <button
-                  onClick={() => navigate("/missions")}
-                  className="btn-secondary"
-                >
-                  <Flag className="w-5 h-5" />
-                  Iniciar Quest
-                </button>
-              </div>
-            </div>
+      <main className="w-full max-w-6xl mx-auto px-3 sm:px-4 py-8 sm:py-12 md:py-20 flex flex-col items-center">
+        <div className="text-center mb-12 sm:mb-16 w-full">
+          <h1 className="text-2xl sm:text-4xl md:text-6xl font-bold mb-4 sm:mb-6 text-center leading-tight tracking-tight px-2">
+            O banco completo de questões oficiais do <span className="text-blue-600 bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">Revalida INEP</span>
+          </h1>
+          <p className="mb-4 sm:mb-6 text-base sm:text-xl md:text-2xl text-muted-foreground text-center max-w-3xl mx-auto leading-relaxed px-2">
+            Acesse todas as provas oficiais, gabaritos, estatísticas, quests personalizadas e gráficos de desempenho — tudo o que você precisa para acelerar sua aprovação.
+          </p>
+          <div className="flex justify-center items-center gap-2 sm:gap-3 text-2xl sm:text-3xl md:text-4xl mb-6 sm:mb-8">
+            🎯 🏆 🚩
           </div>
         </div>
-      </div>
+        
+        <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8 mb-12 sm:mb-16">
+          <FeatureCard
+            title="Banco de Questões"
+            description="Questões oficiais, filtros avançados e referências de todas as edições."
+            icon={<Book size={32} className="text-blue-500 sm:w-10 sm:h-10" />}
+            to="/questoes"
+          />
+          <FeatureCard
+            title="Quests Personalizadas"
+            description="Crie Quests Personalizadas, simule provas reais com questões cronometradas, por área e dificuldades específicas."
+            icon={<Timer size={32} className="text-green-500 sm:w-10 sm:h-10" />}
+            to="/missions"
+          />
+          <FeatureCard
+            title="Ranking de Estudantes"
+            description="Compare seu desempenho com outros estudantes e acompanhe sua posição no ranking nacional."
+            icon={<Crown size={32} className="text-purple-500 sm:w-10 sm:h-10" />}
+            to="/ranking"
+          />
+          <FeatureCard
+            title="Desempenho & Gráficos"
+            description="Analise seu progresso por área e identifique pontos para melhorar."
+            icon={<BarChartBig size={32} className="text-orange-500 sm:w-10 sm:h-10" />}
+            to="/estatisticas"
+          />
+        </div>
+
+        <section className="w-full grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 mt-8 sm:mt-12">
+          <WhyItem
+            icon={<Star size={24} className="text-yellow-500 sm:w-8 sm:h-8" />}
+            title="Dados 100% Oficiais"
+            desc="Todas as questões, gabaritos e referências do INEP desde a 1ª edição."
+          />
+          <WhyItem
+            icon={<Brain size={24} className="text-purple-500 sm:w-8 sm:h-8" />}
+            title="Estudo Inteligente"
+            desc="Estatísticas detalhadas e quests personalizadas para reforço dos pontos fracos."
+          />
+        </section>
+        
+        <footer className="mt-16 sm:mt-20 text-xs sm:text-sm text-muted-foreground w-full text-center border-t border-border/30 pt-6 sm:pt-8 px-2">
+          &copy; {new Date().getFullYear()} RevalidaQuest. Todos os direitos reservados.
+        </footer>
+      </main>
     </div>
   );
 }

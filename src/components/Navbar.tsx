@@ -57,7 +57,7 @@ export function Navbar() {
               }`}
             >
               <FileText className="w-4 h-4" />
-              Questões
+              Provas
             </Link>
             <Link 
               to="/simulado" 

@@ -34,7 +34,7 @@ export function AuthHeroSection() {
           </div>
         </div>
         <p className="text-xl text-gray-700 dark:text-gray-300 mb-8 leading-relaxed">
-          Prepare-se para o <span className="font-semibold text-blue-700">Revalida</span> com questões oficiais e uma experiência gamificada única! 
+          Prepare-se para o <span className="font-semibold text-blue-700">Revalida INEP</span> com questões e gabaritos oficiais em uma experiência única! 
           Sua jornada médica começa aqui.
         </p>
       </div>

@@ -6,8 +6,7 @@ import { Question } from "@/types/question";
 
 interface QuestionHeaderProps {
   question: Question;
-  isQuestionAnswered: boolean;
-  isCorrectAnswer: boolean;
+  isCorrect?: boolean;
 }
 
 const getAreaIcon = (area: string) => {
@@ -69,9 +68,10 @@ const getDifficultyLevel = (question: Question) => {
   }
 };
 
-export function QuestionHeader({ question, isQuestionAnswered, isCorrectAnswer }: QuestionHeaderProps) {
+export function QuestionHeader({ question, isCorrect }: QuestionHeaderProps) {
   const AreaIcon = getAreaIcon(question.area);
   const difficulty = getDifficultyLevel(question);
+  const isQuestionAnswered = isCorrect !== undefined;
 
   return (
     <CardHeader className="bg-gradient-to-r from-blue-50 to-violet-50 dark:from-slate-800 dark:to-slate-700 rounded-t-xl border-b border-blue-100 dark:border-slate-600 p-6 shadow-md">
@@ -86,7 +86,7 @@ export function QuestionHeader({ question, isQuestionAnswered, isCorrectAnswer }
           {/* Answer Status */}
           {isQuestionAnswered && (
             <div className="flex items-center gap-2">
-              {isCorrectAnswer ? (
+              {isCorrect ? (
                 <div className="flex items-center gap-2 text-emerald-700 bg-emerald-100 dark:bg-emerald-900/30 dark:text-emerald-300 px-4 py-2 rounded-full shadow-sm">
                   <CheckCircle className="w-5 h-5" />
                   <span className="font-semibold text-sm">Correto! +10 XP</span>

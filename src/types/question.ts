@@ -23,4 +23,5 @@ export interface QuestionCardProps {
   onAnswer?: (optionId: string) => void;
   disabled?: boolean;
   userAnswer?: string;
+  hideHeader?: boolean;
 }

@@ -4,18 +4,13 @@ import { Question } from "@/types/question";
 
 interface QuestionFeedbackProps {
   question: Question;
-  showAnswer: boolean;
   selectedOption?: string | null;
-  userAnswer?: string;
+  isCorrect: boolean;
 }
 
-export function QuestionFeedback({ question, showAnswer, selectedOption, userAnswer }: QuestionFeedbackProps) {
-  if (!showAnswer) return null;
-
-  const answer = userAnswer || selectedOption;
-  const isCorrect = answer === question.correct;
+export function QuestionFeedback({ question, selectedOption, isCorrect }: QuestionFeedbackProps) {
   const correctOption = question.options.find(opt => opt.id === question.correct);
-  const selectedOptionData = question.options.find(opt => opt.id === answer);
+  const selectedOptionData = question.options.find(opt => opt.id === selectedOption);
 
   return (
     <>

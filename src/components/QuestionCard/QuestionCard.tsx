@@ -59,10 +59,12 @@ export function QuestionCard({
             key={option.id}
             option={option}
             isSelected={selectedOption === option.id}
-            isCorrect={option.id === question.correct}
             showAnswer={showFeedback}
             onSelect={() => handleOptionSelect(option.id)}
             disabled={disabled || hasAnswered}
+            correctAnswer={question.correct}
+            userAnswer={userAnswer}
+            selectedOption={selectedOption}
           />
         ))}
       </div>

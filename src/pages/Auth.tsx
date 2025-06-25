@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -90,9 +91,6 @@ export default function Auth() {
                   <div className="absolute -top-2 -right-2 w-6 h-6 bg-yellow-400 rounded-full flex items-center justify-center">
                     <Crown className="w-3 h-3 text-yellow-800" />
                   </div>
-                </div>
-                <div className="ml-4">
-                  <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-200">Revalida Quest</h2>
                 </div>
               </div>
               <h1 className="text-5xl lg:text-6xl font-bold mb-6">
@@ -196,15 +194,12 @@ export default function Auth() {
               <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-1">
                 <div className="bg-white dark:bg-gray-800 rounded-3xl">
                   <CardHeader className="text-center pb-2 pt-8">
-                    <div className="relative mx-auto mb-6 lg:hidden flex items-center justify-center">
+                    <div className="relative mx-auto mb-6 lg:hidden">
                       <div className="w-16 h-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center shadow-2xl">
                         <Stethoscope className="w-8 h-8 text-white" />
                       </div>
                       <div className="absolute -top-1 -right-1 w-5 h-5 bg-yellow-400 rounded-full flex items-center justify-center">
                         <Crown className="w-2.5 h-2.5 text-yellow-800" />
-                      </div>
-                      <div className="ml-3">
-                        <h3 className="text-lg font-bold text-gray-800 dark:text-gray-200">Revalida Quest</h3>
                       </div>
                     </div>
                     <CardTitle className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
@@ -275,7 +270,7 @@ export default function Auth() {
                             ) : (
                               <div className="flex items-center gap-2">
                                 <Zap className="w-5 h-5" />
-                                Iniciar Jornada
+                                Iniciar Aventura
                               </div>
                             )}
                           </Button>

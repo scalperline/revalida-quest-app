@@ -4,12 +4,25 @@ import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { StreakDisplay } from "./StreakDisplay";
 import { useGamification } from "@/hooks/useGamification";
-import { Menu, X, Trophy, FileText, BarChart3, User, Home, Stethoscope, Flag, Crown } from "lucide-react";
+import { useAuth } from "@/hooks/useAuth";
+import { 
+  Menu, X, Trophy, FileText, BarChart3, User, Home, Stethoscope, 
+  Flag, Crown, LogOut, Settings 
+} from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
   const { userProgress } = useGamification();
+  const { user, signOut } = useAuth();
 
   const navItems = [
     { name: "Início", path: "/", icon: Home },
@@ -19,6 +32,10 @@ export function Navbar() {
     { name: "Estatísticas", path: "/stats", icon: BarChart3 },
     { name: "Perfil", path: "/profile", icon: User },
   ];
+
+  const handleSignOut = async () => {
+    await signOut();
+  };
 
   return (
     <nav className="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 sticky top-0 z-40 backdrop-blur-sm bg-white/95 dark:bg-gray-900/95">
@@ -36,81 +53,84 @@ export function Navbar() {
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center space-x-4">
-            <Link 
-              to="/" 
-              className={`font-medium transition-all duration-200 flex items-center gap-2 px-3 py-2 rounded-lg text-sm xl:text-base ${
-                location.pathname === "/" 
-                  ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg" 
-                  : "text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20"
-              }`}
-            >
-              <Home className="w-4 h-4" />
-              Início
-            </Link>
-            <Link 
-              to="/questoes" 
-              className={`font-medium transition-all duration-200 flex items-center gap-2 px-3 py-2 rounded-lg text-sm xl:text-base ${
-                location.pathname === "/questoes" 
-                  ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg" 
-                  : "text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20"
-              }`}
-            >
-              <FileText className="w-4 h-4" />
-              Provas
-            </Link>
-            <Link 
-              to="/missoes" 
-              className={`font-medium transition-all duration-200 flex items-center gap-2 px-3 py-2 rounded-lg text-sm xl:text-base ${
-                location.pathname === "/missoes" 
-                  ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg" 
-                  : "text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20"
-              }`}
-            >
-              <Flag className="w-4 h-4" />
-              Quests
-            </Link>
-            <Link 
-              to="/ranking" 
-              className={`font-medium transition-all duration-200 flex items-center gap-2 px-3 py-2 rounded-lg text-sm xl:text-base ${
-                location.pathname === "/ranking" 
-                  ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg" 
-                  : "text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20"
-              }`}
-            >
-              <Crown className="w-4 h-4" />
-              Ranking
-            </Link>
-            <Link 
-              to="/estatisticas" 
-              className={`font-medium transition-all duration-200 flex items-center gap-2 px-3 py-2 rounded-lg text-sm xl:text-base ${
-                location.pathname === "/estatisticas" 
-                  ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg" 
-                  : "text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20"
-              }`}
-            >
-              <BarChart3 className="w-4 h-4" />
-              Estatísticas
-            </Link>
-            <Link 
-              to="/perfil" 
-              className={`font-medium transition-all duration-200 flex items-center gap-2 px-3 py-2 rounded-lg text-sm xl:text-base ${
-                location.pathname === "/perfil" 
-                  ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg" 
-                  : "text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20"
-              }`}
-            >
-              <User className="w-4 h-4" />
-              Perfil
-            </Link>
+            {navItems.map((item) => (
+              <Link 
+                key={item.path}
+                to={item.path} 
+                className={`font-medium transition-all duration-200 flex items-center gap-2 px-3 py-2 rounded-lg text-sm xl:text-base ${
+                  location.pathname === item.path || 
+                  (item.path === '/questions' && location.pathname === '/questoes') ||
+                  (item.path === '/stats' && location.pathname === '/estatisticas') ||
+                  (item.path === '/profile' && location.pathname === '/perfil') ||
+                  (item.path === '/missions' && location.pathname === '/missoes')
+                    ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg" 
+                    : "text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20"
+                }`}
+              >
+                <item.icon className="w-4 h-4" />
+                {item.name}
+              </Link>
+            ))}
           </div>
 
-          {/* Streak Display & Level */}
+          {/* Right side content */}
           <div className="hidden md:flex items-center gap-3 xl:gap-4">
-            <StreakDisplay />
-            <div className="flex items-center gap-2 px-3 py-1.5 bg-gradient-to-r from-yellow-400 to-orange-500 text-white rounded-full shadow-lg">
-              <Trophy className="w-4 h-4" />
-              <span className="font-bold text-sm">Nv. {userProgress.level}</span>
-            </div>
+            {user && (
+              <>
+                <StreakDisplay />
+                <div className="flex items-center gap-2 px-3 py-1.5 bg-gradient-to-r from-yellow-400 to-orange-500 text-white rounded-full shadow-lg">
+                  <Trophy className="w-4 h-4" />
+                  <span className="font-bold text-sm">Nv. {userProgress.level}</span>
+                </div>
+                
+                {/* User Menu */}
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="ghost" className="relative h-10 w-10 rounded-full">
+                      <Avatar className="h-10 w-10 border-2 border-blue-200">
+                        <AvatarFallback className="bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold">
+                          {user.email?.charAt(0).toUpperCase() || 'U'}
+                        </AvatarFallback>
+                      </Avatar>
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent className="w-56" align="end" forceMount>
+                    <div className="flex flex-col space-y-1 p-2">
+                      <p className="text-sm font-medium leading-none">{user.email}</p>
+                      <p className="text-xs leading-none text-muted-foreground">
+                        Nível {userProgress.level} • {userProgress.xp} XP
+                      </p>
+                    </div>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem asChild>
+                      <Link to="/profile" className="flex items-center">
+                        <User className="mr-2 h-4 w-4" />
+                        Perfil
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem asChild>
+                      <Link to="/stats" className="flex items-center">
+                        <BarChart3 className="mr-2 h-4 w-4" />
+                        Estatísticas
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem onClick={handleSignOut} className="text-red-600">
+                      <LogOut className="mr-2 h-4 w-4" />
+                      Sair
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </>
+            )}
+            
+            {!user && (
+              <Link to="/auth">
+                <Button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
+                  Entrar
+                </Button>
+              </Link>
+            )}
           </div>
 
           {/* Mobile menu button */}
@@ -128,7 +148,7 @@ export function Navbar() {
         {isOpen && (
           <div className="lg:hidden py-4 border-t border-gray-200 dark:border-gray-700">
             <div className="flex flex-col space-y-3">
-              {navItems.map((item) => {
+              {user && navItems.map((item) => {
                 const Icon = item.icon;
                 const isActive = location.pathname === item.path || 
                   (item.path === '/questions' && location.pathname === '/questoes') ||
@@ -155,14 +175,43 @@ export function Navbar() {
               })}
             </div>
             
-            {/* Mobile Streak & Level */}
-            <div className="flex items-center justify-center gap-4 mt-6 pt-4 border-t border-gray-200 dark:border-gray-700">
-              <StreakDisplay />
-              <div className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-yellow-400 to-orange-500 text-white rounded-full shadow-lg">
-                <Trophy className="w-5 h-5" />
-                <span className="font-bold text-base">Nv. {userProgress.level}</span>
+            {/* Mobile User Info */}
+            {user && (
+              <div className="flex items-center justify-center gap-4 mt-6 pt-4 border-t border-gray-200 dark:border-gray-700">
+                <StreakDisplay />
+                <div className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-yellow-400 to-orange-500 text-white rounded-full shadow-lg">
+                  <Trophy className="w-5 h-5" />
+                  <span className="font-bold text-base">Nv. {userProgress.level}</span>
+                </div>
               </div>
-            </div>
+            )}
+            
+            {/* Mobile Auth Button */}
+            {!user && (
+              <div className="mt-6 pt-4 border-t border-gray-200 dark:border-gray-700">
+                <Link to="/auth" onClick={() => setIsOpen(false)}>
+                  <Button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
+                    Entrar / Cadastrar
+                  </Button>
+                </Link>
+              </div>
+            )}
+            
+            {user && (
+              <div className="mt-4">
+                <Button 
+                  variant="outline" 
+                  className="w-full text-red-600 border-red-600 hover:bg-red-50"
+                  onClick={() => {
+                    handleSignOut();
+                    setIsOpen(false);
+                  }}
+                >
+                  <LogOut className="w-4 h-4 mr-2" />
+                  Sair
+                </Button>
+              </div>
+            )}
           </div>
         )}
       </div>

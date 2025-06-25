@@ -4,6 +4,8 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { AuthProvider } from "@/hooks/useAuth";
+import { ProtectedRoute } from "@/components/ProtectedRoute";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Questions from "./pages/Questions";
@@ -11,29 +13,73 @@ import Stats from "./pages/Stats";
 import Profile from "./pages/Profile";
 import Missions from "./pages/Missions";
 import Ranking from "./pages/Ranking";
+import Auth from "./pages/Auth";
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/questions" element={<Questions />} />
-          <Route path="/questoes" element={<Questions />} />
-          <Route path="/missions" element={<Missions />} />
-          <Route path="/missoes" element={<Missions />} />
-          <Route path="/stats" element={<Stats />} />
-          <Route path="/estatisticas" element={<Stats />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/perfil" element={<Profile />} />
-          <Route path="/ranking" element={<Ranking />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
+      <AuthProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/auth" element={<Auth />} />
+            <Route path="/" element={
+              <ProtectedRoute>
+                <Index />
+              </ProtectedRoute>
+            } />
+            <Route path="/questions" element={
+              <ProtectedRoute>
+                <Questions />
+              </ProtectedRoute>
+            } />
+            <Route path="/questoes" element={
+              <ProtectedRoute>
+                <Questions />
+              </ProtectedRoute>
+            } />
+            <Route path="/missions" element={
+              <ProtectedRoute>
+                <Missions />
+              </ProtectedRoute>
+            } />
+            <Route path="/missoes" element={
+              <ProtectedRoute>
+                <Missions />
+              </ProtectedRoute>
+            } />
+            <Route path="/stats" element={
+              <ProtectedRoute>
+                <Stats />
+              </ProtectedRoute>
+            } />
+            <Route path="/estatisticas" element={
+              <ProtectedRoute>
+                <Stats />
+              </ProtectedRoute>
+            } />
+            <Route path="/profile" element={
+              <ProtectedRoute>
+                <Profile />
+              </ProtectedRoute>
+            } />
+            <Route path="/perfil" element={
+              <ProtectedRoute>
+                <Profile />
+              </ProtectedRoute>
+            } />
+            <Route path="/ranking" element={
+              <ProtectedRoute>
+                <Ranking />
+              </ProtectedRoute>
+            } />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </AuthProvider>
     </TooltipProvider>
   </QueryClientProvider>
 );

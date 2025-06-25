@@ -8,6 +8,7 @@ import { QuestionFeedback } from "./QuestionFeedback";
 import { QuestionCardProps } from "@/types/question";
 import { ConfettiAnimation } from "@/components/ConfettiAnimation";
 import { useAudio } from "@/hooks/useAudio";
+import { useGamification } from "@/hooks/useGamification";
 
 export function QuestionCard({ 
   question, 
@@ -20,6 +21,7 @@ export function QuestionCard({
   const [showConfetti, setShowConfetti] = useState(false);
   const [answered, setAnswered] = useState(showAnswer || !!userAnswer);
   const { playSound } = useAudio();
+  const { answerQuestion } = useGamification();
 
   const handleOptionSelect = (optionId: string) => {
     if (disabled || answered) return;
@@ -35,6 +37,9 @@ export function QuestionCard({
     } else {
       playSound('incorrect');
     }
+    
+    // Register the answer in the gamification system
+    answerQuestion(isCorrect, question.area, question.id);
     
     onAnswer?.(optionId);
   };

@@ -11,37 +11,88 @@ export type Database = {
     Tables: {
       user_profiles: {
         Row: {
+          achievements: Json | null
+          area_stats: Json | null
+          avatar_url: string | null
+          correct_answers: number
           created_at: string
           display_name: string
           id: string
-          last_xp_update: string | null
+          last_activity_date: string | null
           level: number
+          simulados_completos: number
+          streak_dias: number
+          total_questions: number
           total_xp: number
           updated_at: string
           user_id: string
           weekly_xp: number
         }
         Insert: {
+          achievements?: Json | null
+          area_stats?: Json | null
+          avatar_url?: string | null
+          correct_answers?: number
           created_at?: string
           display_name?: string
           id?: string
-          last_xp_update?: string | null
+          last_activity_date?: string | null
           level?: number
+          simulados_completos?: number
+          streak_dias?: number
+          total_questions?: number
           total_xp?: number
           updated_at?: string
           user_id: string
           weekly_xp?: number
         }
         Update: {
+          achievements?: Json | null
+          area_stats?: Json | null
+          avatar_url?: string | null
+          correct_answers?: number
           created_at?: string
           display_name?: string
           id?: string
-          last_xp_update?: string | null
+          last_activity_date?: string | null
           level?: number
+          simulados_completos?: number
+          streak_dias?: number
+          total_questions?: number
           total_xp?: number
           updated_at?: string
           user_id?: string
           weekly_xp?: number
+        }
+        Relationships: []
+      }
+      user_question_answers: {
+        Row: {
+          answered_at: string
+          id: string
+          is_correct: boolean
+          question_id: number
+          quiz_id: string | null
+          user_answer: string
+          user_id: string
+        }
+        Insert: {
+          answered_at?: string
+          id?: string
+          is_correct: boolean
+          question_id: number
+          quiz_id?: string | null
+          user_answer: string
+          user_id: string
+        }
+        Update: {
+          answered_at?: string
+          id?: string
+          is_correct?: boolean
+          question_id?: number
+          quiz_id?: string | null
+          user_answer?: string
+          user_id?: string
         }
         Relationships: []
       }

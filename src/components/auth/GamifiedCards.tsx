@@ -12,6 +12,7 @@ export function GamifiedCards() {
       value: '2.000+',
       color: 'from-blue-500 to-blue-600',
       shadowColor: 'shadow-blue-500/30',
+      valueGradient: false,
     },
     {
       title: 'Sistema XP',
@@ -20,14 +21,16 @@ export function GamifiedCards() {
       value: 'Ilimitado',
       color: 'from-blue-600 to-blue-700',
       shadowColor: 'shadow-blue-600/30',
+      valueGradient: false,
     },
     {
       title: 'Ranking',
       description: 'Compare seu progresso com outros médicos',
       icon: Trophy,
       value: 'Global',
-      color: 'from-blue-700 to-blue-800',
-      shadowColor: 'shadow-blue-700/30',
+      color: 'from-orange-500 to-orange-600',
+      shadowColor: 'shadow-orange-500/30',
+      valueGradient: true,
     },
   ];
 
@@ -42,7 +45,7 @@ export function GamifiedCards() {
               bg-white/15 backdrop-blur-md border-2 border-blue-200/25 
               hover:bg-white/20 transition-all duration-500 ease-out
               hover:shadow-2xl hover:scale-105 ${card.shadowColor}
-              hover:border-blue-200/35 group cursor-pointer
+              hover:border-orange-400/35 group cursor-pointer
             `}
             style={{
               animation: `slideInLeft 0.8s ease-out ${index * 0.2}s both`,
@@ -69,11 +72,15 @@ export function GamifiedCards() {
             </CardHeader>
             <CardContent className="pt-0">
               <div className={`
-                text-xl sm:text-2xl font-bold bg-gradient-to-r ${card.color} 
-                bg-clip-text text-transparent font-space-grotesk
+                text-xl sm:text-2xl font-bold font-space-grotesk
                 group-hover:scale-110 transition-transform duration-300
+                ${card.valueGradient 
+                  ? 'gradient-gold' 
+                  : `bg-gradient-to-r ${card.color} bg-clip-text text-transparent`
+                }
               `}>
                 {card.value}
+                {card.title === 'Ranking' && <span className="ml-1">🏆</span>}
               </div>
             </CardContent>
           </Card>

@@ -33,7 +33,7 @@ export function AuthTabs({
 }: AuthTabsProps) {
   return (
     <Tabs defaultValue="login" className="w-full" onValueChange={onValueChange}>
-      {/* Botões separados com design responsivo */}
+      {/* Botões customizados separados sem TabsList */}
       <div className="w-full mb-6">
         {/* Mobile: botões verticais */}
         <div className="flex flex-col gap-4 sm:hidden">

@@ -27,7 +27,7 @@ export function LoginForm({
     <form onSubmit={onSubmit} className="space-y-5 sm:space-y-6">
       <div className="space-y-2">
         <Label htmlFor="email" className="text-sm sm:text-base font-medium text-white font-space-grotesk">
-          Email <span className="text-orange-400">*</span>
+          📧 Email <span className="text-orange-400">*</span>
         </Label>
         <div className="relative">
           <Mail className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-orange-400" />
@@ -39,13 +39,13 @@ export function LoginForm({
             onChange={(e) => setEmail(e.target.value)}
             required
             disabled={isSubmitting || loading}
-            className="h-12 sm:h-14 pl-12 rounded-xl border-2 border-blue-200/40 bg-blue-50/20 backdrop-blur-sm text-white placeholder:text-blue-200/70 focus:border-orange-400 focus:ring-orange-400/30 transition-all duration-300 hover:bg-blue-50/25 font-space-grotesk text-base sm:text-lg"
+            className="h-12 sm:h-14 pl-12 rounded-xl border-2 border-blue-200/40 bg-blue-50/20 backdrop-blur-sm text-white placeholder:text-blue-200/70 focus:border-orange-400 focus:ring-orange-400/30 transition-all duration-300 hover:bg-blue-50/25 font-space-grotesk text-base sm:text-lg focus-visible:ring-2 focus-visible:ring-orange-400/50"
           />
         </div>
       </div>
       <div className="space-y-2">
         <Label htmlFor="password" className="text-sm sm:text-base font-medium text-white font-space-grotesk">
-          Senha <span className="text-orange-400">*</span>
+          🔒 Senha <span className="text-orange-400">*</span>
         </Label>
         <div className="relative">
           <Lock className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-orange-400" />
@@ -57,7 +57,7 @@ export function LoginForm({
             onChange={(e) => setPassword(e.target.value)}
             required
             disabled={isSubmitting || loading}
-            className="h-12 sm:h-14 pl-12 rounded-xl border-2 border-blue-200/40 bg-blue-50/20 backdrop-blur-sm text-white placeholder:text-blue-200/70 focus:border-orange-400 focus:ring-orange-400/30 transition-all duration-300 hover:bg-blue-50/25 font-space-grotesk text-base sm:text-lg"
+            className="h-12 sm:h-14 pl-12 rounded-xl border-2 border-blue-200/40 bg-blue-50/20 backdrop-blur-sm text-white placeholder:text-blue-200/70 focus:border-orange-400 focus:ring-orange-400/30 transition-all duration-300 hover:bg-blue-50/25 font-space-grotesk text-base sm:text-lg focus-visible:ring-2 focus-visible:ring-orange-400/50"
           />
         </div>
       </div>

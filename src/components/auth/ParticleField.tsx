@@ -4,7 +4,7 @@ import React from 'react';
 export function ParticleField() {
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {/* Floating particles */}
+      {/* Medical floating particles - cells and molecules */}
       {Array.from({ length: 20 }).map((_, i) => (
         <div
           key={`particle-${i}`}
@@ -15,7 +15,7 @@ export function ParticleField() {
             width: `${2 + Math.random() * 4}px`,
             height: `${2 + Math.random() * 4}px`,
             background: `linear-gradient(45deg, ${
-              Math.random() > 0.5 ? '#8B5CF6' : '#3B82F6'
+              Math.random() > 0.5 ? '#3B82F6' : '#1976D2'
             }, transparent)`,
             animation: `float ${8 + Math.random() * 12}s infinite linear`,
             animationDelay: `${Math.random() * 10}s`,
@@ -23,7 +23,7 @@ export function ParticleField() {
         />
       ))}
       
-      {/* Larger glowing orbs */}
+      {/* Larger medical drops and cells */}
       {Array.from({ length: 8 }).map((_, i) => (
         <div
           key={`orb-${i}`}
@@ -34,7 +34,7 @@ export function ParticleField() {
             width: `${6 + Math.random() * 8}px`,
             height: `${6 + Math.random() * 8}px`,
             background: `radial-gradient(circle, ${
-              Math.random() > 0.5 ? '#A855F7' : '#6366F1'
+              Math.random() > 0.5 ? '#1976D2' : '#0D47A1'
             } 0%, transparent 70%)`,
             animation: `drift ${15 + Math.random() * 10}s infinite ease-in-out`,
             animationDelay: `${Math.random() * 8}s`,

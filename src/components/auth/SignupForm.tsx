@@ -2,7 +2,7 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Star } from 'lucide-react';
+import { Cross } from 'lucide-react';
 
 interface SignupFormProps {
   displayName: string;
@@ -30,7 +30,7 @@ export function SignupForm({
   return (
     <form onSubmit={onSubmit} className="space-y-6">
       <div className="space-y-2">
-        <Label htmlFor="displayName" className="text-sm font-medium text-purple-200 font-space-grotesk">Nome</Label>
+        <Label htmlFor="displayName" className="text-sm font-medium text-blue-200 font-space-grotesk">Nome</Label>
         <Input
           id="displayName"
           type="text"
@@ -38,12 +38,12 @@ export function SignupForm({
           value={displayName}
           onChange={(e) => setDisplayName(e.target.value)}
           disabled={isSubmitting || loading}
-          className="h-12 rounded-xl border-2 border-white/20 bg-white/10 backdrop-blur-sm text-white placeholder:text-purple-300/70 focus:border-purple-400 focus:ring-purple-400/30 transition-all duration-300 hover:bg-white/15 font-space-grotesk"
+          className="h-12 rounded-xl border-2 border-blue-200/30 bg-blue-50/10 backdrop-blur-sm text-white placeholder:text-blue-300/70 focus:border-blue-400 focus:ring-blue-400/30 transition-all duration-300 hover:bg-blue-50/15 font-space-grotesk"
         />
       </div>
       <div className="space-y-2">
-        <Label htmlFor="signupEmail" className="text-sm font-medium text-purple-200 font-space-grotesk">
-          Email <span className="text-pink-400">*</span>
+        <Label htmlFor="signupEmail" className="text-sm font-medium text-blue-200 font-space-grotesk">
+          Email <span className="text-red-400">*</span>
         </Label>
         <Input
           id="signupEmail"
@@ -53,12 +53,12 @@ export function SignupForm({
           onChange={(e) => setEmail(e.target.value)}
           required
           disabled={isSubmitting || loading}
-          className="h-12 rounded-xl border-2 border-white/20 bg-white/10 backdrop-blur-sm text-white placeholder:text-purple-300/70 focus:border-purple-400 focus:ring-purple-400/30 transition-all duration-300 hover:bg-white/15 font-space-grotesk"
+          className="h-12 rounded-xl border-2 border-blue-200/30 bg-blue-50/10 backdrop-blur-sm text-white placeholder:text-blue-300/70 focus:border-blue-400 focus:ring-blue-400/30 transition-all duration-300 hover:bg-blue-50/15 font-space-grotesk"
         />
       </div>
       <div className="space-y-2">
-        <Label htmlFor="signupPassword" className="text-sm font-medium text-purple-200 font-space-grotesk">
-          Senha <span className="text-pink-400">*</span>
+        <Label htmlFor="signupPassword" className="text-sm font-medium text-blue-200 font-space-grotesk">
+          Senha <span className="text-red-400">*</span>
         </Label>
         <Input
           id="signupPassword"
@@ -69,13 +69,13 @@ export function SignupForm({
           required
           disabled={isSubmitting || loading}
           minLength={6}
-          className="h-12 rounded-xl border-2 border-white/20 bg-white/10 backdrop-blur-sm text-white placeholder:text-purple-300/70 focus:border-purple-400 focus:ring-purple-400/30 transition-all duration-300 hover:bg-white/15 font-space-grotesk"
+          className="h-12 rounded-xl border-2 border-blue-200/30 bg-blue-50/10 backdrop-blur-sm text-white placeholder:text-blue-300/70 focus:border-blue-400 focus:ring-blue-400/30 transition-all duration-300 hover:bg-blue-50/15 font-space-grotesk"
         />
-        <p className="text-xs text-purple-300/70 mt-1 font-space-grotesk">Mínimo de 6 caracteres</p>
+        <p className="text-xs text-blue-300/70 mt-1 font-space-grotesk">Mínimo de 6 caracteres</p>
       </div>
       <Button 
         type="submit" 
-        className="w-full h-14 bg-gradient-to-r from-purple-700 via-pink-600 to-blue-600 hover:from-purple-800 hover:via-pink-700 hover:to-blue-700 rounded-xl font-bold text-lg shadow-2xl hover:shadow-pink-500/50 transition-all duration-500 transform hover:scale-105 font-space-grotesk group relative overflow-hidden"
+        className="w-full h-14 bg-gradient-to-r from-blue-700 via-blue-800 to-blue-900 hover:from-blue-800 hover:via-blue-900 hover:to-blue-950 rounded-xl font-bold text-lg shadow-2xl hover:shadow-blue-500/50 transition-all duration-500 transform hover:scale-105 font-space-grotesk group relative overflow-hidden"
         disabled={isSubmitting || loading}
       >
         <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
@@ -86,8 +86,8 @@ export function SignupForm({
           </div>
         ) : (
           <div className="flex items-center gap-2 relative z-10">
-            <Star className="w-5 h-5" />
-            Criar Conta ⭐
+            <Cross className="w-5 h-5" />
+            Criar Conta Médica ⚕️
           </div>
         )}
       </Button>

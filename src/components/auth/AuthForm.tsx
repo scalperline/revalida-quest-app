@@ -84,10 +84,10 @@ export function AuthForm() {
 
   return (
     <div className="relative">
-      {/* Glassmorphism card with neon border */}
-      <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 via-blue-500/20 to-cyan-500/20 rounded-3xl blur-xl"></div>
+      {/* Medical glassmorphism card with blue border */}
+      <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 via-blue-600/20 to-blue-700/20 rounded-3xl blur-xl"></div>
       
-      <Card className="relative bg-white/5 backdrop-blur-xl border border-white/10 shadow-2xl rounded-3xl overflow-hidden hover:bg-white/10 transition-all duration-500 hover:border-white/20 hover:shadow-purple-500/20">
+      <Card className="relative bg-white/10 backdrop-blur-xl border border-blue-200/20 shadow-2xl rounded-3xl overflow-hidden hover:bg-white/15 transition-all duration-500 hover:border-blue-200/30 hover:shadow-blue-500/20">
         <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-transparent"></div>
         
         <AuthFormHeader />

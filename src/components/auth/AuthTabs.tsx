@@ -33,17 +33,17 @@ export function AuthTabs({
 }: AuthTabsProps) {
   return (
     <Tabs defaultValue="login" className="w-full" onValueChange={onValueChange}>
-      <TabsList className="grid w-full grid-cols-2 bg-white/10 backdrop-blur-sm rounded-xl p-1 border border-white/10">
+      <TabsList className="grid w-full grid-cols-2 bg-blue-100/20 backdrop-blur-sm rounded-xl p-1 border border-blue-200/20">
         <TabsTrigger 
           value="login" 
-          className="flex items-center gap-2 rounded-lg font-space-grotesk data-[state=active]:bg-white/20 data-[state=active]:text-white data-[state=active]:shadow-lg transition-all duration-300 hover:bg-white/10"
+          className="flex items-center gap-2 rounded-lg font-space-grotesk data-[state=active]:bg-blue-500/20 data-[state=active]:text-white data-[state=active]:shadow-lg transition-all duration-300 hover:bg-blue-400/10"
         >
           <LogIn className="w-4 h-4" />
           Entrar
         </TabsTrigger>
         <TabsTrigger 
           value="signup" 
-          className="flex items-center gap-2 rounded-lg font-space-grotesk data-[state=active]:bg-white/20 data-[state=active]:text-white data-[state=active]:shadow-lg transition-all duration-300 hover:bg-white/10"
+          className="flex items-center gap-2 rounded-lg font-space-grotesk data-[state=active]:bg-blue-500/20 data-[state=active]:text-white data-[state=active]:shadow-lg transition-all duration-300 hover:bg-blue-400/10"
         >
           <UserPlus className="w-4 h-4" />
           Cadastrar

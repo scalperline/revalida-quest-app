@@ -1,33 +1,33 @@
 
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Trophy, Zap, Target } from 'lucide-react';
+import { Microscope, Heart, Cross } from 'lucide-react';
 
 export function GamifiedCards() {
   const cards = [
     {
       title: 'Questões',
       description: 'Pratique com questões reais do Revalida',
-      icon: Target,
+      icon: Microscope,
       value: '2.000+',
-      color: 'from-blue-500 to-cyan-500',
+      color: 'from-blue-500 to-blue-600',
       shadowColor: 'shadow-blue-500/30',
     },
     {
-      title: 'XP Sistema',
+      title: 'Sistema XP',
       description: 'Ganhe experiência a cada resposta',
-      icon: Zap,
+      icon: Heart,
       value: 'Ilimitado',
-      color: 'from-purple-500 to-pink-500',
-      shadowColor: 'shadow-purple-500/30',
+      color: 'from-blue-600 to-blue-700',
+      shadowColor: 'shadow-blue-600/30',
     },
     {
       title: 'Ranking',
-      description: 'Compare seu progresso com outros',
-      icon: Trophy,
+      description: 'Compare seu progresso com outros médicos',
+      icon: Cross,
       value: 'Global',
-      color: 'from-amber-500 to-orange-500',
-      shadowColor: 'shadow-amber-500/30',
+      color: 'from-blue-700 to-blue-800',
+      shadowColor: 'shadow-blue-700/30',
     },
   ];
 
@@ -39,10 +39,10 @@ export function GamifiedCards() {
           <Card
             key={card.title}
             className={`
-              bg-white/10 backdrop-blur-md border border-white/20 
+              bg-white/10 backdrop-blur-md border border-blue-200/20 
               hover:bg-white/15 transition-all duration-500 ease-out
               hover:shadow-2xl hover:scale-105 ${card.shadowColor}
-              hover:border-white/30 group cursor-pointer
+              hover:border-blue-200/30 group cursor-pointer
             `}
             style={{
               animation: `slideInLeft 0.8s ease-out ${index * 0.2}s both`,
@@ -61,7 +61,7 @@ export function GamifiedCards() {
                   <CardTitle className="text-lg font-space-grotesk text-white font-semibold">
                     {card.title}
                   </CardTitle>
-                  <p className="text-sm text-purple-200/80 mt-1">
+                  <p className="text-sm text-blue-200/80 mt-1">
                     {card.description}
                   </p>
                 </div>

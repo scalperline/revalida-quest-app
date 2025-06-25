@@ -19,13 +19,13 @@ export default function Auth() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 flex items-center justify-center relative overflow-hidden">
+      <div className="min-h-screen bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900 flex items-center justify-center relative overflow-hidden">
         <StarField />
         <ParticleField />
         <div className="relative z-10">
-          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-purple-400 shadow-lg shadow-purple-400/50"></div>
+          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-400 shadow-lg shadow-blue-400/50"></div>
           <div className="absolute inset-0 flex items-center justify-center">
-            <Stethoscope className="w-8 h-8 text-purple-400 animate-pulse drop-shadow-lg" />
+            <Stethoscope className="w-8 h-8 text-blue-400 animate-pulse drop-shadow-lg" />
           </div>
         </div>
       </div>
@@ -33,29 +33,29 @@ export default function Auth() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 relative overflow-hidden">
-      {/* Animated stellar background */}
+    <div className="min-h-screen bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900 relative overflow-hidden">
+      {/* Medical background elements */}
       <StarField />
       <ParticleField />
       
-      {/* Gradient overlay for depth */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent"></div>
+      {/* Medical gradient overlay for depth */}
+      <div className="absolute inset-0 bg-gradient-to-t from-blue-950/20 via-transparent to-transparent"></div>
 
       <div className="relative z-10 flex items-center justify-center min-h-screen p-4">
         <div className="w-full max-w-7xl grid lg:grid-cols-2 gap-12 items-center">
           
-          {/* Left side - Gamified cards and hero */}
+          {/* Left side - Medical cards and hero */}
           <div className="space-y-8">
             <div className="text-center lg:text-left">
-              <h1 className="text-5xl lg:text-6xl font-bold font-space-grotesk text-transparent bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text mb-4 drop-shadow-2xl">
+              <h1 className="text-5xl lg:text-6xl font-bold font-space-grotesk text-transparent bg-gradient-to-r from-blue-300 via-blue-400 to-blue-500 bg-clip-text mb-4 drop-shadow-2xl">
                 Revalida Quest
               </h1>
-              <p className="text-xl text-purple-200/90 font-space-grotesk font-light mb-8">
-                Sua jornada intergaláctica médica começa aqui 🚀
+              <p className="text-xl text-blue-200/90 font-space-grotesk font-light mb-8">
+                Sua jornada médica oficial começa aqui 🏥
               </p>
             </div>
             
-            {/* Desktop gamified cards */}
+            {/* Desktop medical cards */}
             <div className="hidden lg:block">
               <GamifiedCards />
             </div>

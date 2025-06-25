@@ -88,7 +88,7 @@ export const QUESTOES_REVALIDA_2014_VERMELHA_58_63: Question[] = [
     year: 2014,
     area: "Clínica Médica",
     enunciado:
-      "Um homem com 55 anos de idade procura Unidade Básica de Saúde (UBS) queixando-se que há três meses apresenta cor amarelada da pele e dos "olhos", com coceira e urina muito escura. Refere piora progressiva dos sintomas há cerca de 25 dias. Sente cansaço progressivo, que associa a emagrecimento de 20 kg nos últimos seis meses. Eventualmente refere dor em mesogástrio e nas costas, que melhora com antiácidos e jejum. História pregressa de etilismo (destilados) há mais de 30 anos. Retorna à UBS após 45 dias da primeira consulta, trazendo ultrassonografia abdominal que evidencia dilatação de vias biliares intra e extra-hepáticas.\n\nA hipótese diagnóstica e a conduta correta são",
+      'Um homem com 55 anos de idade procura Unidade Básica de Saúde (UBS) queixando-se que há três meses apresenta cor amarelada da pele e dos "olhos", com coceira e urina muito escura. Refere piora progressiva dos sintomas há cerca de 25 dias. Sente cansaço progressivo, que associa a emagrecimento de 20 kg nos últimos seis meses. Eventualmente refere dor em mesogástrio e nas costas, que melhora com antiácidos e jejum. História pregressa de etilismo (destilados) há mais de 30 anos. Retorna à UBS após 45 dias da primeira consulta, trazendo ultrassonografia abdominal que evidencia dilatação de vias biliares intra e extra-hepáticas.\n\nA hipótese diagnóstica e a conduta correta são',
     options: [
       {
         id: "A",

@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Navbar } from "@/components/Navbar";
 import { QuestionCard } from "@/components/QuestionCard/QuestionCard";
@@ -8,8 +9,8 @@ import { useQuestionsFilters } from "@/hooks/useQuestionsFilters";
 
 export default function Questions() {
   const [currentPage, setCurrentPage] = useState(1);
-  const { questions, totalQuestions, isLoading, error } = useQuestions(currentPage);
-  const { selectedArea, selectedYear } = useQuestionsFilters();
+  const questionsData = useQuestions();
+  const filtersData = useQuestionsFilters();
 
   const handlePageChange = (newPage: number) => {
     setCurrentPage(newPage);
@@ -29,21 +30,26 @@ export default function Questions() {
             </p>
           </div>
 
-          <QuestionsHeader />
+          <QuestionsHeader 
+            anoSelecionado={questionsData.anoSelecionado}
+            setAnoSelecionado={questionsData.handleAnoSelecionado}
+            totalQuestoes={questionsData.totalQuestoes}
+          />
 
-          {isLoading && <div className="text-center">Carregando questões...</div>}
-          {error && <div className="text-center text-red-500">Erro ao carregar questões.</div>}
+          {questionsData.questoesPaginadas && questionsData.questoesPaginadas.length === 0 && (
+            <div className="text-center">Nenhuma questão encontrada.</div>
+          )}
 
           <div className="grid grid-cols-1 gap-6 mb-8">
-            {questions?.map((question) => (
+            {questionsData.questoesPaginadas?.map((question) => (
               <QuestionCard key={question.id} question={question} />
             ))}
           </div>
 
           <QuestionsPagination
-            currentPage={currentPage}
-            totalQuestions={totalQuestions}
-            onPageChange={handlePageChange}
+            paginaAtual={questionsData.paginaAtual}
+            totalPaginas={questionsData.totalPaginas}
+            onPageChange={questionsData.handlePageChange}
           />
         </div>
       </div>

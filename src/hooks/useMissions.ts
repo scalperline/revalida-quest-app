@@ -77,25 +77,52 @@ export function useMissions() {
     setMissionProgress(progress);
   }, []);
 
+  const createMission = async (missionData: Omit<Mission, 'id' | 'progress' | 'completed' | 'reward'>) => {
+    const newMission: Mission = {
+      ...missionData,
+      id: `custom_${Date.now()}`,
+      progress: 0,
+      completed: false,
+      reward: {
+        xp: missionData.difficulty === 'easy' ? 100 : missionData.difficulty === 'medium' ? 200 : 300,
+        badge: `${missionData.title} Completo`
+      }
+    };
+
+    setMissions(prev => [...prev, newMission]);
+    return newMission;
+  };
+
+  const completeMission = (missionId: string) => {
+    const mission = missions.find(m => m.id === missionId);
+    if (!mission || mission.completed) return;
+
+    setMissions(prev => prev.map(m => 
+      m.id === missionId ? { ...m, completed: true } : m
+    ));
+
+    addXP(mission.reward.xp);
+    if (mission.reward.badge) {
+      console.log(`Badge desbloqueado: ${mission.reward.badge}`);
+    }
+  };
+
   const getQuestionsForMission = (mission: Mission) => {
     let questionsForArea;
 
     if (mission.area === 'Mista') {
-      // For mixed missions, use all questions
       questionsForArea = allQuestions;
     } else {
-      // Filter questions by area
       questionsForArea = allQuestions.filter(q => q.area === mission.area);
     }
 
-    // Shuffle and take the required amount
     const shuffled = [...questionsForArea].sort(() => Math.random() - 0.5);
     return shuffled.slice(0, mission.targetQuestions);
   };
 
   const updateMissionProgress = (missionId: string, questionsAnswered: number, correctAnswers: number) => {
     const mission = missions.find(m => m.id === missionId);
-    if (!mission) return;
+    if (!mission) return false;
 
     const accuracy = questionsAnswered > 0 ? (correctAnswers / questionsAnswered) * 100 : 0;
     const isCompleted = questionsAnswered >= mission.targetQuestions && accuracy >= mission.targetAccuracy;
@@ -108,7 +135,6 @@ export function useMissions() {
       completedAt: isCompleted ? new Date() : undefined
     };
 
-    // Atualizar progresso
     const updatedProgress = {
       ...missionProgress,
       [missionId]: newProgress
@@ -117,18 +143,15 @@ export function useMissions() {
     setMissionProgress(updatedProgress);
     localStorage.setItem('mission-progress', JSON.stringify(updatedProgress));
 
-    // Atualizar missão
     setMissions(prev => prev.map(m => 
       m.id === missionId 
         ? { ...m, progress: questionsAnswered, completed: isCompleted }
         : m
     ));
 
-    // Se completou a missão, dar recompensas
     if (isCompleted && !mission.completed) {
       addXP(mission.reward.xp);
       if (mission.reward.badge) {
-        // Aqui você pode implementar o sistema de badges
         console.log(`Badge desbloqueado: ${mission.reward.badge}`);
       }
     }
@@ -157,6 +180,8 @@ export function useMissions() {
 
   return {
     missions,
+    createMission,
+    completeMission,
     updateMissionProgress,
     getMissionProgress,
     getAvailableMissions,

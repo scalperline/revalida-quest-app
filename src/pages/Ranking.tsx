@@ -1,16 +1,13 @@
+
 import { Navbar } from "@/components/Navbar";
 import { useRanking } from "@/hooks/useRanking";
 import { Trophy, Medal, Award, Crown, Star, TrendingUp } from "lucide-react";
 
 export default function Ranking() {
-  const { ranking, loading, error } = useRanking();
+  const { allTimeRanking, loading } = useRanking();
 
   if (loading) {
     return <div>Carregando ranking...</div>;
-  }
-
-  if (error) {
-    return <div>Erro ao carregar o ranking: {error}</div>;
   }
 
   return (
@@ -28,8 +25,8 @@ export default function Ranking() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {ranking &&
-              ranking.map((user, index) => (
+            {allTimeRanking &&
+              allTimeRanking.map((user, index) => (
                 <div
                   key={user.id}
                   className="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-blue-100 dark:border-gray-700 shadow-xl transition-transform hover:scale-105"
@@ -44,9 +41,9 @@ export default function Ranking() {
                     </div>
                     <TrendingUp className="w-6 h-6 text-green-500" />
                   </div>
-                  <h3 className="font-semibold text-gray-900 dark:text-white">{user.name}</h3>
+                  <h3 className="font-semibold text-gray-900 dark:text-white">{user.display_name}</h3>
                   <p className="text-muted-foreground">
-                    Nível: {user.level} | XP: {user.xp}
+                    Nível: {user.level} | XP: {user.total_xp}
                   </p>
                 </div>
               ))}

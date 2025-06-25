@@ -17,8 +17,8 @@ export default function Missions() {
   const [selectedArea, setSelectedArea] = useState("Clínica Médica");
   const [availableQuestions, setAvailableQuestions] = useState(0);
   const [isCreatingMission, setIsCreatingMission] = useState(false);
-  const { missions, createMission, completeMission } = useMissions();
-  const { startMission } = useGamification();
+  const { missions, createMission } = useMissions();
+  const { addXP } = useGamification();
   const { toast } = useToast();
 
   useEffect(() => {
@@ -39,7 +39,7 @@ export default function Missions() {
       return;
     }
 
-    startMission(mission);
+    console.log("Iniciando missão:", mission.title);
   };
 
   const handleCreateMission = async () => {
@@ -224,7 +224,7 @@ function CreateMissionForm({ availableQuestions, onCreate, onCancel }: CreateMis
       return;
     }
 
-    const missionData: Omit<Mission, 'id' | 'progress' | 'completed' | 'reward'> = {
+    const missionData = {
       title,
       description,
       objective,
@@ -232,6 +232,7 @@ function CreateMissionForm({ availableQuestions, onCreate, onCancel }: CreateMis
       targetQuestions,
       targetAccuracy,
       timeLimit,
+      area: "", // Will be set by parent component
     };
     onCreate(missionData);
   };

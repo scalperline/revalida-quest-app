@@ -1,5 +1,5 @@
 
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Tabs, TabsContent, TabsTrigger } from '@/components/ui/tabs';
 import { LogIn, UserPlus, ArrowRight, Sparkles } from 'lucide-react';
 import { LoginForm } from './LoginForm';
 import { SignupForm } from './SignupForm';
@@ -33,7 +33,7 @@ export function AuthTabs({
 }: AuthTabsProps) {
   return (
     <Tabs defaultValue="login" className="w-full" onValueChange={onValueChange}>
-      {/* Botões customizados separados sem TabsList */}
+      {/* Custom button layout without TabsList */}
       <div className="w-full mb-6">
         {/* Mobile: botões verticais */}
         <div className="flex flex-col gap-4 sm:hidden">

@@ -9,9 +9,7 @@ export function AuthFormHeader() {
       <div className="relative mx-auto mb-6 hidden lg:block">
         <div className="flex items-center justify-center">
           <div className="w-20 h-20 bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800 rounded-2xl flex items-center justify-center shadow-2xl shadow-blue-500/50 hover:shadow-blue-500/70 transition-all duration-300 animate-pulse">
-            <Stethoscope className="w-10 h-10 text-white drop-shadow-lg" style={{ 
-              animation: 'pulse 2s ease-in-out infinite' 
-            }} />
+            <Stethoscope className="w-10 h-10 text-white drop-shadow-lg stethoscope-pulse" />
           </div>
         </div>
         <div className="absolute -top-1 -right-1 w-6 h-6 bg-gradient-to-r from-orange-500 to-orange-600 rounded-full flex items-center justify-center shadow-lg shadow-orange-400/50 animate-pulse">

@@ -19,7 +19,7 @@ export default function Profile() {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-8">
             <h1 className="text-3xl font-bold mb-6 text-center leading-tight tracking-tight">
-              <span className="text-blue-600 bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">Meu Perfil Revalida Quest</span>
+              <span className="text-blue-600 bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">Meu Perfil</span>
             </h1>
             <p className="text-xl text-muted-foreground">
               Acompanhe sua jornada épica rumo à aprovação no Revalida! 🚀

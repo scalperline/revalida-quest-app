@@ -207,8 +207,8 @@ export default function Missions() {
           
           {/* Header */}
           <div className="text-center mb-8">
-            <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">
-              🚩 Quests do Revalida
+            <h1 className="text-3xl font-bold mb-6 text-center leading-tight tracking-tight">
+              <span className="text-blue-600 bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">Quests do Revalida</span>
             </h1>
             <p className="text-xl text-muted-foreground">
               Complete quests especializadas ou crie sua própria quest personalizada com questões oficiais do INEP!

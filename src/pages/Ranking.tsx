@@ -127,8 +127,8 @@ export default function Ranking() {
           
           {/* Header */}
           <div className="text-center mb-8">
-            <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">
-              🏆 Ranking Revalida Quest
+            <h1 className="text-3xl font-bold mb-6 text-center leading-tight tracking-tight">
+              <span className="text-blue-600 bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">Ranking Revalida Quest</span>
             </h1>
             <p className="text-xl text-muted-foreground mb-6">
               Veja como você está se saindo em comparação com outros futuros médicos!

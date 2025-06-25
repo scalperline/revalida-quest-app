@@ -22,17 +22,30 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const { toast } = useToast();
 
   useEffect(() => {
-    // Set up auth state listener
+    // Set up auth state listener FIRST
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (event, session) => {
         console.log('Auth state changed:', event, session?.user?.id);
         setSession(session);
         setUser(session?.user ?? null);
         setLoading(false);
+
+        // Handle auth events
+        if (event === 'SIGNED_IN') {
+          toast({
+            title: "Login realizado com sucesso!",
+            description: "Bem-vindo de volta ao Revalida Quest! 🎉",
+          });
+        } else if (event === 'SIGNED_OUT') {
+          toast({
+            title: "Logout realizado",
+            description: "Até logo! Continue sua jornada quando quiser. 👋",
+          });
+        }
       }
     );
 
-    // Get initial session
+    // THEN check for existing session
     supabase.auth.getSession().then(({ data: { session } }) => {
       console.log('Initial session:', session?.user?.id);
       setSession(session);
@@ -41,33 +54,32 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     });
 
     return () => subscription.unsubscribe();
-  }, []);
+  }, [toast]);
 
   const signIn = async (email: string, password: string) => {
     try {
       setLoading(true);
       const { error } = await supabase.auth.signInWithPassword({
-        email,
+        email: email.trim(),
         password,
       });
 
       if (error) {
+        console.error('Sign in error:', error);
         toast({
           title: "Erro no Login",
           description: error.message === "Invalid login credentials" 
             ? "Email ou senha incorretos" 
-            : error.message,
+            : error.message.includes('Email not confirmed')
+            ? "Por favor, confirme seu email antes de fazer login"
+            : "Erro no login. Tente novamente.",
           variant: "destructive",
-        });
-      } else {
-        toast({
-          title: "Login realizado com sucesso!",
-          description: "Bem-vindo de volta ao Revalida Quest!",
         });
       }
 
       return { error };
     } catch (error: any) {
+      console.error('Unexpected sign in error:', error);
       toast({
         title: "Erro no Login",
         description: "Ocorreu um erro inesperado. Tente novamente.",
@@ -85,39 +97,37 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       const redirectUrl = `${window.location.origin}/`;
       
       const { error } = await supabase.auth.signUp({
-        email,
+        email: email.trim(),
         password,
         options: {
           emailRedirectTo: redirectUrl,
           data: {
-            display_name: displayName || 'Aventureiro',
+            display_name: displayName?.trim() || 'Aventureiro',
           }
         }
       });
 
       if (error) {
-        if (error.message.includes('already registered')) {
-          toast({
-            title: "Usuário já existe",
-            description: "Este email já está cadastrado. Tente fazer login.",
-            variant: "destructive",
-          });
-        } else {
-          toast({
-            title: "Erro no Cadastro",
-            description: error.message,
-            variant: "destructive",
-          });
-        }
+        console.error('Sign up error:', error);
+        toast({
+          title: "Erro no Cadastro",
+          description: error.message.includes('already registered')
+            ? "Este email já está cadastrado. Tente fazer login."
+            : error.message.includes('Password should be')
+            ? "A senha deve ter pelo menos 6 caracteres."
+            : "Erro no cadastro. Tente novamente.",
+          variant: "destructive",
+        });
       } else {
         toast({
-          title: "Cadastro realizado!",
-          description: "Verifique seu email para confirmar a conta.",
+          title: "Cadastro realizado! 🎉",
+          description: "Verifique seu email para confirmar a conta e fazer login.",
         });
       }
 
       return { error };
     } catch (error: any) {
+      console.error('Unexpected sign up error:', error);
       toast({
         title: "Erro no Cadastro",
         description: "Ocorreu um erro inesperado. Tente novamente.",
@@ -132,12 +142,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const signOut = async () => {
     try {
       setLoading(true);
-      await supabase.auth.signOut();
-      toast({
-        title: "Logout realizado",
-        description: "Até logo! Continue sua jornada quando quiser.",
-      });
+      const { error } = await supabase.auth.signOut();
+      
+      if (error) {
+        console.error('Sign out error:', error);
+        toast({
+          title: "Erro no Logout",
+          description: "Ocorreu um erro. Tente novamente.",
+          variant: "destructive",
+        });
+      }
     } catch (error: any) {
+      console.error('Unexpected sign out error:', error);
       toast({
         title: "Erro no Logout",
         description: "Ocorreu um erro. Tente novamente.",

@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Alert, AlertDescription } from '@/components/ui/alert';
 import { useAuth } from '@/hooks/useAuth';
 import { 
   Stethoscope, 
@@ -12,32 +13,84 @@ import {
   LogIn, 
   Star,
   Crown,
-  Zap
+  Zap,
+  CheckCircle,
+  AlertCircle,
+  Mail
 } from 'lucide-react';
 
 export function AuthForm() {
-  const { signIn, signUp } = useAuth();
+  const { signIn, signUp, loading } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [displayName, setDisplayName] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
+  const [error, setError] = useState('');
 
   const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email || !password) return;
+    if (!email || !password) {
+      setError('Por favor, preencha todos os campos obrigatórios.');
+      return;
+    }
     
     setIsSubmitting(true);
-    await signIn(email, password);
+    setError('');
+    
+    const { error: signInError } = await signIn(email, password);
+    
+    if (signInError) {
+      if (signInError.message === "Invalid login credentials") {
+        setError('Email ou senha incorretos. Verifique suas credenciais.');
+      } else if (signInError.message.includes('Email not confirmed')) {
+        setError('Por favor, confirme seu email antes de fazer login. Verifique sua caixa de entrada.');
+      } else {
+        setError('Erro no login. Tente novamente em alguns instantes.');
+      }
+    }
+    
     setIsSubmitting(false);
   };
 
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email || !password) return;
+    if (!email || !password) {
+      setError('Por favor, preencha todos os campos obrigatórios.');
+      return;
+    }
+
+    if (password.length < 6) {
+      setError('A senha deve ter pelo menos 6 caracteres.');
+      return;
+    }
     
     setIsSubmitting(true);
-    await signUp(email, password, displayName);
+    setError('');
+    
+    const { error: signUpError } = await signUp(email, password, displayName);
+    
+    if (signUpError) {
+      if (signUpError.message.includes('already registered')) {
+        setError('Este email já está cadastrado. Tente fazer login ou use outro email.');
+      } else if (signUpError.message.includes('Password should be')) {
+        setError('A senha deve ter pelo menos 6 caracteres.');
+      } else {
+        setError('Erro no cadastro. Tente novamente em alguns instantes.');
+      }
+    } else {
+      setShowSuccess(true);
+      setEmail('');
+      setPassword('');
+      setDisplayName('');
+    }
+    
     setIsSubmitting(false);
+  };
+
+  const resetForm = () => {
+    setError('');
+    setShowSuccess(false);
   };
 
   return (
@@ -69,7 +122,30 @@ export function AuthForm() {
           </CardHeader>
           
           <CardContent className="p-8">
-            <Tabs defaultValue="login" className="w-full">
+            {/* Success Message */}
+            {showSuccess && (
+              <Alert className="mb-6 border-green-200 bg-green-50 dark:bg-green-900/20">
+                <CheckCircle className="h-4 w-4 text-green-600" />
+                <AlertDescription className="text-green-800 dark:text-green-200">
+                  <div className="flex items-center gap-2">
+                    <Mail className="w-4 h-4" />
+                    <span>Conta criada! Verifique seu email para confirmar o cadastro.</span>
+                  </div>
+                </AlertDescription>
+              </Alert>
+            )}
+
+            {/* Error Message */}
+            {error && (
+              <Alert className="mb-6 border-red-200 bg-red-50 dark:bg-red-900/20">
+                <AlertCircle className="h-4 w-4 text-red-600" />
+                <AlertDescription className="text-red-800 dark:text-red-200">
+                  {error}
+                </AlertDescription>
+              </Alert>
+            )}
+
+            <Tabs defaultValue="login" className="w-full" onValueChange={resetForm}>
               <TabsList className="grid w-full grid-cols-2 bg-blue-50 dark:bg-gray-700 rounded-xl p-1">
                 <TabsTrigger 
                   value="login" 
@@ -90,7 +166,9 @@ export function AuthForm() {
               <TabsContent value="login" className="space-y-6 mt-6">
                 <form onSubmit={handleSignIn} className="space-y-6">
                   <div className="space-y-2">
-                    <Label htmlFor="email" className="text-sm font-medium">Email</Label>
+                    <Label htmlFor="email" className="text-sm font-medium">
+                      Email <span className="text-red-500">*</span>
+                    </Label>
                     <Input
                       id="email"
                       type="email"
@@ -98,12 +176,14 @@ export function AuthForm() {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       required
-                      disabled={isSubmitting}
+                      disabled={isSubmitting || loading}
                       className="h-12 rounded-xl border-2 focus:border-blue-500 transition-colors"
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="password" className="text-sm font-medium">Senha</Label>
+                    <Label htmlFor="password" className="text-sm font-medium">
+                      Senha <span className="text-red-500">*</span>
+                    </Label>
                     <Input
                       id="password"
                       type="password"
@@ -111,16 +191,16 @@ export function AuthForm() {
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       required
-                      disabled={isSubmitting}
+                      disabled={isSubmitting || loading}
                       className="h-12 rounded-xl border-2 focus:border-blue-500 transition-colors"
                     />
                   </div>
                   <Button 
                     type="submit" 
                     className="w-full h-12 bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-700 hover:to-blue-900 rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
-                    disabled={isSubmitting}
+                    disabled={isSubmitting || loading}
                   >
-                    {isSubmitting ? (
+                    {isSubmitting || loading ? (
                       <div className="flex items-center gap-2">
                         <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
                         Entrando...
@@ -145,12 +225,14 @@ export function AuthForm() {
                       placeholder="Seu nome completo"
                       value={displayName}
                       onChange={(e) => setDisplayName(e.target.value)}
-                      disabled={isSubmitting}
+                      disabled={isSubmitting || loading}
                       className="h-12 rounded-xl border-2 focus:border-blue-500 transition-colors"
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="signupEmail" className="text-sm font-medium">Email</Label>
+                    <Label htmlFor="signupEmail" className="text-sm font-medium">
+                      Email <span className="text-red-500">*</span>
+                    </Label>
                     <Input
                       id="signupEmail"
                       type="email"
@@ -158,12 +240,14 @@ export function AuthForm() {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       required
-                      disabled={isSubmitting}
+                      disabled={isSubmitting || loading}
                       className="h-12 rounded-xl border-2 focus:border-blue-500 transition-colors"
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="signupPassword" className="text-sm font-medium">Senha</Label>
+                    <Label htmlFor="signupPassword" className="text-sm font-medium">
+                      Senha <span className="text-red-500">*</span>
+                    </Label>
                     <Input
                       id="signupPassword"
                       type="password"
@@ -171,17 +255,18 @@ export function AuthForm() {
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       required
-                      disabled={isSubmitting}
+                      disabled={isSubmitting || loading}
                       minLength={6}
                       className="h-12 rounded-xl border-2 focus:border-blue-500 transition-colors"
                     />
+                    <p className="text-xs text-gray-500 mt-1">Mínimo de 6 caracteres</p>
                   </div>
                   <Button 
                     type="submit" 
                     className="w-full h-12 bg-gradient-to-r from-blue-700 to-blue-900 hover:from-blue-800 hover:to-blue-950 rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
-                    disabled={isSubmitting}
+                    disabled={isSubmitting || loading}
                   >
-                    {isSubmitting ? (
+                    {isSubmitting || loading ? (
                       <div className="flex items-center gap-2">
                         <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
                         Criando conta...
@@ -196,6 +281,13 @@ export function AuthForm() {
                 </form>
               </TabsContent>
             </Tabs>
+
+            {/* Help Text */}
+            <div className="mt-6 text-center">
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                Problemas para acessar? Verifique seu email ou entre em contato conosco.
+              </p>
+            </div>
           </CardContent>
         </div>
       </div>

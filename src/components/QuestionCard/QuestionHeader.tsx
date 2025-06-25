@@ -76,11 +76,11 @@ export function QuestionHeader({ question, isQuestionAnswered, isCorrectAnswer }
   return (
     <CardHeader className="bg-gradient-to-r from-blue-50 to-violet-50 dark:from-slate-800 dark:to-slate-700 rounded-t-xl border-b border-blue-100 dark:border-slate-600 p-6 shadow-md">
       <div className="space-y-4">
-        {/* Main Title */}
+        {/* Main Title - sem redundância do tema */}
         <div className="flex items-center justify-between flex-wrap gap-4">
           <h3 className="text-xl font-bold text-slate-800 dark:text-slate-100 flex items-center gap-2">
             <Trophy className="w-6 h-6 text-yellow-600" />
-            Questão {question.id} – {question.area}
+            Questão {question.id}
           </h3>
           
           {/* Answer Status */}

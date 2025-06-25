@@ -19,18 +19,59 @@ export function QuestionFeedback({ question, showAnswer, selectedOption, userAns
 
   return (
     <>
-      {/* Immediate feedback for correct answers */}
+      {/* Enhanced feedback for correct answers */}
       {isCorrect ? (
-        <div className="mt-6 sm:mt-8 p-4 sm:p-6 bg-gradient-to-r from-emerald-50 to-green-50 dark:from-emerald-900/20 dark:to-green-900/20 border-2 border-emerald-200 dark:border-emerald-700 rounded-lg shadow-lg">
-          <div className="flex items-start gap-3">
-            <CheckCircle className="w-6 h-6 text-emerald-600 flex-shrink-0 mt-0.5" />
-            <div>
-              <p className="font-bold text-emerald-800 dark:text-emerald-200 mb-2 text-lg sm:text-xl">
-                🎉 Parabéns! Resposta correta!
-              </p>
-              <p className="text-base sm:text-lg text-emerald-700 dark:text-emerald-300 leading-relaxed">
-                <strong>Alternativa {question.correct}:</strong> {correctOption?.text}
-              </p>
+        <div className="mt-6 sm:mt-8 space-y-4">
+          <div className="p-4 sm:p-6 bg-gradient-to-r from-emerald-50 to-green-50 dark:from-emerald-900/20 dark:to-green-900/20 border-2 border-emerald-200 dark:border-emerald-700 rounded-lg shadow-lg">
+            <div className="flex items-start gap-3">
+              <CheckCircle className="w-6 h-6 text-emerald-600 flex-shrink-0 mt-0.5" />
+              <div>
+                <p className="font-bold text-emerald-800 dark:text-emerald-200 mb-2 text-lg sm:text-xl">
+                  🎉 Parabéns! Resposta correta!
+                </p>
+                <p className="text-base sm:text-lg text-emerald-700 dark:text-emerald-300 leading-relaxed mb-3">
+                  <strong>Alternativa {question.correct}:</strong> {correctOption?.text}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Detailed explanation section for correct answers */}
+          <div className="p-4 sm:p-6 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/10 dark:to-indigo-900/10 border border-blue-200 dark:border-blue-700 rounded-lg">
+            <div className="flex items-start gap-3">
+              <AlertCircle className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600 flex-shrink-0 mt-0.5" />
+              <div>
+                <p className="font-medium text-blue-800 dark:text-blue-200 mb-3 text-lg sm:text-xl">
+                  🧠 Por que esta é a resposta correta?
+                </p>
+                <div className="text-base sm:text-lg text-blue-700 dark:text-blue-300 leading-relaxed space-y-3">
+                  {correctOption?.feedbackCorreta ? (
+                    <p>{correctOption.feedbackCorreta}</p>
+                  ) : (
+                    <div>
+                      <p className="mb-2">
+                        Esta alternativa representa a abordagem mais adequada para a situação clínica apresentada, considerando:
+                      </p>
+                      <ul className="list-disc list-inside space-y-1 ml-2">
+                        <li>Os protocolos médicos estabelecidos</li>
+                        <li>A evidência científica atual</li>
+                        <li>A segurança do paciente</li>
+                        <li>A eficácia terapêutica</li>
+                      </ul>
+                    </div>
+                  )}
+                  
+                  {/* Educational tip */}
+                  <div className="mt-4 p-3 bg-blue-100 dark:bg-blue-800/20 rounded-lg border border-blue-200 dark:border-blue-600">
+                    <p className="text-sm font-medium text-blue-800 dark:text-blue-200 mb-1">
+                      💡 Dica de estudo:
+                    </p>
+                    <p className="text-sm text-blue-700 dark:text-blue-300">
+                      Continue praticando questões da área de <strong>{question.area}</strong> para consolidar este conhecimento!
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

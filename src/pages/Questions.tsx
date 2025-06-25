@@ -9,8 +9,20 @@ import { useQuestionsFilters } from "@/hooks/useQuestionsFilters";
 
 export default function Questions() {
   const [currentPage, setCurrentPage] = useState(1);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedArea, setSelectedArea] = useState("Todos");
+  const [selectedDifficulty, setSelectedDifficulty] = useState("Todas");
+  
   const questionsData = useQuestions();
-  const filtersData = useQuestionsFilters(questionsData.questoesAnoSelecionado);
+  
+  const filtersData = useQuestionsFilters({
+    ano: questionsData.anoSelecionado,
+    tipo: questionsData.tipoProva,
+    searchTerm,
+    area: selectedArea,
+    difficulty: selectedDifficulty,
+    page: currentPage
+  });
 
   const handlePageChange = (newPage: number) => {
     setCurrentPage(newPage);
@@ -33,23 +45,23 @@ export default function Questions() {
           <QuestionsHeader 
             anoSelecionado={questionsData.anoSelecionado}
             setAnoSelecionado={questionsData.handleAnoSelecionado}
-            totalQuestoes={questionsData.totalQuestoes}
+            totalQuestoes={filtersData.totalQuestions}
           />
 
-          {questionsData.questoesPaginadas && questionsData.questoesPaginadas.length === 0 && (
+          {filtersData.filteredQuestions && filtersData.filteredQuestions.length === 0 && (
             <div className="text-center">Nenhuma questão encontrada.</div>
           )}
 
           <div className="grid grid-cols-1 gap-6 mb-8">
-            {questionsData.questoesPaginadas?.map((question) => (
+            {filtersData.filteredQuestions?.map((question) => (
               <QuestionCard key={question.id} question={question} />
             ))}
           </div>
 
           <QuestionsPagination
-            paginaAtual={questionsData.paginaAtual}
-            totalPaginas={questionsData.totalPaginas}
-            onPageChange={questionsData.handlePageChange}
+            paginaAtual={currentPage}
+            totalPaginas={Math.ceil(filtersData.totalQuestions / filtersData.questionsPerPage)}
+            onPageChange={handlePageChange}
           />
         </div>
       </div>

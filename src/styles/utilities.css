@@ -1,0 +1,85 @@
+
+/* Utility Classes - Layout and spacing utilities */
+
+@layer components {
+  /* Mobile-first responsive utilities with better spacing */
+  .mobile-grid {
+    @apply grid grid-cols-1 gap-6;
+  }
+
+  @media (min-width: 640px) {
+    .mobile-grid {
+      @apply grid-cols-2 gap-8;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .mobile-grid {
+      @apply grid-cols-4 gap-10;
+    }
+  }
+
+  /* Prevent horizontal scroll */
+  .no-scroll-x {
+    overflow-x: hidden;
+    max-width: 100vw;
+  }
+
+  /* Enhanced mobile spacing */
+  .mobile-padding {
+    @apply px-4 py-6;
+  }
+
+  @media (min-width: 640px) {
+    .mobile-padding {
+      @apply px-6 py-8;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .mobile-padding {
+      @apply px-8 py-10;
+    }
+  }
+
+  /* Mobile-optimized text sizes */
+  .mobile-text-lg {
+    @apply text-lg;
+  }
+
+  @media (max-width: 640px) {
+    .mobile-text-lg {
+      @apply text-xl;
+    }
+  }
+
+  .mobile-text-xl {
+    @apply text-xl;
+  }
+
+  @media (max-width: 640px) {
+    .mobile-text-xl {
+      @apply text-2xl;
+    }
+  }
+
+  .mobile-text-2xl {
+    @apply text-2xl;
+  }
+
+  @media (max-width: 640px) {
+    .mobile-text-2xl {
+      @apply text-3xl;
+    }
+  }
+
+  .mobile-text-3xl {
+    @apply text-3xl;
+  }
+
+  @media (max-width: 640px) {
+    .mobile-text-3xl {
+      @apply text-4xl;
+    }
+  }
+}

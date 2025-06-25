@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import { BookOpen, Search, Filter } from "lucide-react";
+import { Search, Filter, ChevronDown, ChevronUp } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import {
   Select,
@@ -9,6 +9,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Button } from "@/components/ui/button";
 
 interface GamifiedQuestionsHeaderProps {
   anoSelecionado: number;
@@ -63,18 +64,16 @@ export function GamifiedQuestionsHeader({
   const [showFilters, setShowFilters] = useState(false);
 
   return (
-    <div className="bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 border border-blue-100 dark:border-gray-700 rounded-2xl p-6 mb-8 shadow-xl">
-      {/* Title and Year/Type Selectors */}
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
-        <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">
-          Banco de Questões Revalida
-        </h1>
-        <div className="flex items-center gap-4">
+    <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-md border border-blue-200/50 dark:border-gray-600/50 rounded-3xl p-6 md:p-8 mb-8 shadow-xl">
+      {/* Main Controls */}
+      <div className="flex flex-col lg:flex-row gap-6 mb-6">
+        {/* Year and Type Selectors */}
+        <div className="flex flex-col sm:flex-row gap-4 flex-1">
           <Select
             onValueChange={(value) => setAnoSelecionado(parseInt(value))}
             defaultValue={anoSelecionado.toString()}
           >
-            <SelectTrigger className="w-[180px] bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border-blue-200 dark:border-gray-600">
+            <SelectTrigger className="w-full sm:w-[200px] h-12 bg-white/80 dark:bg-gray-700/80 backdrop-blur-sm border-blue-200 dark:border-gray-600 rounded-xl text-base font-medium shadow-sm hover:shadow-md transition-all">
               <SelectValue placeholder="Selecione o Ano" />
             </SelectTrigger>
             <SelectContent>
@@ -98,7 +97,7 @@ export function GamifiedQuestionsHeader({
             tipoProva &&
             setTipoProva && (
               <Select onValueChange={setTipoProva} defaultValue={tipoProva}>
-                <SelectTrigger className="w-[180px] bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border-blue-200 dark:border-gray-600">
+                <SelectTrigger className="w-full sm:w-[200px] h-12 bg-white/80 dark:bg-gray-700/80 backdrop-blur-sm border-blue-200 dark:border-gray-600 rounded-xl text-base font-medium shadow-sm hover:shadow-md transition-all">
                   <SelectValue placeholder="Selecione a Prova" />
                 </SelectTrigger>
                 <SelectContent>
@@ -117,74 +116,78 @@ export function GamifiedQuestionsHeader({
               </Select>
             )}
         </div>
-      </div>
 
-      {/* Search and Filter Section */}
-      <div className="space-y-4">
         {/* Search Bar */}
-        <div className="relative">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
+        <div className="relative flex-1 max-w-md">
+          <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500 w-5 h-5" />
           <Input
             placeholder="Buscar questões por palavra-chave..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="pl-10 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border-blue-200 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-500"
+            className="pl-12 h-12 bg-white/80 dark:bg-gray-700/80 backdrop-blur-sm border-blue-200 dark:border-gray-600 rounded-xl text-base shadow-sm hover:shadow-md focus:shadow-lg transition-all"
           />
         </div>
+      </div>
 
-        {/* Filter Toggle */}
-        <div className="flex items-center gap-2">
-          <button
-            onClick={() => setShowFilters(!showFilters)}
-            className="flex items-center gap-2 px-4 py-2 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-blue-200 dark:border-gray-600 rounded-lg hover:bg-blue-50 dark:hover:bg-gray-700 transition-colors"
-          >
-            <Filter className="w-4 h-4" />
-            <span>Filtros Avançados</span>
-          </button>
-          <div className="text-sm text-muted-foreground">
-            {totalQuestoes > 0
-              ? `${totalQuestoes} questões encontradas`
-              : "Nenhuma questão encontrada"}
+      {/* Filter Toggle and Results */}
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+        <Button
+          onClick={() => setShowFilters(!showFilters)}
+          variant="outline"
+          className="flex items-center gap-2 h-10 px-4 bg-white/80 dark:bg-gray-700/80 backdrop-blur-sm border-blue-200 dark:border-gray-600 rounded-xl hover:bg-blue-50 dark:hover:bg-gray-600 transition-all"
+        >
+          <Filter className="w-4 h-4" />
+          <span className="font-medium">Filtros Avançados</span>
+          {showFilters ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+        </Button>
+        
+        <div className="text-sm font-medium text-gray-600 dark:text-gray-400 bg-gray-100/80 dark:bg-gray-700/80 px-4 py-2 rounded-xl">
+          {totalQuestoes > 0
+            ? `${totalQuestoes} questões encontradas`
+            : "Nenhuma questão encontrada"}
+        </div>
+      </div>
+
+      {/* Advanced Filters */}
+      {showFilters && (
+        <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6 p-6 bg-gradient-to-r from-blue-50/80 to-indigo-50/80 dark:from-gray-700/50 dark:to-gray-600/50 backdrop-blur-sm rounded-2xl border border-blue-200/50 dark:border-gray-600/50">
+          <div>
+            <label className="block text-sm font-semibold mb-3 text-gray-700 dark:text-gray-300">
+              Área do Conhecimento
+            </label>
+            <Select value={selectedArea} onValueChange={setSelectedArea}>
+              <SelectTrigger className="h-12 bg-white dark:bg-gray-800 border-blue-200 dark:border-gray-600 rounded-xl text-base shadow-sm hover:shadow-md transition-all">
+                <SelectValue placeholder="Selecione uma área" />
+              </SelectTrigger>
+              <SelectContent>
+                {AREAS.map((area) => (
+                  <SelectItem key={area} value={area}>
+                    {area}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+
+          <div>
+            <label className="block text-sm font-semibold mb-3 text-gray-700 dark:text-gray-300">
+              Nível de Dificuldade
+            </label>
+            <Select value={selectedDifficulty} onValueChange={setSelectedDifficulty}>
+              <SelectTrigger className="h-12 bg-white dark:bg-gray-800 border-blue-200 dark:border-gray-600 rounded-xl text-base shadow-sm hover:shadow-md transition-all">
+                <SelectValue placeholder="Selecione a dificuldade" />
+              </SelectTrigger>
+              <SelectContent>
+                {DIFFICULTIES.map((difficulty) => (
+                  <SelectItem key={difficulty} value={difficulty}>
+                    {difficulty}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </div>
         </div>
-
-        {/* Advanced Filters */}
-        {showFilters && (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm rounded-xl border border-blue-100 dark:border-gray-700">
-            <div>
-              <label className="block text-sm font-medium mb-2">Área do Conhecimento</label>
-              <Select value={selectedArea} onValueChange={setSelectedArea}>
-                <SelectTrigger className="bg-white dark:bg-gray-800 border-blue-200 dark:border-gray-600">
-                  <SelectValue placeholder="Selecione uma área" />
-                </SelectTrigger>
-                <SelectContent>
-                  {AREAS.map((area) => (
-                    <SelectItem key={area} value={area}>
-                      {area}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium mb-2">Nível de Dificuldade</label>
-              <Select value={selectedDifficulty} onValueChange={setSelectedDifficulty}>
-                <SelectTrigger className="bg-white dark:bg-gray-800 border-blue-200 dark:border-gray-600">
-                  <SelectValue placeholder="Selecione a dificuldade" />
-                </SelectTrigger>
-                <SelectContent>
-                  {DIFFICULTIES.map((difficulty) => (
-                    <SelectItem key={difficulty} value={difficulty}>
-                      {difficulty}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-          </div>
-        )}
-      </div>
+      )}
     </div>
   );
 }

@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { useAuth } from '@/hooks/useAuth';
@@ -7,7 +6,6 @@ import { AuthSuccessAlert } from './AuthSuccessAlert';
 import { AuthErrorAlert } from './AuthErrorAlert';
 import { AuthTabs } from './AuthTabs';
 import { AuthStatsFooter } from './AuthStatsFooter';
-import { MobileOfficialCards } from './MobileOfficialCards';
 
 export function AuthForm() {
   const { signIn, signUp, loading } = useAuth();
@@ -109,8 +107,6 @@ export function AuthForm() {
           <AuthStatsFooter />
         </CardContent>
       </Card>
-
-      <MobileOfficialCards />
     </div>
   );
 }

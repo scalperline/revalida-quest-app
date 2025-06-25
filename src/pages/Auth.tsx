@@ -72,9 +72,13 @@ export default function Auth() {
           {/* Auth Form - Desktop 40% */}
           <div className="w-full">
             <AuthForm />
-            <MobileOfficialCards />
           </div>
         </div>
+      </div>
+
+      {/* Mobile Official Cards - Only shown on mobile, positioned after the form */}
+      <div className="lg:hidden relative z-10 pb-8">
+        <MobileOfficialCards />
       </div>
     </div>
   );

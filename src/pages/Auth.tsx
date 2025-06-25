@@ -1,4 +1,3 @@
-
 import { Navigate } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
 import { Stethoscope } from 'lucide-react';
@@ -76,10 +75,8 @@ export default function Auth() {
         </div>
       </div>
 
-      {/* Mobile Official Cards - Only shown on mobile, positioned after the form */}
-      <div className="lg:hidden relative z-10 pb-8">
-        <MobileOfficialCards />
-      </div>
+      {/* Mobile Official Cards - Only shown on mobile, positioned at the bottom */}
+      <MobileOfficialCards />
     </div>
   );
 }

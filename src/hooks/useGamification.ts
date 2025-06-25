@@ -1,5 +1,5 @@
 
-import { useGamificationSupabase } from './useGamificationSupabase';
+import { useGamificationState } from './useGamificationState';
 import { useGamificationAchievements } from './useGamificationAchievements';
 import { useGamificationActions } from './useGamificationActions';
 
@@ -7,14 +7,14 @@ import { useGamificationActions } from './useGamificationActions';
 export type { Achievement, Quest, MedicalCard, UserProgress } from '@/types/gamification';
 
 export function useGamification() {
-  const { userProgress, updateProgress, saveQuestionAnswer, getUserAnswer, loading } = useGamificationSupabase();
+  const { userProgress, setUserProgress } = useGamificationState();
   
   const {
     unlockAchievement,
     checkAchievements,
     getNewlyUnlockedAchievement,
     clearNewlyUnlockedAchievement
-  } = useGamificationAchievements(userProgress, updateProgress);
+  } = useGamificationAchievements(userProgress, setUserProgress);
 
   const {
     resetStats,
@@ -24,15 +24,10 @@ export function useGamification() {
     getProgressPercentage,
     getStreakBonus,
     generateQuestSuggestions
-  } = useGamificationActions(userProgress, updateProgress, checkAchievements);
+  } = useGamificationActions(userProgress, setUserProgress, checkAchievements);
 
-  const answerQuestion = async (correct: boolean, area?: string, questionId?: number, userAnswer?: string) => {
+  const answerQuestion = (correct: boolean, area?: string) => {
     baseAnswerQuestion(correct, area);
-    
-    // Salvar resposta no Supabase se fornecidos os parâmetros
-    if (questionId !== undefined && userAnswer !== undefined) {
-      await saveQuestionAnswer(questionId, userAnswer, correct);
-    }
   };
 
   const completeSimulado = (score: number, total: number) => {
@@ -44,25 +39,19 @@ export function useGamification() {
   };
 
   const addXP = (points: number) => {
-    const newXPToNext = userProgress.level * 100;
-    let newXP = userProgress.xp + points;
-    let newLevel = userProgress.level;
+    setUserProgress(prev => {
+      const { newXP, newLevel, newXPToNext } = require('@/utils/gamificationHelpers').calculateLevelUp(prev.xp, prev.level, points);
 
-    while (newXP >= newXPToNext) {
-      newXP -= newXPToNext;
-      newLevel++;
-    }
-
-    const updatedProgress = {
-      ...userProgress,
-      xp: newXP,
-      level: newLevel,
-      xpToNextLevel: newLevel * 100
-    };
-
-    updateProgress(updatedProgress);
+      return {
+        ...prev,
+        xp: newXP,
+        level: newLevel,
+        xpToNextLevel: newXPToNext
+      };
+    });
   };
 
+  // Get the newly unlocked badge for badge notification
   const getNewlyUnlockedBadge = () => {
     return getNewlyUnlockedAchievement();
   };
@@ -73,7 +62,6 @@ export function useGamification() {
 
   return {
     userProgress,
-    loading,
     addXP,
     answerQuestion,
     completeSimulado,
@@ -86,7 +74,6 @@ export function useGamification() {
     getStreakBonus,
     generateQuestSuggestions,
     resetStats,
-    unlockAchievement,
-    getUserAnswer
+    unlockAchievement
   };
 }

@@ -12,7 +12,6 @@ export function GamifiedCards() {
       value: '2.000+',
       color: 'from-blue-500 to-blue-600',
       shadowColor: 'shadow-blue-500/40',
-      accentColor: 'from-orange-400 to-orange-500',
     },
     {
       title: 'Sistema XP',
@@ -21,7 +20,6 @@ export function GamifiedCards() {
       value: 'Ilimitado',
       color: 'from-blue-600 to-blue-700',
       shadowColor: 'shadow-blue-600/40',
-      accentColor: 'from-yellow-400 to-yellow-500',
     },
     {
       title: 'Ranking',
@@ -30,7 +28,6 @@ export function GamifiedCards() {
       value: 'Global',
       color: 'from-blue-700 to-blue-800',
       shadowColor: 'shadow-blue-700/40',
-      accentColor: 'from-yellow-500 to-orange-500',
     },
   ];
 
@@ -45,7 +42,7 @@ export function GamifiedCards() {
               bg-white/15 backdrop-blur-md border-2 border-blue-200/30 
               hover:bg-white/25 transition-all duration-500 ease-out
               hover:scale-105 ${card.shadowColor}
-              hover:border-orange-400/50 group cursor-pointer
+              hover:border-blue-200/45 group cursor-pointer
             `}
             style={{
               animation: `slideInLeft 0.8s ease-out ${index * 0.2}s both`,
@@ -55,12 +52,12 @@ export function GamifiedCards() {
             <CardHeader className="pb-3">
               <div className="flex items-center gap-3">
                 <div className={`
-                  p-3 rounded-xl bg-gradient-to-r ${card.accentColor} 
+                  p-3 rounded-xl bg-gradient-to-r ${card.color} 
                   shadow-lg group-hover:shadow-xl transition-all duration-300
                   group-hover:scale-110
                 `}
                 style={{
-                  boxShadow: '0 4px 15px rgba(251, 146, 60, 0.4)'
+                  boxShadow: '0 4px 15px rgba(59, 130, 246, 0.3)'
                 }}>
                   <IconComponent className="w-6 h-6 text-white drop-shadow-lg" />
                 </div>
@@ -76,7 +73,7 @@ export function GamifiedCards() {
             </CardHeader>
             <CardContent className="pt-0">
               <div className={`
-                text-xl sm:text-2xl font-bold bg-gradient-to-r ${card.accentColor} 
+                text-xl sm:text-2xl font-bold bg-gradient-to-r ${card.color} 
                 bg-clip-text text-transparent font-space-grotesk
                 group-hover:scale-110 transition-transform duration-300
                 drop-shadow-sm

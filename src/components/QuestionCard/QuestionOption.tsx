@@ -90,7 +90,7 @@ export function QuestionOption({
           {getOptionIcon(option.id)}
         </div>
         <div className="flex-1 text-left">
-          <span className="text-sm sm:text-base md:text-lg leading-relaxed text-gray-800 dark:text-gray-200 whitespace-normal break-words">
+          <span className="text-base leading-relaxed text-gray-800 dark:text-gray-200 whitespace-normal break-words">
             {option.text}
           </span>
         </div>

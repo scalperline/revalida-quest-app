@@ -28,10 +28,10 @@ export function QuestionFeedback({ question, showAnswer, selectedOption, userAns
             <XCircle className="w-5 h-5 text-red-600" />
           )}
           <div>
-            <p className="font-medium text-gray-800 dark:text-gray-200">
+            <p className="font-medium text-gray-800 dark:text-gray-200 text-base">
               <strong>Gabarito:</strong> Alternativa {question.correct}
             </p>
-            <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+            <p className="text-base text-gray-600 dark:text-gray-400 mt-1 leading-relaxed">
               {correctOption?.text}
             </p>
           </div>
@@ -46,10 +46,10 @@ export function QuestionFeedback({ question, showAnswer, selectedOption, userAns
             <div className="flex items-start gap-3">
               <AlertCircle className="w-5 h-5 sm:w-6 sm:h-6 text-orange-600 flex-shrink-0 mt-0.5" />
               <div>
-                <p className="font-medium text-orange-800 dark:text-orange-200 mb-3 text-lg sm:text-xl">
+                <p className="font-medium text-orange-800 dark:text-orange-200 mb-3 text-base">
                   🔍 Por que sua resposta está incorreta?
                 </p>
-                <div className="text-base sm:text-lg text-orange-700 dark:text-orange-300 leading-relaxed space-y-3">
+                <div className="text-base text-orange-700 dark:text-orange-300 leading-relaxed space-y-3">
                   {selectedOptionData?.feedbackErrada ? (
                     <p>{selectedOptionData.feedbackErrada}</p>
                   ) : (
@@ -75,10 +75,10 @@ export function QuestionFeedback({ question, showAnswer, selectedOption, userAns
             <div className="flex items-start gap-3">
               <AlertCircle className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600 flex-shrink-0 mt-0.5" />
               <div>
-                <p className="font-medium text-blue-800 dark:text-blue-200 mb-3 text-lg sm:text-xl">
+                <p className="font-medium text-blue-800 dark:text-blue-200 mb-3 text-base">
                   💡 Por que a alternativa correta é a melhor opção?
                 </p>
-                <div className="text-base sm:text-lg text-blue-700 dark:text-blue-300 leading-relaxed space-y-3">
+                <div className="text-base text-blue-700 dark:text-blue-300 leading-relaxed space-y-3">
                   {correctOption?.feedbackCorreta ? (
                     <p>{correctOption.feedbackCorreta}</p>
                   ) : (
@@ -100,7 +100,7 @@ export function QuestionFeedback({ question, showAnswer, selectedOption, userAns
                     <p className="text-sm font-medium text-blue-800 dark:text-blue-200 mb-1">
                       📚 Para revisar:
                     </p>
-                    <p className="text-sm text-blue-700 dark:text-blue-300">
+                    <p className="text-sm text-blue-700 dark:text-blue-300 leading-relaxed">
                       Revise os conceitos de <strong>{question.area}</strong> e pratique mais questões similares para fortalecer seu conhecimento nesta área.
                     </p>
                   </div>
@@ -114,7 +114,7 @@ export function QuestionFeedback({ question, showAnswer, selectedOption, userAns
       {/* Reference section - always show when available */}
       {question.referencia && (
         <div className="mt-4 sm:mt-6 p-3 sm:p-4 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-lg">
-          <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400 leading-relaxed">
+          <p className="text-base text-gray-600 dark:text-gray-400 leading-relaxed">
             <strong>📚 Referência:</strong> {question.referencia}
           </p>
         </div>

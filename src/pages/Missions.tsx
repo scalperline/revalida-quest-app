@@ -15,7 +15,7 @@ import { ConfettiAnimation } from "@/components/ConfettiAnimation";
 import { Navbar } from '@/components/Navbar';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from "@/components/ui/button";
-import { Flag, Settings, ArrowLeft, ArrowRight, Trophy } from 'lucide-react';
+import { Flag, Settings, ArrowLeft, ArrowRight, Trophy, Target } from 'lucide-react';
 import { Mission } from '@/types/missions';
 import { useNavigate } from 'react-router-dom';
 
@@ -458,18 +458,7 @@ export default function Missions() {
                 </TabsContent>
                 
                 <TabsContent value="personalizada" className="space-y-6">
-                  <div className="pt-8">
-                    <div className="text-center mb-8">
-                      <h2 className="text-3xl font-bold mb-6 text-center leading-tight tracking-tight">
-                        <span className="text-blue-600 bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">Quest Personalizada</span>
-                      </h2>
-                      <p className="text-xl text-muted-foreground">
-                        Configure sua quest do jeito que quiser, conquiste XP e acompanhe seu progresso!
-                      </p>
-                    </div>
-                    
-                    <SimuladoFilters onStart={handleConfiguracaoQuestPersonalizada} />
-                  </div>
+                  <SimuladoFilters onStart={handleConfiguracaoQuestPersonalizada} />
                 </TabsContent>
                 
                 <TabsContent value="concluidas" className="space-y-6">

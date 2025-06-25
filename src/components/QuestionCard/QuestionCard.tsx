@@ -8,6 +8,7 @@ import { QuestionFeedback } from "./QuestionFeedback";
 import { QuestionCardProps } from "@/types/question";
 import { ConfettiAnimation } from "@/components/ConfettiAnimation";
 import { useAudio } from "@/hooks/useAudio";
+import { useGamification } from "@/hooks/useGamification";
 
 export function QuestionCard({ 
   question, 
@@ -19,10 +20,29 @@ export function QuestionCard({
   const [selectedOption, setSelectedOption] = useState<string | null>(userAnswer || null);
   const [showConfetti, setShowConfetti] = useState(false);
   const [answered, setAnswered] = useState(showAnswer || !!userAnswer);
+  const [loadingAnswer, setLoadingAnswer] = useState(false);
   const { playSound } = useAudio();
+  const { answerQuestion, getUserAnswer } = useGamification();
 
-  const handleOptionSelect = (optionId: string) => {
-    if (disabled || answered) return;
+  // Carregar resposta salva do usuário
+  useEffect(() => {
+    const loadSavedAnswer = async () => {
+      if (!userAnswer && !showAnswer) {
+        setLoadingAnswer(true);
+        const savedAnswer = await getUserAnswer(question.id);
+        if (savedAnswer) {
+          setSelectedOption(savedAnswer);
+          setAnswered(true);
+        }
+        setLoadingAnswer(false);
+      }
+    };
+
+    loadSavedAnswer();
+  }, [question.id, userAnswer, showAnswer, getUserAnswer]);
+
+  const handleOptionSelect = async (optionId: string) => {
+    if (disabled || answered || loadingAnswer) return;
     
     setSelectedOption(optionId);
     setAnswered(true);
@@ -35,12 +55,27 @@ export function QuestionCard({
     } else {
       playSound('incorrect');
     }
+
+    // Salvar resposta e atualizar progresso
+    await answerQuestion(isCorrect, question.area, question.id, optionId);
     
     onAnswer?.(optionId);
   };
 
   const isQuestionAnswered = answered || showAnswer;
   const isCorrectAnswer = isQuestionAnswered && (userAnswer || selectedOption) === question.correct;
+
+  if (loadingAnswer) {
+    return (
+      <Card className="w-full border-2 border-blue-100 dark:border-slate-600 shadow-lg rounded-xl overflow-hidden bg-white dark:bg-slate-800 mb-6">
+        <CardContent className="p-6">
+          <div className="flex items-center justify-center py-8">
+            <div className="animate-pulse text-muted-foreground">Carregando questão...</div>
+          </div>
+        </CardContent>
+      </Card>
+    );
+  }
 
   return (
     <>

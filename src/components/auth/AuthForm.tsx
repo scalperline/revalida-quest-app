@@ -295,7 +295,7 @@ export function AuthForm() {
             </p>
           </div>
         </CardContent>
-      </Card>
+      </div>
     </div>
   );
 }

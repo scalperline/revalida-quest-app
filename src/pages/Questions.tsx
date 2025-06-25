@@ -10,7 +10,7 @@ import { useQuestionsFilters } from "@/hooks/useQuestionsFilters";
 export default function Questions() {
   const [currentPage, setCurrentPage] = useState(1);
   const questionsData = useQuestions();
-  const filtersData = useQuestionsFilters();
+  const filtersData = useQuestionsFilters(questionsData.questoesAnoSelecionado);
 
   const handlePageChange = (newPage: number) => {
     setCurrentPage(newPage);

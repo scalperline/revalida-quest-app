@@ -51,7 +51,6 @@ export default function Missions() {
       const newMission = await createMission({
         ...missionData,
         area: selectedArea,
-        year: selectedYear,
       });
       setIsCreatingMission(false);
       toast({
@@ -232,7 +231,7 @@ function CreateMissionForm({ availableQuestions, onCreate, onCancel }: CreateMis
       targetQuestions,
       targetAccuracy,
       timeLimit,
-      area: "", // Will be set by parent component
+      area: "Clínica Médica", // Default area
     };
     onCreate(missionData);
   };

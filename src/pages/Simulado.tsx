@@ -1,107 +1,156 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Navbar } from "@/components/Navbar";
 import { SimuladoHeader } from "@/components/SimuladoHeader";
 import { SimuladoProgress } from "@/components/SimuladoProgress";
 import { SimuladoTimer } from "@/components/SimuladoTimer";
 import { QuestionCard } from "@/components/QuestionCard/QuestionCard";
-import { useQuestions } from "@/hooks/useQuestions";
-import { useSimulado, type SimuladoConfig } from "@/hooks/useSimulado";
+import { SimuladoResults } from "@/components/SimuladoResults";
+import { SimuladoNavigation } from "@/components/SimuladoNavigation";
+import { Button } from "@/components/ui/button";
+import { useSimulado } from "@/hooks/useSimulado";
 import { useGamification } from "@/hooks/useGamification";
+import { getAllQuestions } from "@/utils/questionData";
 
 export default function Simulado() {
-  const [config, setConfig] = useState<SimuladoConfig | undefined>(undefined);
-  const questionsData = useQuestions();
-  const simulado = useSimulado(questionsData.questoesAnoSelecionado || [], config);
-  const { addXP } = useGamification();
+  const allQuestions = getAllQuestions();
+  const {
+    questoesSelecionadas,
+    respostas,
+    index,
+    total,
+    atual,
+    respostaAtual,
+    responder,
+    proxima,
+    terminou,
+    config
+  } = useSimulado(allQuestions);
 
-  const handleStart = (newConfig: SimuladoConfig) => {
-    setConfig(newConfig);
+  const [isStarted, setIsStarted] = useState(false);
+  const [timeRemaining, setTimeRemaining] = useState(config.tempoMinutos * 60);
+  const [selectedAnswer, setSelectedAnswer] = useState("");
+
+  const { completeSimulado } = useGamification();
+
+  const handleStart = () => {
+    setIsStarted(true);
+    setTimeRemaining(config.tempoMinutos * 60);
+  };
+
+  const handleAnswer = (resposta: string) => {
+    responder(resposta);
+    setSelectedAnswer(resposta);
+  };
+
+  const handleNext = () => {
+    proxima();
+    setSelectedAnswer("");
   };
 
   const handleFinish = () => {
-    const score = Object.values(simulado.respostas).filter((resposta, index) => 
-      resposta === simulado.questoesSelecionadas[index]?.gabarito
-    ).length;
+    let score = 0;
+    questoesSelecionadas.forEach((question) => {
+      const userAnswer = respostas[question.id];
+      if (userAnswer === question.correct) {
+        score++;
+      }
+    });
     
-    addXP(score * 10);
-    console.log(`Simulado finalizado! Pontuação: ${score}/${simulado.total}`);
+    completeSimulado(score, total);
+    setIsStarted(false);
   };
+
+  const handleTimeUp = () => {
+    handleFinish();
+  };
+
+  useEffect(() => {
+    const currentAnswer = respostaAtual();
+    setSelectedAnswer(currentAnswer || "");
+  }, [index, respostaAtual]);
+
+  if (!isStarted) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-100 dark:from-gray-900 dark:to-gray-800">
+        <Navbar />
+        <div className="container mx-auto px-4 py-8">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-12">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-center leading-tight tracking-tight">
+                <span className="text-blue-600 bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">Simulado Revalida</span>
+              </h1>
+              <p className="text-lg sm:text-xl lg:text-2xl text-muted-foreground leading-relaxed">
+                Pratique com questões reais do Revalida INEP em formato de simulado! 📋
+              </p>
+            </div>
+
+            <SimuladoHeader onStart={handleStart} />
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (terminou) {
+    let score = 0;
+    questoesSelecionadas.forEach((question) => {
+      const userAnswer = respostas[question.id];
+      if (userAnswer === question.correct) {
+        score++;
+      }
+    });
+
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-100 dark:from-gray-900 dark:to-gray-800">
+        <Navbar />
+        <div className="container mx-auto px-4 py-8">
+          <div className="max-w-6xl mx-auto">
+            <SimuladoResults
+              score={score}
+              total={total}
+              questions={questoesSelecionadas}
+              answers={respostas}
+              onRestart={() => window.location.reload()}
+            />
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-100 dark:from-gray-900 dark:to-gray-800">
       <Navbar />
       <div className="container mx-auto px-4 py-8">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-12">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-center leading-tight tracking-tight">
-              <span className="text-blue-600 bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">Simulado Revalida</span>
-            </h1>
-            <p className="text-lg sm:text-xl lg:text-2xl text-muted-foreground leading-relaxed">
-              Pratique com questões oficiais em formato de prova cronometrada ⏱️
-            </p>
+          <div className="mb-6">
+            <SimuladoProgress current={index + 1} total={total} />
           </div>
 
-          {!config ? (
-            <SimuladoHeader onStart={handleStart} />
-          ) : (
-            <>
-              <SimuladoProgress 
-                currentQuestion={simulado.index + 1} 
-                totalQuestions={simulado.total} 
+          <div className="mb-6">
+            <SimuladoTimer 
+              timeRemaining={timeRemaining} 
+              onTimeUp={handleTimeUp}
+            />
+          </div>
+
+          {atual && (
+            <div className="mb-8">
+              <QuestionCard 
+                question={atual} 
+                onAnswer={handleAnswer}
               />
-              
-              {config.tempoMinutos && (
-                <SimuladoTimer 
-                  initialTime={config.tempoMinutos * 60} 
-                  onTimeUp={handleFinish}
-                />
-              )}
-
-              {simulado.atual && (
-                <div className="mb-8">
-                  <QuestionCard 
-                    question={simulado.atual}
-                    onAnswer={(resposta) => simulado.responder(resposta)}
-                    selectedAnswer={simulado.respostaAtual()}
-                  />
-                  
-                  <div className="flex justify-between mt-6">
-                    <button 
-                      className="px-4 py-2 bg-gray-500 text-white rounded disabled:opacity-50"
-                      disabled={simulado.index === 0}
-                      onClick={() => {/* Implementar navegação anterior */}}
-                    >
-                      Anterior
-                    </button>
-                    
-                    {simulado.index < simulado.total - 1 ? (
-                      <button 
-                        className="px-4 py-2 bg-blue-600 text-white rounded"
-                        onClick={simulado.proxima}
-                      >
-                        Próxima
-                      </button>
-                    ) : (
-                      <button 
-                        className="px-4 py-2 bg-green-600 text-white rounded"
-                        onClick={handleFinish}
-                      >
-                        Finalizar
-                      </button>
-                    )}
-                  </div>
-                </div>
-              )}
-
-              {simulado.terminou && (
-                <div className="text-center">
-                  <h2 className="text-2xl font-bold mb-4">Simulado Concluído!</h2>
-                  <p>Suas respostas foram registradas.</p>
-                </div>
-              )}
-            </>
+            </div>
           )}
+
+          <SimuladoNavigation
+            currentIndex={index}
+            totalQuestions={total}
+            onNext={handleNext}
+            onFinish={handleFinish}
+            hasAnswer={!!selectedAnswer}
+          />
         </div>
       </div>
     </div>

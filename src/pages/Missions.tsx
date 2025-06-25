@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { useMissions } from '@/hooks/useMissions';
 import { useSimulado, type SimuladoConfig } from "@/hooks/useSimulado";
@@ -263,37 +262,43 @@ export default function Missions() {
             
             {/* Stats Cards */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-              <Card>
+              <Card className="border-2 border-blue-200 shadow-lg hover:shadow-xl transition-all duration-300">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-sm font-medium text-muted-foreground">Quests Ativas</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="flex items-center gap-2">
-                    <Target className="w-5 h-5 text-blue-600" />
+                    <div className="p-2 rounded-full bg-blue-500 text-white">
+                      <Target className="w-5 h-5" />
+                    </div>
                     <span className="text-2xl font-bold text-blue-600">{availableMissions.length}</span>
                   </div>
                 </CardContent>
               </Card>
               
-              <Card>
+              <Card className="border-2 border-green-200 shadow-lg hover:shadow-xl transition-all duration-300">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-sm font-medium text-muted-foreground">Concluídas</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="flex items-center gap-2">
-                    <CheckCircle className="w-5 h-5 text-green-600" />
+                    <div className="p-2 rounded-full bg-green-500 text-white">
+                      <CheckCircle className="w-5 h-5" />
+                    </div>
                     <span className="text-2xl font-bold text-green-600">{completedMissions.length}</span>
                   </div>
                 </CardContent>
               </Card>
               
-              <Card>
+              <Card className="border-2 border-yellow-200 shadow-lg hover:shadow-xl transition-all duration-300">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-sm font-medium text-muted-foreground">XP Total das Quests</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="flex items-center gap-2">
-                    <Trophy className="w-5 h-5 text-yellow-600" />
+                    <div className="p-2 rounded-full bg-yellow-500 text-white">
+                      <Trophy className="w-5 h-5" />
+                    </div>
                     <span className="text-2xl font-bold text-yellow-600">{totalXP}</span>
                   </div>
                 </CardContent>
@@ -304,7 +309,7 @@ export default function Missions() {
           {/* Quest Personalizada - Tela de Resultados */}
           {(questFinalizada || (questIniciada && simulado.terminou)) && (
             <div className="pt-8">
-              <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 border border-blue-100 dark:border-gray-700">
+              <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-8 border-2 border-blue-200 dark:border-gray-700">
                 <div className="text-center mb-8">
                   <div className="w-24 h-24 bg-gradient-to-br from-yellow-400 via-orange-500 to-red-500 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
                     <Trophy className="w-12 h-12 text-white" />
@@ -374,7 +379,7 @@ export default function Missions() {
                 <Button
                   variant="outline"
                   onClick={voltarConfiguracao}
-                  className="flex items-center gap-2"
+                  className="flex items-center gap-2 border-2 border-blue-300 hover:border-blue-500"
                 >
                   <ArrowLeft className="w-4 h-4" />
                   Voltar às Configurações
@@ -383,7 +388,7 @@ export default function Missions() {
               
               {/* Alerta de questões insuficientes */}
               {questoesInsuficientes && (
-                <div className="mb-6 p-4 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-xl">
+                <div className="mb-6 p-4 bg-yellow-50 dark:bg-yellow-900/20 border-2 border-yellow-300 dark:border-yellow-800 rounded-xl shadow-lg">
                   <div className="flex items-center gap-2 text-yellow-800 dark:text-yellow-200">
                     <div className="w-5 h-5 text-yellow-600">⚠️</div>
                     <div>
@@ -396,9 +401,9 @@ export default function Missions() {
                 </div>
               )}
               
-              <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 border border-blue-100 dark:border-gray-700">
+              <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-6 border-2 border-blue-200 dark:border-gray-700">
                 <div className="text-center mb-6">
-                  <div className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 py-2 rounded-full font-bold text-lg shadow-lg">
+                  <div className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white px-8 py-3 rounded-full font-bold text-lg shadow-lg border-2 border-white">
                     <Target className="w-5 h-5" />
                     Questão {simulado.index + 1} de {simulado.total}
                   </div>
@@ -446,7 +451,7 @@ export default function Missions() {
             <div className="text-center mt-12">
               <button
                 onClick={encerrarQuestPersonalizada}
-                className="px-12 py-4 bg-gradient-to-r from-green-600 via-emerald-600 to-green-700 text-white rounded-2xl hover:from-green-700 hover:via-emerald-700 hover:to-green-800 font-bold text-xl transition-all duration-300 transform hover:scale-105 shadow-2xl"
+                className="px-12 py-4 bg-gradient-to-r from-green-600 via-emerald-600 to-green-700 text-white rounded-2xl hover:from-green-700 hover:via-emerald-700 hover:to-green-800 font-bold text-xl transition-all duration-300 transform hover:scale-105 shadow-2xl border-2 border-green-400"
               >
                 🏆 Ver Recompensas
               </button>
@@ -455,85 +460,91 @@ export default function Missions() {
 
           {/* Tabs principais - apenas mostrar quando não está em quest personalizada ativa */}
           {!questIniciada && (
-            <Tabs defaultValue="prontas" className="w-full">
-              <TabsList className="grid w-full grid-cols-3 mb-6">
-                <TabsTrigger value="prontas" className="flex items-center gap-2">
-                  <Flag className="w-4 h-4" />
-                  Quests Prontas ({availableMissions.length})
-                </TabsTrigger>
-                <TabsTrigger value="personalizada" className="flex items-center gap-2">
-                  <Settings className="w-4 h-4" />
-                  Quest Personalizada
-                </TabsTrigger>
-                <TabsTrigger value="concluidas" className="flex items-center gap-2">
-                  <Trophy className="w-4 h-4" />
-                  Concluídas ({completedMissions.length})
-                </TabsTrigger>
-              </TabsList>
-              
-              <TabsContent value="prontas" className="space-y-6">
-                {availableMissions.length > 0 ? (
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {availableMissions.map(mission => (
-                      <MissionCard
-                        key={mission.id}
-                        mission={mission}
-                        progress={getMissionProgress(mission.id)}
-                        onStartMission={handleStartMission}
-                        availableQuestions={mission.area === 'Mista' ? totalQuestionsAvailable : areaQuestionsCount[mission.area] || 0}
-                      />
-                    ))}
+            <div className="border-2 border-blue-200 rounded-2xl shadow-xl bg-white dark:bg-gray-800 p-6">
+              <Tabs defaultValue="prontas" className="w-full">
+                <TabsList className="grid w-full grid-cols-3 mb-8 h-14 bg-blue-50 dark:bg-blue-900/20 border-2 border-blue-200">
+                  <TabsTrigger value="prontas" className="flex items-center gap-2 text-base font-medium data-[state=active]:bg-blue-500 data-[state=active]:text-white">
+                    <Flag className="w-5 h-5" />
+                    Quests Prontas ({availableMissions.length})
+                  </TabsTrigger>
+                  <TabsTrigger value="personalizada" className="flex items-center gap-2 text-base font-medium data-[state=active]:bg-purple-500 data-[state=active]:text-white">
+                    <Settings className="w-5 h-5" />
+                    Quest Personalizada
+                  </TabsTrigger>
+                  <TabsTrigger value="concluidas" className="flex items-center gap-2 text-base font-medium data-[state=active]:bg-green-500 data-[state=active]:text-white">
+                    <Trophy className="w-5 h-5" />
+                    Concluídas ({completedMissions.length})
+                  </TabsTrigger>
+                </TabsList>
+                
+                <TabsContent value="prontas" className="space-y-6">
+                  {availableMissions.length > 0 ? (
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      {availableMissions.map(mission => (
+                        <MissionCard
+                          key={mission.id}
+                          mission={mission}
+                          progress={getMissionProgress(mission.id)}
+                          onStartMission={handleStartMission}
+                          availableQuestions={mission.area === 'Mista' ? totalQuestionsAvailable : areaQuestionsCount[mission.area] || 0}
+                        />
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="text-center py-12">
+                      <div className="p-6 rounded-full bg-yellow-100 w-24 h-24 mx-auto mb-4 flex items-center justify-center">
+                        <Trophy className="w-12 h-12 text-yellow-600" />
+                      </div>
+                      <h3 className="text-xl font-bold mb-2">Todas as quests concluídas!</h3>
+                      <p className="text-muted-foreground">
+                        Parabéns! Você completou todas as quests disponíveis.
+                      </p>
+                    </div>
+                  )}
+                </TabsContent>
+                
+                <TabsContent value="personalizada" className="space-y-6">
+                  <div className="pt-8">
+                    <div className="text-center mb-8">
+                      <h2 className="text-3xl font-bold mb-6 text-center leading-tight tracking-tight">
+                        <span className="text-blue-600 bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">Quest Personalizada</span>
+                      </h2>
+                      <p className="text-xl text-muted-foreground">
+                        Configure sua quest do jeito que quiser, conquiste XP e acompanhe seu progresso!
+                      </p>
+                    </div>
+                    
+                    <SimuladoFilters onStart={handleConfiguracaoQuestPersonalizada} />
                   </div>
-                ) : (
-                  <div className="text-center py-12">
-                    <Trophy className="w-16 h-16 text-yellow-500 mx-auto mb-4" />
-                    <h3 className="text-xl font-bold mb-2">Todas as quests concluídas!</h3>
-                    <p className="text-muted-foreground">
-                      Parabéns! Você completou todas as quests disponíveis.
-                    </p>
-                  </div>
-                )}
-              </TabsContent>
-              
-              <TabsContent value="personalizada" className="space-y-6">
-                <div className="pt-8">
-                  <div className="text-center mb-8">
-                    <h2 className="text-3xl font-bold mb-6 text-center leading-tight tracking-tight">
-                      <span className="text-blue-600 bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">Quest Personalizada</span>
-                    </h2>
-                    <p className="text-xl text-muted-foreground">
-                      Configure sua quest do jeito que quiser, conquiste XP e acompanhe seu progresso!
-                    </p>
-                  </div>
-                  
-                  <SimuladoFilters onStart={handleConfiguracaoQuestPersonalizada} />
-                </div>
-              </TabsContent>
-              
-              <TabsContent value="concluidas" className="space-y-6">
-                {completedMissions.length > 0 ? (
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {completedMissions.map(mission => (
-                      <MissionCard
-                        key={mission.id}
-                        mission={mission}
-                        progress={getMissionProgress(mission.id)}
-                        onStartMission={handleStartMission}
-                        availableQuestions={mission.area === 'Mista' ? totalQuestionsAvailable : areaQuestionsCount[mission.area] || 0}
-                      />
-                    ))}
-                  </div>
-                ) : (
-                  <div className="text-center py-12">
-                    <Target className="w-16 h-16 text-blue-500 mx-auto mb-4" />
-                    <h3 className="text-xl font-bold mb-2">Nenhuma quest concluída ainda</h3>
-                    <p className="text-muted-foreground">
-                      Complete sua primeira quest para ver o progresso aqui!
-                    </p>
-                  </div>
-                )}
-              </TabsContent>
-            </Tabs>
+                </TabsContent>
+                
+                <TabsContent value="concluidas" className="space-y-6">
+                  {completedMissions.length > 0 ? (
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      {completedMissions.map(mission => (
+                        <MissionCard
+                          key={mission.id}
+                          mission={mission}
+                          progress={getMissionProgress(mission.id)}
+                          onStartMission={handleStartMission}
+                          availableQuestions={mission.area === 'Mista' ? totalQuestionsAvailable : areaQuestionsCount[mission.area] || 0}
+                        />
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="text-center py-12">
+                      <div className="p-6 rounded-full bg-blue-100 w-24 h-24 mx-auto mb-4 flex items-center justify-center">
+                        <Target className="w-12 h-12 text-blue-600" />
+                      </div>
+                      <h3 className="text-xl font-bold mb-2">Nenhuma quest concluída ainda</h3>
+                      <p className="text-muted-foreground">
+                        Complete sua primeira quest para ver o progresso aqui!
+                      </p>
+                    </div>
+                  )}
+                </TabsContent>
+              </Tabs>
+            </div>
           )}
         </div>
       </div>

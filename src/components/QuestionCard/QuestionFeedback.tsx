@@ -19,6 +19,25 @@ export function QuestionFeedback({ question, showAnswer, selectedOption, userAns
 
   return (
     <>
+      {/* Simple answer confirmation card */}
+      <div className="mt-4 p-4 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-lg">
+        <div className="flex items-center gap-3">
+          {isCorrect ? (
+            <CheckCircle className="w-5 h-5 text-emerald-600" />
+          ) : (
+            <XCircle className="w-5 h-5 text-red-600" />
+          )}
+          <div>
+            <p className="font-medium text-gray-800 dark:text-gray-200">
+              <strong>Gabarito:</strong> Alternativa {question.correct}
+            </p>
+            <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+              {correctOption?.text}
+            </p>
+          </div>
+        </div>
+      </div>
+
       {/* Enhanced feedback for correct answers */}
       {isCorrect ? (
         <div className="mt-6 sm:mt-8 space-y-4">

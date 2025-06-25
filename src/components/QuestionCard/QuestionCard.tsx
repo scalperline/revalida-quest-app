@@ -27,34 +27,44 @@ export function QuestionCard({
   const isCorrectAnswer = isQuestionAnswered && (userAnswer || selectedOption) === question.correct;
 
   return (
-    <Card className="w-full border-2 border-blue-200 dark:border-gray-600 shadow-lg hover:shadow-xl transition-all duration-300 mobile-card">
-      <QuestionHeader 
-        question={question}
-        isQuestionAnswered={!!isQuestionAnswered}
-        isCorrectAnswer={!!isCorrectAnswer}
-      />
+    <Card className="w-full border-2 border-blue-200 dark:border-gray-600 shadow-xl hover:shadow-2xl transition-all duration-500 mobile-card relative overflow-hidden group">
+      {/* Subtle glow effect */}
+      <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 via-purple-500/5 to-indigo-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
       
-      <CardContent className="mobile-padding">
-        <QuestionContent question={question} />
+      {/* Success celebration effect */}
+      {isQuestionAnswered && isCorrectAnswer && (
+        <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/10 via-green-500/10 to-teal-500/10 animate-pulse"></div>
+      )}
+      
+      <div className="relative z-10">
+        <QuestionHeader 
+          question={question}
+          isQuestionAnswered={!!isQuestionAnswered}
+          isCorrectAnswer={!!isCorrectAnswer}
+        />
+        
+        <CardContent className="mobile-padding">
+          <QuestionContent question={question} />
 
-        <div className="space-y-3 sm:space-y-4">
-          {question.options.map((option) => (
-            <QuestionOption
-              key={option.id}
-              option={option}
-              isSelected={selectedOption === option.id}
-              showAnswer={showAnswer}
-              disabled={disabled}
-              correctAnswer={question.correct}
-              userAnswer={userAnswer}
-              selectedOption={selectedOption}
-              onSelect={handleOptionSelect}
-            />
-          ))}
-        </div>
+          <div className="space-y-3 sm:space-y-4">
+            {question.options.map((option) => (
+              <QuestionOption
+                key={option.id}
+                option={option}
+                isSelected={selectedOption === option.id}
+                showAnswer={showAnswer}
+                disabled={disabled}
+                correctAnswer={question.correct}
+                userAnswer={userAnswer}
+                selectedOption={selectedOption}
+                onSelect={handleOptionSelect}
+              />
+            ))}
+          </div>
 
-        <QuestionFeedback question={question} showAnswer={showAnswer} />
-      </CardContent>
+          <QuestionFeedback question={question} showAnswer={showAnswer} />
+        </CardContent>
+      </div>
     </Card>
   );
 }

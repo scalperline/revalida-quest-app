@@ -32,7 +32,7 @@ export function QuestionOption({
     const isUserAnswer = optionId === (userAnswer || selectedOption);
 
     if (isCorrect) {
-      return <CheckCircle className="w-5 h-5 text-green-600" />;
+      return <CheckCircle className="w-5 h-5 text-emerald-600" />;
     }
     
     if (isUserAnswer && !isCorrect) {
@@ -42,24 +42,49 @@ export function QuestionOption({
     return null;
   };
 
+  const isCorrect = showAnswer && option.id === correctAnswer;
+  const isUserAnswer = showAnswer && option.id === (userAnswer || selectedOption);
+
   return (
     <Button
       variant="outline"
       onClick={() => onSelect(option.id)}
       disabled={disabled || showAnswer}
-      className={`w-full p-4 sm:p-6 h-auto text-left justify-start border-2 transition-all duration-200 ${getOptionColor(
+      className={`w-full p-4 sm:p-6 h-auto text-left justify-start border-2 transition-all duration-300 relative overflow-hidden group ${getOptionColor(
         option.id, 
         showAnswer, 
         selectedOption, 
         userAnswer, 
         correctAnswer
       )} ${
-        !disabled && !showAnswer ? "hover:scale-[1.01] cursor-pointer" : "cursor-default"
+        !disabled && !showAnswer ? "hover:scale-[1.02] cursor-pointer hover:shadow-lg" : "cursor-default"
+      } ${
+        isCorrect ? "ring-2 ring-emerald-400 ring-offset-2" : ""
+      } ${
+        isUserAnswer && !isCorrect ? "ring-2 ring-red-400 ring-offset-2" : ""
       }`}
     >
-      <div className="flex items-start gap-3 sm:gap-4 w-full">
+      {/* Subtle animation background */}
+      {!showAnswer && !disabled && (
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+      )}
+      
+      {/* Success glow effect */}
+      {isCorrect && (
+        <div className="absolute inset-0 bg-gradient-to-r from-emerald-400/20 to-green-400/20 animate-pulse"></div>
+      )}
+      
+      <div className="flex items-start gap-3 sm:gap-4 w-full relative z-10">
         <div className="flex items-center gap-2 sm:gap-3">
-          <div className="flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-blue-500 text-white flex items-center justify-center font-bold text-sm sm:text-base">
+          <div className={`flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center font-bold text-sm sm:text-base transition-all duration-300 ${
+            isCorrect 
+              ? "bg-emerald-500 text-white shadow-lg" 
+              : isUserAnswer && !isCorrect
+                ? "bg-red-500 text-white shadow-lg"
+                : isSelected
+                  ? "bg-blue-500 text-white shadow-lg"
+                  : "bg-blue-500 text-white"
+          }`}>
             {option.id}
           </div>
           {getOptionIcon(option.id)}

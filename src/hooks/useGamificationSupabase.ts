@@ -26,6 +26,7 @@ export function useGamificationSupabase() {
   });
 
   const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
 
   // Load user progress from Supabase
   useEffect(() => {
@@ -47,11 +48,11 @@ export function useGamificationSupabase() {
         .from('user_profiles')
         .select('*')
         .eq('user_id', user.id)
-        .single();
+        .maybeSingle();
 
-      if (error && error.code !== 'PGRST116') {
+      if (error) {
         console.error('Erro ao carregar progresso:', error);
-        return;
+        // Continue with default values instead of returning
       }
 
       if (profile) {
@@ -93,10 +94,6 @@ export function useGamificationSupabase() {
 
         console.log('Definindo progresso:', progressData);
         setUserProgress(progressData);
-      } else {
-        console.log('Nenhum perfil encontrado, criando novo');
-        // Create new profile if none exists
-        await createUserProfile();
       }
     } catch (error) {
       console.error('Erro ao carregar progresso:', error);
@@ -110,44 +107,13 @@ export function useGamificationSupabase() {
     }
   };
 
-  const createUserProfile = async () => {
-    if (!user) return;
-
-    try {
-      console.log('Criando novo perfil para usuário:', user.id);
-      
-      const { error } = await supabase
-        .from('user_profiles')
-        .insert({
-          user_id: user.id,
-          level: 1,
-          total_xp: 0,
-          weekly_xp: 0,
-          total_questions: 0,
-          correct_answers: 0,
-          simulados_completos: 0,
-          streak_dias: 0,
-          last_activity_date: new Date().toISOString(),
-          achievements: [],
-          area_stats: {},
-        });
-
-      if (error) {
-        console.error('Erro ao criar perfil:', error);
-      } else {
-        console.log('Perfil criado com sucesso');
-      }
-    } catch (error) {
-      console.error('Erro ao criar perfil:', error);
-    }
-  };
-
   const saveUserProgress = async (progress: UserProgress) => {
-    if (!user) {
-      console.log('Nenhum usuário logado, não salvando progresso');
+    if (!user || saving) {
+      console.log('Não salvando: usuário não logado ou já salvando');
       return;
     }
 
+    setSaving(true);
     try {
       console.log('Salvando progresso do usuário:', progress);
 
@@ -180,9 +146,13 @@ export function useGamificationSupabase() {
 
       console.log('Dados a serem salvos:', dataToSave);
 
+      // Use upsert to handle both insert and update cases
       const { error } = await supabase
         .from('user_profiles')
-        .upsert(dataToSave);
+        .upsert(dataToSave, {
+          onConflict: 'user_id',
+          ignoreDuplicates: false
+        });
 
       if (error) {
         console.error('Erro ao salvar progresso:', error);
@@ -201,6 +171,8 @@ export function useGamificationSupabase() {
         description: "Ocorreu um erro inesperado ao salvar.",
         variant: "destructive",
       });
+    } finally {
+      setSaving(false);
     }
   };
 
@@ -227,8 +199,8 @@ export function useGamificationSupabase() {
 
       console.log('Progresso atualizado com XP:', updated);
       
-      // Save immediately after updating
-      saveUserProgress(updated);
+      // Save with debounce to avoid too many calls
+      setTimeout(() => saveUserProgress(updated), 1000);
       return updated;
     });
   };
@@ -252,6 +224,9 @@ export function useGamificationSupabase() {
             user_answer: correct ? 'correct' : 'incorrect',
             is_correct: correct,
             answered_at: new Date().toISOString()
+          }, {
+            onConflict: 'user_id,question_id',
+            ignoreDuplicates: false
           });
       } catch (error) {
         console.error('Erro ao salvar resposta:', error);
@@ -299,8 +274,8 @@ export function useGamificationSupabase() {
 
       console.log('Progresso atualizado após resposta:', updated);
       
-      // Save immediately after updating
-      saveUserProgress(updated);
+      // Save with debounce
+      setTimeout(() => saveUserProgress(updated), 1000);
       return updated;
     });
 
@@ -319,8 +294,8 @@ export function useGamificationSupabase() {
       
       console.log('Progresso atualizado após simulado:', updated);
       
-      // Save immediately after updating
-      saveUserProgress(updated);
+      // Save with debounce
+      setTimeout(() => saveUserProgress(updated), 1000);
       return updated;
     });
 
@@ -356,6 +331,7 @@ export function useGamificationSupabase() {
   return {
     userProgress,
     loading,
+    saving,
     addXP,
     answerQuestion,
     completeSimulado,

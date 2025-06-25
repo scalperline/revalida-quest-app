@@ -4,7 +4,9 @@ import { Navbar } from "@/components/Navbar";
 import { QuestionCard } from "@/components/QuestionCard";
 import { GamifiedQuestionsHeader } from "@/components/GamifiedQuestionsHeader";
 import { QuestionsPagination } from "@/components/QuestionsPagination";
+import { ConfettiAnimation } from "@/components/ConfettiAnimation";
 import { useQuestionsFilters } from "@/hooks/useQuestionsFilters";
+import { useAudio } from "@/hooks/useAudio";
 import { getDefaultTipoProva } from "@/utils/questionSelector";
 
 export default function Questions() {
@@ -14,6 +16,9 @@ export default function Questions() {
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedArea, setSelectedArea] = useState("Todos");
   const [selectedDifficulty, setSelectedDifficulty] = useState("Todas");
+  const [showConfetti, setShowConfetti] = useState(false);
+
+  const { playSound } = useAudio();
 
   const {
     filteredQuestions,
@@ -39,6 +44,14 @@ export default function Questions() {
   const handleTipoChange = (tipo: string) => {
     setTipoProva(tipo);
     setCurrentPage(1);
+  };
+
+  const handleQuestionAnswer = (questionId: number, optionId: string, correct: boolean) => {
+    playSound(correct ? 'correct' : 'incorrect');
+    
+    if (correct) {
+      setShowConfetti(true);
+    }
   };
 
   return (
@@ -69,7 +82,13 @@ export default function Questions() {
           />
 
           {filteredQuestions.map((question) => (
-            <QuestionCard key={question.id} question={question} />
+            <QuestionCard 
+              key={question.id} 
+              question={question}
+              onAnswerWithEffects={(optionId: string, correct: boolean) => {
+                handleQuestionAnswer(question.id, optionId, correct);
+              }}
+            />
           ))}
 
           <QuestionsPagination
@@ -79,6 +98,11 @@ export default function Questions() {
           />
         </div>
       </div>
+
+      <ConfettiAnimation 
+        trigger={showConfetti} 
+        onComplete={() => setShowConfetti(false)} 
+      />
     </div>
   );
 }

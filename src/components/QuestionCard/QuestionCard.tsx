@@ -7,14 +7,19 @@ import { QuestionOption } from './QuestionOption';
 import { QuestionFeedback } from './QuestionFeedback';
 import { useGamification } from '@/hooks/useGamification';
 
+interface ExtendedQuestionCardProps extends QuestionCardProps {
+  onAnswerWithEffects?: (optionId: string, correct: boolean) => void;
+}
+
 export function QuestionCard({ 
   question, 
   showAnswer = false, 
   onAnswer, 
   disabled = false,
   userAnswer,
-  hideHeader = false 
-}: QuestionCardProps) {
+  hideHeader = false,
+  onAnswerWithEffects
+}: ExtendedQuestionCardProps) {
   const [selectedOption, setSelectedOption] = useState<string | null>(userAnswer || null);
   const [hasAnswered, setHasAnswered] = useState(showAnswer || !!userAnswer);
   const { answerQuestion } = useGamification();
@@ -32,6 +37,11 @@ export function QuestionCard({
     
     // Register the answer in gamification system with question ID
     answerQuestion(correct, question.area, question.id);
+    
+    // Call effects callback if provided (for Questions page)
+    if (onAnswerWithEffects) {
+      onAnswerWithEffects(optionId, correct);
+    }
     
     // Call external handler if provided
     if (onAnswer) {

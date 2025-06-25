@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { useMissions } from '@/hooks/useMissions';
 import { useSimulado, type SimuladoConfig } from "@/hooks/useSimulado";
@@ -370,18 +371,29 @@ export default function Missions() {
           {!questIniciada && (
             <div className="border-2 border-blue-200 rounded-2xl shadow-xl bg-white dark:bg-gray-800 p-6">
               <Tabs defaultValue="prontas" className="w-full">
-                <TabsList className="grid w-full grid-cols-3 mb-8 h-14 bg-blue-50 dark:bg-blue-900/20 border-2 border-blue-200">
-                  <TabsTrigger value="prontas" className="flex items-center gap-2 text-base font-medium data-[state=active]:bg-blue-500 data-[state=active]:text-white">
-                    <Flag className="w-5 h-5" />
-                    Quests Prontas ({availableMissions.length})
+                <TabsList className="grid w-full grid-cols-3 mb-8 h-auto bg-blue-50 dark:bg-blue-900/20 border-2 border-blue-200 p-1 rounded-xl">
+                  <TabsTrigger 
+                    value="prontas" 
+                    className="flex flex-col sm:flex-row items-center gap-2 text-sm sm:text-base font-medium py-2 sm:py-3 px-2 sm:px-4 data-[state=active]:bg-blue-500 data-[state=active]:text-white rounded-lg transition-all duration-200"
+                  >
+                    <Flag className="w-4 h-4 sm:w-5 sm:h-5" />
+                    <span className="text-xs sm:text-base">Quests Prontas</span>
+                    <span className="text-xs opacity-75">({availableMissions.length})</span>
                   </TabsTrigger>
-                  <TabsTrigger value="personalizada" className="flex items-center gap-2 text-base font-medium data-[state=active]:bg-purple-500 data-[state=active]:text-white">
-                    <Settings className="w-5 h-5" />
-                    Quest Personalizada
+                  <TabsTrigger 
+                    value="personalizada" 
+                    className="flex flex-col sm:flex-row items-center gap-2 text-sm sm:text-base font-medium py-2 sm:py-3 px-2 sm:px-4 data-[state=active]:bg-purple-500 data-[state=active]:text-white rounded-lg transition-all duration-200"
+                  >
+                    <Settings className="w-4 h-4 sm:w-5 sm:h-5" />
+                    <span className="text-xs sm:text-base">Quest Personalizada</span>
                   </TabsTrigger>
-                  <TabsTrigger value="concluidas" className="flex items-center gap-2 text-base font-medium data-[state=active]:bg-green-500 data-[state=active]:text-white">
-                    <Trophy className="w-5 h-5" />
-                    Concluídas ({completedMissions.length})
+                  <TabsTrigger 
+                    value="concluidas" 
+                    className="flex flex-col sm:flex-row items-center gap-2 text-sm sm:text-base font-medium py-2 sm:py-3 px-2 sm:px-4 data-[state=active]:bg-green-500 data-[state=active]:text-white rounded-lg transition-all duration-200"
+                  >
+                    <Trophy className="w-4 h-4 sm:w-5 sm:h-5" />
+                    <span className="text-xs sm:text-base">Concluídas</span>
+                    <span className="text-xs opacity-75">({completedMissions.length})</span>
                   </TabsTrigger>
                 </TabsList>
                 

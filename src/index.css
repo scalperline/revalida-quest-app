@@ -130,6 +130,11 @@
     50% { opacity: 0.8; transform: scale(1.3); }
   }
 
+  @keyframes stethoscopePulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+  }
+
   @keyframes float {
     0% { transform: translateY(100vh) translateX(0px) rotate(0deg); }
     100% { transform: translateY(-100px) translateX(100px) rotate(360deg); }
@@ -264,6 +269,16 @@
     @apply bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl font-medium transition-all duration-200 hover:scale-105 hover:border-blue-300 dark:hover:border-blue-500 min-h-[56px] px-6 py-4;
     font-size: 1.125rem; /* 18px for better mobile readability */
     font-family: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+  }
+
+  /* Medical card shadows */
+  .medical-card-shadow {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Stethoscope pulse animation */
+  .stethoscope-pulse {
+    animation: stethoscopePulse 2s ease-in-out infinite;
   }
 
   /* Mobile-first responsive utilities with better spacing */

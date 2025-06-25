@@ -1,8 +1,6 @@
 
-import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { UserPlus } from 'lucide-react';
 
 interface SignupFormProps {
   displayName: string;
@@ -14,6 +12,7 @@ interface SignupFormProps {
   onSubmit: (e: React.FormEvent) => void;
   isSubmitting: boolean;
   loading: boolean;
+  showSubmitButton?: boolean;
 }
 
 export function SignupForm({
@@ -23,12 +22,12 @@ export function SignupForm({
   setEmail,
   password,
   setPassword,
-  onSubmit,
   isSubmitting,
-  loading
+  loading,
+  showSubmitButton = true
 }: SignupFormProps) {
   return (
-    <form onSubmit={onSubmit} className="space-y-5 sm:space-y-6">
+    <div className="space-y-5 sm:space-y-6">
       <div className="space-y-2">
         <Label htmlFor="displayName" className="text-sm sm:text-base font-medium text-blue-100 font-space-grotesk">
           Nome (opcional)
@@ -76,24 +75,6 @@ export function SignupForm({
           Mínimo de 6 caracteres
         </p>
       </div>
-      <Button 
-        type="submit" 
-        className="w-full h-14 sm:h-16 bg-gradient-to-r from-green-600 via-green-700 to-green-800 hover:from-green-700 hover:via-green-800 hover:to-green-900 rounded-xl font-bold text-base sm:text-lg shadow-2xl hover:shadow-green-500/50 transition-all duration-500 transform hover:scale-105 font-space-grotesk group relative overflow-hidden"
-        disabled={isSubmitting || loading}
-      >
-        <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
-        {isSubmitting || loading ? (
-          <div className="flex items-center gap-2 relative z-10">
-            <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-            <span className="text-sm sm:text-base">Cadastrando...</span>
-          </div>
-        ) : (
-          <div className="flex items-center gap-2 relative z-10">
-            <UserPlus className="w-5 h-5" />
-            <span className="text-sm sm:text-base">Criar Conta Médica 👨‍⚕️</span>
-          </div>
-        )}
-      </Button>
-    </form>
+    </div>
   );
 }

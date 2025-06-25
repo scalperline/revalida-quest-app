@@ -31,7 +31,6 @@ export default function Questions() {
   const handleAnoChange = (ano: number) => {
     setAnoSelecionado(ano);
     setCurrentPage(1);
-    // Set appropriate default tipo for the selected year
     const defaultTipo = getDefaultTipoProva(ano);
     setTipoProva(defaultTipo);
   };
@@ -45,12 +44,12 @@ export default function Questions() {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-100 dark:from-gray-900 dark:to-gray-800">
       <Navbar />
       
-      {/* Container otimizado para mobile */}
-      <div className="w-full max-w-none px-3 sm:px-4 lg:px-6 xl:px-8 py-4 sm:py-6 lg:py-8">
-        {/* Container centralizado para o conteúdo */}
-        <div className="max-w-5xl mx-auto space-y-4 sm:space-y-6 lg:space-y-8">
+      {/* Optimized container with consistent spacing */}
+      <div className="w-full max-w-none px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+        {/* Centered content container */}
+        <div className="max-w-6xl mx-auto space-y-6 sm:space-y-8">
           
-          {/* Header com melhor responsividade */}
+          {/* Header with unified design */}
           <div className="w-full">
             <GamifiedQuestionsHeader
               anoSelecionado={anoSelecionado}
@@ -67,8 +66,8 @@ export default function Questions() {
             />
           </div>
 
-          {/* Lista de questões com espaçamento otimizado */}
-          <div className="space-y-4 sm:space-y-6">
+          {/* Questions list with consistent spacing */}
+          <div className="space-y-6">
             {filteredQuestions.length > 0 ? (
               filteredQuestions.map((question) => (
                 <div key={question.id} className="w-full">
@@ -76,14 +75,14 @@ export default function Questions() {
                 </div>
               ))
             ) : (
-              /* Estado vazio melhorado */
-              <div className="flex flex-col items-center justify-center py-12 sm:py-16 lg:py-20 text-center">
-                <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 sm:p-8 shadow-lg max-w-md mx-auto">
-                  <div className="text-6xl mb-4">🔍</div>
-                  <h3 className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white mb-2">
+              /* Enhanced empty state */
+              <div className="flex flex-col items-center justify-center py-16 sm:py-20 text-center">
+                <div className="card-standard card-padding max-w-md mx-auto">
+                  <div className="text-6xl mb-6">🔍</div>
+                  <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">
                     Nenhuma questão encontrada
                   </h3>
-                  <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400 leading-relaxed">
+                  <p className="text-base text-gray-600 dark:text-gray-400 leading-relaxed">
                     Tente ajustar os filtros ou buscar por outros termos.
                   </p>
                 </div>
@@ -91,9 +90,9 @@ export default function Questions() {
             )}
           </div>
 
-          {/* Paginação com melhor espaçamento */}
+          {/* Pagination with consistent spacing */}
           {filteredQuestions.length > 0 && (
-            <div className="flex justify-center pt-4 sm:pt-6 pb-8 sm:pb-12">
+            <div className="flex justify-center pt-6 sm:pt-8 pb-8 sm:pb-12">
               <QuestionsPagination
                 paginaAtual={currentPage}
                 totalPaginas={Math.ceil(totalQuestions / questionsPerPage)}

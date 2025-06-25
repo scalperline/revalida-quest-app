@@ -63,19 +63,19 @@ export function GamifiedQuestionsHeader({
   const [showFilters, setShowFilters] = useState(false);
 
   return (
-    <div className="bg-white dark:bg-gray-800 border border-blue-200 dark:border-gray-700 rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-lg hover:shadow-xl transition-all duration-300">
+    <div className="card-standard card-padding">
       
-      {/* Título e contador - melhor responsividade */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-4 mb-4 sm:mb-6">
-        <div className="flex items-center gap-2 sm:gap-3">
-          <div className="p-2 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg">
-            <BookOpen className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+      {/* Title and counter with unified typography */}
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+        <div className="flex items-center gap-3">
+          <div className="p-2.5 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg shadow-md">
+            <BookOpen className="w-6 h-6 text-white" />
           </div>
           <div>
-            <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            <h1 className="gradient-text font-bold">
               Banco de Questões
             </h1>
-            <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 mt-1">
+            <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
               {totalQuestoes > 0
                 ? `${totalQuestoes} questões encontradas`
                 : "Nenhuma questão encontrada"}
@@ -83,16 +83,16 @@ export function GamifiedQuestionsHeader({
           </div>
         </div>
         
-        {/* Seletores com layout mobile-first */}
-        <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 w-full sm:w-auto">
+        {/* Year and exam type selectors with standard styling */}
+        <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
           <Select
             onValueChange={(value) => setAnoSelecionado(parseInt(value))}
             defaultValue={anoSelecionado.toString()}
           >
-            <SelectTrigger className="w-full sm:w-[160px] lg:w-[180px] bg-white dark:bg-gray-700 border-blue-200 dark:border-gray-600 text-sm sm:text-base">
+            <SelectTrigger className="select-standard w-full sm:w-40">
               <SelectValue placeholder="Ano" />
             </SelectTrigger>
-            <SelectContent className="bg-white dark:bg-gray-700 border-blue-200 dark:border-gray-600">
+            <SelectContent className="bg-white dark:bg-gray-700 border-gray-200 dark:border-gray-600 z-50">
               <SelectItem value="2011">Revalida 2011</SelectItem>
               <SelectItem value="2012">Revalida 2012</SelectItem>
               <SelectItem value="2013">Revalida 2013</SelectItem>
@@ -113,10 +113,10 @@ export function GamifiedQuestionsHeader({
             tipoProva &&
             setTipoProva && (
               <Select onValueChange={setTipoProva} defaultValue={tipoProva}>
-                <SelectTrigger className="w-full sm:w-[140px] lg:w-[160px] bg-white dark:bg-gray-700 border-blue-200 dark:border-gray-600 text-sm sm:text-base">
+                <SelectTrigger className="select-standard w-full sm:w-32">
                   <SelectValue placeholder="Prova" />
                 </SelectTrigger>
-                <SelectContent className="bg-white dark:bg-gray-700 border-blue-200 dark:border-gray-600">
+                <SelectContent className="bg-white dark:bg-gray-700 border-gray-200 dark:border-gray-600 z-50">
                   {[2013, 2014, 2015].includes(anoSelecionado) ? (
                     <>
                       <SelectItem value="Cinza">Prova Cinza</SelectItem>
@@ -134,23 +134,23 @@ export function GamifiedQuestionsHeader({
         </div>
       </div>
 
-      {/* Barra de busca melhorada */}
-      <div className="space-y-3 sm:space-y-4">
+      {/* Search bar with standard styling */}
+      <div className="space-y-4">
         <div className="relative">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4 sm:w-5 sm:h-5" />
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
           <Input
             placeholder="Buscar questões por palavra-chave..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="pl-10 sm:pl-12 pr-4 py-2 sm:py-3 bg-gray-50 dark:bg-gray-700 border-gray-200 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-500 rounded-lg text-sm sm:text-base"
+            className="input-standard pl-11 pr-4"
           />
         </div>
 
-        {/* Toggle de filtros melhorado */}
-        <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
+        {/* Filters toggle with consistent design */}
+        <div className="flex items-center">
           <button
             onClick={() => setShowFilters(!showFilters)}
-            className="flex items-center justify-center sm:justify-start gap-2 px-4 py-2 sm:py-2.5 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors text-sm sm:text-base font-medium"
+            className="flex items-center gap-2 px-4 py-2.5 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors font-medium"
           >
             <Filter className="w-4 h-4" />
             <span>Filtros Avançados</span>
@@ -158,20 +158,20 @@ export function GamifiedQuestionsHeader({
           </button>
         </div>
 
-        {/* Filtros avançados com animação */}
+        {/* Advanced filters with enhanced styling */}
         {showFilters && (
-          <div className="animate-in slide-in-from-top-2 duration-200 grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 p-4 sm:p-5 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-gray-700 dark:to-gray-800 rounded-lg border border-blue-100 dark:border-gray-600">
+          <div className="animate-in slide-in-from-top-2 duration-200 grid grid-cols-1 sm:grid-cols-2 gap-4 p-5 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-gray-700 dark:to-gray-800 rounded-lg border border-blue-100 dark:border-gray-600">
             <div className="space-y-2">
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                 Área do Conhecimento
               </label>
               <Select value={selectedArea} onValueChange={setSelectedArea}>
-                <SelectTrigger className="w-full bg-white dark:bg-gray-600 border-gray-200 dark:border-gray-500 text-sm sm:text-base">
+                <SelectTrigger className="select-standard bg-white dark:bg-gray-600">
                   <SelectValue placeholder="Selecione uma área" />
                 </SelectTrigger>
-                <SelectContent className="bg-white dark:bg-gray-600 border-gray-200 dark:border-gray-500 max-h-60">
+                <SelectContent className="bg-white dark:bg-gray-600 border-gray-200 dark:border-gray-500 max-h-60 z-50">
                   {AREAS.map((area) => (
-                    <SelectItem key={area} value={area} className="text-sm sm:text-base">
+                    <SelectItem key={area} value={area}>
                       {area}
                     </SelectItem>
                   ))}
@@ -184,12 +184,12 @@ export function GamifiedQuestionsHeader({
                 Nível de Dificuldade
               </label>
               <Select value={selectedDifficulty} onValueChange={setSelectedDifficulty}>
-                <SelectTrigger className="w-full bg-white dark:bg-gray-600 border-gray-200 dark:border-gray-500 text-sm sm:text-base">
+                <SelectTrigger className="select-standard bg-white dark:bg-gray-600">
                   <SelectValue placeholder="Selecione a dificuldade" />
                 </SelectTrigger>
-                <SelectContent className="bg-white dark:bg-gray-600 border-gray-200 dark:border-gray-500">
+                <SelectContent className="bg-white dark:bg-gray-600 border-gray-200 dark:border-gray-500 z-50">
                   {DIFFICULTIES.map((difficulty) => (
-                    <SelectItem key={difficulty} value={difficulty} className="text-sm sm:text-base">
+                    <SelectItem key={difficulty} value={difficulty}>
                       {difficulty}
                     </SelectItem>
                   ))}

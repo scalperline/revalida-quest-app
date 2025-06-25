@@ -1,5 +1,5 @@
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Clock, Flag, ChevronDown, ChevronUp } from "lucide-react";
 
 interface Props {
@@ -24,6 +24,8 @@ export function FloatingTimer({
   const [seconds, setSeconds] = useState(initialMinutes * 60);
   const [isVisible, setIsVisible] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const lastUpdateRef = useRef<number>(Date.now());
 
   useEffect(() => {
     const handleScroll = () => {
@@ -40,6 +42,12 @@ export function FloatingTimer({
   }, [running]);
 
   useEffect(() => {
+    // Limpar interval anterior
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
+    }
+
     // Só executar timer se estiver rodando
     if (!running) return;
     
@@ -48,14 +56,40 @@ export function FloatingTimer({
       return;
     }
     
-    const timer = setTimeout(() => setSeconds(s => s - 1), 1000);
-    return () => clearTimeout(timer);
+    // Usar setInterval com verificação de tempo real para maior precisão
+    lastUpdateRef.current = Date.now();
+    
+    intervalRef.current = setInterval(() => {
+      const now = Date.now();
+      const elapsed = now - lastUpdateRef.current;
+      
+      // Se passou pelo menos 1 segundo (com tolerância de 50ms)
+      if (elapsed >= 950) {
+        setSeconds(prevSeconds => {
+          const newSeconds = prevSeconds - 1;
+          if (newSeconds <= 0) {
+            onFinish();
+            return 0;
+          }
+          return newSeconds;
+        });
+        lastUpdateRef.current = now;
+      }
+    }, 100); // Verificar a cada 100ms para maior precisão
+    
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+        intervalRef.current = null;
+      }
+    };
   }, [running, seconds, onFinish]);
 
   // Resetar timer quando iniciar novo simulado
   useEffect(() => {
     if (running) {
       setSeconds(initialMinutes * 60);
+      lastUpdateRef.current = Date.now();
     }
   }, [running, initialMinutes]);
 

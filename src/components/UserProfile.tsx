@@ -1,7 +1,8 @@
 
 import { useState } from 'react';
 import { useGamification } from '@/hooks/useGamification';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { ResponsiveCard, ResponsiveCardContent, ResponsiveCardHeader, ResponsiveCardTitle } from '@/components/ui/responsive-card';
+import { Typography } from '@/components/ui/typography';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -50,97 +51,109 @@ export function UserProfile() {
     return <User className="w-5 h-5 text-gray-500" />;
   };
 
+  const statsCards = [
+    {
+      value: userProgress.level,
+      label: "Nível Atual",
+      color: "from-blue-500 to-blue-600",
+      progress: getProgressPercentage()
+    },
+    {
+      value: `${getAccuracy()}%`,
+      label: "Taxa de Sucesso",
+      color: "from-green-500 to-green-600",
+      subtitle: `${userProgress.correctAnswers}/${userProgress.totalQuestions}`
+    },
+    {
+      value: userProgress.achievements.filter(a => a.unlocked).length,
+      label: "Conquistas",
+      color: "from-purple-500 to-purple-600",
+      subtitle: `de ${userProgress.achievements.length}`
+    },
+    {
+      value: userProgress.xp,
+      label: "XP Total",
+      color: "from-orange-500 to-orange-600",
+      subtitle: `+${userProgress.xpToNextLevel - userProgress.xp} para próximo nível`
+    }
+  ];
+
   return (
-    <div className="p-6 space-y-6">
+    <div className="content-padding space-y-8">
       {/* Header with Avatar and Basic Info */}
-      <div className="flex flex-col md:flex-row items-center gap-6 mb-8">
-        <div className="relative">
-          <Avatar className="w-24 h-24 border-4 border-gradient-to-r from-blue-500 to-purple-600">
-            <AvatarImage src={userData.avatar} />
-            <AvatarFallback className="text-2xl font-bold bg-gradient-to-r from-blue-500 to-purple-600 text-white">
-              {userData.name.split(' ').map(n => n[0]).join('').toUpperCase()}
-            </AvatarFallback>
-          </Avatar>
-          <div className="absolute -bottom-2 -right-2 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full p-2 border-2 border-white shadow-lg">
-            <span className="text-white font-bold text-sm">{userProgress.level}</span>
+      <ResponsiveCard variant="gradient" size="lg">
+        <ResponsiveCardContent className="mobile-stack items-center text-center md:text-left">
+          <div className="relative flex-shrink-0">
+            <Avatar className="w-24 h-24 border-4 border-white shadow-xl">
+              <AvatarImage src={userData.avatar} />
+              <AvatarFallback className="text-2xl font-bold bg-gradient-to-r from-blue-500 to-purple-600 text-white">
+                {userData.name.split(' ').map(n => n[0]).join('').toUpperCase()}
+              </AvatarFallback>
+            </Avatar>
+            <div className="absolute -bottom-2 -right-2 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full p-3 border-4 border-white shadow-lg">
+              <Typography variant="button" className="text-white font-bold">
+                {userProgress.level}
+              </Typography>
+            </div>
           </div>
-        </div>
-        
-        <div className="text-center md:text-left flex-1">
-          <div className="flex items-center justify-center md:justify-start gap-2 mb-2">
-            {getRankIcon(userProgress.level)}
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
-              {userData.name}
-            </h1>
+          
+          <div className="flex-1 space-y-3">
+            <div className="flex items-center justify-center md:justify-start gap-2">
+              {getRankIcon(userProgress.level)}
+              <Typography variant="h2" className="text-gray-900 dark:text-white">
+                {userData.name}
+              </Typography>
+            </div>
+            <Badge variant="secondary" className="bg-gradient-to-r from-blue-100 to-purple-100 text-blue-800 dark:from-blue-900/30 dark:to-purple-900/30 dark:text-blue-200">
+              {getRankTitle(userProgress.level)}
+            </Badge>
+            <Typography variant="p" color="muted" className="flex items-center gap-2 justify-center md:justify-start">
+              <Calendar className="w-4 h-4" />
+              Jornada iniciada em {new Date(userData.joinDate).toLocaleDateString('pt-BR')}
+            </Typography>
           </div>
-          <Badge variant="secondary" className="mb-2 bg-gradient-to-r from-blue-100 to-purple-100 text-blue-800 dark:from-blue-900/30 dark:to-purple-900/30 dark:text-blue-200">
-            {getRankTitle(userProgress.level)}
-          </Badge>
-          <p className="text-muted-foreground flex items-center gap-2 justify-center md:justify-start">
-            <Calendar className="w-4 h-4" />
-            Jornada iniciada em {new Date(userData.joinDate).toLocaleDateString('pt-BR')}
-          </p>
-        </div>
-      </div>
+        </ResponsiveCardContent>
+      </ResponsiveCard>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-        <Card className="bg-gradient-to-br from-blue-500 to-blue-600 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-200">
-          <CardContent className="p-4 text-center">
-            <div className="text-3xl font-bold mb-1">{userProgress.level}</div>
-            <div className="text-sm opacity-90">Nível Atual</div>
-            <Progress value={getProgressPercentage()} className="mt-2 bg-white/20" />
-          </CardContent>
-        </Card>
-
-        <Card className="bg-gradient-to-br from-green-500 to-green-600 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-200">
-          <CardContent className="p-4 text-center">
-            <div className="text-3xl font-bold mb-1">{getAccuracy()}%</div>
-            <div className="text-sm opacity-90">Taxa de Sucesso</div>
-            <div className="text-xs mt-1 opacity-80">
-              {userProgress.correctAnswers}/{userProgress.totalQuestions}
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card className="bg-gradient-to-br from-purple-500 to-purple-600 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-200">
-          <CardContent className="p-4 text-center">
-            <div className="text-3xl font-bold mb-1">
-              {userProgress.achievements.filter(a => a.unlocked).length}
-            </div>
-            <div className="text-sm opacity-90">Conquistas</div>
-            <div className="text-xs mt-1 opacity-80">
-              de {userProgress.achievements.length}
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card className="bg-gradient-to-br from-orange-500 to-orange-600 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-200">
-          <CardContent className="p-4 text-center">
-            <div className="text-3xl font-bold mb-1">{userProgress.xp}</div>
-            <div className="text-sm opacity-90">XP Total</div>
-            <div className="text-xs mt-1 opacity-80">
-              +{userProgress.xpToNextLevel - userProgress.xp} para próximo nível
-            </div>
-          </CardContent>
-        </Card>
+      <div className="responsive-grid">
+        {statsCards.map((stat, index) => (
+          <ResponsiveCard key={index} variant="highlight" className={`bg-gradient-to-br ${stat.color} text-white border-0 shadow-2xl`}>
+            <ResponsiveCardContent className="text-center">
+              <Typography variant="h2" className="text-white mb-2">
+                {stat.value}
+              </Typography>
+              <Typography variant="caption" className="text-white/90">
+                {stat.label}
+              </Typography>
+              {stat.progress && (
+                <Progress value={stat.progress} className="mt-3 bg-white/20" />
+              )}
+              {stat.subtitle && (
+                <Typography variant="caption" className="text-white/70 mt-2 block">
+                  {stat.subtitle}
+                </Typography>
+              )}
+            </ResponsiveCardContent>
+          </ResponsiveCard>
+        ))}
       </div>
 
-      <div className="grid grid-cols-1 gap-6">
+      <div className="space-y-8">
         {/* Badges Section */}
         <BadgesGrid achievements={userProgress.achievements} />
 
-        {/* Profile Information and Progress Details in a row */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Profile Information and Progress Details */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Profile Information */}
-          <Card className="border border-blue-100 dark:border-gray-700 shadow-lg hover:shadow-xl transition-all duration-200">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-gray-900 dark:text-white">
+          <ResponsiveCard variant="feature">
+            <ResponsiveCardHeader>
+              <ResponsiveCardTitle className="flex items-center gap-2 text-gray-900 dark:text-white">
                 <User className="w-5 h-5 text-blue-600" />
                 Informações do Perfil
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
+              </ResponsiveCardTitle>
+            </ResponsiveCardHeader>
+            <ResponsiveCardContent className="space-y-4">
               {isEditing ? (
                 <>
                   <div>
@@ -162,11 +175,11 @@ export function UserProfile() {
                       className="border-blue-200 dark:border-gray-600 focus:border-blue-500"
                     />
                   </div>
-                  <div className="flex gap-2">
-                    <Button onClick={handleSave} className="flex-1 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
+                  <div className="mobile-stack">
+                    <Button onClick={handleSave} className="btn-primary flex-1">
                       Salvar
                     </Button>
-                    <Button variant="outline" onClick={() => setIsEditing(false)} className="flex-1 border-blue-200 dark:border-gray-600">
+                    <Button variant="outline" onClick={() => setIsEditing(false)} className="btn-secondary flex-1">
                       Cancelar
                     </Button>
                   </div>
@@ -175,57 +188,65 @@ export function UserProfile() {
                 <>
                   <div>
                     <Label>Nome</Label>
-                    <p className="font-medium text-gray-900 dark:text-white">{userData.name}</p>
+                    <Typography variant="p" className="font-medium text-gray-900 dark:text-white">
+                      {userData.name}
+                    </Typography>
                   </div>
                   <div>
                     <Label>Email</Label>
-                    <p className="font-medium text-gray-900 dark:text-white">{userData.email}</p>
+                    <Typography variant="p" className="font-medium text-gray-900 dark:text-white">
+                      {userData.email}
+                    </Typography>
                   </div>
-                  <Button onClick={() => setIsEditing(true)} className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
+                  <Button onClick={() => setIsEditing(true)} className="btn-primary w-full">
                     Editar Perfil
                   </Button>
                 </>
               )}
-            </CardContent>
-          </Card>
+            </ResponsiveCardContent>
+          </ResponsiveCard>
 
           {/* Progress Details */}
-          <Card className="border border-blue-100 dark:border-gray-700 shadow-lg hover:shadow-xl transition-all duration-200">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-gray-900 dark:text-white">
+          <ResponsiveCard variant="feature">
+            <ResponsiveCardHeader>
+              <ResponsiveCardTitle className="flex items-center gap-2 text-gray-900 dark:text-white">
                 <Zap className="w-5 h-5 text-blue-500" />
                 Progresso Detalhado
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
+              </ResponsiveCardTitle>
+            </ResponsiveCardHeader>
+            <ResponsiveCardContent>
+              <div className="space-y-6">
                 <div>
-                  <div className="flex justify-between items-center mb-2">
-                    <span className="font-medium text-gray-900 dark:text-white">Experiência para Próximo Nível</span>
-                    <span className="text-sm text-muted-foreground">
+                  <div className="flex justify-between items-center mb-3">
+                    <Typography variant="p" className="font-medium text-gray-900 dark:text-white">
+                      Experiência para Próximo Nível
+                    </Typography>
+                    <Typography variant="caption" color="muted">
                       {userProgress.xp} / {userProgress.xpToNextLevel} XP
-                    </span>
+                    </Typography>
                   </div>
                   <Progress value={getProgressPercentage()} className="h-3" />
                 </div>
                 
-                <div className="grid grid-cols-1 gap-4 text-center">
-                  <div className="p-4 bg-gradient-to-r from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 rounded-lg border border-blue-200 dark:border-blue-700">
-                    <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">{userProgress.totalQuestions}</div>
-                    <div className="text-sm text-gray-600 dark:text-gray-400">Questões Respondidas</div>
-                  </div>
-                  <div className="p-4 bg-gradient-to-r from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/20 rounded-lg border border-green-200 dark:border-green-700">
-                    <div className="text-2xl font-bold text-green-600 dark:text-green-400">{userProgress.correctAnswers}</div>
-                    <div className="text-sm text-gray-600 dark:text-gray-400">Acertos</div>
-                  </div>
-                  <div className="p-4 bg-gradient-to-r from-purple-50 to-purple-100 dark:from-purple-900/20 dark:to-purple-800/20 rounded-lg border border-purple-200 dark:border-purple-700">
-                    <div className="text-2xl font-bold text-purple-600 dark:text-purple-400">{userProgress.simuladosCompletos}</div>
-                    <div className="text-sm text-gray-600 dark:text-gray-400">Simulados</div>
-                  </div>
+                <div className="space-y-4">
+                  {[
+                    { value: userProgress.totalQuestions, label: "Questões Respondidas", color: "blue" },
+                    { value: userProgress.correctAnswers, label: "Acertos", color: "green" },
+                    { value: userProgress.simuladosCompletos, label: "Simulados", color: "purple" }
+                  ].map((item, index) => (
+                    <div key={index} className={`p-4 bg-gradient-to-r from-${item.color}-50 to-${item.color}-100 dark:from-${item.color}-900/20 dark:to-${item.color}-800/20 rounded-lg border border-${item.color}-200 dark:border-${item.color}-700`}>
+                      <Typography variant="h3" className={`text-${item.color}-600 dark:text-${item.color}-400 mb-1`}>
+                        {item.value}
+                      </Typography>
+                      <Typography variant="caption" color="muted">
+                        {item.label}
+                      </Typography>
+                    </div>
+                  ))}
                 </div>
               </div>
-            </CardContent>
-          </Card>
+            </ResponsiveCardContent>
+          </ResponsiveCard>
         </div>
       </div>
     </div>

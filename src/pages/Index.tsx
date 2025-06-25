@@ -1,5 +1,5 @@
 
-import { Book, Timer, BarChartBig, Star, Brain, Flag } from "lucide-react";
+import { Book, Timer, BarChartBig, Star, Brain, Crown } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { FeatureCard } from "@/components/FeatureCard";
 import { WhyItem } from "@/components/WhyItem";
@@ -27,26 +27,26 @@ export default function Index() {
         
         <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8 mb-12 sm:mb-16">
           <FeatureCard
-            title="Banco de Provas"
-            description="Filtros avançados, feedback e referências de todas as edições."
+            title="Banco de Questões"
+            description="Questões oficiais, filtros avançados e referências de todas as edições."
             icon={<Book size={32} className="text-blue-500 sm:w-10 sm:h-10" />}
             to="/questoes"
           />
           <FeatureCard
-            title="Quests RPG"
-            description="Complete quests especializadas ou crie sua própria quest personalizada."
-            icon={<Flag size={32} className="text-purple-500 sm:w-10 sm:h-10" />}
-            to="/missions"
-          />
-          <FeatureCard
             title="Quests Personalizadas"
-            description="Configure questões cronometradas com áreas e dificuldades específicas."
+            description="Crie Quests Personalizadas, simule provas reais com questões cronometradas, por área e dificuldades específicas."
             icon={<Timer size={32} className="text-green-500 sm:w-10 sm:h-10" />}
             to="/missions"
           />
           <FeatureCard
+            title="Ranking de Estudantes"
+            description="Compare seu desempenho com outros estudantes e acompanhe sua posição no ranking nacional."
+            icon={<Crown size={32} className="text-purple-500 sm:w-10 sm:h-10" />}
+            to="/ranking"
+          />
+          <FeatureCard
             title="Desempenho & Gráficos"
-            description="Analise seu progresso por área e identifique pontos de melhoria."
+            description="Analise seu progresso por área e identifique pontos para melhorar."
             icon={<BarChartBig size={32} className="text-orange-500 sm:w-10 sm:h-10" />}
             to="/estatisticas"
           />

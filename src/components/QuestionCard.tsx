@@ -89,31 +89,31 @@ export function QuestionCard({
   const isCorrectAnswer = isQuestionAnswered && (userAnswer || selectedOption) === question.correct;
 
   return (
-    <Card className="w-full border-2 border-blue-200 dark:border-gray-600 shadow-lg hover:shadow-xl transition-all duration-300">
-      <CardHeader className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/10 dark:to-indigo-900/10 border-b border-blue-200 dark:border-gray-600">
+    <Card className="w-full border-2 border-blue-200 dark:border-gray-600 shadow-lg hover:shadow-xl transition-all duration-300 mobile-card">
+      <CardHeader className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/10 dark:to-indigo-900/10 border-b border-blue-200 dark:border-gray-600 mobile-padding">
         <div className="flex items-center justify-between flex-wrap gap-3">
-          <div className="flex items-center gap-3">
-            <Badge variant="outline" className="bg-blue-100 text-blue-800 border-blue-300 dark:bg-blue-900/20 dark:text-blue-200 dark:border-blue-700">
+          <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
+            <Badge variant="outline" className="bg-blue-100 text-blue-800 border-blue-300 dark:bg-blue-900/20 dark:text-blue-200 dark:border-blue-700 text-sm sm:text-base px-3 py-1.5">
               Questão {question.id}
             </Badge>
-            <Badge variant="outline" className="bg-purple-100 text-purple-800 border-purple-300 dark:bg-purple-900/20 dark:text-purple-200 dark:border-purple-700">
+            <Badge variant="outline" className="bg-purple-100 text-purple-800 border-purple-300 dark:bg-purple-900/20 dark:text-purple-200 dark:border-purple-700 text-sm sm:text-base px-3 py-1.5">
               {question.year}
             </Badge>
-            <Badge variant="outline" className="bg-green-100 text-green-800 border-green-300 dark:bg-green-900/20 dark:text-green-200 dark:border-green-700">
+            <Badge variant="outline" className="bg-green-100 text-green-800 border-green-300 dark:bg-green-900/20 dark:text-green-200 dark:border-green-700 text-sm sm:text-base px-3 py-1.5 text-center">
               {question.area}
             </Badge>
           </div>
           
           {isQuestionAnswered && (
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 mt-2 sm:mt-0">
               {isCorrectAnswer ? (
-                <div className="flex items-center gap-2 text-green-600 bg-green-100 dark:bg-green-900/20 px-3 py-1 rounded-full">
-                  <CheckCircle className="w-4 h-4" />
+                <div className="flex items-center gap-2 text-green-600 bg-green-100 dark:bg-green-900/20 px-4 py-2 rounded-full text-sm sm:text-base">
+                  <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5" />
                   <span className="font-medium">Correto!</span>
                 </div>
               ) : (
-                <div className="flex items-center gap-2 text-red-600 bg-red-100 dark:bg-red-900/20 px-3 py-1 rounded-full">
-                  <XCircle className="w-4 h-4" />
+                <div className="flex items-center gap-2 text-red-600 bg-red-100 dark:bg-red-900/20 px-4 py-2 rounded-full text-sm sm:text-base">
+                  <XCircle className="w-4 h-4 sm:w-5 sm:h-5" />
                   <span className="font-medium">Incorreto</span>
                 </div>
               )}
@@ -122,17 +122,17 @@ export function QuestionCard({
         </div>
       </CardHeader>
       
-      <CardContent className="p-6">
+      <CardContent className="mobile-padding">
         {/* Enunciado */}
-        <div className="mb-6">
-          <p className="text-lg leading-relaxed text-gray-800 dark:text-gray-200">
+        <div className="mb-6 sm:mb-8">
+          <p className="mobile-text-lg leading-relaxed text-gray-800 dark:text-gray-200">
             {question.enunciado}
           </p>
         </div>
 
         {/* Imagem se existir */}
         {question.image && (
-          <div className="mb-6">
+          <div className="mb-6 sm:mb-8">
             <img 
               src={question.image} 
               alt="Imagem da questão" 
@@ -142,26 +142,26 @@ export function QuestionCard({
         )}
 
         {/* Opções */}
-        <div className="space-y-3">
+        <div className="space-y-3 sm:space-y-4">
           {question.options.map((option) => (
             <Button
               key={option.id}
               variant="outline"
               onClick={() => handleOptionSelect(option.id)}
               disabled={disabled || showAnswer}
-              className={`w-full p-6 h-auto text-left justify-start border-2 transition-all duration-200 ${getOptionColor(option.id)} ${
+              className={`w-full p-4 sm:p-6 h-auto text-left justify-start border-2 transition-all duration-200 ${getOptionColor(option.id)} ${
                 !disabled && !showAnswer ? "hover:scale-[1.01] cursor-pointer" : "cursor-default"
               }`}
             >
-              <div className="flex items-start gap-4 w-full">
-                <div className="flex items-center gap-3">
-                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-blue-500 text-white flex items-center justify-center font-bold text-sm">
+              <div className="flex items-start gap-3 sm:gap-4 w-full">
+                <div className="flex items-center gap-2 sm:gap-3">
+                  <div className="flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-blue-500 text-white flex items-center justify-center font-bold text-sm sm:text-base">
                     {option.id}
                   </div>
                   {getOptionIcon(option.id)}
                 </div>
                 <div className="flex-1 text-left">
-                  <span className="text-base leading-relaxed">{option.text}</span>
+                  <span className="mobile-text-lg leading-relaxed">{option.text}</span>
                 </div>
               </div>
             </Button>
@@ -170,14 +170,14 @@ export function QuestionCard({
 
         {/* Feedback quando mostrar resposta */}
         {showAnswer && (
-          <div className="mt-6 p-4 bg-blue-50 dark:bg-blue-900/10 border border-blue-200 dark:border-blue-700 rounded-lg">
+          <div className="mt-6 sm:mt-8 p-4 sm:p-6 bg-blue-50 dark:bg-blue-900/10 border border-blue-200 dark:border-blue-700 rounded-lg">
             <div className="flex items-start gap-3">
-              <AlertCircle className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
+              <AlertCircle className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600 flex-shrink-0 mt-0.5" />
               <div>
-                <p className="font-medium text-blue-800 dark:text-blue-200 mb-2">
+                <p className="font-medium text-blue-800 dark:text-blue-200 mb-2 mobile-text-lg">
                   Resposta correta: {question.correct}
                 </p>
-                <p className="text-sm text-blue-700 dark:text-blue-300">
+                <p className="text-sm sm:text-base text-blue-700 dark:text-blue-300 leading-relaxed">
                   {question.options.find(opt => opt.id === question.correct)?.text}
                 </p>
               </div>
@@ -187,8 +187,8 @@ export function QuestionCard({
 
         {/* Referência se existir */}
         {question.referencia && showAnswer && (
-          <div className="mt-4 p-3 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-lg">
-            <p className="text-xs text-gray-600 dark:text-gray-400">
+          <div className="mt-4 sm:mt-6 p-3 sm:p-4 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-lg">
+            <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
               <strong>Referência:</strong> {question.referencia}
             </p>
           </div>

@@ -33,20 +33,20 @@ export function AuthTabs({
 }: AuthTabsProps) {
   return (
     <Tabs defaultValue="login" className="w-full" onValueChange={onValueChange}>
-      <TabsList className="grid w-full grid-cols-2 bg-blue-100/20 backdrop-blur-sm rounded-xl p-1 border border-blue-200/20">
+      <TabsList className="grid w-full grid-cols-2 bg-blue-100/25 backdrop-blur-sm rounded-xl p-1 border border-blue-200/30 h-12 sm:h-auto">
         <TabsTrigger 
           value="login" 
-          className="flex items-center gap-2 rounded-lg font-space-grotesk data-[state=active]:bg-blue-500/20 data-[state=active]:text-white data-[state=active]:shadow-lg transition-all duration-300 hover:bg-blue-400/10"
+          className="flex items-center gap-2 rounded-lg font-space-grotesk data-[state=active]:bg-blue-500/30 data-[state=active]:text-white data-[state=active]:shadow-lg transition-all duration-300 hover:bg-blue-400/20 text-blue-100 font-semibold text-sm sm:text-base py-2 sm:py-3"
         >
           <LogIn className="w-4 h-4" />
-          Entrar
+          <span className="hidden xs:inline">Entrar</span>
         </TabsTrigger>
         <TabsTrigger 
           value="signup" 
-          className="flex items-center gap-2 rounded-lg font-space-grotesk data-[state=active]:bg-blue-500/20 data-[state=active]:text-white data-[state=active]:shadow-lg transition-all duration-300 hover:bg-blue-400/10"
+          className="flex items-center gap-2 rounded-lg font-space-grotesk data-[state=active]:bg-blue-500/30 data-[state=active]:text-white data-[state=active]:shadow-lg transition-all duration-300 hover:bg-blue-400/20 text-blue-100 font-semibold text-sm sm:text-base py-2 sm:py-3"
         >
           <UserPlus className="w-4 h-4" />
-          Cadastrar
+          <span className="hidden xs:inline">Cadastrar</span>
         </TabsTrigger>
       </TabsList>
       

@@ -11,7 +11,7 @@ export function AuthFormHeader() {
             <Stethoscope className="w-8 h-8 text-white drop-shadow-lg" />
           </div>
           <div className="ml-3">
-            <h2 className="text-2xl font-bold font-space-grotesk bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent">
+            <h2 className="text-2xl font-bold font-space-grotesk bg-gradient-to-r from-blue-300 to-blue-500 bg-clip-text text-transparent">
               Revalida Quest
             </h2>
           </div>
@@ -20,10 +20,10 @@ export function AuthFormHeader() {
           <Shield className="w-2.5 h-2.5 text-white" />
         </div>
       </div>
-      <CardTitle className="text-3xl font-bold font-space-grotesk bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 bg-clip-text text-transparent">
+      <CardTitle className="text-2xl sm:text-3xl font-bold font-space-grotesk bg-gradient-to-r from-blue-300 via-blue-400 to-blue-500 bg-clip-text text-transparent leading-tight">
         Bem-vindo ao Revalida Quest
       </CardTitle>
-      <CardDescription className="text-base mt-2 text-blue-200/80 font-space-grotesk">
+      <CardDescription className="text-base sm:text-lg mt-3 text-blue-100 font-space-grotesk font-medium leading-relaxed">
         Sua jornada médica oficial começa aqui! 🏥
       </CardDescription>
     </CardHeader>

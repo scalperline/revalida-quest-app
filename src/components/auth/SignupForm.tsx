@@ -2,7 +2,7 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Cross } from 'lucide-react';
+import { UserPlus } from 'lucide-react';
 
 interface SignupFormProps {
   displayName: string;
@@ -28,9 +28,11 @@ export function SignupForm({
   loading
 }: SignupFormProps) {
   return (
-    <form onSubmit={onSubmit} className="space-y-6">
+    <form onSubmit={onSubmit} className="space-y-5 sm:space-y-6">
       <div className="space-y-2">
-        <Label htmlFor="displayName" className="text-sm font-medium text-blue-200 font-space-grotesk">Nome</Label>
+        <Label htmlFor="displayName" className="text-sm sm:text-base font-medium text-blue-100 font-space-grotesk">
+          Nome (opcional)
+        </Label>
         <Input
           id="displayName"
           type="text"
@@ -38,56 +40,57 @@ export function SignupForm({
           value={displayName}
           onChange={(e) => setDisplayName(e.target.value)}
           disabled={isSubmitting || loading}
-          className="h-12 rounded-xl border-2 border-blue-200/30 bg-blue-50/10 backdrop-blur-sm text-white placeholder:text-blue-300/70 focus:border-blue-400 focus:ring-blue-400/30 transition-all duration-300 hover:bg-blue-50/15 font-space-grotesk"
+          className="h-12 sm:h-14 rounded-xl border-2 border-blue-200/40 bg-blue-50/20 backdrop-blur-sm text-white placeholder:text-blue-200/70 focus:border-blue-300 focus:ring-blue-300/30 transition-all duration-300 hover:bg-blue-50/25 font-space-grotesk text-base sm:text-lg"
         />
       </div>
       <div className="space-y-2">
-        <Label htmlFor="signupEmail" className="text-sm font-medium text-blue-200 font-space-grotesk">
-          Email <span className="text-red-400">*</span>
+        <Label htmlFor="signup-email" className="text-sm sm:text-base font-medium text-blue-100 font-space-grotesk">
+          Email <span className="text-red-300">*</span>
         </Label>
         <Input
-          id="signupEmail"
+          id="signup-email"
           type="email"
           placeholder="seu.email@exemplo.com"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
           disabled={isSubmitting || loading}
-          className="h-12 rounded-xl border-2 border-blue-200/30 bg-blue-50/10 backdrop-blur-sm text-white placeholder:text-blue-300/70 focus:border-blue-400 focus:ring-blue-400/30 transition-all duration-300 hover:bg-blue-50/15 font-space-grotesk"
+          className="h-12 sm:h-14 rounded-xl border-2 border-blue-200/40 bg-blue-50/20 backdrop-blur-sm text-white placeholder:text-blue-200/70 focus:border-blue-300 focus:ring-blue-300/30 transition-all duration-300 hover:bg-blue-50/25 font-space-grotesk text-base sm:text-lg"
         />
       </div>
       <div className="space-y-2">
-        <Label htmlFor="signupPassword" className="text-sm font-medium text-blue-200 font-space-grotesk">
-          Senha <span className="text-red-400">*</span>
+        <Label htmlFor="signup-password" className="text-sm sm:text-base font-medium text-blue-100 font-space-grotesk">
+          Senha <span className="text-red-300">*</span>
         </Label>
         <Input
-          id="signupPassword"
+          id="signup-password"
           type="password"
           placeholder="••••••••"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
           disabled={isSubmitting || loading}
-          minLength={6}
-          className="h-12 rounded-xl border-2 border-blue-200/30 bg-blue-50/10 backdrop-blur-sm text-white placeholder:text-blue-300/70 focus:border-blue-400 focus:ring-blue-400/30 transition-all duration-300 hover:bg-blue-50/15 font-space-grotesk"
+          className="h-12 sm:h-14 rounded-xl border-2 border-blue-200/40 bg-blue-50/20 backdrop-blur-sm text-white placeholder:text-blue-200/70 focus:border-blue-300 focus:ring-blue-300/30 transition-all duration-300 hover:bg-blue-50/25 font-space-grotesk text-base sm:text-lg"
         />
-        <p className="text-xs text-blue-300/70 mt-1 font-space-grotesk">Mínimo de 6 caracteres</p>
+        <p className="text-xs sm:text-sm text-blue-200/80 font-space-grotesk">
+          Mínimo de 6 caracteres
+        </p>
       </div>
       <Button 
         type="submit" 
-        className="w-full h-14 bg-gradient-to-r from-blue-700 via-blue-800 to-blue-900 hover:from-blue-800 hover:via-blue-900 hover:to-blue-950 rounded-xl font-bold text-lg shadow-2xl hover:shadow-blue-500/50 transition-all duration-500 transform hover:scale-105 font-space-grotesk group relative overflow-hidden"
+        className="w-full h-14 sm:h-16 bg-gradient-to-r from-green-600 via-green-700 to-green-800 hover:from-green-700 hover:via-green-800 hover:to-green-900 rounded-xl font-bold text-base sm:text-lg shadow-2xl hover:shadow-green-500/50 transition-all duration-500 transform hover:scale-105 font-space-grotesk group relative overflow-hidden"
         disabled={isSubmitting || loading}
       >
         <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
         {isSubmitting || loading ? (
           <div className="flex items-center gap-2 relative z-10">
             <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-            Criando conta...
+            <span className="text-sm sm:text-base">Cadastrando...</span>
           </div>
         ) : (
           <div className="flex items-center gap-2 relative z-10">
-            <Cross className="w-5 h-5" />
-            Criar Conta Médica ⚕️
+            <UserPlus className="w-5 h-5" />
+            <span className="text-sm sm:text-base">Criar Conta Médica 👨‍⚕️</span>
           </div>
         )}
       </Button>

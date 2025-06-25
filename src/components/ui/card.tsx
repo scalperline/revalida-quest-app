@@ -1,3 +1,4 @@
+
 import * as React from "react"
 
 import { cn } from "@/lib/utils"
@@ -9,7 +10,7 @@ const Card = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "rounded-lg border bg-card text-card-foreground shadow-sm",
+      "rounded-2xl border-2 border-blue-200/50 dark:border-blue-700/50 bg-white/95 dark:bg-gray-800/95 text-card-foreground shadow-lg hover:shadow-xl transition-all duration-300 backdrop-blur-sm",
       className
     )}
     {...props}
@@ -23,7 +24,7 @@ const CardHeader = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn("flex flex-col space-y-1.5 p-6", className)}
+    className={cn("flex flex-col space-y-2 p-6", className)}
     {...props}
   />
 ))
@@ -36,7 +37,7 @@ const CardTitle = React.forwardRef<
   <h3
     ref={ref}
     className={cn(
-      "text-2xl font-semibold leading-none tracking-tight",
+      "text-2xl font-semibold leading-none tracking-tight bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent",
       className
     )}
     {...props}
@@ -46,11 +47,11 @@ CardTitle.displayName = "CardTitle"
 
 const CardDescription = React.forwardRef<
   HTMLParagraphElement,
-  React.HTMLAttributes<HTMLParagraphElement>
+  React.HTMLAttributes<HTMLParagrapElement>
 >(({ className, ...props }, ref) => (
   <p
     ref={ref}
-    className={cn("text-sm text-muted-foreground", className)}
+    className={cn("text-sm text-gray-600 dark:text-gray-400", className)}
     {...props}
   />
 ))

@@ -1,4 +1,3 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -52,12 +51,6 @@
     --blue-500: 217 91% 60%;
     --blue-600: 221 83% 53%;
     --blue-700: 224 76% 48%;
-
-    /* New contrast colors */
-    --orange-accent: 17 100% 59%; /* #FF6B35 */
-    --green-success: 158 64% 52%; /* #10B981 */
-    --gold-start: 51 100% 50%; /* #FFD700 */
-    --gold-end: 39 100% 50%; /* #FFA500 */
   }
 
   .dark {
@@ -125,32 +118,10 @@
     @apply bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent;
   }
 
-  /* New gradient utilities */
-  .gradient-gold {
-    background: linear-gradient(135deg, #FFD700, #FFA500);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .bg-gradient-gold {
-    background: linear-gradient(135deg, #FFD700, #FFA500);
-  }
-
-  /* Medical animations */
-  @keyframes heartbeat {
+  /* Stellar animations */
+  @keyframes twinkle {
     0%, 100% { opacity: 0.3; transform: scale(1); }
     50% { opacity: 1; transform: scale(1.2); }
-  }
-
-  @keyframes medicalPulse {
-    0%, 100% { opacity: 0.2; transform: scale(1); }
-    50% { opacity: 0.8; transform: scale(1.3); }
-  }
-
-  @keyframes stethoscopePulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.1); }
   }
 
   @keyframes float {
@@ -174,12 +145,6 @@
       opacity: 1;
       transform: translateX(0) translateY(0);
     }
-  }
-
-  /* Icon pulse animation */
-  @keyframes iconPulse {
-    0%, 100% { transform: scale(1); opacity: 0.7; }
-    50% { transform: scale(1.1); opacity: 1; }
   }
 
   /* Ensure no horizontal scroll on small devices */
@@ -283,7 +248,6 @@
     @apply shadow-lg hover:shadow-xl transition-shadow duration-300;
   }
 
-  /* Enhanced button styles with orange accents */
   .btn-primary {
     @apply bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-xl font-semibold transition-all duration-200 transform hover:scale-105 hover:from-blue-700 hover:to-blue-800 shadow-lg hover:shadow-xl min-h-[56px] px-6 py-4;
     font-size: 1.125rem; /* 18px for better mobile readability */
@@ -291,55 +255,9 @@
   }
 
   .btn-secondary {
-    @apply bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl font-medium transition-all duration-200 hover:scale-105 hover:border-orange-400 dark:hover:border-orange-500 min-h-[56px] px-6 py-4;
+    @apply bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl font-medium transition-all duration-200 hover:scale-105 hover:border-blue-300 dark:hover:border-blue-500 min-h-[56px] px-6 py-4;
     font-size: 1.125rem; /* 18px for better mobile readability */
     font-family: 'Space Grotesk', system-ui, -apple-system, sans-serif;
-  }
-
-  .btn-secondary:hover {
-    border-color: #FF6B35;
-  }
-
-  /* Input with icon styles */
-  .input-with-icon {
-    @apply pl-12;
-  }
-
-  .input-icon {
-    @apply absolute left-3 top-1/2 transform -translate-y-1/2 text-orange-400 w-5 h-5;
-    animation: iconPulse 3s ease-in-out infinite;
-  }
-
-  /* Medical card shadows */
-  .medical-card-shadow {
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  }
-
-  /* Stethoscope pulse animation */
-  .stethoscope-pulse {
-    animation: stethoscopePulse 2s ease-in-out infinite;
-  }
-
-  /* Enhanced success colors */
-  .success-green {
-    color: #10B981;
-  }
-
-  .bg-success-green {
-    background-color: #10B981;
-  }
-
-  /* Orange accent utilities */
-  .text-orange-accent {
-    color: #FF6B35;
-  }
-
-  .bg-orange-accent {
-    background-color: #FF6B35;
-  }
-
-  .border-orange-accent {
-    border-color: #FF6B35;
   }
 
   /* Mobile-first responsive utilities with better spacing */

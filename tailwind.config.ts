@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -96,14 +95,10 @@ export default {
 						height: '0'
 					}
 				},
-				// Medical animations
-				'heartbeat': {
+				// Stellar animations
+				'twinkle': {
 					'0%, 100%': { opacity: '0.3', transform: 'scale(1)' },
 					'50%': { opacity: '1', transform: 'scale(1.2)' }
-				},
-				'medicalPulse': {
-					'0%, 100%': { opacity: '0.2', transform: 'scale(1)' },
-					'50%': { opacity: '0.8', transform: 'scale(1.3)' }
 				},
 				'float': {
 					'0%': { transform: 'translateY(100vh) translateX(0px) rotate(0deg)' },
@@ -129,8 +124,7 @@ export default {
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
-				'heartbeat': 'heartbeat 1.5s ease-in-out infinite',
-				'medicalPulse': 'medicalPulse 2s ease-in-out infinite',
+				'twinkle': 'twinkle 2s ease-in-out infinite',
 				'float': 'float 20s linear infinite',
 				'drift': 'drift 15s ease-in-out infinite',
 				'slideInLeft': 'slideInLeft 0.8s ease-out'

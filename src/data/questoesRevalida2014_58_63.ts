@@ -1,3 +1,4 @@
+
 import { type Question } from "./questoesRevalida2011";
 
 export const QUESTOES_REVALIDA_2014_58_63: Question[] = [
@@ -29,7 +30,7 @@ export const QUESTOES_REVALIDA_2014_58_63: Question[] = [
       { id: "D", text: "Candida albicans." },
     ],
     correct: "A",
-  } as any,
+  },
   {
     id: 60,
     year: 2014,
@@ -47,7 +48,7 @@ export const QUESTOES_REVALIDA_2014_58_63: Question[] = [
   {
     id: 61,
     year: 2014,
-    area: "Clínica Médica",
+    area: "Pediatria",
     enunciado:
       "Um médico de uma Emergência Pediátrica recebe um lactente com quatro meses de idade que apresenta dificuldade respiratória. A mãe refere que a criança vinha apresentando coriza há três dias e que há um dia surgiu cansaço progressivo e dificuldade para mamar. Não houve febre no período. Não há relato de internações anteriores. Gestação e parto sem intercorrências. Ao exame físico o lactente apresenta-se eutrófico e com um bom estado geral, corado, hidratado. Frequência respiratória de 43 incursões por minuto com leve tragem intercostal. A ausculta respiratória demonstra a presença de sibilos difusos e aumento do tempo expiratório. A ausculta cardíaca é normal e o abdome, plano, flácido, indolor e sem visceromegalias. Uma radiografia de tórax evidencia bilateralmente: hiperinsuflação, retificação das cúpulas diafragmáticas e infiltrado intersticial discreto. A oximetria de pulso mostra os seguintes resultados: pH = 7,41; PO₂ = 58; PCO₂ = 38; BE = 0,4; HCO₃ = 24; SaO₂ = 89%.\n\nConsiderando a principal hipótese diagnóstica e as condições clínicas da criança, o tratamento indicado é",
     options: [

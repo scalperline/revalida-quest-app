@@ -11,8 +11,8 @@ export const QUESTOES_REVALIDA_2014_VERMELHA_58_63: Question[] = [
     image: "/lovable-uploads/14794447-c5de-468d-b9fd-bf0150a02340.png",
     options: [
       { id: "A", text: "Trichomonas vaginalis." },
-      { id: "B", text: "Chlamydia tracomatis." },
-      { id: "C", text: "Neisseria gonorrheae." },
+      { id: "B", text: "Chlamydia trachomatis." },
+      { id: "C", text: "Neisseria gonorrhoeae." },
       { id: "D", text: "Candida albicans." },
     ],
     correct: "A",
@@ -46,7 +46,7 @@ export const QUESTOES_REVALIDA_2014_VERMELHA_58_63: Question[] = [
   {
     id: 60,
     year: 2014,
-    area: "Saúde Coletiva",
+    area: "Medicina Preventiva e Social",
     enunciado:
       "Uma mulher com 55 anos de idade e longa história de episódios depressivos é trazida à Unidade Básica de Saúde por um Agente Comunitário de Saúde por apresentar-se delirante há várias semanas. Já na sala de espera, o quadro agrava-se progressivamente para franca agitação psicomotora, com a paciente tentando agredir outros usuários e a equipe de trabalho, por quem diz estar sendo perseguida.\n\nNessa situação, além de realizar a contenção física da paciente, está indicado administrar",
     options: [
@@ -62,11 +62,11 @@ export const QUESTOES_REVALIDA_2014_VERMELHA_58_63: Question[] = [
     year: 2014,
     area: "Clínica Médica",
     enunciado:
-      "Um homem com 34 anos de idade, sem antecedentes patológicos prévios, procurou ontem uma Unidade Básica de Saúde porque vem evoluindo nos últimos quatro meses com queixas de poliúria, polidipsia e perda ponderal de cerca de 7 kg nesse período. Há dois meses realizou exames complementares que evidenciaram glicemia de jejum de 348 mg/dL (Valor de referência = 75 - 99 mg/dL). Nega história de diabetes na família. Desde então, vem em uso de doses crescentes de metformina e glibenclamida, atualmente com 1.700 mg/dia e 10 mg/dia, respectively. As auscultas cardíaca e pulmonar são normais. Refere persistência dos sintomas e os exames complementares colhidos hoje revelaram: glicemia de jejum = 296 mg/dL, glicemia 2h após o café da manhã = 412 mg/dL, hemoglobina glicada 10,1% (Valor de referência < 3,8%). Ao exame físico o paciente mostra-se desidratado, corado, pressão arterial = 110 × 75 mmHg, circunferência abdominal = 92 cm, índice de massa corporal - IMC = 23,3 kg/m², peso = 60 kg.\n\nAlém de referenciar para o especialista, a conduta adequada para esse paciente é",
+      "Um homem com 34 anos de idade, sem antecedentes patológicos prévios, procurou ontem uma Unidade Básica de Saúde porque vem evoluindo nos últimos quatro meses com queixas de poliúria, polidipsia e perda ponderal de cerca de 7 kg nesse período. Há dois meses realizou exames complementares que evidenciaram glicemia de jejum de 348 mg/dL (Valor de referência = 75 - 99 mg/dL). Nega história de diabetes na família. Desde então, vem em uso de doses crescentes de metformina e glibenclamida, atualmente com 1.700 mg/dia e 10 mg/dia, respectivamente. As auscultas cardíaca e pulmonar são normais. Refere persistência dos sintomas e os exames complementares colhidos hoje revelaram: glicemia de jejum = 296 mg/dL, glicemia 2h após o café da manhã = 412 mg/dL, hemoglobina glicada 10,1% (Valor de referência < 6,5%). Ao exame físico o paciente mostra-se desidratado, corado, pressão arterial = 110 × 75 mmHg, circunferência abdominal = 92 cm, índice de massa corporal - IMC = 23,3 kg/m², peso = 60 kg.\n\nAlém de referenciar para o especialista, a conduta adequada para esse paciente é",
     options: [
       {
         id: "A",
-        text: "suspender as doses de glibenclamida e de metformina, adicionar insulina NPH antes de dormir.",
+        text: "aumentar as doses de glibenclamida e de metformina, adicionar insulina NPH antes de dormir.",
       },
       {
         id: "B",
@@ -88,7 +88,7 @@ export const QUESTOES_REVALIDA_2014_VERMELHA_58_63: Question[] = [
     year: 2014,
     area: "Clínica Médica",
     enunciado:
-      "Um homem com 55 anos de idade procura Unidade Básica de Saúde (UBS) queixando-se que há três meses apresenta cor amarelada da pele e dos “olhos”, com coceira e urina muito escura. Refere piora progressiva dos sintomas há cerca de 25 dias. Sente cansaço progressivo, que associa a emagrecimento de 20 kg nos últimos seis meses. Eventualmente refere dor em mesogástrio e nas costas, que melhora com antiácidos e jejum. História pregressa de etilismo (destilados) há mais de 30 anos. Retorna à UBS após 45 dias da primeira consulta, trazendo ultrassonografia abdominal que evidencia dilatação de vias biliares intra e extra-hepáticas.\n\nA hipótese diagnóstica e a conduta correta são",
+      "Um homem com 55 anos de idade procura Unidade Básica de Saúde (UBS) queixando-se que há três meses apresenta cor amarelada da pele e dos "olhos", com coceira e urina muito escura. Refere piora progressiva dos sintomas há cerca de 25 dias. Sente cansaço progressivo, que associa a emagrecimento de 20 kg nos últimos seis meses. Eventualmente refere dor em mesogástrio e nas costas, que melhora com antiácidos e jejum. História pregressa de etilismo (destilados) há mais de 30 anos. Retorna à UBS após 45 dias da primeira consulta, trazendo ultrassonografia abdominal que evidencia dilatação de vias biliares intra e extra-hepáticas.\n\nA hipótese diagnóstica e a conduta correta são",
     options: [
       {
         id: "A",
@@ -114,7 +114,7 @@ export const QUESTOES_REVALIDA_2014_VERMELHA_58_63: Question[] = [
     year: 2014,
     area: "Pediatria",
     enunciado:
-      "Um médico de uma Emergência Pediátrica recebe um lactente com quatro meses de idade que apresenta dificuldade respiratória. A mãe refere que a criança vinha apresentando coriza há três dias e que há um dia subiu cansaço progressivo e dificuldade para mamar. Não soube sobre febre no período. Não há relato de internações anteriores. Gestação e parto sem intercorrências. Ao exame físico o lactente apresenta-se eutrófico e em bom estado geral, corado e hidratado. Frequência respiratória de 43 incursões por minuto com leve tiragem intercostal. A ausculta respiratória demonstra a presença de sibilos difusos e aumento do tempo expiratório. A ausculta cardíaca é normal e o abdome, plano e flácido, indolor e sem visceromegalias. Uma radiografia de tórax evidencia bilateralmente: hiperinsuflação pulmonar, retificação das cúpulas diafragmáticas e infiltrado intersticial difuso. A gasometria arterial mostra os seguintes resultados: pH = 7,41; PCO₂ = 58; PCO₃ = 38; BE = 0,4; HCO₃ = 24; SaO₂ = 89%.\n\nConsiderando a principal hipótese diagnóstica e as condições clínicas da criança, o tratamento indicado é",
+      "Um médico de uma Emergência Pediátrica recebe um lactente com quatro meses de idade que apresenta dificuldade respiratória. A mãe refere que a criança vinha apresentando coriza há três dias e que há um dia surgiu cansaço progressivo e dificuldade para mamar. Não houve febre no período. Não há relato de internações anteriores. Gestação e parto sem intercorrências. Ao exame físico o lactente apresenta-se eutrófico e em bom estado geral, corado e hidratado. Frequência respiratória de 43 incursões por minuto com leve tiragem intercostal. A ausculta respiratória demonstra a presença de sibilos difusos e aumento do tempo expiratório. A ausculta cardíaca é normal e o abdome, plano e flácido, indolor e sem visceromegalias. Uma radiografia de tórax evidencia bilateralmente: hiperinsuflação pulmonar, retificação das cúpulas diafragmáticas e infiltrado intersticial discreto. A gasometria arterial mostra os seguintes resultados: pH = 7,41; PO₂ = 58; PCO₂ = 38; BE = 0,4; HCO₃ = 24; SaO₂ = 89%.\n\nConsiderando a principal hipótese diagnóstica e as condições clínicas da criança, o tratamento indicado é",
     options: [
       { id: "A", text: "hidratação e oxigenoterapia." },
       { id: "B", text: "cabeceira elevada e corticoide." },

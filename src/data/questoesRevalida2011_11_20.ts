@@ -1,3 +1,4 @@
+
 import { Question } from "./questoesRevalida2011";
 
 export const QUESTOES_REVALIDA_2011_11_20: Question[] = [
@@ -12,7 +13,7 @@ export const QUESTOES_REVALIDA_2011_11_20: Question[] = [
       { id: "C", text: "Ceftriaxona, IM, 1 g/dia, por 7 dias." },
       { id: "D", text: "Levofloxacina, VO, 750 mg/dia, por 7 dias." },
     ],
-    correct: "D",
+    correct: "A",
     referencia: "Diretrizes Brasileiras para Pneumonia Adquirida na Comunidade – Sociedade Brasileira de Pneumologia e Tisiologia.",
   },
   {

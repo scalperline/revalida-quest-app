@@ -19,7 +19,7 @@ export const QUESTOES_REVALIDA_2017_PROVA1_77_78: Question[] = [
   {
     id: 78,
     year: 2017,
-    area: "Preventiva e Social",
+    area: "Medicina Preventiva e Social",
     enunciado:
       "Uma mulher com 75 anos de idade, aposentada há 15 anos, reside em uma instituição de longa permanência de idosas conveniada à prefeitura local. Ela perdeu contato com sua família, apresenta demência grave, síndrome da imobilidade e cognitiva, vive restrita ao leito e com dependência completa de outra pessoa para realização de todas as atividades da vida diária na instituição. Tem histórico de três internações hospitalares prolongadas no último semestre devido a pneumonias por aspiração e está em uso regular de haloperidol 2 mg/dia para controle de episódios de agitação psicomotora frequentes. A referida instituição localiza-se na área de abrangência de uma Unidade Básica de Saúde, cujo médico de família é chamado para discutir a conduta com o novo responsável pela instituição.\n\nNessa situação, o médico de família deve",
     options: [

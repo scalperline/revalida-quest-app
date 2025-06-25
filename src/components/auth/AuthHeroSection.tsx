@@ -4,15 +4,13 @@ import {
   Trophy, 
   Star, 
   Zap, 
-  Shield, 
-  Target,
-  Award,
-  Crown,
   Users,
   CheckCircle,
-  FileText,
-  GraduationCap,
-  BadgeCheck
+  Crown,
+  Target,
+  BadgeCheck,
+  Award,
+  TrendingUp
 } from 'lucide-react';
 import { OfficialBadgeCard } from './OfficialBadgeCard';
 
@@ -41,80 +39,107 @@ export function AuthHeroSection() {
         </p>
       </div>
 
-      {/* Official Authority Cards */}
-      <div className="grid gap-4 mb-8">
+      {/* Modern Cards with Gamification Elements */}
+      <div className="grid gap-6 mb-8">
         <OfficialBadgeCard
-          icon={<BadgeCheck className="w-6 h-6 text-white" />}
+          icon={<BadgeCheck className="w-7 h-7 text-white" />}
           title="Questões Oficiais do Revalida"
-          description="Banco completo com todas as provas aplicadas pelo INEP"
-          badge={{ icon: <CheckCircle className="w-4 h-4 text-green-500 fill-current" />, text: "Verificado", color: "text-green-600" }}
+          description="Banco completo com mais de 1.500 questões oficiais e organizadas por ano"
+          badge={{ 
+            icon: <><CheckCircle className="w-4 h-4 text-green-500 fill-current" /><Award className="w-4 h-4 text-blue-500" /></>, 
+            text: "Verificado", 
+            color: "text-green-600" 
+          }}
           gradient="from-blue-600 to-blue-700"
         />
 
         <OfficialBadgeCard
-          icon={<FileText className="w-6 h-6 text-white" />}
-          title="Provas de 2011 a 2025"
-          description="Mais de 1.500 questões oficiais organizadas por ano"
-          badge={{ icon: <Trophy className="w-4 h-4 text-blue-600" />, text: "Completo", color: "text-blue-600" }}
-          gradient="from-blue-700 to-blue-800"
+          icon={<Trophy className="w-7 h-7 text-white" />}
+          title="Sistema de Níveis e XP"
+          description="Ganhe experiência a cada questão respondida e evolua com feedback imediato"
+          badge={{ 
+            icon: <><Star className="w-4 h-4 text-yellow-500 fill-current" /><Zap className="w-4 h-4 text-blue-500" /></>, 
+            text: "Gamificado", 
+            color: "text-yellow-600" 
+          }}
+          gradient="from-yellow-500 to-orange-500"
         />
 
         <OfficialBadgeCard
-          icon={<GraduationCap className="w-6 h-6 text-white" />}
-          title="Aprovado pelo MEC"
-          description="Conteúdo alinhado com as diretrizes oficiais do exame"
-          badge={{ icon: <><Shield className="w-4 h-4 text-blue-600" /><Award className="w-4 h-4 text-green-500" /></>, text: "", color: "" }}
-          gradient="from-blue-800 to-blue-900"
+          icon={<Users className="w-7 h-7 text-white" />}
+          title="Ranking Nacional"
+          description="Compare seu desempenho com outros médicos em uma competição saudável"
+          badge={{ 
+            icon: <><Target className="w-4 h-4 text-blue-600" /><TrendingUp className="w-4 h-4 text-green-500" /></>, 
+            text: "Competitivo", 
+            color: "text-blue-600" 
+          }}
+          gradient="from-blue-600 to-cyan-500"
         />
       </div>
 
-      {/* Gamification Features */}
-      <div className="grid gap-4">
-        <div className="group flex items-center gap-4 p-5 bg-gradient-to-r from-blue-600/10 to-blue-800/10 rounded-2xl backdrop-blur-sm hover:from-blue-600/20 hover:to-blue-800/20 transition-all duration-300 hover:scale-102 border border-blue-300 dark:border-blue-700">
-          <div className="w-12 h-12 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
-            <Trophy className="w-6 h-6 text-white" />
+      {/* Enhanced Stats Preview - Centered and Modern */}
+      <div className="relative mx-auto max-w-md">
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-blue-800/20 rounded-3xl blur-xl"></div>
+        <div className="relative bg-gradient-to-br from-white/95 to-blue-50/95 dark:from-gray-800/95 dark:to-gray-900/95 rounded-3xl p-8 border-2 border-blue-200/50 dark:border-blue-700/50 backdrop-blur-sm shadow-2xl">
+          <div className="text-center mb-6">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-600/10 to-blue-800/10 rounded-full mb-4">
+              <Crown className="w-5 h-5 text-blue-600" />
+              <span className="text-sm font-semibold text-blue-700 dark:text-blue-300">Comunidade Elite</span>
+            </div>
+            <h3 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent mb-2">
+              Junte-se aos Melhores!
+            </h3>
+            <p className="text-gray-600 dark:text-gray-400 text-sm">
+              Milhares de médicos já confiam em nossa plataforma
+            </p>
           </div>
-          <div className="flex-1">
-            <h3 className="font-bold text-gray-800 dark:text-gray-200">Sistema de Níveis e XP</h3>
-            <p className="text-gray-600 dark:text-gray-400 text-sm">Ganhe experiência a cada questão respondida</p>
+          
+          <div className="grid grid-cols-3 gap-6 text-center">
+            <div className="relative">
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-blue-600/10 rounded-2xl"></div>
+              <div className="relative p-4">
+                <div className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent mb-1">
+                  12k+
+                </div>
+                <div className="text-xs text-gray-600 dark:text-gray-400 font-medium">
+                  Médicos Ativos
+                </div>
+              </div>
+            </div>
+            
+            <div className="relative">
+              <div className="absolute inset-0 bg-gradient-to-r from-green-500/10 to-green-600/10 rounded-2xl"></div>
+              <div className="relative p-4">
+                <div className="text-3xl font-bold bg-gradient-to-r from-green-600 to-green-700 bg-clip-text text-transparent mb-1">
+                  500k+
+                </div>
+                <div className="text-xs text-gray-600 dark:text-gray-400 font-medium">
+                  Questões Resolvidas
+                </div>
+              </div>
+            </div>
+            
+            <div className="relative">
+              <div className="absolute inset-0 bg-gradient-to-r from-yellow-500/10 to-yellow-600/10 rounded-2xl"></div>
+              <div className="relative p-4">
+                <div className="text-3xl font-bold bg-gradient-to-r from-yellow-600 to-yellow-700 bg-clip-text text-transparent mb-1">
+                  95%
+                </div>
+                <div className="text-xs text-gray-600 dark:text-gray-400 font-medium">
+                  Taxa de Aprovação
+                </div>
+              </div>
+            </div>
           </div>
-          <div className="flex items-center gap-1">
-            <Star className="w-4 h-4 text-yellow-500 fill-current" />
-            <Star className="w-4 h-4 text-yellow-500 fill-current" />
-            <Star className="w-4 h-4 text-yellow-500 fill-current" />
-          </div>
-        </div>
 
-        <div className="group flex items-center gap-4 p-5 bg-gradient-to-r from-blue-600/10 to-blue-800/10 rounded-2xl backdrop-blur-sm hover:from-blue-600/20 hover:to-blue-800/20 transition-all duration-300 hover:scale-102 border border-blue-300 dark:border-blue-700">
-          <div className="w-12 h-12 bg-gradient-to-r from-blue-600 to-cyan-500 rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
-            <Users className="w-6 h-6 text-white" />
-          </div>
-          <div className="flex-1">
-            <h3 className="font-bold text-gray-800 dark:text-gray-200">Ranking Nacional</h3>
-            <p className="text-gray-600 dark:text-gray-400 text-sm">Compare seu desempenho com outros médicos</p>
-          </div>
-          <div className="flex items-center gap-1">
-            <Zap className="w-4 h-4 text-blue-500" />
-            <Target className="w-4 h-4 text-blue-600" />
-          </div>
-        </div>
-      </div>
-
-      {/* Stats Preview */}
-      <div className="bg-gradient-to-r from-blue-600/15 to-blue-800/15 rounded-2xl p-6 border border-blue-300 dark:border-blue-700">
-        <h3 className="font-bold text-lg mb-4 text-gray-800 dark:text-gray-200">Junte-se a milhares de médicos!</h3>
-        <div className="grid grid-cols-3 gap-4 text-center">
-          <div>
-            <div className="text-2xl font-bold text-blue-700">12k+</div>
-            <div className="text-sm text-gray-600 dark:text-gray-400">Usuários Ativos</div>
-          </div>
-          <div>
-            <div className="text-2xl font-bold text-blue-800">500k+</div>
-            <div className="text-sm text-gray-600 dark:text-gray-400">Questões Respondidas</div>
-          </div>
-          <div>
-            <div className="text-2xl font-bold text-green-600">95%</div>
-            <div className="text-sm text-gray-600 dark:text-gray-400">Taxa de Aprovação</div>
+          <div className="mt-6 text-center">
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-gradient-to-r from-green-500/20 to-green-600/20 rounded-full">
+              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+              <span className="text-xs font-medium text-green-700 dark:text-green-300">
+                Resultados Comprovados
+              </span>
+            </div>
           </div>
         </div>
       </div>

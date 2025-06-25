@@ -41,6 +41,8 @@ export function useGamificationSupabase() {
     if (!user) return;
 
     try {
+      console.log('Carregando progresso do usuário:', user.id);
+      
       const { data: profile, error } = await supabase
         .from('user_profiles')
         .select('*')
@@ -48,50 +50,107 @@ export function useGamificationSupabase() {
         .single();
 
       if (error && error.code !== 'PGRST116') {
-        console.error('Error loading user progress:', error);
+        console.error('Erro ao carregar progresso:', error);
         return;
       }
 
       if (profile) {
-        const achievements = profile.achievements ? 
+        console.log('Perfil carregado:', profile);
+        
+        // Merge achievements from database with default achievements
+        const savedAchievements = profile.achievements ? 
           (profile.achievements as any[]).map(ach => ({
             ...ach,
             unlockedAt: ach.unlockedAt ? new Date(ach.unlockedAt) : undefined
-          })) :
-          [...ACHIEVEMENTS];
+          })) : [];
+
+        // Merge with default achievements to ensure all achievements are present
+        const allAchievements = ACHIEVEMENTS.map(defaultAch => {
+          const savedAch = savedAchievements.find(saved => saved.id === defaultAch.id);
+          return savedAch || defaultAch;
+        });
 
         // Type-safe area stats parsing
         const areaStats = profile.area_stats && typeof profile.area_stats === 'object' && !Array.isArray(profile.area_stats)
           ? profile.area_stats as Record<string, { correct: number; total: number }>
           : {};
 
-        setUserProgress({
-          level: profile.level,
-          xp: profile.total_xp,
-          xpToNextLevel: profile.level * 100,
-          totalQuestions: profile.total_questions,
-          correctAnswers: profile.correct_answers,
-          simuladosCompletos: profile.simulados_completos,
-          streakDias: profile.streak_dias,
+        const progressData = {
+          level: profile.level || 1,
+          xp: profile.total_xp || 0,
+          xpToNextLevel: (profile.level || 1) * 100,
+          totalQuestions: profile.total_questions || 0,
+          correctAnswers: profile.correct_answers || 0,
+          simuladosCompletos: profile.simulados_completos || 0,
+          streakDias: profile.streak_dias || 0,
           lastActivityDate: profile.last_activity_date ? new Date(profile.last_activity_date) : undefined,
-          achievements,
+          achievements: allAchievements,
           newlyUnlockedAchievements: [],
           quests: [],
           medicalCards: [],
           areaStats
-        });
+        };
+
+        console.log('Definindo progresso:', progressData);
+        setUserProgress(progressData);
+      } else {
+        console.log('Nenhum perfil encontrado, criando novo');
+        // Create new profile if none exists
+        await createUserProfile();
       }
     } catch (error) {
-      console.error('Error loading user progress:', error);
+      console.error('Erro ao carregar progresso:', error);
+      toast({
+        title: "Erro ao carregar progresso",
+        description: "Não foi possível carregar seus dados. Usando dados locais.",
+        variant: "destructive",
+      });
     } finally {
       setLoading(false);
     }
   };
 
-  const saveUserProgress = async (progress: UserProgress) => {
+  const createUserProfile = async () => {
     if (!user) return;
 
     try {
+      console.log('Criando novo perfil para usuário:', user.id);
+      
+      const { error } = await supabase
+        .from('user_profiles')
+        .insert({
+          user_id: user.id,
+          level: 1,
+          total_xp: 0,
+          weekly_xp: 0,
+          total_questions: 0,
+          correct_answers: 0,
+          simulados_completos: 0,
+          streak_dias: 0,
+          last_activity_date: new Date().toISOString(),
+          achievements: [],
+          area_stats: {},
+        });
+
+      if (error) {
+        console.error('Erro ao criar perfil:', error);
+      } else {
+        console.log('Perfil criado com sucesso');
+      }
+    } catch (error) {
+      console.error('Erro ao criar perfil:', error);
+    }
+  };
+
+  const saveUserProgress = async (progress: UserProgress) => {
+    if (!user) {
+      console.log('Nenhum usuário logado, não salvando progresso');
+      return;
+    }
+
+    try {
+      console.log('Salvando progresso do usuário:', progress);
+
       // Convert achievements to JSON-compatible format
       const achievementsJson = progress.achievements.map(ach => ({
         id: ach.id,
@@ -104,37 +163,50 @@ export function useGamificationSupabase() {
         area: ach.area
       }));
 
+      const dataToSave = {
+        user_id: user.id,
+        level: progress.level,
+        total_xp: progress.xp,
+        weekly_xp: progress.xp, // For now, we'll use total_xp as weekly_xp
+        total_questions: progress.totalQuestions,
+        correct_answers: progress.correctAnswers,
+        simulados_completos: progress.simuladosCompletos,
+        streak_dias: progress.streakDias,
+        last_activity_date: progress.lastActivityDate?.toISOString() || new Date().toISOString(),
+        achievements: achievementsJson as any,
+        area_stats: progress.areaStats as any,
+        updated_at: new Date().toISOString()
+      };
+
+      console.log('Dados a serem salvos:', dataToSave);
+
       const { error } = await supabase
         .from('user_profiles')
-        .upsert({
-          user_id: user.id,
-          level: progress.level,
-          total_xp: progress.xp,
-          weekly_xp: progress.xp, // For now, we'll use total_xp as weekly_xp
-          total_questions: progress.totalQuestions,
-          correct_answers: progress.correctAnswers,
-          simulados_completos: progress.simuladosCompletos,
-          streak_dias: progress.streakDias,
-          last_activity_date: progress.lastActivityDate?.toISOString(),
-          achievements: achievementsJson as any,
-          area_stats: progress.areaStats as any,
-          updated_at: new Date().toISOString()
-        });
+        .upsert(dataToSave);
 
       if (error) {
-        console.error('Error saving user progress:', error);
+        console.error('Erro ao salvar progresso:', error);
         toast({
           title: "Erro ao salvar progresso",
           description: "Não foi possível salvar seu progresso. Tente novamente.",
           variant: "destructive",
         });
+      } else {
+        console.log('Progresso salvo com sucesso');
       }
     } catch (error) {
-      console.error('Error saving user progress:', error);
+      console.error('Erro ao salvar progresso:', error);
+      toast({
+        title: "Erro ao salvar progresso",
+        description: "Ocorreu um erro inesperado ao salvar.",
+        variant: "destructive",
+      });
     }
   };
 
   const addXP = (points: number) => {
+    console.log('Adicionando XP:', points);
+    
     setUserProgress(prev => {
       let newXP = prev.xp + points;
       let newLevel = prev.level;
@@ -153,13 +225,21 @@ export function useGamificationSupabase() {
         xpToNextLevel: newXPToNext
       };
 
+      console.log('Progresso atualizado com XP:', updated);
+      
+      // Save immediately after updating
       saveUserProgress(updated);
       return updated;
     });
   };
 
   const answerQuestion = async (correct: boolean, area?: string, questionId?: number) => {
-    if (!user) return;
+    if (!user) {
+      console.log('Nenhum usuário logado, não salvando resposta');
+      return;
+    }
+
+    console.log('Respondendo questão:', { correct, area, questionId });
 
     // Save the answer to database
     if (questionId) {
@@ -174,7 +254,7 @@ export function useGamificationSupabase() {
             answered_at: new Date().toISOString()
           });
       } catch (error) {
-        console.error('Error saving answer:', error);
+        console.error('Erro ao salvar resposta:', error);
       }
     }
 
@@ -217,6 +297,9 @@ export function useGamificationSupabase() {
         areaStats
       };
 
+      console.log('Progresso atualizado após resposta:', updated);
+      
+      // Save immediately after updating
       saveUserProgress(updated);
       return updated;
     });
@@ -226,12 +309,17 @@ export function useGamificationSupabase() {
   };
 
   const completeSimulado = (score: number, total: number) => {
+    console.log('Completando simulado:', { score, total });
+    
     setUserProgress(prev => {
       const updated = {
         ...prev,
         simuladosCompletos: prev.simuladosCompletos + 1
       };
       
+      console.log('Progresso atualizado após simulado:', updated);
+      
+      // Save immediately after updating
       saveUserProgress(updated);
       return updated;
     });

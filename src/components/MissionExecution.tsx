@@ -17,7 +17,7 @@ interface MissionExecutionProps {
 
 export function MissionExecution({ mission, onBack, onComplete }: MissionExecutionProps) {
   const { getQuestionsForMission, updateMissionProgress } = useMissions();
-  const { completeSimulado, userProgress } = useGamification();
+  const { completeSimulado, answerQuestion } = useGamification();
   const { playSound } = useAudio();
 
   const [questions, setQuestions] = useState<Question[]>([]);
@@ -30,6 +30,7 @@ export function MissionExecution({ mission, onBack, onComplete }: MissionExecuti
 
   useEffect(() => {
     const missionQuestions = getQuestionsForMission(mission);
+    console.log('Questões da missão carregadas:', missionQuestions.length);
     setQuestions(missionQuestions);
     setStartTime(Date.now());
   }, [mission]);
@@ -55,11 +56,17 @@ export function MissionExecution({ mission, onBack, onComplete }: MissionExecuti
     playSound('click');
     const currentQuestion = questions[currentIndex];
     if (currentQuestion) {
+      console.log('Respondendo questão da missão:', currentQuestion.id, 'com opção:', optionId);
+      
       setAnswers(prev => ({
         ...prev,
         [currentQuestion.id.toString()]: optionId
       }));
       setQuestionAnswered(true);
+      
+      // Register answer in gamification system with question ID
+      const correct = optionId === currentQuestion.correct;
+      answerQuestion(correct, currentQuestion.area, currentQuestion.id);
     }
   };
 
@@ -80,6 +87,8 @@ export function MissionExecution({ mission, onBack, onComplete }: MissionExecuti
     const correctAnswers = questions.filter(q => 
       answers[q.id.toString()] === q.correct
     ).length;
+
+    console.log('Finalizando missão com', correctAnswers, 'de', questions.length, 'corretas');
 
     const accuracy = (correctAnswers / questions.length) * 100;
     
@@ -104,7 +113,7 @@ export function MissionExecution({ mission, onBack, onComplete }: MissionExecuti
   if (isFinished) {
     return (
       <div className="pt-8">
-        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-8 border-2 border-blue-200 dark:border-gray-700">
+        <div className="bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm rounded-3xl shadow-2xl p-8 border-2 border-blue-200/50 dark:border-blue-700/50">
           <div className="text-center mb-8">
             <div className="w-24 h-24 bg-gradient-to-br from-yellow-400 via-orange-500 to-red-500 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
               <Trophy className="w-12 h-12 text-white" />
@@ -188,7 +197,7 @@ export function MissionExecution({ mission, onBack, onComplete }: MissionExecuti
         </Button>
       </div>
       
-      <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-6 border-2 border-blue-200 dark:border-gray-700">
+      <div className="bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm rounded-3xl shadow-2xl p-6 border-2 border-blue-200/50 dark:border-blue-700/50">
         <div className="text-center mb-6">
           <div className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white px-8 py-3 rounded-full font-bold text-lg shadow-lg border-2 border-white">
             <Target className="w-5 h-5" />

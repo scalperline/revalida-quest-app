@@ -22,20 +22,6 @@ export function QuestionFeedback({ question, showAnswer, selectedOption, userAns
       {/* Enhanced feedback for correct answers */}
       {isCorrect ? (
         <div className="mt-6 sm:mt-8 space-y-4">
-          <div className="p-4 sm:p-6 bg-gradient-to-r from-emerald-50 to-green-50 dark:from-emerald-900/20 dark:to-green-900/20 border-2 border-emerald-200 dark:border-emerald-700 rounded-lg shadow-lg">
-            <div className="flex items-start gap-3">
-              <CheckCircle className="w-6 h-6 text-emerald-600 flex-shrink-0 mt-0.5" />
-              <div>
-                <p className="font-bold text-emerald-800 dark:text-emerald-200 mb-2 text-lg sm:text-xl">
-                  🎉 Parabéns! Resposta correta!
-                </p>
-                <p className="text-base sm:text-lg text-emerald-700 dark:text-emerald-300 leading-relaxed mb-3">
-                  <strong>Alternativa {question.correct}:</strong> {correctOption?.text}
-                </p>
-              </div>
-            </div>
-          </div>
-
           {/* Detailed explanation section for correct answers */}
           <div className="p-4 sm:p-6 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/10 dark:to-indigo-900/10 border border-blue-200 dark:border-blue-700 rounded-lg">
             <div className="flex items-start gap-3">
@@ -78,26 +64,6 @@ export function QuestionFeedback({ question, showAnswer, selectedOption, userAns
       ) : (
         /* Enhanced feedback for incorrect answers with detailed explanation */
         <div className="mt-6 sm:mt-8 space-y-4">
-          <div className="p-4 sm:p-6 bg-gradient-to-r from-red-50 to-pink-50 dark:from-red-900/20 dark:to-pink-900/20 border-2 border-red-200 dark:border-red-700 rounded-lg shadow-lg">
-            <div className="flex items-start gap-3">
-              <XCircle className="w-6 h-6 text-red-600 flex-shrink-0 mt-0.5" />
-              <div>
-                <p className="font-bold text-red-800 dark:text-red-200 mb-2 text-lg sm:text-xl">
-                  Resposta incorreta
-                </p>
-                <p className="text-base sm:text-lg text-red-700 dark:text-red-300 leading-relaxed mb-3">
-                  <strong>Sua resposta - Alternativa {answer}:</strong> {selectedOptionData?.text}
-                </p>
-                <div className="bg-white dark:bg-gray-800 p-3 rounded-lg border border-red-200 dark:border-red-600">
-                  <p className="font-semibold text-red-800 dark:text-red-200 mb-1">
-                    ✓ Resposta correta - Alternativa {question.correct}:
-                  </p>
-                  <p className="text-red-700 dark:text-red-300">{correctOption?.text}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
           {/* Detailed analysis of why the answer is wrong */}
           <div className="p-4 sm:p-6 bg-gradient-to-r from-orange-50 to-amber-50 dark:from-orange-900/10 dark:to-amber-900/10 border border-orange-200 dark:border-orange-700 rounded-lg">
             <div className="flex items-start gap-3">

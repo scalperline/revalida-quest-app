@@ -88,7 +88,7 @@ export function Navbar() {
 
           {/* Desktop User Menu */}
           <div className="hidden md:flex items-center space-x-3">
-            <div className="flex items-center bg-gray-50 rounded-full px-3 py-1.5 border border-gray-200">
+            <div className="flex items-center bg-gradient-to-r from-blue-900 to-indigo-900 rounded-full px-3 py-1.5 border-2 border-blue-800 shadow-lg">
               <SubscriptionBadge />
             </div>
             
@@ -98,7 +98,7 @@ export function Navbar() {
               className={`rounded-full px-4 py-2 text-sm font-medium transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105 ${
                 subscribed 
                   ? 'bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white' 
-                  : 'bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white'
+                  : 'bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white'
               }`}
             >
               <Crown className="w-4 h-4 mr-1" />
@@ -116,7 +116,7 @@ export function Navbar() {
 
           {/* Mobile menu button */}
           <div className="md:hidden flex items-center space-x-2">
-            <div className="bg-gray-50 rounded-full px-2 py-1 border border-gray-200">
+            <div className="bg-gradient-to-r from-blue-900 to-indigo-900 rounded-full px-2 py-1 border-2 border-blue-800 shadow-lg">
               <SubscriptionBadge />
             </div>
             <Button
@@ -164,7 +164,7 @@ export function Navbar() {
                 className={`w-full rounded-full text-sm font-medium transition-all duration-300 shadow-md hover:shadow-lg ${
                   subscribed 
                     ? 'bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white' 
-                    : 'bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white'
+                    : 'bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white'
                 }`}
               >
                 <Crown className="w-4 h-4 mr-2" />

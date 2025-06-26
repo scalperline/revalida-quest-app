@@ -14,7 +14,7 @@ export function SubscriptionBadge() {
 
   if (!subscribed) {
     return (
-      <Badge variant="outline" className="text-gray-600 border-gray-300">
+      <Badge variant="outline" className="text-white border-blue-300 bg-transparent">
         <Zap className="w-3 h-3 mr-1" />
         Gratuito
       </Badge>
@@ -26,25 +26,25 @@ export function SubscriptionBadge() {
       case 'Basic':
         return {
           icon: Crown,
-          color: 'bg-gradient-to-r from-blue-600 to-blue-700 text-white border-0',
+          color: 'bg-transparent text-white border-0',
           label: 'Basic'
         };
       case 'Premium':
         return {
           icon: Sparkles,
-          color: 'bg-gradient-to-r from-purple-600 to-purple-700 text-white border-0',
+          color: 'bg-transparent text-white border-0',
           label: 'Premium'
         };
       case 'Pro':
         return {
           icon: Users,
-          color: 'bg-gradient-to-r from-green-600 to-green-700 text-white border-0',
+          color: 'bg-transparent text-white border-0',
           label: 'Pro'
         };
       default:
         return {
           icon: Crown,
-          color: 'bg-gradient-to-r from-blue-600 to-blue-700 text-white border-0',
+          color: 'bg-transparent text-white border-0',
           label: subscription_tier || 'Premium'
         };
     }

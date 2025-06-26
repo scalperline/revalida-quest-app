@@ -88,7 +88,7 @@ export function Navbar() {
 
           {/* Desktop User Menu */}
           <div className="hidden md:flex items-center space-x-3">
-            <div className="flex items-center bg-gradient-to-r from-blue-900 to-indigo-900 rounded-full px-3 py-1.5 border-2 border-blue-800 shadow-lg">
+            <div className="flex items-center bg-gradient-to-r from-slate-900 via-purple-900 to-blue-900 rounded-full px-3 py-1.5 border-2 border-purple-600 shadow-xl">
               <SubscriptionBadge />
             </div>
             
@@ -116,7 +116,7 @@ export function Navbar() {
 
           {/* Mobile menu button */}
           <div className="md:hidden flex items-center space-x-2">
-            <div className="bg-gradient-to-r from-blue-900 to-indigo-900 rounded-full px-2 py-1 border-2 border-blue-800 shadow-lg">
+            <div className="bg-gradient-to-r from-slate-900 via-purple-900 to-blue-900 rounded-full px-2 py-1 border-2 border-purple-600 shadow-xl">
               <SubscriptionBadge />
             </div>
             <Button

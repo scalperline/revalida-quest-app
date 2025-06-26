@@ -1,6 +1,7 @@
 
 import { useState, useEffect } from 'react';
 import { MobileSidebar } from './MobileSidebar';
+import { MobileHamburgerButton } from './MobileHamburgerButton';
 
 interface Props {
   className?: string;
@@ -8,6 +9,11 @@ interface Props {
 
 export function MobileHamburgerMenu({ className = '' }: Props) {
   const [isOpen, setIsOpen] = useState(false);
+
+  // Toggle menu
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
 
   // Close menu
   const closeMenu = () => {
@@ -43,9 +49,16 @@ export function MobileHamburgerMenu({ className = '' }: Props) {
   }, [isOpen]);
 
   return (
-    <MobileSidebar 
-      isOpen={isOpen} 
-      onClose={closeMenu} 
-    />
+    <>
+      <MobileHamburgerButton 
+        isOpen={isOpen} 
+        onToggle={toggleMenu} 
+        className={className}
+      />
+      <MobileSidebar 
+        isOpen={isOpen} 
+        onClose={closeMenu} 
+      />
+    </>
   );
 }

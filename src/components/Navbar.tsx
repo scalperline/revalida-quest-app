@@ -15,7 +15,6 @@ import {
 import { Button } from '@/components/ui/button';
 import { UserProgressBar } from './UserProgressBar';
 import { MobileHamburgerMenu } from './MobileHamburgerMenu';
-import { MobileHamburgerButton } from './MobileHamburgerButton';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 
 export function Navbar() {
@@ -76,21 +75,13 @@ export function Navbar() {
               <UserProgressBar />
             </div>
 
-            {/* Mobile: Hamburger Button within navbar */}
+            {/* Mobile: Hamburger Menu */}
             <div className="lg:hidden flex items-center">
-              <MobileHamburgerButton 
-                isOpen={isOpen} 
-                onToggle={() => setIsOpen(!isOpen)} 
-              />
+              <MobileHamburgerMenu />
             </div>
           </div>
         </div>
       </nav>
-
-      {/* Mobile Hamburger Menu - Only visible on mobile/tablet */}
-      <div className="lg:hidden">
-        <MobileHamburgerMenu />
-      </div>
     </>
   );
 }

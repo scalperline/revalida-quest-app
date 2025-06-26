@@ -160,6 +160,39 @@ export function useSubscription() {
     }
   };
 
+  const getFeatureLimit = (feature: 'questions' | 'simulados'): { used: number; limit: number; unlimited: boolean } => {
+    if (!usageLimits) return { used: 0, limit: 0, unlimited: false };
+
+    const unlimited = subscriptionData.subscribed;
+    
+    if (feature === 'questions') {
+      return {
+        used: usageLimits.daily_questions_used,
+        limit: 10,
+        unlimited
+      };
+    } else {
+      // Simulados limits based on plan
+      let limit = 1; // Free plan
+      if (subscriptionData.subscribed) {
+        switch (subscriptionData.subscription_tier) {
+          case 'Basic':
+            limit = 5;
+            break;
+          case 'Premium':
+          case 'Pro':
+            return { used: usageLimits.monthly_simulados_used, limit: 999, unlimited: true };
+        }
+      }
+      
+      return {
+        used: usageLimits.monthly_simulados_used,
+        limit,
+        unlimited: subscriptionData.subscription_tier === 'Premium' || subscriptionData.subscription_tier === 'Pro'
+      };
+    }
+  };
+
   useEffect(() => {
     checkSubscription();
     fetchUsageLimits();
@@ -173,7 +206,10 @@ export function useSubscription() {
     openCustomerPortal,
     updateUsage,
     canUseFeature,
+    getFeatureLimit,
     isFreePlan: !subscriptionData.subscribed,
-    isPremium: subscriptionData.subscribed && subscriptionData.subscription_tier !== 'Basic',
+    isBasicPlan: subscriptionData.subscribed && subscriptionData.subscription_tier === 'Basic',
+    isPremiumPlan: subscriptionData.subscribed && subscriptionData.subscription_tier === 'Premium',
+    isProPlan: subscriptionData.subscribed && subscriptionData.subscription_tier === 'Pro',
   };
 }

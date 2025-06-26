@@ -6,14 +6,14 @@ import { useAuth } from '@/hooks/useAuth';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Check, Crown, Zap, Star, Users } from 'lucide-react';
+import { Check, Crown, Zap, Star, Users, Sparkles } from 'lucide-react';
 import { Navbar } from '@/components/Navbar';
 import { toast } from 'sonner';
 
 const plans = [
   {
     name: 'Gratuito',
-    description: 'Para começar sua jornada',
+    description: 'Para conhecer a plataforma',
     price: 'R$ 0',
     period: '/mês',
     priceId: null,
@@ -33,42 +33,59 @@ const plans = [
     popular: false,
   },
   {
-    name: 'Premium',
-    description: 'Para médicos dedicados',
+    name: 'Basic',
+    description: 'Para estudantes dedicados',
     price: 'R$ 29',
-    period: '/mês',
-    priceId: 'price_1234567890', // Substitua pelo ID real do Stripe
+    period: ',90/mês',
+    priceId: 'price_revalida_basic_monthly', // Substitua pelo ID real do Stripe
     features: [
       'Questões ilimitadas',
-      'Simulados ilimitados',
-      'Análises avançadas de desempenho',
+      '5 simulados por mês',
+      'Análises básicas de desempenho',
       'Ranking premium',
-      'Exportação de relatórios PDF',
       'Estatísticas detalhadas',
-      'Suporte prioritário',
-      'Acesso antecipado a novas funcionalidades',
+      'Suporte por email',
     ],
     icon: Crown,
     color: 'text-blue-600',
+    popular: false,
+  },
+  {
+    name: 'Premium',
+    description: 'Para máximo desempenho',
+    price: 'R$ 59',
+    period: ',90/mês',
+    priceId: 'price_revalida_premium_monthly', // Substitua pelo ID real do Stripe
+    features: [
+      'Tudo do plano Basic',
+      'Simulados ilimitados',
+      'Análises avançadas com IA',
+      'Exportação de relatórios PDF',
+      'Mentoria personalizada',
+      'Suporte prioritário',
+      'Acesso antecipado a funcionalidades',
+    ],
+    icon: Sparkles,
+    color: 'text-purple-600',
     popular: true,
   },
   {
-    name: 'Institucional',
-    description: 'Para universidades e cursinhos',
-    price: 'R$ 199',
-    period: '/mês',
-    priceId: 'price_0987654321', // Substitua pelo ID real do Stripe
+    name: 'Pro',
+    description: 'Para instituições de ensino',
+    price: 'R$ 99',
+    period: ',90/mês',
+    priceId: 'price_revalida_pro_monthly', // Substitua pelo ID real do Stripe
     features: [
-      'Tudo do Premium',
-      'Até 100 usuários',
+      'Tudo do plano Premium',
       'Dashboard administrativo',
       'Relatórios institucionais',
+      'Gestão de múltiplos usuários',
+      'API de integração',
       'Suporte dedicado',
       'Treinamentos personalizados',
-      'API de integração',
     ],
     icon: Users,
-    color: 'text-purple-600',
+    color: 'text-green-600',
     popular: false,
   },
 ];
@@ -101,8 +118,9 @@ export default function Pricing() {
 
   const isCurrentPlan = (planName: string) => {
     if (planName === 'Gratuito' && !subscribed) return true;
+    if (planName === 'Basic' && subscribed && subscription_tier === 'Basic') return true;
     if (planName === 'Premium' && subscribed && subscription_tier === 'Premium') return true;
-    if (planName === 'Institucional' && subscribed && subscription_tier === 'Enterprise') return true;
+    if (planName === 'Pro' && subscribed && subscription_tier === 'Pro') return true;
     return false;
   };
 
@@ -120,7 +138,7 @@ export default function Pricing() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
             {plans.map((plan) => {
               const Icon = plan.icon;
               const isCurrent = isCurrentPlan(plan.name);
@@ -128,13 +146,27 @@ export default function Pricing() {
               return (
                 <Card 
                   key={plan.name} 
-                  className={`relative ${plan.popular ? 'ring-2 ring-blue-500 shadow-xl scale-105' : 'shadow-lg'} transition-all duration-300 hover:shadow-xl`}
+                  className={`relative ${
+                    plan.popular 
+                      ? 'ring-2 ring-purple-500 shadow-xl scale-105' 
+                      : 'shadow-lg'
+                  } transition-all duration-300 hover:shadow-xl ${
+                    isCurrent ? 'ring-2 ring-green-500' : ''
+                  }`}
                 >
                   {plan.popular && (
                     <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                      <Badge className="bg-blue-500 text-white px-6 py-1 text-sm font-semibold">
+                      <Badge className="bg-purple-500 text-white px-6 py-1 text-sm font-semibold">
                         <Star className="w-4 h-4 mr-1" />
                         Mais Popular
+                      </Badge>
+                    </div>
+                  )}
+
+                  {isCurrent && (
+                    <div className="absolute -top-4 right-4">
+                      <Badge className="bg-green-500 text-white px-4 py-1 text-sm font-semibold">
+                        Atual
                       </Badge>
                     </div>
                   )}
@@ -143,19 +175,19 @@ export default function Pricing() {
                     <div className={`w-12 h-12 mx-auto mb-4 ${plan.color} bg-gray-100 rounded-full flex items-center justify-center`}>
                       <Icon className="w-6 h-6" />
                     </div>
-                    <CardTitle className="text-2xl font-bold">{plan.name}</CardTitle>
+                    <CardTitle className="text-xl font-bold">{plan.name}</CardTitle>
                     <CardDescription className="text-gray-600">{plan.description}</CardDescription>
                     <div className="mt-4">
-                      <span className="text-4xl font-bold text-gray-900">{plan.price}</span>
+                      <span className="text-3xl font-bold text-gray-900">{plan.price}</span>
                       <span className="text-gray-600">{plan.period}</span>
                     </div>
                   </CardHeader>
 
                   <CardContent className="pt-0">
-                    <ul className="space-y-3 mb-8">
+                    <ul className="space-y-2 mb-6">
                       {plan.features.map((feature, index) => (
-                        <li key={index} className="flex items-center">
-                          <Check className="w-5 h-5 text-green-500 mr-3 flex-shrink-0" />
+                        <li key={index} className="flex items-center text-sm">
+                          <Check className="w-4 h-4 text-green-500 mr-2 flex-shrink-0" />
                           <span className="text-gray-700">{feature}</span>
                         </li>
                       ))}
@@ -166,8 +198,10 @@ export default function Pricing() {
                       disabled={loading || loadingPlan === plan.name || isCurrent}
                       className={`w-full ${
                         plan.popular 
-                          ? 'bg-blue-600 hover:bg-blue-700' 
-                          : 'bg-gray-800 hover:bg-gray-900'
+                          ? 'bg-purple-600 hover:bg-purple-700' 
+                          : plan.name === 'Pro'
+                          ? 'bg-green-600 hover:bg-green-700'
+                          : 'bg-blue-600 hover:bg-blue-700'
                       } text-white`}
                     >
                       {loadingPlan === plan.name ? (
@@ -198,12 +232,12 @@ export default function Pricing() {
           {/* FAQ Section */}
           <div className="mt-16 max-w-3xl mx-auto">
             <h2 className="text-2xl font-bold text-center mb-8">Perguntas Frequentes</h2>
-            <div className="space-y-4">
+            <div className="grid gap-4">
               <Card>
                 <CardContent className="pt-6">
                   <h3 className="font-semibold mb-2">Posso cancelar a qualquer momento?</h3>
                   <p className="text-gray-600">
-                    Sim, você pode cancelar sua assinatura a qualquer momento através do portal do cliente.
+                    Sim, você pode cancelar sua assinatura a qualquer momento através do portal do cliente. Não há taxas de cancelamento.
                   </p>
                 </CardContent>
               </Card>
@@ -211,7 +245,7 @@ export default function Pricing() {
                 <CardContent className="pt-6">
                   <h3 className="font-semibold mb-2">Como funciona a garantia?</h3>
                   <p className="text-gray-600">
-                    Oferecemos garantia de 7 dias. Se não ficar satisfeito, reembolsamos 100% do valor.
+                    Oferecemos garantia de 7 dias. Se não ficar satisfeito, reembolsamos 100% do valor pago.
                   </p>
                 </CardContent>
               </Card>
@@ -219,7 +253,15 @@ export default function Pricing() {
                 <CardContent className="pt-6">
                   <h3 className="font-semibold mb-2">Preciso de cartão de crédito para o plano gratuito?</h3>
                   <p className="text-gray-600">
-                    Não, o plano gratuito não requer cartão de crédito. Apenas crie sua conta e comece a usar.
+                    Não, o plano gratuito não requer cartão de crédito. Apenas crie sua conta e comece a usar imediatamente.
+                  </p>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardContent className="pt-6">
+                  <h3 className="font-semibold mb-2">Posso fazer upgrade ou downgrade do meu plano?</h3>
+                  <p className="text-gray-600">
+                    Sim, você pode alterar seu plano a qualquer momento. As alterações são processadas imediatamente e o valor é ajustado proporcionalmente.
                   </p>
                 </CardContent>
               </Card>

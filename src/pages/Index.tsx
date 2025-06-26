@@ -3,6 +3,7 @@ import { Book, Timer, BarChartBig, Star, Brain, Crown } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { FeatureCard } from "@/components/FeatureCard";
 import { WhyItem } from "@/components/WhyItem";
+import { UsageLimitsCard } from "@/components/UsageLimitsCard";
 import { useGamificationSync } from '@/hooks/useGamificationSync';
 
 export default function Index() {
@@ -31,6 +32,11 @@ export default function Index() {
           <div className="flex justify-center items-center gap-2 sm:gap-3 text-2xl sm:text-3xl md:text-4xl mb-6 sm:mb-8">
             🎯 🏆 🚩
           </div>
+        </div>
+
+        {/* Usage Limits Card */}
+        <div className="w-full max-w-md mx-auto mb-12">
+          <UsageLimitsCard />
         </div>
         
         <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8 mb-12 sm:mb-16">

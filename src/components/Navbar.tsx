@@ -34,7 +34,7 @@ export function Navbar() {
 
   return (
     <>
-      <nav className="bg-white shadow-lg border-b border-gray-200 fixed top-0 left-0 right-0 z-[9990]">
+      <nav className="bg-white shadow-lg border-b border-gray-200 fixed top-0 left-0 right-0 z-[9980]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16 min-h-[64px]">
             {/* Logo */}
@@ -75,12 +75,9 @@ export function Navbar() {
               <UserProgressBar />
             </div>
 
-            {/* Mobile: Progress Bar Only - visível em telas menores que lg */}
-            <div className="lg:hidden flex items-center gap-2 sm:gap-3 flex-shrink-0">
-              {/* Mobile Progress Bar - responsivo */}
-              <div className="flex-shrink-0 min-w-0">
-                <UserProgressBar />
-              </div>
+            {/* Mobile: Spacer to prevent overlap with hamburger menu */}
+            <div className="lg:hidden w-12 h-12 flex-shrink-0">
+              {/* Espaço reservado para evitar sobreposição com o menu hambúrguer */}
             </div>
           </div>
         </div>

@@ -15,6 +15,7 @@ import {
   Stethoscope
 } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
+import { UserProgressBar } from './UserProgressBar';
 
 interface Props {
   className?: string;
@@ -80,11 +81,11 @@ export function MobileHamburgerMenu({ className = '' }: Props) {
 
   return (
     <>
-      {/* Hamburger Button - Fixed Position */}
+      {/* Hamburger Button - Positioned below navbar */}
       <button
         onClick={toggleMenu}
         className={`
-          fixed top-5 right-5 z-[9999] 
+          fixed top-20 right-5 z-[9999] 
           w-11 h-11 
           bg-gradient-to-r from-blue-600 to-blue-700 
           hover:from-blue-700 hover:to-blue-800
@@ -94,7 +95,7 @@ export function MobileHamburgerMenu({ className = '' }: Props) {
           hover:scale-105 active:scale-95
           border border-blue-500/20
           ${className}
-          xs:w-10 xs:h-10 xs:top-4 xs:right-4
+          xs:w-10 xs:h-10 xs:top-[72px] xs:right-4
         `}
         aria-label={isOpen ? 'Fechar menu' : 'Abrir menu'}
       >
@@ -158,6 +159,11 @@ export function MobileHamburgerMenu({ className = '' }: Props) {
           >
             <X className="w-5 h-5 text-gray-500" />
           </button>
+        </div>
+
+        {/* User Progress Section - Mobile Only */}
+        <div className="p-4 border-b border-gray-200 dark:border-gray-700 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-900">
+          <UserProgressBar />
         </div>
 
         {/* Navigation Menu */}

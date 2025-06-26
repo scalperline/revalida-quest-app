@@ -57,9 +57,10 @@ export function MobileSidebar({ isOpen, onClose }: Props) {
         transform transition-transform duration-300 ease-in-out
         ${isOpen ? 'translate-x-0' : 'translate-x-full'}
         overflow-y-auto
+        flex flex-col
       `}>
         {/* Header */}
-        <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700">
+        <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700 flex-shrink-0">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-blue-800 rounded-lg flex items-center justify-center shadow-md">
               <Stethoscope className="w-6 h-6 text-white" />
@@ -77,12 +78,12 @@ export function MobileSidebar({ isOpen, onClose }: Props) {
         </div>
 
         {/* User Progress Section - Mobile Only */}
-        <div className="p-4 border-b border-gray-200 dark:border-gray-700 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-900">
+        <div className="p-4 border-b border-gray-200 dark:border-gray-700 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-900 flex-shrink-0">
           <UserProgressBar />
         </div>
 
-        {/* Navigation Menu */}
-        <div className="py-6">
+        {/* Navigation Menu - Flex grow to take available space */}
+        <div className="flex-1 py-6">
           <nav className="space-y-2 px-4">
             {navigation.map((item) => {
               const isActive = location.pathname === item.href;
@@ -110,10 +111,10 @@ export function MobileSidebar({ isOpen, onClose }: Props) {
         </div>
 
         {/* Divider */}
-        <div className="border-t border-gray-200 dark:border-gray-700 mx-4" />
+        <div className="border-t border-gray-200 dark:border-gray-700 mx-4 flex-shrink-0" />
 
         {/* Action Items */}
-        <div className="py-4">
+        <div className="py-4 flex-shrink-0">
           <nav className="space-y-2 px-4">
             {menuActions.map((item) => (
               <button
@@ -138,8 +139,8 @@ export function MobileSidebar({ isOpen, onClose }: Props) {
           </nav>
         </div>
 
-        {/* Footer */}
-        <div className="absolute bottom-0 left-0 right-0 p-6 border-t border-gray-200 dark:border-gray-700 bg-gradient-to-r from-blue-50 to-blue-100 dark:from-gray-800 dark:to-gray-900">
+        {/* Footer - Fixed at bottom */}
+        <div className="p-4 border-t border-gray-200 dark:border-gray-700 bg-gradient-to-r from-blue-50 to-blue-100 dark:from-gray-800 dark:to-gray-900 flex-shrink-0">
           <div className="text-center text-sm text-gray-600 dark:text-gray-400">
             <p className="font-semibold text-blue-600 dark:text-blue-400">Revalida Quest</p>
             <p className="text-xs">Sua jornada médica</p>

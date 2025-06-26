@@ -27,7 +27,7 @@ export default function Missions() {
   const [executingMission, setExecutingMission] = useState<Mission | null>(null);
   const navigate = useNavigate();
 
-  // Estados para Quest Personalizada (antiga funcionalidade do simulado)
+  // Estados para Simulado Personalizado (antiga funcionalidade do simulado)
   const [configuracao, setConfiguracao] = useState<SimuladoConfig | null>(null);
   const [questIniciada, setQuestIniciada] = useState(false);
   const [questFinalizada, setQuestFinalizada] = useState(false);
@@ -40,7 +40,7 @@ export default function Missions() {
   
   const { questoesAnoSelecionado } = useQuestions();
   
-  // Hook do simulado para Quest Personalizada
+  // Hook do simulado para Simulado Personalizado
   const simulado = useSimulado(
     questoesAnoSelecionado, 
     configuracao || undefined
@@ -57,7 +57,7 @@ export default function Missions() {
   // Check for newly unlocked achievements
   const newlyUnlockedAchievement = getNewlyUnlockedAchievement();
 
-  // Track time elapsed para Quest Personalizada
+  // Track time elapsed para Simulado Personalizado
   useEffect(() => {
     if (questIniciada && !questFinalizada && !simulado.terminou && startTime) {
       const interval = setInterval(() => {
@@ -104,8 +104,8 @@ export default function Missions() {
     setExecutingMission(null);
   };
 
-  // Funções para Quest Personalizada
-  function handleConfiguracaoQuestPersonalizada(config: SimuladoConfig) {
+  // Funções para Simulado Personalizado
+  function handleConfiguracaoSimuladoPersonalizado(config: SimuladoConfig) {
     if (!config.areas || config.areas.length === 0) {
       alert('Selecione pelo menos uma área para continuar!');
       return;
@@ -138,7 +138,7 @@ export default function Missions() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  function encerrarQuestPersonalizada() {
+  function encerrarSimuladoPersonalizado() {
     setQuestFinalizada(true);
     
     const acertos = simulado.questoesSelecionadas.filter(
@@ -211,11 +211,11 @@ export default function Missions() {
               <span className="text-blue-600 bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">Quests do Revalida</span>
             </h1>
             <p className="text-xl text-muted-foreground">
-              Complete quests especializadas ou crie sua própria quest personalizada com questões oficiais do INEP!
+              Complete quests especializadas ou crie seu próprio simulado personalizado com questões oficiais do INEP!
             </p>
           </div>
 
-          {/* Quest Personalizada - Tela de Resultados */}
+          {/* Simulado Personalizado - Tela de Resultados */}
           {(questFinalizada || (questIniciada && simulado.terminou)) && (
             <div className="pt-8">
               <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-8 border-2 border-blue-200 dark:border-gray-700">
@@ -225,7 +225,7 @@ export default function Missions() {
                   </div>
                   
                   <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-yellow-600 via-orange-600 to-red-600 bg-clip-text text-transparent">
-                    Quest Concluída! 🎊
+                    Simulado Concluído! 🎊
                   </h2>
                   
                   <div className="text-3xl font-bold text-green-600 mb-6 p-6 bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-2xl border border-green-200 dark:border-green-700 shadow-sm">
@@ -274,14 +274,14 @@ export default function Missions() {
                     onClick={voltarConfiguracao}
                     className="px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl hover:from-blue-700 hover:to-purple-700 font-semibold transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl"
                   >
-                    🔄 Nova Quest Personalizada
+                    🔄 Novo Simulado Personalizado
                   </Button>
                 </div>
               </div>
             </div>
           )}
 
-          {/* Quest Personalizada - Em Andamento */}
+          {/* Simulado Personalizado - Em Andamento */}
           {questIniciada && !questFinalizada && !simulado.terminou && configuracao && (
             <div className="pt-8">
               <div className="mb-6 flex items-center justify-between">
@@ -345,11 +345,11 @@ export default function Missions() {
 
               <FloatingTimer
                 running={timerRunning}
-                onFinish={encerrarQuestPersonalizada}
+                onFinish={encerrarSimuladoPersonalizado}
                 initialMinutes={configuracao.tempoMinutos}
                 currentQuestion={simulado.index + 1}
                 totalQuestions={simulado.total}
-                onForceFinish={encerrarQuestPersonalizada}
+                onForceFinish={encerrarSimuladoPersonalizado}
                 timeElapsed={timeElapsed}
               />
             </div>
@@ -359,7 +359,7 @@ export default function Missions() {
           {questIniciada && !questFinalizada && simulado.terminou && (
             <div className="text-center mt-12">
               <button
-                onClick={encerrarQuestPersonalizada}
+                onClick={encerrarSimuladoPersonalizado}
                 className="px-12 py-4 bg-gradient-to-r from-green-600 via-emerald-600 to-green-700 text-white rounded-2xl hover:from-green-700 hover:via-emerald-700 hover:to-green-800 font-bold text-xl transition-all duration-300 transform hover:scale-105 shadow-2xl border-2 border-green-400"
               >
                 🏆 Ver Recompensas
@@ -367,7 +367,7 @@ export default function Missions() {
             </div>
           )}
 
-          {/* Tabs principais - apenas mostrar quando não está em quest personalizada ativa */}
+          {/* Tabs principais - apenas mostrar quando não está em simulado personalizado ativo */}
           {!questIniciada && (
             <div className="border-2 border-blue-200 rounded-2xl shadow-xl bg-white dark:bg-gray-800 p-6">
               <Tabs defaultValue="prontas" className="w-full">
@@ -385,7 +385,7 @@ export default function Missions() {
                     className="flex flex-col sm:flex-row items-center gap-2 text-sm sm:text-base font-medium py-2 sm:py-3 px-2 sm:px-4 data-[state=active]:bg-purple-500 data-[state=active]:text-white rounded-lg transition-all duration-200"
                   >
                     <Settings className="w-4 h-4 sm:w-5 sm:h-5" />
-                    <span className="text-xs sm:text-base">Quest Personalizada</span>
+                    <span className="text-xs sm:text-base">Simulado Personalizado</span>
                   </TabsTrigger>
                   <TabsTrigger 
                     value="concluidas" 
@@ -424,7 +424,7 @@ export default function Missions() {
                 </TabsContent>
                 
                 <TabsContent value="personalizada" className="space-y-6">
-                  <SimuladoFilters onStart={handleConfiguracaoQuestPersonalizada} />
+                  <SimuladoFilters onStart={handleConfiguracaoSimuladoPersonalizado} />
                 </TabsContent>
                 
                 <TabsContent value="concluidas" className="space-y-6">

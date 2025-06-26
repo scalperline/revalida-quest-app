@@ -63,14 +63,15 @@ export function Navbar() {
             })}
           </div>
 
-          {/* Desktop User Progress Bar */}
-          <div className="hidden md:flex items-center">
+          {/* Desktop User Progress Bar - Layout Reorganizado */}
+          <div className="hidden md:block">
             <UserProgressBar />
           </div>
 
-          {/* Mobile menu button */}
-          <div className="md:hidden flex items-center space-x-2">
-            <div className="scale-75">
+          {/* Mobile menu button and compact progress */}
+          <div className="md:hidden flex items-center space-x-3">
+            {/* Progresso compacto para mobile */}
+            <div className="scale-90">
               <UserProgressBar />
             </div>
             <Button

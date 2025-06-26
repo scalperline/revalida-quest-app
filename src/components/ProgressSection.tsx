@@ -29,7 +29,7 @@ export function ProgressSection() {
     <Button
       variant="ghost"
       className="
-        h-10 px-3 
+        h-10 px-2 sm:px-3 
         bg-gradient-to-r from-blue-50 to-purple-50 
         hover:from-blue-100 hover:to-purple-100
         border border-blue-200/50 
@@ -37,30 +37,31 @@ export function ProgressSection() {
         transition-all duration-300
         shadow-sm hover:shadow-md
         group
+        min-w-0 flex-shrink-0
       "
     >
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-1 sm:gap-2 min-w-0">
         {/* Ícone e Nível */}
-        <div className="flex items-center gap-1">
-          <div className="w-6 h-6 bg-gradient-to-r from-orange-400 to-orange-600 rounded-full flex items-center justify-center">
-            <Zap className="w-3 h-3 text-white" />
+        <div className="flex items-center gap-1 flex-shrink-0">
+          <div className="w-5 h-5 sm:w-6 sm:h-6 bg-gradient-to-r from-orange-400 to-orange-600 rounded-full flex items-center justify-center">
+            <Zap className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-white" />
           </div>
-          <span className="text-sm font-semibold text-gray-800">
-            Nível {planInfo.level}
+          <span className="text-xs sm:text-sm font-semibold text-gray-800">
+            Nv {planInfo.level}
           </span>
         </div>
 
-        {/* Separador */}
-        <div className="w-px h-4 bg-gray-300"></div>
+        {/* Separador - oculto em telas muito pequenas */}
+        <div className="hidden xs:block w-px h-3 sm:h-4 bg-gray-300"></div>
 
         {/* XP Info */}
-        <div className="flex items-center gap-2">
-          <span className="text-sm text-gray-600 font-medium">
-            {userProgress.xp}/{userProgress.xpToNextLevel} XP
+        <div className="flex items-center gap-1 sm:gap-2 min-w-0">
+          <span className="text-xs sm:text-sm text-gray-600 font-medium whitespace-nowrap">
+            {userProgress.xp}/{userProgress.xpToNextLevel}
           </span>
           
           {/* Barra de Progresso Compacta */}
-          <div className="relative w-12 h-2 bg-gray-200 rounded-full overflow-hidden">
+          <div className="relative w-8 sm:w-12 h-1.5 sm:h-2 bg-gray-200 rounded-full overflow-hidden flex-shrink-0">
             <div 
               className="absolute top-0 left-0 h-full bg-gradient-to-r from-orange-400 to-orange-600 rounded-full transition-all duration-500 group-hover:from-orange-500 group-hover:to-orange-700"
               style={{ width: `${xpPercentage}%` }}

@@ -5,14 +5,21 @@ import { QuickChallenge } from "@/components/QuickChallenge";
 import { QuestsPanel } from "@/components/QuestsPanel";
 import { MedicalCardsPanel } from "@/components/MedicalCardsPanel";
 import { AdaptiveSuggestions } from "@/components/AdaptiveSuggestions";
-import { PerformanceChart } from "@/components/PerformanceChart";
+import PerformanceChart from "@/components/PerformanceChart";
 import { StreakDisplay } from "@/components/StreakDisplay";
 import { BadgesGrid } from "@/components/BadgesGrid";
 import { UsageLimitsCard } from "@/components/UsageLimitsCard";
+import { useGamification } from "@/hooks/useGamification";
 import { Stethoscope, BookOpen, Target, TrendingUp } from "lucide-react";
 
 const Index = () => {
   const { user } = useAuth();
+  const { userProgress } = useGamification();
+
+  const handleQuickChallengeStart = () => {
+    console.log("Quick challenge started");
+    // Aqui você pode adicionar a lógica para iniciar o desafio
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
@@ -28,11 +35,11 @@ const Index = () => {
               </div>
             </div>
             
-            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 sm:mb-4 leading-tight px-2">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 sm:mb-6 leading-tight px-4">
               Bem-vindo ao <span className="gradient-text">Revalida Quest</span>, {user?.user_metadata?.display_name || 'Doutor'}! 👋
             </h1>
             
-            <p className="text-base sm:text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed px-4 sm:px-6">
+            <p className="text-lg sm:text-xl lg:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed px-4 sm:px-6">
               Sua jornada de preparação para o Revalida começa aqui. 
               Pratique com questões oficiais, complete missões gamificadas e 
               acompanhe seu progresso em tempo real.
@@ -40,13 +47,13 @@ const Index = () => {
           </div>
 
           {/* Quick Stats */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-8 sm:mb-12">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-8 sm:mb-12">
             <div className="bg-white rounded-xl p-4 sm:p-6 shadow-lg border border-blue-100 hover:shadow-xl transition-shadow">
               <div className="flex items-center gap-3 mb-2">
                 <BookOpen className="w-6 h-6 sm:w-8 sm:h-8 text-blue-600" />
                 <div>
                   <p className="text-xl sm:text-2xl font-bold text-gray-900">1.500+</p>
-                  <p className="text-xs sm:text-sm text-gray-600">Questões Oficiais</p>
+                  <p className="text-sm sm:text-base text-gray-600">Questões Oficiais</p>
                 </div>
               </div>
             </div>
@@ -56,7 +63,7 @@ const Index = () => {
                 <Target className="w-6 h-6 sm:w-8 sm:h-8 text-green-600" />
                 <div>
                   <p className="text-xl sm:text-2xl font-bold text-gray-900">50+</p>
-                  <p className="text-xs sm:text-sm text-gray-600">Missões Ativas</p>
+                  <p className="text-sm sm:text-base text-gray-600">Missões Ativas</p>
                 </div>
               </div>
             </div>
@@ -66,7 +73,7 @@ const Index = () => {
                 <TrendingUp className="w-6 h-6 sm:w-8 sm:h-8 text-purple-600" />
                 <div>
                   <p className="text-xl sm:text-2xl font-bold text-gray-900">15</p>
-                  <p className="text-xs sm:text-sm text-gray-600">Anos de Provas</p>
+                  <p className="text-sm sm:text-base text-gray-600">Anos de Provas</p>
                 </div>
               </div>
             </div>
@@ -76,7 +83,7 @@ const Index = () => {
                 <Stethoscope className="w-6 h-6 sm:w-8 sm:h-8 text-orange-600" />
                 <div>
                   <p className="text-xl sm:text-2xl font-bold text-gray-900">12k+</p>
-                  <p className="text-xs sm:text-sm text-gray-600">Médicos Ativos</p>
+                  <p className="text-sm sm:text-base text-gray-600">Médicos Ativos</p>
                 </div>
               </div>
             </div>
@@ -86,9 +93,9 @@ const Index = () => {
           <div className="grid lg:grid-cols-3 gap-6 sm:gap-8">
             {/* Left Column */}
             <div className="lg:col-span-2 space-y-6 sm:space-y-8">
-              <QuickChallenge />
+              <QuickChallenge onStart={handleQuickChallengeStart} />
               <AdaptiveSuggestions />
-              <PerformanceChart />
+              <PerformanceChart dados={[]} showDemo={true} />
             </div>
 
             {/* Right Column */}
@@ -96,7 +103,7 @@ const Index = () => {
               <UsageLimitsCard />
               <StreakDisplay />
               <QuestsPanel />
-              <BadgesGrid />
+              <BadgesGrid achievements={userProgress.achievements} />
             </div>
           </div>
 

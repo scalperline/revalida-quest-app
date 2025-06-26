@@ -87,24 +87,28 @@ export function Navbar() {
           </div>
 
           {/* Desktop User Menu */}
-          <div className="hidden md:flex items-center space-x-4">
-            <SubscriptionBadge />
+          <div className="hidden md:flex items-center space-x-3">
+            <div className="flex items-center bg-gray-50 rounded-full px-3 py-1.5 border border-gray-200">
+              <SubscriptionBadge />
+            </div>
             
             <Button
               onClick={handleManageSubscription}
-              variant="outline"
               size="sm"
-              className="flex items-center space-x-1"
+              className={`rounded-full px-4 py-2 text-sm font-medium transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105 ${
+                subscribed 
+                  ? 'bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white' 
+                  : 'bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white'
+              }`}
             >
-              <Crown className="w-4 h-4" />
+              <Crown className="w-4 h-4 mr-1" />
               <span>{subscribed ? 'Gerenciar' : 'Upgrade'}</span>
             </Button>
             
             <Button
               onClick={handleSignOut}
-              variant="ghost"
               size="sm"
-              className="text-gray-600 hover:text-red-600"
+              className="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white rounded-full px-4 py-2 text-sm font-medium transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105"
             >
               <LogOut className="w-4 h-4" />
             </Button>
@@ -112,7 +116,9 @@ export function Navbar() {
 
           {/* Mobile menu button */}
           <div className="md:hidden flex items-center space-x-2">
-            <SubscriptionBadge />
+            <div className="bg-gray-50 rounded-full px-2 py-1 border border-gray-200">
+              <SubscriptionBadge />
+            </div>
             <Button
               variant="ghost"
               size="sm"
@@ -154,11 +160,14 @@ export function Navbar() {
                   handleManageSubscription();
                   setIsOpen(false);
                 }}
-                variant="outline"
                 size="sm"
-                className="w-full flex items-center justify-center space-x-1"
+                className={`w-full rounded-full text-sm font-medium transition-all duration-300 shadow-md hover:shadow-lg ${
+                  subscribed 
+                    ? 'bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white' 
+                    : 'bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white'
+                }`}
               >
-                <Crown className="w-4 h-4" />
+                <Crown className="w-4 h-4 mr-2" />
                 <span>{subscribed ? 'Gerenciar Assinatura' : 'Fazer Upgrade'}</span>
               </Button>
               
@@ -167,9 +176,8 @@ export function Navbar() {
                   handleSignOut();
                   setIsOpen(false);
                 }}
-                variant="ghost"
                 size="sm"
-                className="w-full text-red-600 hover:bg-red-50"
+                className="w-full bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white rounded-full text-sm font-medium transition-all duration-300 shadow-md hover:shadow-lg"
               >
                 <LogOut className="w-4 h-4 mr-2" />
                 Sair

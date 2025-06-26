@@ -36,19 +36,19 @@ export function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16 min-h-[64px]">
           {/* Logo */}
-          <div className="flex items-center">
-            <Link to="/" className="flex items-center gap-3 py-2 mr-4 sm:mr-8">
-              <div className="w-10 h-10 medical-gradient rounded-lg flex items-center justify-center flex-shrink-0 shadow-md">
-                <Stethoscope className="w-6 h-6 text-white" />
+          <div className="flex items-center flex-shrink-0">
+            <Link to="/" className="flex items-center gap-2 sm:gap-3 py-2">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 medical-gradient rounded-lg flex items-center justify-center flex-shrink-0 shadow-md">
+                <Stethoscope className="w-4 h-4 sm:w-6 sm:h-6 text-white" />
               </div>
-              <span className="text-lg sm:text-xl font-bold gradient-text leading-tight whitespace-nowrap">
+              <span className="text-sm sm:text-lg md:text-xl font-bold gradient-text leading-tight hidden xs:block">
                 Revalida Quest
               </span>
             </Link>
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-2">
+          <div className="hidden lg:flex items-center space-x-2">
             {navigation.map((item) => {
               const isActive = location.pathname === item.href;
               return (
@@ -69,14 +69,14 @@ export function Navbar() {
           </div>
 
           {/* Desktop User Progress Bar */}
-          <div className="hidden md:block">
+          <div className="hidden lg:block flex-shrink-0">
             <UserProgressBar />
           </div>
 
           {/* Mobile: Progress Bar + Menu Button */}
-          <div className="md:hidden flex items-center gap-3">
-            {/* Mobile Progress Bar */}
-            <div className="flex-shrink-0">
+          <div className="lg:hidden flex items-center gap-2 sm:gap-3 flex-shrink-0">
+            {/* Mobile Progress Bar - responsivo */}
+            <div className="flex-shrink-0 min-w-0">
               <UserProgressBar />
             </div>
             
@@ -86,12 +86,12 @@ export function Navbar() {
                 <Button
                   variant="ghost"
                   size="sm"
-                  className="text-gray-600 flex-shrink-0 p-2"
+                  className="text-gray-600 flex-shrink-0 p-2 h-10 w-10"
                 >
                   <Menu className="w-5 h-5" />
                 </Button>
               </SheetTrigger>
-              <SheetContent side="right" className="w-80">
+              <SheetContent side="right" className="w-80 sm:w-96">
                 <div className="flex flex-col h-full">
                   {/* Header */}
                   <div className="flex items-center gap-3 pb-6 border-b border-gray-200">

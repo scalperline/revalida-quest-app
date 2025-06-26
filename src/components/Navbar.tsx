@@ -31,7 +31,8 @@ export function Navbar() {
   return (
     <nav className="bg-white shadow-lg border-b border-gray-200 fixed top-0 left-0 right-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-16">
+        <div className="flex justify-between items-center h-16">
+          {/* Logo */}
           <div className="flex items-center">
             <Link to="/" className="flex items-center space-x-2">
               <div className="w-8 h-8 medical-gradient rounded-lg flex items-center justify-center">
@@ -67,9 +68,11 @@ export function Navbar() {
             <UserProgressBar />
           </div>
 
-          {/* Mobile menu button with compact progress */}
+          {/* Mobile menu button */}
           <div className="md:hidden flex items-center space-x-2">
-            <UserProgressBar />
+            <div className="scale-75">
+              <UserProgressBar />
+            </div>
             <Button
               variant="ghost"
               size="sm"

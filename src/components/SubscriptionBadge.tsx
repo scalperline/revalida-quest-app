@@ -8,54 +8,34 @@ export function SubscriptionBadge() {
 
   if (loading) {
     return (
-      <div className="h-6 w-16 bg-gray-200 rounded-full animate-pulse"></div>
+      <div className="h-4 w-16 bg-gray-300/30 rounded-full animate-pulse"></div>
     );
   }
 
   if (!subscribed) {
     return (
-      <Badge variant="outline" className="text-white border-blue-300 bg-transparent">
-        <Zap className="w-3 h-3 mr-1" />
+      <span className="text-white font-semibold text-sm drop-shadow-lg">
         Gratuito
-      </Badge>
+      </span>
     );
   }
 
-  const getBadgeConfig = () => {
+  const getBadgeLabel = () => {
     switch (subscription_tier) {
       case 'Basic':
-        return {
-          icon: Crown,
-          color: 'bg-transparent text-white border-0',
-          label: 'Basic'
-        };
+        return 'Basic';
       case 'Premium':
-        return {
-          icon: Sparkles,
-          color: 'bg-transparent text-white border-0',
-          label: 'Premium'
-        };
+        return 'Premium';
       case 'Pro':
-        return {
-          icon: Users,
-          color: 'bg-transparent text-white border-0',
-          label: 'Pro'
-        };
+        return 'Pro';
       default:
-        return {
-          icon: Crown,
-          color: 'bg-transparent text-white border-0',
-          label: subscription_tier || 'Premium'
-        };
+        return subscription_tier || 'Premium';
     }
   };
 
-  const { icon: Icon, color, label } = getBadgeConfig();
-
   return (
-    <Badge className={color}>
-      <Icon className="w-3 h-3 mr-1" />
-      {label}
-    </Badge>
+    <span className="text-white font-semibold text-sm drop-shadow-lg">
+      {getBadgeLabel()}
+    </span>
   );
 }

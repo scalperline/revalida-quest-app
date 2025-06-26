@@ -12,7 +12,8 @@ import {
   Target,
   Stethoscope,
   LogOut,
-  Crown
+  Crown,
+  Zap
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/hooks/useAuth';
@@ -86,29 +87,31 @@ export function Navbar() {
             })}
           </div>
 
-          {/* Desktop User Menu */}
+          {/* Desktop User Menu - Gamified Buttons */}
           <div className="hidden md:flex items-center space-x-3">
-            <div className="flex items-center bg-gradient-to-r from-slate-900 via-purple-900 to-blue-900 rounded-full px-3 py-1.5 border-2 border-purple-600 shadow-xl">
-              <SubscriptionBadge />
+            {/* Plano Atual - Gamified Badge */}
+            <div className="flex items-center bg-gradient-to-r from-purple-900 via-purple-800 to-indigo-900 rounded-full px-4 py-2 border-2 border-purple-500 shadow-lg hover:shadow-purple-500/30 transition-all duration-300 h-10">
+              <Zap className="w-4 h-4 text-yellow-400 mr-2 animate-pulse" />
+              <div className="text-white font-semibold text-sm drop-shadow-lg">
+                <SubscriptionBadge />
+              </div>
             </div>
             
+            {/* Upgrade Button - Enhanced Orange */}
             <Button
               onClick={handleManageSubscription}
               size="sm"
-              className={`rounded-full px-4 py-2 text-sm font-medium transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105 ${
-                subscribed 
-                  ? 'bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white' 
-                  : 'bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white'
-              }`}
+              className="bg-gradient-to-r from-orange-500 via-orange-600 to-orange-700 hover:from-orange-600 hover:via-orange-700 hover:to-orange-800 text-white rounded-full px-6 py-2 h-10 text-sm font-bold transition-all duration-300 shadow-lg hover:shadow-orange-500/40 transform hover:scale-105 animate-pulse hover:animate-none border-2 border-orange-400"
             >
-              <Crown className="w-4 h-4 mr-1" />
+              <Crown className="w-4 h-4 mr-2 text-yellow-300" />
               <span>{subscribed ? 'Gerenciar' : 'Upgrade'}</span>
             </Button>
             
+            {/* Logout Button - Enhanced Red */}
             <Button
               onClick={handleSignOut}
               size="sm"
-              className="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white rounded-full px-4 py-2 text-sm font-medium transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105"
+              className="bg-gradient-to-r from-red-600 via-red-700 to-red-800 hover:from-red-700 hover:via-red-800 hover:to-red-900 text-white rounded-full px-4 py-2 h-10 text-sm font-medium transition-all duration-300 shadow-lg hover:shadow-red-500/40 transform hover:scale-105 border-2 border-red-500 hover:opacity-90"
             >
               <LogOut className="w-4 h-4" />
             </Button>
@@ -116,8 +119,12 @@ export function Navbar() {
 
           {/* Mobile menu button */}
           <div className="md:hidden flex items-center space-x-2">
-            <div className="bg-gradient-to-r from-slate-900 via-purple-900 to-blue-900 rounded-full px-2 py-1 border-2 border-purple-600 shadow-xl">
-              <SubscriptionBadge />
+            {/* Mobile Badge */}
+            <div className="bg-gradient-to-r from-purple-900 via-purple-800 to-indigo-900 rounded-full px-3 py-1.5 border-2 border-purple-500 shadow-lg">
+              <Zap className="w-3 h-3 text-yellow-400 mr-1 inline" />
+              <div className="text-white text-xs font-semibold inline drop-shadow-lg">
+                <SubscriptionBadge />
+              </div>
             </div>
             <Button
               variant="ghost"
@@ -154,30 +161,28 @@ export function Navbar() {
               );
             })}
             
-            <div className="border-t border-gray-200 pt-3 space-y-2">
+            <div className="border-t border-gray-200 pt-3 space-y-3">
+              {/* Mobile Upgrade Button */}
               <Button
                 onClick={() => {
                   handleManageSubscription();
                   setIsOpen(false);
                 }}
                 size="sm"
-                className={`w-full rounded-full text-sm font-medium transition-all duration-300 shadow-md hover:shadow-lg ${
-                  subscribed 
-                    ? 'bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white' 
-                    : 'bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white'
-                }`}
+                className="w-full bg-gradient-to-r from-orange-500 via-orange-600 to-orange-700 hover:from-orange-600 hover:via-orange-700 hover:to-orange-800 text-white rounded-full text-sm font-bold transition-all duration-300 shadow-lg hover:shadow-orange-500/40 border-2 border-orange-400 h-12"
               >
-                <Crown className="w-4 h-4 mr-2" />
+                <Crown className="w-4 h-4 mr-2 text-yellow-300" />
                 <span>{subscribed ? 'Gerenciar Assinatura' : 'Fazer Upgrade'}</span>
               </Button>
               
+              {/* Mobile Logout Button */}
               <Button
                 onClick={() => {
                   handleSignOut();
                   setIsOpen(false);
                 }}
                 size="sm"
-                className="w-full bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white rounded-full text-sm font-medium transition-all duration-300 shadow-md hover:shadow-lg"
+                className="w-full bg-gradient-to-r from-red-600 via-red-700 to-red-800 hover:from-red-700 hover:via-red-800 hover:to-red-900 text-white rounded-full text-sm font-medium transition-all duration-300 shadow-lg hover:shadow-red-500/40 border-2 border-red-500 h-12 hover:opacity-90"
               >
                 <LogOut className="w-4 h-4 mr-2" />
                 Sair

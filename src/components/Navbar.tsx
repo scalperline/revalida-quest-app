@@ -1,4 +1,5 @@
 
+
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { 
@@ -47,8 +48,8 @@ export function Navbar() {
             </Link>
           </div>
 
-          {/* Desktop Navigation - visível apenas em telas md+ */}
-          <div className="hidden md:flex items-center space-x-2">
+          {/* Desktop Navigation - visível apenas em telas lg+ */}
+          <div className="hidden lg:flex items-center space-x-2">
             {navigation.map((item) => {
               const isActive = location.pathname === item.href;
               return (
@@ -68,13 +69,13 @@ export function Navbar() {
             })}
           </div>
 
-          {/* Desktop User Progress Bar - visível apenas em telas md+ */}
-          <div className="hidden md:block flex-shrink-0">
+          {/* Desktop User Progress Bar - visível apenas em telas lg+ */}
+          <div className="hidden lg:block flex-shrink-0">
             <UserProgressBar />
           </div>
 
-          {/* Mobile: Progress Bar + Menu Button - visível em telas menores que md */}
-          <div className="md:hidden flex items-center gap-2 sm:gap-3 flex-shrink-0">
+          {/* Mobile: Progress Bar + Menu Button - visível em telas menores que lg */}
+          <div className="lg:hidden flex items-center gap-2 sm:gap-3 flex-shrink-0">
             {/* Mobile Progress Bar - responsivo */}
             <div className="flex-shrink-0 min-w-0">
               <UserProgressBar />
@@ -86,9 +87,9 @@ export function Navbar() {
                 <Button
                   variant="ghost"
                   size="sm"
-                  className="text-gray-600 hover:text-gray-900 flex-shrink-0 p-2 h-10 w-10 bg-blue-50 hover:bg-blue-100 border border-blue-200 rounded-lg shadow-sm"
+                  className="text-gray-700 hover:text-gray-900 flex-shrink-0 p-2 h-12 w-12 bg-blue-50 hover:bg-blue-100 border border-blue-200 rounded-lg shadow-sm transition-all duration-200 hover:shadow-md"
                 >
-                  <Menu className="w-5 h-5" />
+                  <Menu className="w-6 h-6" />
                 </Button>
               </SheetTrigger>
               <SheetContent side="right" className="w-80 sm:w-96">
@@ -143,3 +144,4 @@ export function Navbar() {
     </nav>
   );
 }
+

@@ -3,9 +3,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { Navbar } from "@/components/Navbar";
 import { QuickChallenge } from "@/components/QuickChallenge";
 import { QuestsPanel } from "@/components/QuestsPanel";
-import { MedicalCardsPanel } from "@/components/MedicalCardsPanel";
 import { AdaptiveSuggestions } from "@/components/AdaptiveSuggestions";
-import PerformanceChart from "@/components/PerformanceChart";
 import { StreakDisplay } from "@/components/StreakDisplay";
 import { BadgesGrid } from "@/components/BadgesGrid";
 import { UsageLimitsCard } from "@/components/UsageLimitsCard";
@@ -89,7 +87,6 @@ const Index = () => {
             <div className="lg:col-span-2 space-y-3 sm:space-y-4 lg:space-y-6">
               <QuickChallenge onStart={handleQuickChallengeStart} />
               <AdaptiveSuggestions />
-              <PerformanceChart dados={[]} showDemo={true} />
             </div>
 
             {/* Right Column */}
@@ -99,11 +96,6 @@ const Index = () => {
               <QuestsPanel />
               <BadgesGrid achievements={userProgress.achievements} />
             </div>
-          </div>
-
-          {/* Medical Cards Panel */}
-          <div className="mt-4 sm:mt-6 lg:mt-8">
-            <MedicalCardsPanel />
           </div>
         </div>
       </main>

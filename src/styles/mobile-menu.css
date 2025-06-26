@@ -1,67 +1,6 @@
 
 /* Mobile Hamburger Menu Styles */
 
-/* Ensure the hamburger button is positioned below navbar and always visible */
-.hamburger-button {
-  position: fixed !important;
-  top: 80px !important; /* Below navbar (64px + 16px margin) */
-  right: 20px !important;
-  z-index: 9999 !important;
-  width: 44px !important;
-  height: 44px !important;
-  background: linear-gradient(135deg, #4F46E5, #3B82F6) !important;
-  border-radius: 8px !important;
-  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3) !important;
-  transition: all 0.3s ease !important;
-}
-
-@media (max-width: 480px) {
-  .hamburger-button {
-    width: 40px !important;
-    height: 40px !important;
-    right: 15px !important;
-    top: 72px !important; /* Adjusted for smaller screens */
-  }
-}
-
-/* Hamburger line animations */
-.hamburger-line {
-  display: block;
-  position: absolute;
-  height: 2px;
-  width: 20px;
-  background: white;
-  transition: all 0.3s ease;
-  border-radius: 1px;
-}
-
-.hamburger-line:nth-child(1) {
-  top: 6px;
-}
-
-.hamburger-line:nth-child(2) {
-  top: 12px;
-}
-
-.hamburger-line:nth-child(3) {
-  top: 18px;
-}
-
-/* Active state - X formation */
-.hamburger-active .hamburger-line:nth-child(1) {
-  transform: rotate(45deg);
-  top: 12px;
-}
-
-.hamburger-active .hamburger-line:nth-child(2) {
-  opacity: 0;
-}
-
-.hamburger-active .hamburger-line:nth-child(3) {
-  transform: rotate(-45deg);
-  top: 12px;
-}
-
 /* Sidebar menu animations */
 .sidebar-menu {
   transform: translateX(100%);
@@ -95,10 +34,6 @@
 
 /* Touch optimizations */
 @media (hover: none) and (pointer: coarse) {
-  .hamburger-button:active {
-    transform: scale(0.95);
-  }
-  
   .menu-item:active {
     background: rgba(79, 70, 229, 0.1);
   }
@@ -106,10 +41,6 @@
 
 /* High contrast for accessibility */
 @media (prefers-contrast: high) {
-  .hamburger-button {
-    border: 2px solid white;
-  }
-  
   .menu-item {
     border: 1px solid transparent;
   }
@@ -122,26 +53,10 @@
 
 /* Reduced motion for accessibility */
 @media (prefers-reduced-motion: reduce) {
-  .hamburger-button,
-  .hamburger-line,
   .sidebar-menu,
   .menu-overlay,
   .menu-item {
     transition: none !important;
     animation: none !important;
-  }
-}
-
-/* Ensure navbar doesn't overlap with hamburger menu */
-.navbar-mobile-spacer {
-  width: 48px;
-  height: 48px;
-  flex-shrink: 0;
-}
-
-@media (max-width: 480px) {
-  .navbar-mobile-spacer {
-    width: 44px;
-    height: 44px;
   }
 }

@@ -1,6 +1,5 @@
 
 import { useState, useEffect } from 'react';
-import { MobileHamburgerButton } from './MobileHamburgerButton';
 import { MobileSidebar } from './MobileSidebar';
 
 interface Props {
@@ -9,12 +8,6 @@ interface Props {
 
 export function MobileHamburgerMenu({ className = '' }: Props) {
   const [isOpen, setIsOpen] = useState(false);
-
-  // Toggle menu
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-    document.body.style.overflow = !isOpen ? 'hidden' : 'auto';
-  };
 
   // Close menu
   const closeMenu = () => {
@@ -50,16 +43,9 @@ export function MobileHamburgerMenu({ className = '' }: Props) {
   }, [isOpen]);
 
   return (
-    <>
-      <MobileHamburgerButton 
-        isOpen={isOpen} 
-        onToggle={toggleMenu} 
-        className={className} 
-      />
-      <MobileSidebar 
-        isOpen={isOpen} 
-        onClose={closeMenu} 
-      />
-    </>
+    <MobileSidebar 
+      isOpen={isOpen} 
+      onClose={closeMenu} 
+    />
   );
 }

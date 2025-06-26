@@ -10,8 +10,7 @@ export function MobileHamburgerButton({ isOpen, onToggle, className = '' }: Prop
     <button
       onClick={onToggle}
       className={`
-        fixed top-20 right-5 z-[9999] 
-        w-11 h-11 
+        w-10 h-10 
         bg-gradient-to-r from-blue-600 to-blue-700 
         hover:from-blue-700 hover:to-blue-800
         rounded-lg shadow-lg hover:shadow-xl
@@ -19,8 +18,8 @@ export function MobileHamburgerButton({ isOpen, onToggle, className = '' }: Prop
         transition-all duration-300 ease-in-out
         hover:scale-105 active:scale-95
         border border-blue-500/20
+        lg:hidden
         ${className}
-        xs:w-10 xs:h-10 xs:top-[72px] xs:right-4
       `}
       aria-label={isOpen ? 'Fechar menu' : 'Abrir menu'}
     >

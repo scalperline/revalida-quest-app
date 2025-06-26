@@ -66,17 +66,17 @@ export function Navbar() {
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-4">
             {navigation.map((item) => {
               const isActive = location.pathname === item.href;
               return (
                 <Link
                   key={item.name}
                   to={item.href}
-                  className={`flex items-center space-x-1 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                  className={`flex items-center space-x-1 px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
                     isActive
-                      ? 'text-blue-600 bg-blue-50'
-                      : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
+                      ? 'bg-gradient-to-r from-blue-600 to-blue-800 text-white shadow-lg'
+                      : 'text-gray-700 hover:bg-gradient-to-r hover:from-blue-50 hover:to-blue-100 hover:text-blue-600'
                   }`}
                 >
                   <item.icon className="w-4 h-4" />
@@ -99,11 +99,6 @@ export function Navbar() {
               <Crown className="w-4 h-4" />
               <span>{subscribed ? 'Gerenciar' : 'Upgrade'}</span>
             </Button>
-
-            <div className="flex items-center space-x-2 text-sm text-gray-700">
-              <User className="w-4 h-4" />
-              <span>{user?.email}</span>
-            </div>
             
             <Button
               onClick={handleSignOut}
@@ -166,10 +161,6 @@ export function Navbar() {
                 <Crown className="w-4 h-4" />
                 <span>{subscribed ? 'Gerenciar Assinatura' : 'Fazer Upgrade'}</span>
               </Button>
-              
-              <div className="px-3 py-2 text-sm text-gray-600">
-                {user?.email}
-              </div>
               
               <Button
                 onClick={() => {

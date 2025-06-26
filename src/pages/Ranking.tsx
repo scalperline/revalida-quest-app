@@ -106,7 +106,7 @@ export default function Ranking() {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 via-blue-100 to-blue-200 dark:from-gray-900 dark:to-gray-800">
         <Navbar />
-        <div className="container mx-auto px-4 py-8">
+        <div className="container mx-auto px-4 pt-24 pb-8">
           <div className="flex items-center justify-center min-h-[400px]">
             <div className="text-center">
               <Trophy className="w-16 h-16 text-blue-500 mx-auto mb-4 animate-pulse" />
@@ -130,7 +130,7 @@ export default function Ranking() {
       
       <Navbar />
       
-      <div className="relative z-10 container mx-auto px-4 py-8">
+      <div className="relative z-10 container mx-auto px-4 pt-24 pb-8">
         <div className="max-w-4xl mx-auto">
           
           {/* Header */}

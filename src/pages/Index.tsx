@@ -20,10 +20,18 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-blue-100 to-blue-200 dark:from-gray-900 dark:to-gray-800 relative overflow-hidden">
+      {/* Animated Background Elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute -top-4 -right-4 w-24 h-24 bg-blue-400 rounded-full opacity-20 animate-bounce"></div>
+        <div className="absolute top-1/4 -left-4 w-16 h-16 bg-blue-500 rounded-full opacity-20 animate-pulse"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-12 h-12 bg-blue-300 rounded-full opacity-20 animate-ping"></div>
+        <div className="absolute top-1/3 right-1/3 w-8 h-8 bg-blue-600 rounded-full opacity-20 animate-bounce delay-1000"></div>
+      </div>
+
       <Navbar />
       
-      <main className="pt-24 pb-8">
+      <main className="relative z-10 pt-24 pb-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Hero Section */}
           <div className="text-center mb-4 sm:mb-6 lg:mb-8">
@@ -40,7 +48,7 @@ const Index = () => {
 
           {/* Quick Stats */}
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 xs:gap-3 sm:gap-4 mb-4 sm:mb-6 lg:mb-8">
-            <div className="bg-white rounded-lg sm:rounded-xl p-2 xs:p-3 sm:p-4 shadow-lg border border-blue-100 hover:shadow-xl transition-shadow">
+            <div className="bg-white/90 rounded-lg sm:rounded-xl p-2 xs:p-3 sm:p-4 shadow-lg border border-blue-100 hover:shadow-xl transition-shadow backdrop-blur-sm">
               <div className="flex items-center gap-1 sm:gap-2 mb-1">
                 <BookOpen className="w-4 h-4 xs:w-5 xs:h-5 sm:w-6 sm:h-6 text-blue-600 flex-shrink-0" />
                 <div className="min-w-0">
@@ -50,7 +58,7 @@ const Index = () => {
               </div>
             </div>
             
-            <div className="bg-white rounded-lg sm:rounded-xl p-2 xs:p-3 sm:p-4 shadow-lg border border-green-100 hover:shadow-xl transition-shadow">
+            <div className="bg-white/90 rounded-lg sm:rounded-xl p-2 xs:p-3 sm:p-4 shadow-lg border border-green-100 hover:shadow-xl transition-shadow backdrop-blur-sm">
               <div className="flex items-center gap-1 sm:gap-2 mb-1">
                 <Target className="w-4 h-4 xs:w-5 xs:h-5 sm:w-6 sm:h-6 text-green-600 flex-shrink-0" />
                 <div className="min-w-0">
@@ -60,7 +68,7 @@ const Index = () => {
               </div>
             </div>
             
-            <div className="bg-white rounded-lg sm:rounded-xl p-2 xs:p-3 sm:p-4 shadow-lg border border-purple-100 hover:shadow-xl transition-shadow">
+            <div className="bg-white/90 rounded-lg sm:rounded-xl p-2 xs:p-3 sm:p-4 shadow-lg border border-purple-100 hover:shadow-xl transition-shadow backdrop-blur-sm">
               <div className="flex items-center gap-1 sm:gap-2 mb-1">
                 <TrendingUp className="w-4 h-4 xs:w-5 xs:h-5 sm:w-6 sm:h-6 text-purple-600 flex-shrink-0" />
                 <div className="min-w-0">
@@ -70,7 +78,7 @@ const Index = () => {
               </div>
             </div>
             
-            <div className="bg-white rounded-lg sm:rounded-xl p-2 xs:p-3 sm:p-4 shadow-lg border border-orange-100 hover:shadow-xl transition-shadow">
+            <div className="bg-white/90 rounded-lg sm:rounded-xl p-2 xs:p-3 sm:p-4 shadow-lg border border-orange-100 hover:shadow-xl transition-shadow backdrop-blur-sm">
               <div className="flex items-center gap-1 sm:gap-2 mb-1">
                 <Stethoscope className="w-4 h-4 xs:w-5 xs:h-5 sm:w-6 sm:h-6 text-orange-600 flex-shrink-0" />
                 <div className="min-w-0">

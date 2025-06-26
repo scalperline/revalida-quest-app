@@ -40,12 +40,22 @@ const App = () => (
                 <Questions />
               </ProtectedRoute>
             } />
+            <Route path="/provas" element={
+              <ProtectedRoute>
+                <Questions />
+              </ProtectedRoute>
+            } />
             <Route path="/questoes" element={
               <ProtectedRoute>
                 <Questions />
               </ProtectedRoute>
             } />
             <Route path="/missions" element={
+              <ProtectedRoute>
+                <Missions />
+              </ProtectedRoute>
+            } />
+            <Route path="/quests" element={
               <ProtectedRoute>
                 <Missions />
               </ProtectedRoute>

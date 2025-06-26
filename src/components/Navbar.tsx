@@ -21,8 +21,8 @@ export function Navbar() {
 
   const navigation = [
     { name: 'Início', href: '/', icon: Home },
-    { name: 'Questões', href: '/questions', icon: FileText },
-    { name: 'Missões', href: '/missions', icon: Target },
+    { name: 'Provas', href: '/questions', icon: FileText },
+    { name: 'Quests', href: '/missions', icon: Target },
     { name: 'Estatísticas', href: '/stats', icon: BarChart3 },
     { name: 'Ranking', href: '/ranking', icon: Trophy },
     { name: 'Perfil', href: '/profile', icon: User },
@@ -34,7 +34,7 @@ export function Navbar() {
         <div className="flex justify-between items-center h-16 min-h-[64px]">
           {/* Logo - Ajustada com melhor proporção e alinhamento */}
           <div className="flex items-center">
-            <Link to="/" className="flex items-center gap-3 py-2 mr-8">
+            <Link to="/" className="flex items-center gap-3 py-2 mr-6">
               <div className="w-10 h-10 medical-gradient rounded-lg flex items-center justify-center flex-shrink-0 shadow-md">
                 <Stethoscope className="w-6 h-6 text-white" />
               </div>
@@ -44,15 +44,15 @@ export function Navbar() {
             </Link>
           </div>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-4">
+          {/* Desktop Navigation - Espaçamento melhorado */}
+          <div className="hidden md:flex items-center space-x-2">
             {navigation.map((item) => {
               const isActive = location.pathname === item.href;
               return (
                 <Link
                   key={item.name}
                   to={item.href}
-                  className={`flex items-center space-x-1 px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+                  className={`flex items-center space-x-1 px-3 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
                     isActive
                       ? 'bg-gradient-to-r from-blue-600 to-blue-800 text-white shadow-lg'
                       : 'text-gray-700 hover:bg-gradient-to-r hover:from-blue-50 hover:to-blue-100 hover:text-blue-600'

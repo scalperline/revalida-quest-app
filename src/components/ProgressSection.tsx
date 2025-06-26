@@ -1,8 +1,8 @@
 
-import { Progress } from '@/components/ui/progress';
 import { Zap } from 'lucide-react';
 import { useGamification } from '@/hooks/useGamification';
 import { useSubscription } from '@/hooks/useSubscription';
+import { Button } from '@/components/ui/button';
 
 export function ProgressSection() {
   const { userProgress } = useGamification();
@@ -26,28 +26,48 @@ export function ProgressSection() {
   const xpPercentage = Math.round((userProgress.xp / userProgress.xpToNextLevel) * 100);
 
   return (
-    <div className="flex items-center gap-3">
-      {/* Texto de Progresso Compacto */}
-      <div className="hidden md:flex items-center gap-2 text-sm text-gray-600">
-        <Zap className="w-4 h-4 text-orange-500" />
-        <span className="font-medium">
-          Nível {planInfo.level} • {userProgress.xp}/{userProgress.xpToNextLevel} XP
-        </span>
-      </div>
+    <Button
+      variant="ghost"
+      className="
+        h-10 px-3 
+        bg-gradient-to-r from-blue-50 to-purple-50 
+        hover:from-blue-100 hover:to-purple-100
+        border border-blue-200/50 
+        rounded-xl
+        transition-all duration-300
+        shadow-sm hover:shadow-md
+        group
+      "
+    >
+      <div className="flex items-center gap-2">
+        {/* Ícone e Nível */}
+        <div className="flex items-center gap-1">
+          <div className="w-6 h-6 bg-gradient-to-r from-orange-400 to-orange-600 rounded-full flex items-center justify-center">
+            <Zap className="w-3 h-3 text-white" />
+          </div>
+          <span className="text-sm font-semibold text-gray-800">
+            Nível {planInfo.level}
+          </span>
+        </div>
 
-      {/* Versão Mobile - Apenas ícone e nível */}
-      <div className="md:hidden flex items-center gap-1 text-sm text-gray-600">
-        <Zap className="w-4 h-4 text-orange-500" />
-        <span className="font-medium">Lv. {planInfo.level}</span>
-      </div>
+        {/* Separador */}
+        <div className="w-px h-4 bg-gray-300"></div>
 
-      {/* Barra de Progresso Compacta */}
-      <div className="relative w-20 h-1.5 bg-gray-200 rounded-full overflow-hidden">
-        <div 
-          className="absolute top-0 left-0 h-full bg-gradient-to-r from-orange-400 to-orange-600 rounded-full transition-all duration-500"
-          style={{ width: `${xpPercentage}%` }}
-        />
+        {/* XP Info */}
+        <div className="flex items-center gap-2">
+          <span className="text-sm text-gray-600 font-medium">
+            {userProgress.xp}/{userProgress.xpToNextLevel} XP
+          </span>
+          
+          {/* Barra de Progresso Compacta */}
+          <div className="relative w-12 h-2 bg-gray-200 rounded-full overflow-hidden">
+            <div 
+              className="absolute top-0 left-0 h-full bg-gradient-to-r from-orange-400 to-orange-600 rounded-full transition-all duration-500 group-hover:from-orange-500 group-hover:to-orange-700"
+              style={{ width: `${xpPercentage}%` }}
+            />
+          </div>
+        </div>
       </div>
-    </div>
+    </Button>
   );
 }

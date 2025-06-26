@@ -30,15 +30,17 @@ export function Navbar() {
 
   return (
     <nav className="bg-white shadow-lg border-b border-gray-200 fixed top-0 left-0 right-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          {/* Logo */}
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <div className="flex justify-between items-center h-16 min-h-[64px]">
+          {/* Logo - Ajustada com melhor proporção e alinhamento */}
           <div className="flex items-center">
-            <Link to="/" className="flex items-center space-x-2">
-              <div className="w-8 h-8 medical-gradient rounded-lg flex items-center justify-center">
-                <Stethoscope className="w-5 h-5 text-white" />
+            <Link to="/" className="flex items-center gap-3 py-2 mr-8">
+              <div className="w-10 h-10 medical-gradient rounded-lg flex items-center justify-center flex-shrink-0 shadow-md">
+                <Stethoscope className="w-6 h-6 text-white" />
               </div>
-              <span className="text-xl font-bold gradient-text">Revalida Quest</span>
+              <span className="text-xl font-bold gradient-text leading-tight whitespace-nowrap">
+                Revalida Quest
+              </span>
             </Link>
           </div>
 
@@ -63,7 +65,7 @@ export function Navbar() {
             })}
           </div>
 
-          {/* Desktop User Progress Bar - Layout Reorganizado */}
+          {/* Desktop User Progress Bar */}
           <div className="hidden md:block">
             <UserProgressBar />
           </div>

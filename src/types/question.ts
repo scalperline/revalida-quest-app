@@ -4,7 +4,6 @@ export type Option = {
   text: string;
   feedbackCorreta?: string;
   feedbackErrada?: string;
-  correta?: boolean;
 };
 
 export type Question = {
@@ -22,7 +21,6 @@ export interface QuestionCardProps {
   question: Question;
   showAnswer?: boolean;
   onAnswer?: (optionId: string) => void;
-  onAnswerWithEffects?: (optionId: string, correct: boolean) => void;
   disabled?: boolean;
   userAnswer?: string;
   hideHeader?: boolean;

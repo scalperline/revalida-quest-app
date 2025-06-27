@@ -1,9 +1,9 @@
-
 import { useState, useEffect } from "react";
 import { useSimulado, type SimuladoConfig } from "@/hooks/useSimulado";
 import { useGamification } from "@/hooks/useGamification";
 import { useAudio } from "@/hooks/useAudio";
 import { useQuestions } from "@/hooks/useQuestions";
+import { useLimitChecker } from "@/hooks/useLimitChecker";
 import { FloatingTimer } from "@/components/FloatingTimer";
 import { SimuladoFilters } from "@/components/SimuladoFilters";
 import { QuestionCard } from "@/components/QuestionCard";
@@ -11,6 +11,7 @@ import { Navbar } from "@/components/Navbar";
 import { LevelUpNotification } from "@/components/LevelUpNotification";
 import { AchievementNotification } from "@/components/AchievementNotification";
 import { ConfettiAnimation } from "@/components/ConfettiAnimation";
+import { LimitReachedModal } from "@/components/LimitReachedModal";
 import { Trophy, Clock, Target, Zap, ArrowLeft, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -26,6 +27,13 @@ export default function Simulado() {
   const [questaoRespondida, setQuestaoRespondida] = useState(false);
   
   const { questoesAnoSelecionado } = useQuestions();
+  const { 
+    checkSimuladoLimit, 
+    incrementSimuladoUsage, 
+    showLimitModal, 
+    limitType, 
+    closeLimitModal 
+  } = useLimitChecker();
   
   // Só chama useSimulado quando há configuração ou quando está na tela inicial
   const simulado = useSimulado(
@@ -75,9 +83,13 @@ export default function Simulado() {
     }
   }, [newlyUnlockedAchievement, playSound]);
 
-  function handleConfiguracao(config: SimuladoConfig) {
+  async function handleConfiguracao(config: SimuladoConfig) {
     console.log('=== CONFIGURAÇÃO SENDO DEFINIDA ===');
     console.log('Nova configuração:', config);
+    
+    // Check if user can start a new simulado
+    const canStart = await checkSimuladoLimit();
+    if (!canStart) return;
     
     // Garante que a configuração seja válida antes de prosseguir
     if (!config.areas || config.areas.length === 0) {
@@ -89,6 +101,9 @@ export default function Simulado() {
       alert('Selecione uma quantidade válida de questões!');
       return;
     }
+    
+    // Increment simulado usage
+    await incrementSimuladoUsage();
     
     setConfiguracao(config);
     setIniciado(true);
@@ -403,6 +418,12 @@ export default function Simulado() {
       <AchievementNotification
         achievement={newlyUnlockedAchievement}
         onClose={clearNewlyUnlockedAchievement}
+      />
+      
+      <LimitReachedModal 
+        open={showLimitModal}
+        onClose={closeLimitModal}
+        limitType={limitType}
       />
     </div>
   );

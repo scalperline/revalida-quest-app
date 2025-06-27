@@ -44,14 +44,20 @@ export function useGamification() {
   const loading = user ? supabaseGamification.loading : false;
   
   const answerQuestion = (correct: boolean, area?: string, questionId?: number) => {
+    console.log('useGamification.answerQuestion called:', { correct, area, questionId, user: !!user });
+    
     if (user) {
+      // Use Supabase for logged-in users
       supabaseGamification.answerQuestion(correct, area, questionId);
     } else {
+      // Use local state for non-logged-in users
       baseAnswerQuestion(correct, area);
     }
   };
 
   const completeSimulado = (score: number, total: number) => {
+    console.log('useGamification.completeSimulado called:', { score, total, user: !!user });
+    
     if (user) {
       supabaseGamification.completeSimulado(score, total);
     } else {
@@ -64,6 +70,8 @@ export function useGamification() {
   };
 
   const addXP = (points: number) => {
+    console.log('useGamification.addXP called:', { points, user: !!user });
+    
     if (user) {
       supabaseGamification.addXP(points);
     } else {
@@ -112,6 +120,19 @@ export function useGamification() {
   const clearNewlyUnlockedBadge = () => {
     clearNewlyUnlockedAchievement();
   };
+
+  // Debug information
+  console.log('useGamification state:', {
+    userLoggedIn: !!user,
+    userProgress: {
+      level: userProgress.level,
+      xp: userProgress.xp,
+      xpToNextLevel: userProgress.xpToNextLevel,
+      totalQuestions: userProgress.totalQuestions,
+      correctAnswers: userProgress.correctAnswers
+    },
+    loading
+  });
 
   return {
     userProgress,

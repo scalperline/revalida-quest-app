@@ -6,6 +6,8 @@ import { QuestionContent } from './QuestionContent';
 import { QuestionOption } from './QuestionOption';
 import { QuestionFeedback } from './QuestionFeedback';
 import { useGamification } from '@/hooks/useGamification';
+import { useLimitChecker } from '@/hooks/useLimitChecker';
+import { LimitReachedModal } from '@/components/LimitReachedModal';
 
 interface ExtendedQuestionCardProps extends QuestionCardProps {
   onAnswerWithEffects?: (optionId: string, correct: boolean) => void;
@@ -23,9 +25,20 @@ export function QuestionCard({
   const [selectedOption, setSelectedOption] = useState<string | null>(userAnswer || null);
   const [hasAnswered, setHasAnswered] = useState(showAnswer || !!userAnswer);
   const { answerQuestion } = useGamification();
+  const { 
+    checkQuestionLimit, 
+    incrementQuestionUsage, 
+    showLimitModal, 
+    limitType, 
+    closeLimitModal 
+  } = useLimitChecker();
 
-  const handleOptionSelect = (optionId: string) => {
+  const handleOptionSelect = async (optionId: string) => {
     if (disabled || hasAnswered) return;
+    
+    // Check if user can answer more questions
+    const canAnswer = await checkQuestionLimit();
+    if (!canAnswer) return;
     
     console.log('Selecionando opção:', optionId, 'para questão:', question.id);
     
@@ -34,6 +47,9 @@ export function QuestionCard({
     
     const correct = optionId === question.correct;
     console.log('Resposta correta?', correct);
+    
+    // Increment usage counter
+    await incrementQuestionUsage();
     
     // Register the answer in gamification system with question ID
     answerQuestion(correct, question.area, question.id);
@@ -53,39 +69,47 @@ export function QuestionCard({
   const showFeedback = hasAnswered || showAnswer;
 
   return (
-    <div className="bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm rounded-3xl shadow-2xl p-8 border-2 border-blue-200/50 dark:border-blue-700/50 transition-all duration-300 hover:shadow-3xl">
-      {!hideHeader && (
-        <QuestionHeader 
-          question={question} 
-          isCorrect={showFeedback ? isCorrect : undefined}
-        />
-      )}
-      
-      <QuestionContent question={question} />
-      
-      <div className="space-y-4">
-        {question.options.map((option) => (
-          <QuestionOption
-            key={option.id}
-            option={option}
-            isSelected={selectedOption === option.id}
-            showAnswer={showFeedback}
-            onSelect={() => handleOptionSelect(option.id)}
-            disabled={disabled || hasAnswered}
-            correctAnswer={question.correct}
-            userAnswer={userAnswer}
-            selectedOption={selectedOption}
+    <>
+      <div className="bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm rounded-3xl shadow-2xl p-8 border-2 border-blue-200/50 dark:border-blue-700/50 transition-all duration-300 hover:shadow-3xl">
+        {!hideHeader && (
+          <QuestionHeader 
+            question={question} 
+            isCorrect={showFeedback ? isCorrect : undefined}
           />
-        ))}
+        )}
+        
+        <QuestionContent question={question} />
+        
+        <div className="space-y-4">
+          {question.options.map((option) => (
+            <QuestionOption
+              key={option.id}
+              option={option}
+              isSelected={selectedOption === option.id}
+              showAnswer={showFeedback}
+              onSelect={() => handleOptionSelect(option.id)}
+              disabled={disabled || hasAnswered}
+              correctAnswer={question.correct}
+              userAnswer={userAnswer}
+              selectedOption={selectedOption}
+            />
+          ))}
+        </div>
+        
+        {showFeedback && (
+          <QuestionFeedback 
+            question={question}
+            selectedOption={selectedOption}
+            isCorrect={isCorrect}
+          />
+        )}
       </div>
       
-      {showFeedback && (
-        <QuestionFeedback 
-          question={question}
-          selectedOption={selectedOption}
-          isCorrect={isCorrect}
-        />
-      )}
-    </div>
+      <LimitReachedModal 
+        open={showLimitModal}
+        onClose={closeLimitModal}
+        limitType={limitType}
+      />
+    </>
   );
 }

@@ -19,7 +19,7 @@ export function UpgradeButton() {
     }
   };
 
-  const buttonText = subscribed ? 'Gerenciar' : 'Premium';
+  const buttonText = subscribed ? 'Gerenciar' : 'Upgrade';
 
   return (
     <Button

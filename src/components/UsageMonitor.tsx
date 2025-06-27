@@ -5,7 +5,8 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { BarChart3, TrendingUp, AlertTriangle, CheckCircle } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { BarChart3, TrendingUp, AlertTriangle, CheckCircle, RefreshCw } from 'lucide-react';
 
 export function UsageMonitor() {
   const { 
@@ -13,10 +14,12 @@ export function UsageMonitor() {
     subscribed, 
     subscription_tier,
     getFeatureLimit,
-    loading 
+    loading,
+    checkSubscription 
   } = useSubscription();
 
   const [systemStatus, setSystemStatus] = useState<'healthy' | 'warning' | 'error'>('healthy');
+  const [refreshing, setRefreshing] = useState(false);
 
   useEffect(() => {
     if (!usageLimits) return;
@@ -26,8 +29,8 @@ export function UsageMonitor() {
 
     // Check system health based on usage
     if (!subscribed) {
-      const questionsUsage = (questionsLimit.used / questionsLimit.limit) * 100;
-      const simuladosUsage = (simuladosLimit.used / simuladosLimit.limit) * 100;
+      const questionsUsage = questionsLimit.limit > 0 ? (questionsLimit.used / questionsLimit.limit) * 100 : 0;
+      const simuladosUsage = simuladosLimit.limit > 0 ? (simuladosLimit.used / simuladosLimit.limit) * 100 : 0;
 
       if (questionsUsage >= 100 || simuladosUsage >= 100) {
         setSystemStatus('error');
@@ -40,6 +43,15 @@ export function UsageMonitor() {
       setSystemStatus('healthy');
     }
   }, [usageLimits, subscribed, getFeatureLimit]);
+
+  const handleRefresh = async () => {
+    setRefreshing(true);
+    try {
+      await checkSubscription();
+    } finally {
+      setRefreshing(false);
+    }
+  };
 
   if (loading) {
     return (
@@ -79,6 +91,16 @@ export function UsageMonitor() {
     }
   };
 
+  const getQuestionsPercentage = () => {
+    if (questionsLimit.unlimited) return 100;
+    return questionsLimit.limit > 0 ? (questionsLimit.used / questionsLimit.limit) * 100 : 0;
+  };
+
+  const getSimuladosPercentage = () => {
+    if (simuladosLimit.unlimited) return 100;
+    return simuladosLimit.limit > 0 ? (simuladosLimit.used / simuladosLimit.limit) * 100 : 0;
+  };
+
   return (
     <Card>
       <CardHeader>
@@ -87,12 +109,22 @@ export function UsageMonitor() {
             <BarChart3 className="w-5 h-5 text-blue-600" />
             Monitor de Uso
           </div>
-          <Badge className={getStatusColor()}>
-            {getStatusIcon()}
-            {systemStatus === 'healthy' && 'Saudável'}
-            {systemStatus === 'warning' && 'Atenção'}
-            {systemStatus === 'error' && 'Limite'}
-          </Badge>
+          <div className="flex items-center gap-2">
+            <Badge className={getStatusColor()}>
+              {getStatusIcon()}
+              {systemStatus === 'healthy' && 'Saudável'}
+              {systemStatus === 'warning' && 'Atenção'}
+              {systemStatus === 'error' && 'Limite'}
+            </Badge>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={handleRefresh}
+              disabled={refreshing}
+            >
+              <RefreshCw className={`w-4 h-4 ${refreshing ? 'animate-spin' : ''}`} />
+            </Button>
+          </div>
         </CardTitle>
       </CardHeader>
 
@@ -119,9 +151,14 @@ export function UsageMonitor() {
               </span>
             </div>
             <Progress 
-              value={questionsLimit.unlimited ? 100 : (questionsLimit.used / questionsLimit.limit) * 100}
+              value={Math.min(getQuestionsPercentage(), 100)}
               className="h-2"
             />
+            {!questionsLimit.unlimited && questionsLimit.used >= questionsLimit.limit && (
+              <p className="text-xs text-red-600">
+                ⚠️ Limite diário atingido!
+              </p>
+            )}
           </div>
 
           {/* Simulados Usage */}
@@ -133,9 +170,14 @@ export function UsageMonitor() {
               </span>
             </div>
             <Progress 
-              value={simuladosLimit.unlimited ? 100 : (simuladosLimit.used / simuladosLimit.limit) * 100}
+              value={Math.min(getSimuladosPercentage(), 100)}
               className="h-2"
             />
+            {!simuladosLimit.unlimited && simuladosLimit.used >= simuladosLimit.limit && (
+              <p className="text-xs text-red-600">
+                ⚠️ Limite mensal atingido!
+              </p>
+            )}
           </div>
         </div>
 

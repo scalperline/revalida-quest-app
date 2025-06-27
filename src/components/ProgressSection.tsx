@@ -5,7 +5,7 @@ import { useSubscription } from '@/hooks/useSubscription';
 import { Button } from '@/components/ui/button';
 
 export function ProgressSection() {
-  const { userProgress } = useGamification();
+  const { userProgress, loading } = useGamification();
   const { subscribed, subscription_tier } = useSubscription();
 
   const getPlanInfo = () => {
@@ -22,8 +22,21 @@ export function ProgressSection() {
     }
   };
 
+  if (loading) {
+    return (
+      <Button variant="ghost" className="h-10 px-2 sm:px-3">
+        <div className="flex items-center gap-1 sm:gap-2">
+          <div className="w-5 h-5 bg-gray-300 rounded-full animate-pulse"></div>
+          <div className="w-12 h-4 bg-gray-300 rounded animate-pulse"></div>
+        </div>
+      </Button>
+    );
+  }
+
   const planInfo = getPlanInfo();
-  const xpPercentage = Math.round((userProgress.xp / userProgress.xpToNextLevel) * 100);
+  const xpPercentage = userProgress.xpToNextLevel > 0 
+    ? Math.round((userProgress.xp / userProgress.xpToNextLevel) * 100)
+    : 0;
 
   return (
     <Button
@@ -47,7 +60,7 @@ export function ProgressSection() {
             <Zap className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-white" />
           </div>
           <span className="text-xs sm:text-sm font-semibold text-gray-800">
-            Nv {planInfo.level}
+            Nv {userProgress.level}
           </span>
         </div>
 
@@ -64,9 +77,16 @@ export function ProgressSection() {
           <div className="relative w-8 sm:w-12 h-1.5 sm:h-2 bg-gray-200 rounded-full overflow-hidden flex-shrink-0">
             <div 
               className="absolute top-0 left-0 h-full bg-gradient-to-r from-orange-400 to-orange-600 rounded-full transition-all duration-500 group-hover:from-orange-500 group-hover:to-orange-700"
-              style={{ width: `${xpPercentage}%` }}
+              style={{ width: `${Math.min(xpPercentage, 100)}%` }}
             />
           </div>
+        </div>
+
+        {/* Plan Badge */}
+        <div className="hidden sm:block">
+          <span className="text-xs font-medium text-blue-600 bg-blue-100 px-2 py-1 rounded-full">
+            {planInfo.name}
+          </span>
         </div>
       </div>
     </Button>

@@ -4,12 +4,14 @@ import { useGamificationState } from './useGamificationState';
 import { useGamificationAchievements } from './useGamificationAchievements';
 import { useGamificationActions } from './useGamificationActions';
 import { useAuth } from './useAuth';
+import { useSubscription } from './useSubscription';
 
 // Re-export types for backward compatibility
 export type { Achievement, Quest, MedicalCard, UserProgress } from '@/types/gamification';
 
 export function useGamification() {
   const { user } = useAuth();
+  const { updateUsage } = useSubscription();
   
   // Use Supabase integration if user is logged in, otherwise use local state
   const supabaseGamification = useGamificationSupabase();
@@ -43,17 +45,29 @@ export function useGamification() {
   const userProgress = user ? supabaseGamification.userProgress : localProgress;
   const loading = user ? supabaseGamification.loading : false;
   
-  const answerQuestion = (correct: boolean, area?: string, questionId?: number) => {
+  const answerQuestion = async (correct: boolean, area?: string, questionId?: number) => {
+    console.log('🎯 Respondendo questão:', { correct, area, questionId, user: !!user });
+    
     if (user) {
-      supabaseGamification.answerQuestion(correct, area, questionId);
+      // Update gamification first
+      await supabaseGamification.answerQuestion(correct, area, questionId);
+      
+      // Then update usage limits
+      console.log('📊 Atualizando limites de uso...');
     } else {
       baseAnswerQuestion(correct, area);
     }
   };
 
-  const completeSimulado = (score: number, total: number) => {
+  const completeSimulado = async (score: number, total: number) => {
+    console.log('🏆 Completando simulado:', { score, total, user: !!user });
+    
     if (user) {
+      // Update gamification first
       supabaseGamification.completeSimulado(score, total);
+      
+      // Then update usage limits
+      await updateUsage('simulados');
     } else {
       baseCompleteSimulado(score, total);
     }
@@ -64,6 +78,8 @@ export function useGamification() {
   };
 
   const addXP = (points: number) => {
+    console.log('⚡ Adicionando XP:', points, 'para usuário:', user?.id);
+    
     if (user) {
       supabaseGamification.addXP(points);
     } else {

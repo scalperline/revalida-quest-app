@@ -1,4 +1,3 @@
-
 import { Navbar } from '@/components/Navbar';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -9,26 +8,27 @@ import { SubscriptionBadge } from '@/components/SubscriptionBadge';
 import { UsageMonitor } from '@/components/UsageMonitor';
 import { PrivacySettings } from '@/components/PrivacySettings';
 import { User, Crown, Settings, Mail, Calendar, ExternalLink } from 'lucide-react';
-
 export default function Profile() {
-  const { user } = useAuth();
-  const { subscribed, openCustomerPortal } = useSubscription();
-
+  const {
+    user
+  } = useAuth();
+  const {
+    subscribed,
+    openCustomerPortal
+  } = useSubscription();
   const handleManageSubscription = () => {
     openCustomerPortal();
   };
-
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-blue-100 to-blue-200 dark:from-gray-900 dark:to-gray-800">
+  return <div className="min-h-screen bg-gradient-to-br from-blue-50 via-blue-100 to-blue-200 dark:from-gray-900 dark:to-gray-800">
       <Navbar />
       
       <div className="container mx-auto px-4 pt-24 pb-8">
         <div className="max-w-4xl mx-auto">
           <div className="mb-8">
-            <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">
+            <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent text-center">
               Meu Perfil
             </h1>
-            <p className="text-gray-600 dark:text-gray-400 mt-2">
+            <p className="mt-2 text-center text-slate-800">
               Gerencie sua conta e configurações
             </p>
           </div>
@@ -60,13 +60,8 @@ export default function Profile() {
                   </span>
                 </div>
 
-                {subscribed && (
-                  <div className="pt-4 border-t">
-                    <Button 
-                      onClick={handleManageSubscription}
-                      className="w-full"
-                      variant="outline"
-                    >
+                {subscribed && <div className="pt-4 border-t">
+                    <Button onClick={handleManageSubscription} className="w-full" variant="outline">
                       <Settings className="w-4 h-4 mr-2" />
                       Portal do Cliente
                       <ExternalLink className="w-4 h-4 ml-2" />
@@ -74,8 +69,7 @@ export default function Profile() {
                     <p className="text-xs text-gray-500 text-center mt-2">
                       Gerencie pagamentos e assinatura
                     </p>
-                  </div>
-                )}
+                  </div>}
               </CardContent>
             </Card>
 
@@ -89,6 +83,5 @@ export default function Profile() {
           </div>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 }

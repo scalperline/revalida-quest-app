@@ -2,7 +2,7 @@
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { AlertTriangle, Crown } from 'lucide-react';
-import { useSubscription } from '@/hooks/useSubscription';
+import { useNavigate } from 'react-router-dom';
 
 interface LimitReachedModalProps {
   open: boolean;
@@ -11,15 +11,11 @@ interface LimitReachedModalProps {
 }
 
 export function LimitReachedModal({ open, onClose, limitType }: LimitReachedModalProps) {
-  const { createCheckoutSession } = useSubscription();
+  const navigate = useNavigate();
 
-  const handleUpgrade = async () => {
-    try {
-      const url = await createCheckoutSession('price_basic'); // You can make this dynamic
-      window.open(url, '_blank');
-    } catch (error) {
-      console.error('Error creating checkout session:', error);
-    }
+  const handleUpgrade = () => {
+    navigate('/pricing');
+    onClose();
   };
 
   const isQuestions = limitType === 'questions';

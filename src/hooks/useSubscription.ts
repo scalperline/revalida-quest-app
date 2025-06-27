@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useCallback } from 'react';
 import { useAuth } from './useAuth';
 import { supabase } from '@/integrations/supabase/client';
@@ -91,35 +90,61 @@ export function useSubscription() {
     if (!user) return;
 
     try {
-      const { data, error } = await supabase
+      console.log('Fetching usage limits for user:', user.id);
+      
+      // First, try to get existing limits
+      const { data: existingData, error: selectError } = await supabase
         .from('usage_limits')
         .select('*')
         .eq('user_id', user.id)
-        .single();
+        .order('created_at', { ascending: false })
+        .limit(1);
 
-      if (error && error.code !== 'PGRST116') {
-        console.error('Error fetching usage limits:', error);
+      if (selectError) {
+        console.error('Error fetching usage limits:', selectError);
         return;
       }
 
-      if (data) {
-        setUsageLimits(data);
+      if (existingData && existingData.length > 0) {
+        console.log('Found existing usage limits:', existingData[0]);
+        setUsageLimits(existingData[0]);
+        
+        // If there are multiple records, clean them up (keep only the most recent)
+        if (existingData.length > 1) {
+          console.log('Multiple usage records found, cleaning up...');
+          const { error: deleteError } = await supabase
+            .from('usage_limits')
+            .delete()
+            .eq('user_id', user.id)
+            .neq('id', existingData[0].id);
+          
+          if (deleteError) {
+            console.error('Error cleaning up duplicate records:', deleteError);
+          } else {
+            console.log('Cleaned up duplicate usage records');
+          }
+        }
       } else {
-        // Create initial usage limits record
-        const { data: newData, error: insertError } = await supabase
+        // Create initial usage limits record using upsert
+        console.log('No existing limits found, creating new record');
+        const { data: newData, error: upsertError } = await supabase
           .from('usage_limits')
-          .insert({
+          .upsert({
             user_id: user.id,
             daily_questions_used: 0,
             monthly_simulados_used: 0,
             last_reset_date: new Date().toISOString().split('T')[0]
+          }, { 
+            onConflict: 'user_id',
+            ignoreDuplicates: false 
           })
           .select()
           .single();
 
-        if (insertError) {
-          console.error('Error creating usage limits:', insertError);
+        if (upsertError) {
+          console.error('Error creating usage limits:', upsertError);
         } else {
+          console.log('Created new usage limits:', newData);
           setUsageLimits(newData);
         }
       }
@@ -129,20 +154,34 @@ export function useSubscription() {
   }, [user]);
 
   const updateUsage = async (type: 'questions' | 'simulados', increment: number = 1) => {
-    if (!user || !usageLimits) return;
+    if (!user || !usageLimits) {
+      console.log('Cannot update usage: no user or limits');
+      return;
+    }
 
     const field = type === 'questions' ? 'daily_questions_used' : 'monthly_simulados_used';
     const newValue = usageLimits[field] + increment;
 
+    console.log(`Updating ${type} usage from ${usageLimits[field]} to ${newValue}`);
+
     try {
       const { data, error } = await supabase
         .from('usage_limits')
-        .update({ [field]: newValue })
-        .eq('user_id', user.id)
+        .upsert({
+          user_id: user.id,
+          daily_questions_used: type === 'questions' ? newValue : usageLimits.daily_questions_used,
+          monthly_simulados_used: type === 'simulados' ? newValue : usageLimits.monthly_simulados_used,
+          last_reset_date: usageLimits.last_reset_date
+        }, { 
+          onConflict: 'user_id',
+          ignoreDuplicates: false 
+        })
         .select()
         .single();
 
       if (error) throw error;
+      
+      console.log('Updated usage limits:', data);
       setUsageLimits(data);
     } catch (error) {
       console.error('Error updating usage:', error);
@@ -150,13 +189,30 @@ export function useSubscription() {
   };
 
   const canUseFeature = (feature: 'questions' | 'simulados'): boolean => {
-    if (subscriptionData.subscribed) return true;
-    if (!usageLimits) return false;
+    console.log(`Checking if can use ${feature}:`, {
+      subscribed: subscriptionData.subscribed,
+      usageLimits,
+      feature
+    });
+
+    if (subscriptionData.subscribed) {
+      console.log('User is subscribed, allowing feature');
+      return true;
+    }
+    
+    if (!usageLimits) {
+      console.log('No usage limits found, denying feature');
+      return false;
+    }
 
     if (feature === 'questions') {
-      return usageLimits.daily_questions_used < 10; // Free limit: 10 questions per day
+      const canUse = usageLimits.daily_questions_used < 10;
+      console.log(`Questions check: ${usageLimits.daily_questions_used}/10, can use: ${canUse}`);
+      return canUse;
     } else {
-      return usageLimits.monthly_simulados_used < 1; // Free limit: 1 simulado per month
+      const canUse = usageLimits.monthly_simulados_used < 1;
+      console.log(`Simulados check: ${usageLimits.monthly_simulados_used}/1, can use: ${canUse}`);
+      return canUse;
     }
   };
 

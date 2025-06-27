@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { useRanking } from '@/hooks/useRanking';
 import { Navbar } from '@/components/Navbar';
@@ -7,24 +6,25 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Trophy, Crown, Star, Medal, Target, Calendar } from 'lucide-react';
-
 export default function Ranking() {
-  const { allTimeRanking, weeklyRanking, currentUserPosition, loading } = useRanking();
-
+  const {
+    allTimeRanking,
+    weeklyRanking,
+    currentUserPosition,
+    loading
+  } = useRanking();
   const getRankIcon = (position: number) => {
     if (position === 1) return <Crown className="w-6 h-6 text-yellow-500" />;
     if (position === 2) return <Medal className="w-6 h-6 text-gray-400" />;
     if (position === 3) return <Star className="w-6 h-6 text-amber-600" />;
     return <Target className="w-5 h-5 text-blue-500" />;
   };
-
   const getRankColor = (position: number) => {
     if (position === 1) return 'from-yellow-400 to-yellow-600';
     if (position === 2) return 'from-gray-300 to-gray-500';
     if (position === 3) return 'from-amber-400 to-amber-600';
     return 'from-blue-400 to-blue-600';
   };
-
   const getLevelTitle = (level: number) => {
     if (level >= 20) return 'Mestre Cirurgião';
     if (level >= 15) return 'Especialista';
@@ -32,27 +32,22 @@ export default function Ranking() {
     if (level >= 5) return 'Interno Avançado';
     return 'Estudante';
   };
-
-  const RankingList = ({ data, type }: { data: any[], type: 'allTime' | 'weekly' }) => {
+  const RankingList = ({
+    data,
+    type
+  }: {
+    data: any[];
+    type: 'allTime' | 'weekly';
+  }) => {
     const currentUser = data.find(user => {
       // This would need to be matched with actual user ID
       return false; // Simplified for now
     });
-
-    return (
-      <div className="space-y-3">
+    return <div className="space-y-3">
         {data.map((user, index) => {
-          const isCurrentUser = false; // Simplified for now
-          
-          return (
-            <Card 
-              key={user.id} 
-              className={`transition-all duration-200 hover:shadow-md bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm border-2 border-blue-200/50 dark:border-blue-700/50 ${
-                isCurrentUser 
-                  ? 'ring-2 ring-blue-500 bg-gradient-to-r from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20' 
-                  : ''
-              }`}
-            >
+        const isCurrentUser = false; // Simplified for now
+
+        return <Card key={user.id} className={`transition-all duration-200 hover:shadow-md bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm border-2 border-blue-200/50 dark:border-blue-700/50 ${isCurrentUser ? 'ring-2 ring-blue-500 bg-gradient-to-r from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20' : ''}`}>
               <CardContent className="p-4">
                 <div className="flex items-center gap-4">
                   {/* Position */}
@@ -73,11 +68,9 @@ export default function Ranking() {
                       <h3 className="font-semibold text-gray-900 dark:text-white">
                         {user.display_name}
                       </h3>
-                      {isCurrentUser && (
-                        <Badge variant="secondary" className="bg-blue-100 text-blue-800 dark:bg-blue-900/50 dark:text-blue-200">
+                      {isCurrentUser && <Badge variant="secondary" className="bg-blue-100 text-blue-800 dark:bg-blue-900/50 dark:text-blue-200">
                           Você
-                        </Badge>
-                      )}
+                        </Badge>}
                     </div>
                     <p className="text-sm text-gray-700 dark:text-gray-300">
                       {getLevelTitle(user.level)} • Nível {user.level}
@@ -95,16 +88,12 @@ export default function Ranking() {
                   </div>
                 </div>
               </CardContent>
-            </Card>
-          );
-        })}
-      </div>
-    );
+            </Card>;
+      })}
+      </div>;
   };
-
   if (loading) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-blue-100 to-blue-200 dark:from-gray-900 dark:to-gray-800">
+    return <div className="min-h-screen bg-gradient-to-br from-blue-50 via-blue-100 to-blue-200 dark:from-gray-900 dark:to-gray-800">
         <Navbar />
         <div className="container mx-auto px-4 pt-24 pb-8">
           <div className="flex items-center justify-center min-h-[400px]">
@@ -114,12 +103,9 @@ export default function Ranking() {
             </div>
           </div>
         </div>
-      </div>
-    );
+      </div>;
   }
-
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-blue-100 to-blue-200 dark:from-gray-900 dark:to-gray-800 relative overflow-hidden">
+  return <div className="min-h-screen bg-gradient-to-br from-blue-50 via-blue-100 to-blue-200 dark:from-gray-900 dark:to-gray-800 relative overflow-hidden">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-4 -right-4 w-24 h-24 bg-blue-400 rounded-full opacity-20 animate-bounce"></div>
@@ -144,33 +130,9 @@ export default function Ranking() {
             
             {/* Current User Position Stats */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-              <Card className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm border-2 border-blue-200/50 dark:border-blue-700/50">
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-sm font-medium text-gray-600 dark:text-gray-400">Sua Posição Geral</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex items-center gap-2">
-                    <Trophy className="w-5 h-5 text-blue-600" />
-                    <span className="text-2xl font-bold text-blue-600">
-                      {currentUserPosition.allTime || 'N/A'}º
-                    </span>
-                  </div>
-                </CardContent>
-              </Card>
               
-              <Card className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm border-2 border-blue-200/50 dark:border-blue-700/50">
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-sm font-medium text-gray-600 dark:text-gray-400">Posição Semanal</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex items-center gap-2">
-                    <Calendar className="w-5 h-5 text-blue-600" />
-                    <span className="text-2xl font-bold text-blue-600">
-                      {currentUserPosition.weekly || 'N/A'}º
-                    </span>
-                  </div>
-                </CardContent>
-              </Card>
+              
+              
             </div>
           </div>
 
@@ -196,10 +158,7 @@ export default function Ranking() {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  {allTimeRanking.length > 0 ? (
-                    <RankingList data={allTimeRanking} type="allTime" />
-                  ) : (
-                    <div className="text-center py-12">
+                  {allTimeRanking.length > 0 ? <RankingList data={allTimeRanking} type="allTime" /> : <div className="text-center py-12">
                       <Trophy className="w-16 h-16 text-gray-400 mx-auto mb-4" />
                       <h3 className="text-xl font-bold mb-2 text-gray-600 dark:text-gray-400">
                         Nenhum estudante no ranking ainda
@@ -207,8 +166,7 @@ export default function Ranking() {
                       <p className="text-gray-600 dark:text-gray-400">
                         Seja o primeiro a aparecer no ranking!
                       </p>
-                    </div>
-                  )}
+                    </div>}
                 </CardContent>
               </Card>
             </TabsContent>
@@ -222,10 +180,7 @@ export default function Ranking() {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  {weeklyRanking.length > 0 ? (
-                    <RankingList data={weeklyRanking} type="weekly" />
-                  ) : (
-                    <div className="text-center py-12">
+                  {weeklyRanking.length > 0 ? <RankingList data={weeklyRanking} type="weekly" /> : <div className="text-center py-12">
                       <Calendar className="w-16 h-16 text-gray-400 mx-auto mb-4" />
                       <h3 className="text-xl font-bold mb-2 text-gray-600 dark:text-gray-400">
                         Nenhum estudante no ranking semanal ainda
@@ -233,14 +188,12 @@ export default function Ranking() {
                       <p className="text-gray-600 dark:text-gray-400">
                         Comece a estudar para aparecer no ranking desta semana!
                       </p>
-                    </div>
-                  )}
+                    </div>}
                 </CardContent>
               </Card>
             </TabsContent>
           </Tabs>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 }

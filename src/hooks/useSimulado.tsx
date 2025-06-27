@@ -8,9 +8,11 @@ export interface SimuladoConfig {
   tempoMinutos: number;
 }
 
-export function useSimulado(questoes: Question[], config?: SimuladoConfig) {
+export function useSimulado(questoes?: Question[], config?: SimuladoConfig) {
   // Usa useMemo para evitar recalculo desnecessário das questões quando a config não muda
   const questoesSelecionadas = useMemo(() => {
+    if (!questoes || questoes.length === 0) return [];
+    
     let questoesFiltradas = [...questoes];
     
     console.log('=== DEBUG USESIMULADO - RECALCULANDO QUESTÕES ===');
@@ -61,10 +63,13 @@ export function useSimulado(questoes: Question[], config?: SimuladoConfig) {
     console.log('=== FIM DEBUG ===');
     
     return questoesSorteadas;
-  }, [questoes, config?.quantidade, config?.areas, config?.tempoMinutos]); // Incluindo tempoMinutos para estabilidade
+  }, [questoes, config?.quantidade, config?.areas, config?.tempoMinutos]);
 
   const [respostas, setRespostas] = useState<{[id: number]: string}>({});
   const [index, setIndex] = useState(0);
+  const [timeRemaining, setTimeRemaining] = useState((config?.tempoMinutos || 120) * 60);
+  const [isTimerActive, setIsTimerActive] = useState(false);
+  const [isCompleted, setIsCompleted] = useState(false);
 
   console.log('=== ESTADO ATUAL DO SIMULADO ===');
   console.log('Índice atual:', index);
@@ -87,23 +92,71 @@ export function useSimulado(questoes: Question[], config?: SimuladoConfig) {
       setRespostas(r => ({ ...r, [questaoId]: resp }));
     }
   }
+
+  function submitAnswer(questionId: number, answerId: string) {
+    console.log('Submetendo resposta - Questão ID:', questionId, 'Resposta:', answerId);
+    setRespostas(r => ({ ...r, [questionId]: answerId }));
+  }
   
   function proxima() {
     const novoIndex = index + 1;
     console.log('Navegando para próxima questão. Índice atual:', index, 'Novo índice:', novoIndex);
     setIndex(novoIndex);
   }
+
+  function nextQuestion() {
+    proxima();
+  }
+
+  function previousQuestion() {
+    if (index > 0) {
+      setIndex(index - 1);
+    }
+  }
+
+  function startSimulado() {
+    setIsTimerActive(true);
+    setIsCompleted(false);
+    setIndex(0);
+    setRespostas({});
+  }
+
+  function finishSimulado() {
+    setIsCompleted(true);
+    setIsTimerActive(false);
+    
+    const correctAnswers = questoesSelecionadas.filter(
+      (q) => respostas[q.id] === q.correct
+    ).length;
+
+    return {
+      correctAnswers,
+      totalQuestions: questoesSelecionadas.length,
+      accuracy: (correctAnswers / questoesSelecionadas.length) * 100
+    };
+  }
   
   return {
     questoesSelecionadas,
+    questionsSelected: questoesSelecionadas, // Alias for compatibility
     respostas,
+    answers: respostas, // Alias for compatibility
     index,
+    currentQuestionIndex: index, // Alias for compatibility
     total: questoesSelecionadas.length,
     atual: questoesSelecionadas[index],
     respostaAtual,
     responder,
+    submitAnswer,
     proxima,
+    nextQuestion,
+    previousQuestion,
+    startSimulado,
+    finishSimulado,
     terminou: index >= questoesSelecionadas.length,
+    isCompleted,
+    timeRemaining,
+    isTimerActive,
     config: config || { quantidade: 10, areas: [], tempoMinutos: 120 }
   };
 }

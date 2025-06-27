@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Navbar } from '@/components/Navbar';
@@ -11,6 +12,7 @@ import { Alert, AlertDescription } from '@/components/ui/alert';
 import { useSimulado } from '@/hooks/useSimulado';
 import { useGamification } from '@/hooks/useGamification';
 import { useLimitChecker } from '@/hooks/useLimitChecker';
+import { useQuestions } from '@/hooks/useQuestions';
 import { Clock, CheckCircle, XCircle, Trophy, Lock } from 'lucide-react';
 
 export default function Simulado() {
@@ -18,20 +20,9 @@ export default function Simulado() {
   const location = useLocation();
   const { checkAndUseFeature, canUseFeature } = useLimitChecker();
   const { completeSimulado } = useGamification();
+  const { questoesAnoSelecionado } = useQuestions();
   
-  const {
-    questionsSelected,
-    currentQuestionIndex,
-    answers,
-    timeRemaining,
-    isCompleted,
-    isTimerActive,
-    startSimulado,
-    submitAnswer,
-    finishSimulado,
-    nextQuestion,
-    previousQuestion
-  } = useSimulado();
+  const simulado = useSimulado(questoesAnoSelecionado);
 
   const [hasCheckedLimits, setHasCheckedLimits] = useState(false);
   const [canStartSimulado, setCanStartSimulado] = useState(false);
@@ -49,7 +40,7 @@ export default function Simulado() {
 
   // Auto-start simulado if coming from selection and limits allow
   useEffect(() => {
-    if (hasCheckedLimits && canStartSimulado && location.state?.autoStart && questionsSelected.length === 0) {
+    if (hasCheckedLimits && canStartSimulado && location.state?.autoStart && simulado.questionsSelected.length === 0) {
       handleStartSimulado();
     }
   }, [hasCheckedLimits, canStartSimulado, location.state]);
@@ -60,15 +51,15 @@ export default function Simulado() {
     const canProceed = await checkAndUseFeature('simulados');
     if (!canProceed) return;
     
-    startSimulado();
+    simulado.startSimulado();
   };
 
   const handleAnswerSubmit = (questionId: number, answerId: string) => {
-    submitAnswer(questionId, answerId);
+    simulado.submitAnswer(questionId, answerId);
   };
 
   const handleFinishSimulado = async () => {
-    const results = finishSimulado();
+    const results = simulado.finishSimulado();
     
     // Update gamification
     await completeSimulado(results.correctAnswers, results.totalQuestions);
@@ -77,8 +68,8 @@ export default function Simulado() {
     navigate('/simulado/resultado', { 
       state: { 
         results,
-        questions: questionsSelected,
-        answers 
+        questions: simulado.questionsSelected,
+        answers: simulado.answers 
       } 
     });
   };
@@ -149,7 +140,7 @@ export default function Simulado() {
       <Navbar />
       <div className="container mx-auto px-4 pt-20">
         <div className="max-w-4xl mx-auto">
-          {questionsSelected.length === 0 ? (
+          {simulado.questionsSelected.length === 0 ? (
             // Simulado not started
             <Card>
               <CardContent className="pt-6">
@@ -174,25 +165,25 @@ export default function Simulado() {
           ) : (
             // Simulado in progress
             <>
-              <SimuladoHeader />
+              <SimuladoHeader onStart={handleStartSimulado} />
               <SimuladoProgress 
-                current={currentQuestionIndex + 1}
-                total={questionsSelected.length}
-                answers={answers}
+                current={simulado.currentQuestionIndex + 1}
+                total={simulado.questionsSelected.length}
+                answers={simulado.answers}
               />
               
-              {isTimerActive && (
+              {simulado.isTimerActive && (
                 <SimuladoTimer 
-                  timeRemaining={timeRemaining}
+                  timeRemaining={simulado.timeRemaining}
                   onTimeUp={handleFinishSimulado}
                 />
               )}
               
-              {questionsSelected[currentQuestionIndex] && (
+              {simulado.questionsSelected[simulado.currentQuestionIndex] && (
                 <QuestionCard
-                  question={questionsSelected[currentQuestionIndex]}
+                  question={simulado.questionsSelected[simulado.currentQuestionIndex]}
                   onAnswerWithEffects={(optionId: string, correct: boolean) => {
-                    handleAnswerSubmit(questionsSelected[currentQuestionIndex].id, optionId);
+                    handleAnswerSubmit(simulado.questionsSelected[simulado.currentQuestionIndex].id, optionId);
                   }}
                 />
               )}
@@ -200,17 +191,17 @@ export default function Simulado() {
               <div className="flex justify-between items-center mt-6">
                 <Button
                   variant="outline"
-                  onClick={previousQuestion}
-                  disabled={currentQuestionIndex === 0}
+                  onClick={simulado.previousQuestion}
+                  disabled={simulado.currentQuestionIndex === 0}
                 >
                   Anterior
                 </Button>
                 
                 <span className="text-sm text-gray-600">
-                  Questão {currentQuestionIndex + 1} de {questionsSelected.length}
+                  Questão {simulado.currentQuestionIndex + 1} de {simulado.questionsSelected.length}
                 </span>
                 
-                {currentQuestionIndex === questionsSelected.length - 1 ? (
+                {simulado.currentQuestionIndex === simulado.questionsSelected.length - 1 ? (
                   <Button
                     onClick={handleFinishSimulado}
                     className="bg-green-600 hover:bg-green-700"
@@ -219,8 +210,8 @@ export default function Simulado() {
                   </Button>
                 ) : (
                   <Button
-                    onClick={nextQuestion}
-                    disabled={!answers[questionsSelected[currentQuestionIndex].id]}
+                    onClick={simulado.nextQuestion}
+                    disabled={!simulado.answers[simulado.questionsSelected[simulado.currentQuestionIndex].id]}
                   >
                     Próxima
                   </Button>

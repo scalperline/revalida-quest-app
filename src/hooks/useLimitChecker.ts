@@ -2,6 +2,7 @@
 import { useSubscription } from './useSubscription';
 import { useToast } from './use-toast';
 import { useNavigate } from 'react-router-dom';
+import { Button } from '@/components/ui/button';
 
 export function useLimitChecker() {
   const { canUseFeature, updateUsage, subscribed } = useSubscription();
@@ -18,10 +19,11 @@ export function useLimitChecker() {
           ? "Ocorreu um erro ao verificar seus limites. Tente novamente."
           : `Você atingiu o limite ${feature === 'questions' ? 'diário de questões' : 'mensal de simulados'}. Faça upgrade para continuar!`,
         variant: "destructive",
-        action: !subscribed ? {
-          altText: "Fazer upgrade",
-          onClick: () => navigate('/pricing')
-        } : undefined
+        action: !subscribed ? (
+          <Button variant="outline" size="sm" onClick={() => navigate('/pricing')}>
+            Fazer upgrade
+          </Button>
+        ) : undefined
       });
       return false;
     }

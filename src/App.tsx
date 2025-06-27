@@ -91,9 +91,7 @@ const App = () => (
             <Route path="/perfil" element={
               <ProtectedRoute>
                 <Profile />
-              </Protected
-
-Route>
+              </ProtectedRoute>
             } />
             <Route path="/ranking" element={
               <ProtectedRoute>

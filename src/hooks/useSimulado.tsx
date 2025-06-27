@@ -1,6 +1,7 @@
 
 import { useState, useMemo } from "react";
 import { type Question } from "@/components/QuestionCard";
+import { useLimitChecker } from "./useLimitChecker";
 
 export interface SimuladoConfig {
   quantidade: number;
@@ -9,6 +10,8 @@ export interface SimuladoConfig {
 }
 
 export function useSimulado(questoes: Question[], config?: SimuladoConfig) {
+  const { checkSimuladoLimit, incrementSimuladoUsage } = useLimitChecker();
+  
   // Usa useMemo para evitar recalculo desnecessário das questões quando a config não muda
   const questoesSelecionadas = useMemo(() => {
     let questoesFiltradas = [...questoes];
@@ -65,12 +68,14 @@ export function useSimulado(questoes: Question[], config?: SimuladoConfig) {
 
   const [respostas, setRespostas] = useState<{[id: number]: string}>({});
   const [index, setIndex] = useState(0);
+  const [simuladoIniciado, setSimuladoIniciado] = useState(false);
 
   console.log('=== ESTADO ATUAL DO SIMULADO ===');
   console.log('Índice atual:', index);
   console.log('Total de questões:', questoesSelecionadas.length);
   console.log('Questão atual ID:', questoesSelecionadas[index]?.id);
   console.log('Respostas registradas:', Object.keys(respostas).length);
+  console.log('Simulado iniciado:', simuladoIniciado);
   console.log('=== FIM ESTADO ===');
 
   function respostaAtual() {
@@ -93,6 +98,28 @@ export function useSimulado(questoes: Question[], config?: SimuladoConfig) {
     console.log('Navegando para próxima questão. Índice atual:', index, 'Novo índice:', novoIndex);
     setIndex(novoIndex);
   }
+
+  const iniciarSimulado = async (): Promise<boolean> => {
+    console.log('=== TENTANDO INICIAR SIMULADO ===');
+    
+    if (simuladoIniciado) {
+      console.log('Simulado já foi iniciado');
+      return true;
+    }
+
+    const podeIniciar = await checkSimuladoLimit();
+    
+    if (!podeIniciar) {
+      console.log('❌ Não pode iniciar simulado - limite atingido');
+      return false;
+    }
+
+    console.log('✅ Pode iniciar simulado - incrementando contador');
+    await incrementSimuladoUsage();
+    setSimuladoIniciado(true);
+    
+    return true;
+  };
   
   return {
     questoesSelecionadas,
@@ -104,6 +131,8 @@ export function useSimulado(questoes: Question[], config?: SimuladoConfig) {
     responder,
     proxima,
     terminou: index >= questoesSelecionadas.length,
-    config: config || { quantidade: 10, areas: [], tempoMinutos: 120 }
+    config: config || { quantidade: 10, areas: [], tempoMinutos: 120 },
+    iniciarSimulado,
+    simuladoIniciado
   };
 }

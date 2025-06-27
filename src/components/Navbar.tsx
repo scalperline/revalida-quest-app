@@ -10,7 +10,8 @@ import {
   User, 
   Trophy,
   Target,
-  Stethoscope
+  Stethoscope,
+  Flag
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { UserProgressBar } from './UserProgressBar';

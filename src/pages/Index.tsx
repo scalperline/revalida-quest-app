@@ -81,7 +81,7 @@ const Index = () => {
               <div className="flex items-center gap-1 sm:gap-2 mb-1">
                 <Stethoscope className="w-4 h-4 xs:w-5 xs:h-5 sm:w-6 sm:h-6 text-orange-600 flex-shrink-0" />
                 <div className="min-w-0">
-                  <p className="text-sm xs:text-base sm:text-lg lg:text-xl font-bold text-gray-900 leading-tight">10,2k+</p>
+                  <p className="text-sm xs:text-base sm:text-lg lg:text-xl font-bold text-gray-900 leading-tight">11,2k+</p>
                   <p className="text-xs sm:text-sm text-gray-600 leading-tight">Médicos Ativos</p>
                 </div>
               </div>

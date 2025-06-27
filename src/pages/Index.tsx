@@ -1,4 +1,3 @@
-
 import { useAuth } from "@/hooks/useAuth";
 import { Navbar } from "@/components/Navbar";
 import { QuickChallenge } from "@/components/QuickChallenge";
@@ -9,18 +8,18 @@ import { BadgesGrid } from "@/components/BadgesGrid";
 import { UsageLimitsCard } from "@/components/UsageLimitsCard";
 import { useGamification } from "@/hooks/useGamification";
 import { BookOpen, Target, TrendingUp, Stethoscope } from "lucide-react";
-
 const Index = () => {
-  const { user } = useAuth();
-  const { userProgress } = useGamification();
-
+  const {
+    user
+  } = useAuth();
+  const {
+    userProgress
+  } = useGamification();
   const handleQuickChallengeStart = () => {
     console.log("Quick challenge started");
     // Aqui você pode adicionar a lógica para iniciar o desafio
   };
-
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-blue-100 to-blue-200 dark:from-gray-900 dark:to-gray-800 relative overflow-hidden">
+  return <div className="min-h-screen bg-gradient-to-br from-blue-50 via-blue-100 to-blue-200 dark:from-gray-900 dark:to-gray-800 relative overflow-hidden">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-4 -right-4 w-24 h-24 bg-blue-400 rounded-full opacity-20 animate-bounce"></div>
@@ -62,7 +61,7 @@ const Index = () => {
               <div className="flex items-center gap-1 sm:gap-2 mb-1">
                 <Target className="w-4 h-4 xs:w-5 xs:h-5 sm:w-6 sm:h-6 text-green-600 flex-shrink-0" />
                 <div className="min-w-0">
-                  <p className="text-sm xs:text-base sm:text-lg lg:text-xl font-bold text-gray-900 leading-tight">50+</p>
+                  <p className="text-sm xs:text-base sm:text-lg lg:text-xl font-bold text-gray-900 leading-tight">10+</p>
                   <p className="text-xs sm:text-sm text-gray-600 leading-tight">Missões Ativas</p>
                 </div>
               </div>
@@ -82,7 +81,7 @@ const Index = () => {
               <div className="flex items-center gap-1 sm:gap-2 mb-1">
                 <Stethoscope className="w-4 h-4 xs:w-5 xs:h-5 sm:w-6 sm:h-6 text-orange-600 flex-shrink-0" />
                 <div className="min-w-0">
-                  <p className="text-sm xs:text-base sm:text-lg lg:text-xl font-bold text-gray-900 leading-tight">12k+</p>
+                  <p className="text-sm xs:text-base sm:text-lg lg:text-xl font-bold text-gray-900 leading-tight">10,2k+</p>
                   <p className="text-xs sm:text-sm text-gray-600 leading-tight">Médicos Ativos</p>
                 </div>
               </div>
@@ -107,8 +106,6 @@ const Index = () => {
           </div>
         </div>
       </main>
-    </div>
-  );
+    </div>;
 };
-
 export default Index;

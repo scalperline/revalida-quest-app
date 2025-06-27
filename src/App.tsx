@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -16,6 +15,7 @@ import Ranking from "./pages/Ranking";
 import Auth from "./pages/Auth";
 import Pricing from "./pages/Pricing";
 import Success from "./pages/Success";
+import Terms from "./pages/Terms";
 
 const queryClient = new QueryClient();
 
@@ -30,6 +30,7 @@ const App = () => (
             <Route path="/auth" element={<Auth />} />
             <Route path="/pricing" element={<Pricing />} />
             <Route path="/success" element={<Success />} />
+            <Route path="/termos" element={<Terms />} />
             <Route path="/" element={
               <ProtectedRoute>
                 <Index />

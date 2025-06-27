@@ -139,11 +139,11 @@ export default function Ranking() {
           {/* Ranking Tabs */}
           <Tabs defaultValue="allTime" className="w-full">
             <TabsList className="grid w-full grid-cols-2 mb-6 bg-blue-50 dark:bg-gray-700">
-              <TabsTrigger value="allTime" className="flex items-center gap-2 data-[state=active]:bg-blue-600 data-[state=active]:text-white">
+              <TabsTrigger value="allTime" className="flex items-center gap-2 data-[state=active]:bg-blue-600 data-[state=active]:text-white font-normal text-lg">
                 <Trophy className="w-4 h-4" />
                 Ranking Geral
               </TabsTrigger>
-              <TabsTrigger value="weekly" className="flex items-center gap-2 data-[state=active]:bg-blue-600 data-[state=active]:text-white">
+              <TabsTrigger value="weekly" className="flex items-center gap-2 data-[state=active]:bg-blue-600 data-[state=active]:text-white font-normal text-lg">
                 <Calendar className="w-4 h-4" />
                 Ranking Semanal
               </TabsTrigger>

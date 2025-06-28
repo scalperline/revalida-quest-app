@@ -5,9 +5,9 @@ import { LogoutButton } from './LogoutButton';
 
 export function UserProgressBar() {
   return (
-    <div className="flex flex-col items-center gap-2">
+    <div className="flex items-center gap-3">
       <ProgressSection />
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-2">
         <UpgradeButton />
         <LogoutButton />
       </div>

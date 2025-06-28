@@ -54,7 +54,7 @@ export function Navbar() {
           </div>
 
           {/* Desktop Navigation - visível apenas em telas lg+ */}
-          <div className="hidden lg:flex items-center space-x-2">
+          <div className="hidden lg:flex items-center space-x-4 flex-1 justify-center">
             {navigation.map(item => {
               const isActive = location.pathname === item.href;
               return (
@@ -75,7 +75,7 @@ export function Navbar() {
           </div>
 
           {/* Desktop User Progress Bar - visível apenas em telas lg+ */}
-          <div className="hidden lg:block flex-shrink-0">
+          <div className="hidden lg:flex items-center flex-shrink-0">
             <UserProgressBar />
           </div>
 

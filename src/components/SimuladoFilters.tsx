@@ -6,7 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Settings, Play } from 'lucide-react';
+import { Settings, Play, Clock, Target, BookOpen, Info } from 'lucide-react';
 
 export interface SimuladoConfig {
   quantidade: number;
@@ -87,45 +87,163 @@ export function SimuladoFilters({ onStart }: SimuladoFiltersProps) {
   };
 
   return (
-    <Card className="w-full max-w-4xl mx-auto border-2 border-blue-200 shadow-xl hover:shadow-2xl transition-all duration-300">
-      <CardHeader className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 border-b border-blue-200">
-        <CardTitle className="flex items-center gap-2 text-xl">
-          <div className="p-2 rounded-lg bg-blue-500 text-white shadow-md">
-            <Settings className="w-6 h-6" />
-          </div>
-          Configure Sua Quest Personalizada
-        </CardTitle>
-      </CardHeader>
-      <CardContent className="space-y-6 p-6">
-        {/* Quantidade de Questões */}
-        <div className="space-y-3 p-4 bg-gray-50 dark:bg-gray-800/50 rounded-xl border-l-4 border-blue-500">
-          <Label htmlFor="quantidade" className="text-lg font-semibold flex items-center gap-2">
-            📊 Quantidade de Questões
-          </Label>
-          <div className="flex items-center gap-4">
-            <Input
-              id="quantidade"
-              type="number"
-              min="1"
-              max="100"
-              value={quantidade}
-              onChange={(e) => setQuantidade(parseInt(e.target.value) || 1)}
-              className="w-32 border-2 border-blue-200 focus:border-blue-500"
-            />
-            <span className="text-sm text-muted-foreground">
-              (entre 1 e 100 questões)
+    <div className="w-full max-w-5xl mx-auto space-y-6">
+      {/* Header Principal */}
+      <Card className="border-2 border-blue-200 shadow-xl bg-gradient-to-r from-blue-50 to-purple-50">
+        <CardHeader className="text-center pb-4">
+          <CardTitle className="flex items-center justify-center gap-3 text-2xl">
+            <div className="p-3 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg">
+              <Settings className="w-7 h-7" />
+            </div>
+            <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              Configure Seu Simulado Personalizado
             </span>
-          </div>
-        </div>
+          </CardTitle>
+          <p className="text-gray-600 mt-2 text-lg">
+            Monte seu simulado do jeito que desejar e conquiste experiência estudando para o Revalida
+          </p>
+        </CardHeader>
+      </Card>
 
-        {/* Seleção de Áreas */}
-        <div className="space-y-4 p-4 bg-gray-50 dark:bg-gray-800/50 rounded-xl border-l-4 border-purple-500">
-          <Label className="text-lg font-semibold flex items-center gap-2">
-            🏥 Áreas Médicas ({areasSelecionadas.length} selecionadas)
-          </Label>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 max-h-48 overflow-y-auto p-4 border-2 border-blue-200 rounded-lg bg-white dark:bg-gray-900">
+      {/* Configurações */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        
+        {/* Quantidade de Questões */}
+        <Card className="border-2 border-blue-200 shadow-lg hover:shadow-xl transition-all duration-300">
+          <CardHeader className="bg-gradient-to-r from-blue-50 to-blue-100 border-b border-blue-200">
+            <CardTitle className="flex items-center gap-2 text-lg">
+              <Target className="w-5 h-5 text-blue-600" />
+              Quantidade de Questões
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="p-6">
+            <div className="space-y-4">
+              <div className="flex items-center gap-4">
+                <Input
+                  id="quantidade"
+                  type="number"
+                  min="1"
+                  max="100"
+                  value={quantidade}
+                  onChange={(e) => setQuantidade(parseInt(e.target.value) || 1)}
+                  className="w-24 text-center border-2 border-blue-200 focus:border-blue-500 text-lg font-semibold"
+                />
+                <span className="text-sm text-gray-600">questões</span>
+              </div>
+              <p className="text-xs text-gray-500">
+                Escolha entre 1 e 100 questões para seu simulado
+              </p>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Tempo do Simulado */}
+        <Card className="border-2 border-green-200 shadow-lg hover:shadow-xl transition-all duration-300">
+          <CardHeader className="bg-gradient-to-r from-green-50 to-green-100 border-b border-green-200">
+            <CardTitle className="flex items-center gap-2 text-lg">
+              <Clock className="w-5 h-5 text-green-600" />
+              Tempo do Cronômetro
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="p-6">
+            <div className="space-y-4">
+              <div className="flex items-center space-x-2 p-3 bg-gray-50 rounded-lg">
+                <Checkbox
+                  id="tempo-customizado"
+                  checked={tempoCustomizado}
+                  onCheckedChange={(checked) => setTempoCustomizado(!!checked)}
+                  className="border-2"
+                />
+                <Label htmlFor="tempo-customizado" className="font-medium text-sm">
+                  Tempo personalizado
+                </Label>
+              </div>
+
+              {tempoCustomizado ? (
+                <div className="flex items-center gap-3">
+                  <Input
+                    type="number"
+                    min="10"
+                    max="360"
+                    value={tempoMinutos}
+                    onChange={(e) => setTempoMinutos(parseInt(e.target.value) || 10)}
+                    className="w-20 text-center border-2 border-orange-200 focus:border-orange-500"
+                  />
+                  <span className="text-sm text-gray-600">minutos</span>
+                </div>
+              ) : (
+                <Select 
+                  value={tempoMinutos.toString()} 
+                  onValueChange={(value) => setTempoMinutos(parseInt(value))}
+                >
+                  <SelectTrigger className="border-2 border-green-200 focus:border-green-500">
+                    <SelectValue placeholder="Selecione o tempo" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {TEMPOS_PREDEFINIDOS.map(tempo => (
+                      <SelectItem key={tempo.valor} value={tempo.valor.toString()}>
+                        {tempo.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              )}
+              
+              <div className="bg-blue-50 p-3 rounded-lg border border-blue-200">
+                <p className="text-xs text-blue-700 flex items-start gap-2">
+                  <Info className="w-4 h-4 mt-0.5 flex-shrink-0" />
+                  <span>
+                    <strong>Referência INEP:</strong> A primeira prova objetiva do Revalida tem duração oficial de 5 horas (300 minutos)
+                  </span>
+                </p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Resumo */}
+        <Card className="border-2 border-purple-200 shadow-lg hover:shadow-xl transition-all duration-300">
+          <CardHeader className="bg-gradient-to-r from-purple-50 to-purple-100 border-b border-purple-200">
+            <CardTitle className="flex items-center gap-2 text-lg">
+              <BookOpen className="w-5 h-5 text-purple-600" />
+              Resumo do Simulado
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="p-6">
+            <div className="space-y-3">
+              <div className="flex items-center gap-2 text-sm">
+                <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
+                <span><strong>{quantidade}</strong> questões</span>
+              </div>
+              <div className="flex items-center gap-2 text-sm">
+                <div className="w-3 h-3 bg-purple-500 rounded-full"></div>
+                <span><strong>{areasSelecionadas.length}</strong> área(s) médica(s)</span>
+              </div>
+              <div className="flex items-center gap-2 text-sm">
+                <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                <span><strong>{Math.floor(tempoMinutos / 60)}h {tempoMinutos % 60}min</strong> no cronômetro</span>
+              </div>
+              <div className="flex items-center gap-2 text-sm">
+                <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                <span>XP estimado: <strong>+{Math.floor(quantidade * 2.5)} XP</strong></span>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Seleção de Áreas */}
+      <Card className="border-2 border-purple-200 shadow-lg">
+        <CardHeader className="bg-gradient-to-r from-purple-50 to-indigo-50 border-b border-purple-200">
+          <CardTitle className="flex items-center gap-2 text-lg">
+            <BookOpen className="w-5 h-5 text-purple-600" />
+            Áreas Médicas ({areasSelecionadas.length} selecionada{areasSelecionadas.length !== 1 ? 's' : ''})
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="p-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 max-h-64 overflow-y-auto p-4 border-2 border-purple-200 rounded-lg bg-white">
             {AREAS_DISPONIVEIS.map(area => (
-              <div key={area} className="flex items-center space-x-2 p-2 rounded-md hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors">
+              <div key={area} className="flex items-center space-x-2 p-2 rounded-md hover:bg-purple-50 transition-colors">
                 <Checkbox
                   id={area}
                   checked={areasSelecionadas.includes(area)}
@@ -134,19 +252,19 @@ export function SimuladoFilters({ onStart }: SimuladoFiltersProps) {
                 />
                 <Label 
                   htmlFor={area} 
-                  className="text-sm cursor-pointer hover:text-blue-600"
+                  className="text-sm cursor-pointer hover:text-purple-600 leading-tight"
                 >
                   {area}
                 </Label>
               </div>
             ))}
           </div>
-          <div className="flex gap-2">
+          <div className="flex gap-2 mt-4">
             <Button
               variant="outline"
               size="sm"
               onClick={() => setAreasSelecionadas(AREAS_DISPONIVEIS)}
-              className="border-2 border-blue-300 hover:border-blue-500"
+              className="border-2 border-purple-300 hover:border-purple-500 hover:bg-purple-50"
             >
               Selecionar Todas
             </Button>
@@ -154,107 +272,25 @@ export function SimuladoFilters({ onStart }: SimuladoFiltersProps) {
               variant="outline"
               size="sm"
               onClick={() => setAreasSelecionadas([])}
-              className="border-2 border-gray-300 hover:border-gray-500"
+              className="border-2 border-gray-300 hover:border-gray-500 hover:bg-gray-50"
             >
               Limpar Seleção
             </Button>
           </div>
-        </div>
+        </CardContent>
+      </Card>
 
-        {/* Tempo do Cronômetro */}
-        <div className="space-y-4 p-4 bg-gray-50 dark:bg-gray-800/50 rounded-xl border-l-4 border-green-500">
-          <Label className="text-lg font-semibold flex items-center gap-2">
-            ⏱️ Tempo do Cronômetro
-          </Label>
-          
-          <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg border-2 border-blue-200 dark:border-blue-700">
-            <p className="text-sm text-blue-700 dark:text-blue-300">
-              ℹ️ <strong>Referência INEP:</strong> A primeira prova objetiva do Revalida tem duração oficial de 5 horas (300 minutos)
-            </p>
-          </div>
-          
-          <div className="flex items-center space-x-2 p-3 bg-white dark:bg-gray-900 rounded-lg border border-gray-200">
-            <Checkbox
-              id="tempo-customizado"
-              checked={tempoCustomizado}
-              onCheckedChange={(checked) => setTempoCustomizado(!!checked)}
-              className="border-2"
-            />
-            <Label htmlFor="tempo-customizado" className="font-medium">Tempo personalizado</Label>
-          </div>
-
-          {tempoCustomizado ? (
-            <div className="flex items-center gap-4 p-3 bg-white dark:bg-gray-900 rounded-lg border-2 border-orange-300">
-              <Input
-                type="number"
-                min="10"
-                max="360"
-                value={tempoMinutos}
-                onChange={(e) => setTempoMinutos(parseInt(e.target.value) || 10)}
-                className="w-32 border-2 border-orange-200 focus:border-orange-500"
-              />
-              <span className="text-sm text-muted-foreground">
-                minutos (entre 10 min e 6 horas)
-              </span>
-            </div>
-          ) : (
-            <Select 
-              value={tempoMinutos.toString()} 
-              onValueChange={(value) => setTempoMinutos(parseInt(value))}
-            >
-              <SelectTrigger className="w-full border-2 border-green-200 focus:border-green-500">
-                <SelectValue placeholder="Selecione o tempo" />
-              </SelectTrigger>
-              <SelectContent>
-                {TEMPOS_PREDEFINIDOS.map(tempo => (
-                  <SelectItem key={tempo.valor} value={tempo.valor.toString()}>
-                    {tempo.label}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          )}
-        </div>
-
-        {/* Resumo da Configuração */}
-        <div className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 p-6 rounded-xl border-2 border-blue-300 shadow-lg">
-          <h3 className="font-semibold mb-3 text-blue-800 dark:text-blue-200 text-lg flex items-center gap-2">
-            📋 Resumo da Quest
-          </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <ul className="space-y-2 text-sm text-blue-700 dark:text-blue-300">
-              <li className="flex items-center gap-2">
-                <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
-                <strong>{quantidade}</strong> questões selecionadas
-              </li>
-              <li className="flex items-center gap-2">
-                <span className="w-2 h-2 bg-purple-500 rounded-full"></span>
-                <strong>{areasSelecionadas.length}</strong> áreas médicas
-              </li>
-            </ul>
-            <ul className="space-y-2 text-sm text-blue-700 dark:text-blue-300">
-              <li className="flex items-center gap-2">
-                <span className="w-2 h-2 bg-green-500 rounded-full"></span>
-                <strong>{Math.floor(tempoMinutos / 60)}h {tempoMinutos % 60}min</strong> no cronômetro
-              </li>
-              <li className="flex items-center gap-2">
-                <span className="w-2 h-2 bg-yellow-500 rounded-full"></span>
-                XP estimado: <strong>+{Math.floor(quantidade * 2.5)} XP</strong>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        {/* Botão Iniciar */}
+      {/* Botão Iniciar */}
+      <div className="text-center">
         <Button
           onClick={handleIniciar}
-          className="w-full bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white font-bold py-6 text-lg border-2 border-green-500 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-[1.02]"
+          className="w-full max-w-md bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white font-bold py-6 text-xl border-2 border-green-500 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-[1.02] rounded-xl"
           size="lg"
         >
-          <Play className="w-6 h-6 mr-3" />
+          <Play className="w-7 h-7 mr-3" />
           🎯 Iniciar Simulado
         </Button>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 }

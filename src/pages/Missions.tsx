@@ -10,6 +10,9 @@ import { Navbar } from '@/components/Navbar';
 import { PersonalizedSimuladoSection } from '@/components/PersonalizedSimuladoSection';
 import { MissionsTabsSection } from '@/components/MissionsTabsSection';
 import { MissionsHeader } from '@/components/MissionsHeader';
+import { GamifiedMissionsDashboard } from '@/components/GamifiedMissionsDashboard';
+import { RecentAchievements } from '@/components/RecentAchievements';
+import { MissionFilters } from '@/components/MissionFilters';
 import { Mission } from '@/types/missions';
 import { SimuladoConfig } from '@/hooks/useSimulado';
 
@@ -18,6 +21,7 @@ export default function Missions() {
   const [completedMission, setCompletedMission] = useState<Mission | null>(null);
   const [executingMission, setExecutingMission] = useState<Mission | null>(null);
   const [showPersonalizedSimulado, setShowPersonalizedSimulado] = useState(false);
+  const [filters, setFilters] = useState<any>({});
 
   const { 
     getNewlyUnlockedAchievement, 
@@ -55,6 +59,10 @@ export default function Missions() {
 
   const handleBackToTabs = () => {
     setShowPersonalizedSimulado(false);
+  };
+
+  const handleFilterChange = (newFilters: any) => {
+    setFilters(newFilters);
   };
 
   // Se estiver executando uma quest pronta
@@ -101,12 +109,22 @@ export default function Missions() {
           
           <MissionsHeader />
 
+          {/* Gamified Dashboard */}
+          <GamifiedMissionsDashboard />
+
+          {/* Recent Achievements */}
+          <RecentAchievements />
+
+          {/* Mission Filters */}
+          <MissionFilters onFilterChange={handleFilterChange} />
+
           {showPersonalizedSimulado ? (
             <PersonalizedSimuladoSection onBackToTabs={handleBackToTabs} />
           ) : (
             <MissionsTabsSection 
               onStartMission={handleStartMission}
               onStartPersonalizedSimulado={handleStartPersonalizedSimulado}
+              filters={filters}
             />
           )}
         </div>

@@ -49,7 +49,7 @@ export function Navbar() {
               <div className="w-10 h-10 sm:w-12 sm:h-12 medical-gradient rounded-lg flex items-center justify-center flex-shrink-0 shadow-md">
                 <Stethoscope className="w-5 h-5 sm:w-7 sm:h-7 text-white" />
               </div>
-              <span className="text-lg sm:text-xl md:text-2xl font-bold gradient-text leading-tight">RevalidaQuest</span>
+              <span className="text-lg sm:text-xl md:text-2xl font-bold gradient-text leading-tight hidden xs:block">RevalidaQuest</span>
             </Link>
           </div>
 

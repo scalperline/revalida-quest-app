@@ -54,24 +54,26 @@ export function Navbar() {
           </div>
 
           {/* Desktop Navigation - visível apenas em telas lg+ */}
-          <div className="hidden lg:flex items-center space-x-4 flex-1 justify-center">
-            {navigation.map(item => {
-              const isActive = location.pathname === item.href;
-              return (
-                <Link 
-                  key={item.name} 
-                  to={item.href} 
-                  className={`flex items-center space-x-1 px-3 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-                    isActive 
-                      ? 'bg-gradient-to-r from-blue-600 to-blue-800 text-white shadow-lg' 
-                      : 'text-gray-700 hover:bg-gradient-to-r hover:from-blue-50 hover:to-blue-100 hover:text-blue-600'
-                  }`}
-                >
-                  <item.icon className="w-4 h-4" />
-                  <span>{item.name}</span>
-                </Link>
-              );
-            })}
+          <div className="hidden lg:flex items-center justify-center flex-1 max-w-2xl mx-8">
+            <div className="flex items-center bg-gray-50/80 backdrop-blur-sm rounded-full px-2 py-1.5 border border-gray-200/50 shadow-sm">
+              {navigation.map(item => {
+                const isActive = location.pathname === item.href;
+                return (
+                  <Link 
+                    key={item.name} 
+                    to={item.href} 
+                    className={`flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-medium transition-all duration-300 whitespace-nowrap ${
+                      isActive 
+                        ? 'bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-md scale-[1.02]' 
+                        : 'text-gray-700 hover:bg-white/80 hover:text-blue-600 hover:shadow-sm'
+                    }`}
+                  >
+                    <item.icon className="w-4 h-4 flex-shrink-0" />
+                    <span className="hidden xl:inline">{item.name}</span>
+                  </Link>
+                );
+              })}
+            </div>
           </div>
 
           {/* Desktop User Progress Bar - visível apenas em telas lg+ */}

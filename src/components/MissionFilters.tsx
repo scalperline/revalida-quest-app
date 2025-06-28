@@ -144,7 +144,7 @@ export function MissionFilters({ onFilterChange }: MissionFiltersProps) {
           </Badge>
           <Badge variant="outline" className="cursor-pointer hover:bg-purple-100 border-purple-300">
             <Clock className="w-3 h-3 mr-1" />
-            Rápidas (< 15 min)
+            Rápidas (&lt; 15 min)
           </Badge>
         </div>
       </CardContent>

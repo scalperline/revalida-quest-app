@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Home, FileText, BarChart3, User, Trophy, Target, Stethoscope, Flag } from 'lucide-react';
@@ -6,11 +5,9 @@ import { Button } from '@/components/ui/button';
 import { UserProgressBar } from './UserProgressBar';
 import { MobileHamburgerMenu } from './MobileHamburgerMenu';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
-  
   const navigation = [{
     name: 'Início',
     href: '/',
@@ -36,11 +33,8 @@ export function Navbar() {
     href: '/profile',
     icon: User
   }];
-  
   const closeSheet = () => setIsOpen(false);
-  
-  return (
-    <nav className="bg-white shadow-lg border-b border-gray-200 fixed top-0 left-0 right-0 z-[9980]">
+  return <nav className="bg-white shadow-lg border-b border-gray-200 fixed top-0 left-0 right-0 z-[9980]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16 min-h-[64px]">
           {/* Logo */}
@@ -56,22 +50,12 @@ export function Navbar() {
           {/* Desktop Navigation - visível apenas em telas lg+ */}
           <div className="hidden lg:flex items-center space-x-4 flex-1 justify-center">
             {navigation.map(item => {
-              const isActive = location.pathname === item.href;
-              return (
-                <Link 
-                  key={item.name} 
-                  to={item.href} 
-                  className={`flex items-center space-x-1 px-3 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-                    isActive 
-                      ? 'bg-gradient-to-r from-blue-600 to-blue-800 text-white shadow-lg' 
-                      : 'text-gray-700 hover:bg-gradient-to-r hover:from-blue-50 hover:to-blue-100 hover:text-blue-600'
-                  }`}
-                >
+            const isActive = location.pathname === item.href;
+            return <Link key={item.name} to={item.href} className="mx-[23px]">
                   <item.icon className="w-4 h-4" />
                   <span>{item.name}</span>
-                </Link>
-              );
-            })}
+                </Link>;
+          })}
           </div>
 
           {/* Desktop User Progress Bar - visível apenas em telas lg+ */}
@@ -85,6 +69,5 @@ export function Navbar() {
           </div>
         </div>
       </div>
-    </nav>
-  );
+    </nav>;
 }

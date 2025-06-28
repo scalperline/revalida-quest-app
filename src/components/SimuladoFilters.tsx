@@ -252,7 +252,7 @@ export function SimuladoFilters({ onStart }: SimuladoFiltersProps) {
           size="lg"
         >
           <Play className="w-6 h-6 mr-3" />
-          🎯 Iniciar Quest
+          🎯 Iniciar Simulado
         </Button>
       </CardContent>
     </Card>

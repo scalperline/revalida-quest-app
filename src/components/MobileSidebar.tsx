@@ -1,19 +1,18 @@
+
 import { Link, useLocation } from 'react-router-dom';
 import { Home, FileText, BarChart3, User, Trophy, Target, HelpCircle, LogOut, X, Stethoscope } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
 import { UserProgressBar } from './UserProgressBar';
+
 interface Props {
   isOpen: boolean;
   onClose: () => void;
 }
-export function MobileSidebar({
-  isOpen,
-  onClose
-}: Props) {
+
+export function MobileSidebar({ isOpen, onClose }: Props) {
   const location = useLocation();
-  const {
-    signOut
-  } = useAuth();
+  const { signOut } = useAuth();
+
   const navigation = [{
     name: 'Dashboard',
     href: '/',
@@ -45,6 +44,7 @@ export function MobileSidebar({
     icon: User,
     emoji: '⚙️'
   }];
+
   const menuActions = [{
     name: 'Ajuda',
     icon: HelpCircle,
@@ -56,9 +56,16 @@ export function MobileSidebar({
     emoji: '🚪',
     action: () => signOut()
   }];
-  return <>
+
+  return (
+    <>
       {/* Overlay */}
-      {isOpen && <div className="fixed inset-0 bg-black/50 z-[9998] transition-opacity duration-300" onClick={onClose} />}
+      {isOpen && (
+        <div 
+          className="fixed inset-0 bg-black/50 z-[9998] transition-opacity duration-300" 
+          onClick={onClose} 
+        />
+      )}
 
       {/* Side Menu */}
       <div className={`
@@ -79,7 +86,10 @@ export function MobileSidebar({
             </div>
             <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent text-lg text-left font-extrabold">RevalidaQuest</span>
           </div>
-          <button onClick={onClose} className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors">
+          <button 
+            onClick={onClose} 
+            className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
+          >
             <X className="w-5 h-5 text-gray-500" />
           </button>
         </div>
@@ -93,17 +103,27 @@ export function MobileSidebar({
         <div className="flex-1 py-6">
           <nav className="space-y-2 px-4">
             {navigation.map(item => {
-            const isActive = location.pathname === item.href;
-            return <Link key={item.name} to={item.href} onClick={onClose} className={`
+              const isActive = location.pathname === item.href;
+              return (
+                <Link 
+                  key={item.name} 
+                  to={item.href} 
+                  onClick={onClose} 
+                  className={`
                     flex items-center gap-3 px-4 py-3 rounded-xl text-base font-medium 
                     transition-all duration-200 group
-                    ${isActive ? 'bg-gradient-to-r from-blue-600 to-blue-800 text-white shadow-lg' : 'text-gray-700 dark:text-gray-300 hover:bg-gradient-to-r hover:from-blue-50 hover:to-blue-100 hover:text-blue-700 dark:hover:from-blue-900/20 dark:hover:to-blue-800/20 dark:hover:text-blue-300'}
-                  `}>
+                    ${isActive 
+                      ? 'bg-gradient-to-r from-blue-600 to-blue-800 text-white shadow-lg' 
+                      : 'text-gray-700 dark:text-gray-300 hover:bg-gradient-to-r hover:from-blue-50 hover:to-blue-100 hover:text-blue-700 dark:hover:from-blue-900/20 dark:hover:to-blue-800/20 dark:hover:text-blue-300'
+                    }
+                  `}
+                >
                   <span className="text-lg">{item.emoji}</span>
                   <item.icon className="w-5 h-5" />
                   <span>{item.name}</span>
-                </Link>;
-          })}
+                </Link>
+              );
+            })}
           </nav>
         </div>
 
@@ -113,20 +133,26 @@ export function MobileSidebar({
         {/* Action Items */}
         <div className="py-4 flex-shrink-0">
           <nav className="space-y-2 px-4">
-            {menuActions.map(item => <button key={item.name} onClick={() => {
-            item.action();
-            onClose();
-          }} className="
+            {menuActions.map(item => (
+              <button 
+                key={item.name} 
+                onClick={() => {
+                  item.action();
+                  onClose();
+                }} 
+                className="
                   w-full flex items-center gap-3 px-4 py-3 rounded-xl text-base font-medium 
                   text-gray-700 dark:text-gray-300 
                   hover:bg-gradient-to-r hover:from-gray-50 hover:to-gray-100 hover:text-gray-800
                   dark:hover:from-gray-800/30 dark:hover:to-gray-700/30 dark:hover:text-gray-200
                   transition-all duration-200
-                ">
+                "
+              >
                 <span className="text-lg">{item.emoji}</span>
                 <item.icon className="w-5 h-5" />
                 <span>{item.name}</span>
-              </button>)}
+              </button>
+            ))}
           </nav>
         </div>
 
@@ -138,5 +164,6 @@ export function MobileSidebar({
           </div>
         </div>
       </div>
-    </>;
+    </>
+  );
 }

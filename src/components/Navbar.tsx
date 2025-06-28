@@ -20,7 +20,7 @@ export function Navbar() {
     href: '/questions',
     icon: FileText
   }, {
-    name: 'Quests',
+    name: 'Missões',
     href: '/missions',
     icon: Target
   }, {

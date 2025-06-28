@@ -35,7 +35,7 @@ const Index = () => {
           {/* Hero Section */}
           <div className="text-center mb-4 sm:mb-6 lg:mb-8">
             <h1 className="text-xl xs:text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-2 sm:mb-3 lg:mb-4 leading-tight px-2 sm:px-4">
-              Bem-vindo ao <span className="gradient-text font-bold text-4xl">RevalidaQuest</span>, {user?.user_metadata?.display_name || 'Doutor'}! 👋
+              Bem-vindo ao <span className="gradient-text font-bold text-2xl">RevalidaQuest</span>, {user?.user_metadata?.display_name || 'Doutor'}! 👋
             </h1>
             
             <p className="text-sm xs:text-base sm:text-lg lg:text-xl text-gray-600 max-w-2xl sm:max-w-3xl lg:max-w-4xl mx-auto leading-relaxed px-4 sm:px-6">

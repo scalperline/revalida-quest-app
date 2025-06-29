@@ -70,7 +70,7 @@ export function MobileSidebar({ isOpen, onClose }: Props) {
       {/* Side Menu */}
       <div className={`
         fixed top-0 right-0 h-full z-[9999]
-        w-[280px] xs:w-[260px]
+        w-[300px] sm:w-[280px]
         bg-white dark:bg-gray-900
         shadow-2xl
         transform transition-transform duration-300 ease-in-out
@@ -79,7 +79,7 @@ export function MobileSidebar({ isOpen, onClose }: Props) {
         flex flex-col
       `}>
         {/* Header */}
-        <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700 flex-shrink-0">
+        <div className="flex items-center justify-between p-4 sm:p-6 border-b border-gray-200 dark:border-gray-700 flex-shrink-0">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-blue-800 rounded-lg flex items-center justify-center shadow-md">
               <Stethoscope className="w-6 h-6 text-white" />
@@ -94,14 +94,14 @@ export function MobileSidebar({ isOpen, onClose }: Props) {
           </button>
         </div>
 
-        {/* User Progress Section - Mobile Only */}
-        <div className="p-4 border-b border-gray-200 dark:border-gray-700 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-900 flex-shrink-0">
+        {/* User Progress Section - Mobile */}
+        <div className="p-3 sm:p-4 border-b border-gray-200 dark:border-gray-700 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-900 flex-shrink-0">
           <UserProgressBar />
         </div>
 
-        {/* Navigation Menu - Flex grow to take available space */}
-        <div className="flex-1 py-6">
-          <nav className="space-y-2 px-4">
+        {/* Navigation Menu */}
+        <div className="flex-1 py-4 sm:py-6">
+          <nav className="space-y-1 sm:space-y-2 px-3 sm:px-4">
             {navigation.map(item => {
               const isActive = location.pathname === item.href;
               return (
@@ -110,7 +110,7 @@ export function MobileSidebar({ isOpen, onClose }: Props) {
                   to={item.href} 
                   onClick={onClose} 
                   className={`
-                    flex items-center gap-3 px-4 py-3 rounded-xl text-base font-medium 
+                    flex items-center gap-3 px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl text-sm sm:text-base font-medium 
                     transition-all duration-200 group
                     ${isActive 
                       ? 'bg-gradient-to-r from-blue-600 to-blue-800 text-white shadow-lg' 
@@ -118,8 +118,8 @@ export function MobileSidebar({ isOpen, onClose }: Props) {
                     }
                   `}
                 >
-                  <span className="text-lg">{item.emoji}</span>
-                  <item.icon className="w-5 h-5" />
+                  <span className="text-base sm:text-lg">{item.emoji}</span>
+                  <item.icon className="w-4 h-4 sm:w-5 sm:h-5" />
                   <span>{item.name}</span>
                 </Link>
               );
@@ -128,11 +128,11 @@ export function MobileSidebar({ isOpen, onClose }: Props) {
         </div>
 
         {/* Divider */}
-        <div className="border-t border-gray-200 dark:border-gray-700 mx-4 flex-shrink-0" />
+        <div className="border-t border-gray-200 dark:border-gray-700 mx-3 sm:mx-4 flex-shrink-0" />
 
         {/* Action Items */}
-        <div className="py-4 flex-shrink-0">
-          <nav className="space-y-2 px-4">
+        <div className="py-3 sm:py-4 flex-shrink-0">
+          <nav className="space-y-1 sm:space-y-2 px-3 sm:px-4">
             {menuActions.map(item => (
               <button 
                 key={item.name} 
@@ -141,24 +141,24 @@ export function MobileSidebar({ isOpen, onClose }: Props) {
                   onClose();
                 }} 
                 className="
-                  w-full flex items-center gap-3 px-4 py-3 rounded-xl text-base font-medium 
+                  w-full flex items-center gap-3 px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl text-sm sm:text-base font-medium 
                   text-gray-700 dark:text-gray-300 
                   hover:bg-gradient-to-r hover:from-gray-50 hover:to-gray-100 hover:text-gray-800
                   dark:hover:from-gray-800/30 dark:hover:to-gray-700/30 dark:hover:text-gray-200
                   transition-all duration-200
                 "
               >
-                <span className="text-lg">{item.emoji}</span>
-                <item.icon className="w-5 h-5" />
+                <span className="text-base sm:text-lg">{item.emoji}</span>
+                <item.icon className="w-4 h-4 sm:w-5 sm:h-5" />
                 <span>{item.name}</span>
               </button>
             ))}
           </nav>
         </div>
 
-        {/* Footer - Fixed at bottom */}
-        <div className="p-4 border-t border-gray-200 dark:border-gray-700 bg-gradient-to-r from-blue-50 to-blue-100 dark:from-gray-800 dark:to-gray-900 flex-shrink-0">
-          <div className="text-center text-sm text-gray-600 dark:text-gray-400">
+        {/* Footer */}
+        <div className="p-3 sm:p-4 border-t border-gray-200 dark:border-gray-700 bg-gradient-to-r from-blue-50 to-blue-100 dark:from-gray-800 dark:to-gray-900 flex-shrink-0">
+          <div className="text-center text-xs sm:text-sm text-gray-600 dark:text-gray-400">
             <p className="font-semibold text-blue-600 dark:text-blue-400">Revalida Quest</p>
             <p className="text-xs">Sua jornada médica</p>
           </div>

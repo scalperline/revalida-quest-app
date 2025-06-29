@@ -67,9 +67,9 @@ export function MobileSidebar({ isOpen, onClose }: Props) {
         />
       )}
 
-      {/* Side Menu */}
+      {/* Side Menu - Corrigindo altura para ocupar toda a tela */}
       <div className={`
-        fixed top-0 right-0 h-full z-[9999]
+        fixed inset-y-0 right-0 z-[9999]
         w-[320px] sm:w-[300px]
         bg-white dark:bg-gray-900
         shadow-2xl
@@ -77,6 +77,7 @@ export function MobileSidebar({ isOpen, onClose }: Props) {
         ${isOpen ? 'translate-x-0' : 'translate-x-full'}
         overflow-y-auto
         flex flex-col
+        h-screen
       `}>
         {/* Header */}
         <div className="flex items-center justify-between p-4 sm:p-5 border-b border-gray-200 dark:border-gray-700 flex-shrink-0 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-900">
@@ -107,7 +108,7 @@ export function MobileSidebar({ isOpen, onClose }: Props) {
         </div>
 
         {/* Navigation Menu */}
-        <div className="flex-1 py-4">
+        <div className="flex-1 py-4 min-h-0">
           <nav className="space-y-1 px-4">
             {navigation.map(item => {
               const isActive = location.pathname === item.href;
@@ -138,7 +139,7 @@ export function MobileSidebar({ isOpen, onClose }: Props) {
         <div className="border-t border-gray-200 dark:border-gray-700 mx-4" />
 
         {/* Action Items */}
-        <div className="py-4">
+        <div className="py-4 flex-shrink-0">
           <nav className="space-y-1 px-4">
             {menuActions.map(item => (
               <button 

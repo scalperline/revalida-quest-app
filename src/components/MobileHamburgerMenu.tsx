@@ -18,7 +18,6 @@ export function MobileHamburgerMenu({ className = '' }: Props) {
   // Close menu
   const closeMenu = () => {
     setIsOpen(false);
-    document.body.style.overflow = 'auto';
   };
 
   // ESC key handler
@@ -31,7 +30,6 @@ export function MobileHamburgerMenu({ className = '' }: Props) {
     document.addEventListener('keydown', handleEsc);
     return () => {
       document.removeEventListener('keydown', handleEsc);
-      document.body.style.overflow = 'auto';
     };
   }, [isOpen]);
 

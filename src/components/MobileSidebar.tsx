@@ -62,7 +62,7 @@ export function MobileSidebar({ isOpen, onClose }: Props) {
       {/* Overlay */}
       {isOpen && (
         <div 
-          className="fixed inset-0 bg-black/50 z-[9998] transition-opacity duration-300" 
+          className="fixed inset-0 bg-black/50 z-[9998] transition-opacity duration-300 backdrop-blur-xs" 
           onClick={onClose} 
         />
       )}
@@ -70,7 +70,7 @@ export function MobileSidebar({ isOpen, onClose }: Props) {
       {/* Side Menu */}
       <div className={`
         fixed top-0 right-0 h-full z-[9999]
-        w-[300px] sm:w-[280px]
+        w-[320px] sm:w-[300px]
         bg-white dark:bg-gray-900
         shadow-2xl
         transform transition-transform duration-300 ease-in-out
@@ -79,29 +79,36 @@ export function MobileSidebar({ isOpen, onClose }: Props) {
         flex flex-col
       `}>
         {/* Header */}
-        <div className="flex items-center justify-between p-4 sm:p-6 border-b border-gray-200 dark:border-gray-700 flex-shrink-0">
+        <div className="flex items-center justify-between p-4 sm:p-5 border-b border-gray-200 dark:border-gray-700 flex-shrink-0 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-900">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-blue-800 rounded-lg flex items-center justify-center shadow-md">
+            <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl flex items-center justify-center shadow-md">
               <Stethoscope className="w-6 h-6 text-white" />
             </div>
-            <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent text-lg text-left font-extrabold">RevalidaQuest</span>
+            <div className="flex flex-col">
+              <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent text-lg font-extrabold">
+                RevalidaQuest
+              </span>
+              <span className="text-xs text-gray-500 dark:text-gray-400">
+                Sua jornada médica
+              </span>
+            </div>
           </div>
           <button 
             onClick={onClose} 
-            className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
+            className="p-2.5 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-xl transition-colors"
           >
             <X className="w-5 h-5 text-gray-500" />
           </button>
         </div>
 
         {/* User Progress Section - Mobile */}
-        <div className="p-3 sm:p-4 border-b border-gray-200 dark:border-gray-700 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-900 flex-shrink-0">
+        <div className="p-4 border-b border-gray-200 dark:border-gray-700 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-900 flex-shrink-0">
           <UserProgressBar />
         </div>
 
         {/* Navigation Menu */}
-        <div className="flex-1 py-4 sm:py-6">
-          <nav className="space-y-1 sm:space-y-2 px-3 sm:px-4">
+        <div className="flex-1 py-4">
+          <nav className="space-y-1 px-4">
             {navigation.map(item => {
               const isActive = location.pathname === item.href;
               return (
@@ -110,7 +117,7 @@ export function MobileSidebar({ isOpen, onClose }: Props) {
                   to={item.href} 
                   onClick={onClose} 
                   className={`
-                    flex items-center gap-3 px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl text-sm sm:text-base font-medium 
+                    flex items-center gap-3 px-4 py-3.5 rounded-xl text-base font-medium 
                     transition-all duration-200 group
                     ${isActive 
                       ? 'bg-gradient-to-r from-blue-600 to-blue-800 text-white shadow-lg' 
@@ -118,8 +125,8 @@ export function MobileSidebar({ isOpen, onClose }: Props) {
                     }
                   `}
                 >
-                  <span className="text-base sm:text-lg">{item.emoji}</span>
-                  <item.icon className="w-4 h-4 sm:w-5 sm:h-5" />
+                  <span className="text-lg">{item.emoji}</span>
+                  <item.icon className="w-5 h-5" />
                   <span>{item.name}</span>
                 </Link>
               );
@@ -128,11 +135,11 @@ export function MobileSidebar({ isOpen, onClose }: Props) {
         </div>
 
         {/* Divider */}
-        <div className="border-t border-gray-200 dark:border-gray-700 mx-3 sm:mx-4 flex-shrink-0" />
+        <div className="border-t border-gray-200 dark:border-gray-700 mx-4" />
 
         {/* Action Items */}
-        <div className="py-3 sm:py-4 flex-shrink-0">
-          <nav className="space-y-1 sm:space-y-2 px-3 sm:px-4">
+        <div className="py-4">
+          <nav className="space-y-1 px-4">
             {menuActions.map(item => (
               <button 
                 key={item.name} 
@@ -141,15 +148,15 @@ export function MobileSidebar({ isOpen, onClose }: Props) {
                   onClose();
                 }} 
                 className="
-                  w-full flex items-center gap-3 px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl text-sm sm:text-base font-medium 
+                  w-full flex items-center gap-3 px-4 py-3.5 rounded-xl text-base font-medium 
                   text-gray-700 dark:text-gray-300 
                   hover:bg-gradient-to-r hover:from-gray-50 hover:to-gray-100 hover:text-gray-800
                   dark:hover:from-gray-800/30 dark:hover:to-gray-700/30 dark:hover:text-gray-200
                   transition-all duration-200
                 "
               >
-                <span className="text-base sm:text-lg">{item.emoji}</span>
-                <item.icon className="w-4 h-4 sm:w-5 sm:h-5" />
+                <span className="text-lg">{item.emoji}</span>
+                <item.icon className="w-5 h-5" />
                 <span>{item.name}</span>
               </button>
             ))}
@@ -157,10 +164,10 @@ export function MobileSidebar({ isOpen, onClose }: Props) {
         </div>
 
         {/* Footer */}
-        <div className="p-3 sm:p-4 border-t border-gray-200 dark:border-gray-700 bg-gradient-to-r from-blue-50 to-blue-100 dark:from-gray-800 dark:to-gray-900 flex-shrink-0">
-          <div className="text-center text-xs sm:text-sm text-gray-600 dark:text-gray-400">
-            <p className="font-semibold text-blue-600 dark:text-blue-400">Revalida Quest</p>
-            <p className="text-xs">Sua jornada médica</p>
+        <div className="p-4 border-t border-gray-200 dark:border-gray-700 bg-gradient-to-r from-blue-50 to-blue-100 dark:from-gray-800 dark:to-gray-900 flex-shrink-0">
+          <div className="text-center text-sm text-gray-600 dark:text-gray-400">
+            <p className="font-semibold text-blue-600 dark:text-blue-400">© 2024 RevalidaQuest</p>
+            <p className="text-xs">Versão 2.0.1</p>
           </div>
         </div>
       </div>

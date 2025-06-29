@@ -47,13 +47,7 @@ export function QuestionHeader({ question, isCorrect }: QuestionHeaderProps) {
             </h3>
             <div className="flex items-center gap-2 text-xs sm:text-sm text-gray-600 dark:text-gray-400">
               <Calendar className="w-3 h-3 sm:w-4 sm:h-4" />
-              <span>Revalida {question.ano}</span>
-              {question.tipo && (
-                <>
-                  <span>•</span>
-                  <span>{question.tipo}</span>
-                </>
-              )}
+              <span>Revalida {question.year}</span>
             </div>
           </div>
         </div>
@@ -91,22 +85,12 @@ export function QuestionHeader({ question, isCorrect }: QuestionHeaderProps) {
           {question.area}
         </Badge>
         
-        {question.difficulty && (
-          <Badge 
-            variant="outline" 
-            className={`px-3 py-1 font-semibold text-xs sm:text-sm border-2 shadow-sm hover:shadow-md transition-all duration-200 ${getDifficultyColor(question.difficulty)}`}
-          >
-            <Target className="w-3 h-3 mr-1.5" />
-            {question.difficulty}
-          </Badge>
-        )}
-        
         <Badge 
           variant="outline" 
           className="px-3 py-1 font-semibold text-xs sm:text-sm bg-indigo-100 text-indigo-800 border-2 border-indigo-200 shadow-sm hover:shadow-md transition-all duration-200"
         >
           <Calendar className="w-3 h-3 mr-1.5" />
-          {question.ano}
+          {question.year}
         </Badge>
       </div>
     </div>

@@ -1,4 +1,3 @@
-
 import { useAuth } from "@/hooks/useAuth";
 import { Navbar } from "@/components/Navbar";
 import { QuickChallenge } from "@/components/QuickChallenge";
@@ -9,17 +8,17 @@ import { BadgesGrid } from "@/components/BadgesGrid";
 import { UsageLimitsCard } from "@/components/UsageLimitsCard";
 import { useGamification } from "@/hooks/useGamification";
 import { BookOpen, Target, TrendingUp, Stethoscope, Sparkles, Zap } from "lucide-react";
-
 const Index = () => {
-  const { user } = useAuth();
-  const { userProgress } = useGamification();
-
+  const {
+    user
+  } = useAuth();
+  const {
+    userProgress
+  } = useGamification();
   const handleQuickChallengeStart = () => {
     console.log("Quick challenge started");
   };
-
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-blue-100 to-blue-200 dark:from-gray-900 dark:to-gray-800 relative overflow-hidden">
+  return <div className="min-h-screen bg-gradient-to-br from-blue-50 via-blue-100 to-blue-200 dark:from-gray-900 dark:to-gray-800 relative overflow-hidden">
       {/* Enhanced Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-4 -right-4 w-16 h-16 sm:w-24 sm:h-24 bg-blue-400 rounded-full opacity-20 animate-bounce"></div>
@@ -40,7 +39,7 @@ const Index = () => {
             <div className="relative z-10 p-4 sm:p-6 lg:p-8">
               <h1 className="text-xl xs:text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 mb-3 sm:mb-4 lg:mb-6 leading-tight px-2 sm:px-4">
                 Bem-vindo ao{" "}
-                <span className="gradient-text font-extrabold bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent animate-pulse">
+                <span className="gradient-text bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent animate-pulse font-bold text-lg">
                   RevalidaQuest
                 </span>
                 , {user?.user_metadata?.display_name || 'Doutor'}! 
@@ -122,31 +121,39 @@ const Index = () => {
               <div className="animate-fade-in">
                 <QuickChallenge onStart={handleQuickChallengeStart} />
               </div>
-              <div className="animate-fade-in" style={{animationDelay: '0.2s'}}>
+              <div className="animate-fade-in" style={{
+              animationDelay: '0.2s'
+            }}>
                 <AdaptiveSuggestions />
               </div>
             </div>
 
             {/* Right Column */}
             <div className="space-y-4 sm:space-y-6 lg:space-y-8">
-              <div className="animate-fade-in" style={{animationDelay: '0.1s'}}>
+              <div className="animate-fade-in" style={{
+              animationDelay: '0.1s'
+            }}>
                 <UsageLimitsCard />
               </div>
-              <div className="animate-fade-in" style={{animationDelay: '0.3s'}}>
+              <div className="animate-fade-in" style={{
+              animationDelay: '0.3s'
+            }}>
                 <StreakDisplay />
               </div>
-              <div className="animate-fade-in" style={{animationDelay: '0.4s'}}>
+              <div className="animate-fade-in" style={{
+              animationDelay: '0.4s'
+            }}>
                 <QuestsPanel />
               </div>
-              <div className="animate-fade-in" style={{animationDelay: '0.5s'}}>
+              <div className="animate-fade-in" style={{
+              animationDelay: '0.5s'
+            }}>
                 <BadgesGrid achievements={userProgress.achievements} />
               </div>
             </div>
           </div>
         </div>
       </main>
-    </div>
-  );
+    </div>;
 };
-
 export default Index;

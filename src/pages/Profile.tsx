@@ -1,4 +1,5 @@
 import { Navbar } from '@/components/Navbar';
+import { ProfilePageHeader } from '@/components/ProfilePageHeader';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -19,19 +20,20 @@ export default function Profile() {
   const handleManageSubscription = () => {
     openCustomerPortal();
   };
-  return <div className="min-h-screen bg-gradient-to-br from-blue-50 via-blue-100 to-blue-200 dark:from-gray-900 dark:to-gray-800">
+  return <div className="min-h-screen bg-gradient-to-br from-blue-50 via-blue-100 to-blue-200 dark:from-gray-900 dark:to-gray-800 relative overflow-hidden">
+      {/* Animated Background Elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute -top-4 -right-4 w-24 h-24 bg-blue-400 rounded-full opacity-20 animate-bounce"></div>
+        <div className="absolute top-1/4 -left-4 w-16 h-16 bg-blue-500 rounded-full opacity-20 animate-pulse"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-12 h-12 bg-blue-300 rounded-full opacity-20 animate-ping"></div>
+        <div className="absolute top-1/3 right-1/3 w-8 h-8 bg-blue-600 rounded-full opacity-20 animate-bounce delay-1000"></div>
+      </div>
+
       <Navbar />
       
-      <div className="container mx-auto px-4 pt-24 pb-8">
+      <div className="relative z-10 container mx-auto px-4 pt-24 pb-8">
         <div className="max-w-4xl mx-auto">
-          <div className="mb-8">
-            <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent text-center">
-              Meu Perfil
-            </h1>
-            <p className="mt-2 text-center text-slate-800">
-              Gerencie sua conta e configurações
-            </p>
-          </div>
+          <ProfilePageHeader />
 
           <div className="grid gap-6 md:grid-cols-2">
             {/* User Info */}

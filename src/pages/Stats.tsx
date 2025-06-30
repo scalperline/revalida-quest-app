@@ -1,6 +1,7 @@
 import { Navbar } from "@/components/Navbar";
 import PerformanceChart from "@/components/PerformanceChart";
 import { StatsResetDialog } from "@/components/StatsResetDialog";
+import { StatsPageHeader } from "@/components/StatsPageHeader";
 import { useGamification } from "@/hooks/useGamification";
 import { useToast } from "@/hooks/use-toast";
 import { getTotalQuestionsInSystem, getQuestionsCompletionStats } from "@/utils/questionCounter";
@@ -70,18 +71,19 @@ export default function Stats() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-100 dark:from-gray-900 dark:to-gray-800">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-blue-100 to-blue-200 dark:from-gray-900 dark:to-gray-800 relative overflow-hidden">
+      {/* Animated Background Elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute -top-4 -right-4 w-24 h-24 bg-blue-400 rounded-full opacity-20 animate-bounce"></div>
+        <div className="absolute top-1/4 -left-4 w-16 h-16 bg-blue-500 rounded-full opacity-20 animate-pulse"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-12 h-12 bg-blue-300 rounded-full opacity-20 animate-ping"></div>
+        <div className="absolute top-1/3 right-1/3 w-8 h-8 bg-blue-600 rounded-full opacity-20 animate-bounce delay-1000"></div>
+      </div>
+
       <Navbar />
-      <div className="container mx-auto px-4 py-8">
+      <div className="relative z-10 container mx-auto px-4 pt-24 pb-8">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-12">
-            <h1 className="text-3xl font-bold mb-6 text-center leading-tight tracking-tight">
-              <span className="text-blue-600 bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">Dashboard Acadêmico</span>
-            </h1>
-            <p className="text-xl text-muted-foreground">
-              Acompanhe seu progresso na preparação para o Revalida 📚
-            </p>
-          </div>
+          <StatsPageHeader />
 
           {/* Controls Section */}
           {hasAnyData && (

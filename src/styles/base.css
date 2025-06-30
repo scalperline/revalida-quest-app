@@ -29,110 +29,85 @@
     overflow-x: hidden;
   }
 
-  /* Touch targets for mobile - OTIMIZADO */
-  button, a[role="button"], input, select, textarea {
-    min-height: 44px;
-    min-width: 44px;
+  /* Touch targets for mobile */
+  button, a, input, select, textarea {
+    min-height: 48px;
+    min-width: 48px;
   }
 
-  /* Enhanced responsive font scaling - MOBILE FIRST */
+  /* Enhanced responsive font scaling with larger mobile fonts */
   @media (max-width: 640px) {
     html {
-      font-size: 16px;
+      font-size: 18px;
     }
     
     body {
-      font-size: 16px;
-      line-height: 1.5;
+      font-size: 18px;
+      line-height: 1.6;
     }
     
     h1 {
-      font-size: 1.5rem;
-      line-height: 1.25;
+      font-size: 2rem;
+      line-height: 1.2;
     }
     
     h2 {
-      font-size: 1.375rem;
+      font-size: 1.75rem;
       line-height: 1.3;
     }
     
     h3 {
-      font-size: 1.25rem;
-      line-height: 1.35;
+      font-size: 1.5rem;
+      line-height: 1.4;
     }
 
     h4 {
-      font-size: 1.125rem;
+      font-size: 1.25rem;
       line-height: 1.4;
     }
 
     p, div, span {
-      font-size: 0.875rem;
-      line-height: 1.5;
+      font-size: 1.125rem;
+      line-height: 1.6;
     }
 
     button {
-      font-size: 0.875rem;
-      min-height: 44px;
-      padding: 0.75rem 1rem;
+      font-size: 1.125rem;
+      min-height: 56px;
+      padding: 0.875rem 1.5rem;
     }
 
     input, select, textarea {
-      font-size: 1rem;
-      min-height: 44px;
+      font-size: 1.125rem;
+      min-height: 56px;
     }
   }
 
   @media (max-width: 400px) {
     html {
-      font-size: 15px;
+      font-size: 16px;
     }
     
     h1 {
-      font-size: 1.375rem;
-      line-height: 1.25;
+      font-size: 1.75rem;
+      line-height: 1.2;
     }
     
     h2 {
-      font-size: 1.25rem;
+      font-size: 1.5rem;
       line-height: 1.3;
     }
     
     h3 {
-      font-size: 1.125rem;
-      line-height: 1.35;
-    }
-
-    button {
-      min-height: 48px;
-      padding: 0.875rem 1.25rem;
+      font-size: 1.25rem;
+      line-height: 1.4;
     }
   }
 
-  /* Mobile container padding otimizado */
   @media (max-width: 640px) {
     .container {
-      padding-left: 0.75rem;
-      padding-right: 0.75rem;
-    }
-  }
-
-  @media (max-width: 400px) {
-    .container {
-      padding-left: 0.5rem;
-      padding-right: 0.5rem;
-    }
-  }
-
-  /* Scroll optimization for mobile */
-  @media (max-width: 768px) {
-    * {
-      -webkit-overflow-scrolling: touch;
-    }
-    
-    body {
-      -webkit-text-size-adjust: 100%;
-      -ms-text-size-adjust: 100%;
+      padding-left: 1rem;
+      padding-right: 1rem;
     }
   }
 }

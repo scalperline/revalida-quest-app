@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useRanking } from '@/hooks/useRanking';
 import { Navbar } from '@/components/Navbar';
-import { RankingPageHeader } from '@/components/RankingPageHeader';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
@@ -94,17 +93,9 @@ export default function Ranking() {
       </div>;
   };
   if (loading) {
-    return <div className="min-h-screen bg-gradient-to-br from-blue-50 via-blue-100 to-blue-200 dark:from-gray-900 dark:to-gray-800 relative overflow-hidden">
-        {/* Animated Background Elements */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute -top-4 -right-4 w-24 h-24 bg-blue-400 rounded-full opacity-20 animate-bounce"></div>
-          <div className="absolute top-1/4 -left-4 w-16 h-16 bg-blue-500 rounded-full opacity-20 animate-pulse"></div>
-          <div className="absolute bottom-1/4 right-1/4 w-12 h-12 bg-blue-300 rounded-full opacity-20 animate-ping"></div>
-          <div className="absolute top-1/3 right-1/3 w-8 h-8 bg-blue-600 rounded-full opacity-20 animate-bounce delay-1000"></div>
-        </div>
-
+    return <div className="min-h-screen bg-gradient-to-br from-blue-50 via-blue-100 to-blue-200 dark:from-gray-900 dark:to-gray-800">
         <Navbar />
-        <div className="relative z-10 container mx-auto px-4 pt-24 pb-8">
+        <div className="container mx-auto px-4 pt-24 pb-8">
           <div className="flex items-center justify-center min-h-[400px]">
             <div className="text-center">
               <Trophy className="w-16 h-16 text-blue-500 mx-auto mb-4 animate-pulse" />
@@ -128,13 +119,21 @@ export default function Ranking() {
       <div className="relative z-10 container mx-auto px-4 pt-24 pb-8">
         <div className="max-w-4xl mx-auto">
           
-          <RankingPageHeader />
-
-          {/* Current User Position Stats */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+          {/* Header */}
+          <div className="text-center mb-8">
+            <h1 className="text-3xl font-bold mb-6 text-center leading-tight tracking-tight">
+              <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">Ranking Revalida Quest</span>
+            </h1>
+            <p className="text-xl text-gray-700 dark:text-gray-300 mb-6">
+              Veja como você está se saindo em comparação com outros futuros médicos!
+            </p>
             
-            
-            
+            {/* Current User Position Stats */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+              
+              
+              
+            </div>
           </div>
 
           {/* Ranking Tabs */}

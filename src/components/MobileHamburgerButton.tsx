@@ -10,59 +10,43 @@ export function MobileHamburgerButton({ isOpen, onToggle, className = '' }: Prop
     <button
       onClick={onToggle}
       className={`
-        relative w-11 h-11 
-        bg-white/90 dark:bg-gray-800/90 
-        hover:bg-white dark:hover:bg-gray-800
-        backdrop-blur-sm
+        w-12 h-12 
+        bg-gradient-to-r from-blue-600 to-blue-700 
+        hover:from-blue-700 hover:to-blue-800
         rounded-xl shadow-lg hover:shadow-xl
         flex items-center justify-center
-        transition-all duration-300 ease-out
+        transition-all duration-300 ease-in-out
         hover:scale-105 active:scale-95
-        border border-gray-200/50 dark:border-gray-700/50
-        hover:border-blue-200 dark:hover:border-blue-600
+        border border-blue-500/20
         touch-manipulation
         ${className}
       `}
       aria-label={isOpen ? 'Fechar menu' : 'Abrir menu'}
     >
-      {/* Enhanced Hamburger Icon */}
-      <div className="relative w-5 h-5 flex flex-col justify-center items-center">
+      <div className="relative w-6 h-6 flex flex-col justify-center items-center">
+        {/* Hamburger Lines - melhoradas */}
         <span 
           className={`
-            block absolute h-0.5 w-5 bg-gray-700 dark:bg-gray-300 rounded-full
-            transition-all duration-300 ease-out
-            ${isOpen 
-              ? 'rotate-45 translate-y-0 bg-blue-600 dark:bg-blue-400' 
-              : '-translate-y-1.5'
-            }
+            block absolute h-0.5 w-6 bg-white rounded-full
+            transition-all duration-300 ease-in-out
+            ${isOpen ? 'rotate-45 translate-y-0' : '-translate-y-2'}
           `}
         />
         <span 
           className={`
-            block absolute h-0.5 w-5 bg-gray-700 dark:bg-gray-300 rounded-full
-            transition-all duration-300 ease-out
-            ${isOpen 
-              ? 'opacity-0 scale-0' 
-              : 'opacity-100 scale-100'
-            }
+            block absolute h-0.5 w-6 bg-white rounded-full
+            transition-all duration-300 ease-in-out
+            ${isOpen ? 'opacity-0' : 'opacity-100'}
           `}
         />
         <span 
           className={`
-            block absolute h-0.5 w-5 bg-gray-700 dark:bg-gray-300 rounded-full
-            transition-all duration-300 ease-out
-            ${isOpen 
-              ? '-rotate-45 translate-y-0 bg-blue-600 dark:bg-blue-400' 
-              : 'translate-y-1.5'
-            }
+            block absolute h-0.5 w-6 bg-white rounded-full
+            transition-all duration-300 ease-in-out
+            ${isOpen ? '-rotate-45 translate-y-0' : 'translate-y-2'}
           `}
         />
       </div>
-
-      {/* Subtle active state indicator */}
-      {isOpen && (
-        <div className="absolute -top-0.5 -right-0.5 w-3 h-3 bg-blue-500 rounded-full animate-pulse" />
-      )}
     </button>
   );
 }

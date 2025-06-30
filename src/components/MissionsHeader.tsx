@@ -1,12 +1,10 @@
-
 import { Trophy, Target, Star, Zap } from 'lucide-react';
 import { useGamification } from '@/hooks/useGamification';
-
 export function MissionsHeader() {
-  const { userProgress } = useGamification();
-  
-  return (
-    <div className="text-center mb-6 sm:mb-8 relative overflow-hidden">
+  const {
+    userProgress
+  } = useGamification();
+  return <div className="text-center mb-6 sm:mb-8 relative overflow-hidden">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-4 right-1/4 w-4 h-4 sm:w-6 sm:h-6 bg-blue-400 rounded-full opacity-20 animate-bounce"></div>
@@ -14,7 +12,7 @@ export function MissionsHeader() {
         <div className="absolute top-1/2 right-8 w-3 h-3 sm:w-5 sm:h-5 bg-yellow-400 rounded-full opacity-20 animate-ping"></div>
       </div>
 
-      <div className="relative z-10 px-4 sm:px-6">
+      <div className="relative z-10 px-4 sm:px-6 py-[17px]">
         {/* Main Title */}
         <div className="mb-4 sm:mb-6">
           <div className="flex items-center justify-center gap-2 sm:gap-3 mb-3 sm:mb-4">
@@ -42,6 +40,5 @@ export function MissionsHeader() {
           </div>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 }

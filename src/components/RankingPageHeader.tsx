@@ -37,9 +37,7 @@ export function RankingPageHeader() {
         <div className="mt-6 p-4 bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 rounded-xl max-w-2xl mx-auto">
           <div className="flex items-center justify-center gap-2 text-green-800">
             <Star className="w-5 h-5" />
-            <span className="font-medium">
-              Compete com outros estudantes e alcance o topo do ranking médico!
-            </span>
+            <span className="font-medium">Conquiompita com outros estudantes e alcance o topo do ranking médico!</span>
           </div>
         </div>
       </div>

@@ -79,7 +79,7 @@ export default function Missions() {
 
         <Navbar />
         
-        <div className="relative z-10 container mx-auto px-3 sm:px-4 pt-20 sm:pt-24 pb-6 sm:pb-8">
+        <div className="relative z-10 container mx-auto px-2 sm:px-4 pt-16 sm:pt-24 pb-4 sm:pb-8">
           <div className="max-w-4xl sm:max-w-6xl mx-auto">
             <MissionExecution
               mission={executingMission}
@@ -104,28 +104,28 @@ export default function Missions() {
 
       <Navbar />
       
-      <div className="relative z-10 container mx-auto px-3 sm:px-4 pt-20 sm:pt-24 pb-6 sm:pb-8">
-        <div className="max-w-4xl sm:max-w-6xl mx-auto space-y-6 sm:space-y-8">
+      <div className="relative z-10 container mx-auto px-2 sm:px-4 pt-16 sm:pt-24 pb-4 sm:pb-8">
+        <div className="max-w-4xl sm:max-w-6xl mx-auto space-y-4 sm:space-y-8">
           
           <MissionsHeader />
 
           {/* Gamified Dashboard */}
-          <div className="px-2 sm:px-0">
+          <div className="px-1 sm:px-0">
             <GamifiedMissionsDashboard />
           </div>
 
           {/* Recent Achievements */}
-          <div className="px-2 sm:px-0">
+          <div className="px-1 sm:px-0">
             <RecentAchievements />
           </div>
 
           {/* Mission Filters */}
-          <div className="px-2 sm:px-0">
+          <div className="px-1 sm:px-0">
             <MissionFilters onFilterChange={handleFilterChange} />
           </div>
 
           {showPersonalizedSimulado ? (
-            <div className="px-2 sm:px-0">
+            <div className="px-1 sm:px-0">
               <PersonalizedSimuladoSection onBackToTabs={handleBackToTabs} />
             </div>
           ) : (

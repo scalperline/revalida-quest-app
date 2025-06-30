@@ -53,7 +53,6 @@ export function MissionsTabsSection({ onStartMission, onStartPersonalizedSimulad
           filtered.sort((a, b) => b.progress - a.progress);
           break;
         case 'trending':
-          // For now, just randomize for "trending" effect
           filtered.sort(() => Math.random() - 0.5);
           break;
       }
@@ -66,50 +65,50 @@ export function MissionsTabsSection({ onStartMission, onStartPersonalizedSimulad
   const filteredCompletedMissions = filterMissions(completedMissions);
 
   return (
-    <div className="border-2 border-blue-200 rounded-xl sm:rounded-2xl shadow-xl bg-white dark:bg-gray-800 p-3 sm:p-6 backdrop-blur-sm mx-2 sm:mx-0">
+    <div className="border-2 border-blue-200 rounded-xl sm:rounded-2xl shadow-xl bg-white dark:bg-gray-800 p-2 sm:p-6 backdrop-blur-sm mx-1 sm:mx-0">
       <Tabs defaultValue="prontas" className="w-full">
-        <TabsList className="grid w-full grid-cols-3 mb-4 sm:mb-8 h-auto bg-gradient-to-r from-blue-50 to-purple-50 dark:bg-blue-900/20 border-2 border-blue-200 p-1 rounded-xl shadow-inner">
+        <TabsList className="grid w-full grid-cols-3 mb-3 sm:mb-8 h-auto bg-gradient-to-r from-blue-50 to-purple-50 dark:bg-blue-900/20 border-2 border-blue-200 p-1 rounded-xl shadow-inner">
           <TabsTrigger 
             value="prontas" 
-            className="flex flex-col items-center gap-1 sm:gap-2 text-xs sm:text-base font-medium py-2 sm:py-3 px-2 sm:px-4 data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-500 data-[state=active]:to-blue-600 data-[state=active]:text-white data-[state=active]:shadow-lg rounded-lg transition-all duration-200 group"
+            className="flex flex-col items-center gap-1 text-xs sm:text-base font-medium py-2 sm:py-3 px-1 sm:px-4 data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-500 data-[state=active]:to-blue-600 data-[state=active]:text-white data-[state=active]:shadow-lg rounded-lg transition-all duration-200 group"
           >
             <Flag className="w-3 h-3 sm:w-4 sm:h-4 lg:w-5 lg:h-5 group-data-[state=active]:animate-pulse flex-shrink-0" />
-            <div className="flex flex-col items-center gap-0.5 sm:gap-1">
-              <span className="text-xs sm:text-sm lg:text-base font-semibold leading-tight">Quests</span>
-              <span className="text-xs sm:text-sm lg:text-base font-semibold leading-tight">Prontas</span>
-              <span className="text-xs opacity-75 bg-blue-100 group-data-[state=active]:bg-white/20 text-blue-800 group-data-[state=active]:text-white px-1.5 sm:px-2 py-0.5 rounded-full leading-none">
+            <div className="flex flex-col items-center gap-0.5">
+              <span className="text-xs sm:text-sm lg:text-base font-bold leading-tight">Quests</span>
+              <span className="text-xs sm:text-sm lg:text-base font-bold leading-tight">Prontas</span>
+              <span className="text-xs opacity-75 bg-blue-100 group-data-[state=active]:bg-white/20 text-blue-800 group-data-[state=active]:text-white px-1 sm:px-2 py-0.5 rounded-full leading-none font-semibold">
                 {filteredAvailableMissions.length}
               </span>
             </div>
           </TabsTrigger>
           <TabsTrigger 
             value="personalizada" 
-            className="flex flex-col items-center gap-1 sm:gap-2 text-xs sm:text-base font-medium py-2 sm:py-3 px-2 sm:px-4 data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-purple-600 data-[state=active]:text-white data-[state=active]:shadow-lg rounded-lg transition-all duration-200 group"
+            className="flex flex-col items-center gap-1 text-xs sm:text-base font-medium py-2 sm:py-3 px-1 sm:px-4 data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-purple-600 data-[state=active]:text-white data-[state=active]:shadow-lg rounded-lg transition-all duration-200 group"
           >
             <Settings className="w-3 h-3 sm:w-4 sm:h-4 lg:w-5 lg:h-5 group-data-[state=active]:animate-spin flex-shrink-0" />
-            <div className="flex flex-col items-center gap-0.5 sm:gap-1">
-              <span className="text-xs sm:text-sm lg:text-base font-semibold leading-tight">Simulado</span>
-              <span className="text-xs sm:text-sm lg:text-base font-semibold leading-tight">Personalizado</span>
+            <div className="flex flex-col items-center gap-0.5">
+              <span className="text-xs sm:text-sm lg:text-base font-bold leading-tight">Simulado</span>
+              <span className="text-xs sm:text-sm lg:text-base font-bold leading-tight">Personalizado</span>
               <Sparkles className="w-2 h-2 sm:w-3 sm:h-3 text-purple-500 group-data-[state=active]:text-white" />
             </div>
           </TabsTrigger>
           <TabsTrigger 
             value="concluidas" 
-            className="flex flex-col items-center gap-1 sm:gap-2 text-xs sm:text-base font-medium py-2 sm:py-3 px-2 sm:px-4 data-[state=active]:bg-gradient-to-r data-[state=active]:from-green-500 data-[state=active]:to-green-600 data-[state=active]:text-white data-[state=active]:shadow-lg rounded-lg transition-all duration-200 group"
+            className="flex flex-col items-center gap-1 text-xs sm:text-base font-medium py-2 sm:py-3 px-1 sm:px-4 data-[state=active]:bg-gradient-to-r data-[state=active]:from-green-500 data-[state=active]:to-green-600 data-[state=active]:text-white data-[state=active]:shadow-lg rounded-lg transition-all duration-200 group"
           >
             <Trophy className="w-3 h-3 sm:w-4 sm:h-4 lg:w-5 lg:h-5 group-data-[state=active]:animate-bounce flex-shrink-0" />
-            <div className="flex flex-col items-center gap-0.5 sm:gap-1">
-              <span className="text-xs sm:text-sm lg:text-base font-semibold leading-tight">Concluídas</span>
-              <span className="text-xs opacity-75 bg-green-100 group-data-[state=active]:bg-white/20 text-green-800 group-data-[state=active]:text-white px-1.5 sm:px-2 py-0.5 rounded-full leading-none">
+            <div className="flex flex-col items-center gap-0.5">
+              <span className="text-xs sm:text-sm lg:text-base font-bold leading-tight">Concluídas</span>
+              <span className="text-xs opacity-75 bg-green-100 group-data-[state=active]:bg-white/20 text-green-800 group-data-[state=active]:text-white px-1 sm:px-2 py-0.5 rounded-full leading-none font-semibold">
                 {filteredCompletedMissions.length}
               </span>
             </div>
           </TabsTrigger>
         </TabsList>
         
-        <TabsContent value="prontas" className="space-y-4 sm:space-y-6">
+        <TabsContent value="prontas" className="space-y-3 sm:space-y-6">
           {filteredAvailableMissions.length > 0 ? (
-            <div className="grid grid-cols-1 gap-4 sm:gap-6 lg:grid-cols-2">
+            <div className="grid grid-cols-1 gap-3 sm:gap-6 lg:grid-cols-2">
               {filteredAvailableMissions.map((mission, index) => (
                 <div 
                   key={mission.id} 
@@ -146,15 +145,15 @@ export function MissionsTabsSection({ onStartMission, onStartPersonalizedSimulad
           )}
         </TabsContent>
         
-        <TabsContent value="personalizada" className="space-y-4 sm:space-y-6">
-          <div className="bg-gradient-to-r from-purple-50 to-indigo-50 rounded-xl p-4 sm:p-6 border-2 border-purple-200">
+        <TabsContent value="personalizada" className="space-y-3 sm:space-y-6">
+          <div className="bg-gradient-to-r from-purple-50 to-indigo-50 rounded-xl p-3 sm:p-6 border-2 border-purple-200">
             <SimuladoFilters onStart={onStartPersonalizedSimulado} />
           </div>
         </TabsContent>
         
-        <TabsContent value="concluidas" className="space-y-4 sm:space-y-6">
+        <TabsContent value="concluidas" className="space-y-3 sm:space-y-6">
           {filteredCompletedMissions.length > 0 ? (
-            <div className="grid grid-cols-1 gap-4 sm:gap-6 lg:grid-cols-2">
+            <div className="grid grid-cols-1 gap-3 sm:gap-6 lg:grid-cols-2">
               {filteredCompletedMissions.map((mission, index) => (
                 <div 
                   key={mission.id} 

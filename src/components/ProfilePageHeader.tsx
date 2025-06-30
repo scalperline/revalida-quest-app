@@ -19,7 +19,7 @@ export function ProfilePageHeader() {
             <div className="p-3 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full shadow-lg px-[8px] py-[8px]">
               <User className="w-8 h-8 text-white" />
             </div>
-            <h1 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            <h1 className="md:text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent text-2xl">
               Meu Perfil
             </h1>
           </div>

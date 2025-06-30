@@ -66,42 +66,50 @@ export function MissionsTabsSection({ onStartMission, onStartPersonalizedSimulad
   const filteredCompletedMissions = filterMissions(completedMissions);
 
   return (
-    <div className="border-2 border-blue-200 rounded-2xl shadow-xl bg-white dark:bg-gray-800 p-6 backdrop-blur-sm">
+    <div className="border-2 border-blue-200 rounded-xl sm:rounded-2xl shadow-xl bg-white dark:bg-gray-800 p-3 sm:p-6 backdrop-blur-sm mx-2 sm:mx-0">
       <Tabs defaultValue="prontas" className="w-full">
-        <TabsList className="grid w-full grid-cols-3 mb-8 h-auto bg-gradient-to-r from-blue-50 to-purple-50 dark:bg-blue-900/20 border-2 border-blue-200 p-1 rounded-xl shadow-inner">
+        <TabsList className="grid w-full grid-cols-3 mb-4 sm:mb-8 h-auto bg-gradient-to-r from-blue-50 to-purple-50 dark:bg-blue-900/20 border-2 border-blue-200 p-1 rounded-xl shadow-inner">
           <TabsTrigger 
             value="prontas" 
-            className="flex flex-col sm:flex-row items-center gap-2 text-sm sm:text-base font-medium py-3 px-4 data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-500 data-[state=active]:to-blue-600 data-[state=active]:text-white data-[state=active]:shadow-lg rounded-lg transition-all duration-200 group"
+            className="flex flex-col items-center gap-1 sm:gap-2 text-xs sm:text-base font-medium py-2 sm:py-3 px-2 sm:px-4 data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-500 data-[state=active]:to-blue-600 data-[state=active]:text-white data-[state=active]:shadow-lg rounded-lg transition-all duration-200 group"
           >
-            <Flag className="w-4 h-4 sm:w-5 sm:h-5 group-data-[state=active]:animate-pulse" />
-            <span className="text-xs sm:text-base font-semibold">Quests Prontas</span>
-            <span className="text-xs opacity-75 bg-blue-100 group-data-[state=active]:bg-white/20 text-blue-800 group-data-[state=active]:text-white px-2 py-0.5 rounded-full">
-              {filteredAvailableMissions.length}
-            </span>
+            <Flag className="w-3 h-3 sm:w-4 sm:h-4 lg:w-5 lg:h-5 group-data-[state=active]:animate-pulse flex-shrink-0" />
+            <div className="flex flex-col items-center gap-0.5 sm:gap-1">
+              <span className="text-xs sm:text-sm lg:text-base font-semibold leading-tight">Quests</span>
+              <span className="text-xs sm:text-sm lg:text-base font-semibold leading-tight">Prontas</span>
+              <span className="text-xs opacity-75 bg-blue-100 group-data-[state=active]:bg-white/20 text-blue-800 group-data-[state=active]:text-white px-1.5 sm:px-2 py-0.5 rounded-full leading-none">
+                {filteredAvailableMissions.length}
+              </span>
+            </div>
           </TabsTrigger>
           <TabsTrigger 
             value="personalizada" 
-            className="flex flex-col sm:flex-row items-center gap-2 text-sm sm:text-base font-medium py-3 px-4 data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-purple-600 data-[state=active]:text-white data-[state=active]:shadow-lg rounded-lg transition-all duration-200 group"
+            className="flex flex-col items-center gap-1 sm:gap-2 text-xs sm:text-base font-medium py-2 sm:py-3 px-2 sm:px-4 data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-purple-600 data-[state=active]:text-white data-[state=active]:shadow-lg rounded-lg transition-all duration-200 group"
           >
-            <Settings className="w-4 h-4 sm:w-5 sm:h-5 group-data-[state=active]:animate-spin" />
-            <span className="text-xs sm:text-base font-semibold">Simulado Personalizado</span>
-            <Sparkles className="w-3 h-3 text-purple-500 group-data-[state=active]:text-white" />
+            <Settings className="w-3 h-3 sm:w-4 sm:h-4 lg:w-5 lg:h-5 group-data-[state=active]:animate-spin flex-shrink-0" />
+            <div className="flex flex-col items-center gap-0.5 sm:gap-1">
+              <span className="text-xs sm:text-sm lg:text-base font-semibold leading-tight">Simulado</span>
+              <span className="text-xs sm:text-sm lg:text-base font-semibold leading-tight">Personalizado</span>
+              <Sparkles className="w-2 h-2 sm:w-3 sm:h-3 text-purple-500 group-data-[state=active]:text-white" />
+            </div>
           </TabsTrigger>
           <TabsTrigger 
             value="concluidas" 
-            className="flex flex-col sm:flex-row items-center gap-2 text-sm sm:text-base font-medium py-3 px-4 data-[state=active]:bg-gradient-to-r data-[state=active]:from-green-500 data-[state=active]:to-green-600 data-[state=active]:text-white data-[state=active]:shadow-lg rounded-lg transition-all duration-200 group"
+            className="flex flex-col items-center gap-1 sm:gap-2 text-xs sm:text-base font-medium py-2 sm:py-3 px-2 sm:px-4 data-[state=active]:bg-gradient-to-r data-[state=active]:from-green-500 data-[state=active]:to-green-600 data-[state=active]:text-white data-[state=active]:shadow-lg rounded-lg transition-all duration-200 group"
           >
-            <Trophy className="w-4 h-4 sm:w-5 sm:h-5 group-data-[state=active]:animate-bounce" />
-            <span className="text-xs sm:text-base font-semibold">Concluídas</span>
-            <span className="text-xs opacity-75 bg-green-100 group-data-[state=active]:bg-white/20 text-green-800 group-data-[state=active]:text-white px-2 py-0.5 rounded-full">
-              {filteredCompletedMissions.length}
-            </span>
+            <Trophy className="w-3 h-3 sm:w-4 sm:h-4 lg:w-5 lg:h-5 group-data-[state=active]:animate-bounce flex-shrink-0" />
+            <div className="flex flex-col items-center gap-0.5 sm:gap-1">
+              <span className="text-xs sm:text-sm lg:text-base font-semibold leading-tight">Concluídas</span>
+              <span className="text-xs opacity-75 bg-green-100 group-data-[state=active]:bg-white/20 text-green-800 group-data-[state=active]:text-white px-1.5 sm:px-2 py-0.5 rounded-full leading-none">
+                {filteredCompletedMissions.length}
+              </span>
+            </div>
           </TabsTrigger>
         </TabsList>
         
-        <TabsContent value="prontas" className="space-y-6">
+        <TabsContent value="prontas" className="space-y-4 sm:space-y-6">
           {filteredAvailableMissions.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 gap-4 sm:gap-6 lg:grid-cols-2">
               {filteredAvailableMissions.map((mission, index) => (
                 <div 
                   key={mission.id} 
@@ -118,17 +126,17 @@ export function MissionsTabsSection({ onStartMission, onStartPersonalizedSimulad
               ))}
             </div>
           ) : (
-            <div className="text-center py-12">
-              <div className="p-6 rounded-full bg-yellow-100 w-24 h-24 mx-auto mb-4 flex items-center justify-center animate-pulse">
-                <Trophy className="w-12 h-12 text-yellow-600" />
+            <div className="text-center py-8 sm:py-12">
+              <div className="p-4 sm:p-6 rounded-full bg-yellow-100 w-16 h-16 sm:w-24 sm:h-24 mx-auto mb-4 flex items-center justify-center animate-pulse">
+                <Trophy className="w-8 h-8 sm:w-12 sm:h-12 text-yellow-600" />
               </div>
-              <h3 className="text-xl font-bold mb-2">
+              <h3 className="text-lg sm:text-xl font-bold mb-2">
                 {filters.searchTerm || filters.difficulty !== 'all' || filters.area !== 'all' 
                   ? 'Nenhuma quest encontrada!' 
                   : 'Todas as quests concluídas!'
                 }
               </h3>
-              <p className="text-muted-foreground">
+              <p className="text-muted-foreground text-sm sm:text-base px-4">
                 {filters.searchTerm || filters.difficulty !== 'all' || filters.area !== 'all'
                   ? 'Tente ajustar os filtros para encontrar quests disponíveis.'
                   : 'Parabéns! Você completou todas as quests disponíveis.'
@@ -138,15 +146,15 @@ export function MissionsTabsSection({ onStartMission, onStartPersonalizedSimulad
           )}
         </TabsContent>
         
-        <TabsContent value="personalizada" className="space-y-6">
-          <div className="bg-gradient-to-r from-purple-50 to-indigo-50 rounded-xl p-6 border-2 border-purple-200">
+        <TabsContent value="personalizada" className="space-y-4 sm:space-y-6">
+          <div className="bg-gradient-to-r from-purple-50 to-indigo-50 rounded-xl p-4 sm:p-6 border-2 border-purple-200">
             <SimuladoFilters onStart={onStartPersonalizedSimulado} />
           </div>
         </TabsContent>
         
-        <TabsContent value="concluidas" className="space-y-6">
+        <TabsContent value="concluidas" className="space-y-4 sm:space-y-6">
           {filteredCompletedMissions.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 gap-4 sm:gap-6 lg:grid-cols-2">
               {filteredCompletedMissions.map((mission, index) => (
                 <div 
                   key={mission.id} 
@@ -163,12 +171,12 @@ export function MissionsTabsSection({ onStartMission, onStartPersonalizedSimulad
               ))}
             </div>
           ) : (
-            <div className="text-center py-12">
-              <div className="p-6 rounded-full bg-blue-100 w-24 h-24 mx-auto mb-4 flex items-center justify-center">
-                <Flag className="w-12 h-12 text-blue-600" />
+            <div className="text-center py-8 sm:py-12">
+              <div className="p-4 sm:p-6 rounded-full bg-blue-100 w-16 h-16 sm:w-24 sm:h-24 mx-auto mb-4 flex items-center justify-center">
+                <Flag className="w-8 h-8 sm:w-12 sm:h-12 text-blue-600" />
               </div>
-              <h3 className="text-xl font-bold mb-2">Nenhuma quest concluída ainda</h3>
-              <p className="text-muted-foreground">
+              <h3 className="text-lg sm:text-xl font-bold mb-2">Nenhuma quest concluída ainda</h3>
+              <p className="text-muted-foreground text-sm sm:text-base px-4">
                 Complete sua primeira quest para ver o progresso aqui!
               </p>
             </div>

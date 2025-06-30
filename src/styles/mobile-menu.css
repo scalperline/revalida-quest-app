@@ -1,60 +1,77 @@
 
-/* Mobile Menu Styles - Otimizado para espaçamento */
+/* Enhanced Mobile Menu Styles */
 
-/* Sidebar menu animations */
+/* Sidebar animations with better easing */
 .sidebar-menu {
   transform: translateX(100%);
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .sidebar-menu.open {
   transform: translateX(0);
 }
 
-/* Overlay animations */
+/* Improved overlay with better backdrop */
 .menu-overlay {
-  opacity: 0;
-  animation: fadeIn 0.3s ease-out forwards;
+  background: rgba(15, 23, 42, 0.4);
+  backdrop-filter: blur(8px);
+  transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-@keyframes fadeIn {
-  to {
-    opacity: 1;
-  }
-}
-
-/* Prevent body scroll when menu is open */
+/* Body scroll prevention */
 .menu-open {
   overflow: hidden !important;
-  position: fixed;
-  width: 100%;
+  touch-action: none;
 }
 
-/* Menu item hover effects - otimizados */
+/* Enhanced menu item interactions */
 .menu-item {
-  position: relative;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  backdrop-filter: blur(8px);
+  transition: all 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform-origin: left center;
 }
 
 .menu-item:hover {
-  transform: translateX(2px);
+  transform: translateX(2px) scale(1.01);
 }
 
 .menu-item:active {
-  transform: translateX(1px) scale(0.98);
+  transform: translateX(1px) scale(0.99);
 }
 
-/* Progress section compact styling */
-.mobile-progress-compact {
+/* Professional focus states */
+.menu-item:focus-visible {
+  outline: 2px solid rgb(59, 130, 246);
+  outline-offset: 2px;
+  border-radius: 0.75rem;
+}
+
+/* Smooth icon rotations */
+.menu-icon {
+  transition: transform 0.25s ease-out;
+}
+
+.menu-item:hover .menu-icon {
+  transform: scale(1.1);
+}
+
+/* Progress section enhancements */
+.progress-compact {
   backdrop-filter: blur(12px);
-  border: 1px solid rgba(59, 130, 246, 0.15);
+  background: rgba(255, 255, 255, 0.95);
 }
 
-/* Touch optimizations */
+.dark .progress-compact {
+  background: rgba(31, 41, 55, 0.95);
+}
+
+/* Touch optimizations for mobile */
 @media (hover: none) and (pointer: coarse) {
+  .menu-item {
+    min-height: 48px; /* Ensure touch targets are large enough */
+  }
+  
   .menu-item:hover {
-    transform: none;
+    transform: none; /* Disable hover transforms on touch devices */
   }
   
   .menu-item:active {
@@ -63,36 +80,55 @@
   }
 }
 
-/* High contrast for accessibility */
+/* High contrast mode support */
 @media (prefers-contrast: high) {
   .menu-item {
     border: 1px solid transparent;
   }
   
   .menu-item:focus {
-    border-color: #3B82F6;
-    outline: 2px solid #3B82F6;
-    outline-offset: 2px;
+    border-color: currentColor;
+    outline: 2px solid currentColor;
+  }
+  
+  .menu-overlay {
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: none;
   }
 }
 
-/* Reduced motion for accessibility */
+/* Reduced motion preferences */
 @media (prefers-reduced-motion: reduce) {
   .sidebar-menu,
   .menu-overlay,
-  .menu-item {
+  .menu-item,
+  .menu-icon {
     transition: none !important;
     animation: none !important;
+    transform: none !important;
+  }
+  
+  .menu-item:hover {
+    transform: none !important;
   }
 }
 
-/* Compact spacing utilities */
-.mobile-compact-spacing {
-  padding: 0.5rem;
-  gap: 0.5rem;
+/* Dark mode refinements */
+@media (prefers-color-scheme: dark) {
+  .menu-overlay {
+    background: rgba(0, 0, 0, 0.6);
+  }
 }
 
-.mobile-progress-wrapper {
-  max-width: 100%;
-  overflow: hidden;
+/* Landscape orientation adjustments */
+@media (orientation: landscape) and (max-height: 500px) {
+  .sidebar-menu {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+  
+  .menu-item {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
 }

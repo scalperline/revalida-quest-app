@@ -1,129 +1,169 @@
 
-import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { Home, FileText, BarChart3, User, Trophy, Target, HelpCircle, LogOut, X, Stethoscope } from 'lucide-react';
+import { useAuth } from '@/hooks/useAuth';
 import { MobileUserProgress } from './MobileUserProgress';
-import { LogoutButton } from './LogoutButton';
-import {
-  Home,
-  HelpCircle,
-  BarChart3,
-  Trophy,
-  Target,
-  User,
-  BookOpen,
-  X,
-  Zap
-} from 'lucide-react';
 
 interface Props {
   isOpen: boolean;
   onClose: () => void;
 }
 
-const menuItems = [
-  { href: '/', icon: Home, label: 'Início' },
-  { href: '/questions', icon: BookOpen, label: 'Questões' },
-  { href: '/stats', icon: BarChart3, label: 'Estatísticas' },
-  { href: '/ranking', icon: Trophy, label: 'Ranking' },
-  { href: '/missions', icon: Target, label: 'Missões' },
-  { href: '/profile', icon: User, label: 'Perfil' },
-  { href: '/help', icon: HelpCircle, label: 'Ajuda' },
-];
-
 export function MobileSidebar({ isOpen, onClose }: Props) {
   const location = useLocation();
+  const { signOut } = useAuth();
 
-  // Prevent body scroll when menu is open
-  useEffect(() => {
-    if (isOpen) {
-      document.body.classList.add('menu-open');
-    } else {
-      document.body.classList.remove('menu-open');
-    }
+  const navigation = [{
+    name: 'Dashboard',
+    href: '/',
+    icon: Home,
+    emoji: '📊'
+  }, {
+    name: 'Questões',
+    href: '/questions',
+    icon: FileText,
+    emoji: '📚'
+  }, {
+    name: 'Missões',
+    href: '/missions',
+    icon: Target,
+    emoji: '🎯'
+  }, {
+    name: 'Progresso',
+    href: '/stats',
+    icon: BarChart3,
+    emoji: '📈'
+  }, {
+    name: 'Ranking',
+    href: '/ranking',
+    icon: Trophy,
+    emoji: '👥'
+  }, {
+    name: 'Perfil',
+    href: '/profile',
+    icon: User,
+    emoji: '⚙️'
+  }];
 
-    return () => {
-      document.body.classList.remove('menu-open');
-    };
-  }, [isOpen]);
+  const menuActions = [{
+    name: 'Ajuda',
+    icon: HelpCircle,
+    emoji: '❓',
+    action: () => window.open('mailto:suporte@revalidaquest.com', '_blank')
+  }, {
+    name: 'Sair',
+    icon: LogOut,
+    emoji: '🚪',
+    action: () => signOut()
+  }];
 
   return (
     <>
       {/* Overlay */}
       {isOpen && (
         <div 
-          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 menu-overlay"
-          onClick={onClose}
-          aria-hidden="true"
+          className="fixed inset-0 bg-black/50 z-[9998] transition-opacity duration-300 backdrop-blur-sm" 
+          onClick={onClose} 
         />
       )}
 
-      {/* Sidebar */}
+      {/* Side Menu */}
       <div className={`
-        fixed top-0 right-0 h-full w-80 max-w-[85vw]
-        bg-gradient-to-br from-white via-blue-50/30 to-blue-100/50
-        dark:from-gray-900 dark:via-gray-800/50 dark:to-gray-700/30
-        backdrop-blur-xl
-        shadow-2xl border-l border-blue-200/30 dark:border-blue-700/30
-        z-50 sidebar-menu
-        ${isOpen ? 'open' : ''}
+        fixed inset-y-0 right-0 z-[9999]
+        w-[300px] sm:w-[280px]
+        bg-white dark:bg-gray-900
+        shadow-2xl
+        transform transition-transform duration-300 ease-in-out
+        ${isOpen ? 'translate-x-0' : 'translate-x-full'}
+        overflow-y-auto
+        flex flex-col
+        h-screen
       `}>
-        
-        {/* Header com botão de fechar */}
-        <div className="flex items-center justify-between p-4 border-b border-blue-200/30 dark:border-blue-700/30 bg-white/40 dark:bg-gray-800/40 backdrop-blur-sm">
-          <div className="flex items-center gap-2">
-            <Zap className="w-6 h-6 text-blue-600" />
-            <h2 className="text-lg font-bold bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">
-              Menu
-            </h2>
+        {/* Header - Simplificado */}
+        <div className="flex items-center justify-between p-5 border-b border-gray-100 dark:border-gray-800 flex-shrink-0 bg-white dark:bg-gray-900">
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-blue-700 rounded-lg flex items-center justify-center">
+              <Stethoscope className="w-4 h-4 text-white" />
+            </div>
+            <div>
+              <span className="text-lg font-bold text-gray-900 dark:text-white">
+                RevalidaQuest
+              </span>
+            </div>
           </div>
-          <button
-            onClick={onClose}
-            className="p-2 rounded-xl bg-gray-100/80 dark:bg-gray-700/80 hover:bg-gray-200/80 dark:hover:bg-gray-600/80 transition-colors"
-            aria-label="Fechar menu"
+          <button 
+            onClick={onClose} 
+            className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
           >
-            <X className="w-5 h-5 text-gray-600 dark:text-gray-300" />
+            <X className="w-5 h-5 text-gray-500" />
           </button>
         </div>
 
-        {/* Progress Section - Otimizada para mobile */}
-        <div className="p-3 border-b border-blue-200/20 dark:border-blue-700/20 bg-gradient-to-r from-blue-50/40 to-transparent dark:from-gray-800/20">
+        {/* User Progress Section - Compacto */}
+        <div className="p-4 border-b border-gray-100 dark:border-gray-800 flex-shrink-0 bg-gray-50/50 dark:bg-gray-800/50">
           <MobileUserProgress />
         </div>
 
         {/* Navigation Menu */}
-        <nav className="flex-1 p-3">
-          <div className="space-y-1">
-            {menuItems.map((item) => {
+        <div className="flex-1 py-6">
+          <nav className="px-4 space-y-2">
+            {navigation.map(item => {
               const isActive = location.pathname === item.href;
-              const Icon = item.icon;
-              
               return (
-                <Link
-                  key={item.href}
-                  to={item.href}
-                  onClick={onClose}
+                <Link 
+                  key={item.name} 
+                  to={item.href} 
+                  onClick={onClose} 
                   className={`
-                    menu-item flex items-center gap-3 px-4 py-3.5 rounded-xl
+                    flex items-center gap-4 px-4 py-3 rounded-lg text-base font-medium 
                     transition-all duration-200 group
                     ${isActive 
-                      ? 'bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-lg shadow-blue-500/25' 
-                      : 'text-gray-700 dark:text-gray-200 hover:bg-white/60 dark:hover:bg-gray-700/60 hover:shadow-md'
+                      ? 'bg-blue-600 text-white shadow-sm' 
+                      : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-white'
                     }
                   `}
                 >
-                  <Icon className={`w-5 h-5 transition-transform group-hover:scale-110 ${
-                    isActive ? 'text-white' : 'text-blue-600 dark:text-blue-400'
-                  }`} />
-                  <span className="font-medium text-sm">{item.label}</span>
+                  <span className="text-lg flex-shrink-0">{item.emoji}</span>
+                  <item.icon className="w-5 h-5 flex-shrink-0" />
+                  <span className="flex-1">{item.name}</span>
                 </Link>
               );
             })}
-          </div>
-        </nav>
+          </nav>
+        </div>
 
-        {/* Footer com logout */}
-        <div className="p-3 border-t border-blue-200/20 dark:border-blue-700/20 bg-gradient-to-r from-blue-50/20 to-transparent dark:from-gray-800/10">
-          <LogoutButton />
+        {/* Action Items */}
+        <div className="p-4 border-t border-gray-100 dark:border-gray-800 flex-shrink-0 bg-gray-50/50 dark:bg-gray-800/50">
+          <nav className="space-y-2">
+            {menuActions.map(item => (
+              <button 
+                key={item.name} 
+                onClick={() => {
+                  item.action();
+                  onClose();
+                }} 
+                className="
+                  w-full flex items-center gap-4 px-4 py-3 rounded-lg text-base font-medium 
+                  text-gray-600 dark:text-gray-400 
+                  hover:bg-gray-100 hover:text-gray-900
+                  dark:hover:bg-gray-800 dark:hover:text-white
+                  transition-all duration-200
+                "
+              >
+                <span className="text-lg flex-shrink-0">{item.emoji}</span>
+                <item.icon className="w-5 h-5 flex-shrink-0" />
+                <span className="flex-1 text-left">{item.name}</span>
+              </button>
+            ))}
+          </nav>
+        </div>
+
+        {/* Footer - Simplificado */}
+        <div className="p-4 border-t border-gray-100 dark:border-gray-800 flex-shrink-0">
+          <div className="text-center text-sm text-gray-500 dark:text-gray-400">
+            <p className="font-medium">© 2024 RevalidaQuest</p>
+            <p className="text-xs mt-1">Versão 2.0.1</p>
+          </div>
         </div>
       </div>
     </>

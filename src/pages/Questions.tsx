@@ -1,7 +1,8 @@
+
 import { useState } from "react";
 import { Navbar } from "@/components/Navbar";
 import { QuestionCard } from "@/components/QuestionCard";
-import { QuestionsPageHeader } from "@/components/QuestionsPageHeader";
+import { GamifiedQuestionsHeader } from "@/components/GamifiedQuestionsHeader";
 import { QuestionsPagination } from "@/components/QuestionsPagination";
 import { ConfettiAnimation } from "@/components/ConfettiAnimation";
 import { useQuestionsFilters } from "@/hooks/useQuestionsFilters";
@@ -66,8 +67,6 @@ export default function Questions() {
       <Navbar />
       <div className="relative z-10 container mx-auto px-4 pt-20 pb-8">
         <div className="max-w-4xl mx-auto">
-          <QuestionsPageHeader />
-
           <GamifiedQuestionsHeader
             anoSelecionado={anoSelecionado}
             setAnoSelecionado={handleAnoChange}

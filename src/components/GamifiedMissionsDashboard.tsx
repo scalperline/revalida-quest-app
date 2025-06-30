@@ -10,7 +10,7 @@ export function GamifiedMissionsDashboard() {
   
   const stats = [
     {
-      label: 'Nível Atual',
+      label: 'Nível',
       value: userProgress.level,
       icon: Star,
       color: 'from-yellow-400 to-orange-500',
@@ -25,7 +25,7 @@ export function GamifiedMissionsDashboard() {
     },
     {
       label: 'Sequência',
-      value: `${userProgress.streakDias} dias`,
+      value: `${userProgress.streakDias}d`,
       icon: Flame,
       color: 'from-orange-400 to-red-500',
       bgColor: 'bg-orange-50 border-orange-200'
@@ -42,19 +42,19 @@ export function GamifiedMissionsDashboard() {
   const xpPercentage = Math.round((userProgress.xp / userProgress.xpToNextLevel) * 100);
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+    <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3 lg:gap-4 mb-4 sm:mb-6 lg:mb-8">
       {stats.map((stat, index) => {
         const IconComponent = stat.icon;
         return (
           <Card key={index} className={`${stat.bgColor} border-2 transition-all duration-300 hover:shadow-lg`}>
-            <CardContent className="p-4">
+            <CardContent className="p-2 sm:p-3 lg:p-4">
               <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm font-medium text-gray-600">{stat.label}</p>
-                  <p className="text-2xl font-bold text-gray-900">{stat.value}</p>
+                <div className="min-w-0 flex-1">
+                  <p className="text-xs sm:text-sm font-medium text-gray-600 leading-tight">{stat.label}</p>
+                  <p className="text-base sm:text-lg lg:text-xl xl:text-2xl font-bold text-gray-900 leading-tight">{stat.value}</p>
                 </div>
-                <div className={`w-12 h-12 rounded-full bg-gradient-to-r ${stat.color} flex items-center justify-center`}>
-                  <IconComponent className="w-6 h-6 text-white" />
+                <div className={`w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 rounded-full bg-gradient-to-r ${stat.color} flex items-center justify-center flex-shrink-0`}>
+                  <IconComponent className="w-3 h-3 sm:w-4 sm:h-4 lg:w-5 lg:h-5 xl:w-6 xl:h-6 text-white" />
                 </div>
               </div>
             </CardContent>

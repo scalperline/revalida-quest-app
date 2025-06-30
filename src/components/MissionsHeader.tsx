@@ -1,12 +1,10 @@
-
 import { Trophy, Target, Star, Zap } from 'lucide-react';
 import { useGamification } from '@/hooks/useGamification';
-
 export function MissionsHeader() {
-  const { userProgress } = useGamification();
-
-  return (
-    <div className="text-center mb-8 relative overflow-hidden">
+  const {
+    userProgress
+  } = useGamification();
+  return <div className="text-center mb-8 relative overflow-hidden">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-4 right-1/4 w-6 h-6 bg-blue-400 rounded-full opacity-20 animate-bounce"></div>
@@ -33,41 +31,10 @@ export function MissionsHeader() {
         </div>
 
         {/* Player Status Badge */}
-        <div className="inline-flex items-center gap-4 bg-gradient-to-r from-blue-50 to-purple-50 border-2 border-blue-200 rounded-full px-6 py-3 shadow-lg">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full flex items-center justify-center">
-              <span className="text-white font-bold text-sm">{userProgress.level}</span>
-            </div>
-            <span className="font-semibold text-gray-800">Nível {userProgress.level}</span>
-          </div>
-          
-          <div className="w-px h-6 bg-gray-300"></div>
-          
-          <div className="flex items-center gap-2">
-            <Zap className="w-5 h-5 text-blue-600" />
-            <span className="font-medium text-gray-700">{userProgress.xp} XP</span>
-          </div>
-          
-          <div className="w-px h-6 bg-gray-300"></div>
-          
-          <div className="flex items-center gap-2">
-            <Target className="w-5 h-5 text-green-600" />
-            <span className="font-medium text-gray-700">
-              {userProgress.achievements?.filter(a => a.unlocked).length || 0} Conquistas
-            </span>
-          </div>
-        </div>
+        
 
         {/* Motivational Message */}
-        <div className="mt-6 p-4 bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 rounded-xl max-w-2xl mx-auto">
-          <div className="flex items-center justify-center gap-2 text-green-800">
-            <Star className="w-5 h-5" />
-            <span className="font-medium">
-              Continue sua jornada! Faltam {userProgress.xpToNextLevel - userProgress.xp} XP para o próximo nível.
-            </span>
-          </div>
-        </div>
+        
       </div>
-    </div>
-  );
+    </div>;
 }

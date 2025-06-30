@@ -14,7 +14,7 @@ export function MissionsHeader() {
 
       <div className="relative z-10">
         {/* Main Title */}
-        <div className="mb-6">
+        <div className="mb-6 px-0 py-0 my-0 mx-0">
           <div className="flex items-center justify-center gap-3 mb-4">
             <div className="p-3 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full shadow-lg">
               <Trophy className="w-8 h-8 text-white" />

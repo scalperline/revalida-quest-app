@@ -19,7 +19,7 @@ export function StatsPageHeader() {
             <div className="p-3 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full shadow-lg">
               <TrendingUp className="w-8 h-8 text-white" />
             </div>
-            <h1 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            <h1 className="md:text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent text-2xl">
               Dashboard Acadêmico
             </h1>
           </div>
@@ -37,7 +37,7 @@ export function StatsPageHeader() {
         <div className="mt-6 p-4 bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 rounded-xl max-w-2xl mx-auto">
           <div className="flex items-center justify-center gap-2 text-green-800">
             <Star className="w-5 h-5" />
-            <span className="font-medium">
+            <span className="font-medium text-sm">
               Analise seus dados e continue evoluindo! Cada estatística conta na sua jornada.
             </span>
           </div>

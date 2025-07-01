@@ -1,18 +1,15 @@
-
 import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Trophy, Target, Clock, Zap, Crown, Sparkles, Shield, Rocket } from 'lucide-react';
 import { ChallengeModal } from './ChallengeModal';
-
 interface PremiumChallengeSectionProps {
   canStartChallenge: boolean;
   attemptsLeft: number;
   hasWonBefore: boolean;
   onStartChallenge: () => void;
 }
-
 export function PremiumChallengeSection({
   canStartChallenge,
   attemptsLeft,
@@ -20,16 +17,13 @@ export function PremiumChallengeSection({
   onStartChallenge
 }: PremiumChallengeSectionProps) {
   const [showModal, setShowModal] = useState(false);
-
   const handleStartChallenge = () => {
     if (canStartChallenge) {
       onStartChallenge();
       setShowModal(true);
     }
   };
-
-  return (
-    <>
+  return <>
       <div className="relative mb-16">
         {/* Simplified Background Effects */}
         <div className="absolute inset-0 overflow-hidden rounded-3xl">
@@ -59,11 +53,9 @@ export function PremiumChallengeSection({
               Conquiste o <span className="text-transparent bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text font-bold">Plano Premium</span> pelo preço do Basic!
             </p>
 
-            {hasWonBefore && (
-              <Badge className="bg-gradient-to-r from-green-500 to-green-600 text-white px-4 py-2 font-bold mb-4 animate-pulse">
+            {hasWonBefore && <Badge className="bg-gradient-to-r from-green-500 to-green-600 text-white px-4 py-2 font-bold mb-4 animate-pulse">
                 ✨ MISSÃO CONQUISTADA! Desconto Disponível ✨
-              </Badge>
-            )}
+              </Badge>}
           </CardHeader>
 
           <CardContent className="relative z-10 text-center px-6">
@@ -135,45 +127,31 @@ export function PremiumChallengeSection({
 
             {/* Streamlined Action Section */}
             <div className="flex flex-col items-center gap-4">
-              {canStartChallenge ? (
-                <>
-                  <Button
-                    onClick={handleStartChallenge}
-                    className="bg-gradient-to-r from-yellow-500 via-orange-500 to-red-500 hover:from-yellow-600 hover:via-orange-600 hover:to-red-600 text-white text-xl font-bold py-4 px-8 rounded-full shadow-xl transform hover:scale-105 transition-all duration-300"
-                  >
-                    🚀 ACEITAR MISSÃO SUPREMA 🚀
-                  </Button>
+              {canStartChallenge ? <>
+                  <Button onClick={handleStartChallenge} className="bg-gradient-to-r from-yellow-500 via-orange-500 to-red-500 hover:from-yellow-600 hover:via-orange-600 hover:to-red-600 text-white text-xl font-bold rounded-full shadow-xl transform hover:scale-105 transition-all duration-300 py-0 px-[7px]">🚀 Aceitar Desafio 🚀</Button>
                   
                   <div className="flex items-center gap-3">
                     <div className="flex gap-1">
-                      {[...Array(attemptsLeft)].map((_, i) => (
-                        <div key={i} className="w-3 h-3 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full"></div>
-                      ))}
-                      {[...Array(3 - attemptsLeft)].map((_, i) => (
-                        <div key={i} className="w-3 h-3 bg-gray-600 rounded-full"></div>
-                      ))}
+                      {[...Array(attemptsLeft)].map((_, i) => <div key={i} className="w-3 h-3 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full"></div>)}
+                      {[...Array(3 - attemptsLeft)].map((_, i) => <div key={i} className="w-3 h-3 bg-gray-600 rounded-full"></div>)}
                     </div>
                     <p className="text-sm text-gray-300">
                       <span className="text-yellow-400 font-bold">{attemptsLeft}</span> tentativas restantes
                     </p>
                   </div>
-                </>
-              ) : (
-                <div className="text-center bg-gradient-to-br from-red-900/60 to-red-800/60 backdrop-blur-sm rounded-xl p-6 border border-red-400/30">
+                </> : <div className="text-center bg-gradient-to-br from-red-900/60 to-red-800/60 backdrop-blur-sm rounded-xl p-6 border border-red-400/30">
                   <p className="text-xl font-bold text-red-300 mb-1">
                     ⚡ Energia Esgotada ⚡
                   </p>
                   <p className="text-red-200 text-sm">
                     Você utilizou todas as 3 tentativas disponíveis
                   </p>
-                </div>
-              )}
+                </div>}
             </div>
           </CardContent>
         </Card>
       </div>
 
       <ChallengeModal isOpen={showModal} onClose={() => setShowModal(false)} />
-    </>
-  );
+    </>;
 }

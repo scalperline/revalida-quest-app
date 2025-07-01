@@ -1,6 +1,6 @@
 
-import { ProgressSection } from './ProgressSection';
-import { UpgradeButton } from './UpgradeButton';
+import { MobileProgressSection } from './MobileProgressSection';
+import { MobileUpgradeButton } from './MobileUpgradeButton';
 
 export function MobileUserProgress() {
   return (
@@ -8,10 +8,10 @@ export function MobileUserProgress() {
       {/* Progress Section with Upgrade Button - Responsive container */}
       <div className="flex flex-col xs:flex-row items-center xs:items-start gap-2 xs:gap-3">
         <div className="w-full xs:flex-1">
-          <ProgressSection />
+          <MobileProgressSection />
         </div>
         <div className="w-full xs:w-auto">
-          <UpgradeButton />
+          <MobileUpgradeButton />
         </div>
       </div>
     </div>

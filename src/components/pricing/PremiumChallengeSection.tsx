@@ -44,7 +44,7 @@ export function PremiumChallengeSection({
             </div>
             
             <CardTitle className="text-3xl md:text-4xl font-bold mb-4">
-              <span className="bg-gradient-to-r from-yellow-400 via-orange-500 to-purple-600 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-yellow-400 via-orange-500 to-purple-600 bg-clip-text text-transparent text-xl">
                 ⚡ MISSÃO SUPREMA ⚡
               </span>
             </CardTitle>

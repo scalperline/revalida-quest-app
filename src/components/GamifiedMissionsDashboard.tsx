@@ -39,17 +39,17 @@ export function GamifiedMissionsDashboard() {
   const xpPercentage = Math.round((userProgress.xp / userProgress.xpToNextLevel) * 100);
   
   return (
-    <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+    <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-6">
       {stats.map((stat, index) => (
-        <Card key={index} className={`${stat.bgColor} border-2`}>
-          <CardContent className="p-4">
+        <Card key={index} className={`${stat.bgColor} border-2 hover:scale-105 transition-transform duration-200`}>
+          <CardContent className="p-3 sm:p-4">
             <div className="flex items-center gap-2 mb-2">
-              <div className={`p-2 bg-gradient-to-r ${stat.color} rounded-lg`}>
-                <stat.icon className="w-4 h-4 text-white" />
+              <div className={`p-1.5 sm:p-2 bg-gradient-to-r ${stat.color} rounded-lg flex-shrink-0`}>
+                <stat.icon className="w-3 h-3 sm:w-4 sm:h-4 text-white" />
               </div>
             </div>
-            <div className="text-2xl font-bold text-gray-900">{stat.value}</div>
-            <div className="text-sm text-gray-600">{stat.label}</div>
+            <div className="text-lg sm:text-2xl font-bold text-gray-900 mb-1">{stat.value}</div>
+            <div className="text-xs sm:text-sm text-gray-600 leading-tight">{stat.label}</div>
           </CardContent>
         </Card>
       ))}

@@ -40,7 +40,7 @@ export function Navbar() {
           <div className="flex items-center flex-shrink-0 min-w-0">
             <Link to="/" className="flex items-center gap-2 sm:gap-3 py-2 group transition-all duration-300 hover:scale-105 min-w-0">
               <div className="w-8 h-8 sm:w-9 sm:h-9 lg:w-10 lg:h-10 xl:w-12 xl:h-12 bg-gradient-to-br from-blue-500 via-blue-600 to-purple-600 flex items-center justify-center flex-shrink-0 shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:rotate-3 mx-[3px] px-0 my-0 py-0 rounded-lg">
-                <Stethoscope className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 text-white" />
+                <Stethoscope className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 text-white mx-0 my-0 py-0 px-0" />
               </div>
               {/* Responsive logo text */}
               <div className="flex flex-col min-w-0">

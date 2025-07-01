@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -7,54 +6,44 @@ import { Label } from '@/components/ui/label';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Settings, Play, Clock, Target, BookOpen, Info } from 'lucide-react';
-
 export interface SimuladoConfig {
   quantidade: number;
   areas: string[];
   tempoMinutos: number;
 }
-
 interface SimuladoFiltersProps {
   onStart: (config: SimuladoConfig) => void;
 }
-
-const AREAS_DISPONIVEIS = [
-  'Clínica Médica',
-  'Cirurgia Geral',
-  'Pediatria',
-  'Ginecologia e Obstetrícia',
-  'Psiquiatria',
-  'Medicina Preventiva e Social',
-  'Medicina de Família e Comunidade',
-  'Cardiologia',
-  'Neurologia',
-  'Ortopedia',
-  'Dermatologia',
-  'Oftalmologia',
-  'Otorrinolaringologia',
-  'Urologia',
-  'Anestesiologia',
-  'Radiologia',
-  'Patologia',
-  'Medicina Legal'
-];
-
-const TEMPOS_PREDEFINIDOS = [
-  { valor: 30, label: '30 minutos (Revisão Rápida)' },
-  { valor: 60, label: '1 hora (Treino Focado)' },
-  { valor: 90, label: '1h30 (Simulado Médio)' },
-  { valor: 120, label: '2 horas (Simulado Longo)' },
-  { valor: 180, label: '3 horas (Simulado Extenso)' },
-  { valor: 240, label: '4 horas (Quase Real)' },
-  { valor: 300, label: '5 horas (Tempo Real INEP)' }
-];
-
-export function SimuladoFilters({ onStart }: SimuladoFiltersProps) {
+const AREAS_DISPONIVEIS = ['Clínica Médica', 'Cirurgia Geral', 'Pediatria', 'Ginecologia e Obstetrícia', 'Psiquiatria', 'Medicina Preventiva e Social', 'Medicina de Família e Comunidade', 'Cardiologia', 'Neurologia', 'Ortopedia', 'Dermatologia', 'Oftalmologia', 'Otorrinolaringologia', 'Urologia', 'Anestesiologia', 'Radiologia', 'Patologia', 'Medicina Legal'];
+const TEMPOS_PREDEFINIDOS = [{
+  valor: 30,
+  label: '30 minutos (Revisão Rápida)'
+}, {
+  valor: 60,
+  label: '1 hora (Treino Focado)'
+}, {
+  valor: 90,
+  label: '1h30 (Simulado Médio)'
+}, {
+  valor: 120,
+  label: '2 horas (Simulado Longo)'
+}, {
+  valor: 180,
+  label: '3 horas (Simulado Extenso)'
+}, {
+  valor: 240,
+  label: '4 horas (Quase Real)'
+}, {
+  valor: 300,
+  label: '5 horas (Tempo Real INEP)'
+}];
+export function SimuladoFilters({
+  onStart
+}: SimuladoFiltersProps) {
   const [quantidade, setQuantidade] = useState(10);
   const [areasSelecionadas, setAreasSelecionadas] = useState<string[]>(['Clínica Médica']);
   const [tempoMinutos, setTempoMinutos] = useState(120);
   const [tempoCustomizado, setTempoCustomizado] = useState(false);
-
   const handleAreaChange = (area: string, checked: boolean) => {
     if (checked) {
       setAreasSelecionadas(prev => [...prev, area]);
@@ -62,32 +51,26 @@ export function SimuladoFilters({ onStart }: SimuladoFiltersProps) {
       setAreasSelecionadas(prev => prev.filter(a => a !== area));
     }
   };
-
   const handleIniciar = () => {
     if (areasSelecionadas.length === 0) {
       alert('Selecione pelo menos uma área para continuar!');
       return;
     }
-    
     if (quantidade < 1 || quantidade > 100) {
       alert('A quantidade deve estar entre 1 e 100 questões!');
       return;
     }
-
     if (tempoMinutos < 10 || tempoMinutos > 360) {
       alert('O tempo deve estar entre 10 minutos e 6 horas!');
       return;
     }
-
     onStart({
       quantidade,
       areas: areasSelecionadas,
       tempoMinutos
     });
   };
-
-  return (
-    <div className="w-full max-w-5xl mx-auto space-y-6">
+  return <div className="w-full max-w-5xl mx-auto space-y-6">
       {/* Header Principal */}
       <Card className="border-2 border-blue-200 shadow-xl bg-gradient-to-r from-blue-50 to-purple-50">
         <CardHeader className="text-center pb-4">
@@ -119,15 +102,7 @@ export function SimuladoFilters({ onStart }: SimuladoFiltersProps) {
           <CardContent className="p-6">
             <div className="space-y-4">
               <div className="flex items-center gap-4">
-                <Input
-                  id="quantidade"
-                  type="number"
-                  min="1"
-                  max="100"
-                  value={quantidade}
-                  onChange={(e) => setQuantidade(parseInt(e.target.value) || 1)}
-                  className="w-24 text-center border-2 border-blue-200 focus:border-blue-500 text-lg font-semibold"
-                />
+                <Input id="quantidade" type="number" min="1" max="100" value={quantidade} onChange={e => setQuantidade(parseInt(e.target.value) || 1)} className="w-24 text-center border-2 border-blue-200 focus:border-blue-500 text-lg font-semibold" />
                 <span className="text-sm text-gray-600">questões</span>
               </div>
               <p className="text-xs text-gray-500">
@@ -148,46 +123,25 @@ export function SimuladoFilters({ onStart }: SimuladoFiltersProps) {
           <CardContent className="p-6">
             <div className="space-y-4">
               <div className="flex items-center space-x-2 p-3 bg-gray-50 rounded-lg">
-                <Checkbox
-                  id="tempo-customizado"
-                  checked={tempoCustomizado}
-                  onCheckedChange={(checked) => setTempoCustomizado(!!checked)}
-                  className="border-2"
-                />
+                <Checkbox id="tempo-customizado" checked={tempoCustomizado} onCheckedChange={checked => setTempoCustomizado(!!checked)} className="border-2" />
                 <Label htmlFor="tempo-customizado" className="font-medium text-sm">
                   Tempo personalizado
                 </Label>
               </div>
 
-              {tempoCustomizado ? (
-                <div className="flex items-center gap-3">
-                  <Input
-                    type="number"
-                    min="10"
-                    max="360"
-                    value={tempoMinutos}
-                    onChange={(e) => setTempoMinutos(parseInt(e.target.value) || 10)}
-                    className="w-20 text-center border-2 border-orange-200 focus:border-orange-500"
-                  />
+              {tempoCustomizado ? <div className="flex items-center gap-3">
+                  <Input type="number" min="10" max="360" value={tempoMinutos} onChange={e => setTempoMinutos(parseInt(e.target.value) || 10)} className="w-20 text-center border-2 border-orange-200 focus:border-orange-500" />
                   <span className="text-sm text-gray-600">minutos</span>
-                </div>
-              ) : (
-                <Select 
-                  value={tempoMinutos.toString()} 
-                  onValueChange={(value) => setTempoMinutos(parseInt(value))}
-                >
+                </div> : <Select value={tempoMinutos.toString()} onValueChange={value => setTempoMinutos(parseInt(value))}>
                   <SelectTrigger className="border-2 border-green-200 focus:border-green-500">
                     <SelectValue placeholder="Selecione o tempo" />
                   </SelectTrigger>
                   <SelectContent>
-                    {TEMPOS_PREDEFINIDOS.map(tempo => (
-                      <SelectItem key={tempo.valor} value={tempo.valor.toString()}>
+                    {TEMPOS_PREDEFINIDOS.map(tempo => <SelectItem key={tempo.valor} value={tempo.valor.toString()}>
                         {tempo.label}
-                      </SelectItem>
-                    ))}
+                      </SelectItem>)}
                   </SelectContent>
-                </Select>
-              )}
+                </Select>}
               
               <div className="bg-blue-50 p-3 rounded-lg border border-blue-200">
                 <p className="text-xs text-blue-700 flex items-start gap-2">
@@ -235,45 +189,25 @@ export function SimuladoFilters({ onStart }: SimuladoFiltersProps) {
       {/* Seleção de Áreas */}
       <Card className="border-2 border-purple-200 shadow-lg">
         <CardHeader className="bg-gradient-to-r from-purple-50 to-indigo-50 border-b border-purple-200">
-          <CardTitle className="flex items-center gap-2 text-lg">
+          <CardTitle className="flex items-center gap-2 text-base">
             <BookOpen className="w-5 h-5 text-purple-600" />
             Áreas Médicas ({areasSelecionadas.length} selecionada{areasSelecionadas.length !== 1 ? 's' : ''})
           </CardTitle>
         </CardHeader>
         <CardContent className="p-6">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 max-h-64 overflow-y-auto p-4 border-2 border-purple-200 rounded-lg bg-white">
-            {AREAS_DISPONIVEIS.map(area => (
-              <div key={area} className="flex items-center space-x-2 p-2 rounded-md hover:bg-purple-50 transition-colors">
-                <Checkbox
-                  id={area}
-                  checked={areasSelecionadas.includes(area)}
-                  onCheckedChange={(checked) => handleAreaChange(area, !!checked)}
-                  className="border-2"
-                />
-                <Label 
-                  htmlFor={area} 
-                  className="text-sm cursor-pointer hover:text-purple-600 leading-tight"
-                >
+            {AREAS_DISPONIVEIS.map(area => <div key={area} className="flex items-center space-x-2 p-2 rounded-md hover:bg-purple-50 transition-colors">
+                <Checkbox id={area} checked={areasSelecionadas.includes(area)} onCheckedChange={checked => handleAreaChange(area, !!checked)} className="border-2" />
+                <Label htmlFor={area} className="text-sm cursor-pointer hover:text-purple-600 leading-tight">
                   {area}
                 </Label>
-              </div>
-            ))}
+              </div>)}
           </div>
           <div className="flex gap-2 mt-4">
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => setAreasSelecionadas(AREAS_DISPONIVEIS)}
-              className="border-2 border-purple-300 hover:border-purple-500 hover:bg-purple-50"
-            >
+            <Button variant="outline" size="sm" onClick={() => setAreasSelecionadas(AREAS_DISPONIVEIS)} className="border-2 border-purple-300 hover:border-purple-500 hover:bg-purple-50">
               Selecionar Todas
             </Button>
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => setAreasSelecionadas([])}
-              className="border-2 border-gray-300 hover:border-gray-500 hover:bg-gray-50"
-            >
+            <Button variant="outline" size="sm" onClick={() => setAreasSelecionadas([])} className="border-2 border-gray-300 hover:border-gray-500 hover:bg-gray-50">
               Limpar Seleção
             </Button>
           </div>
@@ -282,15 +216,10 @@ export function SimuladoFilters({ onStart }: SimuladoFiltersProps) {
 
       {/* Botão Iniciar */}
       <div className="text-center">
-        <Button
-          onClick={handleIniciar}
-          className="w-full max-w-md bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white font-bold py-6 text-xl border-2 border-green-500 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-[1.02] rounded-xl"
-          size="lg"
-        >
+        <Button onClick={handleIniciar} className="w-full max-w-md bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white font-bold py-6 text-xl border-2 border-green-500 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-[1.02] rounded-xl" size="lg">
           <Play className="w-7 h-7 mr-3" />
           🎯 Iniciar Simulado
         </Button>
       </div>
-    </div>
-  );
+    </div>;
 }

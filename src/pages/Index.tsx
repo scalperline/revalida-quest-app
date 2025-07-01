@@ -39,7 +39,7 @@ const Index = () => {
             <div className="relative z-10 p-3 sm:p-4 lg:p-6 xl:p-8">
               <h1 className="text-lg xs:text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 mb-3 sm:mb-4 lg:mb-6 leading-tight px-2 sm:px-4">
                 Bem-vindo ao{" "}
-                <span className="gradient-text bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent animate-pulse font-bold text-xl">
+                <span className="gradient-text bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent animate-pulse font-bold text-4xl">
                   RevalidaQuest
                 </span>
                 , {user?.user_metadata?.display_name || 'Doutor'}! 

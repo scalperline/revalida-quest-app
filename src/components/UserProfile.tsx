@@ -1,15 +1,14 @@
 
 import { useState } from 'react';
 import { useGamification } from '@/hooks/useGamification';
-import { useAuth } from '@/hooks/useAuth';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { BadgesGrid } from '@/components/BadgesGrid';
-import { AvatarUpload } from '@/components/AvatarUpload';
 import { User, Trophy, Target, Calendar, Star, Crown, Zap } from 'lucide-react';
 
 interface UserData {
@@ -20,12 +19,11 @@ interface UserData {
 }
 
 export function UserProfile() {
-  const { user } = useAuth();
   const { userProgress, getAccuracy, getProgressPercentage } = useGamification();
   const [userData, setUserData] = useState<UserData>({
-    name: user?.user_metadata?.display_name || 'Aventureiro',
-    email: user?.email || 'aventureiro@revalida.com',
-    joinDate: user?.created_at ? new Date(user.created_at).toISOString().split('T')[0] : '2024-01-15'
+    name: 'Aventureiro',
+    email: 'aventureiro@revalida.com',
+    joinDate: '2024-01-15'
   });
 
   const [isEditing, setIsEditing] = useState(false);
@@ -34,11 +32,6 @@ export function UserProfile() {
   const handleSave = () => {
     setUserData(editData);
     setIsEditing(false);
-  };
-
-  const handleAvatarUpdate = (url: string) => {
-    // Avatar is automatically updated in the database by AvatarUpload component
-    console.log('Avatar updated:', url);
   };
 
   const getRankTitle = (level: number) => {
@@ -62,12 +55,12 @@ export function UserProfile() {
       {/* Header with Avatar and Basic Info */}
       <div className="flex flex-col md:flex-row items-center gap-6 mb-8">
         <div className="relative">
-          <AvatarUpload 
-            currentAvatarUrl={user?.user_metadata?.avatar_url}
-            onAvatarUpdate={handleAvatarUpdate}
-            size="xl"
-            showUploadButton={true}
-          />
+          <Avatar className="w-24 h-24 border-4 border-gradient-to-r from-blue-500 to-purple-600">
+            <AvatarImage src={userData.avatar} />
+            <AvatarFallback className="text-2xl font-bold bg-gradient-to-r from-blue-500 to-purple-600 text-white">
+              {userData.name.split(' ').map(n => n[0]).join('').toUpperCase()}
+            </AvatarFallback>
+          </Avatar>
           <div className="absolute -bottom-2 -right-2 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full p-2 border-2 border-white shadow-lg">
             <span className="text-white font-bold text-sm">{userProgress.level}</span>
           </div>

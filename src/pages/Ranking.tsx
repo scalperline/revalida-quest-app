@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { useRanking } from '@/hooks/useRanking';
 import { Navbar } from '@/components/Navbar';
@@ -6,7 +5,7 @@ import { RankingPageHeader } from '@/components/RankingPageHeader';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Trophy, Crown, Star, Medal, Target, Calendar } from 'lucide-react';
 
 export default function Ranking() {
@@ -39,16 +38,6 @@ export default function Ranking() {
     return 'Estudante';
   };
 
-  const getInitials = (displayName: string) => {
-    if (!displayName) return 'U';
-    return displayName
-      .split(' ')
-      .map(name => name[0])
-      .join('')
-      .toUpperCase()
-      .slice(0, 2);
-  };
-
   const RankingList = ({
     data,
     type
@@ -73,10 +62,9 @@ export default function Ranking() {
                     {user.position <= 3 ? getRankIcon(user.position) : user.position}
                   </div>
 
-                  <Avatar className="w-12 h-12 border-4 border-blue-200">
-                    <AvatarImage src={user.avatar_url} alt="Avatar" />
-                    <AvatarFallback className="bg-gradient-to-r from-blue-500 to-purple-600 text-white font-bold">
-                      {getInitials(user.display_name)}
+                  <Avatar className="w-12 h-12 border-2 border-blue-200 dark:border-blue-700">
+                    <AvatarFallback className="bg-gradient-to-r from-blue-500 to-blue-600 text-white font-semibold">
+                      {user.display_name.split(' ').map(n => n[0]).join('').toUpperCase()}
                     </AvatarFallback>
                   </Avatar>
 

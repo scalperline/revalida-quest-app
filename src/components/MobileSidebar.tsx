@@ -1,4 +1,3 @@
-
 import { Link, useLocation } from 'react-router-dom';
 import { Home, FileText, BarChart3, User, Trophy, Target, HelpCircle, LogOut, X, Stethoscope } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
@@ -31,7 +30,7 @@ export function MobileSidebar({
     icon: Target,
     emoji: '🎯'
   }, {
-    name: 'Progresso',
+    name: 'Estatísticas',
     href: '/stats',
     icon: BarChart3,
     emoji: '📈'

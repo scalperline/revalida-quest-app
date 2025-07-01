@@ -33,13 +33,13 @@ export function ProgressSection() {
   return (
     <Button 
       variant="ghost" 
-      className="h-8 md:h-9 lg:h-10 bg-gradient-to-r from-blue-50 to-purple-50 hover:from-blue-100 hover:to-purple-100 border border-blue-200/50 rounded-lg md:rounded-xl transition-all duration-300 shadow-sm hover:shadow-md group min-w-0 flex-shrink-0 text-left px-2 md:px-3 lg:px-[12px] py-1 text-gray-500"
+      className="h-7 md:h-8 lg:h-9 bg-gradient-to-r from-blue-50 to-purple-50 hover:from-blue-100 hover:to-purple-100 border border-blue-200/50 rounded-md md:rounded-lg transition-all duration-300 shadow-sm hover:shadow-md group min-w-0 flex-shrink-0 text-left px-1.5 md:px-2 lg:px-3 py-0.5 text-gray-500"
     >
-      <div className="flex items-center gap-1 md:gap-1.5 lg:gap-2 min-w-0">
+      <div className="flex items-center gap-0.5 md:gap-1 lg:gap-1.5 min-w-0">
         {/* Ícone e Nível de Gamificação */}
-        <div className="flex items-center gap-0.5 md:gap-1 flex-shrink-0">
-          <div className="w-4 h-4 md:w-5 md:h-5 lg:w-6 lg:h-6 bg-gradient-to-r from-orange-400 to-orange-600 rounded-full flex items-center justify-center">
-            <Zap className="w-2 h-2 md:w-2.5 md:h-2.5 lg:w-3 lg:h-3 text-white" />
+        <div className="flex items-center gap-0.5 flex-shrink-0">
+          <div className="w-3 h-3 md:w-4 md:h-4 lg:w-5 lg:h-5 bg-gradient-to-r from-orange-400 to-orange-600 rounded-full flex items-center justify-center">
+            <Zap className="w-1.5 h-1.5 md:w-2 md:h-2 lg:w-2.5 lg:h-2.5 text-white" />
           </div>
           <span className="text-xs md:text-sm font-semibold text-gray-800">
             Nv {gamificationLevel}
@@ -47,16 +47,16 @@ export function ProgressSection() {
         </div>
 
         {/* Separador - oculto em tablets menores */}
-        <div className="hidden lg:block w-px h-3 sm:h-4 bg-gray-300"></div>
+        <div className="hidden lg:block w-px h-2 sm:h-3 bg-gray-300"></div>
 
-        {/* XP Info - mais compacto em tablet */}
-        <div className="flex items-center gap-0.5 md:gap-1 lg:gap-2 min-w-0">
+        {/* XP Info - mais compacto */}
+        <div className="flex items-center gap-0.5 md:gap-1 min-w-0">
           <span className="text-xs font-medium text-gray-600 whitespace-nowrap">
             {userProgress.xp}/{userProgress.xpToNextLevel}
           </span>
           
-          {/* Barra de Progresso XP - mais estreita em tablet */}
-          <div className="relative w-6 md:w-8 lg:w-12 h-1 md:h-1.5 lg:h-2 bg-gray-200 rounded-full overflow-hidden flex-shrink-0">
+          {/* Barra de Progresso XP - mais estreita */}
+          <div className="relative w-4 md:w-6 lg:w-8 h-1 md:h-1.5 bg-gray-200 rounded-full overflow-hidden flex-shrink-0">
             <div 
               className="absolute top-0 left-0 h-full bg-gradient-to-r from-orange-400 to-orange-600 rounded-full transition-all duration-500 group-hover:from-orange-500 group-hover:to-orange-700" 
               style={{ width: `${xpPercentage}%` }} 
@@ -65,11 +65,11 @@ export function ProgressSection() {
         </div>
 
         {/* Separador - oculto em tablets */}
-        <div className="hidden lg:block w-px h-3 sm:h-4 bg-gray-300"></div>
+        <div className="hidden lg:block w-px h-2 sm:h-3 bg-gray-300"></div>
 
         {/* Plano de Assinatura - oculto em tablet */}
-        <div className="hidden lg:flex items-center gap-1 flex-shrink-0">
-          <div className={`w-2 h-2 rounded-full bg-gradient-to-r ${planInfo.color}`}></div>
+        <div className="hidden lg:flex items-center gap-0.5 flex-shrink-0">
+          <div className={`w-1.5 h-1.5 rounded-full bg-gradient-to-r ${planInfo.color}`}></div>
           <span className="text-xs font-medium text-gray-600">
             {planInfo.name}
           </span>

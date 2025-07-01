@@ -60,23 +60,23 @@ export function Navbar() {
             </Link>
           </div>
 
-          {/* Tablet Navigation - Simplified icons only (md to xl) */}
-          <div className="hidden md:flex lg:hidden items-center justify-center flex-1 max-w-xl mx-4">
-            <div className="flex items-center bg-gray-50/90 backdrop-blur-sm rounded-2xl px-1 py-1 border-2 border-gray-200/50 shadow-lg hover:shadow-xl transition-all duration-300">
+          {/* Tablet Navigation - Simplified and compact (md to xl) */}
+          <div className="hidden md:flex lg:hidden items-center justify-center flex-1 max-w-lg mx-2">
+            <div className="flex items-center bg-gray-50/90 backdrop-blur-sm rounded-xl px-0.5 py-0.5 border-2 border-gray-200/50 shadow-lg hover:shadow-xl transition-all duration-300">
               {navigation.map(item => {
                 const isActive = location.pathname === item.href;
                 return (
                   <Link 
                     key={item.name} 
                     to={item.href} 
-                    className={`flex items-center justify-center p-2.5 rounded-xl transition-all duration-300 group ${
+                    className={`flex items-center justify-center p-1.5 rounded-lg transition-all duration-300 group ${
                       isActive 
                         ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg scale-105 z-10' 
                         : 'text-gray-700 hover:bg-white/90 hover:text-blue-600 hover:shadow-md hover:scale-[1.02]'
                     }`}
                     title={item.name}
                   >
-                    <item.icon className={`w-5 h-5 flex-shrink-0 ${isActive ? 'animate-pulse' : 'group-hover:animate-bounce'}`} />
+                    <item.icon className={`w-4 h-4 flex-shrink-0 ${isActive ? 'animate-pulse' : 'group-hover:animate-bounce'}`} />
                   </Link>
                 );
               })}
@@ -108,14 +108,7 @@ export function Navbar() {
 
           {/* User Progress - Responsive visibility */}
           <div className="hidden md:flex items-center flex-shrink-0">
-            <div className="bg-white/90 backdrop-blur-sm rounded-xl px-2 sm:px-3 py-1.5 sm:py-2 shadow-lg border border-gray-200">
-              <UserProgressBar />
-            </div>
-          </div>
-
-          {/* Tablet Progress - Visible only on tablets */}
-          <div className="hidden sm:flex md:hidden items-center flex-shrink-0">
-            <div className="bg-white/90 backdrop-blur-sm rounded-lg px-2 py-1.5 shadow-md border border-gray-200">
+            <div className="bg-white/90 backdrop-blur-sm rounded-xl px-2 py-1.5 shadow-lg border border-gray-200">
               <UserProgressBar />
             </div>
           </div>

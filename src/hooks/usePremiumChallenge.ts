@@ -32,7 +32,7 @@ export function usePremiumChallenge() {
 
   const maxAttempts = 3;
   const questionsCount = 10;
-  const winThreshold = 8; // 80% de 10 questões
+  const winThreshold = 10; // 100% de acerto - todas as 10 questões
 
   const startChallenge = useCallback(() => {
     if (attemptsUsed >= maxAttempts) return false;
@@ -122,6 +122,7 @@ export function usePremiumChallenge() {
     attemptsLeft,
     maxAttempts,
     hasWonBefore,
+    winThreshold,
     startChallenge,
     answerQuestion,
     nextQuestion,

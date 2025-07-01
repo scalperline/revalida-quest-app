@@ -8,7 +8,7 @@ export function PricingHeader() {
         <div className="w-16 h-16 medical-gradient rounded-2xl flex items-center justify-center shadow-2xl">
           <Stethoscope className="w-8 h-8 text-white" />
         </div>
-        <h1 className="font-bold gradient-text text-3xl md:text-4xl">
+        <h1 className="font-bold bg-gradient-to-r from-white to-blue-400 bg-clip-text text-transparent text-3xl md:text-4xl">
           Planos RevalidaQuest
         </h1>
       </div>

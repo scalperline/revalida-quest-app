@@ -64,7 +64,7 @@ export function PremiumChallengeSection({
               <div className="bg-gradient-to-br from-blue-900/60 to-indigo-900/60 backdrop-blur-sm rounded-xl p-4 border border-blue-400/20">
                 <div className="flex items-center justify-center gap-2 mb-2">
                   <Target className="w-6 h-6 text-blue-400" />
-                  <span className="font-bold text-blue-300 text-base">10 Questões</span>
+                  <span className="font-bold text-base text-gray-300">10 Questões</span>
                 </div>
                 <p className="text-blue-200 text-sm">Questões oficiais</p>
               </div>
@@ -72,7 +72,7 @@ export function PremiumChallengeSection({
               <div className="bg-gradient-to-br from-green-900/60 to-emerald-900/60 backdrop-blur-sm rounded-xl p-4 border border-green-400/20">
                 <div className="flex items-center justify-center gap-2 mb-2">
                   <Clock className="w-6 h-6 text-green-400" />
-                  <span className="font-bold text-green-300 text-base">10 Minutos</span>
+                  <span className="font-bold text-base text-green-200">10 Minutos</span>
                 </div>
                 <p className="text-green-200 text-sm">Tempo limite</p>
               </div>
@@ -80,7 +80,7 @@ export function PremiumChallengeSection({
               <div className="bg-gradient-to-br from-purple-900/60 to-pink-900/60 backdrop-blur-sm rounded-xl p-4 border border-purple-400/20">
                 <div className="flex items-center justify-center gap-2 mb-2">
                   <Zap className="w-6 h-6 text-purple-400" />
-                  <span className="font-bold text-purple-300 text-base">100% Acerto</span>
+                  <span className="font-bold text-base text-fuchsia-200">100% Acerto</span>
                 </div>
                 <p className="text-purple-200 text-sm">Perfeição total</p>
               </div>

@@ -34,7 +34,7 @@ const Index = () => {
       <main className="relative z-10 pt-20 sm:pt-24 pb-6 sm:pb-8">
         <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 xl:px-8">
           {/* Enhanced Hero Section */}
-          <div className="text-center mb-6 sm:mb-8 lg:mb-12 relative">
+          <div className="text-center mb-6 sm:mb-8 lg:mb-12 relative text-4xl">
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-100/50 to-transparent rounded-3xl blur-3xl"></div>
             <div className="relative z-10 p-4 sm:p-6 lg:p-8">
               <h1 className="text-xl xs:text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 mb-3 sm:mb-4 lg:mb-6 leading-tight px-2 sm:px-4">

@@ -45,7 +45,7 @@ export function ProgressSection() {
     }
   };
   const planInfo = getPlanInfo();
-  return <Button variant="ghost" className="h-10 bg-gradient-to-r from-blue-50 to-purple-50 hover:from-blue-100 hover:to-purple-100 border border-blue-200/50 rounded-xl transition-all duration-300 shadow-sm hover:shadow-md group min-w-0 flex-shrink-0 text-left mx-0 my-0 py-0 sm:px-[11px] px-0">
+  return <Button variant="ghost" className="h-10 bg-gradient-to-r from-blue-50 to-purple-50 hover:from-blue-100 hover:to-purple-100 border border-blue-200/50 rounded-xl transition-all duration-300 shadow-sm hover:shadow-md group min-w-0 flex-shrink-0 text-left mx-0 my-0 sm:px-[11px] py-px px-[12px] bg-gray-500 hover:bg-gray-400 text-gray-500">
       <div className="flex items-center gap-1 sm:gap-2 min-w-0">
         {/* Ícone e Nível de Gamificação */}
         <div className="flex items-center gap-1 flex-shrink-0 px-0 my-0 py-0">

@@ -4,7 +4,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/u
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
-import { Clock, Target, Zap, Trophy, X, Shield, Star } from 'lucide-react';
+import { Clock, Target, Zap, Trophy, X, Shield } from 'lucide-react';
 import { usePremiumChallenge } from '@/hooks/usePremiumChallenge';
 import { useTimer } from '@/hooks/useTimer';
 import { QuestionCard } from '@/components/QuestionCard';
@@ -72,7 +72,6 @@ export function ChallengeModal({ isOpen, onClose }: ChallengeModalProps) {
               <div className="absolute top-10 left-10 w-32 h-32 bg-blue-500/10 rounded-full animate-pulse blur-xl"></div>
               <div className="absolute bottom-10 right-10 w-24 h-24 bg-purple-500/10 rounded-full animate-bounce blur-lg"></div>
               <div className="absolute top-1/2 left-1/4 w-16 h-16 bg-pink-500/10 rounded-full animate-ping blur-md"></div>
-              <Star className="absolute top-20 right-20 w-6 h-6 text-yellow-400/30 animate-pulse" />
               <Shield className="absolute bottom-20 left-20 w-8 h-8 text-blue-400/20 animate-bounce delay-300" />
             </div>
 

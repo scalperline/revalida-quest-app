@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Trophy, Target, Clock, Zap, Star, Crown, Sparkles, Shield, Rocket } from 'lucide-react';
+import { Trophy, Target, Clock, Zap, Crown, Sparkles, Shield, Rocket } from 'lucide-react';
 import { ChallengeModal } from './ChallengeModal';
 
 interface PremiumChallengeSectionProps {
@@ -41,7 +41,6 @@ export function PremiumChallengeSection({
           
           {/* Floating Icons */}
           <Sparkles className="absolute top-8 left-8 w-8 h-8 text-yellow-400 opacity-40 animate-pulse" />
-          <Star className="absolute top-12 right-12 w-6 h-6 text-orange-400 opacity-50 animate-bounce delay-500" />
           <Shield className="absolute bottom-12 left-16 w-7 h-7 text-purple-400 opacity-45 animate-pulse delay-700" />
           <Rocket className="absolute bottom-16 right-8 w-8 h-8 text-blue-400 opacity-35 animate-bounce delay-300" />
         </div>
@@ -136,9 +135,9 @@ export function PremiumChallengeSection({
               <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-purple-400/5 to-pink-400/5 animate-pulse"></div>
               <div className="relative z-10">
                 <h3 className="text-3xl font-bold text-transparent bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 bg-clip-text mb-4 flex items-center justify-center gap-3">
-                  <Star className="w-8 h-8 text-yellow-400 animate-spin" />
+                  <Sparkles className="w-8 h-8 text-yellow-400 animate-pulse" />
                   RECOMPENSA ÉPICA
-                  <Star className="w-8 h-8 text-yellow-400 animate-spin" />
+                  <Sparkles className="w-8 h-8 text-yellow-400 animate-pulse" />
                 </h3>
                 
                 <div className="text-4xl md:text-5xl font-bold mb-4">

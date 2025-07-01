@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Check, Crown, Zap, Star, Sparkles } from 'lucide-react';
+import { Check, Crown, Zap, Sparkles, ArrowRight, Star } from 'lucide-react';
 import { useSubscription } from '@/hooks/useSubscription';
 import { toast } from 'sonner';
 
@@ -17,8 +17,10 @@ const plans = [
     features: ['10 questões por dia', '1 simulado por mês', 'Ranking básico', 'Estatísticas básicas'],
     limitations: ['Funcionalidades limitadas', 'Sem análises avançadas', 'Sem suporte prioritário'],
     icon: Zap,
-    color: 'from-gray-400 to-gray-500',
-    popular: false
+    color: 'from-slate-600 to-slate-700',
+    borderGradient: 'from-slate-200 via-slate-300 to-slate-200',
+    popular: false,
+    tier: 'starter'
   },
   {
     name: 'Basic',
@@ -28,8 +30,10 @@ const plans = [
     priceId: 'price_revalida_basic_monthly',
     features: ['Questões ilimitadas', '5 simulados por mês', 'Análises básicas de desempenho', 'Ranking premium', 'Estatísticas detalhadas', 'Suporte por email'],
     icon: Crown,
-    color: 'from-blue-500 to-blue-600',
-    popular: false
+    color: 'from-blue-600 to-blue-700',
+    borderGradient: 'from-blue-300 via-blue-400 to-blue-300',
+    popular: false,
+    tier: 'professional'
   },
   {
     name: 'Premium',
@@ -39,8 +43,10 @@ const plans = [
     priceId: 'price_revalida_premium_monthly',
     features: ['Tudo do plano Basic', 'Simulados ilimitados', 'IA avançada personalizada', 'Análises preditivas com IA', 'Sugestões inteligentes de estudo', 'Exportação de relatórios PDF', 'Suporte prioritário', 'Acesso antecipado a funcionalidades'],
     icon: Sparkles,
-    color: 'from-purple-500 to-purple-600',
-    popular: true
+    color: 'from-purple-600 to-indigo-600',
+    borderGradient: 'from-purple-300 via-pink-300 to-purple-300',
+    popular: true,
+    tier: 'enterprise'
   }
 ];
 
@@ -77,97 +83,147 @@ export function PricingPlansGrid({ subscribed, subscription_tier, loading }: Pri
   };
 
   return (
-    <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto mb-16">
+    <div className="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto mb-16 px-4">
       {plans.map((plan, index) => {
         const Icon = plan.icon;
         const isCurrent = isCurrentPlan(plan.name);
         
         return (
-          <Card 
+          <div 
             key={plan.name} 
-            className={`relative transition-all duration-300 hover:shadow-2xl hover:scale-105 bg-white/90 backdrop-blur-sm border-2 ${
-              plan.popular 
-                ? 'ring-4 ring-purple-200 shadow-2xl scale-105 border-purple-300' 
-                : 'border-blue-200 shadow-lg'
-            } ${
-              isCurrent ? 'ring-4 ring-green-200 border-green-300' : ''
+            className={`relative group transition-all duration-500 hover:scale-[1.02] ${
+              plan.popular ? 'md:-mt-8' : ''
             }`}
           >
-            {plan.popular && (
-              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                <Badge className="bg-gradient-to-r from-purple-500 to-purple-600 text-white px-6 py-2 text-sm font-semibold shadow-lg">
-                  <Star className="w-4 h-4 mr-1" />
-                  Mais Popular
-                </Badge>
-              </div>
-            )}
-
-            {isCurrent && (
-              <div className="absolute -top-4 right-4">
-                <Badge className="bg-gradient-to-r from-green-500 to-green-600 text-white px-4 py-2 text-sm font-semibold shadow-lg">
-                  Plano Atual
-                </Badge>
-              </div>
-            )}
+            {/* Gradient Border Effect */}
+            <div className={`absolute inset-0 bg-gradient-to-br ${plan.borderGradient} rounded-3xl blur-sm opacity-70 group-hover:opacity-100 transition-opacity duration-300`}></div>
             
-            <CardHeader className="text-center pb-4">
-              <div className={`w-16 h-16 mx-auto mb-4 bg-gradient-to-r ${plan.color} rounded-full flex items-center justify-center shadow-lg`}>
-                <Icon className="w-8 h-8 text-white" />
-              </div>
-              <CardTitle className="text-2xl font-bold text-gray-900">{plan.name}</CardTitle>
-              <CardDescription className="text-gray-600 text-base">{plan.description}</CardDescription>
-              <div className="mt-6">
-                <span className="text-4xl font-bold gradient-text">{plan.price}</span>
-                <span className="text-gray-600 text-lg">{plan.period}</span>
-              </div>
-            </CardHeader>
-
-            <CardContent className="pt-0">
-              <ul className="space-y-3 mb-8">
-                {plan.features.map((feature, featureIndex) => (
-                  <li key={featureIndex} className="flex items-center text-base">
-                    <div className="w-5 h-5 bg-gradient-to-r from-green-400 to-green-500 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
-                      <Check className="w-3 h-3 text-white font-bold" />
-                    </div>
-                    <span className="text-gray-700">{feature}</span>
-                  </li>
-                ))}
-              </ul>
-
-              <Button
-                onClick={() => handleSelectPlan(plan)}
-                disabled={loading || loadingPlan === plan.name || isCurrent}
-                className={`w-full py-3 text-base font-medium transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 ${
-                  plan.popular 
-                    ? 'bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700' 
-                    : plan.name === 'Premium' 
-                      ? 'bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700' 
-                      : plan.name === 'Basic' 
-                        ? 'bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700' 
-                        : 'bg-gradient-to-r from-gray-500 to-gray-600 hover:from-gray-600 hover:to-gray-700'
-                } text-white rounded-full`}
-              >
-                {loadingPlan === plan.name ? (
-                  <div className="flex items-center justify-center">
-                    <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
-                    Processando...
-                  </div>
-                ) : isCurrent ? (
-                  'Plano Atual'
-                ) : plan.priceId ? (
-                  'Assinar Agora'
-                ) : (
-                  'Começar Grátis'
-                )}
-              </Button>
-
-              {isCurrent && (
-                <p className="text-center text-sm text-green-600 mt-3 font-medium">
-                  ✓ Plano ativo e funcionando
-                </p>
+            <Card 
+              className={`relative bg-white/95 dark:bg-gray-900/95 backdrop-blur-xl border-0 rounded-3xl shadow-2xl overflow-hidden ${
+                plan.popular 
+                  ? 'shadow-purple-500/20 ring-2 ring-purple-200/50' 
+                  : 'shadow-slate-500/10'
+              } ${
+                isCurrent ? 'ring-2 ring-emerald-200/50 shadow-emerald-500/20' : ''
+              }`}
+            >
+              {/* Popular Badge */}
+              {plan.popular && (
+                <div className="absolute -top-5 left-1/2 transform -translate-x-1/2 z-10">
+                  <Badge className="bg-gradient-to-r from-purple-600 via-pink-500 to-purple-600 text-white px-6 py-2.5 text-sm font-bold shadow-xl border-0 rounded-full">
+                    <Star className="w-4 h-4 mr-2 fill-current" />
+                    Mais Popular
+                  </Badge>
+                </div>
               )}
-            </CardContent>
-          </Card>
+
+              {/* Current Plan Badge */}
+              {isCurrent && (
+                <div className="absolute -top-5 right-6 z-10">
+                  <Badge className="bg-gradient-to-r from-emerald-500 to-green-600 text-white px-4 py-2.5 text-sm font-bold shadow-xl border-0 rounded-full">
+                    <Check className="w-4 h-4 mr-1 fill-current" />
+                    Ativo
+                  </Badge>
+                </div>
+              )}
+              
+              <CardHeader className="text-center pb-6 pt-8 px-8">
+                {/* Icon with enhanced gradient */}
+                <div className={`w-20 h-20 mx-auto mb-6 bg-gradient-to-br ${plan.color} rounded-2xl flex items-center justify-center shadow-2xl relative overflow-hidden group-hover:scale-110 transition-transform duration-300`}>
+                  <div className="absolute inset-0 bg-gradient-to-tr from-white/20 to-transparent"></div>
+                  <Icon className="w-9 h-9 text-white relative z-10" />
+                </div>
+
+                {/* Plan Name and Description */}
+                <CardTitle className="text-3xl font-bold text-gray-900 dark:text-white mb-3">
+                  {plan.name}
+                </CardTitle>
+                <CardDescription className="text-gray-600 dark:text-gray-400 text-lg font-medium">
+                  {plan.description}
+                </CardDescription>
+
+                {/* Pricing */}
+                <div className="mt-8 mb-2">
+                  <div className="flex items-baseline justify-center">
+                    <span className={`text-5xl font-bold bg-gradient-to-r ${plan.color} bg-clip-text text-transparent`}>
+                      {plan.price}
+                    </span>
+                    <span className="text-gray-500 dark:text-gray-400 text-xl font-medium ml-1">
+                      {plan.period}
+                    </span>
+                  </div>
+                </div>
+              </CardHeader>
+
+              <CardContent className="px-8 pb-8">
+                {/* Features List */}
+                <div className="space-y-4 mb-8">
+                  {plan.features.map((feature, featureIndex) => (
+                    <div key={featureIndex} className="flex items-start gap-3">
+                      <div className={`w-6 h-6 bg-gradient-to-r ${plan.color} rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 shadow-lg`}>
+                        <Check className="w-3.5 h-3.5 text-white font-bold" />
+                      </div>
+                      <span className="text-gray-700 dark:text-gray-300 font-medium leading-relaxed">
+                        {feature}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Action Button */}
+                <Button
+                  onClick={() => handleSelectPlan(plan)}
+                  disabled={loading || loadingPlan === plan.name || isCurrent}
+                  className={`w-full py-4 text-lg font-bold transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:scale-[1.02] rounded-2xl border-0 ${
+                    plan.popular 
+                      ? 'bg-gradient-to-r from-purple-600 via-pink-500 to-purple-600 hover:from-purple-700 hover:via-pink-600 hover:to-purple-700 text-white' 
+                      : plan.name === 'Premium' 
+                        ? 'bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white' 
+                        : plan.name === 'Basic' 
+                          ? 'bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white' 
+                          : 'bg-gradient-to-r from-slate-600 to-slate-700 hover:from-slate-700 hover:to-slate-800 text-white'
+                  } ${
+                    isCurrent ? 'opacity-75 cursor-not-allowed' : ''
+                  }`}
+                >
+                  {loadingPlan === plan.name ? (
+                    <div className="flex items-center justify-center gap-3">
+                      <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                      Processando...
+                    </div>
+                  ) : isCurrent ? (
+                    <div className="flex items-center justify-center gap-2">
+                      <Check className="w-5 h-5" />
+                      Plano Atual
+                    </div>
+                  ) : plan.priceId ? (
+                    <div className="flex items-center justify-center gap-2">
+                      Assinar Agora
+                      <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                    </div>
+                  ) : (
+                    <div className="flex items-center justify-center gap-2">
+                      Começar Grátis
+                      <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                    </div>
+                  )}
+                </Button>
+
+                {/* Current Plan Status */}
+                {isCurrent && (
+                  <div className="text-center mt-4">
+                    <p className="text-emerald-600 dark:text-emerald-400 text-sm font-bold flex items-center justify-center gap-2">
+                      <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></div>
+                      Plano ativo e funcionando
+                    </p>
+                  </div>
+                )}
+              </CardContent>
+
+              {/* Subtle background pattern */}
+              <div className="absolute inset-0 bg-gradient-to-br from-transparent via-white/5 to-white/10 dark:via-white/2 dark:to-white/5 pointer-events-none rounded-3xl"></div>
+            </Card>
+          </div>
         );
       })}
     </div>

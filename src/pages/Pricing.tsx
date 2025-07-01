@@ -1,4 +1,3 @@
-
 import { useNavigate } from 'react-router-dom';
 import { useSubscription } from '@/hooks/useSubscription';
 import { useAuth } from '@/hooks/useAuth';
@@ -10,13 +9,22 @@ import { PricingHeader } from '@/components/pricing/PricingHeader';
 import { PricingPlansGrid } from '@/components/pricing/PricingPlansGrid';
 import { PricingFAQ } from '@/components/pricing/PricingFAQ';
 import { PricingFooter } from '@/components/pricing/PricingFooter';
-
 export default function Pricing() {
   const navigate = useNavigate();
-  const { user } = useAuth();
-  const { subscribed, subscription_tier, loading } = useSubscription();
-  const { canStartChallenge, attemptsLeft, hasWonBefore, startChallenge } = usePremiumChallenge();
-
+  const {
+    user
+  } = useAuth();
+  const {
+    subscribed,
+    subscription_tier,
+    loading
+  } = useSubscription();
+  const {
+    canStartChallenge,
+    attemptsLeft,
+    hasWonBefore,
+    startChallenge
+  } = usePremiumChallenge();
   const handleStartChallenge = () => {
     if (!user) {
       navigate('/auth');
@@ -24,9 +32,7 @@ export default function Pricing() {
     }
     startChallenge();
   };
-
-  return (
-    <div className="min-h-screen stellar-gradient relative overflow-hidden">
+  return <div className="min-h-screen stellar-gradient relative overflow-hidden">
       {/* Enhanced Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-4 -right-4 w-32 h-32 bg-blue-400 rounded-full opacity-20 animate-bounce"></div>
@@ -39,27 +45,17 @@ export default function Pricing() {
       <Navbar />
       
       <div className="relative z-10 pt-20">
-        <div className="container mx-auto px-4 py-12">
+        <div className="container mx-auto px-4 py-[33px]">
           <PricingHeader />
 
-          <PremiumChallengeSection
-            canStartChallenge={canStartChallenge}
-            attemptsLeft={attemptsLeft}
-            hasWonBefore={hasWonBefore}
-            onStartChallenge={handleStartChallenge}
-          />
+          <PremiumChallengeSection canStartChallenge={canStartChallenge} attemptsLeft={attemptsLeft} hasWonBefore={hasWonBefore} onStartChallenge={handleStartChallenge} />
 
-          <PricingPlansGrid
-            subscribed={subscribed}
-            subscription_tier={subscription_tier}
-            loading={loading}
-          />
+          <PricingPlansGrid subscribed={subscribed} subscription_tier={subscription_tier} loading={loading} />
 
           <PricingFAQ />
 
           <PricingFooter />
         </div>
       </div>
-    </div>
-  );
+    </div>;
 }

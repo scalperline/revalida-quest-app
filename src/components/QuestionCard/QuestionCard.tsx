@@ -70,7 +70,7 @@ export function QuestionCard({
 
   return (
     <>
-      <div className="bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm rounded-3xl shadow-2xl p-8 border-2 border-blue-200/50 dark:border-blue-700/50 transition-all duration-300 hover:shadow-3xl">
+      <div className="bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm rounded-2xl sm:rounded-3xl shadow-xl sm:shadow-2xl p-4 sm:p-6 lg:p-8 border-2 border-blue-200/50 dark:border-blue-700/50 transition-all duration-300 hover:shadow-2xl sm:hover:shadow-3xl mb-6 sm:mb-8">
         {!hideHeader && (
           <QuestionHeader 
             question={question} 
@@ -80,7 +80,7 @@ export function QuestionCard({
         
         <QuestionContent question={question} />
         
-        <div className="space-y-4">
+        <div className="space-y-3 sm:space-y-4">
           {question.options.map((option) => (
             <QuestionOption
               key={option.id}

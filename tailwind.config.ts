@@ -15,9 +15,16 @@ export default {
 			center: true,
 			padding: {
 				DEFAULT: '1rem',
-				sm: '2rem',
+				sm: '1.5rem',
+				md: '2rem',
+				lg: '2.5rem',
+				xl: '3rem',
 			},
 			screens: {
+				'sm': '640px',
+				'md': '768px',
+				'lg': '1024px',
+				'xl': '1280px',
 				'2xl': '1400px'
 			}
 		},
@@ -25,6 +32,9 @@ export default {
 			screens: {
 				'xs': '375px',
 				'xxs': '320px',
+				'sm-md': '640px',
+				'md-lg': '896px',
+				'lg-xl': '1152px',
 			},
 			colors: {
 				border: 'hsl(var(--border))',
@@ -103,6 +113,8 @@ export default {
 				'safe-bottom': 'env(safe-area-inset-bottom)',
 				'safe-left': 'env(safe-area-inset-left)',
 				'safe-right': 'env(safe-area-inset-right)',
+				'18': '4.5rem',
+				'22': '5.5rem',
 			}
 		}
 	},

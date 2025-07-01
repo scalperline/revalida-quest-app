@@ -1,12 +1,15 @@
+
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Home, FileText, BarChart3, User, Trophy, Target, Stethoscope } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { UserProgressBar } from './UserProgressBar';
 import { MobileHamburgerMenu } from './MobileHamburgerMenu';
+
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
+  
   const navigation = [{
     name: 'Início',
     href: '/',
@@ -32,8 +35,11 @@ export function Navbar() {
     href: '/profile',
     icon: User
   }];
+
   const closeSheet = () => setIsOpen(false);
-  return <nav className="bg-white/95 backdrop-blur-md shadow-xl border-b-2 border-blue-100 fixed top-0 left-0 right-0 z-[9999] transition-all duration-300">
+
+  return (
+    <nav className="bg-white/95 backdrop-blur-md shadow-xl border-b-2 border-blue-100 fixed top-0 left-0 right-0 z-[9999] transition-all duration-300">
       <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 xl:px-8">
         <div className="flex justify-between items-center h-14 sm:h-16 lg:h-18">
           {/* Logo - Responsive and always visible */}
@@ -54,16 +60,49 @@ export function Navbar() {
             </Link>
           </div>
 
-          {/* Desktop Navigation - Hidden on smaller screens */}
-          <div className="hidden xl:flex items-center justify-center flex-1 max-w-2xl mx-4">
+          {/* Tablet Navigation - Simplified icons only (md to xl) */}
+          <div className="hidden md:flex lg:hidden items-center justify-center flex-1 max-w-xl mx-4">
             <div className="flex items-center bg-gray-50/90 backdrop-blur-sm rounded-2xl px-1 py-1 border-2 border-gray-200/50 shadow-lg hover:shadow-xl transition-all duration-300">
               {navigation.map(item => {
-              const isActive = location.pathname === item.href;
-              return <Link key={item.name} to={item.href} className={`flex items-center gap-1.5 px-2.5 py-2 rounded-xl text-sm font-medium transition-all duration-300 whitespace-nowrap group ${isActive ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg scale-105 z-10' : 'text-gray-700 hover:bg-white/90 hover:text-blue-600 hover:shadow-md hover:scale-[1.02]'}`}>
+                const isActive = location.pathname === item.href;
+                return (
+                  <Link 
+                    key={item.name} 
+                    to={item.href} 
+                    className={`flex items-center justify-center p-2.5 rounded-xl transition-all duration-300 group ${
+                      isActive 
+                        ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg scale-105 z-10' 
+                        : 'text-gray-700 hover:bg-white/90 hover:text-blue-600 hover:shadow-md hover:scale-[1.02]'
+                    }`}
+                    title={item.name}
+                  >
+                    <item.icon className={`w-5 h-5 flex-shrink-0 ${isActive ? 'animate-pulse' : 'group-hover:animate-bounce'}`} />
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Desktop Navigation - Full with text (xl+) */}
+          <div className="hidden lg:flex items-center justify-center flex-1 max-w-2xl mx-4">
+            <div className="flex items-center bg-gray-50/90 backdrop-blur-sm rounded-2xl px-1 py-1 border-2 border-gray-200/50 shadow-lg hover:shadow-xl transition-all duration-300">
+              {navigation.map(item => {
+                const isActive = location.pathname === item.href;
+                return (
+                  <Link 
+                    key={item.name} 
+                    to={item.href} 
+                    className={`flex items-center gap-1.5 px-2.5 py-2 rounded-xl text-sm font-medium transition-all duration-300 whitespace-nowrap group ${
+                      isActive 
+                        ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg scale-105 z-10' 
+                        : 'text-gray-700 hover:bg-white/90 hover:text-blue-600 hover:shadow-md hover:scale-[1.02]'
+                    }`}
+                  >
                     <item.icon className={`w-4 h-4 flex-shrink-0 ${isActive ? 'animate-pulse' : 'group-hover:animate-bounce'}`} />
                     <span>{item.name}</span>
-                  </Link>;
-            })}
+                  </Link>
+                );
+              })}
             </div>
           </div>
 
@@ -81,11 +120,12 @@ export function Navbar() {
             </div>
           </div>
 
-          {/* Mobile Menu Button */}
-          <div className="xl:hidden flex items-center">
+          {/* Mobile Menu Button - Only for mobile (below md) */}
+          <div className="md:hidden flex items-center">
             <MobileHamburgerMenu />
           </div>
         </div>
       </div>
-    </nav>;
+    </nav>
+  );
 }

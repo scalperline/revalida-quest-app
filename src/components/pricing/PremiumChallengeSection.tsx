@@ -1,18 +1,15 @@
-
 import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Trophy, Target, Clock, Zap, Star, Crown } from 'lucide-react';
 import { ChallengeModal } from './ChallengeModal';
-
 interface PremiumChallengeSectionProps {
   canStartChallenge: boolean;
   attemptsLeft: number;
   hasWonBefore: boolean;
   onStartChallenge: () => void;
 }
-
 export function PremiumChallengeSection({
   canStartChallenge,
   attemptsLeft,
@@ -20,16 +17,13 @@ export function PremiumChallengeSection({
   onStartChallenge
 }: PremiumChallengeSectionProps) {
   const [showModal, setShowModal] = useState(false);
-
   const handleStartChallenge = () => {
     if (canStartChallenge) {
       onStartChallenge();
       setShowModal(true);
     }
   };
-
-  return (
-    <>
+  return <>
       <div className="relative mb-12">
         {/* Background Effects */}
         <div className="absolute inset-0 overflow-hidden rounded-3xl">
@@ -54,20 +48,16 @@ export function PremiumChallengeSection({
             </div>
             
             <CardTitle className="text-3xl md:text-4xl font-bold mb-2">
-              <span className="bg-gradient-to-r from-yellow-600 via-orange-600 to-red-600 bg-clip-text text-transparent">
-                🎯 Missão Suprema
-              </span>
+              <span className="bg-gradient-to-r from-yellow-600 via-orange-600 to-red-600 bg-clip-text text-transparent">Missão Suprema</span>
             </CardTitle>
             
             <p className="text-lg text-gray-700 mb-4">
               Conquiste o <span className="font-bold text-purple-600">Plano Premium</span> pelo preço do Basic!
             </p>
 
-            {hasWonBefore && (
-              <Badge className="bg-gradient-to-r from-green-500 to-emerald-600 text-white px-4 py-2 text-sm font-semibold mb-4">
+            {hasWonBefore && <Badge className="bg-gradient-to-r from-green-500 to-emerald-600 text-white px-4 py-2 text-sm font-semibold mb-4">
                 ✨ Missão Conquistada! Desconto Disponível
-              </Badge>
-            )}
+              </Badge>}
           </CardHeader>
 
           <CardContent className="relative z-10 text-center">
@@ -111,38 +101,27 @@ export function PremiumChallengeSection({
             </div>
 
             <div className="flex flex-col items-center gap-4">
-              {canStartChallenge ? (
-                <>
-                  <Button
-                    onClick={handleStartChallenge}
-                    className="bg-gradient-to-r from-yellow-500 via-orange-500 to-red-500 hover:from-yellow-600 hover:via-orange-600 hover:to-red-600 text-white text-xl font-bold py-4 px-8 rounded-full shadow-2xl transform hover:scale-105 transition-all duration-300 animate-pulse"
-                  >
+              {canStartChallenge ? <>
+                  <Button onClick={handleStartChallenge} className="bg-gradient-to-r from-yellow-500 via-orange-500 to-red-500 hover:from-yellow-600 hover:via-orange-600 hover:to-red-600 text-white text-xl font-bold py-4 px-8 rounded-full shadow-2xl transform hover:scale-105 transition-all duration-300 animate-pulse">
                     🚀 Aceitar Missão Suprema
                   </Button>
                   
                   <p className="text-sm text-gray-600">
                     Tentativas restantes: <span className="font-bold text-orange-600">{attemptsLeft}</span>
                   </p>
-                </>
-              ) : (
-                <div className="text-center">
+                </> : <div className="text-center">
                   <p className="text-lg font-semibold text-red-600 mb-2">
                     Limite de tentativas atingido
                   </p>
                   <p className="text-sm text-gray-600">
                     Você já utilizou todas as 3 tentativas disponíveis
                   </p>
-                </div>
-              )}
+                </div>}
             </div>
           </CardContent>
         </Card>
       </div>
 
-      <ChallengeModal 
-        isOpen={showModal} 
-        onClose={() => setShowModal(false)} 
-      />
-    </>
-  );
+      <ChallengeModal isOpen={showModal} onClose={() => setShowModal(false)} />
+    </>;
 }

@@ -1,3 +1,4 @@
+
 import { Link, useLocation } from 'react-router-dom';
 import { Home, FileText, BarChart3, User, Trophy, Target, HelpCircle, LogOut, X, Stethoscope } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
@@ -72,18 +73,21 @@ export function MobileSidebar({
         flex flex-col
         h-screen
       `}>
-        {/* Header - Professional spacing */}
+        {/* Header - Professional spacing with complete logo */}
         <div className="flex items-center justify-between p-6 border-b border-gray-100 dark:border-gray-800 flex-shrink-0 bg-white dark:bg-gray-900">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-blue-700 rounded-lg flex items-center justify-center">
-              <Stethoscope className="w-4 h-4 text-white" />
+          <Link to="/" onClick={onClose} className="flex items-center gap-3 py-2 group transition-all duration-300 hover:scale-105">
+            <div className="w-10 h-10 bg-gradient-to-br from-blue-500 via-blue-600 to-purple-600 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:rotate-3">
+              <Stethoscope className="w-5 h-5 text-white" />
             </div>
-            <div>
-              <span className="text-lg font-bold text-gray-900 dark:text-white">
+            <div className="flex flex-col">
+              <span className="text-xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent leading-tight group-hover:animate-pulse">
                 RevalidaQuest
               </span>
+              <span className="text-xs text-gray-500 -mt-1">
+                Sua jornada médica
+              </span>
             </div>
-          </div>
+          </Link>
           <button onClick={onClose} className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors">
             <X className="w-5 h-5 text-gray-500" />
           </button>

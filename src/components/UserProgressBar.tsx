@@ -1,14 +1,11 @@
 
 import { useGamification } from '@/hooks/useGamification';
 import { useAuth } from '@/hooks/useAuth';
-import { useAvatar } from '@/hooks/useAvatar';
-import { AvatarUpload } from '@/components/AvatarUpload';
 import { Zap } from 'lucide-react';
 
 export function UserProgressBar() {
   const { user } = useAuth();
   const { userProgress } = useGamification();
-  const { avatarUrl } = useAvatar();
   
   const xpPercentage = Math.round((userProgress.xp / userProgress.xpToNextLevel) * 100);
 
@@ -16,12 +13,6 @@ export function UserProgressBar() {
 
   return (
     <div className="flex items-center gap-3">
-      <AvatarUpload 
-        currentAvatarUrl={avatarUrl || undefined}
-        size="sm"
-        showUploadButton={false}
-      />
-      
       <div className="flex items-center gap-2">
         <div className="flex items-center gap-1">
           <div className="w-4 h-4 bg-gradient-to-r from-orange-400 to-orange-600 rounded-full flex items-center justify-center">

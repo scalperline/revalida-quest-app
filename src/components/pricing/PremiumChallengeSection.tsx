@@ -95,7 +95,7 @@ export function PremiumChallengeSection({
               
               <div className="text-3xl md:text-4xl font-bold mb-3">
                 <span className="text-gray-300">Premium por </span>
-                <span className="text-transparent bg-gradient-to-r from-green-400 to-emerald-500 bg-clip-text">R$ 29,90</span>
+                <span className="text-transparent bg-gradient-to-r from-green-400 to-emerald-500 bg-clip-text text-base">R$ 29,90/mês</span>
               </div>
               
               <div className="flex items-center justify-center gap-3 mb-3">

@@ -23,14 +23,14 @@ export function UpgradeButton() {
       onClick={handleUpgrade}
       variant={subscribed ? "outline" : "default"}
       size="sm"
-      className={`flex items-center gap-1 md:gap-1.5 lg:gap-2 h-8 md:h-9 lg:h-10 px-2 md:px-3 lg:px-4 text-xs md:text-sm ${
+      className={`flex items-center gap-0.5 md:gap-1 lg:gap-1.5 h-7 md:h-8 lg:h-9 px-1.5 md:px-2 lg:px-3 text-xs ${
         subscribed 
           ? 'border-blue-200 text-blue-700 hover:bg-blue-50' 
           : 'bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white'
       }`}
     >
-      <Star className="w-3 h-3 md:w-4 md:h-4" />
-      <span className="hidden md:inline">{buttonText}</span>
+      <Star className="w-2.5 h-2.5 md:w-3 md:h-3 lg:w-4 lg:h-4" />
+      <span className="hidden sm:inline text-xs">{buttonText}</span>
     </Button>
   );
 }

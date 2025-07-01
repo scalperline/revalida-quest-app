@@ -1,12 +1,15 @@
+
 import { useGamification } from '@/hooks/useGamification';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
 import { Trophy, Target, Flame, Star, Zap, Award } from 'lucide-react';
+
 export function GamifiedMissionsDashboard() {
   const {
     userProgress
   } = useGamification();
+  
   const stats = [{
     label: 'Nível Atual',
     value: userProgress.level,
@@ -32,6 +35,24 @@ export function GamifiedMissionsDashboard() {
     color: 'from-purple-400 to-purple-600',
     bgColor: 'bg-purple-50 border-purple-200'
   }];
-  const xpPercentage = Math.round(userProgress.xp / userProgress.xpToNextLevel * 100);
-  return;
+  
+  const xpPercentage = Math.round((userProgress.xp / userProgress.xpToNextLevel) * 100);
+  
+  return (
+    <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+      {stats.map((stat, index) => (
+        <Card key={index} className={`${stat.bgColor} border-2`}>
+          <CardContent className="p-4">
+            <div className="flex items-center gap-2 mb-2">
+              <div className={`p-2 bg-gradient-to-r ${stat.color} rounded-lg`}>
+                <stat.icon className="w-4 h-4 text-white" />
+              </div>
+            </div>
+            <div className="text-2xl font-bold text-gray-900">{stat.value}</div>
+            <div className="text-sm text-gray-600">{stat.label}</div>
+          </CardContent>
+        </Card>
+      ))}
+    </div>
+  );
 }

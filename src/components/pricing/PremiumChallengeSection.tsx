@@ -56,7 +56,7 @@ export function PremiumChallengeSection({
             </CardTitle>
             
             <p className="text-lg md:text-xl text-gray-200 mb-4">
-              Conquiste o <span className="text-transparent bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text font-bold">Plano Premium</span> pelo preço do Basic!
+              Conquiste o <span className="text-transparent bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text font-bold">Plano Premium</span> pelo preço do Básico!
             </p>
 
             {hasWonBefore && (

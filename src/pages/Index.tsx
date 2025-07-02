@@ -43,7 +43,7 @@ const Index = () => {
                   RevalidaQuest
                 </span>
                 , {user?.user_metadata?.display_name || 'Doutor'}! 
-                <span className="inline-block animate-bounce ml-1 sm:ml-2">👋</span>
+                <span className="inline-block animate-bounce ml-1 sm:ml-2 text-lg">👋</span>
               </h1>
               
               <p className="text-xs xs:text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-gray-600 max-w-sm xs:max-w-md sm:max-w-2xl lg:max-w-3xl xl:max-w-5xl mx-auto leading-relaxed px-2 sm:px-4 lg:px-6">

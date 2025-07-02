@@ -15,6 +15,8 @@ interface ChallengeState {
 
 export function usePremiumChallenge() {
   const { questoesAnoSelecionado } = useQuestions();
+  
+  console.log('usePremiumChallenge - questoesAnoSelecionado length:', questoesAnoSelecionado.length);
   const [challengeState, setChallengeState] = useState<ChallengeState>({
     isActive: false,
     currentQuestionIndex: 0,
@@ -118,6 +120,14 @@ export function usePremiumChallenge() {
   const canStartChallenge = attemptsUsed < maxAttempts;
   const attemptsLeft = maxAttempts - attemptsUsed;
   const hasWonBefore = localStorage.getItem('premium_challenge_won') === 'true';
+  
+  console.log('usePremiumChallenge values:', { 
+    canStartChallenge, 
+    attemptsUsed, 
+    attemptsLeft, 
+    hasWonBefore,
+    questionsLength: questoesAnoSelecionado.length 
+  });
 
   // Função para resetar tentativas (só para debug/teste)
   const resetAttempts = useCallback(() => {

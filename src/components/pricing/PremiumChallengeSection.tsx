@@ -22,6 +22,12 @@ export function PremiumChallengeSection({
   onResetAttempts
 }: PremiumChallengeSectionProps) {
   const [showModal, setShowModal] = useState(false);
+  
+  console.log('PremiumChallengeSection props:', { 
+    canStartChallenge, 
+    attemptsLeft, 
+    hasWonBefore 
+  });
 
   const handleStartChallenge = () => {
     if (canStartChallenge) {

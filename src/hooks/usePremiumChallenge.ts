@@ -37,6 +37,10 @@ export function usePremiumChallenge() {
   const startChallenge = useCallback(() => {
     if (attemptsUsed >= maxAttempts) return false;
 
+    if (questoesAnoSelecionado.length === 0) {
+      return false;
+    }
+
     // Selecionar 10 questões aleatórias
     const shuffled = [...questoesAnoSelecionado].sort(() => 0.5 - Math.random());
     const selectedQuestions = shuffled.slice(0, questionsCount);
@@ -115,6 +119,13 @@ export function usePremiumChallenge() {
   const attemptsLeft = maxAttempts - attemptsUsed;
   const hasWonBefore = localStorage.getItem('premium_challenge_won') === 'true';
 
+  // Função para resetar tentativas (só para debug/teste)
+  const resetAttempts = useCallback(() => {
+    localStorage.removeItem('premium_challenge_attempts');
+    localStorage.removeItem('premium_challenge_won');
+    setAttemptsUsed(0);
+  }, []);
+
   return {
     challengeState,
     canStartChallenge,
@@ -126,6 +137,7 @@ export function usePremiumChallenge() {
     startChallenge,
     answerQuestion,
     nextQuestion,
-    resetChallenge
+    resetChallenge,
+    resetAttempts // Exposing para debug
   };
 }

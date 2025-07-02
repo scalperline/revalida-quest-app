@@ -11,13 +11,15 @@ interface PremiumChallengeSectionProps {
   attemptsLeft: number;
   hasWonBefore: boolean;
   onStartChallenge: () => void;
+  onResetAttempts?: () => void; // Adicionar prop opcional para reset
 }
 
 export function PremiumChallengeSection({
   canStartChallenge,
   attemptsLeft,
   hasWonBefore,
-  onStartChallenge
+  onStartChallenge,
+  onResetAttempts
 }: PremiumChallengeSectionProps) {
   const [showModal, setShowModal] = useState(false);
 
@@ -168,9 +170,19 @@ export function PremiumChallengeSection({
                   <p className="text-xl md:text-3xl font-bold text-red-300 mb-2 md:mb-3">
                     ⚡ Energia Esgotada ⚡
                   </p>
-                  <p className="text-red-200 text-sm md:text-lg">
+                  <p className="text-red-200 text-sm md:text-lg mb-4">
                     Você utilizou todas as 3 tentativas disponíveis
                   </p>
+                  {/* Botão temporário para resetar tentativas */}
+                  {onResetAttempts && (
+                    <Button 
+                      onClick={onResetAttempts}
+                      variant="outline"
+                      className="border-2 border-yellow-400/50 text-yellow-300 hover:bg-yellow-400/10 text-sm px-4 py-2"
+                    >
+                      🔄 Resetar Tentativas (Debug)
+                    </Button>
+                  )}
                 </div>
               )}
             </div>

@@ -23,7 +23,8 @@ export default function Pricing() {
     canStartChallenge,
     attemptsLeft,
     hasWonBefore,
-    startChallenge
+    startChallenge,
+    resetAttempts
   } = usePremiumChallenge();
   const handleStartChallenge = () => {
     if (!user) {
@@ -48,7 +49,13 @@ export default function Pricing() {
         <div className="container mx-auto px-4 py-[33px]">
           <PricingHeader />
 
-          <PremiumChallengeSection canStartChallenge={canStartChallenge} attemptsLeft={attemptsLeft} hasWonBefore={hasWonBefore} onStartChallenge={handleStartChallenge} />
+          <PremiumChallengeSection 
+            canStartChallenge={canStartChallenge} 
+            attemptsLeft={attemptsLeft} 
+            hasWonBefore={hasWonBefore} 
+            onStartChallenge={handleStartChallenge}
+            onResetAttempts={resetAttempts}
+          />
 
           <PricingPlansGrid subscribed={subscribed} subscription_tier={subscription_tier} loading={loading} />
 

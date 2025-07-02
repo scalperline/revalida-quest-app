@@ -19,7 +19,7 @@ const plans = [{
   popular: false,
   tier: 'starter'
 }, {
-  name: 'Basic',
+  name: 'Básico',
   description: 'Para estudantes dedicados',
   price: 'R$ 29',
   period: ',90/mês',
@@ -73,7 +73,7 @@ export function PricingPlansGrid({
   };
   const isCurrentPlan = (planName: string) => {
     if (planName === 'Gratuito' && !subscribed) return true;
-    if (planName === 'Basic' && subscribed && subscription_tier === 'Basic') return true;
+    if (planName === 'Básico' && subscribed && subscription_tier === 'Basic') return true;
     if (planName === 'Premium' && subscribed && subscription_tier === 'Premium') return true;
     return false;
   };
@@ -141,7 +141,7 @@ export function PricingPlansGrid({
 
                 {/* Action Button - always at bottom */}
                 <div className="mt-auto">
-                  <Button onClick={() => handleSelectPlan(plan)} disabled={loading || loadingPlan === plan.name || isCurrent} className={`w-full py-3 lg:py-4 text-base lg:text-lg font-bold transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:scale-[1.02] rounded-2xl border-0 ${plan.popular ? 'bg-gradient-to-r from-purple-600 via-pink-500 to-purple-600 hover:from-purple-700 hover:via-pink-600 hover:to-purple-700 text-white' : plan.name === 'Premium' ? 'bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white' : plan.name === 'Basic' ? 'bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white' : 'bg-gradient-to-r from-slate-600 to-slate-700 hover:from-slate-700 hover:to-slate-800 text-white'} ${isCurrent ? 'opacity-75 cursor-not-allowed' : ''}`}>
+                  <Button onClick={() => handleSelectPlan(plan)} disabled={loading || loadingPlan === plan.name || isCurrent} className={`w-full py-3 lg:py-4 text-base lg:text-lg font-bold transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:scale-[1.02] rounded-2xl border-0 ${plan.popular ? 'bg-gradient-to-r from-purple-600 via-pink-500 to-purple-600 hover:from-purple-700 hover:via-pink-600 hover:to-purple-700 text-white' : plan.name === 'Premium' ? 'bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white' : plan.name === 'Básico' ? 'bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white' : 'bg-gradient-to-r from-slate-600 to-slate-700 hover:from-slate-700 hover:to-slate-800 text-white'} ${isCurrent ? 'opacity-75 cursor-not-allowed' : ''}`}>
                     {loadingPlan === plan.name ? <div className="flex items-center justify-center gap-3">
                         <div className="w-4 h-4 lg:w-5 lg:h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
                         Processando...

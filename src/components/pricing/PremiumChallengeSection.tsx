@@ -1,15 +1,18 @@
+
 import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Trophy, Target, Clock, Zap, Crown, Sparkles, Shield, Rocket } from 'lucide-react';
 import { ChallengeModal } from './ChallengeModal';
+
 interface PremiumChallengeSectionProps {
   canStartChallenge: boolean;
   attemptsLeft: number;
   hasWonBefore: boolean;
   onStartChallenge: () => void;
 }
+
 export function PremiumChallengeSection({
   canStartChallenge,
   attemptsLeft,
@@ -17,141 +20,165 @@ export function PremiumChallengeSection({
   onStartChallenge
 }: PremiumChallengeSectionProps) {
   const [showModal, setShowModal] = useState(false);
+
   const handleStartChallenge = () => {
     if (canStartChallenge) {
       onStartChallenge();
       setShowModal(true);
     }
   };
-  return <>
-      <div className="relative mb-16">
-        {/* Simplified Background Effects */}
-        <div className="absolute inset-0 overflow-hidden rounded-3xl">
-          <div className="absolute -top-4 -right-4 w-32 h-32 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full opacity-15 animate-pulse blur-xl"></div>
-          <div className="absolute -bottom-4 -left-4 w-24 h-24 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full opacity-20 animate-bounce blur-lg"></div>
+
+  return (
+    <>
+      <div className="relative mb-8 md:mb-16">
+        {/* Background Effects - Adjusted for mobile */}
+        <div className="absolute inset-0 overflow-hidden rounded-2xl md:rounded-3xl">
+          <div className="absolute -top-2 -right-2 md:-top-4 md:-right-4 w-20 h-20 md:w-32 md:h-32 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full opacity-15 animate-pulse blur-xl"></div>
+          <div className="absolute -bottom-2 -left-2 md:-bottom-4 md:-left-4 w-16 h-16 md:w-24 md:h-24 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full opacity-20 animate-bounce blur-lg"></div>
         </div>
 
         <Card className="relative overflow-hidden border-2 border-purple-400/30 bg-gradient-to-br from-slate-900/95 via-purple-900/90 to-indigo-900/95 backdrop-blur-xl shadow-2xl">
-          <CardHeader className="relative z-10 text-center pb-6">
-            {/* Simplified Trophy Icon */}
-            <div className="flex justify-center mb-6">
-              <div className="w-20 h-20 bg-gradient-to-br from-yellow-400 via-orange-500 to-red-500 rounded-full flex items-center justify-center shadow-xl animate-pulse">
-                <Trophy className="w-10 h-10 text-white" />
-                <div className="absolute -top-2 -right-2 w-8 h-8 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
-                  <Crown className="w-4 h-4 text-white" />
+          <CardHeader className="relative z-10 text-center pb-4 md:pb-8 pt-4 md:pt-8 px-4 md:px-6">
+            {/* Trophy Icon - Mobile optimized */}
+            <div className="flex justify-center mb-4 md:mb-8">
+              <div className="w-16 h-16 md:w-24 md:h-24 bg-gradient-to-br from-yellow-400 via-orange-500 to-red-500 rounded-full flex items-center justify-center shadow-xl animate-pulse relative">
+                <Trophy className="w-8 h-8 md:w-12 md:h-12 text-white" />
+                <div className="absolute -top-2 -right-2 md:-top-3 md:-right-3 w-7 h-7 md:w-10 md:h-10 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center shadow-lg">
+                  <Crown className="w-3 h-3 md:w-5 md:h-5 text-white" />
                 </div>
               </div>
             </div>
             
-            <CardTitle className="text-3xl md:text-4xl font-bold mb-4">
-              <span className="bg-gradient-to-r from-yellow-400 via-orange-500 to-purple-600 bg-clip-text text-transparent text-xl">
+            <CardTitle className="text-2xl md:text-4xl lg:text-5xl font-bold mb-3 md:mb-6">
+              <span className="bg-gradient-to-r from-yellow-400 via-orange-500 to-purple-600 bg-clip-text text-transparent">
                 ⚡ MISSÃO SUPREMA ⚡
               </span>
             </CardTitle>
             
-            <p className="text-lg md:text-xl text-gray-200 mb-4">
-              Conquiste o <span className="text-transparent bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text font-bold">⚡ DESAFIO SUPREMO ⚡</span> pelo preço do Basic!
+            <p className="text-base md:text-xl lg:text-2xl text-gray-200 mb-4 md:mb-6 max-w-2xl mx-auto leading-relaxed px-2">
+              Conquiste o <span className="text-transparent bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text font-bold">Plano Premium</span> pelo preço do Básico!
             </p>
 
-            {hasWonBefore && <Badge className="bg-gradient-to-r from-green-500 to-green-600 text-white px-4 py-2 font-bold mb-4 animate-pulse">
+            {hasWonBefore && (
+              <Badge className="bg-gradient-to-r from-green-500 to-green-600 text-white px-3 py-2 md:px-6 md:py-3 font-bold text-sm md:text-lg animate-pulse shadow-lg">
                 ✨ MISSÃO CONQUISTADA! Desconto Disponível ✨
-              </Badge>}
+              </Badge>
+            )}
           </CardHeader>
 
-          <CardContent className="relative z-10 text-center px-6">
-            {/* Streamlined Challenge Requirements */}
-            <div className="grid grid-cols-3 gap-4 mb-8">
-              <div className="bg-gradient-to-br from-blue-900/60 to-indigo-900/60 backdrop-blur-sm rounded-xl p-4 border border-blue-400/20">
-                <div className="flex items-center justify-center gap-2 mb-2">
-                  <Target className="w-6 h-6 text-blue-400" />
-                  <span className="font-bold text-base text-gray-300">10 Questões</span>
+          <CardContent className="relative z-10 text-center px-3 md:px-6">
+            {/* Challenge Requirements - Mobile grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-6 mb-6 md:mb-10">
+              <div className="bg-gradient-to-br from-blue-900/60 to-indigo-900/60 backdrop-blur-sm rounded-xl p-4 md:p-6 border border-blue-400/20">
+                <div className="flex items-center justify-center gap-2 md:gap-3 mb-2 md:mb-3">
+                  <Target className="w-5 h-5 md:w-7 md:h-7 text-blue-400" />
+                  <span className="font-bold text-base md:text-lg text-gray-300">10 Questões</span>
                 </div>
-                <p className="text-blue-200 text-sm">Questões oficiais</p>
+                <p className="text-blue-200 text-xs md:text-sm">Questões oficiais</p>
               </div>
 
-              <div className="bg-gradient-to-br from-green-900/60 to-emerald-900/60 backdrop-blur-sm rounded-xl p-4 border border-green-400/20">
-                <div className="flex items-center justify-center gap-2 mb-2">
-                  <Clock className="w-6 h-6 text-green-400" />
-                  <span className="font-bold text-base text-green-200">10 Minutos</span>
+              <div className="bg-gradient-to-br from-green-900/60 to-emerald-900/60 backdrop-blur-sm rounded-xl p-4 md:p-6 border border-green-400/20">
+                <div className="flex items-center justify-center gap-2 md:gap-3 mb-2 md:mb-3">
+                  <Clock className="w-5 h-5 md:w-7 md:h-7 text-green-400" />
+                  <span className="font-bold text-base md:text-lg text-green-200">10 Minutos</span>
                 </div>
-                <p className="text-green-200 text-sm">Tempo limite</p>
+                <p className="text-green-200 text-xs md:text-sm">Tempo limite</p>
               </div>
 
-              <div className="bg-gradient-to-br from-purple-900/60 to-pink-900/60 backdrop-blur-sm rounded-xl p-4 border border-purple-400/20">
-                <div className="flex items-center justify-center gap-2 mb-2">
-                  <Zap className="w-6 h-6 text-purple-400" />
-                  <span className="font-bold text-base text-fuchsia-200">100% Acerto</span>
+              <div className="bg-gradient-to-br from-purple-900/60 to-pink-900/60 backdrop-blur-sm rounded-xl p-4 md:p-6 border border-purple-400/20 sm:col-span-1 col-span-1">
+                <div className="flex items-center justify-center gap-2 md:gap-3 mb-2 md:mb-3">
+                  <Zap className="w-5 h-5 md:w-7 md:h-7 text-purple-400" />
+                  <span className="font-bold text-base md:text-lg text-fuchsia-200">100% Acerto</span>
                 </div>
-                <p className="text-purple-200 text-sm">Perfeição total</p>
+                <p className="text-purple-200 text-xs md:text-sm">Perfeição total</p>
               </div>
             </div>
 
-            {/* Streamlined Reward Section */}
-            <div className="bg-gradient-to-br from-purple-900/80 to-pink-900/80 backdrop-blur-sm rounded-2xl p-6 mb-6 border border-purple-400/30">
-              <h3 className="font-bold text-transparent bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text mb-3 flex items-center justify-center gap-2 text-xl">
-                <Sparkles className="w-6 h-6 text-yellow-400" />
-                RECOMPENSA ÉPICA
-              </h3>
-              
-              <div className="text-3xl md:text-4xl font-bold mb-3">
-                <span className="text-gray-300">Premium por </span>
-                <span className="text-transparent bg-gradient-to-r from-green-400 to-emerald-500 bg-clip-text text-base">R$ 29,90/mês</span>
+            {/* Reward Section - Mobile optimized */}
+            <div className="bg-gradient-to-br from-purple-900/70 to-pink-900/70 backdrop-blur-md rounded-2xl p-6 md:p-10 mb-6 md:mb-10 border border-purple-400/40 shadow-xl">
+              <div className="flex items-center justify-center gap-2 md:gap-4 mb-4 md:mb-8">
+                <Sparkles className="w-6 h-6 md:w-8 md:h-8 text-yellow-400 animate-pulse" />
+                <h3 className="text-xl md:text-3xl font-bold text-transparent bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text">
+                  RECOMPENSA ÉPICA
+                </h3>
+                <Sparkles className="w-6 h-6 md:w-8 md:h-8 text-yellow-400 animate-pulse" />
               </div>
               
-              <div className="flex items-center justify-center gap-3 mb-3">
-                <span className="text-xl text-gray-400 line-through">R$ 49,90</span>
-                <Badge className="bg-gradient-to-r from-red-500 to-red-600 text-white px-3 py-1 font-bold">
-                  40% OFF
-                </Badge>
+              <div className="mb-6 md:mb-8">
+                <div className="text-3xl md:text-5xl lg:text-6xl font-bold mb-3 md:mb-4">
+                  <span className="text-gray-300 block sm:inline">Premium por </span>
+                  <span className="text-transparent bg-gradient-to-r from-green-400 to-emerald-500 bg-clip-text">R$ 29,90/mês</span>
+                </div>
+                
+                <div className="flex items-center justify-center gap-3 md:gap-6 mb-4 md:mb-8">
+                  <span className="text-xl md:text-3xl text-gray-400 line-through">R$ 49,90</span>
+                  <Badge className="bg-gradient-to-r from-red-500 to-red-600 text-white px-3 py-2 md:px-6 md:py-3 font-bold text-sm md:text-xl shadow-lg">
+                    40% OFF
+                  </Badge>
+                </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-2 text-sm text-gray-300">
-                <div className="flex items-center gap-2">
-                  <Rocket className="w-4 h-4 text-2xl text-lime-400" />
-                  <span>Acesso Premium completo</span>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-6 text-sm md:text-lg">
+                <div className="flex items-center gap-3 md:gap-4 p-3 md:p-4 bg-gradient-to-r from-blue-900/40 to-indigo-900/40 rounded-xl border border-blue-400/20">
+                  <Rocket className="w-5 h-5 md:w-6 md:h-6 text-blue-400 flex-shrink-0" />
+                  <span className="text-blue-200">Acesso Premium completo</span>
                 </div>
-                <div className="flex items-center gap-2">
-                  <Shield className="w-4 h-4 text-purple-400" />
-                  <span>IA avançada personalizada</span>
+                <div className="flex items-center gap-3 md:gap-4 p-3 md:p-4 bg-gradient-to-r from-purple-900/40 to-pink-900/40 rounded-xl border border-purple-400/20">
+                  <Shield className="w-5 h-5 md:w-6 md:h-6 text-purple-400 flex-shrink-0" />
+                  <span className="text-purple-200">IA avançada personalizada</span>
                 </div>
-                <div className="flex items-center gap-2">
-                  <Target className="w-4 h-4 text-green-400" />
-                  <span>Análises preditivas</span>
+                <div className="flex items-center gap-3 md:gap-4 p-3 md:p-4 bg-gradient-to-r from-green-900/40 to-emerald-900/40 rounded-xl border border-green-400/20">
+                  <Target className="w-5 h-5 md:w-6 md:h-6 text-green-400 flex-shrink-0" />
+                  <span className="text-green-200">Análises preditivas</span>
                 </div>
-                <div className="flex items-center gap-2">
-                  <Trophy className="w-4 h-4 text-yellow-400" />
-                  <span>Simulados ilimitados</span>
+                <div className="flex items-center gap-3 md:gap-4 p-3 md:p-4 bg-gradient-to-r from-yellow-900/40 to-orange-900/40 rounded-xl border border-yellow-400/20">
+                  <Trophy className="w-5 h-5 md:w-6 md:h-6 text-yellow-400 flex-shrink-0" />
+                  <span className="text-yellow-200">Simulados ilimitados</span>
                 </div>
               </div>
             </div>
 
-            {/* Streamlined Action Section */}
-            <div className="flex flex-col items-center gap-4">
-              {canStartChallenge ? <>
-                  <Button onClick={handleStartChallenge} className="bg-gradient-to-r from-yellow-500 via-orange-500 to-red-500 hover:from-yellow-600 hover:via-orange-600 hover:to-red-600 text-white text-xl font-bold rounded-full shadow-xl transform hover:scale-105 transition-all duration-300 py-0 px-[7px]">🚀 Aceitar Desafio 🚀</Button>
+            {/* Action Section - Mobile optimized */}
+            <div className="flex flex-col items-center gap-4 md:gap-8">
+              {canStartChallenge ? (
+                <>
+                  <Button 
+                    onClick={handleStartChallenge} 
+                    className="bg-gradient-to-r from-yellow-500 via-orange-500 to-red-500 hover:from-yellow-600 hover:via-orange-600 hover:to-red-600 text-white text-lg md:text-2xl font-bold rounded-full shadow-xl transform hover:scale-105 transition-all duration-300 py-4 px-8 md:py-6 md:px-12 w-full sm:w-auto"
+                  >
+                    🚀 Aceitar Desafio 🚀
+                  </Button>
                   
-                  <div className="flex items-center gap-3">
-                    <div className="flex gap-1">
-                      {[...Array(attemptsLeft)].map((_, i) => <div key={i} className="w-3 h-3 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full"></div>)}
-                      {[...Array(3 - attemptsLeft)].map((_, i) => <div key={i} className="w-3 h-3 bg-gray-600 rounded-full"></div>)}
+                  <div className="flex items-center gap-3 md:gap-6 bg-gradient-to-r from-gray-900/60 to-gray-800/60 backdrop-blur-sm rounded-xl p-4 md:p-6 border border-gray-600/30">
+                    <div className="flex gap-2 md:gap-3">
+                      {[...Array(attemptsLeft)].map((_, i) => (
+                        <div key={i} className="w-4 h-4 md:w-5 md:h-5 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full shadow-lg"></div>
+                      ))}
+                      {[...Array(3 - attemptsLeft)].map((_, i) => (
+                        <div key={i} className="w-4 h-4 md:w-5 md:h-5 bg-gray-600 rounded-full"></div>
+                      ))}
                     </div>
-                    <p className="text-sm text-gray-300">
+                    <p className="text-sm md:text-lg text-gray-300">
                       <span className="text-yellow-400 font-bold">{attemptsLeft}</span> tentativas restantes
                     </p>
                   </div>
-                </> : <div className="text-center bg-gradient-to-br from-red-900/60 to-red-800/60 backdrop-blur-sm rounded-xl p-6 border border-red-400/30">
-                  <p className="text-xl font-bold text-red-300 mb-1">
+                </>
+              ) : (
+                <div className="text-center bg-gradient-to-br from-red-900/60 to-red-800/60 backdrop-blur-sm rounded-xl p-6 md:p-10 border border-red-400/30">
+                  <p className="text-xl md:text-3xl font-bold text-red-300 mb-2 md:mb-3">
                     ⚡ Energia Esgotada ⚡
                   </p>
-                  <p className="text-red-200 text-sm">
+                  <p className="text-red-200 text-sm md:text-lg">
                     Você utilizou todas as 3 tentativas disponíveis
                   </p>
-                </div>}
+                </div>
+              )}
             </div>
           </CardContent>
         </Card>
       </div>
 
       <ChallengeModal isOpen={showModal} onClose={() => setShowModal(false)} />
-    </>;
+    </>
+  );
 }

@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -48,7 +49,7 @@ export function Navbar() {
         <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 xl:px-8">
           <div className="flex items-center justify-between h-16 lg:h-18">
             {/* Logo */}
-            <Link to="/" className="flex items-center gap-3 lg:gap-4 flex-shrink-0">
+            <Link to="/" className="flex items-center gap-2 lg:gap-2 flex-shrink-0">
               <div className="w-10 h-10 lg:w-12 lg:h-12 bg-gradient-to-br from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg">
                 <Stethoscope className="w-5 h-5 lg:w-6 lg:h-6 text-white" />
               </div>
@@ -63,7 +64,7 @@ export function Navbar() {
             </Link>
 
             {/* Desktop Navigation */}
-            {user && <div className="hidden lg:flex items-center -space-x-px">
+            {user && <div className="hidden lg:flex items-center -space-x-px ml-8">
                 {navItems.map(item => {
               const Icon = item.icon;
               const isActive = isActivePath(item.to);

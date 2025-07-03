@@ -64,11 +64,11 @@ export function Navbar() {
             </Link>
 
             {/* Desktop Navigation */}
-            {user && <div className="hidden lg:flex items-center gap-0.5 xl:gap-1">
+            {user && <div className="hidden lg:flex items-center -space-x-px">
                 {navItems.map(item => {
               const Icon = item.icon;
               const isActive = isActivePath(item.to);
-              return <Link key={item.to} to={item.to} className="mx-0 my-0 py-0 px-1">
+              return <Link key={item.to} to={item.to}>
                       <Button variant={isActive ? "default" : "ghost"} size="sm" className={`flex items-center gap-2 h-9 xl:h-10 px-3 xl:px-4 text-sm xl:text-base font-medium transition-all duration-300 shadow-sm hover:shadow-md ${isActive ? 'bg-gray-900 text-white hover:bg-gray-800 dark:bg-gray-100 dark:text-gray-900 dark:hover:bg-gray-200 shadow-gray-900/20' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-gray-100 dark:hover:bg-gray-800 hover:shadow-gray-500/10'}`}>
                         <Icon className="w-4 h-4 xl:w-5 xl:h-5" />
                         <span>{item.label}</span>

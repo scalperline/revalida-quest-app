@@ -1,6 +1,7 @@
 
 import { useState, useCallback, useEffect } from 'react';
 import { useQuestions } from './useQuestions';
+import { useGamification } from './useGamification';
 import { type Question } from '@/types/question';
 
 interface ChallengeState {
@@ -11,12 +12,15 @@ interface ChallengeState {
   questions: Question[];
   hasCompleted: boolean;
   hasWon: boolean;
+  streak: number;
+  combo: number;
+  timeBonus: number;
 }
 
 export function usePremiumChallenge() {
   const { questoesAnoSelecionado } = useQuestions();
+  const { addXP, answerQuestion: recordAnswer } = useGamification();
   
-  console.log('usePremiumChallenge - questoesAnoSelecionado length:', questoesAnoSelecionado.length);
   const [challengeState, setChallengeState] = useState<ChallengeState>({
     isActive: false,
     currentQuestionIndex: 0,
@@ -24,7 +28,10 @@ export function usePremiumChallenge() {
     answers: {},
     questions: [],
     hasCompleted: false,
-    hasWon: false
+    hasWon: false,
+    streak: 0,
+    combo: 0,
+    timeBonus: 0
   });
 
   const [attemptsUsed, setAttemptsUsed] = useState(() => {
@@ -34,7 +41,7 @@ export function usePremiumChallenge() {
 
   const maxAttempts = 3;
   const questionsCount = 10;
-  const winThreshold = 10; // 100% de acerto - todas as 10 questões
+  const winThreshold = 10; // 100% de acerto
 
   const startChallenge = useCallback(() => {
     if (attemptsUsed >= maxAttempts) return false;
@@ -54,31 +61,47 @@ export function usePremiumChallenge() {
       answers: {},
       questions: selectedQuestions,
       hasCompleted: false,
-      hasWon: false
+      hasWon: false,
+      streak: 0,
+      combo: 0,
+      timeBonus: 0
     });
 
     return true;
   }, [questoesAnoSelecionado, attemptsUsed, maxAttempts]);
 
-  const answerQuestion = useCallback((questionId: number, optionId: string) => {
-    setChallengeState(prev => ({
-      ...prev,
-      answers: {
-        ...prev.answers,
-        [questionId]: optionId
-      }
-    }));
-  }, []);
+  const answerCurrentQuestion = useCallback((optionId: string) => {
+    setChallengeState(prev => {
+      const currentQuestion = prev.questions[prev.currentQuestionIndex];
+      if (!currentQuestion) return prev;
+
+      const isCorrect = currentQuestion.correct === optionId;
+      const newScore = isCorrect ? prev.score + 1 : prev.score;
+      const newStreak = isCorrect ? prev.streak + 1 : 0;
+      const newCombo = isCorrect ? prev.combo + 1 : 0;
+
+      // Record the answer in gamification system
+      recordAnswer(isCorrect, currentQuestion.area, currentQuestion.id);
+
+      return {
+        ...prev,
+        answers: {
+          ...prev.answers,
+          [currentQuestion.id]: optionId
+        },
+        score: newScore,
+        streak: newStreak,
+        combo: newCombo
+      };
+    });
+  }, [recordAnswer]);
 
   const nextQuestion = useCallback(() => {
     setChallengeState(prev => {
-      const currentQuestion = prev.questions[prev.currentQuestionIndex];
-      const isCorrect = currentQuestion?.correct === prev.answers[currentQuestion.id];
-      const newScore = isCorrect ? prev.score + 1 : prev.score;
       const isLastQuestion = prev.currentQuestionIndex >= prev.questions.length - 1;
 
       if (isLastQuestion) {
-        const hasWon = newScore >= winThreshold;
+        const hasWon = prev.score >= winThreshold;
         const newAttemptsUsed = attemptsUsed + 1;
         
         setAttemptsUsed(newAttemptsUsed);
@@ -86,11 +109,15 @@ export function usePremiumChallenge() {
         
         if (hasWon) {
           localStorage.setItem('premium_challenge_won', 'true');
+          // Bonus XP for completing the supreme challenge
+          addXP(500 + prev.timeBonus);
+        } else {
+          // Consolation XP
+          addXP(prev.score * 25);
         }
 
         return {
           ...prev,
-          score: newScore,
           isActive: false,
           hasCompleted: true,
           hasWon
@@ -99,11 +126,10 @@ export function usePremiumChallenge() {
 
       return {
         ...prev,
-        score: newScore,
         currentQuestionIndex: prev.currentQuestionIndex + 1
       };
     });
-  }, [attemptsUsed, winThreshold]);
+  }, [attemptsUsed, winThreshold, addXP]);
 
   const resetChallenge = useCallback(() => {
     setChallengeState({
@@ -113,23 +139,17 @@ export function usePremiumChallenge() {
       answers: {},
       questions: [],
       hasCompleted: false,
-      hasWon: false
+      hasWon: false,
+      streak: 0,
+      combo: 0,
+      timeBonus: 0
     });
   }, []);
 
   const canStartChallenge = attemptsUsed < maxAttempts;
   const attemptsLeft = maxAttempts - attemptsUsed;
   const hasWonBefore = localStorage.getItem('premium_challenge_won') === 'true';
-  
-  console.log('usePremiumChallenge values:', { 
-    canStartChallenge, 
-    attemptsUsed, 
-    attemptsLeft, 
-    hasWonBefore,
-    questionsLength: questoesAnoSelecionado.length 
-  });
 
-  // Função para resetar tentativas (só para debug/teste)
   const resetAttempts = useCallback(() => {
     localStorage.removeItem('premium_challenge_attempts');
     localStorage.removeItem('premium_challenge_won');
@@ -145,9 +165,9 @@ export function usePremiumChallenge() {
     hasWonBefore,
     winThreshold,
     startChallenge,
-    answerQuestion,
+    answerCurrentQuestion,
     nextQuestion,
     resetChallenge,
-    resetAttempts // Exposing para debug
+    resetAttempts
   };
 }

@@ -14,11 +14,13 @@ import { toast } from 'sonner';
 interface ChallengeModalProps {
   isOpen: boolean;
   onClose: () => void;
+  challengeType: 'basic' | 'supreme';
 }
 
-export function ChallengeModal({ isOpen, onClose }: ChallengeModalProps) {
-  const { challengeState, answerQuestion, nextQuestion } = usePremiumChallenge();
-  const { timeLeft, minutes, seconds, isRunning, isFinished, start, stop } = useTimer(600);
+export function ChallengeModal({ isOpen, onClose, challengeType }: ChallengeModalProps) {
+  const { challengeState, answerQuestion, nextQuestion, challenges } = usePremiumChallenge();
+  const config = challenges[challengeType];
+  const { timeLeft, minutes, seconds, isRunning, isFinished, start, stop } = useTimer(config.timeLimit);
   const [selectedAnswer, setSelectedAnswer] = useState<string>('');
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [showFeedback, setShowFeedback] = useState(false);
@@ -30,10 +32,10 @@ export function ChallengeModal({ isOpen, onClose }: ChallengeModalProps) {
   const progress = ((challengeState.currentQuestionIndex + 1) / challengeState.questions.length) * 100;
 
   useEffect(() => {
-    if (isOpen && challengeState.isActive && !isRunning) {
+    if (isOpen && challengeState.isActive && challengeState.challengeType === challengeType && !isRunning) {
       start();
     }
-  }, [isOpen, challengeState.isActive, isRunning, start]);
+  }, [isOpen, challengeState.isActive, challengeState.challengeType, challengeType, isRunning, start]);
 
   useEffect(() => {
     if (isFinished || challengeState.hasCompleted) {
@@ -100,38 +102,42 @@ export function ChallengeModal({ isOpen, onClose }: ChallengeModalProps) {
     onClose();
   };
 
-  if (!challengeState.isActive || !currentQuestion) {
+  if (!challengeState.isActive || !currentQuestion || challengeState.challengeType !== challengeType) {
     return null;
   }
 
-  const isTimeRunningOut = timeLeft < 120; // Last 2 minutes
+  const isTimeRunningOut = timeLeft < 60; // Last minute
   const perfectProgress = challengeState.score === challengeState.currentQuestionIndex && challengeState.currentQuestionIndex > 0;
+  const isBasicChallenge = challengeType === 'basic';
 
   return (
     <>
       <Dialog open={isOpen} onOpenChange={handleClose}>
         <DialogContent className="max-w-5xl h-[95vh] overflow-hidden p-0 border-0">
-          <div className="flex flex-col h-full bg-gradient-to-br from-slate-900 via-purple-900/90 to-indigo-900 relative overflow-hidden">
-            {/* Animated Background Elements */}
-            <div className="absolute inset-0 overflow-hidden pointer-events-none">
-              <div className="absolute top-10 left-10 w-32 h-32 bg-blue-500/10 rounded-full animate-pulse blur-xl"></div>
-              <div className="absolute bottom-10 right-10 w-24 h-24 bg-purple-500/10 rounded-full animate-bounce blur-lg"></div>
-              <div className="absolute top-1/2 left-1/4 w-16 h-16 bg-pink-500/10 rounded-full animate-ping blur-md"></div>
-              <Shield className="absolute bottom-20 left-20 w-8 h-8 text-blue-400/20 animate-bounce delay-300" />
-            </div>
-
+          <div className={`flex flex-col h-full ${isBasicChallenge 
+            ? 'bg-gradient-to-br from-slate-900 via-blue-900/90 to-indigo-900' 
+            : 'bg-gradient-to-br from-slate-900 via-purple-900/90 to-pink-900'
+          } relative overflow-hidden`}>
+            
             {/* Epic Header */}
-            <DialogHeader className="relative z-10 bg-gradient-to-r from-purple-600/90 via-pink-600/90 to-red-600/90 backdrop-blur-xl text-white p-8 border-b-4 border-yellow-400/50">
+            <DialogHeader className={`relative z-10 ${isBasicChallenge
+              ? 'bg-gradient-to-r from-blue-600/90 via-cyan-600/90 to-blue-600/90'
+              : 'bg-gradient-to-r from-purple-600/90 via-pink-600/90 to-red-600/90'
+            } backdrop-blur-xl text-white p-8 border-b-4 border-yellow-400/50`}>
               <div className="flex items-center justify-between">
                 <DialogTitle className="text-3xl md:text-4xl font-bold flex items-center gap-4">
                   <div className="relative">
-                    <Trophy className="w-12 h-12 text-yellow-400 animate-pulse" />
-                    <div className="absolute inset-0 animate-ping">
-                      <Trophy className="w-12 h-12 text-yellow-400/50" />
-                    </div>
+                    {isBasicChallenge ? (
+                      <Target className="w-12 h-12 text-cyan-400 animate-pulse" />
+                    ) : (
+                      <Brain className="w-12 h-12 text-purple-400 animate-pulse" />
+                    )}
                   </div>
-                  <span className="bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text text-transparent">
-                    MISSÃO SUPREMA ATIVA
+                  <span className={`bg-gradient-to-r ${isBasicChallenge 
+                    ? 'from-cyan-400 to-blue-400' 
+                    : 'from-purple-400 to-pink-400'
+                  } bg-clip-text text-transparent`}>
+                    {config.title.toUpperCase()} ATIVO
                   </span>
                 </DialogTitle>
                 <Button
@@ -149,37 +155,32 @@ export function ChallengeModal({ isOpen, onClose }: ChallengeModalProps) {
                   {/* Enhanced Timer */}
                   <div className="flex items-center gap-3">
                     <div className={`relative ${isTimeRunningOut ? 'animate-pulse' : ''}`}>
-                      <Clock className={`w-6 h-6 md:w-8 md:h-8 ${isTimeRunningOut ? 'text-red-400' : 'text-blue-400'}`} />
-                      {isTimeRunningOut && (
-                        <div className="absolute inset-0 animate-ping">
-                          <Clock className="w-6 h-6 md:w-8 md:h-8 text-red-400/50" />
-                        </div>
-                      )}
+                      <Clock className={`w-6 h-6 md:w-8 md:h-8 ${isTimeRunningOut ? 'text-red-400' : isBasicChallenge ? 'text-cyan-400' : 'text-purple-400'}`} />
                     </div>
-                    <span className={`text-lg md:text-2xl font-mono font-bold ${isTimeRunningOut ? 'text-red-300 animate-pulse' : 'text-blue-300'}`}>
+                    <span className={`text-lg md:text-2xl font-mono font-bold ${isTimeRunningOut ? 'text-red-300 animate-pulse' : isBasicChallenge ? 'text-cyan-300' : 'text-purple-300'}`}>
                       {String(minutes).padStart(2, '0')}:{String(seconds).padStart(2, '0')}
                     </span>
                   </div>
                   
                   {/* Question Counter */}
                   <div className="flex items-center gap-3">
-                    <Target className="w-6 h-6 md:w-8 md:h-8 text-green-400" />
-                    <span className="text-lg md:text-2xl font-bold text-green-300">
+                    <Target className={`w-6 h-6 md:w-8 md:h-8 ${isBasicChallenge ? 'text-blue-400' : 'text-pink-400'}`} />
+                    <span className={`text-lg md:text-2xl font-bold ${isBasicChallenge ? 'text-blue-300' : 'text-pink-300'}`}>
                       {challengeState.currentQuestionIndex + 1} / {challengeState.questions.length}
                     </span>
                   </div>
                   
-                  {/* Perfect Score Tracker */}
+                  {/* Score Tracker */}
                   <div className="flex items-center gap-3">
                     <div className="relative">
                       {perfectProgress ? (
-                        <Brain className="w-6 h-6 md:w-8 md:h-8 text-purple-400 animate-pulse" />
+                        <Brain className="w-6 h-6 md:w-8 md:h-8 text-yellow-400 animate-pulse" />
                       ) : (
-                        <Zap className="w-6 h-6 md:w-8 md:h-8 text-yellow-400 animate-pulse" />
+                        <Zap className="w-6 h-6 md:w-8 md:h-8 text-green-400 animate-pulse" />
                       )}
                     </div>
-                    <span className={`text-lg md:text-2xl font-bold ${perfectProgress ? 'text-purple-300' : 'text-yellow-300'}`}>
-                      {challengeState.score} / {challengeState.currentQuestionIndex || challengeState.questions.length}
+                    <span className={`text-lg md:text-2xl font-bold ${perfectProgress ? 'text-yellow-300' : 'text-green-300'}`}>
+                      {challengeState.score} / {challengeState.questions.length}
                     </span>
                   </div>
 
@@ -195,7 +196,10 @@ export function ChallengeModal({ isOpen, onClose }: ChallengeModalProps) {
                 </div>
                 
                 <div className="flex items-center gap-3">
-                  <Badge className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-3 py-2 md:px-4 md:py-2 text-sm md:text-lg font-bold">
+                  <Badge className={`${isBasicChallenge 
+                    ? 'bg-gradient-to-r from-blue-500 to-cyan-500' 
+                    : 'bg-gradient-to-r from-purple-500 to-pink-500'
+                  } text-white px-3 py-2 md:px-4 md:py-2 text-sm md:text-lg font-bold`}>
                     Questão {challengeState.currentQuestionIndex + 1}
                   </Badge>
                   {combo >= 3 && (
@@ -204,7 +208,7 @@ export function ChallengeModal({ isOpen, onClose }: ChallengeModalProps) {
                     </Badge>
                   )}
                   {perfectProgress && (
-                    <Badge className="bg-gradient-to-r from-purple-500 to-indigo-500 text-white px-3 py-2 text-sm font-bold animate-pulse">
+                    <Badge className="bg-gradient-to-r from-yellow-500 to-orange-500 text-white px-3 py-2 text-sm font-bold animate-pulse">
                       🧠 PERFEITO!
                     </Badge>
                   )}
@@ -214,7 +218,7 @@ export function ChallengeModal({ isOpen, onClose }: ChallengeModalProps) {
               {/* Enhanced Progress Bar */}
               <div className="mt-6 space-y-2">
                 <div className="flex justify-between text-sm text-gray-200">
-                  <span>Progresso da Missão</span>
+                  <span>Progresso do {config.title}</span>
                   <span>{Math.round(progress)}% completo</span>
                 </div>
                 <Progress value={progress} className="h-4 bg-gray-700/50 border border-yellow-400/30" />
@@ -278,13 +282,6 @@ export function ChallengeModal({ isOpen, onClose }: ChallengeModalProps) {
                         : 'Não desista! Foque na próxima questão!'
                       }
                     </p>
-                    {lastAnswerCorrect && combo >= 5 && (
-                      <div className="mt-4 flex items-center justify-center gap-2">
-                        <Star className="w-6 h-6 text-yellow-300 animate-spin" />
-                        <span className="text-yellow-300 font-bold">INCRÍVEL!</span>
-                        <Star className="w-6 h-6 text-yellow-300 animate-spin" />
-                      </div>
-                    )}
                   </div>
                 </div>
               )}
@@ -300,27 +297,23 @@ export function ChallengeModal({ isOpen, onClose }: ChallengeModalProps) {
             </div>
 
             {/* Epic Footer */}
-            <div className="relative z-10 bg-gradient-to-r from-slate-800/95 to-gray-800/95 backdrop-blur-xl border-t-4 border-purple-400/50 p-4 md:p-8">
+            <div className={`relative z-10 ${isBasicChallenge
+              ? 'bg-gradient-to-r from-slate-800/95 to-blue-800/95'
+              : 'bg-gradient-to-r from-slate-800/95 to-purple-800/95'
+            } backdrop-blur-xl border-t-4 border-yellow-400/50 p-4 md:p-8`}>
               <div className="flex flex-col md:flex-row justify-between items-center max-w-4xl mx-auto gap-4">
                 <div className="flex flex-col md:flex-row items-center gap-3 md:gap-6 text-center md:text-left">
                   <div className="text-sm md:text-lg text-gray-300">
-                    ⏰ <span className={`font-mono font-bold ${isTimeRunningOut ? 'text-red-400' : 'text-blue-400'}`}>
+                    ⏰ <span className={`font-mono font-bold ${isTimeRunningOut ? 'text-red-400' : isBasicChallenge ? 'text-cyan-400' : 'text-purple-400'}`}>
                       {minutes}m {seconds}s
                     </span>
                   </div>
                   <div className="text-sm md:text-lg text-gray-300">
-                    🎯 <span className="text-yellow-400 font-bold">100% necessário</span>
+                    🎯 <span className="text-yellow-400 font-bold">{isBasicChallenge ? '80%' : '100%'} necessário</span>
                   </div>
-                  {perfectProgress && (
-                    <div className="text-sm md:text-lg text-purple-300 animate-pulse">
-                      🧠 <span className="font-bold">PERFEIÇÃO TOTAL!</span>
-                    </div>
-                  )}
-                  {combo >= 3 && (
-                    <div className="text-sm md:text-lg text-orange-300 animate-pulse">
-                      🔥 <span className="font-bold">EM CHAMAS!</span>
-                    </div>
-                  )}
+                  <div className="text-sm md:text-lg text-gray-300">
+                    ⚡ <span className={`font-bold ${isBasicChallenge ? 'text-cyan-400' : 'text-purple-400'}`}>+{config.xpReward} XP</span>
+                  </div>
                 </div>
                 
                 <Button
@@ -329,8 +322,8 @@ export function ChallengeModal({ isOpen, onClose }: ChallengeModalProps) {
                   className={`${
                     showFeedback 
                       ? 'bg-gray-600 cursor-not-allowed' 
-                      : combo >= 3
-                      ? 'bg-gradient-to-r from-orange-500 via-red-500 to-red-600 hover:from-orange-600 hover:via-red-600 hover:to-red-700 animate-pulse'
+                      : isBasicChallenge
+                      ? 'bg-gradient-to-r from-blue-600 via-cyan-600 to-blue-600 hover:from-blue-700 hover:via-cyan-700 hover:to-blue-700'
                       : 'bg-gradient-to-r from-purple-600 via-pink-600 to-red-600 hover:from-purple-700 hover:via-pink-700 hover:to-red-700'
                   } text-white px-6 md:px-10 py-3 md:py-4 text-lg md:text-xl font-bold rounded-full shadow-2xl transform hover:scale-105 transition-all duration-300 disabled:opacity-50 disabled:scale-100`}
                 >
@@ -340,7 +333,7 @@ export function ChallengeModal({ isOpen, onClose }: ChallengeModalProps) {
                       Processando...
                     </div>
                   ) : challengeState.currentQuestionIndex === challengeState.questions.length - 1 ? (
-                    '🏆 FINALIZAR MISSÃO'
+                    `🏆 FINALIZAR ${config.title.toUpperCase()}`
                   ) : (
                     `⚡ PRÓXIMA ${combo >= 3 ? '🔥' : ''}`
                   )}
@@ -359,6 +352,7 @@ export function ChallengeModal({ isOpen, onClose }: ChallengeModalProps) {
         }}
         score={challengeState.score}
         total={challengeState.questions.length}
+        challengeType={challengeType}
       />
     </>
   );

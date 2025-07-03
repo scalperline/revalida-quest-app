@@ -1,3 +1,4 @@
+
 import { useNavigate } from 'react-router-dom';
 import { useSubscription } from '@/hooks/useSubscription';
 import { useAuth } from '@/hooks/useAuth';
@@ -9,31 +10,32 @@ import { PricingHeader } from '@/components/pricing/PricingHeader';
 import { PricingPlansGrid } from '@/components/pricing/PricingPlansGrid';
 import { PricingFAQ } from '@/components/pricing/PricingFAQ';
 import { PricingFooter } from '@/components/pricing/PricingFooter';
+
 export default function Pricing() {
   const navigate = useNavigate();
+  const { user } = useAuth();
+  const { subscribed, subscription_tier, loading } = useSubscription();
   const {
-    user
-  } = useAuth();
-  const {
-    subscribed,
-    subscription_tier,
-    loading
-  } = useSubscription();
-  const {
-    canStartChallenge,
-    attemptsLeft,
-    hasWonBefore,
+    canStartBasic,
+    canStartSupreme,
+    basicAttemptsLeft,
+    supremeAttemptsLeft,
+    hasWonBasic,
+    hasWonSupreme,
     startChallenge,
     resetAttempts
   } = usePremiumChallenge();
-  const handleStartChallenge = () => {
+
+  const handleStartChallenge = (type: 'basic' | 'supreme') => {
     if (!user) {
       navigate('/auth');
       return;
     }
-    startChallenge();
+    startChallenge(type);
   };
-  return <div className="min-h-screen stellar-gradient relative overflow-hidden">
+
+  return (
+    <div className="min-h-screen stellar-gradient relative overflow-hidden">
       {/* Enhanced Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-4 -right-4 w-32 h-32 bg-blue-400 rounded-full opacity-20 animate-bounce"></div>
@@ -50,9 +52,12 @@ export default function Pricing() {
           <PricingHeader />
 
           <PremiumChallengeSection 
-            canStartChallenge={canStartChallenge} 
-            attemptsLeft={attemptsLeft} 
-            hasWonBefore={hasWonBefore} 
+            canStartBasic={canStartBasic}
+            canStartSupreme={canStartSupreme}
+            basicAttemptsLeft={basicAttemptsLeft}
+            supremeAttemptsLeft={supremeAttemptsLeft}
+            hasWonBasic={hasWonBasic}
+            hasWonSupreme={hasWonSupreme}
             onStartChallenge={handleStartChallenge}
             onResetAttempts={resetAttempts}
           />
@@ -64,5 +69,6 @@ export default function Pricing() {
           <PricingFooter />
         </div>
       </div>
-    </div>;
+    </div>
+  );
 }

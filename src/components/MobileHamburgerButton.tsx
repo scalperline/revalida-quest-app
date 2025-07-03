@@ -1,15 +1,14 @@
 
-
 interface Props {
   isOpen: boolean;
-  onToggle: () => void;
+  onClick: () => void;
   className?: string;
 }
 
-export function MobileHamburgerButton({ isOpen, onToggle, className = '' }: Props) {
+export function MobileHamburgerButton({ isOpen, onClick, className = '' }: Props) {
   return (
     <button
-      onClick={onToggle}
+      onClick={onClick}
       className={`
         w-8 h-8 
         bg-gradient-to-r from-blue-600 to-blue-700 
@@ -51,4 +50,3 @@ export function MobileHamburgerButton({ isOpen, onToggle, className = '' }: Prop
     </button>
   );
 }
-

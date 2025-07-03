@@ -1,24 +1,14 @@
-
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { BookOpen, Clock, Target, CheckCircle, XCircle, AlertCircle } from 'lucide-react';
-import { type Question } from '@/types/question';
-
-interface QuestionCardProps {
-  question: Question;
-  onAnswer?: (optionId: string) => void;
-  userAnswer?: string;
-  showAnswer?: boolean;
-  hideHeader?: boolean;
-  isReviewMode?: boolean;
-  disabled?: boolean;
-}
+import { type Question, type QuestionCardProps } from '@/types/question';
 
 export function QuestionCard({
   question,
   onAnswer,
+  onAnswerWithEffects,
   userAnswer,
   showAnswer = false,
   hideHeader = false,
@@ -41,8 +31,15 @@ export function QuestionCard({
     if (disabled) return; // Don't allow selection when disabled
     
     setSelectedOption(optionId);
+    
+    const correct = optionId === question.correct;
+    
     if (onAnswer) {
       onAnswer(optionId);
+    }
+    
+    if (onAnswerWithEffects) {
+      onAnswerWithEffects(optionId, correct);
     }
   };
 

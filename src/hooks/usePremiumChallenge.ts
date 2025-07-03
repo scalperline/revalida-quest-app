@@ -61,13 +61,13 @@ export function usePremiumChallenge() {
 
     // Selecionar 10 questões aleatórias com diversidade de áreas
     const shuffled = [...todasQuestoes]
-      .filter(q => q.area && q.pergunta && q.alternativas && q.correct) // Garantir que as questões estão completas
+      .filter(q => q.area && q.enunciado && q.options && q.correct) // Garantir que as questões estão completas
       .sort(() => 0.5 - Math.random());
     
     const selectedQuestions = shuffled.slice(0, Math.min(questionsCount, shuffled.length));
 
     console.log('✅ Questões selecionadas:', selectedQuestions.length);
-    console.log('Questões válidas:', selectedQuestions.map(q => ({ id: q.id, area: q.area, pergunta: q.pergunta?.substring(0, 50) + '...' })));
+    console.log('Questões válidas:', selectedQuestions.map(q => ({ id: q.id, area: q.area, enunciado: q.enunciado?.substring(0, 50) + '...' })));
 
     if (selectedQuestions.length < questionsCount) {
       console.log('⚠️ Menos questões disponíveis que o necessário');

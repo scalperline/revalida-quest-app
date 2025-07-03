@@ -1,25 +1,25 @@
 
 import { useState, useEffect, useMemo } from 'react';
-import { questoesRevalida2025_1 } from '@/data/questoesRevalida2025_1';
-import { questoesRevalida2024_1 } from '@/data/questoesRevalida2024_1';
-import { questoesRevalida2023_1 } from '@/data/questoesRevalida2023_1';
-import { questoesRevalida2023_2 } from '@/data/questoesRevalida2023_2';
-import { questoesRevalida2022_1 } from '@/data/questoesRevalida2022_1';
-import { questoesRevalida2022_2 } from '@/data/questoesRevalida2022_2';
-import { questoesRevalida2021 } from '@/data/questoesRevalida2021';
-import { questoesRevalida2020 } from '@/data/questoesRevalida2020';
+import { QUESTOES_REVALIDA_2025_1 } from '@/data/questoesRevalida2025_1';
+import { QUESTOES_REVALIDA_2024_1 } from '@/data/questoesRevalida2024_1';
+import { QUESTOES_REVALIDA_2023_1 } from '@/data/questoesRevalida2023_1';
+import { QUESTOES_REVALIDA_2023_2 } from '@/data/questoesRevalida2023_2';
+import { QUESTOES_REVALIDA_2022_1 } from '@/data/questoesRevalida2022_1';
+import { QUESTOES_REVALIDA_2022_2 } from '@/data/questoesRevalida2022_2';
+import { QUESTOES_REVALIDA_2021 } from '@/data/questoesRevalida2021';
+import { QUESTOES_REVALIDA_2020 } from '@/data/questoesRevalida2020';
 import { type Question } from '@/types/question';
 
 // Consolidar todas as questões
 const todasQuestoes: Question[] = [
-  ...questoesRevalida2025_1,
-  ...questoesRevalida2024_1,
-  ...questoesRevalida2023_1,
-  ...questoesRevalida2023_2,
-  ...questoesRevalida2022_1,
-  ...questoesRevalida2022_2,
-  ...questoesRevalida2021,
-  ...questoesRevalida2020
+  ...QUESTOES_REVALIDA_2025_1,
+  ...QUESTOES_REVALIDA_2024_1,
+  ...QUESTOES_REVALIDA_2023_1,
+  ...QUESTOES_REVALIDA_2023_2,
+  ...QUESTOES_REVALIDA_2022_1,
+  ...QUESTOES_REVALIDA_2022_2,
+  ...QUESTOES_REVALIDA_2021,
+  ...QUESTOES_REVALIDA_2020
 ];
 
 export function useQuestions() {
@@ -39,7 +39,7 @@ export function useQuestions() {
 
     // Filtro por ano
     if (anoSelecionado !== 'todos') {
-      questoesFiltradas = questoesFiltradas.filter(q => q.ano === parseInt(anoSelecionado));
+      questoesFiltradas = questoesFiltradas.filter(q => q.year === parseInt(anoSelecionado));
     }
 
     // Filtro por área
@@ -47,9 +47,9 @@ export function useQuestions() {
       questoesFiltradas = questoesFiltradas.filter(q => q.area === areaSelecionada);
     }
 
-    // Filtro por dificuldade
+    // Filtro por dificuldade (if property exists)
     if (dificuldadeSelecionada !== 'todas') {
-      questoesFiltradas = questoesFiltradas.filter(q => q.dificuldade === dificuldadeSelecionada);
+      questoesFiltradas = questoesFiltradas.filter(q => (q as any).dificuldade === dificuldadeSelecionada);
     }
 
     console.log('Filtered questions count:', questoesFiltradas.length);
@@ -69,7 +69,7 @@ export function useQuestions() {
   const anosDisponiveis = useMemo(() => {
     const anos = new Set<number>();
     todasQuestoes.forEach(q => {
-      if (q.ano) anos.add(q.ano);
+      if (q.year) anos.add(q.year);
     });
     return Array.from(anos).sort((a, b) => b - a);
   }, []);

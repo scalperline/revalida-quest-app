@@ -1,4 +1,3 @@
-
 import { useState, useEffect, createContext, useContext, ReactNode } from 'react';
 import { User, Session } from '@supabase/supabase-js';
 import { supabase } from '@/integrations/supabase/client';
@@ -22,39 +21,43 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const { toast } = useToast();
 
   useEffect(() => {
-    // Set up auth state listener FIRST
+    console.log('AuthProvider - getting initial session');
+    
+    const getInitialSession = async () => {
+      try {
+        const { data: { session }, error } = await supabase.auth.getSession();
+        console.log('AuthProvider - initial session:', session);
+        console.log('AuthProvider - initial error:', error);
+        
+        if (error) {
+          console.error('Error getting session:', error);
+          setUser(null);
+        } else {
+          setUser(session?.user ?? null);
+        }
+      } catch (error) {
+        console.error('Error in getInitialSession:', error);
+        setUser(null);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    getInitialSession();
+
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (event, session) => {
-        console.log('Auth state changed:', event, session?.user?.id);
-        setSession(session);
+        console.log('AuthProvider - auth state change:', event, session);
         setUser(session?.user ?? null);
         setLoading(false);
-
-        // Handle auth events
-        if (event === 'SIGNED_IN') {
-          toast({
-            title: "Login realizado com sucesso!",
-            description: "Bem-vindo de volta ao Revalida Quest! 🎉",
-          });
-        } else if (event === 'SIGNED_OUT') {
-          toast({
-            title: "Logout realizado",
-            description: "Até logo! Continue sua jornada quando quiser. 👋",
-          });
-        }
       }
     );
 
-    // THEN check for existing session
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      console.log('Initial session:', session?.user?.id);
-      setSession(session);
-      setUser(session?.user ?? null);
-      setLoading(false);
-    });
-
-    return () => subscription.unsubscribe();
-  }, [toast]);
+    return () => {
+      console.log('AuthProvider - cleaning up subscription');
+      subscription.unsubscribe();
+    };
+  }, []);
 
   const signIn = async (email: string, password: string) => {
     try {
@@ -164,15 +167,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   };
 
+  const value = {
+    user,
+    loading,
+    signIn,
+    signUp,
+    signOut,
+  };
+
+  console.log('AuthProvider - rendering with user:', user, 'loading:', loading);
+
   return (
-    <AuthContext.Provider value={{
-      user,
-      session,
-      loading,
-      signIn,
-      signUp,
-      signOut,
-    }}>
+    <AuthContext.Provider value={value}>
       {children}
     </AuthContext.Provider>
   );

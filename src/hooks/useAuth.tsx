@@ -1,3 +1,4 @@
+
 import { useState, useEffect, createContext, useContext, ReactNode } from 'react';
 import { User, Session } from '@supabase/supabase-js';
 import { supabase } from '@/integrations/supabase/client';
@@ -32,12 +33,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         if (error) {
           console.error('Error getting session:', error);
           setUser(null);
+          setSession(null);
         } else {
           setUser(session?.user ?? null);
+          setSession(session);
         }
       } catch (error) {
         console.error('Error in getInitialSession:', error);
         setUser(null);
+        setSession(null);
       } finally {
         setLoading(false);
       }
@@ -49,6 +53,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       async (event, session) => {
         console.log('AuthProvider - auth state change:', event, session);
         setUser(session?.user ?? null);
+        setSession(session);
         setLoading(false);
       }
     );
@@ -169,6 +174,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const value = {
     user,
+    session,
     loading,
     signIn,
     signUp,

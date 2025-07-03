@@ -13,6 +13,7 @@ interface QuestionCardProps {
   showAnswer?: boolean;
   hideHeader?: boolean;
   isReviewMode?: boolean;
+  disabled?: boolean;
 }
 
 export function QuestionCard({
@@ -21,7 +22,8 @@ export function QuestionCard({
   userAnswer,
   showAnswer = false,
   hideHeader = false,
-  isReviewMode = false
+  isReviewMode = false,
+  disabled = false
 }: QuestionCardProps) {
   const [selectedOption, setSelectedOption] = useState<string>('');
 
@@ -36,6 +38,7 @@ export function QuestionCard({
 
   const handleOptionSelect = (optionId: string) => {
     if (showAnswer && !isReviewMode) return; // Don't allow selection when showing answer
+    if (disabled) return; // Don't allow selection when disabled
     
     setSelectedOption(optionId);
     if (onAnswer) {
@@ -90,13 +93,13 @@ export function QuestionCard({
   console.log('=== QUESTION CARD RENDER ===');
   console.log('Question ID:', question.id);
   console.log('Question Area:', question.area);
-  console.log('Question Text:', question.pergunta?.substring(0, 50) + '...');
-  console.log('Options count:', question.alternativas?.length);
+  console.log('Question Text:', question.enunciado?.substring(0, 50) + '...');
+  console.log('Options count:', question.options?.length);
   console.log('Correct answer:', question.correct);
   console.log('Selected option:', selectedOption);
   console.log('Show answer:', showAnswer);
 
-  if (!question || !question.pergunta || !question.alternativas) {
+  if (!question || !question.enunciado || !question.options) {
     console.error('❌ Questão inválida:', question);
     return (
       <Card className="w-full border-red-200 bg-red-50">
@@ -124,10 +127,10 @@ export function QuestionCard({
                   {question.area}
                 </Badge>
               )}
-              {question.ano && (
+              {question.year && (
                 <div className="flex items-center gap-1 text-sm">
                   <Clock className="w-4 h-4" />
-                  <span>{question.ano}</span>
+                  <span>{question.year}</span>
                 </div>
               )}
             </div>
@@ -141,20 +144,20 @@ export function QuestionCard({
           <div className="prose prose-lg max-w-none">
             <div 
               className="text-gray-800 leading-relaxed"
-              dangerouslySetInnerHTML={{ __html: question.pergunta }}
+              dangerouslySetInnerHTML={{ __html: question.enunciado }}
             />
           </div>
         </div>
 
         {/* Question Image if exists */}
-        {question.imagem && (
+        {question.image && (
           <div className="mb-6 text-center">
             <img 
-              src={question.imagem} 
+              src={question.image} 
               alt="Imagem da questão" 
               className="max-w-full h-auto rounded-lg shadow-md mx-auto"
               onError={(e) => {
-                console.error('Erro ao carregar imagem:', question.imagem);
+                console.error('Erro ao carregar imagem:', question.image);
                 (e.target as HTMLImageElement).style.display = 'none';
               }}
             />
@@ -163,7 +166,7 @@ export function QuestionCard({
 
         {/* Answer Options */}
         <div className="space-y-3">
-          {question.alternativas.map((option, index) => {
+          {question.options.map((option, index) => {
             const optionId = String.fromCharCode(65 + index); // A, B, C, D, E
             const status = getOptionStatus(optionId);
             
@@ -173,7 +176,7 @@ export function QuestionCard({
                 onClick={() => handleOptionSelect(optionId)}
                 className={getOptionClasses(status)}
                 variant="ghost"
-                disabled={showAnswer && !isReviewMode}
+                disabled={disabled || (showAnswer && !isReviewMode)}
               >
                 <div className="flex items-start gap-4 w-full">
                   <div className="flex items-center gap-2 flex-shrink-0">
@@ -182,7 +185,7 @@ export function QuestionCard({
                   </div>
                   <div 
                     className="flex-1 text-left"
-                    dangerouslySetInnerHTML={{ __html: option }}
+                    dangerouslySetInnerHTML={{ __html: option.text }}
                   />
                 </div>
               </Button>
@@ -191,7 +194,7 @@ export function QuestionCard({
         </div>
 
         {/* Explanation */}
-        {showAnswer && question.explicacao && (
+        {showAnswer && question.referencia && (
           <div className="mt-6 p-4 bg-blue-50 border-l-4 border-blue-400 rounded-r-lg">
             <h4 className="font-semibold text-blue-800 mb-2 flex items-center gap-2">
               <BookOpen className="w-4 h-4" />
@@ -199,7 +202,7 @@ export function QuestionCard({
             </h4>
             <div 
               className="text-blue-700 prose prose-sm max-w-none"
-              dangerouslySetInnerHTML={{ __html: question.explicacao }}
+              dangerouslySetInnerHTML={{ __html: question.referencia }}
             />
           </div>
         )}
@@ -233,3 +236,6 @@ export function QuestionCard({
     </Card>
   );
 }
+
+// Export the type for backward compatibility
+export type { Question };

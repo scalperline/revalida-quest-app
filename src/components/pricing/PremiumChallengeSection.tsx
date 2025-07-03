@@ -46,15 +46,9 @@ export function PremiumChallengeSection({
     setIsStarting(false);
   };
 
-  const handleChallengeComplete = (passed: boolean) => {
-    console.log('=== HANDLE CHALLENGE COMPLETE ===');
-    console.log('Challenge passed:', passed);
-    
+  const handleCloseModal = () => {
+    console.log('=== HANDLE CLOSE MODAL ===');
     setShowModal(false);
-    
-    if (passed) {
-      setShowRewardModal(true);
-    }
   };
 
   const handleCloseRewardModal = () => {
@@ -186,8 +180,7 @@ export function PremiumChallengeSection({
       {showModal && (
         <ChallengeModal
           isOpen={showModal}
-          onClose={() => setShowModal(false)}
-          onComplete={handleChallengeComplete}
+          onClose={handleCloseModal}
         />
       )}
 
@@ -195,6 +188,8 @@ export function PremiumChallengeSection({
         <SuccessRewardModal
           isOpen={showRewardModal}
           onClose={handleCloseRewardModal}
+          score={10}
+          total={10}
         />
       )}
     </>

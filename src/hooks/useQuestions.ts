@@ -1,58 +1,98 @@
 
-import { useState, useMemo } from "react";
-import { type Question } from "@/components/QuestionCard";
-import { getQuestionsByYearAndType, getDefaultTipoProva } from "@/utils/questionSelector";
+import { useState, useEffect, useMemo } from 'react';
+import { questoesRevalida2025_1 } from '@/data/questoesRevalida2025_1';
+import { questoesRevalida2024_1 } from '@/data/questoesRevalida2024_1';
+import { questoesRevalida2023_1 } from '@/data/questoesRevalida2023_1';
+import { questoesRevalida2023_2 } from '@/data/questoesRevalida2023_2';
+import { questoesRevalida2022_1 } from '@/data/questoesRevalida2022_1';
+import { questoesRevalida2022_2 } from '@/data/questoesRevalida2022_2';
+import { questoesRevalida2021 } from '@/data/questoesRevalida2021';
+import { questoesRevalida2020 } from '@/data/questoesRevalida2020';
+import { type Question } from '@/types/question';
 
-const QUESTOES_POR_PAGINA = 10;
+// Consolidar todas as questões
+const todasQuestoes: Question[] = [
+  ...questoesRevalida2025_1,
+  ...questoesRevalida2024_1,
+  ...questoesRevalida2023_1,
+  ...questoesRevalida2023_2,
+  ...questoesRevalida2022_1,
+  ...questoesRevalida2022_2,
+  ...questoesRevalida2021,
+  ...questoesRevalida2020
+];
 
 export function useQuestions() {
-  const [anoSelecionado, setAnoSelecionado] = useState<number>(2025);
-  const [tipoProva, setTipoProva] = useState<string>(getDefaultTipoProva(2025));
-  const [paginaAtual, setPaginaAtual] = useState(1);
+  const [anoSelecionado, setAnoSelecionado] = useState<string>('todos');
+  const [areaSelecionada, setAreaSelecionada] = useState<string>('todas');
+  const [dificuldadeSelecionada, setDificuldadeSelecionada] = useState<string>('todas');
 
-  const questoesAnoSelecionado: Question[] = useMemo(() => {
-    return getQuestionsByYearAndType(anoSelecionado, tipoProva);
-  }, [anoSelecionado, tipoProva]);
+  // Filtrar questões baseado nos filtros selecionados
+  const questoesAnoSelecionado = useMemo(() => {
+    console.log('=== FILTERING QUESTIONS ===');
+    console.log('Total questions available:', todasQuestoes.length);
+    console.log('Year filter:', anoSelecionado);
+    console.log('Area filter:', areaSelecionada);
+    console.log('Difficulty filter:', dificuldadeSelecionada);
 
-  const sortedQuestoes = useMemo(
-    () => [...questoesAnoSelecionado].sort((a, b) => a.id - b.id),
-    [questoesAnoSelecionado]
-  );
+    let questoesFiltradas = [...todasQuestoes];
 
-  const totalPaginas = Math.ceil(sortedQuestoes.length / QUESTOES_POR_PAGINA);
-
-  const indiceInicio = (paginaAtual - 1) * QUESTOES_POR_PAGINA;
-  const indiceFim = indiceInicio + QUESTOES_POR_PAGINA;
-  const questoesPaginadas = sortedQuestoes.slice(indiceInicio, indiceFim);
-
-  function handleAnoSelecionado(v: number) {
-    setAnoSelecionado(v);
-    setPaginaAtual(1);
-    const defaultTipo = getDefaultTipoProva(v);
-    setTipoProva(defaultTipo);
-  }
-
-  function handleTipoProva(v: string) {
-    setTipoProva(v);
-    setPaginaAtual(1);
-  }
-
-  const handlePageChange = (page: number) => {
-    if (page >= 1 && page <= totalPaginas) {
-      setPaginaAtual(page);
+    // Filtro por ano
+    if (anoSelecionado !== 'todos') {
+      questoesFiltradas = questoesFiltradas.filter(q => q.ano === parseInt(anoSelecionado));
     }
-  };
+
+    // Filtro por área
+    if (areaSelecionada !== 'todas') {
+      questoesFiltradas = questoesFiltradas.filter(q => q.area === areaSelecionada);
+    }
+
+    // Filtro por dificuldade
+    if (dificuldadeSelecionada !== 'todas') {
+      questoesFiltradas = questoesFiltradas.filter(q => q.dificuldade === dificuldadeSelecionada);
+    }
+
+    console.log('Filtered questions count:', questoesFiltradas.length);
+    return questoesFiltradas;
+  }, [anoSelecionado, areaSelecionada, dificuldadeSelecionada]);
+
+  // Areas disponíveis baseadas nas questões filtradas
+  const areasDisponiveis = useMemo(() => {
+    const areas = new Set<string>();
+    questoesAnoSelecionado.forEach(q => {
+      if (q.area) areas.add(q.area);
+    });
+    return Array.from(areas).sort();
+  }, [questoesAnoSelecionado]);
+
+  // Anos disponíveis
+  const anosDisponiveis = useMemo(() => {
+    const anos = new Set<number>();
+    todasQuestoes.forEach(q => {
+      if (q.ano) anos.add(q.ano);
+    });
+    return Array.from(anos).sort((a, b) => b - a);
+  }, []);
+
+  // Debug logs
+  useEffect(() => {
+    console.log('=== useQuestions Debug ===');
+    console.log('Total questions loaded:', todasQuestoes.length);
+    console.log('Available years:', anosDisponiveis);
+    console.log('Available areas:', areasDisponiveis);
+    console.log('Filtered questions:', questoesAnoSelecionado.length);
+  }, [questoesAnoSelecionado.length, anosDisponiveis, areasDisponiveis]);
 
   return {
+    questoesAnoSelecionado,
     anoSelecionado,
-    tipoProva,
-    paginaAtual,
-    questoesPaginadas,
-    totalQuestoes: sortedQuestoes.length,
-    totalPaginas,
-    handleAnoSelecionado,
-    handleTipoProva,
-    handlePageChange,
-    questoesAnoSelecionado, // Expose this for compatibility
+    setAnoSelecionado,
+    areaSelecionada,
+    setAreaSelecionada,
+    dificuldadeSelecionada,
+    setDificuldadeSelecionada,
+    anosDisponiveis,
+    areasDisponiveis,
+    todasQuestoes
   };
 }

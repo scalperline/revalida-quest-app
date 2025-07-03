@@ -4,7 +4,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/u
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
-import { Clock, Target, Zap, Trophy, X, Shield, CheckCircle, XCircle, Flame, Star, Brain, Heart, Sparkles } from 'lucide-react';
+import { Clock, Target, Zap, Trophy, X, Shield, CheckCircle, XCircle, Flame, Sparkles } from 'lucide-react';
 import { usePremiumChallenge } from '@/hooks/usePremiumChallenge';
 import { useTimer } from '@/hooks/useTimer';
 import { QuestionCard } from '@/components/QuestionCard';
@@ -33,28 +33,41 @@ export function ChallengeModal({ isOpen, onClose }: ChallengeModalProps) {
   console.log('challengeState.isActive:', challengeState.isActive);
   console.log('challengeState.questions.length:', challengeState.questions.length);
   console.log('currentQuestion:', currentQuestion?.id);
+  console.log('currentQuestionIndex:', challengeState.currentQuestionIndex);
 
+  // Iniciar timer quando modal abre e questões estão carregadas
   useEffect(() => {
     if (isOpen && challengeState.isActive && challengeState.questions.length > 0 && !isRunning) {
-      console.log('Iniciando timer...');
+      console.log('🕐 Iniciando timer do desafio...');
       start();
     }
   }, [isOpen, challengeState.isActive, challengeState.questions.length, isRunning, start]);
 
+  // Parar timer e mostrar modal de sucesso quando completar
   useEffect(() => {
     if (isFinished || challengeState.hasCompleted) {
-      console.log('Parando timer - desafio finalizado');
+      console.log('⏹️ Parando timer - desafio finalizado');
       stop();
       if (challengeState.hasWon) {
-        console.log('Usuário ganhou! Mostrando modal de sucesso');
+        console.log('🏆 Usuário ganhou! Mostrando modal de sucesso');
         setShowSuccessModal(true);
       }
     }
   }, [isFinished, challengeState.hasCompleted, challengeState.hasWon, stop]);
 
+  // Reset states when modal closes
+  useEffect(() => {
+    if (!isOpen) {
+      setSelectedAnswer('');
+      setShowFeedback(false);
+      setLastAnswerCorrect(null);
+      setXpEarned(0);
+    }
+  }, [isOpen]);
+
   const handleAnswer = (optionId: string) => {
     if (showFeedback) return;
-    console.log('Resposta selecionada:', optionId);
+    console.log('✋ Resposta selecionada:', optionId);
     setSelectedAnswer(optionId);
   };
 
@@ -62,7 +75,11 @@ export function ChallengeModal({ isOpen, onClose }: ChallengeModalProps) {
     if (!selectedAnswer || !currentQuestion || showFeedback) return;
 
     const isCorrect = currentQuestion.correct === selectedAnswer;
-    console.log('Confirmando resposta. Correta?', isCorrect);
+    console.log('✅ Confirmando resposta:', { 
+      selectedAnswer, 
+      correctAnswer: currentQuestion.correct, 
+      isCorrect 
+    });
     
     // Show immediate feedback
     setLastAnswerCorrect(isCorrect);
@@ -100,7 +117,7 @@ export function ChallengeModal({ isOpen, onClose }: ChallengeModalProps) {
   };
 
   const handleNextQuestion = () => {
-    console.log('Avançando para próxima questão...');
+    console.log('➡️ Avançando para próxima questão...');
     nextQuestion();
     setSelectedAnswer('');
     setShowFeedback(false);
@@ -109,7 +126,7 @@ export function ChallengeModal({ isOpen, onClose }: ChallengeModalProps) {
   };
 
   const handleClose = () => {
-    console.log('Fechando modal do desafio...');
+    console.log('❌ Fechando modal do desafio...');
     stop();
     setSelectedAnswer('');
     setShowFeedback(false);
@@ -119,7 +136,7 @@ export function ChallengeModal({ isOpen, onClose }: ChallengeModalProps) {
 
   // Só renderiza se o modal estiver aberto, desafio ativo E há questões carregadas
   if (!isOpen || !challengeState.isActive || challengeState.questions.length === 0 || !currentQuestion) {
-    console.log('Modal não deve ser exibido:', {
+    console.log('🚫 Modal não deve ser exibido:', {
       isOpen,
       isActive: challengeState.isActive,
       questionsLength: challengeState.questions.length,

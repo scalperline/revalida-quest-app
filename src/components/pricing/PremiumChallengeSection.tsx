@@ -3,8 +3,9 @@ import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Trophy, Target, Clock, Zap, Crown, Sparkles, Shield, Rocket } from 'lucide-react';
+import { Trophy, Target, Clock, Zap, Crown, Sparkles, Shield, Rocket, AlertCircle } from 'lucide-react';
 import { ChallengeModal } from './ChallengeModal';
+import { toast } from 'sonner';
 
 interface PremiumChallengeSectionProps {
   canStartChallenge: boolean;
@@ -22,29 +23,64 @@ export function PremiumChallengeSection({
   onResetAttempts
 }: PremiumChallengeSectionProps) {
   const [showModal, setShowModal] = useState(false);
+  const [isStarting, setIsStarting] = useState(false);
 
-  const handleStartChallenge = () => {
-    console.log('=== BOTÃO CLICADO ===');
+  const handleStartChallenge = async () => {
+    console.log('=== BOTÃO DESAFIO CLICADO ===');
     console.log('Pode iniciar desafio?', canStartChallenge);
+    console.log('Tentativas restantes:', attemptsLeft);
     
-    if (canStartChallenge) {
-      console.log('Iniciando desafio...');
+    if (!canStartChallenge) {
+      console.log('❌ Não pode iniciar desafio - tentativas esgotadas');
+      toast.error("Você já utilizou todas as tentativas disponíveis!", {
+        duration: 3000,
+        className: "bg-gradient-to-r from-red-500 to-red-600 text-white border-0"
+      });
+      return;
+    }
+
+    setIsStarting(true);
+    
+    try {
+      console.log('🚀 Iniciando desafio...');
+      toast.loading("Preparando o Desafio Supremo...", {
+        duration: 2000,
+        className: "bg-gradient-to-r from-purple-500 to-pink-500 text-white border-0"
+      });
+      
+      // Pequeno delay para melhor UX
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
       const started = onStartChallenge();
       console.log('Desafio iniciado?', started);
       
       if (started) {
-        console.log('Abrindo modal...');
+        console.log('✅ Abrindo modal...');
+        toast.success("Desafio Supremo iniciado! Boa sorte! 🚀", {
+          duration: 2000,
+          className: "bg-gradient-to-r from-green-500 to-emerald-500 text-white border-0"
+        });
         setShowModal(true);
       } else {
         console.log('❌ Falha ao iniciar desafio');
+        toast.error("Erro ao iniciar o desafio. Tente novamente!", {
+          duration: 3000,
+          className: "bg-gradient-to-r from-red-500 to-red-600 text-white border-0"
+        });
       }
-    } else {
-      console.log('❌ Não pode iniciar desafio - tentativas esgotadas');
+    } catch (error) {
+      console.error('❌ Erro ao iniciar desafio:', error);
+      toast.error("Erro inesperado. Tente novamente!", {
+        duration: 3000,
+        className: "bg-gradient-to-r from-red-500 to-red-600 text-white border-0"
+      });
+    } finally {
+      setIsStarting(false);
     }
   };
 
   const handleCloseModal = () => {
-    console.log('Fechando modal...');
+    console.log('🚪 Fechando modal...');
     setShowModal(false);
   };
 
@@ -52,6 +88,7 @@ export function PremiumChallengeSection({
   console.log('showModal:', showModal);
   console.log('canStartChallenge:', canStartChallenge);
   console.log('attemptsLeft:', attemptsLeft);
+  console.log('isStarting:', isStarting);
 
   return (
     <>
@@ -168,10 +205,18 @@ export function PremiumChallengeSection({
               {canStartChallenge ? (
                 <>
                   <Button 
-                    onClick={handleStartChallenge} 
-                    className="bg-gradient-to-r from-yellow-500 via-orange-500 to-red-500 hover:from-yellow-600 hover:via-orange-600 hover:to-red-600 text-white text-lg md:text-2xl font-bold rounded-full shadow-xl transform hover:scale-105 transition-all duration-300 py-4 px-8 md:py-6 md:px-12 w-full sm:w-auto"
+                    onClick={handleStartChallenge}
+                    disabled={isStarting}
+                    className="bg-gradient-to-r from-yellow-500 via-orange-500 to-red-500 hover:from-yellow-600 hover:via-orange-600 hover:to-red-600 text-white text-lg md:text-2xl font-bold rounded-full shadow-xl transform hover:scale-105 transition-all duration-300 py-4 px-8 md:py-6 md:px-12 w-full sm:w-auto disabled:opacity-70 disabled:cursor-not-allowed disabled:scale-100"
                   >
-                    🚀 ACEITAR DESAFIO SUPREMO 🚀
+                    {isStarting ? (
+                      <div className="flex items-center gap-3">
+                        <div className="w-6 h-6 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
+                        PREPARANDO DESAFIO...
+                      </div>
+                    ) : (
+                      <>🚀 ACEITAR DESAFIO SUPREMO 🚀</>
+                    )}
                   </Button>
                   
                   <div className="flex items-center gap-3 md:gap-6 bg-gradient-to-r from-gray-900/60 to-gray-800/60 backdrop-blur-sm rounded-xl p-4 md:p-6 border border-gray-600/30">
@@ -190,6 +235,7 @@ export function PremiumChallengeSection({
                 </>
               ) : (
                 <div className="text-center bg-gradient-to-br from-red-900/60 to-red-800/60 backdrop-blur-sm rounded-xl p-6 md:p-10 border border-red-400/30">
+                  <AlertCircle className="w-12 h-12 md:w-16 md:h-16 text-red-400 mx-auto mb-4 animate-pulse" />
                   <p className="text-xl md:text-3xl font-bold text-red-300 mb-2 md:mb-3">
                     ⚡ Energia Esgotada ⚡
                   </p>

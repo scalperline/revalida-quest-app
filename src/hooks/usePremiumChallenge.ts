@@ -18,7 +18,7 @@ interface ChallengeState {
 }
 
 export function usePremiumChallenge() {
-  const { questoesAnoSelecionado } = useQuestions();
+  const { todasQuestoes } = useQuestions();
   const { addXP, answerQuestion: recordAnswer } = useGamification();
   
   const [challengeState, setChallengeState] = useState<ChallengeState>({
@@ -47,25 +47,33 @@ export function usePremiumChallenge() {
     console.log('=== INICIANDO DESAFIO SUPREMO ===');
     console.log('Tentativas usadas:', attemptsUsed);
     console.log('Máximo de tentativas:', maxAttempts);
-    console.log('Questões disponíveis:', questoesAnoSelecionado.length);
+    console.log('Total de questões disponíveis:', todasQuestoes.length);
 
     if (attemptsUsed >= maxAttempts) {
       console.log('❌ Limite de tentativas atingido');
       return false;
     }
 
-    if (questoesAnoSelecionado.length === 0) {
+    if (!todasQuestoes || todasQuestoes.length === 0) {
       console.log('❌ Nenhuma questão disponível');
       return false;
     }
 
-    // Selecionar 10 questões aleatórias
-    const shuffled = [...questoesAnoSelecionado].sort(() => 0.5 - Math.random());
-    const selectedQuestions = shuffled.slice(0, questionsCount);
+    // Selecionar 10 questões aleatórias com diversidade de áreas
+    const shuffled = [...todasQuestoes]
+      .filter(q => q.area && q.pergunta && q.alternativas && q.correct) // Garantir que as questões estão completas
+      .sort(() => 0.5 - Math.random());
+    
+    const selectedQuestions = shuffled.slice(0, Math.min(questionsCount, shuffled.length));
 
     console.log('✅ Questões selecionadas:', selectedQuestions.length);
+    console.log('Questões válidas:', selectedQuestions.map(q => ({ id: q.id, area: q.area, pergunta: q.pergunta?.substring(0, 50) + '...' })));
 
-    const newState = {
+    if (selectedQuestions.length < questionsCount) {
+      console.log('⚠️ Menos questões disponíveis que o necessário');
+    }
+
+    const newState: ChallengeState = {
       isActive: true,
       currentQuestionIndex: 0,
       score: 0,
@@ -82,11 +90,12 @@ export function usePremiumChallenge() {
     setChallengeState(newState);
 
     return true;
-  }, [questoesAnoSelecionado, attemptsUsed, maxAttempts]);
+  }, [todasQuestoes, attemptsUsed, maxAttempts, questionsCount]);
 
   const answerCurrentQuestion = useCallback((optionId: string) => {
     console.log('=== RESPONDENDO QUESTÃO ===');
     console.log('Resposta selecionada:', optionId);
+    console.log('Estado atual:', challengeState);
 
     setChallengeState(prev => {
       const currentQuestion = prev.questions[prev.currentQuestionIndex];
@@ -100,14 +109,16 @@ export function usePremiumChallenge() {
       const newStreak = isCorrect ? prev.streak + 1 : 0;
       const newCombo = isCorrect ? prev.combo + 1 : 0;
 
-      console.log('Resposta correta?', isCorrect);
+      console.log('Questão atual:', currentQuestion.id);
+      console.log('Resposta correta:', currentQuestion.correct);
+      console.log('Resposta dada:', optionId);
+      console.log('É correto?', isCorrect);
       console.log('Nova pontuação:', newScore);
-      console.log('Nova sequência:', newStreak);
 
       // Record the answer in gamification system
       recordAnswer(isCorrect, currentQuestion.area, currentQuestion.id);
 
-      return {
+      const updatedState = {
         ...prev,
         answers: {
           ...prev.answers,
@@ -117,6 +128,9 @@ export function usePremiumChallenge() {
         streak: newStreak,
         combo: newCombo
       };
+
+      console.log('Estado atualizado após resposta:', updatedState);
+      return updatedState;
     });
   }, [recordAnswer]);
 
@@ -128,14 +142,16 @@ export function usePremiumChallenge() {
       console.log('É a última questão?', isLastQuestion);
       console.log('Índice atual:', prev.currentQuestionIndex);
       console.log('Total de questões:', prev.questions.length);
+      console.log('Pontuação atual:', prev.score);
 
       if (isLastQuestion) {
         const hasWon = prev.score >= winThreshold;
         const newAttemptsUsed = attemptsUsed + 1;
         
-        console.log('Desafio finalizado!');
+        console.log('🏁 Desafio finalizado!');
         console.log('Ganhou?', hasWon);
         console.log('Pontuação final:', prev.score);
+        console.log('Limiar para ganhar:', winThreshold);
         
         setAttemptsUsed(newAttemptsUsed);
         localStorage.setItem('premium_challenge_attempts', newAttemptsUsed.toString());
@@ -143,12 +159,14 @@ export function usePremiumChallenge() {
         if (hasWon) {
           localStorage.setItem('premium_challenge_won', 'true');
           // Bonus XP for completing the supreme challenge
-          addXP(500 + prev.timeBonus);
-          console.log('✅ XP adicionado:', 500 + prev.timeBonus);
+          const bonusXP = 500 + prev.timeBonus;
+          addXP(bonusXP);
+          console.log('✅ XP de vitória adicionado:', bonusXP);
         } else {
           // Consolation XP
-          addXP(prev.score * 25);
-          console.log('XP de consolação:', prev.score * 25);
+          const consolationXP = prev.score * 25;
+          addXP(consolationXP);
+          console.log('XP de consolação:', consolationXP);
         }
 
         return {
@@ -159,7 +177,7 @@ export function usePremiumChallenge() {
         };
       }
 
-      console.log('Avançando para a próxima questão:', prev.currentQuestionIndex + 1);
+      console.log('➡️ Avançando para a próxima questão:', prev.currentQuestionIndex + 1);
       return {
         ...prev,
         currentQuestionIndex: prev.currentQuestionIndex + 1
@@ -188,6 +206,7 @@ export function usePremiumChallenge() {
   const hasWonBefore = localStorage.getItem('premium_challenge_won') === 'true';
 
   const resetAttempts = useCallback(() => {
+    console.log('=== RESETANDO TENTATIVAS (DEBUG) ===');
     localStorage.removeItem('premium_challenge_attempts');
     localStorage.removeItem('premium_challenge_won');
     setAttemptsUsed(0);
@@ -199,7 +218,10 @@ export function usePremiumChallenge() {
     console.log('isActive:', challengeState.isActive);
     console.log('questões carregadas:', challengeState.questions.length);
     console.log('índice atual:', challengeState.currentQuestionIndex);
-  }, [challengeState.isActive, challengeState.questions.length, challengeState.currentQuestionIndex]);
+    console.log('pontuação:', challengeState.score);
+    console.log('completado:', challengeState.hasCompleted);
+    console.log('ganhou:', challengeState.hasWon);
+  }, [challengeState]);
 
   return {
     challengeState,

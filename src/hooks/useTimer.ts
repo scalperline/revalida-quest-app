@@ -1,62 +1,88 @@
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 
-export function useTimer(initialTime: number = 600) { // 10 minutos em segundos
-  const [timeLeft, setTimeLeft] = useState(initialTime);
+export function useTimer(initialSeconds: number) {
+  const [timeLeft, setTimeLeft] = useState(initialSeconds);
   const [isRunning, setIsRunning] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+
+  const minutes = Math.floor(timeLeft / 60);
+  const seconds = timeLeft % 60;
 
   const start = useCallback(() => {
+    console.log('🕐 Timer iniciado');
     setIsRunning(true);
     setIsFinished(false);
   }, []);
 
-  const pause = useCallback(() => {
+  const stop = useCallback(() => {
+    console.log('⏹️ Timer parado');
     setIsRunning(false);
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
+    }
   }, []);
 
   const reset = useCallback(() => {
-    setTimeLeft(initialTime);
+    console.log('🔄 Timer resetado');
+    setTimeLeft(initialSeconds);
     setIsRunning(false);
     setIsFinished(false);
-  }, [initialTime]);
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
+    }
+  }, [initialSeconds]);
 
-  const stop = useCallback(() => {
-    setIsRunning(false);
-    setIsFinished(true);
-  }, []);
-
+  // Effect para controlar o timer
   useEffect(() => {
-    if (!isRunning || timeLeft <= 0) return;
+    if (isRunning && timeLeft > 0) {
+      intervalRef.current = setInterval(() => {
+        setTimeLeft(prev => {
+          const newTime = prev - 1;
+          if (newTime <= 0) {
+            console.log('⏰ Timer finalizado');
+            setIsRunning(false);
+            setIsFinished(true);
+            return 0;
+          }
+          return newTime;
+        });
+      }, 1000);
+    } else {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+        intervalRef.current = null;
+      }
+    }
 
-    const interval = setInterval(() => {
-      setTimeLeft(prev => {
-        if (prev <= 1) {
-          setIsRunning(false);
-          setIsFinished(true);
-          return 0;
-        }
-        return prev - 1;
-      });
-    }, 1000);
-
-    return () => clearInterval(interval);
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+        intervalRef.current = null;
+      }
+    };
   }, [isRunning, timeLeft]);
 
-  const minutes = Math.floor(timeLeft / 60);
-  const seconds = timeLeft % 60;
-  const percentage = ((initialTime - timeLeft) / initialTime) * 100;
+  // Cleanup on unmount
+  useEffect(() => {
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+    };
+  }, []);
 
   return {
     timeLeft,
     minutes,
     seconds,
-    percentage,
     isRunning,
     isFinished,
     start,
-    pause,
-    reset,
-    stop
+    stop,
+    reset
   };
 }

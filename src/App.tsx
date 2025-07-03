@@ -12,7 +12,6 @@ import Ranking from '@/pages/Ranking';
 import Profile from '@/pages/Profile';
 import Stats from '@/pages/Stats';
 import Pricing from '@/pages/Pricing';
-import Marketing from '@/pages/Marketing';
 import './App.css';
 
 const queryClient = new QueryClient();
@@ -76,14 +75,6 @@ function App() {
                 }
               />
               <Route path="/pricing" element={<Pricing />} />
-              <Route
-                path="/marketing"
-                element={
-                  <ProtectedRoute>
-                    <Marketing />
-                  </ProtectedRoute>
-                }
-              />
             </Routes>
             <Toaster />
           </div>

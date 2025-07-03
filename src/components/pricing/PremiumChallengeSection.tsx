@@ -10,7 +10,7 @@ interface PremiumChallengeSectionProps {
   canStartChallenge: boolean;
   attemptsLeft: number;
   hasWonBefore: boolean;
-  onStartChallenge: () => void;
+  onStartChallenge: () => boolean;
   onResetAttempts?: () => void;
 }
 
@@ -24,11 +24,34 @@ export function PremiumChallengeSection({
   const [showModal, setShowModal] = useState(false);
 
   const handleStartChallenge = () => {
+    console.log('=== BOTÃO CLICADO ===');
+    console.log('Pode iniciar desafio?', canStartChallenge);
+    
     if (canStartChallenge) {
-      onStartChallenge();
-      setShowModal(true);
+      console.log('Iniciando desafio...');
+      const started = onStartChallenge();
+      console.log('Desafio iniciado?', started);
+      
+      if (started) {
+        console.log('Abrindo modal...');
+        setShowModal(true);
+      } else {
+        console.log('❌ Falha ao iniciar desafio');
+      }
+    } else {
+      console.log('❌ Não pode iniciar desafio - tentativas esgotadas');
     }
   };
+
+  const handleCloseModal = () => {
+    console.log('Fechando modal...');
+    setShowModal(false);
+  };
+
+  console.log('=== RENDER PREMIUM CHALLENGE SECTION ===');
+  console.log('showModal:', showModal);
+  console.log('canStartChallenge:', canStartChallenge);
+  console.log('attemptsLeft:', attemptsLeft);
 
   return (
     <>
@@ -189,7 +212,10 @@ export function PremiumChallengeSection({
         </Card>
       </div>
 
-      <ChallengeModal isOpen={showModal} onClose={() => setShowModal(false)} />
+      <ChallengeModal 
+        isOpen={showModal} 
+        onClose={handleCloseModal} 
+      />
     </>
   );
 }

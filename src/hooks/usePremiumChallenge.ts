@@ -44,15 +44,26 @@ export function usePremiumChallenge() {
   const winThreshold = 10; // 100% de acerto
 
   const startChallenge = useCallback(() => {
-    if (attemptsUsed >= maxAttempts) return false;
+    console.log('=== INICIANDO DESAFIO SUPREMO ===');
+    console.log('Tentativas usadas:', attemptsUsed);
+    console.log('Máximo de tentativas:', maxAttempts);
+    console.log('Questões disponíveis:', questoesAnoSelecionado.length);
+
+    if (attemptsUsed >= maxAttempts) {
+      console.log('❌ Limite de tentativas atingido');
+      return false;
+    }
 
     if (questoesAnoSelecionado.length === 0) {
+      console.log('❌ Nenhuma questão disponível');
       return false;
     }
 
     // Selecionar 10 questões aleatórias
     const shuffled = [...questoesAnoSelecionado].sort(() => 0.5 - Math.random());
     const selectedQuestions = shuffled.slice(0, questionsCount);
+
+    console.log('✅ Questões selecionadas:', selectedQuestions.length);
 
     setChallengeState({
       isActive: true,
@@ -67,18 +78,29 @@ export function usePremiumChallenge() {
       timeBonus: 0
     });
 
+    console.log('✅ Estado do desafio atualizado - isActive: true');
     return true;
   }, [questoesAnoSelecionado, attemptsUsed, maxAttempts]);
 
   const answerCurrentQuestion = useCallback((optionId: string) => {
+    console.log('=== RESPONDENDO QUESTÃO ===');
+    console.log('Resposta selecionada:', optionId);
+
     setChallengeState(prev => {
       const currentQuestion = prev.questions[prev.currentQuestionIndex];
-      if (!currentQuestion) return prev;
+      if (!currentQuestion) {
+        console.log('❌ Questão atual não encontrada');
+        return prev;
+      }
 
       const isCorrect = currentQuestion.correct === optionId;
       const newScore = isCorrect ? prev.score + 1 : prev.score;
       const newStreak = isCorrect ? prev.streak + 1 : 0;
       const newCombo = isCorrect ? prev.combo + 1 : 0;
+
+      console.log('Resposta correta?', isCorrect);
+      console.log('Nova pontuação:', newScore);
+      console.log('Nova sequência:', newStreak);
 
       // Record the answer in gamification system
       recordAnswer(isCorrect, currentQuestion.area, currentQuestion.id);
@@ -97,12 +119,21 @@ export function usePremiumChallenge() {
   }, [recordAnswer]);
 
   const nextQuestion = useCallback(() => {
+    console.log('=== PRÓXIMA QUESTÃO ===');
+    
     setChallengeState(prev => {
       const isLastQuestion = prev.currentQuestionIndex >= prev.questions.length - 1;
+      console.log('É a última questão?', isLastQuestion);
+      console.log('Índice atual:', prev.currentQuestionIndex);
+      console.log('Total de questões:', prev.questions.length);
 
       if (isLastQuestion) {
         const hasWon = prev.score >= winThreshold;
         const newAttemptsUsed = attemptsUsed + 1;
+        
+        console.log('Desafio finalizado!');
+        console.log('Ganhou?', hasWon);
+        console.log('Pontuação final:', prev.score);
         
         setAttemptsUsed(newAttemptsUsed);
         localStorage.setItem('premium_challenge_attempts', newAttemptsUsed.toString());
@@ -111,9 +142,11 @@ export function usePremiumChallenge() {
           localStorage.setItem('premium_challenge_won', 'true');
           // Bonus XP for completing the supreme challenge
           addXP(500 + prev.timeBonus);
+          console.log('✅ XP adicionado:', 500 + prev.timeBonus);
         } else {
           // Consolation XP
           addXP(prev.score * 25);
+          console.log('XP de consolação:', prev.score * 25);
         }
 
         return {
@@ -124,6 +157,7 @@ export function usePremiumChallenge() {
         };
       }
 
+      console.log('Avançando para a próxima questão:', prev.currentQuestionIndex + 1);
       return {
         ...prev,
         currentQuestionIndex: prev.currentQuestionIndex + 1
@@ -132,6 +166,7 @@ export function usePremiumChallenge() {
   }, [attemptsUsed, winThreshold, addXP]);
 
   const resetChallenge = useCallback(() => {
+    console.log('=== RESETANDO DESAFIO ===');
     setChallengeState({
       isActive: false,
       currentQuestionIndex: 0,
@@ -155,6 +190,14 @@ export function usePremiumChallenge() {
     localStorage.removeItem('premium_challenge_won');
     setAttemptsUsed(0);
   }, []);
+
+  // Debug logs
+  useEffect(() => {
+    console.log('=== ESTADO DO DESAFIO ATUALIZADO ===');
+    console.log('isActive:', challengeState.isActive);
+    console.log('questões carregadas:', challengeState.questions.length);
+    console.log('índice atual:', challengeState.currentQuestionIndex);
+  }, [challengeState.isActive, challengeState.questions.length, challengeState.currentQuestionIndex]);
 
   return {
     challengeState,

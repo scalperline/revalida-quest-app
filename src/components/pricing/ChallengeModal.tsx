@@ -28,16 +28,25 @@ export function ChallengeModal({ isOpen, onClose }: ChallengeModalProps) {
   const currentQuestion = challengeState.questions[challengeState.currentQuestionIndex];
   const progress = ((challengeState.currentQuestionIndex + 1) / challengeState.questions.length) * 100;
 
+  console.log('=== CHALLENGE MODAL RENDER ===');
+  console.log('isOpen:', isOpen);
+  console.log('challengeState.isActive:', challengeState.isActive);
+  console.log('currentQuestion:', currentQuestion?.id);
+  console.log('questions length:', challengeState.questions.length);
+
   useEffect(() => {
     if (isOpen && challengeState.isActive && !isRunning) {
+      console.log('Iniciando timer...');
       start();
     }
   }, [isOpen, challengeState.isActive, isRunning, start]);
 
   useEffect(() => {
     if (isFinished || challengeState.hasCompleted) {
+      console.log('Parando timer - desafio finalizado');
       stop();
       if (challengeState.hasWon) {
+        console.log('Usuário ganhou! Mostrando modal de sucesso');
         setShowSuccessModal(true);
       }
     }
@@ -45,6 +54,7 @@ export function ChallengeModal({ isOpen, onClose }: ChallengeModalProps) {
 
   const handleAnswer = (optionId: string) => {
     if (showFeedback) return;
+    console.log('Resposta selecionada:', optionId);
     setSelectedAnswer(optionId);
   };
 
@@ -52,6 +62,7 @@ export function ChallengeModal({ isOpen, onClose }: ChallengeModalProps) {
     if (!selectedAnswer || !currentQuestion || showFeedback) return;
 
     const isCorrect = currentQuestion.correct === selectedAnswer;
+    console.log('Confirmando resposta. Correta?', isCorrect);
     
     // Show immediate feedback
     setLastAnswerCorrect(isCorrect);
@@ -89,6 +100,7 @@ export function ChallengeModal({ isOpen, onClose }: ChallengeModalProps) {
   };
 
   const handleNextQuestion = () => {
+    console.log('Avançando para próxima questão...');
     nextQuestion();
     setSelectedAnswer('');
     setShowFeedback(false);
@@ -97,6 +109,7 @@ export function ChallengeModal({ isOpen, onClose }: ChallengeModalProps) {
   };
 
   const handleClose = () => {
+    console.log('Fechando modal do desafio...');
     stop();
     setSelectedAnswer('');
     setShowFeedback(false);
@@ -104,13 +117,14 @@ export function ChallengeModal({ isOpen, onClose }: ChallengeModalProps) {
     onClose();
   };
 
+  // Retorna null se o desafio não estiver ativo ou se não há questão atual
   if (!challengeState.isActive || !currentQuestion) {
+    console.log('Modal não deve ser exibido - desafio inativo ou sem questão');
     return null;
   }
 
   const isTimeRunningOut = timeLeft < 120; // Last 2 minutes
   const perfectProgress = challengeState.score === challengeState.currentQuestionIndex + (showFeedback && lastAnswerCorrect ? 1 : 0);
-  const currentQuestionAnswer = challengeState.answers[currentQuestion.id];
 
   return (
     <>

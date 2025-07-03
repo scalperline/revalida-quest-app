@@ -65,7 +65,7 @@ export function usePremiumChallenge() {
 
     console.log('✅ Questões selecionadas:', selectedQuestions.length);
 
-    setChallengeState({
+    const newState = {
       isActive: true,
       currentQuestionIndex: 0,
       score: 0,
@@ -76,9 +76,11 @@ export function usePremiumChallenge() {
       streak: 0,
       combo: 0,
       timeBonus: 0
-    });
+    };
 
-    console.log('✅ Estado do desafio atualizado - isActive: true');
+    console.log('✅ Novo estado do desafio:', newState);
+    setChallengeState(newState);
+
     return true;
   }, [questoesAnoSelecionado, attemptsUsed, maxAttempts]);
 

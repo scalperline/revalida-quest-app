@@ -26,20 +26,20 @@ export function ChallengeModal({ isOpen, onClose }: ChallengeModalProps) {
   const [xpEarned, setXpEarned] = useState(0);
 
   const currentQuestion = challengeState.questions[challengeState.currentQuestionIndex];
-  const progress = ((challengeState.currentQuestionIndex + 1) / challengeState.questions.length) * 100;
+  const progress = challengeState.questions.length > 0 ? ((challengeState.currentQuestionIndex + 1) / challengeState.questions.length) * 100 : 0;
 
   console.log('=== CHALLENGE MODAL RENDER ===');
   console.log('isOpen:', isOpen);
   console.log('challengeState.isActive:', challengeState.isActive);
+  console.log('challengeState.questions.length:', challengeState.questions.length);
   console.log('currentQuestion:', currentQuestion?.id);
-  console.log('questions length:', challengeState.questions.length);
 
   useEffect(() => {
-    if (isOpen && challengeState.isActive && !isRunning) {
+    if (isOpen && challengeState.isActive && challengeState.questions.length > 0 && !isRunning) {
       console.log('Iniciando timer...');
       start();
     }
-  }, [isOpen, challengeState.isActive, isRunning, start]);
+  }, [isOpen, challengeState.isActive, challengeState.questions.length, isRunning, start]);
 
   useEffect(() => {
     if (isFinished || challengeState.hasCompleted) {
@@ -117,9 +117,14 @@ export function ChallengeModal({ isOpen, onClose }: ChallengeModalProps) {
     onClose();
   };
 
-  // Retorna null se o desafio não estiver ativo ou se não há questão atual
-  if (!challengeState.isActive || !currentQuestion) {
-    console.log('Modal não deve ser exibido - desafio inativo ou sem questão');
+  // Só renderiza se o modal estiver aberto, desafio ativo E há questões carregadas
+  if (!isOpen || !challengeState.isActive || challengeState.questions.length === 0 || !currentQuestion) {
+    console.log('Modal não deve ser exibido:', {
+      isOpen,
+      isActive: challengeState.isActive,
+      questionsLength: challengeState.questions.length,
+      hasCurrentQuestion: !!currentQuestion
+    });
     return null;
   }
 

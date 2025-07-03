@@ -2,13 +2,11 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { MobileHamburgerButton } from './MobileHamburgerButton';
 
 interface NavItem {
   to: string;
   icon: React.ComponentType<any>;
   label: string;
-  color: string;
 }
 
 interface Props {
@@ -89,8 +87,8 @@ export function MobileHamburgerMenu({ isOpen, onClose, navItems, isActivePath }:
                       variant={isActive ? "default" : "ghost"}
                       className={`w-full justify-start h-12 text-left ${
                         isActive 
-                          ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white' 
-                          : `${item.color} hover:bg-gray-100 dark:hover:bg-gray-800`
+                          ? 'bg-gray-900 text-white dark:bg-gray-100 dark:text-gray-900' 
+                          : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-gray-100 dark:hover:bg-gray-800'
                       }`}
                     >
                       <Icon className="w-5 h-5 mr-3" />

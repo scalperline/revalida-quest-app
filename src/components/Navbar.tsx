@@ -14,12 +14,12 @@ export function Navbar() {
   const location = useLocation();
 
   const navItems = [
-    { to: '/', icon: BookOpen, label: 'Início', color: 'text-blue-600' },
-    { to: '/questions', icon: Target, label: 'Questões', color: 'text-green-600' },
-    { to: '/ranking', icon: Trophy, label: 'Ranking', color: 'text-yellow-600' },
-    { to: '/stats', icon: BarChart3, label: 'Estatísticas', color: 'text-purple-600' },
-    { to: '/profile', icon: User, label: 'Perfil', color: 'text-indigo-600' },
-    { to: '/pricing', icon: Crown, label: 'Premium', color: 'text-pink-600' }
+    { to: '/', icon: BookOpen, label: 'Início' },
+    { to: '/questions', icon: Target, label: 'Questões' },
+    { to: '/ranking', icon: Trophy, label: 'Ranking' },
+    { to: '/stats', icon: BarChart3, label: 'Estatísticas' },
+    { to: '/profile', icon: User, label: 'Perfil' },
+    { to: '/pricing', icon: Crown, label: 'Premium' }
   ];
 
   const isActivePath = (path: string) => {
@@ -30,15 +30,15 @@ export function Navbar() {
 
   return (
     <>
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 dark:bg-gray-900/95 backdrop-blur-md border-b border-gray-200 dark:border-gray-700 shadow-sm">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 dark:bg-gray-900/95 backdrop-blur-md border-b border-gray-200 dark:border-gray-700">
         <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 xl:px-8">
           <div className="flex items-center justify-between h-16 lg:h-18">
             {/* Logo */}
             <Link to="/" className="flex items-center gap-2 lg:gap-3 flex-shrink-0">
-              <div className="w-8 h-8 lg:w-10 lg:h-10 bg-gradient-to-br from-blue-600 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
-                <BookOpen className="w-4 h-4 lg:w-5 lg:h-5 text-white" />
+              <div className="w-8 h-8 lg:w-10 lg:h-10 bg-gray-900 dark:bg-white rounded-xl flex items-center justify-center">
+                <BookOpen className="w-4 h-4 lg:w-5 lg:h-5 text-white dark:text-gray-900" />
               </div>
-              <span className="text-xl lg:text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              <span className="text-xl lg:text-2xl font-bold text-gray-900 dark:text-white">
                 RevalidaQuest
               </span>
             </Link>
@@ -55,10 +55,10 @@ export function Navbar() {
                       <Button
                         variant={isActive ? "default" : "ghost"}
                         size="sm"
-                        className={`flex items-center gap-2 h-9 xl:h-10 px-3 xl:px-4 text-sm xl:text-base font-medium transition-all duration-300 ${
+                        className={`flex items-center gap-2 h-9 xl:h-10 px-3 xl:px-4 text-sm xl:text-base font-medium transition-all duration-200 ${
                           isActive 
-                            ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg hover:from-blue-700 hover:to-purple-700' 
-                            : `hover:bg-gray-100 dark:hover:bg-gray-800 ${item.color} hover:text-opacity-80 hover:scale-105`
+                            ? 'bg-gray-900 text-white hover:bg-gray-800 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-100' 
+                            : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-800'
                         }`}
                       >
                         <Icon className="w-4 h-4 xl:w-5 xl:h-5" />

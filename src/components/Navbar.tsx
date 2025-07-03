@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -6,7 +5,7 @@ import { UserProgressBar } from '@/components/UserProgressBar';
 import { MobileHamburgerButton } from '@/components/MobileHamburgerButton';
 import { MobileHamburgerMenu } from '@/components/MobileHamburgerMenu';
 import { useAuth } from '@/hooks/useAuth';
-import { Search, Target, Trophy, BarChart3, User, Crown } from 'lucide-react';
+import { Search, Target, Trophy, BarChart3, User, Crown, Stethoscope } from 'lucide-react';
 
 export function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -51,7 +50,7 @@ export function Navbar() {
             {/* Logo */}
             <Link to="/" className="flex items-center gap-3 lg:gap-4 flex-shrink-0">
               <div className="w-10 h-10 lg:w-12 lg:h-12 bg-gradient-to-br from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg">
-                <Search className="w-5 h-5 lg:w-6 lg:h-6 text-white" />
+                <Stethoscope className="w-5 h-5 lg:w-6 lg:h-6 text-white" />
               </div>
               <div className="flex flex-col">
                 <span className="text-xl lg:text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent text-left">

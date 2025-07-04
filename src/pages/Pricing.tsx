@@ -204,7 +204,7 @@ export default function Pricing() {
                     <Trophy className="w-12 h-12 sm:w-16 sm:h-16 text-yellow-400 animate-bounce" />
                     <div>
                       <h2 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-2">
-                        <span className="bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 bg-clip-text text-transparent animate-pulse">
+                        <span className="bg-gradient-to-r from-white via-yellow-100 to-yellow-400 bg-clip-text text-transparent animate-pulse">
                           DESAFIO SUPREMO
                         </span>
                       </h2>

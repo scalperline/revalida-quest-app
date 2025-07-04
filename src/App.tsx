@@ -20,6 +20,7 @@ import Success from "./pages/Success";
 import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
 import Help from "./pages/Help";
+import SupremeChallenge from "./pages/SupremeChallenge";
 
 const queryClient = new QueryClient();
 
@@ -38,6 +39,11 @@ const App = () => (
             <Route path="/termos" element={<Terms />} />
             <Route path="/privacidade" element={<Privacy />} />
             <Route path="/ajuda" element={<Help />} />
+            <Route path="/supreme-challenge" element={
+              <ProtectedRoute>
+                <SupremeChallenge />
+              </ProtectedRoute>
+            } />
             <Route path="/" element={
               <ProtectedRoute>
                 <Index />

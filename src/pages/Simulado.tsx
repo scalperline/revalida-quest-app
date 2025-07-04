@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { useSimulado, type SimuladoConfig } from "@/hooks/useSimulado";
 import { useGamification } from "@/hooks/useGamification";
@@ -72,8 +71,16 @@ export default function Simulado() {
   }, [iniciado, finalizado, simulado.terminou, startTime]);
 
   useEffect(() => {
+    console.log('=== EFFECT RESET QUESTAO RESPONDIDA ===');
+    console.log('Índice da questão:', simulado.index);
+    console.log('ID da questão atual:', simulado.atual?.id);
+    console.log('Resposta atual:', simulado.respostaAtual());
+    
     const temResposta = !!simulado.respostaAtual();
     setQuestaoRespondida(temResposta);
+    
+    console.log('questaoRespondida definida como:', temResposta);
+    console.log('=== FIM EFFECT ===');
   }, [simulado.index, simulado.atual?.id]);
 
   useEffect(() => {
@@ -83,6 +90,9 @@ export default function Simulado() {
   }, [newlyUnlockedAchievement, playSound]);
 
   async function handleConfiguracao(config: SimuladoConfig) {
+    console.log('=== CONFIGURAÇÃO SENDO DEFINIDA ===');
+    console.log('Nova configuração:', config);
+    
     const canStart = await checkSimuladoLimit();
     if (!canStart) return;
     
@@ -105,9 +115,21 @@ export default function Simulado() {
     setTimeElapsed(0);
     setQuestaoRespondida(false);
     playSound('click');
+    
+    console.log('Estado após configuração:', {
+      configuracao: config,
+      iniciado: true,
+      finalizado: false
+    });
+    console.log('=== FIM CONFIGURAÇÃO ===');
   }
 
   function handleResposta(optionId: string, correct: boolean, sourceElement?: HTMLElement) {
+    console.log('=== RESPOSTA SELECIONADA ===');
+    console.log('ID da opção:', optionId);
+    console.log('ID da questão:', simulado.atual?.id);
+    console.log('Resposta correta?', correct);
+    
     playSound(correct ? 'correct' : 'incorrect');
     simulado.responder(optionId);
     setQuestaoRespondida(true);
@@ -116,6 +138,9 @@ export default function Simulado() {
       const xpPoints = 15;
       triggerXPAnimation(xpPoints, sourceElement);
     }
+    
+    console.log('questaoRespondida definida como true');
+    console.log('=== FIM RESPOSTA ===');
   }
 
   const handleAnimationComplete = () => {
@@ -123,10 +148,21 @@ export default function Simulado() {
   };
 
   function handleContinuar() {
+    console.log('=== CONTINUANDO PARA PRÓXIMA QUESTÃO ===');
+    console.log('Índice atual antes:', simulado.index);
+    console.log('Questão atual antes:', simulado.atual?.id);
+    
     playSound('click');
+    
     setQuestaoRespondida(false);
+    
     simulado.proxima();
+    
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    
+    console.log('questaoRespondida resetada para false');
+    console.log('Navegação executada');
+    console.log('=== FIM CONTINUAR ===');
   }
 
   function encerrar() {
@@ -157,6 +193,7 @@ export default function Simulado() {
   }
 
   function voltarConfiguracao() {
+    console.log('=== VOLTANDO PARA CONFIGURAÇÃO ===');
     setConfiguracao(null);
     setIniciado(false);
     setFinalizado(false);
@@ -164,10 +201,28 @@ export default function Simulado() {
     setTimeElapsed(0);
     setQuestaoRespondida(false);
     window.scrollTo({top:0,behavior:"smooth"});
+    console.log('Estado resetado para configuração');
+    console.log('=== FIM VOLTAR ===');
   }
 
+  const answeredCount = Object.keys(simulado.respostas).length;
   const questoesInsuficientes = configuracao && simulado.total < configuracao.quantidade;
   const timerRunning = iniciado && !finalizado && !simulado.terminou;
+
+  console.log('=== DEBUG GERAL SIMULADO ===');
+  console.log('Estado atual:', {
+    configuracao: configuracao?.quantidade,
+    totalQuestoes: simulado.total,
+    questoesSelecionadas: simulado.questoesSelecionadas.length,
+    questoesInsuficientes,
+    iniciado,
+    finalizado,
+    questaoRespondida,
+    indexAtual: simulado.index,
+    questaoAtualId: simulado.atual?.id,
+    timerRunning
+  });
+  console.log('=== FIM DEBUG GERAL ===');
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-100 dark:from-gray-900 dark:to-gray-800">
@@ -180,7 +235,7 @@ export default function Simulado() {
             <div className="pt-8">
               <div className="text-center mb-8">
                 <h1 className="text-3xl font-bold mb-6 text-center leading-tight tracking-tight">
-                  🎯 <span className="text-blue-600 bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">Simulado Personalizado</span>
+                  <span className="text-blue-600 bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">Simulado Personalizado</span>
                 </h1>
                 <p className="text-xl text-muted-foreground">
                   Configure seu simulado do jeito que quiser, conquiste XP e acompanhe seu progresso!
@@ -214,13 +269,40 @@ export default function Simulado() {
                   </div>
                   
                   <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-yellow-600 via-orange-600 to-red-600 bg-clip-text text-transparent">
-                    Simulado Concluído! 🎊
+                    Quest Concluída! 🎊
                   </h2>
                   
                   <div className="text-3xl font-bold text-green-600 mb-6 p-6 bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-2xl border border-green-200 dark:border-green-700 shadow-sm">
-                    🎯 Você acertou {simulado.questoesSelecionadas.filter(
+                    🎯 Você conquistou {simulado.questoesSelecionadas.filter(
                       (q) => simulado.respostas[q.id] === q.correct
                     ).length} de {simulado.total} questões!
+                  </div>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+                    <div className="bg-gradient-to-r from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 p-4 rounded-xl border border-blue-200 dark:border-blue-700 shadow-sm">
+                      <div className="text-2xl font-bold text-blue-700 dark:text-blue-400">
+                        +{Math.floor((simulado.questoesSelecionadas.filter(q => simulado.respostas[q.id] === q.correct).length / simulado.total) * (simulado.config.quantidade * 2.5))} XP
+                      </div>
+                      <div className="text-blue-600 dark:text-blue-500">Experiência Ganha</div>
+                    </div>
+                    <div className="bg-gradient-to-r from-purple-50 to-purple-100 dark:from-purple-900/20 dark:to-purple-800/20 p-4 rounded-xl border border-purple-200 dark:border-purple-700 shadow-sm">
+                      <div className="text-2xl font-bold text-purple-700 dark:text-purple-400">
+                        {simulado.config.areas.length}
+                      </div>
+                      <div className="text-purple-600 dark:text-purple-500">Áreas Estudadas</div>
+                    </div>
+                    <div className="bg-gradient-to-r from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/20 p-4 rounded-xl border border-green-200 dark:border-green-700 shadow-sm">
+                      <div className="text-2xl font-bold text-green-700 dark:text-green-400">
+                        {Math.floor(timeElapsed / 60)}min
+                      </div>
+                      <div className="text-green-600 dark:text-green-500">Tempo Utilizado</div>
+                    </div>
+                    <div className="bg-gradient-to-r from-orange-50 to-orange-100 dark:from-orange-900/20 dark:to-orange-800/20 p-4 rounded-xl border border-orange-200 dark:border-orange-700 shadow-sm">
+                      <div className="text-2xl font-bold text-orange-700 dark:text-orange-400">
+                        {Math.round(timeElapsed / simulado.total)}s
+                      </div>
+                      <div className="text-orange-600 dark:text-orange-500">Média por Questão</div>
+                    </div>
                   </div>
                 </div>
                 
@@ -235,7 +317,7 @@ export default function Simulado() {
                     onClick={voltarConfiguracao}
                     className="px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl hover:from-blue-700 hover:to-purple-700 font-semibold transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl"
                   >
-                    🔄 Novo Simulado
+                    🔄 Nova Quest Personalizada
                   </Button>
                 </div>
               </div>
@@ -306,7 +388,7 @@ export default function Simulado() {
                 onClick={encerrar}
                 className="px-12 py-4 bg-gradient-to-r from-green-600 via-emerald-600 to-green-700 text-white rounded-2xl hover:from-green-700 hover:via-emerald-700 hover:to-green-800 font-bold text-xl transition-all duration-300 transform hover:scale-105 shadow-2xl"
               >
-                🏆 Ver Resultados
+                🏆 Ver Recompensas
               </button>
             </div>
           )}

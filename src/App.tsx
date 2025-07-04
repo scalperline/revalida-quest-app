@@ -13,7 +13,6 @@ import Questions from "./pages/Questions";
 import Stats from "./pages/Stats";
 import Profile from "./pages/Profile";
 import Missions from "./pages/Missions";
-import Simulado from "./pages/Simulado";
 import Ranking from "./pages/Ranking";
 import Auth from "./pages/Auth";
 import Pricing from "./pages/Pricing";
@@ -57,11 +56,6 @@ const App = () => (
             <Route path="/questoes" element={
               <ProtectedRoute>
                 <Questions />
-              </ProtectedRoute>
-            } />
-            <Route path="/simulado" element={
-              <ProtectedRoute>
-                <Simulado />
               </ProtectedRoute>
             } />
             <Route path="/missions" element={

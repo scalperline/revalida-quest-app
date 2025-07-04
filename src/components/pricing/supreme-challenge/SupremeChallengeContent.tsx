@@ -1,3 +1,4 @@
+
 import { CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -75,7 +76,7 @@ export function SupremeChallengeContent({
               <div className="absolute inset-0 rounded-full bg-gradient-to-r from-yellow-400/20 to-yellow-300/20 animate-pulse"></div>
               <div className="relative z-10 flex items-center gap-3 sm:gap-4">
                 <Trophy className="w-6 h-6 sm:w-8 sm:h-8" />
-                {challengeReady ? 'ACEITAR DESAFIO SUPREMO' : '⏳ Carregando questões...'}
+                {challengeReady ? 'ACEITAR DESAFIO' : '⏳ Carregando questões...'}
                 <Crown className="w-6 h-6 sm:w-8 sm:h-8" />
               </div>
             </Button>

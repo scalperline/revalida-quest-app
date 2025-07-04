@@ -7,7 +7,9 @@ import { Badge } from '@/components/ui/badge';
 import { Clock, Target, Zap, Trophy, X, Shield, CheckCircle, XCircle, Flame, Sparkles, Loader2 } from 'lucide-react';
 import { usePremiumChallenge } from '@/hooks/usePremiumChallenge';
 import { useTimer } from '@/hooks/useTimer';
-import { QuestionCard } from '@/components/QuestionCard';
+import { PremiumQuestionCard } from '@/components/premium/PremiumQuestionCard';
+import { PremiumTimer } from '@/components/premium/PremiumTimer';
+import { RewardPill } from '@/components/premium/RewardPill';
 import { SuccessRewardModal } from './SuccessRewardModal';
 import { toast } from 'sonner';
 
@@ -23,20 +25,12 @@ export function ChallengeModal({ isOpen, onClose }: ChallengeModalProps) {
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [showFeedback, setShowFeedback] = useState(false);
   const [lastAnswerCorrect, setLastAnswerCorrect] = useState<boolean | null>(null);
-  const [xpEarned, setXpEarned] = useState(0);
+  const [showRewardPill, setShowRewardPill] = useState(false);
+  const [lastCoinsEarned, setLastCoinsEarned] = useState(0);
 
   const currentQuestion = challengeState.questions[challengeState.currentQuestionIndex];
   const progress = challengeState.questions.length > 0 ? ((challengeState.currentQuestionIndex + 1) / challengeState.questions.length) * 100 : 0;
-  
-  // Simplificar a condição - mostrar loading quando ativo mas sem questões
   const isLoadingQuestions = challengeState.isActive && challengeState.questions.length === 0;
-
-  console.log('=== CHALLENGE MODAL RENDER ===');
-  console.log('isOpen:', isOpen);
-  console.log('challengeState.isActive:', challengeState.isActive);
-  console.log('challengeState.questions.length:', challengeState.questions.length);
-  console.log('isLoadingQuestions:', isLoadingQuestions);
-  console.log('currentQuestion:', currentQuestion?.id);
 
   // Iniciar timer quando modal abre e questões estão carregadas
   useEffect(() => {
@@ -64,7 +58,8 @@ export function ChallengeModal({ isOpen, onClose }: ChallengeModalProps) {
       setSelectedAnswer('');
       setShowFeedback(false);
       setLastAnswerCorrect(null);
-      setXpEarned(0);
+      setShowRewardPill(false);
+      setLastCoinsEarned(0);
     }
   }, [isOpen]);
 
@@ -78,11 +73,7 @@ export function ChallengeModal({ isOpen, onClose }: ChallengeModalProps) {
     if (!selectedAnswer || !currentQuestion || showFeedback) return;
 
     const isCorrect = currentQuestion.correct === selectedAnswer;
-    console.log('✅ Confirmando resposta:', { 
-      selectedAnswer, 
-      correctAnswer: currentQuestion.correct, 
-      isCorrect 
-    });
+    const prevCoins = challengeState.coinsEarned;
     
     // Show immediate feedback
     setLastAnswerCorrect(isCorrect);
@@ -92,21 +83,21 @@ export function ChallengeModal({ isOpen, onClose }: ChallengeModalProps) {
     answerCurrentQuestion(selectedAnswer);
     
     if (isCorrect) {
-      const baseXP = 50;
-      const comboBonus = challengeState.combo >= 3 ? 25 : 0;
-      const streakBonus = challengeState.streak >= 5 ? 30 : 0;
-      const totalXP = baseXP + comboBonus + streakBonus;
-      
-      setXpEarned(totalXP);
-      
+      // Mostrar pill de recompensa
+      setTimeout(() => {
+        const coinsEarned = challengeState.coinsEarned - prevCoins;
+        setLastCoinsEarned(coinsEarned);
+        setShowRewardPill(true);
+      }, 500);
+
       // Epic feedback for combos
       if (challengeState.combo >= 3) {
-        toast.success(`🔥 COMBO ${challengeState.combo + 1}x! +${totalXP} XP!`, {
+        toast.success(`🔥 COMBO ${challengeState.combo + 1}x! Moedas extras!`, {
           duration: 2000,
           className: "bg-gradient-to-r from-orange-500 to-red-500 text-white border-0"
         });
       } else {
-        toast.success(`✅ Correto! +${totalXP} XP`, {
+        toast.success(`✅ Correto! +${challengeState.coinsEarned - prevCoins} moedas`, {
           duration: 1500,
           className: "bg-gradient-to-r from-green-500 to-emerald-500 text-white border-0"
         });
@@ -125,7 +116,7 @@ export function ChallengeModal({ isOpen, onClose }: ChallengeModalProps) {
     setSelectedAnswer('');
     setShowFeedback(false);
     setLastAnswerCorrect(null);
-    setXpEarned(0);
+    setShowRewardPill(false);
   };
 
   const handleClose = () => {
@@ -137,20 +128,38 @@ export function ChallengeModal({ isOpen, onClose }: ChallengeModalProps) {
     onClose();
   };
 
-  // Renderizar o modal se estiver aberto, independentemente do estado do desafio
+  const handleTimeWarning = (timeLeft: number) => {
+    if (timeLeft === 120) {
+      toast.warning("⏰ Apenas 2 minutos restantes!", {
+        duration: 3000,
+        className: "bg-gradient-to-r from-yellow-500 to-orange-500 text-white border-0"
+      });
+    } else if (timeLeft === 60) {
+      toast.error("🚨 ÚLTIMO MINUTO! Finalize rapidamente!", {
+        duration: 4000,
+        className: "bg-gradient-to-r from-red-500 to-red-600 text-white border-0"
+      });
+    }
+  };
+
   if (!isOpen) {
-    console.log('🚫 Modal não deve ser exibido - isOpen:', isOpen);
     return null;
   }
 
-  const isTimeRunningOut = timeLeft < 120; // Last 2 minutes
+  const isTimeRunningOut = timeLeft < 120;
   const perfectProgress = challengeState.score === challengeState.currentQuestionIndex + (showFeedback && lastAnswerCorrect ? 1 : 0);
 
   return (
     <>
       <Dialog open={isOpen} onOpenChange={handleClose}>
-        <DialogContent className="max-w-5xl h-[95vh] overflow-hidden p-0 border-0">
+        <DialogContent className="max-w-7xl h-[95vh] overflow-hidden p-0 border-0">
           <div className="flex flex-col h-full bg-gradient-to-br from-slate-900 via-purple-900/90 to-indigo-900 relative overflow-hidden">
+            {/* Animated Background */}
+            <div className="absolute inset-0 overflow-hidden pointer-events-none">
+              <div className="absolute -top-40 -right-40 w-80 h-80 bg-purple-500 rounded-full opacity-10 animate-pulse"></div>
+              <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-blue-500 rounded-full opacity-10 animate-bounce"></div>
+            </div>
+
             {/* Epic Header */}
             <DialogHeader className="relative z-10 bg-gradient-to-r from-purple-600/90 via-pink-600/90 to-red-600/90 backdrop-blur-xl text-white p-6 border-b-4 border-yellow-400/50">
               <div className="flex items-center justify-between">
@@ -175,20 +184,22 @@ export function ChallengeModal({ isOpen, onClose }: ChallengeModalProps) {
                 </Button>
               </div>
               
-              {/* Só mostrar informações do header se não estiver carregando */}
               {!isLoadingQuestions && (
                 <>
-                  <div className="flex items-center justify-between mt-4 flex-wrap gap-4">
+                  <div className="flex items-center justify-between mt-6 flex-wrap gap-4">
                     <div className="flex items-center gap-6 flex-wrap">
-                      {/* Timer */}
-                      <div className="flex items-center gap-2">
-                        <Clock className={`w-5 h-5 ${isTimeRunningOut ? 'text-red-400 animate-pulse' : 'text-blue-400'}`} />
-                        <span className={`text-lg font-mono font-bold ${isTimeRunningOut ? 'text-red-300' : 'text-blue-300'}`}>
-                          {String(minutes).padStart(2, '0')}:{String(seconds).padStart(2, '0')}
-                        </span>
-                      </div>
+                      {/* Timer Premium */}
+                      <PremiumTimer 
+                        initialMinutes={10}
+                        isRunning={isRunning}
+                        onTimeUp={() => {
+                          toast.error("⏰ Tempo esgotado! Desafio finalizado.");
+                          nextQuestion();
+                        }}
+                        onTimeWarning={handleTimeWarning}
+                      />
                       
-                      {/* Question Counter */}
+                      {/* Stats */}
                       <div className="flex items-center gap-2">
                         <Target className="w-5 h-5 text-green-400" />
                         <span className="text-lg font-bold text-green-300">
@@ -196,7 +207,6 @@ export function ChallengeModal({ isOpen, onClose }: ChallengeModalProps) {
                         </span>
                       </div>
                       
-                      {/* Score */}
                       <div className="flex items-center gap-2">
                         <Zap className="w-5 h-5 text-yellow-400" />
                         <span className="text-lg font-bold text-yellow-300">
@@ -204,7 +214,13 @@ export function ChallengeModal({ isOpen, onClose }: ChallengeModalProps) {
                         </span>
                       </div>
 
-                      {/* Combo Counter */}
+                      <div className="flex items-center gap-2">
+                        <Sparkles className="w-5 h-5 text-purple-400" />
+                        <span className="text-lg font-bold text-purple-300">
+                          {challengeState.coinsEarned} moedas
+                        </span>
+                      </div>
+
                       {challengeState.combo >= 3 && (
                         <div className="flex items-center gap-2">
                           <Flame className="w-5 h-5 text-orange-400 animate-bounce" />
@@ -212,17 +228,6 @@ export function ChallengeModal({ isOpen, onClose }: ChallengeModalProps) {
                             COMBO {challengeState.combo}x!
                           </span>
                         </div>
-                      )}
-                    </div>
-                    
-                    <div className="flex items-center gap-2">
-                      <Badge className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-3 py-1 text-sm font-bold">
-                        Questão {challengeState.currentQuestionIndex + 1}
-                      </Badge>
-                      {perfectProgress && (
-                        <Badge className="bg-gradient-to-r from-green-500 to-emerald-500 text-white px-3 py-1 text-sm font-bold animate-pulse">
-                          🎯 PERFEITO!
-                        </Badge>
                       )}
                     </div>
                   </div>
@@ -241,17 +246,16 @@ export function ChallengeModal({ isOpen, onClose }: ChallengeModalProps) {
 
             {/* Question Content */}
             <div className="flex-1 p-6 overflow-y-auto relative z-10">
-              {/* Loading State */}
               {isLoadingQuestions && (
                 <div className="flex flex-col items-center justify-center h-full text-center">
                   <div className="mb-6">
                     <Loader2 className="w-16 h-16 text-purple-400 animate-spin mx-auto mb-4" />
-                    <h3 className="text-2xl font-bold text-white mb-2">Preparando Desafio...</h3>
-                    <p className="text-gray-300 text-lg">Selecionando as melhores questões para você</p>
+                    <h3 className="text-2xl font-bold text-white mb-2">Preparando Desafio Supremo...</h3>
+                    <p className="text-gray-300 text-lg">Selecionando questões oficiais do Revalida</p>
                   </div>
                   <div className="flex items-center gap-2 text-purple-300">
                     <Sparkles className="w-5 h-5 animate-pulse" />
-                    <span className="text-sm">Isso pode levar alguns segundos</span>
+                    <span className="text-sm">Questões dos anos 2022-2025</span>
                   </div>
                 </div>
               )}
@@ -275,17 +279,9 @@ export function ChallengeModal({ isOpen, onClose }: ChallengeModalProps) {
                       {lastAnswerCorrect ? 'CORRETO!' : 'INCORRETO!'}
                     </h3>
                     {lastAnswerCorrect && (
-                      <>
-                        <p className="text-lg text-white/90 mb-3">
-                          {challengeState.combo >= 3 ? `🔥 COMBO ${challengeState.combo}x!` : 'Excelente!'}
-                        </p>
-                        {xpEarned > 0 && (
-                          <div className="flex items-center justify-center gap-2">
-                            <Sparkles className="w-5 h-5 text-yellow-300" />
-                            <span className="text-yellow-300 font-bold">+{xpEarned} XP</span>
-                          </div>
-                        )}
-                      </>
+                      <p className="text-lg text-white/90 mb-3">
+                        {challengeState.combo >= 3 ? `🔥 COMBO ${challengeState.combo}x!` : 'Excelente!'}
+                      </p>
                     )}
                     {!lastAnswerCorrect && (
                       <p className="text-lg text-white/90">
@@ -298,27 +294,26 @@ export function ChallengeModal({ isOpen, onClose }: ChallengeModalProps) {
 
               {/* Question Card */}
               {!isLoadingQuestions && currentQuestion && (
-                <div className="max-w-4xl mx-auto">
-                  <QuestionCard
-                    question={currentQuestion}
-                    onAnswer={handleAnswer}
-                    userAnswer={selectedAnswer}
-                    hideHeader={true}
-                    showAnswer={showFeedback}
-                  />
-                </div>
+                <PremiumQuestionCard
+                  question={currentQuestion}
+                  questionNumber={challengeState.currentQuestionIndex + 1}
+                  totalQuestions={challengeState.questions.length}
+                  onAnswer={handleAnswer}
+                  userAnswer={selectedAnswer}
+                  showAnswer={showFeedback}
+                  streak={challengeState.streak}
+                  combo={challengeState.combo}
+                />
               )}
             </div>
 
             {/* Action Footer */}
             {!isLoadingQuestions && (
               <div className="relative z-10 bg-gradient-to-r from-slate-800/95 to-gray-800/95 backdrop-blur-xl border-t-4 border-purple-400/50 p-6">
-                <div className="flex flex-col md:flex-row justify-between items-center max-w-4xl mx-auto gap-4">
+                <div className="flex flex-col md:flex-row justify-between items-center max-w-6xl mx-auto gap-4">
                   <div className="flex items-center gap-4 text-center md:text-left">
                     <div className="text-sm text-gray-300">
-                      ⏰ <span className={`font-mono font-bold ${isTimeRunningOut ? 'text-red-400' : 'text-blue-400'}`}>
-                        {minutes}m {seconds}s
-                      </span>
+                      💰 <span className="font-bold text-yellow-400">{challengeState.coinsEarned} moedas</span>
                     </div>
                     {perfectProgress && (
                       <div className="text-sm text-purple-300 animate-pulse">
@@ -365,6 +360,15 @@ export function ChallengeModal({ isOpen, onClose }: ChallengeModalProps) {
           </div>
         </DialogContent>
       </Dialog>
+
+      {/* Reward Pill */}
+      <RewardPill
+        coins={lastCoinsEarned}
+        combo={challengeState.combo}
+        streak={challengeState.streak}
+        isVisible={showRewardPill}
+        onAnimationComplete={() => setShowRewardPill(false)}
+      />
 
       <SuccessRewardModal
         isOpen={showSuccessModal}

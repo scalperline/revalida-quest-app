@@ -18,65 +18,107 @@ export function useRanking() {
   const [currentUserPosition, setCurrentUserPosition] = useState<{ allTime: number; weekly: number }>({ allTime: 0, weekly: 0 });
   const [loading, setLoading] = useState(true);
 
-  const fetchRankings = async () => {
+  // Pagination states
+  const [allTimeCurrentPage, setAllTimeCurrentPage] = useState(1);
+  const [weeklyCurrentPage, setWeeklyCurrentPage] = useState(1);
+  const [allTimeTotalCount, setAllTimeTotalCount] = useState(0);
+  const [weeklyTotalCount, setWeeklyTotalCount] = useState(0);
+  
+  const ITEMS_PER_PAGE = 10;
+
+  const fetchPaginatedRanking = async (type: 'allTime' | 'weekly', page: number) => {
     try {
-      setLoading(true);
+      const orderBy = type === 'allTime' ? 'total_xp' : 'weekly_xp';
+      const offset = (page - 1) * ITEMS_PER_PAGE;
 
-      // Fetch all-time ranking
-      const { data: allTimeData, error: allTimeError } = await supabase
+      // Get total count
+      const { count } = await supabase
+        .from('user_profiles')
+        .select('*', { count: 'exact', head: true });
+
+      // Get paginated data
+      const { data, error } = await supabase
         .from('user_profiles')
         .select('*')
-        .order('total_xp', { ascending: false })
-        .limit(100);
+        .order(orderBy, { ascending: false })
+        .range(offset, offset + ITEMS_PER_PAGE - 1);
 
-      if (allTimeError) {
-        console.error('Error fetching all-time ranking:', allTimeError);
+      if (error) {
+        console.error(`Error fetching ${type} ranking:`, error);
         return;
       }
 
-      // Fetch weekly ranking
-      const { data: weeklyData, error: weeklyError } = await supabase
-        .from('user_profiles')
-        .select('*')
-        .order('weekly_xp', { ascending: false })
-        .limit(100);
-
-      if (weeklyError) {
-        console.error('Error fetching weekly ranking:', weeklyError);
-        return;
-      }
-
-      // Add position to data
-      const allTimeWithPosition = allTimeData?.map((user, index) => ({
+      // Add position to data (based on global ranking position)
+      const rankingWithPosition = data?.map((user, index) => ({
         ...user,
-        position: index + 1
+        position: offset + index + 1
       })) || [];
 
-      const weeklyWithPosition = weeklyData?.map((user, index) => ({
-        ...user,
-        position: index + 1
-      })) || [];
-
-      setAllTimeRanking(allTimeWithPosition);
-      setWeeklyRanking(weeklyWithPosition);
-
-      // Get current user data to find their position
-      const { data: { user } } = await supabase.auth.getUser();
-      if (user) {
-        const allTimePos = allTimeWithPosition.findIndex(u => u.user_id === user.id);
-        const weeklyPos = weeklyWithPosition.findIndex(u => u.user_id === user.id);
-        
-        setCurrentUserPosition({
-          allTime: allTimePos >= 0 ? allTimePos + 1 : 0,
-          weekly: weeklyPos >= 0 ? weeklyPos + 1 : 0
-        });
+      if (type === 'allTime') {
+        setAllTimeRanking(rankingWithPosition);
+        setAllTimeTotalCount(count || 0);
+      } else {
+        setWeeklyRanking(rankingWithPosition);
+        setWeeklyTotalCount(count || 0);
       }
+
     } catch (error) {
-      console.error('Error in fetchRankings:', error);
-    } finally {
-      setLoading(false);
+      console.error(`Error in fetch${type}Ranking:`, error);
     }
   };
+
+  const fetchUserPosition = async () => {
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) return;
+
+      // Get user's position in all-time ranking
+      const { data: allTimeData } = await supabase
+        .from('user_profiles')
+        .select('user_id, total_xp')
+        .order('total_xp', { ascending: false });
+
+      // Get user's position in weekly ranking
+      const { data: weeklyData } = await supabase
+        .from('user_profiles')
+        .select('user_id, weekly_xp')
+        .order('weekly_xp', { ascending: false });
+
+      const allTimePos = allTimeData?.findIndex(u => u.user_id === user.id) ?? -1;
+      const weeklyPos = weeklyData?.findIndex(u => u.user_id === user.id) ?? -1;
+
+      setCurrentUserPosition({
+        allTime: allTimePos >= 0 ? allTimePos + 1 : 0,
+        weekly: weeklyPos >= 0 ? weeklyPos + 1 : 0
+      });
+    } catch (error) {
+      console.error('Error fetching user position:', error);
+    }
+  };
+
+  const fetchRankings = async () => {
+    setLoading(true);
+    await Promise.all([
+      fetchPaginatedRanking('allTime', allTimeCurrentPage),
+      fetchPaginatedRanking('weekly', weeklyCurrentPage),
+      fetchUserPosition()
+    ]);
+    setLoading(false);
+  };
+
+  // Update rankings when page changes
+  useEffect(() => {
+    fetchPaginatedRanking('allTime', allTimeCurrentPage);
+  }, [allTimeCurrentPage]);
+
+  useEffect(() => {
+    fetchPaginatedRanking('weekly', weeklyCurrentPage);
+  }, [weeklyCurrentPage]);
+
+  // Initial load
+  useEffect(() => {
+    fetchRankings();
+  }, []);
 
   const updateUserProfile = async (userData: { display_name: string; level: number; total_xp: number; weekly_xp: number }) => {
     try {
@@ -105,9 +147,10 @@ export function useRanking() {
     }
   };
 
-  useEffect(() => {
-    fetchRankings();
-  }, []);
+  const getTotalPages = (type: 'allTime' | 'weekly') => {
+    const totalCount = type === 'allTime' ? allTimeTotalCount : weeklyTotalCount;
+    return Math.ceil(totalCount / ITEMS_PER_PAGE);
+  };
 
   return {
     allTimeRanking,
@@ -115,6 +158,15 @@ export function useRanking() {
     currentUserPosition,
     loading,
     refreshRankings: fetchRankings,
-    updateUserProfile
+    updateUserProfile,
+    // Pagination
+    allTimeCurrentPage,
+    weeklyCurrentPage,
+    setAllTimeCurrentPage,
+    setWeeklyCurrentPage,
+    allTimeTotalPages: getTotalPages('allTime'),
+    weeklyTotalPages: getTotalPages('weekly'),
+    allTimeTotalCount,
+    weeklyTotalCount
   };
 }

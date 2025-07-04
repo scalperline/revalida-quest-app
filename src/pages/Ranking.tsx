@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { useRanking } from '@/hooks/useRanking';
 import { Navbar } from '@/components/Navbar';
@@ -7,13 +8,29 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Trophy, Crown, Star, Medal, Target, Calendar } from 'lucide-react';
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from '@/components/ui/pagination';
 
 export default function Ranking() {
   const {
     allTimeRanking,
     weeklyRanking,
     currentUserPosition,
-    loading
+    loading,
+    allTimeCurrentPage,
+    weeklyCurrentPage,
+    setAllTimeCurrentPage,
+    setWeeklyCurrentPage,
+    allTimeTotalPages,
+    weeklyTotalPages,
+    allTimeTotalCount,
+    weeklyTotalCount
   } = useRanking();
 
   const getRankIcon = (position: number) => {
@@ -59,7 +76,7 @@ export default function Ranking() {
               <CardContent className="p-4">
                 <div className="flex items-center gap-4">
                   <div className={`w-12 h-12 rounded-full bg-gradient-to-r ${getRankColor(user.position)} flex items-center justify-center text-white font-bold text-lg shadow-lg`}>
-                    {user.position <= 3 ? getRankIcon(user.position) : user.position}
+                    {user.position <= 3 ? getRankIcon(user.position) : `#${user.position}`}
                   </div>
 
                   <Avatar className="w-12 h-12 border-2 border-blue-200 dark:border-blue-700">
@@ -97,6 +114,83 @@ export default function Ranking() {
             </Card>
           );
         })}
+      </div>
+    );
+  };
+
+  const RankingPagination = ({ 
+    currentPage, 
+    totalPages, 
+    onPageChange,
+    totalCount
+  }: { 
+    currentPage: number; 
+    totalPages: number; 
+    onPageChange: (page: number) => void;
+    totalCount: number;
+  }) => {
+    if (totalPages <= 1) return null;
+
+    return (
+      <div className="mt-6 flex flex-col items-center gap-4">
+        <p className="text-sm text-gray-600 dark:text-gray-400">
+          Mostrando {Math.min((currentPage - 1) * 10 + 1, totalCount)} - {Math.min(currentPage * 10, totalCount)} de {totalCount} usuários
+        </p>
+        
+        <Pagination>
+          <PaginationContent>
+            <PaginationItem>
+              <PaginationPrevious 
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  if (currentPage > 1) onPageChange(currentPage - 1);
+                }}
+                className={currentPage <= 1 ? 'pointer-events-none opacity-50' : 'cursor-pointer'}
+              />
+            </PaginationItem>
+            
+            {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
+              let pageNum;
+              if (totalPages <= 5) {
+                pageNum = i + 1;
+              } else if (currentPage <= 3) {
+                pageNum = i + 1;
+              } else if (currentPage >= totalPages - 2) {
+                pageNum = totalPages - 4 + i;
+              } else {
+                pageNum = currentPage - 2 + i;
+              }
+              
+              return (
+                <PaginationItem key={pageNum}>
+                  <PaginationLink
+                    href="#"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      onPageChange(pageNum);
+                    }}
+                    isActive={currentPage === pageNum}
+                    className="cursor-pointer"
+                  >
+                    {pageNum}
+                  </PaginationLink>
+                </PaginationItem>
+              );
+            })}
+            
+            <PaginationItem>
+              <PaginationNext
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  if (currentPage < totalPages) onPageChange(currentPage + 1);
+                }}
+                className={currentPage >= totalPages ? 'pointer-events-none opacity-50' : 'cursor-pointer'}
+              />
+            </PaginationItem>
+          </PaginationContent>
+        </Pagination>
       </div>
     );
   };
@@ -155,7 +249,15 @@ export default function Ranking() {
                 </CardHeader>
                 <CardContent>
                   {allTimeRanking.length > 0 ? (
-                    <RankingList data={allTimeRanking} type="allTime" />
+                    <>
+                      <RankingList data={allTimeRanking} type="allTime" />
+                      <RankingPagination
+                        currentPage={allTimeCurrentPage}
+                        totalPages={allTimeTotalPages}
+                        onPageChange={setAllTimeCurrentPage}
+                        totalCount={allTimeTotalCount}
+                      />
+                    </>
                   ) : (
                     <div className="text-center py-12">
                       <Trophy className="w-16 h-16 text-gray-400 mx-auto mb-4" />
@@ -181,7 +283,15 @@ export default function Ranking() {
                 </CardHeader>
                 <CardContent>
                   {weeklyRanking.length > 0 ? (
-                    <RankingList data={weeklyRanking} type="weekly" />
+                    <>
+                      <RankingList data={weeklyRanking} type="weekly" />
+                      <RankingPagination
+                        currentPage={weeklyCurrentPage}
+                        totalPages={weeklyTotalPages}
+                        onPageChange={setWeeklyCurrentPage}
+                        totalCount={weeklyTotalCount}
+                      />
+                    </>
                   ) : (
                     <div className="text-center py-12">
                       <Calendar className="w-16 h-16 text-gray-400 mx-auto mb-4" />

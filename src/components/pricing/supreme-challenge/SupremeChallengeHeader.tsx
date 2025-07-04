@@ -41,7 +41,8 @@ export function SupremeChallengeHeader({
           <div className="bg-red-900/50 backdrop-blur-sm rounded-2xl p-3 sm:p-4 border border-red-600/50">
             <Star className="w-6 h-6 sm:w-8 sm:h-8 text-yellow-400 mx-auto mb-2" />
             <div className="text-lg sm:text-2xl font-bold text-yellow-400">{attemptsLeft}</div>
-            <div className="text-xs sm:text-sm text-yellow-300">Tentativasestantes</div>
+            <div className="text-xs sm:text-sm text-yellow-300">Tentativas
+restantes</div>
           </div>
         </div>
       </div>

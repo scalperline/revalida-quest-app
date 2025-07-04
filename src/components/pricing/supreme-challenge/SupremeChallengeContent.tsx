@@ -30,12 +30,12 @@ export function SupremeChallengeContent({
           </h3>
           <div className="text-center mb-6">
             <div className="text-3xl sm:text-5xl font-bold mb-2">
-              <span className="text-yellow-500 line-through text-xl sm:text-2xl">R$ 49,90</span>
+              <span className="line-through text-xl sm:text-2xl text-zinc-400">R$ 49,90</span>
               <span className="ml-4 text-lime-400 text-2xl">
                 R$ 29,90
               </span>
             </div>
-            <p className="text-yellow-300 text-lg sm:text-xl font-semibold">
+            <p className="text-lg sm:text-xl font-semibold text-zinc-50">
               💰 Desconto de R$ 20,00/mês no Plano Premium!
             </p>
           </div>
@@ -43,15 +43,15 @@ export function SupremeChallengeContent({
           <div className="grid grid-cols-2 gap-4 text-yellow-300 text-sm sm:text-base">
             <div className="flex items-center gap-2">
               <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-400 flex-shrink-0" />
-              <span>Acesso Premium completo</span>
+              <span className="text-white">Acesso Premium completo</span>
             </div>
             <div className="flex items-center gap-2">
               <Zap className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-500 flex-shrink-0" />
-              <span>IA personalizada avançada</span>
+              <span className="text-white">IA personalizada avançada</span>
             </div>
             <div className="flex items-center gap-2">
               <Target className="w-4 h-4 sm:w-5 sm:h-5 text-green-400 flex-shrink-0" />
-              <span>Simulados ilimitados</span>
+              <span className="text-white">Simulados ilimitados</span>
             </div>
             <div className="flex items-center gap-2">
               <Crown className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-400 flex-shrink-0" />

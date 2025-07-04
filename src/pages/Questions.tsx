@@ -1,20 +1,13 @@
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { ResponsiveLayout } from "@/components/ResponsiveLayout";
 import { QuestionCard } from "@/components/QuestionCard";
 import { GamifiedQuestionsHeader } from "@/components/GamifiedQuestionsHeader";
 import { QuestionsPagination } from "@/components/QuestionsPagination";
 import { ConfettiAnimation } from "@/components/ConfettiAnimation";
-import { CircularXPProgress } from "@/components/CircularXPProgress";
-import { FloatingXPNotification } from "@/components/FloatingXPNotification";
-import { LevelUpAlert } from "@/components/LevelUpAlert";
 import { useQuestionsFilters } from "@/hooks/useQuestionsFilters";
 import { useAudio } from "@/hooks/useAudio";
-import { useXPAnimation } from "@/hooks/useXPAnimation";
-import { useKeyboardDemo } from "@/hooks/useKeyboardDemo";
-import { useGamification } from "@/hooks/useGamification";
 import { getDefaultTipoProva } from "@/utils/questionSelector";
-import { initializeDemoProgress } from "@/utils/gamificationHelpers";
 
 export default function Questions() {
   const [anoSelecionado, setAnoSelecionado] = useState(2025);
@@ -24,36 +17,8 @@ export default function Questions() {
   const [selectedArea, setSelectedArea] = useState("Todos");
   const [selectedDifficulty, setSelectedDifficulty] = useState("Todas");
   const [showConfetti, setShowConfetti] = useState(false);
-  
-  // Initialize demo XP state
-  const [demoXP, setDemoXP] = useState(250);
 
   const { playSound } = useAudio();
-  const { userProgress, addXP } = useGamification();
-  const { 
-    xpNotification, 
-    levelUpNotification, 
-    showXPGain, 
-    hideLevelUpNotification 
-  } = useXPAnimation();
-
-  // Initialize demo progress on mount
-  useEffect(() => {
-    const demoProgress = initializeDemoProgress();
-    setDemoXP(demoProgress.xp);
-  }, []);
-
-  // Test XP gain with keyboard
-  const handleTestXP = () => {
-    const gainAmount = 10;
-    const oldXP = demoXP;
-    const newXP = demoXP + gainAmount;
-    setDemoXP(newXP);
-    showXPGain(gainAmount, oldXP, newXP);
-    console.log(`Test XP: +${gainAmount} (${oldXP} → ${newXP})`);
-  };
-
-  useKeyboardDemo({ onTestXP: handleTestXP });
 
   const {
     filteredQuestions,
@@ -100,11 +65,6 @@ export default function Questions() {
           <div className="absolute top-1/3 right-1/3 w-6 h-6 sm:w-8 sm:h-8 bg-blue-600 rounded-full opacity-20 animate-bounce delay-1000"></div>
         </div>
 
-        {/* Circular XP Progress (Mobile Top Right) */}
-        <div className="fixed top-4 right-4 z-40 md:hidden">
-          <CircularXPProgress xp={demoXP} size={70} strokeWidth={5} />
-        </div>
-
         <div className="relative z-10 responsive-container responsive-padding pb-8">
           <div className="pt-6 sm:pt-8 space-y-6 sm:space-y-8">
             <GamifiedQuestionsHeader
@@ -146,19 +106,6 @@ export default function Questions() {
         <ConfettiAnimation 
           trigger={showConfetti} 
           onComplete={() => setShowConfetti(false)} 
-        />
-
-        {/* Floating XP Notification */}
-        <FloatingXPNotification 
-          show={xpNotification.show}
-          amount={xpNotification.amount}
-        />
-
-        {/* Level Up Alert */}
-        <LevelUpAlert
-          show={levelUpNotification.show}
-          newLevel={levelUpNotification.newLevel}
-          onClose={hideLevelUpNotification}
         />
       </div>
     </ResponsiveLayout>

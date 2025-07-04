@@ -22,10 +22,7 @@ export function ProfilePageHeader() {
             
           </div>
           
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Gerencie sua conta, configurações e acompanhe seu progresso acadêmico 
-            personalizado na preparação para o Revalida 👤
-          </p>
+          <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">Gerencie sua conta, configurações e acompanhe seu progresso acadêmico personalizado na preparação para o Revalida.</p>
         </div>
 
         {/* Player Status Badge */}

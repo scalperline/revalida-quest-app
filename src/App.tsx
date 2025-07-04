@@ -24,7 +24,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
         <Router>
-          <div className="App">
+          <div className="w-full h-full">
             <Routes>
               <Route path="/auth" element={<Auth />} />
               <Route

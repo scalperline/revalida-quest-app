@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -11,6 +10,19 @@ import { useChallengeQuestions } from '@/hooks/useChallengeQuestions';
 import { useChallengeAudio } from '@/hooks/useChallengeAudio';
 import { Trophy, ArrowRight, Home, RefreshCw } from 'lucide-react';
 import { toast } from 'sonner';
+import { type Question } from '@/types/question';
+import { type ChallengeQuestion } from '@/types/premiumChallenge';
+
+// Convert Question to ChallengeQuestion
+const convertToChallengeQuestion = (question: Question): ChallengeQuestion => ({
+  id: question.id,
+  enunciado: question.enunciado,
+  options: question.options,
+  correct: question.correct,
+  area: question.area,
+  year: question.year,
+  image: question.image
+});
 
 export default function SupremeChallenge() {
   const navigate = useNavigate();
@@ -43,7 +55,8 @@ export default function SupremeChallenge() {
     if (questionsReady && !challengeState.isActive && !challengeState.hasCompleted) {
       try {
         const questions = selectTenQuestions();
-        startChallenge(questions);
+        const challengeQuestions = questions.map(convertToChallengeQuestion);
+        startChallenge(challengeQuestions);
       } catch (error) {
         console.error('Erro ao carregar questões:', error);
         toast.error('Erro ao carregar questões. Voltando...');
@@ -119,7 +132,8 @@ export default function SupremeChallenge() {
   const handleRetry = () => {
     resetChallenge();
     const questions = selectTenQuestions();
-    startChallenge(questions);
+    const challengeQuestions = questions.map(convertToChallengeQuestion);
+    startChallenge(challengeQuestions);
   };
 
   // Tela de carregamento

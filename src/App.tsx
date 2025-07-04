@@ -1,41 +1,36 @@
+
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { ThemeProvider } from "@/components/theme-provider"
+import { ThemeProvider } from "next-themes"
 import { Toaster } from "@/components/ui/toaster"
-import Home from './pages/Home';
-import Questions from './pages/Questions';
-import Missions from './pages/Missions';
-import Stats from './pages/Stats';
-import Ranking from './pages/Ranking';
-import Profile from './pages/Profile';
-import Pricing from './pages/Pricing';
-import Simulado from './pages/Simulado';
-import Auth from './pages/Auth';
-import { QueryClient } from '@tanstack/react-query';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import SupremeChallenge from '@/pages/SupremeChallenge';
+
+// Create a QueryClient instance
+const queryClient = new QueryClient();
 
 function App() {
   return (
-    <QueryClient>
+    <QueryClientProvider client={queryClient}>
       <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
         <BrowserRouter>
           <div className="App">
             <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/questions" element={<Questions />} />
-              <Route path="/missions" element={<Missions />} />
-              <Route path="/stats" element={<Stats />} />
-              <Route path="/ranking" element={<Ranking />} />
-              <Route path="/profile" element={<Profile />} />
-              <Route path="/pricing" element={<Pricing />} />
-              <Route path="/simulado" element={<Simulado />} />
-              <Route path="/auth" element={<Auth />} />
+              <Route path="/" element={<div>Home placeholder</div>} />
+              <Route path="/questions" element={<div>Questions placeholder</div>} />
+              <Route path="/missions" element={<div>Missions placeholder</div>} />
+              <Route path="/stats" element={<div>Stats placeholder</div>} />
+              <Route path="/ranking" element={<div>Ranking placeholder</div>} />
+              <Route path="/profile" element={<div>Profile placeholder</div>} />
+              <Route path="/pricing" element={<div>Pricing placeholder</div>} />
+              <Route path="/simulado" element={<div>Simulado placeholder</div>} />
+              <Route path="/auth" element={<div>Auth placeholder</div>} />
               <Route path="/supreme-challenge" element={<SupremeChallenge />} />
             </Routes>
             <Toaster />
           </div>
         </BrowserRouter>
       </ThemeProvider>
-    </QueryClient>
+    </QueryClientProvider>
   );
 }
 

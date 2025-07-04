@@ -1,6 +1,6 @@
 
 export interface ChallengeQuestion {
-  id: string;
+  id: number; // Changed from string to number to match Question type
   enunciado: string;
   options: { text: string }[];
   correct: string;

@@ -12,6 +12,18 @@ import { ChallengeFeedbackOverlay } from './challenge/ChallengeFeedbackOverlay';
 import { ChallengeModalHeader } from './challenge/ChallengeModalHeader';
 import { ChallengeModalFooter } from './challenge/ChallengeModalFooter';
 import { toast } from 'sonner';
+import { type Question } from '@/types/question';
+
+// Convert ChallengeQuestion to Question for PremiumQuestionCard
+const convertToQuestion = (challengeQuestion: any): Question => ({
+  id: challengeQuestion.id,
+  enunciado: challengeQuestion.enunciado,
+  options: challengeQuestion.options,
+  correct: challengeQuestion.correct,
+  area: challengeQuestion.area,
+  year: challengeQuestion.year,
+  image: challengeQuestion.image
+});
 
 interface ChallengeModalProps {
   isOpen: boolean;
@@ -202,7 +214,7 @@ export function ChallengeModal({ isOpen, onClose }: ChallengeModalProps) {
               {/* Card da questão */}
               {isQuestionsReady && currentQuestion && !hasError && (
                 <PremiumQuestionCard
-                  question={currentQuestion}
+                  question={convertToQuestion(currentQuestion)}
                   questionNumber={challengeState.currentQuestionIndex + 1}
                   totalQuestions={challengeState.questions.length}
                   onAnswer={handleAnswer}

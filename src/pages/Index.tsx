@@ -1,3 +1,4 @@
+
 import { useAuth } from "@/hooks/useAuth";
 import { Navbar } from "@/components/Navbar";
 import { QuickChallenge } from "@/components/QuickChallenge";
@@ -6,19 +7,20 @@ import { AdaptiveSuggestions } from "@/components/AdaptiveSuggestions";
 import { StreakDisplay } from "@/components/StreakDisplay";
 import { BadgesGrid } from "@/components/BadgesGrid";
 import { UsageLimitsCard } from "@/components/UsageLimitsCard";
+import { MobileProgressDrawer } from "@/components/MobileProgressDrawer";
 import { useGamification } from "@/hooks/useGamification";
 import { BookOpen, Target, TrendingUp, Stethoscope, Sparkles, Zap } from "lucide-react";
+
 const Index = () => {
-  const {
-    user
-  } = useAuth();
-  const {
-    userProgress
-  } = useGamification();
+  const { user } = useAuth();
+  const { userProgress } = useGamification();
+
   const handleQuickChallengeStart = () => {
     console.log("Quick challenge started");
   };
-  return <div className="min-h-screen bg-gradient-to-br from-blue-50 via-blue-100 to-blue-200 dark:from-gray-900 dark:to-gray-800 relative overflow-hidden">
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-blue-100 to-blue-200 dark:from-gray-900 dark:to-gray-800 relative overflow-hidden">
       {/* Enhanced Animated Background Elements - Responsive */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-2 -right-2 sm:-top-4 sm:-right-4 w-8 h-8 sm:w-16 sm:h-16 lg:w-24 lg:h-24 bg-blue-400 rounded-full opacity-20 animate-bounce"></div>
@@ -30,6 +32,9 @@ const Index = () => {
       </div>
 
       <Navbar />
+      
+      {/* Mobile Progress Drawer */}
+      <MobileProgressDrawer />
       
       <main className="relative z-10 pt-16 sm:pt-20 lg:pt-24 pb-6 sm:pb-8">
         <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 xl:px-8">
@@ -154,6 +159,8 @@ const Index = () => {
           </div>
         </div>
       </main>
-    </div>;
+    </div>
+  );
 };
+
 export default Index;

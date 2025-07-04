@@ -1,12 +1,20 @@
 
-import { type Question } from '@/types/question';
+export interface ChallengeQuestion {
+  id: string;
+  enunciado: string;
+  options: { text: string }[];
+  correct: string;
+  area: string;
+  year: number;
+  image?: string;
+}
 
 export interface ChallengeState {
   isActive: boolean;
   currentQuestionIndex: number;
   score: number;
-  answers: Record<number, string>;
-  questions: Question[];
+  answers: Record<string, string>;
+  questions: ChallengeQuestion[];
   hasCompleted: boolean;
   hasWon: boolean;
   streak: number;
@@ -14,10 +22,13 @@ export interface ChallengeState {
   timeBonus: number;
   coinsEarned: number;
   perfectAnswers: number;
+  timeLeft: number;
 }
 
-export interface ChallengeConfig {
-  maxAttempts: number;
-  questionsCount: number;
-  winThreshold: number;
+export interface ChallengeStats {
+  totalQuestions: number;
+  correctAnswers: number;
+  timeSpent: number;
+  coinsEarned: number;
+  perfectStreak: boolean;
 }

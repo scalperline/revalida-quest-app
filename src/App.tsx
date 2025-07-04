@@ -1,109 +1,42 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { ThemeProvider } from "@/components/theme-provider"
+import { Toaster } from "@/components/ui/toaster"
+import Home from './pages/Home';
+import Questions from './pages/Questions';
+import Missions from './pages/Missions';
+import Stats from './pages/Stats';
+import Ranking from './pages/Ranking';
+import Profile from './pages/Profile';
+import Pricing from './pages/Pricing';
+import Simulado from './pages/Simulado';
+import Auth from './pages/Auth';
+import { QueryClient } from '@tanstack/react-query';
+import SupremeChallenge from '@/pages/SupremeChallenge';
 
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { AuthProvider } from "@/hooks/useAuth";
-import { ProtectedRoute } from "@/components/ProtectedRoute";
-import { CookieBanner } from "@/components/CookieBanner";
-import Index from "./pages/Index";
-import NotFound from "./pages/NotFound";
-import Questions from "./pages/Questions";
-import Stats from "./pages/Stats";
-import Profile from "./pages/Profile";
-import Missions from "./pages/Missions";
-import Ranking from "./pages/Ranking";
-import Auth from "./pages/Auth";
-import Pricing from "./pages/Pricing";
-import Success from "./pages/Success";
-import Terms from "./pages/Terms";
-import Privacy from "./pages/Privacy";
-import Help from "./pages/Help";
-
-const queryClient = new QueryClient();
-
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <AuthProvider>
-        <Toaster />
-        <Sonner />
-        <CookieBanner />
+function App() {
+  return (
+    <QueryClient>
+      <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
         <BrowserRouter>
-          <Routes>
-            <Route path="/auth" element={<Auth />} />
-            <Route path="/pricing" element={<Pricing />} />
-            <Route path="/success" element={<Success />} />
-            <Route path="/termos" element={<Terms />} />
-            <Route path="/privacidade" element={<Privacy />} />
-            <Route path="/ajuda" element={<Help />} />
-            <Route path="/" element={
-              <ProtectedRoute>
-                <Index />
-              </ProtectedRoute>
-            } />
-            <Route path="/questions" element={
-              <ProtectedRoute>
-                <Questions />
-              </ProtectedRoute>
-            } />
-            <Route path="/provas" element={
-              <ProtectedRoute>
-                <Questions />
-              </ProtectedRoute>
-            } />
-            <Route path="/questoes" element={
-              <ProtectedRoute>
-                <Questions />
-              </ProtectedRoute>
-            } />
-            <Route path="/missions" element={
-              <ProtectedRoute>
-                <Missions />
-              </ProtectedRoute>
-            } />
-            <Route path="/quests" element={
-              <ProtectedRoute>
-                <Missions />
-              </ProtectedRoute>
-            } />
-            <Route path="/missoes" element={
-              <ProtectedRoute>
-                <Missions />
-              </ProtectedRoute>
-            } />
-            <Route path="/stats" element={
-              <ProtectedRoute>
-                <Stats />
-              </ProtectedRoute>
-            } />
-            <Route path="/estatisticas" element={
-              <ProtectedRoute>
-                <Stats />
-              </ProtectedRoute>
-            } />
-            <Route path="/profile" element={
-              <ProtectedRoute>
-                <Profile />
-              </ProtectedRoute>
-            } />
-            <Route path="/perfil" element={
-              <ProtectedRoute>
-                <Profile />
-              </ProtectedRoute>
-            } />
-            <Route path="/ranking" element={
-              <ProtectedRoute>
-                <Ranking />
-              </ProtectedRoute>
-            } />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+          <div className="App">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/questions" element={<Questions />} />
+              <Route path="/missions" element={<Missions />} />
+              <Route path="/stats" element={<Stats />} />
+              <Route path="/ranking" element={<Ranking />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/pricing" element={<Pricing />} />
+              <Route path="/simulado" element={<Simulado />} />
+              <Route path="/auth" element={<Auth />} />
+              <Route path="/supreme-challenge" element={<SupremeChallenge />} />
+            </Routes>
+            <Toaster />
+          </div>
         </BrowserRouter>
-      </AuthProvider>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+      </ThemeProvider>
+    </QueryClient>
+  );
+}
 
 export default App;

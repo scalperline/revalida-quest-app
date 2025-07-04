@@ -10,15 +10,15 @@ import { MobileUserProgress } from "@/components/MobileUserProgress";
 import { UserProgressBar } from "@/components/UserProgressBar";
 import { SubscriptionBadge } from "@/components/SubscriptionBadge";
 import { useSubscription } from "@/hooks/useSubscription";
-import { useIsMobile } from "@/hooks/use-mobile";
+import { useMobile } from "@/hooks/use-mobile";
 import { useState } from "react";
 import { BookOpen, Target, BarChart3, User, Trophy, Flag, Play } from "lucide-react";
 
 export function Navbar() {
   const { user } = useAuth();
   const { userProgress } = useGamification();
-  const subscriptionData = useSubscription();
-  const isMobile = useIsMobile();
+  const { subscription } = useSubscription();
+  const isMobile = useMobile();
   const navigate = useNavigate();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -75,12 +75,17 @@ export function Navbar() {
             <div className="flex items-center gap-2 sm:gap-3">
               {/* Subscription Badge - Desktop */}
               <div className="hidden sm:block">
-                <SubscriptionBadge />
+                <SubscriptionBadge subscription={subscription} />
               </div>
 
               {/* Progress Bar - Desktop/Tablet */}
               <div className="hidden sm:block">
-                <UserProgressBar />
+                <UserProgressBar 
+                  level={userProgress.level}
+                  xp={userProgress.xp}
+                  xpToNextLevel={userProgress.xpToNextLevel}
+                  showCompact={true}
+                />
               </div>
 
               {/* Profile Button - Desktop */}
@@ -104,7 +109,7 @@ export function Navbar() {
               <div className="lg:hidden">
                 <MobileHamburgerButton 
                   isOpen={mobileMenuOpen}
-                  onToggle={() => setMobileMenuOpen(!mobileMenuOpen)}
+                  onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 />
               </div>
             </div>
@@ -112,13 +117,17 @@ export function Navbar() {
 
           {/* Mobile Progress Bar */}
           <div className="sm:hidden pb-2">
-            <MobileUserProgress />
+            <MobileUserProgress userProgress={userProgress} />
           </div>
         </div>
       </nav>
 
       {/* Mobile Menu */}
-      <MobileHamburgerMenu />
+      <MobileHamburgerMenu 
+        isOpen={mobileMenuOpen}
+        onClose={() => setMobileMenuOpen(false)}
+        navItems={navItems}
+      />
     </>
   );
 }

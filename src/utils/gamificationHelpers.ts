@@ -64,6 +64,28 @@ export const calculateLevelUp = (currentXP: number, currentLevel: number, points
   return { newXP, newLevel, newXPToNext };
 };
 
+// Initialize with demo values (XP=250, Level=3)
+export const initializeDemoProgress = (): UserProgress => {
+  return {
+    level: 3,
+    xp: 250,
+    xpToNextLevel: 250, // 500 - 250 = 250 XP to next level
+    totalQuestions: 25,
+    correctAnswers: 20,
+    simuladosCompletos: 2,
+    streakDias: 5,
+    achievements: [...ACHIEVEMENTS],
+    newlyUnlockedAchievements: [],
+    quests: [],
+    medicalCards: [],
+    areaStats: {
+      'Clínica Médica': { correct: 8, total: 10 },
+      'Cirurgia': { correct: 6, total: 8 },
+      'Pediatria': { correct: 6, total: 7 }
+    }
+  };
+};
+
 export const calculateStreakXP = (streakDays: number): number => {
   if (streakDays >= 30) return 100;
   if (streakDays >= 7) return 50;

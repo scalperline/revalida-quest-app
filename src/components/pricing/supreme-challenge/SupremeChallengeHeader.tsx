@@ -13,7 +13,7 @@ export function SupremeChallengeHeader({
       
       <div className="relative z-10 text-center">
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
-          <Trophy className="w-12 h-12 sm:w-16 sm:h-16 text-yellow-500 animate-bounce" />
+          
           <div>
             <h2 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-2">
               <span className="bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 bg-clip-text animate-pulse text-3xl text-slate-50">
@@ -31,7 +31,7 @@ export function SupremeChallengeHeader({
           <div className="bg-red-900/50 backdrop-blur-sm rounded-2xl p-3 sm:p-4 border border-red-600/50">
             <Target className="w-6 h-6 sm:w-8 sm:h-8 text-green-400 mx-auto mb-2" />
             <div className="text-lg sm:text-2xl font-bold text-yellow-400">10/10</div>
-            <div className="text-xs sm:text-sm text-yellow-300">Acertos</div>
+            <div className="text-xs sm:text-sm text-yellow-300">Acerte 10 questões oficiais</div>
           </div>
           <div className="bg-red-900/50 backdrop-blur-sm rounded-2xl p-3 sm:p-4 border border-red-600/50">
             <Zap className="w-6 h-6 sm:w-8 sm:h-8 text-blue-400 mx-auto mb-2" />
@@ -41,7 +41,7 @@ export function SupremeChallengeHeader({
           <div className="bg-red-900/50 backdrop-blur-sm rounded-2xl p-3 sm:p-4 border border-red-600/50">
             <Star className="w-6 h-6 sm:w-8 sm:h-8 text-yellow-400 mx-auto mb-2" />
             <div className="text-lg sm:text-2xl font-bold text-yellow-400">{attemptsLeft}</div>
-            <div className="text-xs sm:text-sm text-yellow-300">Restantes</div>
+            <div className="text-xs sm:text-sm text-yellow-300">Tentativasestantes</div>
           </div>
         </div>
       </div>

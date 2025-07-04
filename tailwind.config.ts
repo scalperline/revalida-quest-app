@@ -14,11 +14,12 @@ export default {
 		container: {
 			center: true,
 			padding: {
-				DEFAULT: '1rem',
-				sm: '1.5rem',
-				md: '2rem',
-				lg: '2.5rem',
-				xl: '3rem',
+				DEFAULT: '0.75rem',
+				sm: '1rem',
+				md: '1.5rem',
+				lg: '2rem',
+				xl: '2.5rem',
+				'2xl': '3rem',
 			},
 			screens: {
 				'sm': '640px',
@@ -30,11 +31,23 @@ export default {
 		},
 		extend: {
 			screens: {
-				'xs': '375px',
 				'xxs': '320px',
+				'xs': '375px',
 				'sm-md': '640px',
 				'md-lg': '896px',
 				'lg-xl': '1152px',
+			},
+			fontSize: {
+				'2xs': ['0.625rem', { lineHeight: '0.75rem' }],
+				'xs': ['0.75rem', { lineHeight: '1rem' }],
+				'sm': ['0.875rem', { lineHeight: '1.25rem' }],
+				'base': ['1rem', { lineHeight: '1.5rem' }],
+				'lg': ['1.125rem', { lineHeight: '1.75rem' }],
+				'xl': ['1.25rem', { lineHeight: '1.75rem' }],
+				'2xl': ['1.5rem', { lineHeight: '2rem' }],
+				'3xl': ['1.875rem', { lineHeight: '2.25rem' }],
+				'4xl': ['2.25rem', { lineHeight: '2.5rem' }],
+				'5xl': ['3rem', { lineHeight: '1' }],
 			},
 			colors: {
 				border: 'hsl(var(--border))',
@@ -113,6 +126,12 @@ export default {
 				'safe-bottom': 'env(safe-area-inset-bottom)',
 				'safe-left': 'env(safe-area-inset-left)',
 				'safe-right': 'env(safe-area-inset-right)',
+				'0.5': '0.125rem',
+				'1.5': '0.375rem',
+				'2.5': '0.625rem',
+				'3.5': '0.875rem',
+				'4.5': '1.125rem',
+				'5.5': '1.375rem',
 				'18': '4.5rem',
 				'22': '5.5rem',
 			}

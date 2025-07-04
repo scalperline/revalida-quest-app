@@ -55,18 +55,18 @@ export function ResponsiveNavbar() {
   return (
     <>
       <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 dark:bg-gray-900/95 backdrop-blur-md border-b border-gray-200 dark:border-gray-800">
-        <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-14 sm:h-16 lg:h-18">
-            {/* Logo - Responsive sizing */}
-            <Link to="/" className="flex items-center gap-1 sm:gap-1.5 lg:gap-2 flex-shrink-0 min-w-0">
-              <div className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 bg-gradient-to-br from-blue-600 to-purple-600 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-lg flex-shrink-0">
-                <Stethoscope className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 text-white" />
+        <div className="max-w-7xl mx-auto px-2 xs:px-3 sm:px-4 md:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-12 xs:h-14 sm:h-16 lg:h-18">
+            {/* Logo - Ultra responsive */}
+            <Link to="/" className="flex items-center gap-1 xs:gap-1.5 sm:gap-2 flex-shrink-0 min-w-0 max-w-[140px] xs:max-w-[160px] sm:max-w-none">
+              <div className="w-6 h-6 xs:w-8 xs:h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg xs:rounded-xl sm:rounded-2xl flex items-center justify-center shadow-lg flex-shrink-0">
+                <Stethoscope className="w-3 h-3 xs:w-4 xs:h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 text-white" />
               </div>
-              <div className="flex flex-col min-w-0">
-                <span className="text-base sm:text-xl lg:text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent text-left leading-tight">
+              <div className="flex flex-col min-w-0 overflow-hidden">
+                <span className="text-sm xs:text-base sm:text-xl lg:text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent leading-tight truncate">
                   RevalidaQuest
                 </span>
-                <span className="text-xs text-gray-500 dark:text-gray-400 -mt-0.5 sm:-mt-1 text-left whitespace-nowrap">
+                <span className="text-2xs xs:text-xs text-gray-500 dark:text-gray-400 -mt-0.5 sm:-mt-1 leading-tight truncate">
                   sua jornada médica
                 </span>
               </div>
@@ -74,7 +74,7 @@ export function ResponsiveNavbar() {
 
             {/* Desktop Navigation - Hidden on mobile and tablet */}
             {user && (
-              <div className="hidden xl:flex items-center -space-x-px ml-8 lg:ml-12">
+              <div className="hidden xl:flex items-center -space-x-px ml-4 lg:ml-8">
                 {navItems.map(item => {
                   const Icon = item.icon;
                   const isActive = isActivePath(item.to);
@@ -83,14 +83,14 @@ export function ResponsiveNavbar() {
                       <Button 
                         variant={isActive ? "default" : "ghost"} 
                         size="sm" 
-                        className={`flex items-center gap-2 h-9 xl:h-10 px-3 xl:px-4 text-sm xl:text-base font-medium transition-all duration-300 shadow-sm hover:shadow-md ${
+                        className={`flex items-center gap-1.5 xl:gap-2 h-8 xl:h-10 px-2.5 xl:px-4 text-xs xl:text-sm font-medium transition-all duration-300 shadow-sm hover:shadow-md ${
                           isActive 
                             ? 'bg-gray-900 text-white hover:bg-gray-800 dark:bg-gray-100 dark:text-gray-900 dark:hover:bg-gray-200 shadow-gray-900/20' 
                             : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-gray-100 dark:hover:bg-gray-800 hover:shadow-gray-500/10'
                         }`}
                       >
-                        <Icon className="w-4 h-4 xl:w-5 xl:h-5" />
-                        <span>{item.label}</span>
+                        <Icon className="w-3.5 h-3.5 xl:w-4 xl:h-4" />
+                        <span className="whitespace-nowrap">{item.label}</span>
                       </Button>
                     </Link>
                   );
@@ -100,7 +100,7 @@ export function ResponsiveNavbar() {
 
             {/* Tablet Navigation - Visible on tablet only */}
             {user && (
-              <div className="hidden md:flex xl:hidden items-center gap-1">
+              <div className="hidden md:flex xl:hidden items-center gap-0.5">
                 {navItems.slice(0, 5).map(item => {
                   const Icon = item.icon;
                   const isActive = isActivePath(item.to);
@@ -109,14 +109,14 @@ export function ResponsiveNavbar() {
                       <Button 
                         variant={isActive ? "default" : "ghost"} 
                         size="sm" 
-                        className={`flex items-center justify-center w-10 h-10 p-0 transition-all duration-300 ${
+                        className={`flex items-center justify-center w-9 h-9 p-0 transition-all duration-300 ${
                           isActive 
                             ? 'bg-gray-900 text-white hover:bg-gray-800 dark:bg-gray-100 dark:text-gray-900' 
                             : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-gray-100 dark:hover:bg-gray-800'
                         }`}
                         title={item.label}
                       >
-                        <Icon className="w-5 h-5" />
+                        <Icon className="w-4 h-4" />
                       </Button>
                     </Link>
                   );
@@ -127,16 +127,16 @@ export function ResponsiveNavbar() {
                   variant="ghost"
                   size="sm"
                   onClick={() => setIsTabletMenuOpen(true)}
-                  className="flex items-center justify-center w-10 h-10 p-0 text-gray-600 hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-gray-100 dark:hover:bg-gray-800"
+                  className="flex items-center justify-center w-9 h-9 p-0 text-gray-600 hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-gray-100 dark:hover:bg-gray-800"
                   title="Mais opções"
                 >
-                  <Menu className="w-5 h-5" />
+                  <Menu className="w-4 h-4" />
                 </Button>
               </div>
             )}
 
             {/* Right Side - Progress + Mobile Menu */}
-            <div className="flex items-center gap-2 sm:gap-3">
+            <div className="flex items-center gap-1 xs:gap-2 sm:gap-3 flex-shrink-0">
               {user && <UserProgressBar />}
               
               {/* Mobile Menu Button - Visible on mobile only */}

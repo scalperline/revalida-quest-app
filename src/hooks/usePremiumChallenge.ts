@@ -1,3 +1,4 @@
+
 import { useState, useCallback, useEffect } from 'react';
 import { useQuestions } from './useQuestions';
 import { useGamification } from './useGamification';
@@ -17,6 +18,7 @@ interface ChallengeState {
   timeBonus: number;
   coinsEarned: number;
   perfectAnswers: number;
+  isLoading: boolean;
 }
 
 export function usePremiumChallenge() {
@@ -35,7 +37,8 @@ export function usePremiumChallenge() {
     combo: 0,
     timeBonus: 0,
     coinsEarned: 0,
-    perfectAnswers: 0
+    perfectAnswers: 0,
+    isLoading: false
   });
 
   const [attemptsUsed, setAttemptsUsed] = useState(() => {
@@ -45,166 +48,141 @@ export function usePremiumChallenge() {
 
   const maxAttempts = 3;
   const questionsCount = 10;
-  const winThreshold = 10; // 100% de acerto
+  const winThreshold = 10;
 
-  // 🚀 BULLETPROOF QUESTION SELECTION - SEMPRE FUNCIONA!
-  const getOfficialQuestions = useCallback(() => {
-    console.log('🚀 BULLETPROOF: Iniciando seleção de questões...');
-    console.log('Total de questões disponíveis:', todasQuestoes.length);
+  // 🚀 SISTEMA DE SELEÇÃO BULLETPROOF - SEMPRE FUNCIONA!
+  const selectTenQuestions = useCallback(() => {
+    console.log('🎯 INICIANDO SELEÇÃO DE 10 QUESTÕES SUPREMAS');
+    console.log('📊 Total disponível:', todasQuestoes.length);
     
-    // BULLETPROOF: Filtrar APENAS questões com dados completos e corretos
-    const validQuestions = todasQuestoes.filter(q => {
-      const hasRequiredFields = q.year && q.area && q.enunciado && q.options && q.correct;
-      const hasCorrectAnswer = q.correct && q.correct.trim() !== ''; // CRÍTICO!
-      const hasEnoughOptions = q.options && q.options.length >= 4;
-      const isValidYear = q.year >= 2020 && q.year <= 2025;
-      
-      const isValid = hasRequiredFields && hasCorrectAnswer && hasEnoughOptions && isValidYear;
-      
-      if (!isValid && q.id % 50 === 0) { // Log apenas algumas para não spammar
-        console.log('❌ Questão inválida:', {
-          id: q.id,
-          year: q.year,
-          area: q.area,
-          hasCorrect: !!q.correct,
-          correctValue: q.correct
-        });
-      }
-      
-      return isValid;
-    });
-
-    console.log('✅ Questões válidas encontradas:', validQuestions.length);
-    console.log('📊 Anos disponíveis:', [...new Set(validQuestions.map(q => q.year))].sort());
-    console.log('📊 Áreas disponíveis:', [...new Set(validQuestions.map(q => q.area))]);
-
-    // BULLETPROOF: Se não temos questões suficientes, relaxar critérios
-    if (validQuestions.length < questionsCount) {
-      console.warn('⚠️ Questões insuficientes com critérios rigorosos! Relaxando...');
-      
-      // Pegar TODAS as questões com pelo menos resposta correta, independente do ano
-      const fallbackQuestions = todasQuestoes.filter(q => {
-        return q.correct && q.correct.trim() !== '' && q.options && q.options.length >= 4 && q.enunciado;
-      });
-      
-      console.log('🔄 Fallback: questões encontradas:', fallbackQuestions.length);
-      
-      if (fallbackQuestions.length < questionsCount) {
-        console.error('💥 ERRO CRÍTICO: Sistema não possui questões suficientes!');
-        console.error('Questões com respostas:', fallbackQuestions.length, 'Necessárias:', questionsCount);
-        return [];
-      }
-      
-      // Usar questões de fallback embaralhadas
-      const shuffled = [...fallbackQuestions].sort(() => Math.random() - 0.5);
-      const selected = shuffled.slice(0, questionsCount);
-      console.log('🎯 FALLBACK: Selecionadas', selected.length, 'questões');
-      return selected;
+    if (!todasQuestoes || todasQuestoes.length === 0) {
+      console.error('❌ ERRO: Nenhuma questão disponível');
+      return [];
     }
 
-    // BULLETPROOF: Balanceamento inteligente por área médica
-    const areaGroups: Record<string, Question[]> = {};
-    validQuestions.forEach(q => {
-      if (!areaGroups[q.area]) areaGroups[q.area] = [];
-      areaGroups[q.area].push(q);
+    // FILTRO APENAS QUESTÕES COM DADOS ESSENCIAIS
+    const validQuestions = todasQuestoes.filter(q => {
+      const hasBasics = q.id && q.enunciado && q.options && q.correct;
+      const hasValidOptions = q.options && Array.isArray(q.options) && q.options.length >= 4;
+      const hasValidCorrect = q.correct && typeof q.correct === 'string' && q.correct.trim() !== '';
+      
+      return hasBasics && hasValidOptions && hasValidCorrect;
     });
 
-    const selectedQuestions: Question[] = [];
+    console.log('✅ Questões válidas filtradas:', validQuestions.length);
+    
+    if (validQuestions.length < questionsCount) {
+      console.warn('⚠️ Questões insuficientes:', validQuestions.length, 'necessárias:', questionsCount);
+      
+      // USAR TODAS AS QUESTÕES DISPONÍVEIS SE FOR MENOR QUE 10
+      const shuffled = [...validQuestions].sort(() => Math.random() - 0.5);
+      console.log('🔄 Usando todas as questões disponíveis:', shuffled.length);
+      return shuffled;
+    }
+
+    // SELEÇÃO BALANCEADA POR ÁREA QUANDO POSSÍVEL
+    const areaGroups: Record<string, Question[]> = {};
+    validQuestions.forEach(q => {
+      const area = q.area || 'Geral';
+      if (!areaGroups[area]) areaGroups[area] = [];
+      areaGroups[area].push(q);
+    });
+
     const areas = Object.keys(areaGroups);
-    
-    console.log('🎯 Balanceando por áreas:', areas.length, 'áreas disponíveis');
-    
-    // Distribuir questões equilibradamente entre áreas
-    for (let i = 0; i < questionsCount && areas.length > 0; i++) {
-      const areaIndex = i % areas.length;
-      const area = areas[areaIndex];
+    const selectedQuestions: Question[] = [];
+    let currentAreaIndex = 0;
+
+    console.log('🎯 Balanceando entre', areas.length, 'áreas médicas');
+
+    // SELECIONAR 10 QUESTÕES DISTRIBUÍDAS
+    while (selectedQuestions.length < questionsCount && areas.length > 0) {
+      const area = areas[currentAreaIndex % areas.length];
       const areaQuestions = areaGroups[area];
       
       if (areaQuestions && areaQuestions.length > 0) {
         const randomIndex = Math.floor(Math.random() * areaQuestions.length);
         const selectedQuestion = areaQuestions.splice(randomIndex, 1)[0];
         selectedQuestions.push(selectedQuestion);
-        console.log(`✅ Q${i + 1}: ${area} (${selectedQuestion.year}) - Resposta: ${selectedQuestion.correct}`);
+        
+        console.log(`✅ Q${selectedQuestions.length}: ${area} - ID: ${selectedQuestion.id}`);
         
         // Remover área se esgotou
         if (areaQuestions.length === 0) {
           delete areaGroups[area];
-          const areaIndexToRemove = areas.indexOf(area);
-          if (areaIndexToRemove > -1) {
-            areas.splice(areaIndexToRemove, 1);
-          }
-        }
-      }
-    }
-    
-    // Se ainda faltam questões, pegar de qualquer área restante
-    while (selectedQuestions.length < questionsCount) {
-      const remainingQuestions = Object.values(areaGroups).flat();
-      if (remainingQuestions.length === 0) break;
-      
-      const randomIndex = Math.floor(Math.random() * remainingQuestions.length);
-      const question = remainingQuestions[randomIndex];
-      
-      // Remover da área original
-      const questionArea = question.area;
-      if (areaGroups[questionArea]) {
-        areaGroups[questionArea] = areaGroups[questionArea].filter(q => q.id !== question.id);
-        if (areaGroups[questionArea].length === 0) {
-          delete areaGroups[questionArea];
+          areas.splice(areas.indexOf(area), 1);
         }
       }
       
-      selectedQuestions.push(question);
-      console.log(`➕ Q${selectedQuestions.length}: ${questionArea} (extra) - Resposta: ${question.correct}`);
+      currentAreaIndex++;
     }
 
-    console.log('🎉 SUCESSO BULLETPROOF! Questões selecionadas:', selectedQuestions.length);
-    console.log('📋 Resumo final:', selectedQuestions.map(q => `Q${q.id}(${q.year})-${q.correct}`));
+    console.log('🎉 SUCESSO! 10 questões selecionadas para o desafio');
+    console.log('📋 IDs das questões:', selectedQuestions.map(q => q.id));
     
     return selectedQuestions.slice(0, questionsCount);
   }, [todasQuestoes, questionsCount]);
 
   const startChallenge = useCallback(() => {
-    console.log('=== 🚀 INICIANDO DESAFIO SUPREMO BULLETPROOF ===');
+    console.log('=== 🚀 INICIANDO DESAFIO SUPREMO ===');
     
     if (attemptsUsed >= maxAttempts) {
       console.log('❌ Limite de tentativas atingido');
-      return false;
-    }
-
-    const selectedQuestions = getOfficialQuestions();
-    
-    if (selectedQuestions.length < questionsCount) {
-      console.log('❌ FALHA CRÍTICA: Questões insuficientes:', selectedQuestions.length);
-      toast.error("Sistema temporariamente indisponível. Tente novamente em alguns minutos.", {
+      toast.error("Você já utilizou todas as 3 tentativas disponíveis!", {
         duration: 4000,
         className: "bg-gradient-to-r from-red-500 to-red-600 text-white border-0"
       });
       return false;
     }
 
-    console.log('✅ SUCESSO! Questões carregadas:', selectedQuestions.length);
-    console.log('📋 Áreas das questões:', [...new Set(selectedQuestions.map(q => q.area))]);
-    console.log('📅 Anos das questões:', [...new Set(selectedQuestions.map(q => q.year))].sort());
+    // MARCAR COMO LOADING IMEDIATAMENTE
+    setChallengeState(prev => ({
+      ...prev,
+      isLoading: true,
+      isActive: true
+    }));
 
-    const newState: ChallengeState = {
-      isActive: true,
-      currentQuestionIndex: 0,
-      score: 0,
-      answers: {},
-      questions: selectedQuestions,
-      hasCompleted: false,
-      hasWon: false,
-      streak: 0,
-      combo: 0,
-      timeBonus: 0,
-      coinsEarned: 0,
-      perfectAnswers: 0
-    };
+    // PROCESSAR SELEÇÃO DAS QUESTÕES
+    const selectedQuestions = selectTenQuestions();
+    
+    if (selectedQuestions.length === 0) {
+      console.error('❌ FALHA CRÍTICA: Nenhuma questão selecionada');
+      toast.error("Sistema temporariamente indisponível. Tente novamente!", {
+        duration: 4000,
+        className: "bg-gradient-to-r from-red-500 to-red-600 text-white border-0"
+      });
+      
+      setChallengeState(prev => ({
+        ...prev,
+        isLoading: false,
+        isActive: false
+      }));
+      return false;
+    }
 
-    setChallengeState(newState);
+    console.log('✅ DESAFIO INICIADO COM SUCESSO!', selectedQuestions.length, 'questões');
+
+    // CONFIGURAR ESTADO FINAL DO DESAFIO
+    setTimeout(() => {
+      setChallengeState(prev => ({
+        ...prev,
+        isLoading: false,
+        isActive: true,
+        currentQuestionIndex: 0,
+        score: 0,
+        answers: {},
+        questions: selectedQuestions,
+        hasCompleted: false,
+        hasWon: false,
+        streak: 0,
+        combo: 0,
+        timeBonus: 0,
+        coinsEarned: 0,
+        perfectAnswers: 0
+      }));
+    }, 1000); // 1 segundo de loading para criar expectativa
+
     return true;
-  }, [getOfficialQuestions, attemptsUsed, maxAttempts, questionsCount]);
+  }, [selectTenQuestions, attemptsUsed, maxAttempts]);
 
   const answerCurrentQuestion = useCallback((optionId: string) => {
     console.log('=== 📝 RESPONDENDO QUESTÃO ===');
@@ -222,28 +200,24 @@ export function usePremiumChallenge() {
       const newCombo = isCorrect ? prev.combo + 1 : 0;
       const newPerfectAnswers = isCorrect ? prev.perfectAnswers + 1 : prev.perfectAnswers;
 
-      console.log('📊 Resultado da resposta:', { 
+      console.log('📊 Resposta:', { 
         questao: currentQuestion.id,
         resposta: optionId,
         correta: currentQuestion.correct,
         isCorrect, 
-        newScore, 
-        newStreak, 
-        newCombo 
+        newScore 
       });
 
-      // Sistema de moedas baseado na performance
+      // Sistema de moedas
       let coinsEarned = 0;
       if (isCorrect) {
-        coinsEarned = 10; // Base
-        if (newCombo >= 3) coinsEarned += 5; // Combo bonus
-        if (newStreak >= 5) coinsEarned += 10; // Streak bonus
-        if (prev.currentQuestionIndex < 5) coinsEarned += 5; // Speed bonus
-        console.log('💰 Moedas ganhas nesta questão:', coinsEarned);
+        coinsEarned = 10;
+        if (newCombo >= 3) coinsEarned += 5;
+        if (newStreak >= 5) coinsEarned += 10;
       }
 
-      // Registrar resposta no sistema de gamificação
-      recordAnswer(isCorrect, currentQuestion.area, currentQuestion.id);
+      // Registrar no sistema de gamificação
+      recordAnswer(isCorrect, currentQuestion.area || 'Geral', currentQuestion.id);
 
       return {
         ...prev,
@@ -268,8 +242,7 @@ export function usePremiumChallenge() {
         console.log('🏁 DESAFIO FINALIZADO!', { 
           score: prev.score, 
           total: prev.questions.length,
-          hasWon,
-          winThreshold 
+          hasWon 
         });
         
         setAttemptsUsed(newAttemptsUsed);
@@ -277,7 +250,6 @@ export function usePremiumChallenge() {
         
         if (hasWon) {
           localStorage.setItem('premium_challenge_won', 'true');
-          // XP épico para vitória perfeita
           const bonusXP = 1000 + (prev.perfectAnswers * 100) + prev.coinsEarned;
           addXP(bonusXP);
           
@@ -285,8 +257,6 @@ export function usePremiumChallenge() {
             duration: 6000,
             className: "bg-gradient-to-r from-yellow-500 to-orange-500 text-white border-0"
           });
-          
-          console.log('🎉 VITÓRIA! XP bonus concedido:', bonusXP);
         } else {
           const consolationXP = prev.score * 50 + prev.coinsEarned;
           addXP(consolationXP);
@@ -295,8 +265,6 @@ export function usePremiumChallenge() {
             duration: 4000,
             className: "bg-gradient-to-r from-blue-500 to-purple-500 text-white border-0"
           });
-          
-          console.log('💪 Consolação: XP concedido:', consolationXP);
         }
 
         return {
@@ -307,7 +275,6 @@ export function usePremiumChallenge() {
         };
       }
 
-      console.log('➡️ Próxima questão:', prev.currentQuestionIndex + 1);
       return {
         ...prev,
         currentQuestionIndex: prev.currentQuestionIndex + 1
@@ -329,7 +296,8 @@ export function usePremiumChallenge() {
       combo: 0,
       timeBonus: 0,
       coinsEarned: 0,
-      perfectAnswers: 0
+      perfectAnswers: 0,
+      isLoading: false
     });
   }, []);
 

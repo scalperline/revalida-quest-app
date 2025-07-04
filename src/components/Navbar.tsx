@@ -104,7 +104,7 @@ export function Navbar() {
               <div className="lg:hidden">
                 <MobileHamburgerButton 
                   isOpen={mobileMenuOpen}
-                  onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                  onToggle={() => setMobileMenuOpen(!mobileMenuOpen)}
                 />
               </div>
             </div>
@@ -118,11 +118,7 @@ export function Navbar() {
       </nav>
 
       {/* Mobile Menu */}
-      <MobileHamburgerMenu 
-        isOpen={mobileMenuOpen}
-        onClose={() => setMobileMenuOpen(false)}
-        navItems={navItems}
-      />
+      <MobileHamburgerMenu />
     </>
   );
 }

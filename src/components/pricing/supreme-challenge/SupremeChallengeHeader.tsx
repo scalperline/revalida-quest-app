@@ -1,19 +1,15 @@
-
 import { CardHeader } from '@/components/ui/card';
 import { Trophy, Crown, Target, Zap, Star } from 'lucide-react';
-
 interface SupremeChallengeHeaderProps {
   hasWonBefore: boolean;
   attemptsLeft: number;
 }
-
 export function SupremeChallengeHeader({
   hasWonBefore,
   attemptsLeft
 }: SupremeChallengeHeaderProps) {
-  return (
-    <CardHeader className="relative bg-red-900/80 backdrop-blur-xl p-6 sm:p-8 border border-red-600/30">
-      <div className="absolute inset-0 bg-gradient-to-r from-red-700/5 to-red-600/5"></div>
+  return <CardHeader className="relative bg-red-900/80 backdrop-blur-xl p-6 sm:p-8 border border-red-600/30">
+      <div className="absolute inset-0 bg-gradient-to-r from-red-700/5 to-red-600/5 bg-rose-950"></div>
       
       <div className="relative z-10 text-center">
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
@@ -49,6 +45,5 @@ export function SupremeChallengeHeader({
           </div>
         </div>
       </div>
-    </CardHeader>
-  );
+    </CardHeader>;
 }

@@ -254,10 +254,10 @@ export function ChallengeModal({ isOpen, onClose }: ChallengeModalProps) {
                     <h3 className="text-2xl font-bold text-white mb-2">Preparando Desafio Supremo...</h3>
                     <p className="text-gray-300 text-lg">Selecionando questões oficiais do Revalida</p>
                   </div>
-                  <div className="flex items-center gap-2 text-purple-300">
-                    <Sparkles className="w-5 h-5 animate-pulse" />
-                    <span className="text-sm">Questões dos anos 2022-2025</span>
-                  </div>
+                   <div className="flex items-center gap-2 text-purple-300">
+                     <Sparkles className="w-5 h-5 animate-pulse" />
+                     <span className="text-sm">Questões dos anos 2020-2025</span>
+                   </div>
                 </div>
               )}
 

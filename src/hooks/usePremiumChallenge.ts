@@ -50,12 +50,12 @@ export function usePremiumChallenge() {
 
   // Filtrar questões oficiais do Revalida 2022-2025
   const getOfficialQuestions = useCallback(() => {
-    console.log('🔍 Filtrando questões oficiais do Revalida 2022-2025...');
+    console.log('🔍 Filtrando questões oficiais do Revalida 2020-2025...');
     console.log('Total de questões disponíveis:', todasQuestoes.length);
     
     const officialQuestions = todasQuestoes.filter(q => {
       const hasRequiredFields = q.year && q.area && q.enunciado && q.options && q.correct;
-      const isInYearRange = q.year >= 2022 && q.year <= 2025;
+      const isInYearRange = q.year >= 2020 && q.year <= 2025;
       const hasEnoughOptions = q.options && q.options.length >= 4;
       
       return hasRequiredFields && isInYearRange && hasEnoughOptions;

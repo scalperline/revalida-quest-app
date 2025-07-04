@@ -54,7 +54,7 @@ export function ResponsiveNavbar() {
 
   return (
     <>
-      <nav className="fixed top-0 left-0 right-0 z-50 glass-effect border-b border-border/50">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md border-b border-border shadow-lg">
         <div className="w-full max-w-none mx-auto px-3 sm:px-4 lg:px-6 xl:px-8">
           <div className="flex items-center justify-between h-14 sm:h-16 lg:h-18 xl:h-20">
             {/* Logo - Fixed size and spacing */}

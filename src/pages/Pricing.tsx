@@ -23,12 +23,12 @@ export default function Pricing() {
     resetAttempts
   } = usePremiumChallenge();
 
-  const handleStartChallenge = (): boolean => {
+  const handleStartChallenge = async (): Promise<boolean> => {
     if (!user) {
       navigate('/auth');
       return false;
     }
-    return startChallenge();
+    return await startChallenge();
   };
 
   return (

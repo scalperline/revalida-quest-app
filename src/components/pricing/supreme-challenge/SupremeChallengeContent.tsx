@@ -22,7 +22,7 @@ export function SupremeChallengeContent({
   onResetAttempts
 }: SupremeChallengeContentProps) {
   return (
-    <CardContent className="relative z-10 text-center p-6 sm:p-8">
+    <CardContent className="relative z-10 text-center p-6 sm:p-8 bg-red-950/20 backdrop-blur-sm">
       {/* Epic Reward */}
       <div className="bg-red-900/80 backdrop-blur-sm rounded-3xl p-6 sm:p-8 mb-6 sm:mb-8 border border-yellow-500/30 shadow-2xl relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/10 to-yellow-300/10 animate-pulse"></div>

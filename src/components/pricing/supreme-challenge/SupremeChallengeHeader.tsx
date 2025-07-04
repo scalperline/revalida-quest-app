@@ -1,3 +1,4 @@
+
 import { CardHeader } from '@/components/ui/card';
 import { Trophy, Crown, Target, Zap, Star } from 'lucide-react';
 interface SupremeChallengeHeaderProps {
@@ -30,7 +31,7 @@ export function SupremeChallengeHeader({
         <div className="grid grid-cols-3 gap-4 sm:gap-8 text-center max-w-2xl mx-auto">
           <div className="bg-slate-900/60 backdrop-blur-sm rounded-2xl p-3 sm:p-4 border border-blue-600/50">
             <Target className="w-6 h-6 sm:w-8 sm:h-8 text-green-400 mx-auto mb-2" />
-            <div className="text-lg sm:text-2xl font-bold text-yellow-400 bg-transparent">10/10</div>
+            <div className="text-lg sm:text-2xl font-bold text-white bg-transparent">10/10</div>
             <div className="text-xs sm:text-sm text-yellow-300 bg-transparent">Acerte 10 questões oficiais</div>
           </div>
           <div className="bg-slate-900/60 backdrop-blur-sm rounded-2xl p-3 sm:p-4 border border-blue-600/50">

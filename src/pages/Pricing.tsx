@@ -58,7 +58,7 @@ export default function Pricing() {
   }, [todasQuestoes]);
 
   return (
-    <div className="min-h-screen stellar-gradient relative overflow-hidden">
+    <div className="min-h-screen elegant-gradient relative overflow-hidden">
       <PricingBackground />
 
       <div className="navbar">

@@ -8,105 +8,105 @@
     @apply shadow-lg hover:shadow-xl transition-shadow duration-300;
   }
 
-  /* Medical Blue Theme Components */
-  .medical-gradient {
-    background: linear-gradient(135deg, hsl(var(--medical-blue-primary)) 0%, hsl(var(--medical-blue-secondary)) 100%);
+  /* Golden Elegant Theme Components */
+  .golden-gradient {
+    background: linear-gradient(135deg, hsl(45, 100%, 51%) 0%, hsl(43, 89%, 38%) 100%);
   }
 
-  /* Enhanced Galactic Gradient - Responsive */
-  .stellar-gradient {
-    background: 
-      /* Nebula clouds - scaled for mobile */
-      radial-gradient(ellipse 400px 200px at 20% 30%, rgba(30, 64, 175, 0.3) 0%, transparent 60%),
-      radial-gradient(ellipse 300px 150px at 80% 70%, rgba(59, 130, 246, 0.25) 0%, transparent 60%),
-      radial-gradient(ellipse 200px 100px at 40% 80%, rgba(147, 51, 234, 0.2) 0%, transparent 50%),
-      radial-gradient(ellipse 150px 75px at 70% 20%, rgba(79, 70, 229, 0.25) 0%, transparent 50%),
-      
-      /* Deep space gradient */
-      linear-gradient(135deg, 
-        #0c1445 0%,
-        #1e293b 25%,
-        #1e40af 45%,
-        #1e3a8a 65%,
-        #312e81 85%,
-        #1e1b4b 100%
-      );
-  }
-
-  @media (min-width: 768px) {
-    .stellar-gradient {
-      background: 
-        radial-gradient(ellipse 800px 400px at 20% 30%, rgba(30, 64, 175, 0.3) 0%, transparent 60%),
-        radial-gradient(ellipse 600px 300px at 80% 70%, rgba(59, 130, 246, 0.25) 0%, transparent 60%),
-        radial-gradient(ellipse 400px 200px at 40% 80%, rgba(147, 51, 234, 0.2) 0%, transparent 50%),
-        radial-gradient(ellipse 300px 150px at 70% 20%, rgba(79, 70, 229, 0.25) 0%, transparent 50%),
-        
-        linear-gradient(135deg, 
-          #0c1445 0%,
-          #1e293b 25%,
-          #1e40af 45%,
-          #1e3a8a 65%,
-          #312e81 85%,
-          #1e1b4b 100%
-        );
-    }
-  }
-
-  .medical-glass {
-    background: hsla(var(--medical-blue-glass));
+  .golden-glass {
+    background: hsla(45, 100%, 51%, 0.1);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
   }
 
-  .medical-card {
-    @apply bg-white rounded-2xl sm:rounded-3xl shadow-xl sm:shadow-2xl border-t-4 border-blue-500;
+  /* Enhanced Elegant Gradient - Golden Theme */
+  .elegant-gradient {
+    background: 
+      /* Golden clouds - scaled for mobile */
+      radial-gradient(ellipse 400px 200px at 20% 30%, rgba(255, 215, 0, 0.3) 0%, transparent 60%),
+      radial-gradient(ellipse 300px 150px at 80% 70%, rgba(255, 215, 0, 0.25) 0%, transparent 60%),
+      radial-gradient(ellipse 200px 100px at 40% 80%, rgba(184, 134, 11, 0.2) 0%, transparent 50%),
+      radial-gradient(ellipse 150px 75px at 70% 20%, rgba(139, 115, 85, 0.25) 0%, transparent 50%),
+      
+      /* Deep elegant gradient */
+      linear-gradient(135deg, 
+        rgba(0, 0, 0, 0.9) 0%,
+        rgba(0, 0, 0, 0.8) 25%,
+        rgba(184, 134, 11, 0.1) 45%,
+        rgba(255, 215, 0, 0.05) 65%,
+        rgba(0, 0, 0, 0.7) 85%,
+        rgba(0, 0, 0, 0.9) 100%
+      );
+  }
+
+  @media (min-width: 768px) {
+    .elegant-gradient {
+      background: 
+        radial-gradient(ellipse 800px 400px at 20% 30%, rgba(255, 215, 0, 0.3) 0%, transparent 60%),
+        radial-gradient(ellipse 600px 300px at 80% 70%, rgba(255, 215, 0, 0.25) 0%, transparent 60%),
+        radial-gradient(ellipse 400px 200px at 40% 80%, rgba(184, 134, 11, 0.2) 0%, transparent 50%),
+        radial-gradient(ellipse 300px 150px at 70% 20%, rgba(139, 115, 85, 0.25) 0%, transparent 50%),
+        
+        linear-gradient(135deg, 
+          rgba(0, 0, 0, 0.9) 0%,
+          rgba(0, 0, 0, 0.8) 25%,
+          rgba(184, 134, 11, 0.1) 45%,
+          rgba(255, 215, 0, 0.05) 65%,
+          rgba(0, 0, 0, 0.7) 85%,
+          rgba(0, 0, 0, 0.9) 100%
+        );
+    }
+  }
+
+  .elegant-card {
+    @apply bg-white/95 backdrop-blur-sm rounded-2xl sm:rounded-3xl shadow-xl sm:shadow-2xl border border-yellow-500/20;
     padding: 1.5rem;
   }
 
   @media (min-width: 640px) {
-    .medical-card {
+    .elegant-card {
       padding: 2rem;
     }
   }
 
   @media (min-width: 1024px) {
-    .medical-card {
+    .elegant-card {
       padding: 2.5rem;
     }
   }
 
   .feature-card {
-    @apply bg-white/90 backdrop-blur-sm rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-blue-100/50 shadow-lg sm:shadow-xl hover:shadow-xl sm:hover:shadow-2xl transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1;
+    @apply bg-white/95 backdrop-blur-sm rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-yellow-500/20 shadow-lg sm:shadow-xl hover:shadow-xl sm:hover:shadow-2xl transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1;
   }
 
-  /* Enhanced Gamified Feature Cards - Responsive */
-  .gamified-feature-card {
-    @apply relative transition-all duration-500 hover:-translate-y-1;
+  /* Enhanced Golden Feature Cards - Responsive */
+  .golden-feature-card {
+    @apply relative transition-all duration-500 hover:-translate-y-1 bg-gradient-to-br from-white/90 to-yellow-50/80 backdrop-blur-sm border border-yellow-500/30;
   }
 
-  .medical-button {
+  .elegant-button {
     @apply px-4 sm:px-6 py-2 sm:py-2.5 rounded-lg font-semibold text-sm shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105;
   }
 
-  .medical-button-primary {
-    @apply medical-button medical-gradient text-white hover:shadow-blue-500/50;
+  .elegant-button-primary {
+    @apply elegant-button golden-gradient text-black hover:shadow-yellow-500/50;
   }
 
-  .medical-input {
-    @apply h-10 sm:h-12 rounded-lg border-2 border-gray-200 focus:border-blue-500 transition-all duration-200 px-3 text-sm sm:text-base placeholder:text-gray-400;
+  .elegant-input {
+    @apply h-10 sm:h-12 rounded-lg border-2 border-yellow-500/30 bg-white/90 backdrop-blur-sm focus:border-yellow-500 transition-all duration-200 px-3 text-sm sm:text-base placeholder:text-gray-600;
   }
 
-  /* Gamification Elements - Responsive */
-  .badge-verified {
-    @apply inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-semibold bg-green-100 text-green-700;
+  /* Golden Badge Elements - Responsive */
+  .badge-golden {
+    @apply inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-semibold bg-yellow-100/90 text-yellow-800 border border-yellow-500/30;
   }
 
-  .badge-gamified {
-    @apply inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-semibold bg-yellow-100 text-yellow-700;
+  .badge-elegant {
+    @apply inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-semibold bg-white/90 text-gray-800 border border-gray-300/50;
   }
 
-  .badge-competitive {
-    @apply inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-semibold bg-blue-100 text-blue-700;
+  .badge-premium {
+    @apply inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-semibold bg-gradient-to-r from-yellow-400 to-yellow-600 text-white;
   }
 
   /* Animation Classes - Performance optimized */

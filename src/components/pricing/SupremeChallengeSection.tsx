@@ -133,12 +133,12 @@ export function SupremeChallengeSection({
     <div className="relative mb-16">
       {/* Epic Background Effects */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-20 -left-20 w-40 h-40 bg-gradient-to-r from-purple-600/30 to-pink-600/30 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute -bottom-20 -right-20 w-60 h-60 bg-gradient-to-r from-blue-600/20 to-purple-600/20 rounded-full blur-3xl animate-bounce"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-gradient-to-r from-yellow-400/10 to-orange-400/10 rounded-full blur-3xl animate-spin" style={{ animationDuration: '20s' }}></div>
+        <div className="absolute -top-20 -left-20 w-40 h-40 bg-gradient-to-r from-yellow-600/30 to-yellow-500/30 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute -bottom-20 -right-20 w-60 h-60 bg-gradient-to-r from-yellow-500/20 to-yellow-400/20 rounded-full blur-3xl animate-bounce"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-gradient-to-r from-yellow-400/10 to-yellow-300/10 rounded-full blur-3xl animate-spin" style={{ animationDuration: '20s' }}></div>
       </div>
       
-      <Card className="relative overflow-hidden border-4 border-gradient-to-r from-purple-500 via-pink-500 to-red-500 bg-gradient-to-br from-slate-900/95 via-purple-900/90 to-indigo-900/95 backdrop-blur-xl shadow-2xl">
+      <Card className="relative overflow-hidden border-4 border-gradient-to-r from-yellow-500 via-yellow-400 to-yellow-300 bg-gradient-to-br from-black/95 via-yellow-900/20 to-black/95 backdrop-blur-xl shadow-2xl">
         <SupremeChallengeHeader hasWonBefore={hasWonBefore} attemptsLeft={attemptsLeft} />
         
         <SupremeChallengeContent

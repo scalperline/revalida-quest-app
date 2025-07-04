@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import { useGamification } from '@/hooks/useGamification';
@@ -54,17 +53,18 @@ export function MobileProgressDrawer({
       {/* Backdrop when expanded */}
       {isExpanded && <div className="fixed inset-0 bg-black/20 z-40 md:hidden" onClick={toggleDrawer} />}
       
-      {/* Drawer Container - Moved to align with hamburger menu */}
-      <div className="fixed top-16 right-4 z-50 md:hidden">
+      {/* Drawer Container */}
+      <div className="fixed top-14 left-0 right-0 z-50 md:hidden">
         {/* Collapsed State - Arrow Button */}
-        {!isExpanded && <div className="flex justify-end">
-            <button onClick={toggleDrawer} className="bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 flex items-center gap-1.5 px-3 py-1 text-xs">
-              <ChevronDown className="w-3 h-3" />
+        {!isExpanded && <div className="flex justify-center">
+            <button onClick={toggleDrawer} className="bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-b-lg shadow-md hover:shadow-lg transition-all duration-300 flex items-center gap-1.5 px-[16px] py-0 text-sm">
+              
+              <ChevronDown className="w-3 h-3 rounded" />
             </button>
           </div>}
 
         {/* Expanded State - Full Drawer */}
-        {isExpanded && <div className={`bg-white/95 backdrop-blur-md border-2 border-blue-100 shadow-xl rounded-lg w-72 ${animationClass}`}>
+        {isExpanded && <div className={`bg-white/95 backdrop-blur-md border-b-2 border-blue-100 shadow-xl ${animationClass}`}>
             {/* Header with Close Button */}
             <div className="flex justify-between items-center p-4 border-b border-gray-200">
               <h3 className="text-lg font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">

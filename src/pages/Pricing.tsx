@@ -1,4 +1,5 @@
 
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSubscription } from '@/hooks/useSubscription';
 import { useAuth } from '@/hooks/useAuth';
@@ -6,6 +7,8 @@ import { usePremiumChallenge } from '@/hooks/usePremiumChallenge';
 import { Sparkles } from 'lucide-react';
 import { Navbar } from '@/components/Navbar';
 import { PremiumChallengeSection } from '@/components/pricing/PremiumChallengeSection';
+import { SupremeChallengeModal } from '@/components/challenge/SupremeChallengeModal';
+import { SupremeVictoryModal } from '@/components/challenge/SupremeVictoryModal';
 import { PricingHeader } from '@/components/pricing/PricingHeader';
 import { PricingPlansGrid } from '@/components/pricing/PricingPlansGrid';
 import { PricingFAQ } from '@/components/pricing/PricingFAQ';
@@ -20,15 +23,46 @@ export default function Pricing() {
     attemptsLeft,
     hasWonBefore,
     startChallenge,
-    resetAttempts
+    resetAttempts,
+    challengeState
   } = usePremiumChallenge();
+
+  const [showSupremeModal, setShowSupremeModal] = useState(false);
+  const [showVictoryModal, setShowVictoryModal] = useState(false);
+  const [victoryData, setVictoryData] = useState({ coins: 0, discount: 0 });
 
   const handleStartChallenge = async (): Promise<boolean> => {
     if (!user) {
       navigate('/auth');
       return false;
     }
-    return await startChallenge();
+
+    const started = await startChallenge();
+    if (started) {
+      setShowSupremeModal(true);
+      // Ocultar navbar
+      document.querySelector('.navbar')?.classList.add('navbar-hidden');
+    }
+    return started;
+  };
+
+  const handleCloseSupremeModal = () => {
+    setShowSupremeModal(false);
+    // Mostrar navbar novamente
+    document.querySelector('.navbar')?.classList.remove('navbar-hidden');
+  };
+
+  const handleVictory = (coins: number, discount: number) => {
+    setVictoryData({ coins, discount });
+    setShowSupremeModal(false);
+    setShowVictoryModal(true);
+    // Manter navbar oculta até fechar modal de vitória
+  };
+
+  const handleCloseVictoryModal = () => {
+    setShowVictoryModal(false);
+    // Mostrar navbar novamente
+    document.querySelector('.navbar')?.classList.remove('navbar-hidden');
   };
 
   return (
@@ -42,7 +76,9 @@ export default function Pricing() {
         <Sparkles className="absolute top-20 left-20 w-8 h-8 text-blue-300 opacity-30 animate-pulse delay-500" />
       </div>
 
-      <Navbar />
+      <div className="navbar">
+        <Navbar />
+      </div>
       
       <div className="relative z-10 pt-20">
         <div className="container mx-auto px-4 py-[33px]">
@@ -63,6 +99,22 @@ export default function Pricing() {
           <PricingFooter />
         </div>
       </div>
+
+      {/* Modals do Desafio Supremo */}
+      <SupremeChallengeModal
+        isOpen={showSupremeModal}
+        onClose={handleCloseSupremeModal}
+        onVictory={handleVictory}
+      />
+
+      <SupremeVictoryModal
+        isOpen={showVictoryModal}
+        onClose={handleCloseVictoryModal}
+        coins={victoryData.coins}
+        discount={victoryData.discount}
+        score={challengeState.score}
+        total={challengeState.questions.length}
+      />
     </div>
   );
 }

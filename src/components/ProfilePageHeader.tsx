@@ -16,7 +16,7 @@ export function ProfilePageHeader() {
         {/* Main Title */}
         <div className="mb-6">
           <div className="flex items-center justify-center gap-3 mb-4">
-            <div className="p-3 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full shadow-lg px-[8px] py-[8px]">
+            <div className="p-3 bg-gradient-to-r from-blue-500 to-purple-600 shadow-lg rounded-md py-[12px] px-[12px]">
               <User className="w-8 h-8 text-white" />
             </div>
             

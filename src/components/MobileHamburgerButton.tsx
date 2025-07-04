@@ -1,3 +1,4 @@
+
 import { Menu, X } from 'lucide-react';
 interface MobileHamburgerButtonProps {
   isOpen: boolean;
@@ -14,7 +15,7 @@ export function MobileHamburgerButton({
         bg-gradient-to-r from-gray-50 to-white 
         hover:from-gray-100 hover:to-gray-50 
         text-gray-700 shadow-lg hover:shadow-xl 
-        border border-gray-200
+        border-2 border-gray-400 hover:border-gray-500
         transform hover:scale-105 active:scale-95
         ${className}
       `} aria-label={isOpen ? 'Fechar menu' : 'Abrir menu'}>

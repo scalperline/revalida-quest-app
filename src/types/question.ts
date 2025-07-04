@@ -21,7 +21,7 @@ export interface QuestionCardProps {
   question: Question;
   showAnswer?: boolean;
   onAnswer?: (optionId: string) => void;
-  onAnswerWithEffects?: (optionId: string, correct: boolean) => void;
+  onAnswerWithEffects?: (optionId: string, correct: boolean, sourceElement?: HTMLElement) => void;
   disabled?: boolean;
   userAnswer?: string;
   hideHeader?: boolean;

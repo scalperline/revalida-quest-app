@@ -1,60 +1,35 @@
 
 import { useState, useEffect } from 'react';
 import { useSubscription } from '@/hooks/useSubscription';
-import { useQuestions } from '@/hooks/useQuestions';
 import { Navbar } from '@/components/Navbar';
 import { PricingHeader } from '@/components/pricing/PricingHeader';
 import { PricingPlansGrid } from '@/components/pricing/PricingPlansGrid';
 import { PricingFAQ } from '@/components/pricing/PricingFAQ';
 import { PricingFooter } from '@/components/pricing/PricingFooter';
 import { SupremeChallengeSection } from '@/components/pricing/SupremeChallengeSection';
+import { getFixedSupremeChallengeQuestions } from '@/utils/fixedSupremeChallengeQuestions';
 
 export default function Pricing() {
   const { subscribed, subscription_tier, loading } = useSubscription();
-  const { todasQuestoes } = useQuestions();
 
-  // Challenge states
+  // Challenge states - usando questões fixas
   const [challengeQuestions, setChallengeQuestions] = useState<any[]>([]);
   const [challengeReady, setChallengeReady] = useState(false);
 
-  // Prepare challenge questions - select shorter questions without images
+  // Preparar questões fixas do desafio
   useEffect(() => {
-    if (todasQuestoes && todasQuestoes.length > 0) {
-      console.log('📚 Preparando questões do desafio...', todasQuestoes.length);
-      
-      // Filter questions: no images, shorter statements, valid structure
-      const validQuestions = todasQuestoes.filter(q => 
-        q && q.id && q.enunciado && q.options && Array.isArray(q.options) && 
-        q.options.length >= 2 && q.correct && q.year && q.area &&
-        !q.image && // No images
-        q.enunciado.length <= 500 && // Shorter statements
-        q.options.every((opt: any) => opt.text && opt.text.length <= 200) // Shorter options
-      );
-      
-      if (validQuestions.length >= 10) {
-        // Shuffle and select 10 questions
-        const shuffled = [...validQuestions].sort(() => Math.random() - 0.5);
-        const selected = shuffled.slice(0, 10);
-        setChallengeQuestions(selected);
-        setChallengeReady(true);
-        console.log('✅ Desafio preparado com', selected.length, 'questões otimizadas');
-      } else {
-        console.error('❌ Questões otimizadas insuficientes:', validQuestions.length);
-        // Fallback to any valid questions if optimized ones are not enough
-        const fallbackQuestions = todasQuestoes.filter(q => 
-          q && q.id && q.enunciado && q.options && Array.isArray(q.options) && 
-          q.options.length >= 2 && q.correct && q.year && q.area
-        );
-        if (fallbackQuestions.length >= 10) {
-          const shuffled = [...fallbackQuestions].sort(() => Math.random() - 0.5);
-          const selected = shuffled.slice(0, 10);
-          setChallengeQuestions(selected);
-          setChallengeReady(true);
-          console.log('✅ Desafio preparado com questões de fallback:', selected.length);
-        }
-      }
+    console.log('🎯 Preparando Desafio Supremo com questões fixas...');
+    
+    try {
+      const fixedQuestions = getFixedSupremeChallengeQuestions();
+      setChallengeQuestions(fixedQuestions);
+      setChallengeReady(true);
+      console.log('✅ Desafio Supremo preparado com questões fixas:', fixedQuestions.length);
+    } catch (error) {
+      console.error('❌ Erro ao preparar questões fixas:', error);
+      setChallengeReady(false);
     }
-  }, [todasQuestoes]);
+  }, []);
 
   return (
     <div className="min-h-screen bg-slate-950">
@@ -66,7 +41,7 @@ export default function Pricing() {
 
           {/* Supreme Challenge Section */}
           <SupremeChallengeSection
-            todasQuestoes={todasQuestoes}
+            todasQuestoes={challengeQuestions} // Usar questões fixas
             challengeQuestions={challengeQuestions}
             challengeReady={challengeReady}
             setChallengeQuestions={setChallengeQuestions}

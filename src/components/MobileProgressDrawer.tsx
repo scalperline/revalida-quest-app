@@ -69,11 +69,11 @@ export function MobileProgressDrawer({
                 
                 <div className="flex items-center gap-1">
                   <Zap className="w-3 h-3 text-orange-300" />
-                  <span className="text-xs font-medium">{userProgress.xp}</span>
+                  <span className="font-medium text-xs">{userProgress.xp}</span>
                 </div>
               </div>
               
-              <ChevronDown className="w-3 h-3 ml-1" />
+              <ChevronDown className="w-3 h-3 ml-1 mx-0 px-0 my-0 py-0" />
             </button>
           </div>}
 

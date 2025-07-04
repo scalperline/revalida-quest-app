@@ -1,15 +1,14 @@
-
 import { CardHeader } from '@/components/ui/card';
 import { Trophy, Crown, Target, Zap, Star } from 'lucide-react';
-
 interface SupremeChallengeHeaderProps {
   hasWonBefore: boolean;
   attemptsLeft: number;
 }
-
-export function SupremeChallengeHeader({ hasWonBefore, attemptsLeft }: SupremeChallengeHeaderProps) {
-  return (
-    <CardHeader className="relative bg-gradient-to-r from-yellow-600/90 via-yellow-500/90 to-yellow-400/90 backdrop-blur-xl p-6 sm:p-8 border-b-4 border-yellow-300/70">
+export function SupremeChallengeHeader({
+  hasWonBefore,
+  attemptsLeft
+}: SupremeChallengeHeaderProps) {
+  return <CardHeader className="relative bg-gradient-to-r from-yellow-600/90 via-yellow-500/90 to-yellow-400/90 backdrop-blur-xl p-6 sm:p-8 border-b-4 border-yellow-300/70">
       <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/20 to-yellow-300/20 animate-pulse"></div>
       
       <div className="relative z-10 text-center">
@@ -17,7 +16,7 @@ export function SupremeChallengeHeader({ hasWonBefore, attemptsLeft }: SupremeCh
           <Trophy className="w-12 h-12 sm:w-16 sm:h-16 text-yellow-800 animate-bounce" />
           <div>
             <h2 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-2">
-              <span className="bg-gradient-to-r from-black via-gray-800 to-yellow-900 bg-clip-text text-transparent animate-pulse">
+              <span className="bg-gradient-to-r from-black via-gray-800 to-yellow-900 bg-clip-text animate-pulse text-3xl text-slate-950">
                 DESAFIO SUPREMO
               </span>
             </h2>
@@ -46,6 +45,5 @@ export function SupremeChallengeHeader({ hasWonBefore, attemptsLeft }: SupremeCh
           </div>
         </div>
       </div>
-    </CardHeader>
-  );
+    </CardHeader>;
 }

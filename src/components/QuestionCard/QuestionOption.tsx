@@ -1,4 +1,5 @@
 
+import { useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { CheckCircle, XCircle } from "lucide-react";
 import { Option } from "@/types/question";
@@ -12,7 +13,7 @@ interface QuestionOptionProps {
   correctAnswer: string;
   userAnswer?: string;
   selectedOption: string | null;
-  onSelect: (optionId: string) => void;
+  onSelect: (optionId: string, sourceElement?: HTMLElement) => void;
 }
 
 export function QuestionOption({ 
@@ -25,6 +26,12 @@ export function QuestionOption({
   selectedOption, 
   onSelect 
 }: QuestionOptionProps) {
+  const buttonRef = useRef<HTMLButtonElement>(null);
+
+  const handleClick = () => {
+    onSelect(option.id, buttonRef.current || undefined);
+  };
+
   const getOptionIcon = (optionId: string) => {
     if (!showAnswer) return null;
 
@@ -47,8 +54,9 @@ export function QuestionOption({
 
   return (
     <Button
+      ref={buttonRef}
       variant="outline"
-      onClick={() => onSelect(option.id)}
+      onClick={handleClick}
       disabled={disabled || showAnswer}
       className={`question-option w-full min-h-[60px] h-auto text-left justify-start border-2 transition-all duration-300 relative overflow-hidden group p-3 sm:p-4 lg:p-6 rounded-xl ${getOptionColor(
         option.id, 
@@ -69,7 +77,6 @@ export function QuestionOption({
         <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
       )}
       
-      {/* Success glow effect */}
       {isCorrect && (
         <div className="absolute inset-0 bg-gradient-to-r from-emerald-400/20 to-green-400/20 animate-pulse"></div>
       )}

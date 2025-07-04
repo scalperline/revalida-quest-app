@@ -10,7 +10,7 @@ import { useLimitChecker } from '@/hooks/useLimitChecker';
 import { LimitReachedModal } from '@/components/LimitReachedModal';
 
 interface ExtendedQuestionCardProps extends QuestionCardProps {
-  onAnswerWithEffects?: (optionId: string, correct: boolean) => void;
+  onAnswerWithEffects?: (optionId: string, correct: boolean, sourceElement?: HTMLElement) => void;
 }
 
 export function QuestionCard({ 
@@ -33,7 +33,7 @@ export function QuestionCard({
     closeLimitModal 
   } = useLimitChecker();
 
-  const handleOptionSelect = async (optionId: string) => {
+  const handleOptionSelect = async (optionId: string, sourceElement?: HTMLElement) => {
     if (disabled || hasAnswered) return;
     
     // Check if user can answer more questions
@@ -56,7 +56,7 @@ export function QuestionCard({
     
     // Call effects callback if provided (for Questions page)
     if (onAnswerWithEffects) {
-      onAnswerWithEffects(optionId, correct);
+      onAnswerWithEffects(optionId, correct, sourceElement);
     }
     
     // Call external handler if provided
@@ -87,7 +87,7 @@ export function QuestionCard({
               option={option}
               isSelected={selectedOption === option.id}
               showAnswer={showFeedback}
-              onSelect={() => handleOptionSelect(option.id)}
+              onSelect={handleOptionSelect}
               disabled={disabled || hasAnswered}
               correctAnswer={question.correct}
               userAnswer={userAnswer}

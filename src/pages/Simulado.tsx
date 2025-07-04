@@ -4,6 +4,7 @@ import { useGamification } from "@/hooks/useGamification";
 import { useAudio } from "@/hooks/useAudio";
 import { useQuestions } from "@/hooks/useQuestions";
 import { useLimitChecker } from "@/hooks/useLimitChecker";
+import { useXPPillAnimation } from "@/hooks/useXPPillAnimation";
 import { FloatingTimer } from "@/components/FloatingTimer";
 import { SimuladoFilters } from "@/components/SimuladoFilters";
 import { QuestionCard } from "@/components/QuestionCard";
@@ -12,6 +13,7 @@ import { LevelUpNotification } from "@/components/LevelUpNotification";
 import { AchievementNotification } from "@/components/AchievementNotification";
 import { ConfettiAnimation } from "@/components/ConfettiAnimation";
 import { LimitReachedModal } from "@/components/LimitReachedModal";
+import { XPPillAnimation } from "@/components/XPPillAnimation";
 import { Trophy, Clock, Target, Zap, ArrowLeft, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -35,7 +37,6 @@ export default function Simulado() {
     closeLimitModal 
   } = useLimitChecker();
   
-  // Só chama useSimulado quando há configuração ou quando está na tela inicial
   const simulado = useSimulado(
     questoesAnoSelecionado, 
     configuracao || undefined
@@ -49,10 +50,17 @@ export default function Simulado() {
   } = useGamification();
   const { playSound } = useAudio();
 
-  // Check for newly unlocked achievements
+  const {
+    isAnimating,
+    xpAmount,
+    startPosition,
+    endPosition,
+    triggerXPAnimation,
+    resetAnimation
+  } = useXPPillAnimation();
+
   const newlyUnlockedAchievement = getNewlyUnlockedAchievement();
 
-  // Track time elapsed - CORRIGIDO: só atualizar se simulado estiver rodando
   useEffect(() => {
     if (iniciado && !finalizado && !simulado.terminou && startTime) {
       const interval = setInterval(() => {
@@ -62,7 +70,6 @@ export default function Simulado() {
     }
   }, [iniciado, finalizado, simulado.terminou, startTime]);
 
-  // Reset questão respondida quando mudar de questão
   useEffect(() => {
     console.log('=== EFFECT RESET QUESTAO RESPONDIDA ===');
     console.log('Índice da questão:', simulado.index);
@@ -76,7 +83,6 @@ export default function Simulado() {
     console.log('=== FIM EFFECT ===');
   }, [simulado.index, simulado.atual?.id]);
 
-  // Handle achievement notification
   useEffect(() => {
     if (newlyUnlockedAchievement) {
       playSound('achievement');
@@ -87,11 +93,9 @@ export default function Simulado() {
     console.log('=== CONFIGURAÇÃO SENDO DEFINIDA ===');
     console.log('Nova configuração:', config);
     
-    // Check if user can start a new simulado
     const canStart = await checkSimuladoLimit();
     if (!canStart) return;
     
-    // Garante que a configuração seja válida antes de prosseguir
     if (!config.areas || config.areas.length === 0) {
       alert('Selecione pelo menos uma área para continuar!');
       return;
@@ -102,7 +106,6 @@ export default function Simulado() {
       return;
     }
     
-    // Increment simulado usage
     await incrementSimuladoUsage();
     
     setConfiguracao(config);
@@ -121,18 +124,28 @@ export default function Simulado() {
     console.log('=== FIM CONFIGURAÇÃO ===');
   }
 
-  function handleResposta(optionId: string) {
+  function handleResposta(optionId: string, correct: boolean, sourceElement?: HTMLElement) {
     console.log('=== RESPOSTA SELECIONADA ===');
     console.log('ID da opção:', optionId);
     console.log('ID da questão:', simulado.atual?.id);
+    console.log('Resposta correta?', correct);
     
-    playSound('click');
+    playSound(correct ? 'correct' : 'incorrect');
     simulado.responder(optionId);
     setQuestaoRespondida(true);
+    
+    if (correct && sourceElement && window.innerWidth < 768) {
+      const xpPoints = 15;
+      triggerXPAnimation(xpPoints, sourceElement);
+    }
     
     console.log('questaoRespondida definida como true');
     console.log('=== FIM RESPOSTA ===');
   }
+
+  const handleAnimationComplete = () => {
+    resetAnimation();
+  };
 
   function handleContinuar() {
     console.log('=== CONTINUANDO PARA PRÓXIMA QUESTÃO ===');
@@ -141,13 +154,10 @@ export default function Simulado() {
     
     playSound('click');
     
-    // Reset ANTES de ir para próxima questão
     setQuestaoRespondida(false);
     
-    // Navegar para próxima
     simulado.proxima();
     
-    // Scroll to top smoothly
     window.scrollTo({ top: 0, behavior: 'smooth' });
     
     console.log('questaoRespondida resetada para false');
@@ -158,7 +168,6 @@ export default function Simulado() {
   function encerrar() {
     setFinalizado(true);
     
-    // Calculate score and update gamification
     const acertos = simulado.questoesSelecionadas.filter(
       (q) => simulado.respostas[q.id] === q.correct
     ).length;
@@ -166,10 +175,8 @@ export default function Simulado() {
     const previousLevel = userProgress.level;
     completeSimulado(acertos, simulado.total);
     
-    // Trigger celebrations
     setShowConfetti(true);
     
-    // Check for level up
     setTimeout(() => {
       if (userProgress.level > previousLevel) {
         setNewLevel(userProgress.level);
@@ -178,7 +185,6 @@ export default function Simulado() {
       }
     }, 500);
     
-    // Play completion sound
     if (acertos / simulado.total >= 0.7) {
       playSound('achievement');
     } else {
@@ -199,13 +205,8 @@ export default function Simulado() {
     console.log('=== FIM VOLTAR ===');
   }
 
-  // Count answered questions
   const answeredCount = Object.keys(simulado.respostas).length;
-
-  // Verificar se a quantidade de questões condiz com a configuração
   const questoesInsuficientes = configuracao && simulado.total < configuracao.quantidade;
-
-  // Estado do timer: rodando apenas se iniciado, não finalizado e não terminou
   const timerRunning = iniciado && !finalizado && !simulado.terminou;
 
   console.log('=== DEBUG GERAL SIMULADO ===');
@@ -230,7 +231,6 @@ export default function Simulado() {
       <div className="container mx-auto px-4 py-6">
         <div className="max-w-4xl mx-auto">
           
-          {/* Tela de Configuração */}
           {!configuracao && (
             <div className="pt-8">
               <div className="text-center mb-8">
@@ -246,7 +246,6 @@ export default function Simulado() {
             </div>
           )}
 
-          {/* Alerta de questões insuficientes */}
           {questoesInsuficientes && iniciado && !finalizado && (
             <div className="mb-6 p-4 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-xl">
               <div className="flex items-center gap-2 text-yellow-800 dark:text-yellow-200">
@@ -261,7 +260,6 @@ export default function Simulado() {
             </div>
           )}
 
-          {/* Tela de Resultados */}
           {(finalizado || simulado.terminou) && (
             <div className="pt-8">
               <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 border border-blue-100 dark:border-gray-700">
@@ -280,7 +278,6 @@ export default function Simulado() {
                     ).length} de {simulado.total} questões!
                   </div>
                   
-                  {/* Resumo da Performance */}
                   <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
                     <div className="bg-gradient-to-r from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 p-4 rounded-xl border border-blue-200 dark:border-blue-700 shadow-sm">
                       <div className="text-2xl font-bold text-blue-700 dark:text-blue-400">
@@ -327,10 +324,8 @@ export default function Simulado() {
             </div>
           )}
 
-          {/* Tela do Simulado em Andamento */}
           {iniciado && !finalizado && !simulado.terminou && configuracao && (
             <div className="pt-8">
-              {/* Header com botão voltar */}
               <div className="mb-6 flex items-center justify-between">
                 <Button
                   variant="outline"
@@ -352,16 +347,14 @@ export default function Simulado() {
                 
                 {simulado.atual && (
                   <div>
-                    {/* Usando key para forçar re-render quando muda questão */}
                     <QuestionCard
                       key={`${simulado.atual.id}-${simulado.index}`}
                       question={simulado.atual}
                       showAnswer={questaoRespondida}
-                      onAnswer={handleResposta}
+                      onAnswerWithEffects={handleResposta}
                       disabled={questaoRespondida}
                     />
                     
-                    {/* Botão Continuar - só aparece quando respondida */}
                     {questaoRespondida && (
                       <div className="flex justify-center mt-8">
                         <Button
@@ -377,7 +370,6 @@ export default function Simulado() {
                 )}
               </div>
 
-              {/* Floating Timer - CORRIGIDO: passa timeElapsed e running correto */}
               <FloatingTimer
                 running={timerRunning}
                 onFinish={encerrar}
@@ -390,7 +382,6 @@ export default function Simulado() {
             </div>
           )}
 
-          {/* Botão Finalizar quando terminou */}
           {iniciado && !finalizado && simulado.terminou && (
             <div className="text-center mt-12">
               <button
@@ -403,6 +394,14 @@ export default function Simulado() {
           )}
         </div>
       </div>
+      
+      <XPPillAnimation
+        isVisible={isAnimating}
+        xpAmount={xpAmount}
+        startPosition={startPosition}
+        endPosition={endPosition}
+        onAnimationComplete={handleAnimationComplete}
+      />
       
       <ConfettiAnimation 
         trigger={showConfetti} 

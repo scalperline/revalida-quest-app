@@ -2,6 +2,7 @@ import { CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Target, Trophy, Sparkles, Zap, Crown } from 'lucide-react';
+
 interface SupremeChallengeContentProps {
   canStartChallenge: boolean;
   attemptsLeft: number;
@@ -10,6 +11,7 @@ interface SupremeChallengeContentProps {
   onStartChallenge: () => void;
   onResetAttempts: () => void;
 }
+
 export function SupremeChallengeContent({
   canStartChallenge,
   attemptsLeft,
@@ -25,7 +27,6 @@ export function SupremeChallengeContent({
         
         <div className="relative z-10">
           <h3 className="text-2xl sm:text-3xl font-bold mb-4 flex items-center justify-center gap-3 text-gray-50">
-            
             RECOMPENSA SUPREMA
           </h3>
           <div className="text-center mb-6">
@@ -76,7 +77,7 @@ export function SupremeChallengeContent({
               <div className="absolute inset-0 rounded-full bg-gradient-to-r from-yellow-400/20 to-yellow-300/20 animate-pulse"></div>
               <div className="relative z-10 flex items-center gap-3 sm:gap-4">
                 <Trophy className="w-6 h-6 sm:w-8 sm:h-8" />
-                {challengeReady ? '🚀 INICIAR DESAFIO SUPREMO' : '⏳ Carregando questões...'}
+                {challengeReady ? 'INICIAR DESAFIO SUPREMO' : '⏳ Carregando questões...'}
                 <Crown className="w-6 h-6 sm:w-8 sm:h-8" />
               </div>
             </Button>

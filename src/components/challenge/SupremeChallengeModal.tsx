@@ -4,6 +4,7 @@ import { useChallengeTimer } from '@/hooks/useChallengeTimer';
 import { useChallengeAudio } from '@/hooks/useChallengeAudio';
 import { useVirtualCoins } from '@/hooks/useVirtualCoins';
 import { CoinAnimationPill } from './CoinAnimationPill';
+import { SupremeChallengeVictoryModal } from './SupremeChallengeVictoryModal';
 import { SupremeChallengeModalHeader } from './supreme-modal/SupremeChallengeModalHeader';
 import { SupremeChallengeQuestionCard } from './supreme-modal/SupremeChallengeQuestionCard';
 import { SupremeChallengeLoadingState } from './supreme-modal/SupremeChallengeLoadingState';
@@ -13,20 +14,16 @@ import { toast } from 'sonner';
 interface SupremeChallengeModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onVictory: (coins: number, discount: number) => void;
-  onChallengeEnd: () => void;
   questions: any[];
 }
 
 export function SupremeChallengeModal({ 
   isOpen, 
   onClose, 
-  onVictory, 
-  onChallengeEnd, 
   questions 
 }: SupremeChallengeModalProps) {
   const { playSound } = useChallengeAudio();
-  const { coinSystem, calculateCoins, resetSession, getDiscountAmount } = useVirtualCoins();
+  const { coinSystem, calculateCoins, resetSession } = useVirtualCoins();
   
   // Challenge state
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -36,6 +33,7 @@ export function SupremeChallengeModal({
   const [score, setScore] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [isCompleted, setIsCompleted] = useState(false);
+  const [showVictoryModal, setShowVictoryModal] = useState(false);
   
   // Animation state
   const [coinAnimation, setCoinAnimation] = useState<{
@@ -191,16 +189,20 @@ export function SupremeChallengeModal({
       stop();
       
       if (hasWon) {
-        const discount = getDiscountAmount();
         playSound('victory');
-        onVictory(coinSystem.totalCoins, discount);
+        localStorage.setItem('premium_challenge_won', 'true');
+        setShowVictoryModal(true);
+        
+        toast.success("🏆 DESAFIO SUPREMO CONQUISTADO! Seu prêmio está pronto!", {
+          duration: 6000,
+          className: "bg-gradient-to-r from-yellow-500 to-orange-500 text-white border-0"
+        });
       } else {
         toast.error(`💪 Quase lá! Você acertou ${score}/${questions.length}. Tente novamente!`, {
           duration: 4000,
           className: "bg-gradient-to-r from-blue-500 to-purple-500 text-white border-0"
         });
         setTimeout(() => {
-          onChallengeEnd();
           onClose();
         }, 2000);
       }
@@ -225,6 +227,11 @@ export function SupremeChallengeModal({
 
   const handleClose = () => {
     stop();
+    onClose();
+  };
+
+  const handleVictoryModalClose = () => {
+    setShowVictoryModal(false);
     onClose();
   };
 
@@ -293,6 +300,11 @@ export function SupremeChallengeModal({
         isVisible={coinAnimation.show}
         position={coinAnimation.position}
         onAnimationComplete={() => setCoinAnimation({ show: false, coins: 0, position: { x: 0, y: 0 } })}
+      />
+
+      <SupremeChallengeVictoryModal
+        isOpen={showVictoryModal}
+        onClose={handleVictoryModalClose}
       />
     </>
   );

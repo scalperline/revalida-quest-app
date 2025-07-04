@@ -50,14 +50,14 @@ export function QuestionOption({
       variant="outline"
       onClick={() => onSelect(option.id)}
       disabled={disabled || showAnswer}
-      className={`w-full p-3 xs:p-4 sm:p-6 h-auto text-left justify-start border-2 transition-all duration-300 relative overflow-hidden group ${getOptionColor(
+      className={`w-full p-4 sm:p-6 h-auto text-left justify-start border-2 transition-all duration-300 relative overflow-hidden group ${getOptionColor(
         option.id, 
         showAnswer, 
         selectedOption, 
         userAnswer, 
         correctAnswer
       )} ${
-        !disabled && !showAnswer ? "hover:scale-[1.02] cursor-pointer hover:shadow-lg" : "cursor-default"
+        !disabled && !showAnswer ? "hover:scale-[1.01] cursor-pointer hover:shadow-md" : "cursor-default"
       } ${
         isCorrect ? "ring-2 ring-emerald-400 ring-offset-2" : ""
       } ${
@@ -74,9 +74,9 @@ export function QuestionOption({
         <div className="absolute inset-0 bg-gradient-to-r from-emerald-400/20 to-green-400/20 animate-pulse"></div>
       )}
       
-      <div className="flex items-start gap-2 xs:gap-3 sm:gap-4 w-full relative z-10">
-        <div className="flex items-center gap-1.5 xs:gap-2 sm:gap-3">
-          <div className={`flex-shrink-0 w-6 h-6 xs:w-8 xs:h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center font-bold text-xs xs:text-sm sm:text-base transition-all duration-300 ${
+      <div className="flex items-start gap-3 sm:gap-4 w-full relative z-10">
+        <div className="flex items-center gap-2 sm:gap-3">
+          <div className={`flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center font-bold text-sm sm:text-base transition-all duration-300 ${
             isCorrect 
               ? "bg-emerald-500 text-white shadow-lg" 
               : isUserAnswer && !isCorrect
@@ -90,7 +90,7 @@ export function QuestionOption({
           {getOptionIcon(option.id)}
         </div>
         <div className="flex-1 text-left min-w-0">
-          <span className="text-sm xs:text-base sm:text-lg leading-relaxed text-gray-800 dark:text-gray-200 whitespace-normal break-words block">
+          <span className="responsive-text-body text-gray-800 dark:text-gray-200 whitespace-normal break-words block">
             {option.text}
           </span>
         </div>

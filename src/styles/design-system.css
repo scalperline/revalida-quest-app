@@ -40,21 +40,63 @@
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
 
-    /* Revalida Quest - Blue Medical Theme Colors */
-    --medical-blue-primary: 221 83% 53%; /* #3b82f6 */
-    --medical-blue-secondary: 224 76% 48%; /* #1e40af */
-    --medical-blue-light: 213 93% 68%; /* #60a5fa */
-    --medical-blue-glass: 221 83% 53% / 0.1; /* glassmorphism */
-    --medical-white: 0 0% 100%;
-    --medical-gray-text: 215 20% 65%; /* #64748b */
-    --medical-gray-light: 210 40% 96%; /* #f1f5f9 */
+    /* Responsive spacing scale */
+    --spacing-xs: 0.25rem;    /* 4px */
+    --spacing-sm: 0.5rem;     /* 8px */
+    --spacing-md: 1rem;       /* 16px */
+    --spacing-lg: 1.5rem;     /* 24px */
+    --spacing-xl: 2rem;       /* 32px */
+    --spacing-2xl: 3rem;      /* 48px */
+    --spacing-3xl: 4rem;      /* 64px */
+
+    /* Responsive font scale */
+    --text-2xs: 0.625rem;     /* 10px */
+    --text-xs: 0.75rem;       /* 12px */
+    --text-sm: 0.875rem;      /* 14px */
+    --text-base: 1rem;        /* 16px */
+    --text-lg: 1.125rem;      /* 18px */
+    --text-xl: 1.25rem;       /* 20px */
+    --text-2xl: 1.5rem;       /* 24px */
+    --text-3xl: 1.875rem;     /* 30px */
+    --text-4xl: 2.25rem;      /* 36px */
+
+    /* RevalidaQuest Medical Theme */
+    --medical-blue-primary: 221 83% 53%;
+    --medical-blue-secondary: 224 76% 48%;
+    --medical-blue-light: 213 93% 68%;
+    --medical-blue-dark: 224 76% 35%;
+    --medical-blue-glass: 221 83% 53% / 0.1;
+    
+    --medical-background-primary: 213 100% 97%;
+    --medical-background-secondary: 210 40% 96%;
+    --medical-background-accent: 221 83% 53% / 0.05;
+    
+    --medical-text-primary: 222.2 84% 4.9%;
+    --medical-text-secondary: 215 20% 65%;
+    --medical-text-muted: 215.4 16.3% 46.9%;
     
     /* Gamification Colors */
-    --success-green: 142 76% 36%; /* #059669 */
-    --warning-gold: 45 93% 47%; /* #d97706 */
+    --success-green: 142 76% 36%;
+    --warning-gold: 45 93% 47%;
+    --info-blue: 221 83% 53%;
+    --error-red: 0 84.2% 60.2%;
+    
     --badge-verified: 142 76% 36%;
     --badge-gamified: 45 93% 47%;
     --badge-competitive: 221 83% 53%;
+
+    /* Glass morphism effects */
+    --glass-light: 255 255 255 / 0.25;
+    --glass-dark: 0 0 0 / 0.1;
+    --backdrop-blur: blur(16px);
+    
+    /* Shadow system */
+    --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+    --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
   }
 
   .dark {
@@ -85,6 +127,7 @@
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
+    
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -93,5 +136,61 @@
     --sidebar-accent-foreground: 240 4.8% 95.9%;
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+    /* Dark theme medical colors */
+    --medical-background-primary: 222.2 84% 4.9%;
+    --medical-background-secondary: 217.2 32.6% 17.5%;
+    --medical-background-accent: 217 91% 60% / 0.1;
+    
+    --medical-text-primary: 210 40% 98%;
+    --medical-text-secondary: 215 20.2% 65.1%;
+    --medical-text-muted: 215 20.2% 55%;
+
+    /* Dark glass effects */
+    --glass-light: 255 255 255 / 0.1;
+    --glass-dark: 0 0 0 / 0.3;
+  }
+
+  /* Responsive utility classes */
+  .responsive-container {
+    @apply w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .responsive-grid-cards {
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4 lg:gap-6;
+  }
+
+  .responsive-flex-between {
+    @apply flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4;
+  }
+
+  .responsive-text-heading {
+    @apply text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold;
+  }
+
+  .responsive-text-body {
+    @apply text-sm sm:text-base md:text-lg leading-relaxed;
+  }
+
+  .responsive-padding {
+    @apply p-3 sm:p-4 md:p-6 lg:p-8;
+  }
+
+  .responsive-margin {
+    @apply m-3 sm:m-4 md:m-6 lg:m-8;
+  }
+
+  /* Glass morphism utility */
+  .glass-effect {
+    @apply bg-white/25 dark:bg-white/10 backdrop-blur-md border border-white/20 dark:border-white/10;
+  }
+
+  /* Medical theme button variants */
+  .btn-medical-primary {
+    @apply bg-blue-600 hover:bg-blue-700 text-white shadow-md hover:shadow-lg transition-all duration-200;
+  }
+
+  .btn-medical-secondary {
+    @apply bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 hover:border-blue-300 transition-all duration-200;
   }
 }

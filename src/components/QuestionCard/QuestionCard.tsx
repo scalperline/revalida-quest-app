@@ -70,39 +70,41 @@ export function QuestionCard({
 
   return (
     <>
-      <div className="bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm rounded-xl xs:rounded-2xl sm:rounded-3xl shadow-lg xs:shadow-xl sm:shadow-2xl p-3 xs:p-4 sm:p-6 lg:p-8 border-2 border-blue-200/50 dark:border-blue-700/50 transition-all duration-300 hover:shadow-xl xs:hover:shadow-2xl sm:hover:shadow-3xl mb-4 xs:mb-6 sm:mb-8">
-        {!hideHeader && (
-          <QuestionHeader 
-            question={question} 
-            isCorrect={showFeedback ? isCorrect : undefined}
-          />
-        )}
-        
-        <QuestionContent question={question} />
-        
-        <div className="space-y-2 xs:space-y-3 sm:space-y-4">
-          {question.options.map((option) => (
-            <QuestionOption
-              key={option.id}
-              option={option}
-              isSelected={selectedOption === option.id}
-              showAnswer={showFeedback}
-              onSelect={() => handleOptionSelect(option.id)}
-              disabled={disabled || hasAnswered}
-              correctAnswer={question.correct}
-              userAnswer={userAnswer}
-              selectedOption={selectedOption}
+      <div className="bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm rounded-2xl sm:rounded-3xl shadow-lg hover:shadow-xl transition-all duration-300 border border-blue-200/50 dark:border-blue-700/50 overflow-hidden">
+        <div className="responsive-padding">
+          {!hideHeader && (
+            <QuestionHeader 
+              question={question} 
+              isCorrect={showFeedback ? isCorrect : undefined}
             />
-          ))}
+          )}
+          
+          <QuestionContent question={question} />
+          
+          <div className="space-y-3 sm:space-y-4 mt-6">
+            {question.options.map((option) => (
+              <QuestionOption
+                key={option.id}
+                option={option}
+                isSelected={selectedOption === option.id}
+                showAnswer={showFeedback}
+                onSelect={() => handleOptionSelect(option.id)}
+                disabled={disabled || hasAnswered}
+                correctAnswer={question.correct}
+                userAnswer={userAnswer}
+                selectedOption={selectedOption}
+              />
+            ))}
+          </div>
+          
+          {showFeedback && (
+            <QuestionFeedback 
+              question={question}
+              selectedOption={selectedOption}
+              isCorrect={isCorrect}
+            />
+          )}
         </div>
-        
-        {showFeedback && (
-          <QuestionFeedback 
-            question={question}
-            selectedOption={selectedOption}
-            isCorrect={isCorrect}
-          />
-        )}
       </div>
       
       <LimitReachedModal 

@@ -66,7 +66,7 @@ export function SupremeChallengeContent({
           <div className="mt-6 p-4 bg-gradient-to-r from-purple-900/50 to-indigo-900/50 rounded-xl border border-purple-500/30">
             <p className="text-sm text-purple-200 flex items-center justify-center gap-2">
               <Target className="w-4 h-4" />
-              <span>10 questões oficiais fixas • Você pode memorizar as alternativas!</span>
+              <span>Desafio Por Tempo Limitado</span>
             </p>
           </div>
         </div>

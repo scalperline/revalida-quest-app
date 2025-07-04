@@ -61,10 +61,10 @@ export function MobileProgressDrawer({ isVisible = true, onXPReceived }: MobileP
       )}
       
       {/* Drawer Container */}
-      <div className="fixed top-14 left-0 right-0 z-50 md:hidden">
+      <div className="fixed top-14 right-0 z-50 md:hidden">
         {/* Collapsed State - Arrow Button */}
         {!isExpanded && (
-          <div className="flex justify-center">
+          <div className="flex justify-end pr-3">
             <button
               onClick={toggleDrawer}
               className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-3 py-1.5 rounded-b-lg shadow-md hover:shadow-lg transition-all duration-300 flex items-center gap-1.5"
@@ -77,7 +77,7 @@ export function MobileProgressDrawer({ isVisible = true, onXPReceived }: MobileP
 
         {/* Expanded State - Full Drawer */}
         {isExpanded && (
-          <div className={`bg-white/95 backdrop-blur-md border-b-2 border-blue-100 shadow-xl ${animationClass}`}>
+          <div className={`bg-white/95 backdrop-blur-md border-b-2 border-blue-100 shadow-xl w-screen ${animationClass}`}>
             {/* Header with Close Button */}
             <div className="flex justify-between items-center p-4 border-b border-gray-200">
               <h3 className="text-lg font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">

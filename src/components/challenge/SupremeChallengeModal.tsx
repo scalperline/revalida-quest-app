@@ -73,12 +73,32 @@ export function SupremeChallengeModal({
     }
   });
 
-  // Start timer when modal opens
+  // Hide navbar when challenge is active
   useEffect(() => {
     if (isOpen && isQuestionsReady) {
+      // Hide navbar
+      const navbar = document.querySelector('nav');
+      if (navbar) {
+        navbar.style.display = 'none';
+      }
+      
+      // Prevent body scroll
+      document.body.style.overflow = 'hidden';
+      
       console.log('🕐 Timer do desafio iniciado');
       start();
     }
+
+    return () => {
+      // Show navbar again when modal closes
+      const navbar = document.querySelector('nav');
+      if (navbar) {
+        navbar.style.display = '';
+      }
+      
+      // Restore body scroll
+      document.body.style.overflow = '';
+    };
   }, [isOpen, isQuestionsReady, start]);
 
   // Reset states when modal closes
@@ -213,7 +233,7 @@ export function SupremeChallengeModal({
   return (
     <>
       <Dialog open={isOpen} onOpenChange={handleClose}>
-        <DialogContent className="max-w-6xl h-screen overflow-hidden p-0 border-0 bg-gradient-to-br from-slate-900 via-purple-900/90 to-indigo-900">
+        <DialogContent className="max-w-full max-h-full h-screen w-screen overflow-hidden p-0 border-0 bg-gradient-to-br from-slate-900 via-purple-900/90 to-indigo-900">
           <DialogTitle className="sr-only">Desafio Supremo</DialogTitle>
           <DialogDescription className="sr-only">Complete o desafio para ganhar desconto premium</DialogDescription>
           
@@ -235,19 +255,21 @@ export function SupremeChallengeModal({
               onClose={handleClose}
             />
 
-            {/* Conteúdo principal */}
-            <div className="flex-1 flex flex-col p-4 sm:p-6 overflow-hidden relative z-10">
+            {/* Conteúdo principal - com scroll */}
+            <div className="flex-1 flex flex-col overflow-y-auto relative z-10 px-4 sm:px-6">
               {!isQuestionsReady && <SupremeChallengeLoadingState />}
 
               {isQuestionsReady && currentQuestion && (
-                <SupremeChallengeQuestionCard
-                  currentQuestion={currentQuestion}
-                  currentQuestionIndex={currentQuestionIndex}
-                  totalQuestions={questions.length}
-                  selectedAnswer={selectedAnswer}
-                  showFeedback={showFeedback}
-                  onAnswer={handleAnswer}
-                />
+                <div className="py-4">
+                  <SupremeChallengeQuestionCard
+                    currentQuestion={currentQuestion}
+                    currentQuestionIndex={currentQuestionIndex}
+                    totalQuestions={questions.length}
+                    selectedAnswer={selectedAnswer}
+                    showFeedback={showFeedback}
+                    onAnswer={handleAnswer}
+                  />
+                </div>
               )}
             </div>
 

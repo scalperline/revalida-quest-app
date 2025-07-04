@@ -50,14 +50,14 @@ export function QuestionOption({
       variant="outline"
       onClick={() => onSelect(option.id)}
       disabled={disabled || showAnswer}
-      className={`w-full p-3 sm:p-4 md:p-6 min-h-[60px] sm:min-h-[70px] h-auto text-left justify-start border-2 transition-all duration-300 relative group ${getOptionColor(
+      className={`w-full p-4 sm:p-6 min-h-[60px] sm:min-h-[70px] h-auto text-left justify-start border-2 transition-all duration-300 relative group rounded-xl whitespace-normal break-words overflow-hidden ${getOptionColor(
         option.id, 
         showAnswer, 
         selectedOption, 
         userAnswer, 
         correctAnswer
       )} ${
-        !disabled && !showAnswer ? "hover:scale-[1.01] cursor-pointer hover:shadow-md" : "cursor-default"
+        !disabled && !showAnswer ? "cursor-pointer hover:shadow-md" : "cursor-default"
       } ${
         isCorrect ? "ring-2 ring-emerald-400 ring-offset-2" : ""
       } ${
@@ -90,7 +90,7 @@ export function QuestionOption({
           {getOptionIcon(option.id)}
         </div>
         <div className="flex-1 text-left min-w-0">
-          <span className="text-sm sm:text-base md:text-lg text-gray-800 dark:text-gray-200 leading-relaxed block break-words whitespace-normal">
+          <span className="text-sm sm:text-base md:text-lg text-gray-800 dark:text-gray-200 leading-relaxed block break-words whitespace-normal overflow-hidden">
             {option.text}
           </span>
         </div>

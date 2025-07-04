@@ -60,7 +60,7 @@ export function QuestionCard({
   };
 
   const getOptionClasses = (status: string) => {
-    const baseClasses = "w-full text-left p-4 rounded-xl border-2 transition-all duration-300 transform hover:scale-[1.02]";
+    const baseClasses = "w-full text-left p-4 sm:p-6 rounded-xl border-2 transition-all duration-300 whitespace-normal break-words overflow-hidden h-auto";
     
     switch (status) {
       case 'selected':

@@ -55,7 +55,7 @@ export function SupremeChallengeContent({
             </div>
             <div className="flex items-center gap-2">
               <Crown className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-400 flex-shrink-0" />
-              <span>Suporte prioritário</span>
+              <span className="text-white">Suporte prioritário</span>
             </div>
           </div>
         </div>
@@ -81,7 +81,7 @@ export function SupremeChallengeContent({
               </div>
             </Button>
             
-            <p className="text-yellow-300 mt-4 text-sm sm:text-base">
+            <p className="mt-4 text-sm sm:text-base text-white">
               💡 Tentativas restantes: <span className="text-yellow-400 font-bold">{attemptsLeft}</span>
             </p>
             

@@ -83,6 +83,49 @@
     }
   }
 
+  /* New Drawer Animations */
+  @keyframes slide-in-down {
+    0% {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes slide-out-up {
+    0% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+  }
+
+  /* XP Pill Flight Animation */
+  @keyframes xp-flight {
+    0% {
+      transform: translate(0, 0) scale(1);
+      opacity: 1;
+    }
+    25% {
+      transform: translate(calc(var(--delta-x) * 0.3), calc(var(--delta-y) * 0.1)) scale(1.2);
+      opacity: 1;
+    }
+    75% {
+      transform: translate(calc(var(--delta-x) * 0.8), calc(var(--delta-y) * 0.8)) scale(1.1);
+      opacity: 0.8;
+    }
+    100% {
+      transform: translate(var(--delta-x), var(--delta-y)) scale(0.8);
+      opacity: 0;
+    }
+  }
+
   /* Bounce Enhanced */
   @keyframes bounce-enhanced {
     0%, 20%, 53%, 80%, 100% {
@@ -177,6 +220,18 @@
     animation: slide-in-left 0.5s ease-out forwards;
   }
 
+  .animate-slide-in-down {
+    animation: slide-in-down 0.3s ease-out forwards;
+  }
+
+  .animate-slide-out-up {
+    animation: slide-out-up 0.3s ease-out forwards;
+  }
+
+  .animate-xp-flight {
+    animation: xp-flight 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  }
+
   .animate-bounce-enhanced {
     animation: bounce-enhanced 1s infinite;
   }
@@ -232,11 +287,14 @@
     .animate-scale-in,
     .animate-slide-in-right,
     .animate-slide-in-left,
+    .animate-slide-in-down,
+    .animate-slide-out-up,
     .animate-bounce-enhanced,
     .animate-pulse-enhanced,
     .animate-wobble,
     .animate-stagger-in,
-    .animate-glow {
+    .animate-glow,
+    .animate-xp-flight {
       animation: none;
     }
     

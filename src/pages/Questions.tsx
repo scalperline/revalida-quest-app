@@ -1,12 +1,15 @@
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Navbar } from "@/components/Navbar";
 import { QuestionCard } from "@/components/QuestionCard";
 import { GamifiedQuestionsHeader } from "@/components/GamifiedQuestionsHeader";
 import { QuestionsPagination } from "@/components/QuestionsPagination";
 import { ConfettiAnimation } from "@/components/ConfettiAnimation";
+import { MobileProgressDrawer } from "@/components/MobileProgressDrawer";
+import { XPPillAnimation } from "@/components/XPPillAnimation";
 import { useQuestionsFilters } from "@/hooks/useQuestionsFilters";
 import { useAudio } from "@/hooks/useAudio";
+import { useXPPillAnimation } from "@/hooks/useXPPillAnimation";
 import { getDefaultTipoProva } from "@/utils/questionSelector";
 
 export default function Questions() {
@@ -17,8 +20,18 @@ export default function Questions() {
   const [selectedArea, setSelectedArea] = useState("Todos");
   const [selectedDifficulty, setSelectedDifficulty] = useState("Todas");
   const [showConfetti, setShowConfetti] = useState(false);
+  const [drawerXPReceived, setDrawerXPReceived] = useState(false);
 
+  const drawerRef = useRef<HTMLDivElement>(null);
   const { playSound } = useAudio();
+  const {
+    isAnimating,
+    xpAmount,
+    startPosition,
+    endPosition,
+    triggerXPAnimation,
+    resetAnimation
+  } = useXPPillAnimation();
 
   const {
     filteredQuestions,
@@ -36,7 +49,6 @@ export default function Questions() {
   const handleAnoChange = (ano: number) => {
     setAnoSelecionado(ano);
     setCurrentPage(1);
-    // Set appropriate default tipo for the selected year
     const defaultTipo = getDefaultTipoProva(ano);
     setTipoProva(defaultTipo);
   };
@@ -46,12 +58,28 @@ export default function Questions() {
     setCurrentPage(1);
   };
 
-  const handleQuestionAnswer = (questionId: number, optionId: string, correct: boolean) => {
+  const handleQuestionAnswer = (questionId: number, optionId: string, correct: boolean, sourceElement?: HTMLElement) => {
     playSound(correct ? 'correct' : 'incorrect');
     
     if (correct) {
       setShowConfetti(true);
+      
+      // Trigger XP animation on mobile
+      if (sourceElement && window.innerWidth < 768) {
+        const xpPoints = 10; // Base XP amount
+        triggerXPAnimation(xpPoints, sourceElement);
+        setDrawerXPReceived(true);
+        
+        // Reset drawer state after animation
+        setTimeout(() => {
+          setDrawerXPReceived(false);
+        }, 4000);
+      }
     }
+  };
+
+  const handleAnimationComplete = () => {
+    resetAnimation();
   };
 
   return (
@@ -65,6 +93,21 @@ export default function Questions() {
       </div>
 
       <Navbar />
+      
+      {/* Mobile Progress Drawer */}
+      <MobileProgressDrawer 
+        onXPReceived={drawerXPReceived ? () => {} : undefined}
+      />
+
+      {/* XP Pill Animation */}
+      <XPPillAnimation
+        isVisible={isAnimating}
+        xpAmount={xpAmount}
+        startPosition={startPosition}
+        endPosition={endPosition}
+        onAnimationComplete={handleAnimationComplete}
+      />
+
       <div className="relative z-10 container mx-auto px-4 pt-20 pb-8">
         <div className="max-w-4xl mx-auto">
           <GamifiedQuestionsHeader
@@ -85,8 +128,8 @@ export default function Questions() {
             <QuestionCard 
               key={question.id} 
               question={question}
-              onAnswerWithEffects={(optionId: string, correct: boolean) => {
-                handleQuestionAnswer(question.id, optionId, correct);
+              onAnswerWithEffects={(optionId: string, correct: boolean, sourceElement?: HTMLElement) => {
+                handleQuestionAnswer(question.id, optionId, correct, sourceElement);
               }}
             />
           ))}

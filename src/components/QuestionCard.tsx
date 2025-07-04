@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -26,9 +27,9 @@ export function QuestionCard({
     }
   }, [question.id, userAnswer]);
 
-  const handleOptionSelect = (optionId: string) => {
-    if (showAnswer && !isReviewMode) return; // Don't allow selection when showing answer
-    if (disabled) return; // Don't allow selection when disabled
+  const handleOptionSelect = (optionId: string, event?: React.MouseEvent<HTMLButtonElement>) => {
+    if (showAnswer && !isReviewMode) return;
+    if (disabled) return;
     
     setSelectedOption(optionId);
     
@@ -39,7 +40,9 @@ export function QuestionCard({
     }
     
     if (onAnswerWithEffects) {
-      onAnswerWithEffects(optionId, correct);
+      // Pass the clicked element for animation
+      const sourceElement = event?.currentTarget;
+      onAnswerWithEffects(optionId, correct, sourceElement);
     }
   };
 
@@ -170,7 +173,7 @@ export function QuestionCard({
             return (
               <Button
                 key={optionId}
-                onClick={() => handleOptionSelect(optionId)}
+                onClick={(event) => handleOptionSelect(optionId, event)}
                 className={getOptionClasses(status)}
                 variant="ghost"
                 disabled={disabled || (showAnswer && !isReviewMode)}

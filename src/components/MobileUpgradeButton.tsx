@@ -1,34 +1,23 @@
 
-import { Button } from '@/components/ui/button';
-import { Star } from 'lucide-react';
 import { useSubscription } from '@/hooks/useSubscription';
-import { useNavigate } from 'react-router-dom';
+import { Crown } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Link } from 'react-router-dom';
 
 export function MobileUpgradeButton() {
-  const navigate = useNavigate();
-  const {
-    subscribed,
-    openCustomerPortal
-  } = useSubscription();
+  const { subscribed, loading } = useSubscription();
 
-  const handleUpgrade = () => {
-    if (subscribed) {
-      openCustomerPortal();
-    } else {
-      navigate('/pricing');
-    }
-  };
-
-  const buttonText = subscribed ? 'Gerenciar' : 'Upgrade';
+  if (loading || subscribed) return null;
 
   return (
-    <Button
-      onClick={handleUpgrade}
-      size="sm"
-      className="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-medium shadow-md hover:shadow-lg transition-all duration-300"
-    >
-      <Star className="w-3 h-3 mr-1" />
-      {buttonText}
-    </Button>
+    <Link to="/pricing">
+      <Button 
+        size="sm" 
+        className="bg-gradient-to-r from-yellow-500 to-orange-600 hover:from-yellow-600 hover:to-orange-700 text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-200 text-xs px-3 py-1.5"
+      >
+        <Crown className="w-3 h-3 mr-1" />
+        Upgrade
+      </Button>
+    </Link>
   );
 }

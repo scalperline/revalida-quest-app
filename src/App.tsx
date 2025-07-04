@@ -8,6 +8,7 @@ import Index from '@/pages/Index';
 import Auth from '@/pages/Auth';
 import Questions from '@/pages/Questions';
 import Simulado from '@/pages/Simulado';
+import Missions from '@/pages/Missions';
 import Ranking from '@/pages/Ranking';
 import Profile from '@/pages/Profile';
 import Stats from '@/pages/Stats';
@@ -47,6 +48,14 @@ function App() {
                 element={
                   <ProtectedRoute>
                     <Simulado />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/missions"
+                element={
+                  <ProtectedRoute>
+                    <Missions />
                   </ProtectedRoute>
                 }
               />

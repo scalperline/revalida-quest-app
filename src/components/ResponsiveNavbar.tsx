@@ -7,7 +7,7 @@ import { MobileHamburgerButton } from '@/components/MobileHamburgerButton';
 import { MobileHamburgerMenu } from '@/components/MobileHamburgerMenu';
 import { useAuth } from '@/hooks/useAuth';
 import { useIsMobile } from '@/hooks/use-mobile';
-import { Search, Target, Trophy, BarChart3, User, Crown, Stethoscope, Menu, X } from 'lucide-react';
+import { Search, Target, Trophy, BarChart3, User, Crown, Stethoscope, Menu, X, Flag, Play } from 'lucide-react';
 
 export function ResponsiveNavbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -19,6 +19,8 @@ export function ResponsiveNavbar() {
   const navItems = [
     { to: '/', icon: Search, label: 'Início' },
     { to: '/questions', icon: Target, label: 'Questões' },
+    { to: '/missions', icon: Flag, label: 'Missões' },
+    { to: '/simulado', icon: Play, label: 'Simulado' },
     { to: '/ranking', icon: Trophy, label: 'Ranking' },
     { to: '/stats', icon: BarChart3, label: 'Estatísticas' },
     { to: '/profile', icon: User, label: 'Perfil' },
@@ -56,7 +58,7 @@ export function ResponsiveNavbar() {
         <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
           <div className="flex items-center justify-between h-14 sm:h-16 lg:h-18">
             {/* Logo - Responsive sizing */}
-            <Link to="/" className="flex items-center gap-1.5 sm:gap-2 lg:gap-2 flex-shrink-0 min-w-0">
+            <Link to="/" className="flex items-center gap-1 sm:gap-1.5 lg:gap-2 flex-shrink-0 min-w-0">
               <div className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 bg-gradient-to-br from-blue-600 to-purple-600 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-lg flex-shrink-0">
                 <Stethoscope className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 text-white" />
               </div>
@@ -72,7 +74,7 @@ export function ResponsiveNavbar() {
 
             {/* Desktop Navigation - Hidden on mobile and tablet */}
             {user && (
-              <div className="hidden xl:flex items-center -space-x-px ml-6 lg:ml-8">
+              <div className="hidden xl:flex items-center -space-x-px ml-8 lg:ml-12">
                 {navItems.map(item => {
                   const Icon = item.icon;
                   const isActive = isActivePath(item.to);
@@ -99,7 +101,7 @@ export function ResponsiveNavbar() {
             {/* Tablet Navigation - Visible on tablet only */}
             {user && (
               <div className="hidden md:flex xl:hidden items-center gap-1">
-                {navItems.slice(0, 4).map(item => {
+                {navItems.slice(0, 5).map(item => {
                   const Icon = item.icon;
                   const isActive = isActivePath(item.to);
                   return (
@@ -182,7 +184,7 @@ export function ResponsiveNavbar() {
                 </Button>
               </div>
               <div className="space-y-2">
-                {navItems.slice(4).map(item => {
+                {navItems.slice(5).map(item => {
                   const Icon = item.icon;
                   const isActive = isActivePath(item.to);
                   return (

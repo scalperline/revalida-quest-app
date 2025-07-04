@@ -1,4 +1,3 @@
-
 import { useAuth } from "@/hooks/useAuth";
 import { Navbar } from "@/components/Navbar";
 import { QuickChallenge } from "@/components/QuickChallenge";
@@ -7,7 +6,6 @@ import { AdaptiveSuggestions } from "@/components/AdaptiveSuggestions";
 import { StreakDisplay } from "@/components/StreakDisplay";
 import { BadgesGrid } from "@/components/BadgesGrid";
 import { UsageLimitsCard } from "@/components/UsageLimitsCard";
-import { MobileProgressDrawer } from "@/components/MobileProgressDrawer";
 import { useGamification } from "@/hooks/useGamification";
 import { BookOpen, Target, TrendingUp, Stethoscope, Sparkles, Zap } from "lucide-react";
 
@@ -32,9 +30,6 @@ const Index = () => {
       </div>
 
       <Navbar />
-      
-      {/* Mobile Progress Drawer */}
-      <MobileProgressDrawer />
       
       <main className="relative z-10 pt-16 sm:pt-20 lg:pt-24 pb-6 sm:pb-8">
         <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 xl:px-8">

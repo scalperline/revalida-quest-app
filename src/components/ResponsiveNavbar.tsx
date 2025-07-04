@@ -55,9 +55,9 @@ export function ResponsiveNavbar() {
   return (
     <>
       <nav className="fixed top-0 left-0 right-0 z-50 glass-effect border-b border-border/50">
-        <div className="responsive-container">
-          <div className="flex items-center justify-between h-14 sm:h-16 lg:h-18">
-            {/* Logo - Optimized responsive */}
+        <div className="w-full max-w-none mx-auto px-3 sm:px-4 lg:px-6 xl:px-8">
+          <div className="flex items-center justify-between h-14 sm:h-16 lg:h-18 xl:h-20">
+            {/* Logo - Fixed size and spacing */}
             <Link to="/" className="flex items-center gap-2 sm:gap-3 flex-shrink-0 min-w-0 group hover:scale-105 transition-transform duration-200">
               <div className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 bg-gradient-to-br from-blue-600 to-purple-600 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow duration-200">
                 <Stethoscope className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 text-white" />
@@ -72,25 +72,26 @@ export function ResponsiveNavbar() {
               </div>
             </Link>
 
-            {/* Desktop Navigation - Hidden on mobile and tablet */}
+            {/* Desktop Navigation - Show all items with proper spacing */}
             {user && (
-              <div className="hidden xl:flex items-center gap-1 ml-8">
+              <div className="hidden lg:flex items-center gap-0.5 xl:gap-1 ml-4 xl:ml-8 flex-1 justify-center max-w-4xl">
                 {navItems.map(item => {
                   const Icon = item.icon;
                   const isActive = isActivePath(item.to);
                   return (
-                    <Link key={item.to} to={item.to}>
+                    <Link key={item.to} to={item.to} className="flex-shrink-0">
                       <Button 
                         variant={isActive ? "default" : "ghost"} 
                         size="sm" 
-                        className={`flex items-center gap-2 h-10 px-4 text-sm font-medium transition-all duration-200 ${
+                        className={`flex items-center gap-1.5 xl:gap-2 h-9 xl:h-10 px-2.5 xl:px-4 text-xs xl:text-sm font-medium transition-all duration-200 whitespace-nowrap ${
                           isActive 
                             ? 'bg-primary text-primary-foreground shadow-md hover:shadow-lg' 
                             : 'text-muted-foreground hover:text-foreground hover:bg-accent'
                         }`}
                       >
-                        <Icon className="w-4 h-4" />
-                        <span className="whitespace-nowrap">{item.label}</span>
+                        <Icon className="w-3.5 h-3.5 xl:w-4 xl:h-4 flex-shrink-0" />
+                        <span className="hidden xl:inline">{item.label}</span>
+                        <span className="lg:inline xl:hidden text-2xs">{item.label.substring(0, 4)}</span>
                       </Button>
                     </Link>
                   );
@@ -98,9 +99,9 @@ export function ResponsiveNavbar() {
               </div>
             )}
 
-            {/* Tablet Navigation - Visible on tablet only */}
+            {/* Tablet Navigation - Compact version */}
             {user && (
-              <div className="hidden md:flex xl:hidden items-center gap-1">
+              <div className="hidden md:flex lg:hidden items-center gap-1 ml-4 flex-1 justify-center">
                 {navItems.slice(0, 5).map(item => {
                   const Icon = item.icon;
                   const isActive = isActivePath(item.to);
@@ -109,7 +110,7 @@ export function ResponsiveNavbar() {
                       <Button 
                         variant={isActive ? "default" : "ghost"} 
                         size="sm" 
-                        className={`flex items-center justify-center w-10 h-10 p-0 transition-all duration-200 ${
+                        className={`flex items-center justify-center w-9 h-9 p-0 transition-all duration-200 ${
                           isActive 
                             ? 'bg-primary text-primary-foreground shadow-md' 
                             : 'text-muted-foreground hover:text-foreground hover:bg-accent'
@@ -127,7 +128,7 @@ export function ResponsiveNavbar() {
                   variant="ghost"
                   size="sm"
                   onClick={() => setIsTabletMenuOpen(true)}
-                  className="flex items-center justify-center w-10 h-10 p-0 text-muted-foreground hover:text-foreground hover:bg-accent"
+                  className="flex items-center justify-center w-9 h-9 p-0 text-muted-foreground hover:text-foreground hover:bg-accent"
                   title="Mais opções"
                 >
                   <Menu className="w-4 h-4" />

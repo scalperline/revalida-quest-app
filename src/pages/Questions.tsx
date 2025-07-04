@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import { ResponsiveLayout } from "@/components/ResponsiveLayout";
+import { Navbar } from "@/components/Navbar";
 import { QuestionCard } from "@/components/QuestionCard";
 import { GamifiedQuestionsHeader } from "@/components/GamifiedQuestionsHeader";
 import { QuestionsPagination } from "@/components/QuestionsPagination";
@@ -55,59 +55,54 @@ export default function Questions() {
   };
 
   return (
-    <ResponsiveLayout>
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-blue-100 to-blue-200 dark:from-gray-900 dark:to-gray-800 relative">
-        {/* Animated Background Elements */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute -top-4 -right-4 w-16 h-16 sm:w-24 sm:h-24 bg-blue-400 rounded-full opacity-20 animate-bounce"></div>
-          <div className="absolute top-1/4 -left-4 w-12 h-12 sm:w-16 sm:h-16 bg-blue-500 rounded-full opacity-20 animate-pulse"></div>
-          <div className="absolute bottom-1/4 right-1/4 w-8 h-8 sm:w-12 sm:h-12 bg-blue-300 rounded-full opacity-20 animate-ping"></div>
-          <div className="absolute top-1/3 right-1/3 w-6 h-6 sm:w-8 sm:h-8 bg-blue-600 rounded-full opacity-20 animate-bounce delay-1000"></div>
-        </div>
-
-        <div className="relative z-10 responsive-container responsive-padding pb-8">
-          <div className="pt-6 sm:pt-8 space-y-6 sm:space-y-8">
-            <GamifiedQuestionsHeader
-              anoSelecionado={anoSelecionado}
-              setAnoSelecionado={handleAnoChange}
-              totalQuestoes={totalQuestions}
-              tipoProva={tipoProva || undefined}
-              setTipoProva={handleTipoChange}
-              searchTerm={searchTerm}
-              setSearchTerm={setSearchTerm}
-              selectedArea={selectedArea}
-              setSelectedArea={setSelectedArea}
-              selectedDifficulty={selectedDifficulty}
-              setSelectedDifficulty={setSelectedDifficulty}
-            />
-
-            <div className="space-y-6 sm:space-y-8">
-              {filteredQuestions.map((question) => (
-                <QuestionCard 
-                  key={question.id} 
-                  question={question}
-                  onAnswerWithEffects={(optionId: string, correct: boolean) => {
-                    handleQuestionAnswer(question.id, optionId, correct);
-                  }}
-                />
-              ))}
-            </div>
-
-            <div className="mt-8 sm:mt-12">
-              <QuestionsPagination
-                paginaAtual={currentPage}
-                totalPaginas={Math.ceil(totalQuestions / questionsPerPage)}
-                onPageChange={setCurrentPage}
-              />
-            </div>
-          </div>
-        </div>
-
-        <ConfettiAnimation 
-          trigger={showConfetti} 
-          onComplete={() => setShowConfetti(false)} 
-        />
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-blue-100 to-blue-200 dark:from-gray-900 dark:to-gray-800 relative overflow-hidden">
+      {/* Animated Background Elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute -top-4 -right-4 w-24 h-24 bg-blue-400 rounded-full opacity-20 animate-bounce"></div>
+        <div className="absolute top-1/4 -left-4 w-16 h-16 bg-blue-500 rounded-full opacity-20 animate-pulse"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-12 h-12 bg-blue-300 rounded-full opacity-20 animate-ping"></div>
+        <div className="absolute top-1/3 right-1/3 w-8 h-8 bg-blue-600 rounded-full opacity-20 animate-bounce delay-1000"></div>
       </div>
-    </ResponsiveLayout>
+
+      <Navbar />
+      <div className="relative z-10 container mx-auto px-4 pt-20 pb-8">
+        <div className="max-w-4xl mx-auto">
+          <GamifiedQuestionsHeader
+            anoSelecionado={anoSelecionado}
+            setAnoSelecionado={handleAnoChange}
+            totalQuestoes={totalQuestions}
+            tipoProva={tipoProva || undefined}
+            setTipoProva={handleTipoChange}
+            searchTerm={searchTerm}
+            setSearchTerm={setSearchTerm}
+            selectedArea={selectedArea}
+            setSelectedArea={setSelectedArea}
+            selectedDifficulty={selectedDifficulty}
+            setSelectedDifficulty={setSelectedDifficulty}
+          />
+
+          {filteredQuestions.map((question) => (
+            <QuestionCard 
+              key={question.id} 
+              question={question}
+              onAnswerWithEffects={(optionId: string, correct: boolean) => {
+                handleQuestionAnswer(question.id, optionId, correct);
+              }}
+            />
+          ))}
+
+          <QuestionsPagination
+            paginaAtual={currentPage}
+            totalPaginas={Math.ceil(totalQuestions / questionsPerPage)}
+            onPageChange={setCurrentPage}
+          />
+        </div>
+      </div>
+
+      <ConfettiAnimation 
+        trigger={showConfetti} 
+        onComplete={() => setShowConfetti(false)} 
+      />
+    </div>
   );
 }

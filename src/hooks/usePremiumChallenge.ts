@@ -1,3 +1,4 @@
+
 import { useState, useCallback, useEffect } from 'react';
 import { useQuestions } from './useQuestions';
 import { useGamification } from './useGamification';
@@ -38,7 +39,7 @@ export function usePremiumChallenge() {
     return saved ? parseInt(saved) : 0;
   });
 
-  const maxAttempts = 10; // AUMENTADO DE 3 PARA 10!
+  const maxAttempts = 3;
   const questionsCount = 10;
   const winThreshold = 10; // 100% de acerto
 

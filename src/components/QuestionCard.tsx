@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
-import { AlertCircle } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { BookOpen, Clock, Target, CheckCircle, XCircle, AlertCircle } from 'lucide-react';
 import { type Question, type QuestionCardProps } from '@/types/question';
-import { QuestionHeader } from './QuestionCard/QuestionHeader';
-import { QuestionContent } from './QuestionCard/QuestionContent';
-import { QuestionOptions } from './QuestionCard/QuestionOptions';
-import { QuestionFeedback } from './QuestionCard/QuestionFeedback';
 
 export function QuestionCard({
   question,
@@ -45,6 +43,49 @@ export function QuestionCard({
     }
   };
 
+  const getOptionStatus = (optionId: string) => {
+    if (!showAnswer) {
+      return selectedOption === optionId ? 'selected' : 'default';
+    }
+
+    if (optionId === question.correct) {
+      return 'correct';
+    }
+
+    if (selectedOption === optionId && optionId !== question.correct) {
+      return 'incorrect';
+    }
+
+    return 'default';
+  };
+
+  const getOptionClasses = (status: string) => {
+    const baseClasses = "w-full text-left p-4 rounded-xl border-2 transition-all duration-300 transform hover:scale-[1.02]";
+    
+    switch (status) {
+      case 'selected':
+        return `${baseClasses} border-blue-500 bg-blue-50 text-blue-900 shadow-md`;
+      case 'correct':
+        return `${baseClasses} border-green-500 bg-green-50 text-green-900 shadow-md`;
+      case 'incorrect':
+        return `${baseClasses} border-red-500 bg-red-50 text-red-900 shadow-md`;
+      default:
+        return `${baseClasses} border-gray-200 bg-white hover:border-gray-300 hover:bg-gray-50`;
+    }
+  };
+
+  const getOptionIcon = (status: string) => {
+    switch (status) {
+      case 'correct':
+        return <CheckCircle className="w-5 h-5 text-green-600" />;
+      case 'incorrect':
+        return <XCircle className="w-5 h-5 text-red-600" />;
+      case 'selected':
+        return <Target className="w-5 h-5 text-blue-600" />;
+      default:
+        return null;
+    }
+  };
 
   console.log('=== QUESTION CARD RENDER ===');
   console.log('Question ID:', question.id);
@@ -71,35 +112,123 @@ export function QuestionCard({
   return (
     <Card className="w-full shadow-lg border-0 overflow-hidden">
       {!hideHeader && (
-        <QuestionHeader 
-          questionId={question.id}
-          area={question.area}
-          year={question.year}
-        />
+        <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-4">
+          <div className="flex items-center justify-between flex-wrap gap-2">
+            <div className="flex items-center gap-3">
+              <BookOpen className="w-5 h-5" />
+              <span className="font-semibold">Questão {question.id}</span>
+            </div>
+            <div className="flex items-center gap-4">
+              {question.area && (
+                <Badge className="bg-white/20 text-white border-white/30">
+                  {question.area}
+                </Badge>
+              )}
+              {question.year && (
+                <div className="flex items-center gap-1 text-sm">
+                  <Clock className="w-4 h-4" />
+                  <span>{question.year}</span>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
       )}
 
       <CardContent className="p-6">
-        <QuestionContent 
-          enunciado={question.enunciado}
-          image={question.image}
-        />
+        {/* Question Text */}
+        <div className="mb-6">
+          <div className="prose prose-lg max-w-none">
+            <div 
+              className="text-gray-800 leading-relaxed"
+              dangerouslySetInnerHTML={{ __html: question.enunciado }}
+            />
+          </div>
+        </div>
 
-        <QuestionOptions
-          options={question.options}
-          selectedOption={selectedOption}
-          correctAnswer={question.correct}
-          showAnswer={showAnswer}
-          disabled={disabled}
-          isReviewMode={isReviewMode}
-          onOptionSelect={handleOptionSelect}
-        />
+        {/* Question Image if exists */}
+        {question.image && (
+          <div className="mb-6 text-center">
+            <img 
+              src={question.image} 
+              alt="Imagem da questão" 
+              className="max-w-full h-auto rounded-lg shadow-md mx-auto"
+              onError={(e) => {
+                console.error('Erro ao carregar imagem:', question.image);
+                (e.target as HTMLImageElement).style.display = 'none';
+              }}
+            />
+          </div>
+        )}
 
-        <QuestionFeedback
-          showAnswer={showAnswer}
-          selectedOption={selectedOption}
-          correctAnswer={question.correct}
-          referencia={question.referencia}
-        />
+        {/* Answer Options */}
+        <div className="space-y-3">
+          {question.options.map((option, index) => {
+            const optionId = String.fromCharCode(65 + index); // A, B, C, D, E
+            const status = getOptionStatus(optionId);
+            
+            return (
+              <Button
+                key={optionId}
+                onClick={() => handleOptionSelect(optionId)}
+                className={getOptionClasses(status)}
+                variant="ghost"
+                disabled={disabled || (showAnswer && !isReviewMode)}
+              >
+                <div className="flex items-start gap-4 w-full">
+                  <div className="flex items-center gap-2 flex-shrink-0">
+                    <span className="font-bold text-lg">({optionId})</span>
+                    {getOptionIcon(status)}
+                  </div>
+                  <div 
+                    className="flex-1 text-left"
+                    dangerouslySetInnerHTML={{ __html: option.text }}
+                  />
+                </div>
+              </Button>
+            );
+          })}
+        </div>
+
+        {/* Explanation */}
+        {showAnswer && question.referencia && (
+          <div className="mt-6 p-4 bg-blue-50 border-l-4 border-blue-400 rounded-r-lg">
+            <h4 className="font-semibold text-blue-800 mb-2 flex items-center gap-2">
+              <BookOpen className="w-4 h-4" />
+              Explicação
+            </h4>
+            <div 
+              className="text-blue-700 prose prose-sm max-w-none"
+              dangerouslySetInnerHTML={{ __html: question.referencia }}
+            />
+          </div>
+        )}
+
+        {/* Answer feedback for review mode */}
+        {showAnswer && (
+          <div className={`mt-4 p-4 rounded-lg border-2 ${
+            selectedOption === question.correct 
+              ? 'bg-green-50 border-green-200' 
+              : 'bg-red-50 border-red-200'
+          }`}>
+            <div className="flex items-center gap-2 mb-2">
+              {selectedOption === question.correct ? (
+                <>
+                  <CheckCircle className="w-5 h-5 text-green-600" />
+                  <span className="font-semibold text-green-800">Resposta Correta!</span>
+                </>
+              ) : (
+                <>
+                  <XCircle className="w-5 h-5 text-red-600" />
+                  <span className="font-semibold text-red-800">Resposta Incorreta</span>
+                </>
+              )}
+            </div>
+            <p className={selectedOption === question.correct ? 'text-green-700' : 'text-red-700'}>
+              A resposta correta é: <strong>({question.correct})</strong>
+            </p>
+          </div>
+        )}
       </CardContent>
     </Card>
   );

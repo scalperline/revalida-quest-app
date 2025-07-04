@@ -10,15 +10,15 @@ import { MobileUserProgress } from "@/components/MobileUserProgress";
 import { UserProgressBar } from "@/components/UserProgressBar";
 import { SubscriptionBadge } from "@/components/SubscriptionBadge";
 import { useSubscription } from "@/hooks/useSubscription";
-import { useMobile } from "@/hooks/use-mobile";
+import { useIsMobile } from "@/hooks/use-mobile";
 import { useState } from "react";
 import { BookOpen, Target, BarChart3, User, Trophy, Flag, Play } from "lucide-react";
 
 export function Navbar() {
   const { user } = useAuth();
   const { userProgress } = useGamification();
-  const { subscription } = useSubscription();
-  const isMobile = useMobile();
+  const subscriptionData = useSubscription();
+  const isMobile = useIsMobile();
   const navigate = useNavigate();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -75,17 +75,12 @@ export function Navbar() {
             <div className="flex items-center gap-2 sm:gap-3">
               {/* Subscription Badge - Desktop */}
               <div className="hidden sm:block">
-                <SubscriptionBadge subscription={subscription} />
+                <SubscriptionBadge />
               </div>
 
               {/* Progress Bar - Desktop/Tablet */}
               <div className="hidden sm:block">
-                <UserProgressBar 
-                  level={userProgress.level}
-                  xp={userProgress.xp}
-                  xpToNextLevel={userProgress.xpToNextLevel}
-                  showCompact={true}
-                />
+                <UserProgressBar />
               </div>
 
               {/* Profile Button - Desktop */}
@@ -117,7 +112,7 @@ export function Navbar() {
 
           {/* Mobile Progress Bar */}
           <div className="sm:hidden pb-2">
-            <MobileUserProgress userProgress={userProgress} />
+            <MobileUserProgress />
           </div>
         </div>
       </nav>

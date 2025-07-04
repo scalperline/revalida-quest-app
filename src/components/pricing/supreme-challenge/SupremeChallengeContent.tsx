@@ -63,7 +63,7 @@ export function SupremeChallengeContent({
           </div>
           
           {/* Dica sobre questões fixas */}
-          <div className="mt-6 p-4 bg-gradient-to-r from-purple-900/50 to-indigo-900/50 rounded-xl border border-purple-500/30">
+          <div className="mt-6 p-4 bg-gradient-to-r from-purple-900/50 to-indigo-900/50 rounded-xl border border-purple-500/30 animate-pulse">
             <p className="text-sm text-purple-200 flex items-center justify-center gap-2">
               <Target className="w-4 h-4" />
               <span>Desafio Por Tempo Limitado</span>

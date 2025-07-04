@@ -57,7 +57,7 @@ export function MobileProgressDrawer({
       <div className="fixed top-14 right-0 z-50 md:hidden">
         {/* Estado Colapsado - Botão com Preview */}
         {!isExpanded && <div className="flex justify-end pr-3">
-            <button onClick={toggleDrawer} className="bg-gradient-to-r from-blue-500 via-blue-600 to-purple-600 text-white rounded-b-xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2 px-3 py-2 text-xs font-medium border-t-0 border-2 border-blue-300/30">
+            <button onClick={toggleDrawer} className="bg-gradient-to-r from-blue-500 via-blue-600 to-purple-600 text-white rounded-b-xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2 text-xs font-medium border-t-0 border-2 border-blue-300/30 px-0 py-0">
               {/* Mini Preview do Progresso */}
               <div className="flex items-center gap-1.5">
                 <div className="flex items-center gap-1">

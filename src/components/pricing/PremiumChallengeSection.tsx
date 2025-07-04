@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Trophy, Target, Clock, Zap, Crown, Sparkles, Shield, Rocket, AlertCircle } from 'lucide-react';
+import { Trophy, Target, Clock, Zap, Crown, Sparkles, Shield, Rocket, AlertCircle, Loader2 } from 'lucide-react';
 import { ChallengeModal } from './ChallengeModal';
 import { toast } from 'sonner';
 
@@ -48,21 +48,24 @@ export function PremiumChallengeSection({
         className: "bg-gradient-to-r from-purple-500 to-pink-500 text-white border-0"
       });
       
+      // Abrir modal imediatamente para melhor UX
+      setShowModal(true);
+      
       // Pequeno delay para melhor UX
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      await new Promise(resolve => setTimeout(resolve, 500));
       
       const started = onStartChallenge();
       console.log('Desafio iniciado?', started);
       
       if (started) {
-        console.log('✅ Abrindo modal...');
+        console.log('✅ Desafio iniciado com sucesso');
         toast.success("Desafio Supremo iniciado! Boa sorte! 🚀", {
           duration: 2000,
           className: "bg-gradient-to-r from-green-500 to-emerald-500 text-white border-0"
         });
-        setShowModal(true);
       } else {
         console.log('❌ Falha ao iniciar desafio');
+        setShowModal(false); // Fechar modal se falhou
         toast.error("Erro ao iniciar o desafio. Tente novamente!", {
           duration: 3000,
           className: "bg-gradient-to-r from-red-500 to-red-600 text-white border-0"
@@ -70,6 +73,7 @@ export function PremiumChallengeSection({
       }
     } catch (error) {
       console.error('❌ Erro ao iniciar desafio:', error);
+      setShowModal(false); // Fechar modal em caso de erro
       toast.error("Erro inesperado. Tente novamente!", {
         duration: 3000,
         className: "bg-gradient-to-r from-red-500 to-red-600 text-white border-0"
@@ -211,7 +215,7 @@ export function PremiumChallengeSection({
                   >
                     {isStarting ? (
                       <div className="flex items-center gap-3">
-                        <div className="w-6 h-6 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
+                        <Loader2 className="w-6 h-6 animate-spin" />
                         PREPARANDO DESAFIO...
                       </div>
                     ) : (

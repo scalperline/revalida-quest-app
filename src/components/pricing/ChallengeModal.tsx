@@ -4,7 +4,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/u
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
-import { Clock, Target, Zap, Trophy, X, Shield, CheckCircle, XCircle, Flame, Sparkles } from 'lucide-react';
+import { Clock, Target, Zap, Trophy, X, Shield, CheckCircle, XCircle, Flame, Sparkles, Loader2 } from 'lucide-react';
 import { usePremiumChallenge } from '@/hooks/usePremiumChallenge';
 import { useTimer } from '@/hooks/useTimer';
 import { QuestionCard } from '@/components/QuestionCard';
@@ -27,13 +27,16 @@ export function ChallengeModal({ isOpen, onClose }: ChallengeModalProps) {
 
   const currentQuestion = challengeState.questions[challengeState.currentQuestionIndex];
   const progress = challengeState.questions.length > 0 ? ((challengeState.currentQuestionIndex + 1) / challengeState.questions.length) * 100 : 0;
+  
+  // Check if we're still loading questions (simplified condition)
+  const isLoadingQuestions = challengeState.isActive && challengeState.questions.length === 0;
 
   console.log('=== CHALLENGE MODAL RENDER ===');
   console.log('isOpen:', isOpen);
   console.log('challengeState.isActive:', challengeState.isActive);
   console.log('challengeState.questions.length:', challengeState.questions.length);
+  console.log('isLoadingQuestions:', isLoadingQuestions);
   console.log('currentQuestion:', currentQuestion?.id);
-  console.log('currentQuestionIndex:', challengeState.currentQuestionIndex);
 
   // Iniciar timer quando modal abre e questões estão carregadas
   useEffect(() => {
@@ -134,13 +137,11 @@ export function ChallengeModal({ isOpen, onClose }: ChallengeModalProps) {
     onClose();
   };
 
-  // Só renderiza se o modal estiver aberto, desafio ativo E há questões carregadas
-  if (!isOpen || !challengeState.isActive || challengeState.questions.length === 0 || !currentQuestion) {
+  // Only hide modal if it's not open OR if challenge is not active
+  if (!isOpen || !challengeState.isActive) {
     console.log('🚫 Modal não deve ser exibido:', {
       isOpen,
-      isActive: challengeState.isActive,
-      questionsLength: challengeState.questions.length,
-      hasCurrentQuestion: !!currentQuestion
+      isActive: challengeState.isActive
     });
     return null;
   }
@@ -177,67 +178,86 @@ export function ChallengeModal({ isOpen, onClose }: ChallengeModalProps) {
                 </Button>
               </div>
               
-              <div className="flex items-center justify-between mt-4 flex-wrap gap-4">
-                <div className="flex items-center gap-6 flex-wrap">
-                  {/* Timer */}
-                  <div className="flex items-center gap-2">
-                    <Clock className={`w-5 h-5 ${isTimeRunningOut ? 'text-red-400 animate-pulse' : 'text-blue-400'}`} />
-                    <span className={`text-lg font-mono font-bold ${isTimeRunningOut ? 'text-red-300' : 'text-blue-300'}`}>
-                      {String(minutes).padStart(2, '0')}:{String(seconds).padStart(2, '0')}
-                    </span>
-                  </div>
-                  
-                  {/* Question Counter */}
-                  <div className="flex items-center gap-2">
-                    <Target className="w-5 h-5 text-green-400" />
-                    <span className="text-lg font-bold text-green-300">
-                      {challengeState.currentQuestionIndex + 1} / {challengeState.questions.length}
-                    </span>
-                  </div>
-                  
-                  {/* Score */}
-                  <div className="flex items-center gap-2">
-                    <Zap className="w-5 h-5 text-yellow-400" />
-                    <span className="text-lg font-bold text-yellow-300">
-                      {challengeState.score} corretas
-                    </span>
-                  </div>
+              {!isLoadingQuestions && (
+                <>
+                  <div className="flex items-center justify-between mt-4 flex-wrap gap-4">
+                    <div className="flex items-center gap-6 flex-wrap">
+                      {/* Timer */}
+                      <div className="flex items-center gap-2">
+                        <Clock className={`w-5 h-5 ${isTimeRunningOut ? 'text-red-400 animate-pulse' : 'text-blue-400'}`} />
+                        <span className={`text-lg font-mono font-bold ${isTimeRunningOut ? 'text-red-300' : 'text-blue-300'}`}>
+                          {String(minutes).padStart(2, '0')}:{String(seconds).padStart(2, '0')}
+                        </span>
+                      </div>
+                      
+                      {/* Question Counter */}
+                      <div className="flex items-center gap-2">
+                        <Target className="w-5 h-5 text-green-400" />
+                        <span className="text-lg font-bold text-green-300">
+                          {challengeState.currentQuestionIndex + 1} / {challengeState.questions.length}
+                        </span>
+                      </div>
+                      
+                      {/* Score */}
+                      <div className="flex items-center gap-2">
+                        <Zap className="w-5 h-5 text-yellow-400" />
+                        <span className="text-lg font-bold text-yellow-300">
+                          {challengeState.score} corretas
+                        </span>
+                      </div>
 
-                  {/* Combo Counter */}
-                  {challengeState.combo >= 3 && (
-                    <div className="flex items-center gap-2">
-                      <Flame className="w-5 h-5 text-orange-400 animate-bounce" />
-                      <span className="text-lg font-bold text-orange-300">
-                        COMBO {challengeState.combo}x!
-                      </span>
+                      {/* Combo Counter */}
+                      {challengeState.combo >= 3 && (
+                        <div className="flex items-center gap-2">
+                          <Flame className="w-5 h-5 text-orange-400 animate-bounce" />
+                          <span className="text-lg font-bold text-orange-300">
+                            COMBO {challengeState.combo}x!
+                          </span>
+                        </div>
+                      )}
                     </div>
-                  )}
-                </div>
-                
-                <div className="flex items-center gap-2">
-                  <Badge className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-3 py-1 text-sm font-bold">
-                    Questão {challengeState.currentQuestionIndex + 1}
-                  </Badge>
-                  {perfectProgress && (
-                    <Badge className="bg-gradient-to-r from-green-500 to-emerald-500 text-white px-3 py-1 text-sm font-bold animate-pulse">
-                      🎯 PERFEITO!
-                    </Badge>
-                  )}
-                </div>
-              </div>
-              
-              {/* Progress Bar */}
-              <div className="mt-4 space-y-2">
-                <div className="flex justify-between text-sm text-gray-200">
-                  <span>Progresso do Desafio</span>
-                  <span>{Math.round(progress)}% completo</span>
-                </div>
-                <Progress value={progress} className="h-3 bg-gray-700/50 border border-yellow-400/30" />
-              </div>
+                    
+                    <div className="flex items-center gap-2">
+                      <Badge className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-3 py-1 text-sm font-bold">
+                        Questão {challengeState.currentQuestionIndex + 1}
+                      </Badge>
+                      {perfectProgress && (
+                        <Badge className="bg-gradient-to-r from-green-500 to-emerald-500 text-white px-3 py-1 text-sm font-bold animate-pulse">
+                          🎯 PERFEITO!
+                        </Badge>
+                      )}
+                    </div>
+                  </div>
+                  
+                  {/* Progress Bar */}
+                  <div className="mt-4 space-y-2">
+                    <div className="flex justify-between text-sm text-gray-200">
+                      <span>Progresso do Desafio</span>
+                      <span>{Math.round(progress)}% completo</span>
+                    </div>
+                    <Progress value={progress} className="h-3 bg-gray-700/50 border border-yellow-400/30" />
+                  </div>
+                </>
+              )}
             </DialogHeader>
 
             {/* Question Content */}
             <div className="flex-1 p-6 overflow-y-auto relative z-10">
+              {/* Loading State */}
+              {isLoadingQuestions && (
+                <div className="flex flex-col items-center justify-center h-full text-center">
+                  <div className="mb-6">
+                    <Loader2 className="w-16 h-16 text-purple-400 animate-spin mx-auto mb-4" />
+                    <h3 className="text-2xl font-bold text-white mb-2">Preparando Desafio...</h3>
+                    <p className="text-gray-300 text-lg">Selecionando as melhores questões para você</p>
+                  </div>
+                  <div className="flex items-center gap-2 text-purple-300">
+                    <Sparkles className="w-5 h-5 animate-pulse" />
+                    <span className="text-sm">Isso pode levar alguns segundos</span>
+                  </div>
+                </div>
+              )}
+
               {/* Feedback Overlay */}
               {showFeedback && (
                 <div className="absolute inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center">
@@ -278,67 +298,72 @@ export function ChallengeModal({ isOpen, onClose }: ChallengeModalProps) {
                 </div>
               )}
 
-              <div className="max-w-4xl mx-auto">
-                <QuestionCard
-                  question={currentQuestion}
-                  onAnswer={handleAnswer}
-                  userAnswer={selectedAnswer}
-                  hideHeader={true}
-                  showAnswer={showFeedback}
-                />
-              </div>
+              {/* Question Card */}
+              {!isLoadingQuestions && currentQuestion && (
+                <div className="max-w-4xl mx-auto">
+                  <QuestionCard
+                    question={currentQuestion}
+                    onAnswer={handleAnswer}
+                    userAnswer={selectedAnswer}
+                    hideHeader={true}
+                    showAnswer={showFeedback}
+                  />
+                </div>
+              )}
             </div>
 
             {/* Action Footer */}
-            <div className="relative z-10 bg-gradient-to-r from-slate-800/95 to-gray-800/95 backdrop-blur-xl border-t-4 border-purple-400/50 p-6">
-              <div className="flex flex-col md:flex-row justify-between items-center max-w-4xl mx-auto gap-4">
-                <div className="flex items-center gap-4 text-center md:text-left">
-                  <div className="text-sm text-gray-300">
-                    ⏰ <span className={`font-mono font-bold ${isTimeRunningOut ? 'text-red-400' : 'text-blue-400'}`}>
-                      {minutes}m {seconds}s
-                    </span>
+            {!isLoadingQuestions && (
+              <div className="relative z-10 bg-gradient-to-r from-slate-800/95 to-gray-800/95 backdrop-blur-xl border-t-4 border-purple-400/50 p-6">
+                <div className="flex flex-col md:flex-row justify-between items-center max-w-4xl mx-auto gap-4">
+                  <div className="flex items-center gap-4 text-center md:text-left">
+                    <div className="text-sm text-gray-300">
+                      ⏰ <span className={`font-mono font-bold ${isTimeRunningOut ? 'text-red-400' : 'text-blue-400'}`}>
+                        {minutes}m {seconds}s
+                      </span>
+                    </div>
+                    {perfectProgress && (
+                      <div className="text-sm text-purple-300 animate-pulse">
+                        🎯 <span className="font-bold">PERFEIÇÃO!</span>
+                      </div>
+                    )}
+                    {challengeState.combo >= 3 && (
+                      <div className="text-sm text-orange-300 animate-pulse">
+                        🔥 <span className="font-bold">EM CHAMAS!</span>
+                      </div>
+                    )}
                   </div>
-                  {perfectProgress && (
-                    <div className="text-sm text-purple-300 animate-pulse">
-                      🎯 <span className="font-bold">PERFEIÇÃO!</span>
-                    </div>
-                  )}
-                  {challengeState.combo >= 3 && (
-                    <div className="text-sm text-orange-300 animate-pulse">
-                      🔥 <span className="font-bold">EM CHAMAS!</span>
-                    </div>
+                  
+                  {showFeedback ? (
+                    <Button
+                      onClick={handleNextQuestion}
+                      className="bg-gradient-to-r from-purple-600 via-pink-600 to-red-600 hover:from-purple-700 hover:via-pink-700 hover:to-red-700 text-white px-8 py-3 text-lg font-bold rounded-full shadow-2xl transform hover:scale-105 transition-all duration-300"
+                    >
+                      {challengeState.currentQuestionIndex === challengeState.questions.length - 1 ? (
+                        <><Trophy className="w-5 h-5 mr-2" /> FINALIZAR DESAFIO</>
+                      ) : (
+                        <><Zap className="w-5 h-5 mr-2" /> PRÓXIMA QUESTÃO</>
+                      )}
+                    </Button>
+                  ) : (
+                    <Button
+                      onClick={handleConfirmAnswer}
+                      disabled={!selectedAnswer}
+                      className={`${
+                        !selectedAnswer 
+                          ? 'bg-gray-600 cursor-not-allowed' 
+                          : challengeState.combo >= 3
+                          ? 'bg-gradient-to-r from-orange-500 via-red-500 to-red-600 hover:from-orange-600 hover:via-red-600 hover:to-red-700 animate-pulse'
+                          : 'bg-gradient-to-r from-purple-600 via-pink-600 to-red-600 hover:from-purple-700 hover:via-pink-700 hover:to-red-700'
+                      } text-white px-8 py-3 text-lg font-bold rounded-full shadow-2xl transform hover:scale-105 transition-all duration-300 disabled:opacity-50 disabled:scale-100`}
+                    >
+                      <Shield className="w-5 h-5 mr-2" />
+                      CONFIRMAR RESPOSTA
+                    </Button>
                   )}
                 </div>
-                
-                {showFeedback ? (
-                  <Button
-                    onClick={handleNextQuestion}
-                    className="bg-gradient-to-r from-purple-600 via-pink-600 to-red-600 hover:from-purple-700 hover:via-pink-700 hover:to-red-700 text-white px-8 py-3 text-lg font-bold rounded-full shadow-2xl transform hover:scale-105 transition-all duration-300"
-                  >
-                    {challengeState.currentQuestionIndex === challengeState.questions.length - 1 ? (
-                      <><Trophy className="w-5 h-5 mr-2" /> FINALIZAR DESAFIO</>
-                    ) : (
-                      <><Zap className="w-5 h-5 mr-2" /> PRÓXIMA QUESTÃO</>
-                    )}
-                  </Button>
-                ) : (
-                  <Button
-                    onClick={handleConfirmAnswer}
-                    disabled={!selectedAnswer}
-                    className={`${
-                      !selectedAnswer 
-                        ? 'bg-gray-600 cursor-not-allowed' 
-                        : challengeState.combo >= 3
-                        ? 'bg-gradient-to-r from-orange-500 via-red-500 to-red-600 hover:from-orange-600 hover:via-red-600 hover:to-red-700 animate-pulse'
-                        : 'bg-gradient-to-r from-purple-600 via-pink-600 to-red-600 hover:from-purple-700 hover:via-pink-700 hover:to-red-700'
-                    } text-white px-8 py-3 text-lg font-bold rounded-full shadow-2xl transform hover:scale-105 transition-all duration-300 disabled:opacity-50 disabled:scale-100`}
-                  >
-                    <Shield className="w-5 h-5 mr-2" />
-                    CONFIRMAR RESPOSTA
-                  </Button>
-                )}
               </div>
-            </div>
+            )}
           </div>
         </DialogContent>
       </Dialog>

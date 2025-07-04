@@ -1,9 +1,7 @@
-
 import { CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Target, Trophy, Sparkles, Zap, Crown } from 'lucide-react';
-
 interface SupremeChallengeContentProps {
   canStartChallenge: boolean;
   attemptsLeft: number;
@@ -12,7 +10,6 @@ interface SupremeChallengeContentProps {
   onStartChallenge: () => void;
   onResetAttempts: () => void;
 }
-
 export function SupremeChallengeContent({
   canStartChallenge,
   attemptsLeft,
@@ -21,41 +18,9 @@ export function SupremeChallengeContent({
   onStartChallenge,
   onResetAttempts
 }: SupremeChallengeContentProps) {
-  return (
-    <CardContent className="relative z-10 text-center p-6 sm:p-8">
+  return <CardContent className="relative z-10 text-center p-6 sm:p-8">
       {/* Challenge Requirements */}
-      <div className="bg-black/80 backdrop-blur-sm rounded-3xl p-6 sm:p-8 mb-6 sm:mb-8 border border-yellow-500/30">
-        <h3 className="text-xl sm:text-2xl font-bold text-yellow-400 mb-4 sm:mb-6 flex items-center justify-center gap-3">
-          <Target className="w-6 h-6 sm:w-8 sm:h-8 text-yellow-400" />
-          DESAFIO EXTREMO
-        </h3>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 text-base sm:text-lg">
-          <div className="flex items-center gap-3 text-yellow-300">
-            <div className="w-6 h-6 bg-gradient-to-r from-yellow-500 to-yellow-600 rounded-full flex items-center justify-center flex-shrink-0">
-              <span className="text-xs font-bold text-black">✓</span>
-            </div>
-            <span>10 questões oficiais do Revalida</span>
-          </div>
-          <div className="flex items-center gap-3 text-yellow-300">
-            <div className="w-6 h-6 bg-gradient-to-r from-yellow-500 to-yellow-600 rounded-full flex items-center justify-center flex-shrink-0">
-              <span className="text-xs font-bold text-black">⚡</span>
-            </div>
-            <span>Cronômetro regressivo de 10 minutos</span>
-          </div>
-          <div className="flex items-center gap-3 text-yellow-300">
-            <div className="w-6 h-6 bg-gradient-to-r from-yellow-500 to-yellow-600 rounded-full flex items-center justify-center flex-shrink-0">
-              <span className="text-xs font-bold text-black">🎯</span>
-            </div>
-            <span>100% de aproveitamento obrigatório</span>
-          </div>
-          <div className="flex items-center gap-3 text-yellow-300">
-            <div className="w-6 h-6 bg-gradient-to-r from-yellow-500 to-yellow-600 rounded-full flex items-center justify-center flex-shrink-0">
-              <span className="text-xs font-bold text-black">🔥</span>
-            </div>
-            <span>Sistema de combos e streaks</span>
-          </div>
-        </div>
-      </div>
+      
 
       {/* Epic Reward */}
       <div className="bg-black/80 backdrop-blur-sm rounded-3xl p-6 sm:p-8 mb-6 sm:mb-8 border border-yellow-500/30 shadow-2xl relative overflow-hidden">
@@ -101,27 +66,16 @@ export function SupremeChallengeContent({
 
       {/* Challenge Action */}
       <div className="flex flex-col items-center gap-6">
-        {hasWonBefore ? (
-          <div className="text-center">
+        {hasWonBefore ? <div className="text-center">
             <Badge className="bg-gradient-to-r from-yellow-500 to-yellow-600 text-black text-base sm:text-lg px-4 sm:px-6 py-2 sm:py-3 mb-4">
               🏆 DESAFIO CONQUISTADO! Você é um MESTRE!
             </Badge>
             <p className="text-yellow-300 mb-4 text-sm sm:text-base">Parabéns! Você já conquistou este desafio épico.</p>
-            <Button
-              onClick={onResetAttempts}
-              variant="outline"
-              className="border-2 border-yellow-400 text-yellow-400 hover:bg-yellow-400 hover:text-black"
-            >
+            <Button onClick={onResetAttempts} variant="outline" className="border-2 border-yellow-400 text-yellow-400 hover:bg-yellow-400 hover:text-black">
               🔄 Resetar para Tentar Novamente
             </Button>
-          </div>
-        ) : canStartChallenge ? (
-          <div className="text-center">
-            <Button
-              onClick={onStartChallenge}
-              disabled={!challengeReady}
-              className="relative group bg-gradient-to-r from-yellow-600 via-yellow-500 to-yellow-400 hover:from-yellow-700 hover:via-yellow-600 hover:to-yellow-500 text-black text-lg sm:text-2xl font-bold py-4 sm:py-6 px-8 sm:px-12 rounded-full shadow-2xl transform hover:scale-110 transition-all duration-500"
-            >
+          </div> : canStartChallenge ? <div className="text-center">
+            <Button onClick={onStartChallenge} disabled={!challengeReady} className="relative group bg-gradient-to-r from-yellow-600 via-yellow-500 to-yellow-400 hover:from-yellow-700 hover:via-yellow-600 hover:to-yellow-500 text-black text-lg sm:text-2xl font-bold py-4 sm:py-6 px-8 sm:px-12 rounded-full shadow-2xl transform hover:scale-110 transition-all duration-500">
               <div className="absolute inset-0 rounded-full bg-gradient-to-r from-yellow-400/20 to-yellow-300/20 animate-pulse"></div>
               <div className="relative z-10 flex items-center gap-3 sm:gap-4">
                 <Trophy className="w-6 h-6 sm:w-8 sm:h-8" />
@@ -134,33 +88,18 @@ export function SupremeChallengeContent({
               💡 Tentativas restantes: <span className="text-yellow-400 font-bold">{attemptsLeft}</span>
             </p>
             
-            {process.env.NODE_ENV === 'development' && (
-              <Button
-                onClick={onResetAttempts}
-                variant="ghost"
-                size="sm"
-                className="mt-2 text-yellow-500 text-xs"
-              >
+            {process.env.NODE_ENV === 'development' && <Button onClick={onResetAttempts} variant="ghost" size="sm" className="mt-2 text-yellow-500 text-xs">
                 🔧 Dev: Resetar tentativas
-              </Button>
-            )}
-          </div>
-        ) : (
-          <div className="text-center">
+              </Button>}
+          </div> : <div className="text-center">
             <Badge variant="destructive" className="text-base sm:text-lg px-4 sm:px-6 py-2 sm:py-3 mb-4 bg-red-800/80 text-yellow-300">
               ❌ Tentativas Esgotadas
             </Badge>
             <p className="text-yellow-300 mb-4 text-sm sm:text-base">Você utilizou todas as 3 tentativas disponíveis.</p>
-            <Button
-              onClick={onResetAttempts}
-              variant="outline"
-              className="border-2 border-yellow-400 text-yellow-400 hover:bg-yellow-400 hover:text-black"
-            >
+            <Button onClick={onResetAttempts} variant="outline" className="border-2 border-yellow-400 text-yellow-400 hover:bg-yellow-400 hover:text-black">
               🔄 Resetar Tentativas (Debug)
             </Button>
-          </div>
-        )}
+          </div>}
       </div>
-    </CardContent>
-  );
+    </CardContent>;
 }

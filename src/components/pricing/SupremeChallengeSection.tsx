@@ -1,10 +1,9 @@
-
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
 import { Card } from '@/components/ui/card';
 import { SupremeChallengeModal } from '@/components/challenge/SupremeChallengeModal';
-import { SupremeVictoryModal } from '@/components/challenge/SupremeVictoryModal';
+import { SupremeChallengeVictoryModal } from '@/components/challenge/SupremeChallengeVictoryModal';
 import { SupremeChallengeHeader } from './supreme-challenge/SupremeChallengeHeader';
 import { SupremeChallengeContent } from './supreme-challenge/SupremeChallengeContent';
 import { toast } from 'sonner';
@@ -91,6 +90,7 @@ export function SupremeChallengeSection({
   };
 
   const handleVictory = (coins: number, discount: number) => {
+    console.log('🏆 VITÓRIA NO DESAFIO SUPREMO! Coins:', coins, 'Discount:', discount);
     setVictoryData({ coins, discount });
     setShowSupremeModal(false);
     setShowVictoryModal(true);
@@ -100,6 +100,11 @@ export function SupremeChallengeSection({
     const newAttempts = attemptsUsed + 1;
     setAttemptsUsed(newAttempts);
     localStorage.setItem('supreme_challenge_attempts', newAttempts.toString());
+    
+    toast.success("🏆 DESAFIO SUPREMO CONQUISTADO! Seu prêmio está pronto!", {
+      duration: 6000,
+      className: "bg-gradient-to-r from-yellow-500 to-orange-500 text-white border-0"
+    });
   };
 
   const handleChallengeEnd = () => {
@@ -161,13 +166,9 @@ export function SupremeChallengeSection({
       />
 
       {/* Supreme Victory Modal */}
-      <SupremeVictoryModal
+      <SupremeChallengeVictoryModal
         isOpen={showVictoryModal}
         onClose={handleCloseVictoryModal}
-        coins={victoryData.coins}
-        discount={victoryData.discount}
-        score={10}
-        total={10}
       />
     </div>
   );

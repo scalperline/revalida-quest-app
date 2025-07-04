@@ -1,11 +1,9 @@
-
 import { useState, useEffect, useRef } from 'react';
 import { Dialog, DialogContent, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { useChallengeTimer } from '@/hooks/useChallengeTimer';
 import { useChallengeAudio } from '@/hooks/useChallengeAudio';
 import { useVirtualCoins } from '@/hooks/useVirtualCoins';
 import { CoinAnimationPill } from './CoinAnimationPill';
-import { SupremeChallengeVictoryModal } from './SupremeChallengeVictoryModal';
 import { SupremeChallengeModalHeader } from './supreme-modal/SupremeChallengeModalHeader';
 import { SupremeChallengeQuestionCard } from './supreme-modal/SupremeChallengeQuestionCard';
 import { SupremeChallengeLoadingState } from './supreme-modal/SupremeChallengeLoadingState';
@@ -38,7 +36,6 @@ export function SupremeChallengeModal({
   const [score, setScore] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [isCompleted, setIsCompleted] = useState(false);
-  const [showVictoryModal, setShowVictoryModal] = useState(false);
   
   // Animation state
   const [coinAnimation, setCoinAnimation] = useState<{
@@ -196,8 +193,8 @@ export function SupremeChallengeModal({
       if (hasWon) {
         playSound('victory');
         localStorage.setItem('premium_challenge_won', 'true');
-        setShowVictoryModal(true);
         
+        console.log('🏆 Chamando onVictory com:', coinSystem.totalCoins, 'moedas e 20% desconto');
         // Call onVictory with coins and discount values
         onVictory(coinSystem.totalCoins, 20);
         
@@ -238,11 +235,6 @@ export function SupremeChallengeModal({
 
   const handleClose = () => {
     stop();
-    onClose();
-  };
-
-  const handleVictoryModalClose = () => {
-    setShowVictoryModal(false);
     onClose();
   };
 
@@ -311,11 +303,6 @@ export function SupremeChallengeModal({
         isVisible={coinAnimation.show}
         position={coinAnimation.position}
         onAnimationComplete={() => setCoinAnimation({ show: false, coins: 0, position: { x: 0, y: 0 } })}
-      />
-
-      <SupremeChallengeVictoryModal
-        isOpen={showVictoryModal}
-        onClose={handleVictoryModalClose}
       />
     </>
   );

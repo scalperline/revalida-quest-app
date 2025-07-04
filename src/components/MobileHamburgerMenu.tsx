@@ -3,7 +3,11 @@ import { useState, useEffect } from 'react';
 import { MobileSidebar } from './MobileSidebar';
 import { MobileHamburgerButton } from './MobileHamburgerButton';
 
-export function MobileHamburgerMenu() {
+interface Props {
+  className?: string;
+}
+
+export function MobileHamburgerMenu({ className = '' }: Props) {
   const [isOpen, setIsOpen] = useState(false);
 
   // Toggle menu
@@ -47,6 +51,7 @@ export function MobileHamburgerMenu() {
       <MobileHamburgerButton 
         isOpen={isOpen} 
         onToggle={toggleMenu} 
+        className={className}
       />
       <MobileSidebar 
         isOpen={isOpen} 

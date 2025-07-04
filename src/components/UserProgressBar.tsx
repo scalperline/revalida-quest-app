@@ -1,6 +1,7 @@
 
 import { ProgressSection } from './ProgressSection';
 import { UpgradeButton } from './UpgradeButton';
+import { LogoutButton } from './LogoutButton';
 
 export function UserProgressBar() {
   return (
@@ -10,6 +11,7 @@ export function UserProgressBar() {
       </div>
       <div className="flex items-center gap-0.5 md:gap-1">
         <UpgradeButton />
+        <LogoutButton />
       </div>
     </div>
   );

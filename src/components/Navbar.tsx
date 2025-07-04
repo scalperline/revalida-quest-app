@@ -15,7 +15,7 @@ export function Navbar() {
     href: '/',
     icon: Home
   }, {
-    name: 'Provas',
+    name: 'Questões',
     href: '/questions',
     icon: FileText
   }, {

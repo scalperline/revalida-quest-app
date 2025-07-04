@@ -31,16 +31,17 @@ export function ChallengeModal({ isOpen, onClose }: ChallengeModalProps) {
   const currentQuestion = challengeState.questions[challengeState.currentQuestionIndex];
   const progress = challengeState.questions.length > 0 ? ((challengeState.currentQuestionIndex + 1) / challengeState.questions.length) * 100 : 0;
 
-  // Usar o novo estado isLoading do challengeState
-  const isLoadingQuestions = challengeState.isLoading || (challengeState.isActive && (!challengeState.questions || challengeState.questions.length === 0));
+  // LOADING LÓGICA SIMPLIFICADA
+  const isLoadingQuestions = challengeState.isLoading;
+  const hasQuestionsReady = challengeState.isActive && challengeState.questions.length > 0 && !challengeState.isLoading;
 
-  // Iniciar timer quando questões estão carregadas
+  // Iniciar timer quando questões estão prontas
   useEffect(() => {
-    if (isOpen && challengeState.isActive && !challengeState.isLoading && challengeState.questions.length > 0 && !isRunning && !isFinished) {
+    if (isOpen && hasQuestionsReady && !isRunning && !isFinished) {
       console.log('🕐 Iniciando timer do desafio...');
       start();
     }
-  }, [isOpen, challengeState.isActive, challengeState.isLoading, challengeState.questions.length, isRunning, isFinished, start]);
+  }, [isOpen, hasQuestionsReady, isRunning, isFinished, start]);
 
   // Parar timer quando completar
   useEffect(() => {
@@ -176,7 +177,7 @@ export function ChallengeModal({ isOpen, onClose }: ChallengeModalProps) {
                 </Button>
               </div>
               
-              {!isLoadingQuestions && challengeState.questions.length > 0 && (
+              {hasQuestionsReady && (
                 <>
                   <div className="flex items-center justify-between mt-6 flex-wrap gap-4">
                     <div className="flex items-center gap-6 flex-wrap">
@@ -244,7 +245,7 @@ export function ChallengeModal({ isOpen, onClose }: ChallengeModalProps) {
                     <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-xl p-4 border border-purple-400/30">
                       <div className="flex items-center justify-center gap-3 text-yellow-300">
                         <Sparkles className="w-5 h-5 animate-pulse" />
-                        <span className="text-sm font-medium">Balanceadas por área • Dificuldade progressiva • 100% validadas</span>
+                        <span className="text-sm font-medium">Questões validadas • Dificuldade balanceada • 100% funcionais</span>
                         <Sparkles className="w-5 h-5 animate-pulse" />
                       </div>
                     </div>
@@ -285,7 +286,7 @@ export function ChallengeModal({ isOpen, onClose }: ChallengeModalProps) {
               )}
 
               {/* Card da questão */}
-              {!isLoadingQuestions && currentQuestion && (
+              {hasQuestionsReady && currentQuestion && (
                 <PremiumQuestionCard
                   question={currentQuestion}
                   questionNumber={challengeState.currentQuestionIndex + 1}
@@ -300,7 +301,7 @@ export function ChallengeModal({ isOpen, onClose }: ChallengeModalProps) {
             </div>
 
             {/* Footer de ação */}
-            {!isLoadingQuestions && (
+            {hasQuestionsReady && (
               <div className="relative z-10 bg-gradient-to-r from-slate-800/95 to-gray-800/95 backdrop-blur-xl border-t-4 border-purple-400/50 p-6">
                 <div className="flex flex-col md:flex-row justify-between items-center max-w-6xl mx-auto gap-4">
                   <div className="flex items-center gap-4 text-center md:text-left">

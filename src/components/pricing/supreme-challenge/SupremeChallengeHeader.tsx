@@ -16,7 +16,7 @@ export function SupremeChallengeHeader({
           <Trophy className="w-12 h-12 sm:w-16 sm:h-16 text-yellow-500 animate-bounce" />
           <div>
             <h2 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-2">
-              <span className="bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 bg-clip-text text-transparent animate-pulse text-3xl">
+              <span className="bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 bg-clip-text animate-pulse text-3xl text-slate-50">
                 DESAFIO SUPREMO
               </span>
             </h2>

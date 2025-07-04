@@ -1,16 +1,16 @@
 
 import { useState, useEffect } from 'react';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { Button } from '@/components/ui/button';
-import { Progress } from '@/components/ui/progress';
-import { Badge } from '@/components/ui/badge';
-import { Clock, Target, Zap, Trophy, X, Shield, CheckCircle, XCircle, Flame, Sparkles, Loader2, AlertCircle, RotateCcw } from 'lucide-react';
+import { Dialog, DialogContent } from '@/components/ui/dialog';
 import { usePremiumChallenge } from '@/hooks/usePremiumChallenge';
 import { useTimer } from '@/hooks/useTimer';
 import { PremiumQuestionCard } from '@/components/premium/PremiumQuestionCard';
-import { PremiumTimer } from '@/components/premium/PremiumTimer';
 import { RewardPill } from '@/components/premium/RewardPill';
 import { SuccessRewardModal } from './SuccessRewardModal';
+import { ChallengeLoadingState } from './challenge/ChallengeLoadingState';
+import { ChallengeErrorState } from './challenge/ChallengeErrorState';
+import { ChallengeFeedbackOverlay } from './challenge/ChallengeFeedbackOverlay';
+import { ChallengeModalHeader } from './challenge/ChallengeModalHeader';
+import { ChallengeModalFooter } from './challenge/ChallengeModalFooter';
 import { toast } from 'sonner';
 
 interface ChallengeModalProps {
@@ -28,7 +28,7 @@ export function ChallengeModal({ isOpen, onClose }: ChallengeModalProps) {
     retryStart 
   } = usePremiumChallenge();
   
-  const { timeLeft, minutes, seconds, isRunning, isFinished, start, stop } = useTimer(600);
+  const { isRunning, isFinished, start, stop } = useTimer(600);
   const [selectedAnswer, setSelectedAnswer] = useState<string>('');
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [showFeedback, setShowFeedback] = useState(false);
@@ -37,9 +37,6 @@ export function ChallengeModal({ isOpen, onClose }: ChallengeModalProps) {
   const [lastCoinsEarned, setLastCoinsEarned] = useState(0);
 
   const currentQuestion = challengeState.questions[challengeState.currentQuestionIndex];
-  const progress = challengeState.questions.length > 0 ? ((challengeState.currentQuestionIndex + 1) / challengeState.questions.length) * 100 : 0;
-
-  // Estados do modal
   const isQuestionsReady = challengeState.isActive && challengeState.questions.length > 0;
   const hasError = startError !== null;
 
@@ -150,12 +147,14 @@ export function ChallengeModal({ isOpen, onClose }: ChallengeModalProps) {
     }
   };
 
+  const handleTimeUp = () => {
+    toast.error("⏰ Tempo esgotado! Desafio finalizado.");
+    nextQuestion();
+  };
+
   if (!isOpen) {
     return null;
   }
-
-  const isTimeRunningOut = timeLeft < 120;
-  const perfectProgress = challengeState.score === challengeState.currentQuestionIndex + (showFeedback && lastAnswerCorrect ? 1 : 0);
 
   return (
     <>
@@ -168,177 +167,37 @@ export function ChallengeModal({ isOpen, onClose }: ChallengeModalProps) {
               <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-blue-500 rounded-full opacity-10 animate-bounce"></div>
             </div>
 
-            {/* Header épico */}
-            <DialogHeader className="relative z-10 bg-gradient-to-r from-purple-600/90 via-pink-600/90 to-red-600/90 backdrop-blur-xl text-white p-6 border-b-4 border-yellow-400/50">
-              <div className="flex items-center justify-between">
-                <DialogTitle className="text-2xl md:text-3xl font-bold flex items-center gap-3">
-                  <div className="relative">
-                    <Trophy className="w-8 h-8 md:w-10 md:h-10 text-yellow-400 animate-pulse" />
-                    <div className="absolute inset-0 animate-ping">
-                      <Trophy className="w-8 h-8 md:w-10 md:h-10 text-yellow-400/50" />
-                    </div>
-                  </div>
-                  <span className="bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text text-transparent">
-                    DESAFIO SUPREMO
-                  </span>
-                </DialogTitle>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={handleClose}
-                  className="text-white hover:bg-white/20 hover:text-yellow-400 transition-all duration-300"
-                >
-                  <X className="w-5 h-5" />
-                </Button>
-              </div>
-              
-              {isQuestionsReady && (
-                <>
-                  <div className="flex items-center justify-between mt-6 flex-wrap gap-4">
-                    <div className="flex items-center gap-6 flex-wrap">
-                      <PremiumTimer 
-                        initialMinutes={10}
-                        isRunning={isRunning && !showFeedback}
-                        onTimeUp={() => {
-                          toast.error("⏰ Tempo esgotado! Desafio finalizado.");
-                          nextQuestion();
-                        }}
-                        onTimeWarning={handleTimeWarning}
-                      />
-                      
-                      <div className="flex items-center gap-2">
-                        <Target className="w-5 h-5 text-green-400" />
-                        <span className="text-lg font-bold text-green-300">
-                          {challengeState.currentQuestionIndex + 1} / {challengeState.questions.length}
-                        </span>
-                      </div>
-                      
-                      <div className="flex items-center gap-2">
-                        <Zap className="w-5 h-5 text-yellow-400" />
-                        <span className="text-lg font-bold text-yellow-300">
-                          {challengeState.score} corretas
-                        </span>
-                      </div>
-
-                      <div className="flex items-center gap-2">
-                        <Sparkles className="w-5 h-5 text-purple-400" />
-                        <span className="text-lg font-bold text-purple-300">
-                          {challengeState.coinsEarned} moedas
-                        </span>
-                      </div>
-
-                      {challengeState.combo >= 3 && (
-                        <div className="flex items-center gap-2">
-                          <Flame className="w-5 h-5 text-orange-400 animate-bounce" />
-                          <span className="text-lg font-bold text-orange-300">
-                            COMBO {challengeState.combo}x!
-                          </span>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                  
-                  <div className="mt-4 space-y-2">
-                    <div className="flex justify-between text-sm text-gray-200">
-                      <span>Progresso do Desafio</span>
-                      <span>{Math.round(progress)}% completo</span>
-                    </div>
-                    <Progress value={progress} className="h-3 bg-gray-700/50 border border-yellow-400/30" />
-                  </div>
-                </>
-              )}
-            </DialogHeader>
+            <ChallengeModalHeader
+              challengeState={challengeState}
+              isQuestionsReady={isQuestionsReady}
+              isRunning={isRunning}
+              showFeedback={showFeedback}
+              onClose={handleClose}
+              onTimeUp={handleTimeUp}
+              onTimeWarning={handleTimeWarning}
+            />
 
             {/* Conteúdo das questões */}
             <div className="flex-1 p-6 overflow-y-auto relative z-10">
               {/* TELA DE LOADING */}
-              {isStarting && !hasError && (
-                <div className="flex flex-col items-center justify-center h-full text-center">
-                  <div className="mb-6">
-                    <Loader2 className="w-16 h-16 text-purple-400 animate-spin mx-auto mb-4" />
-                    <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">🚀 PREPARANDO DESAFIO SUPREMO</h3>
-                    <p className="text-gray-300 text-lg mb-4">Selecionando as 10 melhores questões do Revalida</p>
-                    <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-xl p-4 border border-purple-400/30">
-                      <div className="flex items-center justify-center gap-3 text-yellow-300">
-                        <Sparkles className="w-5 h-5 animate-pulse" />
-                        <span className="text-sm font-medium">Questões validadas • Dificuldade balanceada • 100% funcionais</span>
-                        <Sparkles className="w-5 h-5 animate-pulse" />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              )}
+              {isStarting && !hasError && <ChallengeLoadingState />}
 
               {/* TELA DE ERRO */}
               {hasError && (
-                <div className="flex flex-col items-center justify-center h-full text-center">
-                  <div className="mb-6">
-                    <AlertCircle className="w-16 h-16 text-red-400 animate-pulse mx-auto mb-4" />
-                    <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">❌ ERRO NO DESAFIO</h3>
-                    <p className="text-red-300 text-lg mb-6">{startError}</p>
-                    
-                    <div className="flex gap-4 justify-center">
-                      <Button
-                        onClick={handleRetry}
-                        disabled={isStarting}
-                        className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white px-6 py-3 rounded-full font-bold"
-                      >
-                        {isStarting ? (
-                          <>
-                            <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                            Tentando...
-                          </>
-                        ) : (
-                          <>
-                            <RotateCcw className="w-4 h-4 mr-2" />
-                            Tentar Novamente
-                          </>
-                        )}
-                      </Button>
-                      
-                      <Button
-                        onClick={handleClose}
-                        variant="outline"
-                        className="border-2 border-gray-400 text-gray-300 hover:bg-gray-700 px-6 py-3 rounded-full font-bold"
-                      >
-                        Fechar
-                      </Button>
-                    </div>
-                  </div>
-                </div>
+                <ChallengeErrorState
+                  error={startError}
+                  onRetry={handleRetry}
+                  onClose={handleClose}
+                  isRetrying={isStarting}
+                />
               )}
 
               {/* Feedback overlay */}
-              {showFeedback && (
-                <div className="absolute inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center">
-                  <div className={`text-center p-8 rounded-3xl shadow-2xl max-w-md mx-4 ${
-                    lastAnswerCorrect 
-                      ? 'bg-gradient-to-br from-green-500/90 to-emerald-600/90' 
-                      : 'bg-gradient-to-br from-red-500/90 to-red-600/90'
-                  }`}>
-                    <div className="mb-4">
-                      {lastAnswerCorrect ? (
-                        <CheckCircle className="w-16 h-16 text-white mx-auto animate-bounce" />
-                      ) : (
-                        <XCircle className="w-16 h-16 text-white mx-auto animate-pulse" />
-                      )}
-                    </div>
-                    <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">
-                      {lastAnswerCorrect ? 'CORRETO!' : 'INCORRETO!'}
-                    </h3>
-                    {lastAnswerCorrect && (
-                      <p className="text-lg text-white/90 mb-3">
-                        {challengeState.combo >= 3 ? `🔥 COMBO ${challengeState.combo}x!` : 'Excelente!'}
-                      </p>
-                    )}
-                    {!lastAnswerCorrect && (
-                      <p className="text-lg text-white/90">
-                        Continue tentando! Você consegue!
-                      </p>
-                    )}
-                  </div>
-                </div>
-              )}
+              <ChallengeFeedbackOverlay
+                isVisible={showFeedback}
+                isCorrect={lastAnswerCorrect}
+                combo={challengeState.combo}
+              />
 
               {/* Card da questão */}
               {isQuestionsReady && currentQuestion && !hasError && (
@@ -357,53 +216,13 @@ export function ChallengeModal({ isOpen, onClose }: ChallengeModalProps) {
 
             {/* Footer de ação */}
             {isQuestionsReady && !hasError && (
-              <div className="relative z-10 bg-gradient-to-r from-slate-800/95 to-gray-800/95 backdrop-blur-xl border-t-4 border-purple-400/50 p-6">
-                <div className="flex flex-col md:flex-row justify-between items-center max-w-6xl mx-auto gap-4">
-                  <div className="flex items-center gap-4 text-center md:text-left">
-                    <div className="text-sm text-gray-300">
-                      💰 <span className="font-bold text-yellow-400">{challengeState.coinsEarned} moedas</span>
-                    </div>
-                    {perfectProgress && (
-                      <div className="text-sm text-purple-300 animate-pulse">
-                        🎯 <span className="font-bold">PERFEIÇÃO!</span>
-                      </div>
-                    )}
-                    {challengeState.combo >= 3 && (
-                      <div className="text-sm text-orange-300 animate-pulse">
-                        🔥 <span className="font-bold">EM CHAMAS!</span>
-                      </div>
-                    )}
-                  </div>
-                  
-                  {showFeedback ? (
-                    <Button
-                      onClick={handleNextQuestion}
-                      className="bg-gradient-to-r from-purple-600 via-pink-600 to-red-600 hover:from-purple-700 hover:via-pink-700 hover:to-red-700 text-white px-8 py-3 text-lg font-bold rounded-full shadow-2xl transform hover:scale-105 transition-all duration-300"
-                    >
-                      {challengeState.currentQuestionIndex === challengeState.questions.length - 1 ? (
-                        <><Trophy className="w-5 h-5 mr-2" /> FINALIZAR DESAFIO</>
-                      ) : (
-                        <><Zap className="w-5 h-5 mr-2" /> PRÓXIMA QUESTÃO</>
-                      )}
-                    </Button>
-                  ) : (
-                    <Button
-                      onClick={handleConfirmAnswer}
-                      disabled={!selectedAnswer}
-                      className={`${
-                        !selectedAnswer 
-                          ? 'bg-gray-600 cursor-not-allowed' 
-                          : challengeState.combo >= 3
-                          ? 'bg-gradient-to-r from-orange-500 via-red-500 to-red-600 hover:from-orange-600 hover:via-red-600 hover:to-red-700 animate-pulse'
-                          : 'bg-gradient-to-r from-purple-600 via-pink-600 to-red-600 hover:from-purple-700 hover:via-pink-700 hover:to-red-700'
-                      } text-white px-8 py-3 text-lg font-bold rounded-full shadow-2xl transform hover:scale-105 transition-all duration-300 disabled:opacity-50 disabled:scale-100`}
-                    >
-                      <Shield className="w-5 h-5 mr-2" />
-                      CONFIRMAR RESPOSTA
-                    </Button>
-                  )}
-                </div>
-              </div>
+              <ChallengeModalFooter
+                challengeState={challengeState}
+                selectedAnswer={selectedAnswer}
+                showFeedback={showFeedback}
+                onConfirmAnswer={handleConfirmAnswer}
+                onNextQuestion={handleNextQuestion}
+              />
             )}
           </div>
         </DialogContent>

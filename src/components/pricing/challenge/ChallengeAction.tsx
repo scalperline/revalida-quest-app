@@ -1,7 +1,6 @@
 
 import { AlertCircle, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { useNavigate } from 'react-router-dom';
 
 interface ChallengeActionProps {
   canStartChallenge: boolean;
@@ -18,18 +17,11 @@ export function ChallengeAction({
   onStartChallenge, 
   onResetAttempts 
 }: ChallengeActionProps) {
-  const navigate = useNavigate();
-
-  const handleStartChallenge = () => {
-    // Navegar para a página do desafio supremo
-    navigate('/supreme-challenge');
-  };
-
   if (canStartChallenge) {
     return (
       <>
         <Button 
-          onClick={handleStartChallenge}
+          onClick={onStartChallenge}
           disabled={isStarting}
           className="bg-gradient-to-r from-yellow-500 via-orange-500 to-red-500 hover:from-yellow-600 hover:via-orange-600 hover:to-red-600 text-white text-lg md:text-2xl font-bold rounded-full shadow-xl transform hover:scale-105 transition-all duration-300 py-4 px-8 md:py-6 md:px-12 w-full sm:w-auto disabled:opacity-70 disabled:cursor-not-allowed disabled:scale-100"
         >

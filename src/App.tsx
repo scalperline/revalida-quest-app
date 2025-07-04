@@ -1,38 +1,109 @@
 
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { ThemeProvider } from "next-themes"
-import { Toaster } from "@/components/ui/toaster"
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import SupremeChallenge from '@/pages/SupremeChallenge';
-import Index from '@/pages/Index';
+import { Toaster } from "@/components/ui/toaster";
+import { Toaster as Sonner } from "@/components/ui/sonner";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { AuthProvider } from "@/hooks/useAuth";
+import { ProtectedRoute } from "@/components/ProtectedRoute";
+import { CookieBanner } from "@/components/CookieBanner";
+import Index from "./pages/Index";
+import NotFound from "./pages/NotFound";
+import Questions from "./pages/Questions";
+import Stats from "./pages/Stats";
+import Profile from "./pages/Profile";
+import Missions from "./pages/Missions";
+import Ranking from "./pages/Ranking";
+import Auth from "./pages/Auth";
+import Pricing from "./pages/Pricing";
+import Success from "./pages/Success";
+import Terms from "./pages/Terms";
+import Privacy from "./pages/Privacy";
+import Help from "./pages/Help";
 
-// Create a QueryClient instance
 const queryClient = new QueryClient();
 
-function App() {
-  return (
-    <QueryClientProvider client={queryClient}>
-      <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
+const App = () => (
+  <QueryClientProvider client={queryClient}>
+    <TooltipProvider>
+      <AuthProvider>
+        <Toaster />
+        <Sonner />
+        <CookieBanner />
         <BrowserRouter>
-          <div className="App">
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/questions" element={<div>Questions placeholder</div>} />
-              <Route path="/missions" element={<div>Missions placeholder</div>} />
-              <Route path="/stats" element={<div>Stats placeholder</div>} />
-              <Route path="/ranking" element={<div>Ranking placeholder</div>} />
-              <Route path="/profile" element={<div>Profile placeholder</div>} />
-              <Route path="/pricing" element={<div>Pricing placeholder</div>} />
-              <Route path="/simulado" element={<div>Simulado placeholder</div>} />
-              <Route path="/auth" element={<div>Auth placeholder</div>} />
-              <Route path="/supreme-challenge" element={<SupremeChallenge />} />
-            </Routes>
-            <Toaster />
-          </div>
+          <Routes>
+            <Route path="/auth" element={<Auth />} />
+            <Route path="/pricing" element={<Pricing />} />
+            <Route path="/success" element={<Success />} />
+            <Route path="/termos" element={<Terms />} />
+            <Route path="/privacidade" element={<Privacy />} />
+            <Route path="/ajuda" element={<Help />} />
+            <Route path="/" element={
+              <ProtectedRoute>
+                <Index />
+              </ProtectedRoute>
+            } />
+            <Route path="/questions" element={
+              <ProtectedRoute>
+                <Questions />
+              </ProtectedRoute>
+            } />
+            <Route path="/provas" element={
+              <ProtectedRoute>
+                <Questions />
+              </ProtectedRoute>
+            } />
+            <Route path="/questoes" element={
+              <ProtectedRoute>
+                <Questions />
+              </ProtectedRoute>
+            } />
+            <Route path="/missions" element={
+              <ProtectedRoute>
+                <Missions />
+              </ProtectedRoute>
+            } />
+            <Route path="/quests" element={
+              <ProtectedRoute>
+                <Missions />
+              </ProtectedRoute>
+            } />
+            <Route path="/missoes" element={
+              <ProtectedRoute>
+                <Missions />
+              </ProtectedRoute>
+            } />
+            <Route path="/stats" element={
+              <ProtectedRoute>
+                <Stats />
+              </ProtectedRoute>
+            } />
+            <Route path="/estatisticas" element={
+              <ProtectedRoute>
+                <Stats />
+              </ProtectedRoute>
+            } />
+            <Route path="/profile" element={
+              <ProtectedRoute>
+                <Profile />
+              </ProtectedRoute>
+            } />
+            <Route path="/perfil" element={
+              <ProtectedRoute>
+                <Profile />
+              </ProtectedRoute>
+            } />
+            <Route path="/ranking" element={
+              <ProtectedRoute>
+                <Ranking />
+              </ProtectedRoute>
+            } />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
         </BrowserRouter>
-      </ThemeProvider>
-    </QueryClientProvider>
-  );
-}
+      </AuthProvider>
+    </TooltipProvider>
+  </QueryClientProvider>
+);
 
 export default App;

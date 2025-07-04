@@ -8,7 +8,6 @@ import { PricingPlansGrid } from '@/components/pricing/PricingPlansGrid';
 import { PricingFAQ } from '@/components/pricing/PricingFAQ';
 import { PricingFooter } from '@/components/pricing/PricingFooter';
 import { SupremeChallengeSection } from '@/components/pricing/SupremeChallengeSection';
-import { PricingBackground } from '@/components/pricing/PricingBackground';
 
 export default function Pricing() {
   const { subscribed, subscription_tier, loading } = useSubscription();
@@ -58,14 +57,10 @@ export default function Pricing() {
   }, [todasQuestoes]);
 
   return (
-    <div className="min-h-screen galaxy-gradient relative overflow-hidden">
-      <PricingBackground />
-
-      <div className="navbar">
-        <Navbar />
-      </div>
+    <div className="min-h-screen bg-gray-900">
+      <Navbar />
       
-      <div className="relative z-10 pt-20">
+      <div className="pt-20">
         <div className="container mx-auto px-4 py-8">
           <PricingHeader />
 
@@ -83,13 +78,6 @@ export default function Pricing() {
           <PricingFooter />
         </div>
       </div>
-
-      {/* CSS para ocultar navbar */}
-      <style>{`
-        .navbar-hidden { 
-          display: none !important; 
-        }
-      `}</style>
     </div>
   );
 }

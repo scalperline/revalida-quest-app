@@ -5,14 +5,14 @@ export function PricingHeader() {
   return (
     <div className="text-center mb-12">
       <div className="flex flex-col items-center justify-center gap-4 mb-6">
-        <div className="w-16 h-16 bg-gradient-to-br from-white to-blue-600 flex items-center justify-center shadow-2xl rounded-lg my-0 py-[2px] px-[3px]">
-          <Stethoscope className="w-8 h-8 text-blue-900" />
+        <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center shadow-2xl rounded-lg">
+          <Stethoscope className="w-8 h-8 text-white" />
         </div>
-        <h1 className="font-bold bg-gradient-to-r from-blue-600 via-blue-500 to-blue-400 bg-clip-text text-transparent md:text-4xl text-2xl">
+        <h1 className="font-bold bg-gradient-to-r from-blue-400 via-blue-300 to-blue-200 bg-clip-text text-transparent md:text-4xl text-2xl">
           Planos RevalidaQuest
         </h1>
       </div>
-      <p className="text-white/90 max-w-3xl mx-auto mb-8 text-base">
+      <p className="text-gray-300 max-w-3xl mx-auto mb-8 text-base">
         Acelere sua preparação para o Revalida com nossos planos especializados
       </p>
     </div>

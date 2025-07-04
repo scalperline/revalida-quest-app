@@ -1,6 +1,3 @@
-
-
-
 import { CardHeader } from '@/components/ui/card';
 import { Trophy, Crown, Target, Zap, Star } from 'lucide-react';
 interface SupremeChallengeHeaderProps {
@@ -34,7 +31,7 @@ export function SupremeChallengeHeader({
           <div className="bg-slate-900/60 backdrop-blur-sm rounded-2xl p-3 sm:p-4 border border-blue-600/50">
             <Target className="w-6 h-6 sm:w-8 sm:h-8 text-green-400 mx-auto mb-2" />
             <div className="text-lg sm:text-2xl font-bold text-white bg-transparent">10/10</div>
-            <div className="text-xs sm:text-sm text-yellow-300 bg-transparent">Acerte 10 questões oficiais</div>
+            <div className="text-xs sm:text-sm text-slate-100 bg-transparent">Acerte 10 questões oficiais</div>
           </div>
           <div className="bg-slate-900/60 backdrop-blur-sm rounded-2xl p-3 sm:p-4 border border-blue-600/50">
             <Zap className="w-6 h-6 sm:w-8 sm:h-8 text-blue-400 mx-auto mb-2" />
@@ -51,5 +48,3 @@ restantes</div>
       </div>
     </CardHeader>;
 }
-
-

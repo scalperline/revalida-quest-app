@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useSupremeChallenge } from '@/hooks/useSupremeChallenge';
 import { useSubscription } from '@/hooks/useSubscription';
 import { ChallengeIntro } from '@/components/supreme/ChallengeIntro';
@@ -30,7 +30,7 @@ export default function SupremeChallenge() {
   const currentQuestion = challengeState.questions[challengeState.currentQuestionIndex];
 
   // Mostrar modal de recompensa quando completar
-  useState(() => {
+  useEffect(() => {
     if (challengeState.hasCompleted && challengeState.hasWon) {
       setShowRewardModal(true);
     }

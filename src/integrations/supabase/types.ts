@@ -9,6 +9,66 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      affiliate_referrals: {
+        Row: {
+          affiliate_code: string
+          commission_amount: number | null
+          conversion_status: string | null
+          converted_at: string | null
+          created_at: string | null
+          id: string
+          referred_at: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          affiliate_code: string
+          commission_amount?: number | null
+          conversion_status?: string | null
+          converted_at?: string | null
+          created_at?: string | null
+          id?: string
+          referred_at?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          affiliate_code?: string
+          commission_amount?: number | null
+          conversion_status?: string | null
+          converted_at?: string | null
+          created_at?: string | null
+          id?: string
+          referred_at?: string | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      affiliates: {
+        Row: {
+          affiliate_code: string
+          created_at: string | null
+          id: string
+          is_active: boolean | null
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          affiliate_code: string
+          created_at?: string | null
+          id?: string
+          is_active?: boolean | null
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          affiliate_code?: string
+          created_at?: string | null
+          id?: string
+          is_active?: boolean | null
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
       subscribers: {
         Row: {
           created_at: string

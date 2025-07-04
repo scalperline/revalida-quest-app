@@ -1,22 +1,20 @@
-
 import { useState, useEffect } from 'react';
 import { ChevronDown, ChevronUp, Trophy, Zap } from 'lucide-react';
 import { useGamification } from '@/hooks/useGamification';
 import { ProgressBalance } from './ProgressBalance';
-
 interface MobileProgressDrawerProps {
   isVisible?: boolean;
   onXPReceived?: () => void;
 }
-
 export function MobileProgressDrawer({
   isVisible = true,
   onXPReceived
 }: MobileProgressDrawerProps) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [animationClass, setAnimationClass] = useState('');
-  const { userProgress } = useGamification();
-
+  const {
+    userProgress
+  } = useGamification();
   const toggleDrawer = () => {
     if (isExpanded) {
       setAnimationClass('animate-slide-out-up');
@@ -50,33 +48,21 @@ export function MobileProgressDrawer({
       }, 3000);
     }
   }, [onXPReceived]);
-
   if (!isVisible) return null;
-
-  return (
-    <>
+  return <>
       {/* Backdrop quando expandido */}
-      {isExpanded && (
-        <div 
-          className="fixed inset-0 bg-black/20 z-40 md:hidden backdrop-blur-sm" 
-          onClick={toggleDrawer} 
-        />
-      )}
+      {isExpanded && <div className="fixed inset-0 bg-black/20 z-40 md:hidden backdrop-blur-sm" onClick={toggleDrawer} />}
       
       {/* Container do Drawer */}
       <div className="fixed top-14 right-0 z-50 md:hidden">
         {/* Estado Colapsado - Botão com Preview */}
-        {!isExpanded && (
-          <div className="flex justify-end pr-3">
-            <button 
-              onClick={toggleDrawer} 
-              className="bg-gradient-to-r from-blue-500 via-blue-600 to-purple-600 text-white rounded-b-xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2 px-3 py-2 text-xs font-medium border-t-0 border-2 border-blue-300/30"
-            >
+        {!isExpanded && <div className="flex justify-end pr-3">
+            <button onClick={toggleDrawer} className="bg-gradient-to-r from-blue-500 via-blue-600 to-purple-600 text-white rounded-b-xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2 px-3 py-2 text-xs font-medium border-t-0 border-2 border-blue-300/30">
               {/* Mini Preview do Progresso */}
               <div className="flex items-center gap-1.5">
                 <div className="flex items-center gap-1">
-                  <Trophy className="w-3 h-3 text-yellow-300" />
-                  <span className="font-bold text-white">{userProgress.level}</span>
+                  
+                  
                 </div>
                 
                 <div className="w-px h-3 bg-white/30"></div>
@@ -89,12 +75,10 @@ export function MobileProgressDrawer({
               
               <ChevronDown className="w-3 h-3 ml-1" />
             </button>
-          </div>
-        )}
+          </div>}
 
         {/* Estado Expandido - Drawer Completo */}
-        {isExpanded && (
-          <div className={`bg-white/98 backdrop-blur-lg border-b-2 border-blue-200/50 shadow-2xl w-screen ${animationClass} border-l border-r border-gray-100`}>
+        {isExpanded && <div className={`bg-white/98 backdrop-blur-lg border-b-2 border-blue-200/50 shadow-2xl w-screen ${animationClass} border-l border-r border-gray-100`}>
             {/* Header Profissional */}
             <div className="flex justify-between items-center p-4 border-b border-gray-100/80 bg-gradient-to-r from-blue-50/50 to-purple-50/50">
               <div className="flex items-center gap-2">
@@ -105,10 +89,7 @@ export function MobileProgressDrawer({
                   Progresso Gamificado
                 </h3>
               </div>
-              <button 
-                onClick={toggleDrawer} 
-                className="p-2 rounded-lg hover:bg-gray-100/80 transition-colors group"
-              >
+              <button onClick={toggleDrawer} className="p-2 rounded-lg hover:bg-gray-100/80 transition-colors group">
                 <ChevronUp className="w-5 h-5 text-gray-600 group-hover:text-gray-800" />
               </button>
             </div>
@@ -130,9 +111,7 @@ export function MobileProgressDrawer({
                 </div>
               </div>
             </div>
-          </div>
-        )}
+          </div>}
       </div>
-    </>
-  );
+    </>;
 }

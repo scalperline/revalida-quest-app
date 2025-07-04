@@ -11,11 +11,12 @@ export function MobileHamburgerButton({ isOpen, onClick, className = '' }: Props
       onClick={onClick}
       className={`
         w-8 h-8 sm:w-9 sm:h-9
-        bg-gray-900 dark:bg-white
-        hover:bg-gray-800 dark:hover:bg-gray-100
+        bg-gradient-to-br from-blue-600 to-purple-600
+        hover:from-blue-700 hover:to-purple-700
         rounded-lg sm:rounded-xl
         flex items-center justify-center
         transition-all duration-200
+        shadow-lg hover:shadow-xl
         touch-target
         ${className}
       `}
@@ -24,21 +25,21 @@ export function MobileHamburgerButton({ isOpen, onClick, className = '' }: Props
       <div className="relative w-3.5 h-3.5 sm:w-4 sm:h-4 flex flex-col justify-center items-center">
         <span 
           className={`
-            block absolute h-0.5 w-3.5 sm:w-4 bg-white dark:bg-gray-900 rounded-full
+            block absolute h-0.5 w-3.5 sm:w-4 bg-white rounded-full
             transition-all duration-300 ease-in-out
             ${isOpen ? 'rotate-45 translate-y-0' : '-translate-y-1 sm:-translate-y-1.5'}
           `}
         />
         <span 
           className={`
-            block absolute h-0.5 w-3.5 sm:w-4 bg-white dark:bg-gray-900 rounded-full
+            block absolute h-0.5 w-3.5 sm:w-4 bg-white rounded-full
             transition-all duration-300 ease-in-out
             ${isOpen ? 'opacity-0' : 'opacity-100'}
           `}
         />
         <span 
           className={`
-            block absolute h-0.5 w-3.5 sm:w-4 bg-white dark:bg-gray-900 rounded-full
+            block absolute h-0.5 w-3.5 sm:w-4 bg-white rounded-full
             transition-all duration-300 ease-in-out
             ${isOpen ? '-rotate-45 translate-y-0' : 'translate-y-1 sm:translate-y-1.5'}
           `}

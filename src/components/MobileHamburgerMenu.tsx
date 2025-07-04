@@ -1,25 +1,37 @@
 
 import { useState, useEffect } from 'react';
 import { MobileSidebar } from './MobileSidebar';
+import { MobileHamburgerButton } from './MobileHamburgerButton';
 
 interface Props {
-  isOpen: boolean;
-  onClose: () => void;
+  className?: string;
 }
 
-export function MobileHamburgerMenu({ isOpen, onClose }: Props) {
+export function MobileHamburgerMenu({ className = '' }: Props) {
+  const [isOpen, setIsOpen] = useState(false);
+
+  // Toggle menu
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
+
+  // Close menu
+  const closeMenu = () => {
+    setIsOpen(false);
+  };
+
   // ESC key handler
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
       if (e.key === 'Escape' && isOpen) {
-        onClose();
+        closeMenu();
       }
     };
     document.addEventListener('keydown', handleEsc);
     return () => {
       document.removeEventListener('keydown', handleEsc);
     };
-  }, [isOpen, onClose]);
+  }, [isOpen]);
 
   // Prevent scroll when menu is open
   useEffect(() => {
@@ -35,9 +47,16 @@ export function MobileHamburgerMenu({ isOpen, onClose }: Props) {
   }, [isOpen]);
 
   return (
-    <MobileSidebar 
-      isOpen={isOpen} 
-      onClose={onClose} 
-    />
+    <>
+      <MobileHamburgerButton 
+        isOpen={isOpen} 
+        onToggle={toggleMenu} 
+        className={className}
+      />
+      <MobileSidebar 
+        isOpen={isOpen} 
+        onClose={closeMenu} 
+      />
+    </>
   );
 }

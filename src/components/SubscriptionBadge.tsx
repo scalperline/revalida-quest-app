@@ -1,23 +1,33 @@
-
 import { useSubscription } from '@/hooks/useSubscription';
 import { Badge } from '@/components/ui/badge';
-import { Crown } from 'lucide-react';
-
+import { Crown, Zap, Sparkles, Users } from 'lucide-react';
 export function SubscriptionBadge() {
-  const { subscription } = useSubscription();
-  
-  if (!subscription) {
-    return (
-      <Badge variant="outline" className="text-xs">
-        Gratuito
-      </Badge>
-    );
+  const {
+    subscribed,
+    subscription_tier,
+    loading
+  } = useSubscription();
+  if (loading) {
+    return <div className="h-4 w-16 bg-gray-300/30 rounded-full animate-pulse"></div>;
   }
-  
-  return (
-    <Badge className="bg-gradient-to-r from-yellow-500 to-orange-500 text-white text-xs flex items-center gap-1">
-      <Crown className="w-3 h-3" />
-      Premium
-    </Badge>
-  );
+  if (!subscribed) {
+    return <span className="font-semibold text-sm drop-shadow-lg text-gray-800">
+        Gratuito
+      </span>;
+  }
+  const getBadgeLabel = () => {
+    switch (subscription_tier) {
+      case 'Basic':
+        return 'Basic';
+      case 'Premium':
+        return 'Premium';
+      case 'Pro':
+        return 'Pro';
+      default:
+        return subscription_tier || 'Premium';
+    }
+  };
+  return <span className="text-white font-semibold text-sm drop-shadow-lg">
+      {getBadgeLabel()}
+    </span>;
 }

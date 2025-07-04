@@ -118,10 +118,7 @@ export function Navbar() {
       </nav>
 
       {/* Mobile Menu */}
-      <MobileHamburgerMenu 
-        isOpen={mobileMenuOpen}
-        onClose={() => setMobileMenuOpen(false)}
-      />
+      <MobileHamburgerMenu />
     </>
   );
 }

@@ -17,7 +17,7 @@ const initialState: ChallengeState = {
   timeBonus: 0,
   coinsEarned: 0,
   perfectAnswers: 0,
-  timeLeft: 600 // Added missing property
+  timeLeft: 600
 };
 
 export function useChallengeState() {
@@ -70,8 +70,8 @@ export function useChallengeState() {
         if (newStreak >= 5) coinsEarned += 10;
       }
 
-      // Registrar no sistema de gamificação - fix the parameter type
-      recordAnswer(isCorrect, currentQuestion.area || 'Geral', currentQuestion.id.toString());
+      // Registrar no sistema de gamificação - pass the numeric ID directly
+      recordAnswer(isCorrect, currentQuestion.area || 'Geral', currentQuestion.id);
 
       return {
         ...prev,

@@ -50,11 +50,25 @@ export function usePremiumChallenge() {
 
   // Filtrar questões oficiais do Revalida 2022-2025
   const getOfficialQuestions = useCallback(() => {
-    const officialQuestions = todasQuestoes.filter(q => 
-      q.year && q.year >= 2022 && q.year <= 2025 && 
-      q.area && q.enunciado && q.options && q.correct &&
-      q.options.length >= 4 // Garantir que tem pelo menos 4 alternativas
-    );
+    console.log('🔍 Filtrando questões oficiais do Revalida 2022-2025...');
+    console.log('Total de questões disponíveis:', todasQuestoes.length);
+    
+    const officialQuestions = todasQuestoes.filter(q => {
+      const hasRequiredFields = q.year && q.area && q.enunciado && q.options && q.correct;
+      const isInYearRange = q.year >= 2022 && q.year <= 2025;
+      const hasEnoughOptions = q.options && q.options.length >= 4;
+      
+      return hasRequiredFields && isInYearRange && hasEnoughOptions;
+    });
+
+    console.log('Questões oficiais encontradas:', officialQuestions.length);
+    console.log('Anos disponíveis:', [...new Set(officialQuestions.map(q => q.year))]);
+    console.log('Áreas disponíveis:', [...new Set(officialQuestions.map(q => q.area))]);
+
+    if (officialQuestions.length < questionsCount) {
+      console.warn('⚠️ Questões insuficientes encontradas:', officialQuestions.length);
+      return [];
+    }
 
     // Diversificar por área para ter um desafio equilibrado
     const areaGroups: Record<string, Question[]> = {};
@@ -66,27 +80,40 @@ export function usePremiumChallenge() {
     const selectedQuestions: Question[] = [];
     const areas = Object.keys(areaGroups);
     
+    console.log('🎯 Selecionando questões por área:', areas);
+    
     // Selecionar questões de forma equilibrada entre áreas
-    for (let i = 0; i < questionsCount; i++) {
-      const area = areas[i % areas.length];
+    for (let i = 0; i < questionsCount && areas.length > 0; i++) {
+      const areaIndex = i % areas.length;
+      const area = areas[areaIndex];
       const areaQuestions = areaGroups[area];
       
       if (areaQuestions && areaQuestions.length > 0) {
         const randomIndex = Math.floor(Math.random() * areaQuestions.length);
         const selectedQuestion = areaQuestions.splice(randomIndex, 1)[0];
         selectedQuestions.push(selectedQuestion);
+        console.log(`✅ Questão ${i + 1} selecionada - Área: ${area}, Ano: ${selectedQuestion.year}`);
+        
+        // Remove área se não tem mais questões
+        if (areaQuestions.length === 0) {
+          delete areaGroups[area];
+          areas.splice(areaIndex, 1);
+        }
       }
     }
 
-    // Se não conseguiu 10 questões equilibradas, completar aleatoriamente
-    while (selectedQuestions.length < questionsCount && officialQuestions.length > 0) {
-      const randomIndex = Math.floor(Math.random() * officialQuestions.length);
-      const question = officialQuestions.splice(randomIndex, 1)[0];
+    // Se ainda precisamos de mais questões, pegar aleatoriamente
+    const remainingQuestions = Object.values(areaGroups).flat();
+    while (selectedQuestions.length < questionsCount && remainingQuestions.length > 0) {
+      const randomIndex = Math.floor(Math.random() * remainingQuestions.length);
+      const question = remainingQuestions.splice(randomIndex, 1)[0];
       if (!selectedQuestions.find(q => q.id === question.id)) {
         selectedQuestions.push(question);
+        console.log(`➕ Questão extra ${selectedQuestions.length} - Área: ${question.area}, Ano: ${question.year}`);
       }
     }
 
+    console.log('🎉 Seleção final:', selectedQuestions.length, 'questões');
     return selectedQuestions.slice(0, questionsCount);
   }, [todasQuestoes, questionsCount]);
 
@@ -101,13 +128,14 @@ export function usePremiumChallenge() {
     const selectedQuestions = getOfficialQuestions();
     
     if (selectedQuestions.length < questionsCount) {
-      console.log('❌ Questões insuficientes disponíveis');
+      console.log('❌ Questões insuficientes disponíveis:', selectedQuestions.length);
       toast.error("Questões insuficientes para o desafio. Tente novamente mais tarde.");
       return false;
     }
 
     console.log('✅ Questões selecionadas:', selectedQuestions.length);
     console.log('📋 Áreas das questões:', [...new Set(selectedQuestions.map(q => q.area))]);
+    console.log('📅 Anos das questões:', [...new Set(selectedQuestions.map(q => q.year))]);
 
     const newState: ChallengeState = {
       isActive: true,
@@ -133,13 +161,18 @@ export function usePremiumChallenge() {
     
     setChallengeState(prev => {
       const currentQuestion = prev.questions[prev.currentQuestionIndex];
-      if (!currentQuestion) return prev;
+      if (!currentQuestion) {
+        console.error('❌ Questão atual não encontrada');
+        return prev;
+      }
 
       const isCorrect = currentQuestion.correct === optionId;
       const newScore = isCorrect ? prev.score + 1 : prev.score;
       const newStreak = isCorrect ? prev.streak + 1 : 0;
       const newCombo = isCorrect ? prev.combo + 1 : 0;
       const newPerfectAnswers = isCorrect ? prev.perfectAnswers + 1 : prev.perfectAnswers;
+
+      console.log('📊 Resposta:', { isCorrect, newScore, newStreak, newCombo });
 
       // Sistema de moedas baseado na performance
       let coinsEarned = 0;
@@ -148,6 +181,7 @@ export function usePremiumChallenge() {
         if (newCombo >= 3) coinsEarned += 5; // Combo bonus
         if (newStreak >= 5) coinsEarned += 10; // Streak bonus
         if (prev.currentQuestionIndex < 5) coinsEarned += 5; // Speed bonus
+        console.log('💰 Moedas ganhas:', coinsEarned);
       }
 
       recordAnswer(isCorrect, currentQuestion.area, currentQuestion.id);
@@ -171,6 +205,8 @@ export function usePremiumChallenge() {
       if (isLastQuestion) {
         const hasWon = prev.score >= winThreshold;
         const newAttemptsUsed = attemptsUsed + 1;
+        
+        console.log('🏁 Desafio finalizado!', { score: prev.score, hasWon });
         
         setAttemptsUsed(newAttemptsUsed);
         localStorage.setItem('premium_challenge_attempts', newAttemptsUsed.toString());
@@ -198,6 +234,7 @@ export function usePremiumChallenge() {
         };
       }
 
+      console.log('➡️ Próxima questão:', prev.currentQuestionIndex + 1);
       return {
         ...prev,
         currentQuestionIndex: prev.currentQuestionIndex + 1
@@ -206,6 +243,7 @@ export function usePremiumChallenge() {
   }, [attemptsUsed, winThreshold, addXP]);
 
   const resetChallenge = useCallback(() => {
+    console.log('🔄 Resetando desafio...');
     setChallengeState({
       isActive: false,
       currentQuestionIndex: 0,

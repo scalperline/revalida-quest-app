@@ -108,10 +108,10 @@ export function PremiumQuestionCard({
             {question.enunciado}
           </h3>
           
-          {question.imagem && (
+          {question.image && (
             <div className="mb-6 flex justify-center">
               <img 
-                src={question.imagem} 
+                src={question.image} 
                 alt="Imagem da questão" 
                 className="max-w-full h-auto rounded-xl border-2 border-gray-600 shadow-lg"
               />
@@ -137,7 +137,7 @@ export function PremiumQuestionCard({
                     <div className="w-8 h-8 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center text-white font-bold">
                       {optionId}
                     </div>
-                    <span className="text-left">{option}</span>
+                    <span className="text-left">{option.text}</span>
                   </div>
                   {getOptionIcon(optionId)}
                 </div>

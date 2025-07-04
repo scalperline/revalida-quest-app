@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
@@ -30,15 +29,15 @@ export function ChallengeModal({ isOpen, onClose }: ChallengeModalProps) {
 
   const currentQuestion = challengeState.questions[challengeState.currentQuestionIndex];
   const progress = challengeState.questions.length > 0 ? ((challengeState.currentQuestionIndex + 1) / challengeState.questions.length) * 100 : 0;
-  const isLoadingQuestions = challengeState.isActive && challengeState.questions.length === 0;
+  const isLoadingQuestions = challengeState.isActive && (!challengeState.questions || challengeState.questions.length === 0);
 
   // Iniciar timer quando modal abre e questões estão carregadas
   useEffect(() => {
-    if (isOpen && challengeState.isActive && challengeState.questions.length > 0 && !isRunning) {
+    if (isOpen && challengeState.isActive && challengeState.questions.length > 0 && !isRunning && !isFinished) {
       console.log('🕐 Iniciando timer do desafio...');
       start();
     }
-  }, [isOpen, challengeState.isActive, challengeState.questions.length, isRunning, start]);
+  }, [isOpen, challengeState.isActive, challengeState.questions.length, isRunning, isFinished, start]);
 
   // Parar timer e mostrar modal de sucesso quando completar
   useEffect(() => {
@@ -75,6 +74,8 @@ export function ChallengeModal({ isOpen, onClose }: ChallengeModalProps) {
     const isCorrect = currentQuestion.correct === selectedAnswer;
     const prevCoins = challengeState.coinsEarned;
     
+    console.log('✅ Confirmando resposta:', { selectedAnswer, isCorrect, prevCoins });
+    
     // Show immediate feedback
     setLastAnswerCorrect(isCorrect);
     setShowFeedback(true);
@@ -83,12 +84,12 @@ export function ChallengeModal({ isOpen, onClose }: ChallengeModalProps) {
     answerCurrentQuestion(selectedAnswer);
     
     if (isCorrect) {
-      // Mostrar pill de recompensa
+      // Mostrar pill de recompensa após um delay
       setTimeout(() => {
-        const coinsEarned = challengeState.coinsEarned - prevCoins;
+        const coinsEarned = 10 + (challengeState.combo >= 3 ? 5 : 0) + (challengeState.streak >= 5 ? 10 : 0);
         setLastCoinsEarned(coinsEarned);
         setShowRewardPill(true);
-      }, 500);
+      }, 800);
 
       // Epic feedback for combos
       if (challengeState.combo >= 3) {
@@ -97,7 +98,7 @@ export function ChallengeModal({ isOpen, onClose }: ChallengeModalProps) {
           className: "bg-gradient-to-r from-orange-500 to-red-500 text-white border-0"
         });
       } else {
-        toast.success(`✅ Correto! +${challengeState.coinsEarned - prevCoins} moedas`, {
+        toast.success(`✅ Correto! +10 moedas`, {
           duration: 1500,
           className: "bg-gradient-to-r from-green-500 to-emerald-500 text-white border-0"
         });
@@ -184,14 +185,14 @@ export function ChallengeModal({ isOpen, onClose }: ChallengeModalProps) {
                 </Button>
               </div>
               
-              {!isLoadingQuestions && (
+              {challengeState.questions.length > 0 && (
                 <>
                   <div className="flex items-center justify-between mt-6 flex-wrap gap-4">
                     <div className="flex items-center gap-6 flex-wrap">
                       {/* Timer Premium */}
                       <PremiumTimer 
                         initialMinutes={10}
-                        isRunning={isRunning}
+                        isRunning={isRunning && !showFeedback}
                         onTimeUp={() => {
                           toast.error("⏰ Tempo esgotado! Desafio finalizado.");
                           nextQuestion();

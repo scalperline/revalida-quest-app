@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { ChevronDown, ChevronUp, Trophy, Zap } from 'lucide-react';
 import { useGamification } from '@/hooks/useGamification';
@@ -58,7 +57,7 @@ export function MobileProgressDrawer({
       <div className="fixed top-14 right-0 z-50 md:hidden">
         {/* Estado Colapsado - Botão com Preview */}
         {!isExpanded && <div className="flex justify-end pr-3">
-            <button onClick={toggleDrawer} className="bg-gradient-to-r from-blue-500 via-blue-600 to-purple-600 text-white rounded-b-xl shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col items-center gap-1 font-medium border-t-0 border-2 border-blue-300/30 px-3 py-2 text-xs">
+            <button onClick={toggleDrawer} className="bg-gradient-to-r from-blue-500 via-blue-600 to-purple-600 text-white rounded-b-xl shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col items-center gap-1 font-medium border-t-0 border-2 border-blue-300/30 text-xs px-[4px] py-[6px]">
               {/* Mini Preview do Progresso */}
               <div className="flex items-center gap-1.5">
                 <div className="flex items-center gap-1">
@@ -70,7 +69,7 @@ export function MobileProgressDrawer({
                 
                 <div className="flex items-center gap-1">
                   <Zap className="w-3 h-3 text-orange-300" />
-                  <span className="font-medium text-xs">{userProgress.xp}</span>
+                  <span className="font-medium text-xs my-0 px-0 mx-0 py-[2px]">{userProgress.xp}</span>
                 </div>
               </div>
               

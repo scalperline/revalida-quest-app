@@ -1,36 +1,23 @@
-
 import { useAuth } from "@/hooks/useAuth";
 import { Navbar } from "@/components/Navbar";
+import { QuickChallenge } from "@/components/QuickChallenge";
 import { QuestsPanel } from "@/components/QuestsPanel";
 import { AdaptiveSuggestions } from "@/components/AdaptiveSuggestions";
 import { StreakDisplay } from "@/components/StreakDisplay";
 import { BadgesGrid } from "@/components/BadgesGrid";
 import { UsageLimitsCard } from "@/components/UsageLimitsCard";
-import { SupremeChallengeSection } from "@/components/pricing/SupremeChallengeSection";
 import { useGamification } from "@/hooks/useGamification";
-import { useQuestions } from "@/hooks/useQuestions";
-import { useState, useEffect } from "react";
 import { BookOpen, Target, TrendingUp, Stethoscope, Sparkles, Zap } from "lucide-react";
-
 const Index = () => {
-  const { user } = useAuth();
-  const { userProgress } = useGamification();
-  const { todasQuestoes } = useQuestions();
-  
-  // Supreme Challenge states
-  const [challengeQuestions, setChallengeQuestions] = useState<any[]>([]);
-  const [challengeReady, setChallengeReady] = useState(false);
-
-  // Prepare challenge questions
-  useEffect(() => {
-    if (todasQuestoes && todasQuestoes.length >= 10) {
-      const shuffled = [...todasQuestoes].sort(() => 0.5 - Math.random());
-      const selected = shuffled.slice(0, 10);
-      setChallengeQuestions(selected);
-      setChallengeReady(true);
-    }
-  }, [todasQuestoes]);
-
+  const {
+    user
+  } = useAuth();
+  const {
+    userProgress
+  } = useGamification();
+  const handleQuickChallengeStart = () => {
+    console.log("Quick challenge started");
+  };
   return <div className="min-h-screen bg-gradient-to-br from-blue-50 via-blue-100 to-blue-200 dark:from-gray-900 dark:to-gray-800 relative overflow-hidden">
       {/* Enhanced Animated Background Elements - Responsive */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -132,31 +119,35 @@ const Index = () => {
             {/* Left Column */}
             <div className="xl:col-span-2 space-y-4 sm:space-y-6 lg:space-y-8">
               <div className="animate-fade-in">
-                <SupremeChallengeSection
-                  todasQuestoes={todasQuestoes || []}
-                  challengeQuestions={challengeQuestions}
-                  challengeReady={challengeReady}
-                  setChallengeQuestions={setChallengeQuestions}
-                  setChallengeReady={setChallengeReady}
-                />
+                <QuickChallenge onStart={handleQuickChallengeStart} />
               </div>
-              <div className="animate-fade-in" style={{ animationDelay: '0.2s' }}>
+              <div className="animate-fade-in" style={{
+              animationDelay: '0.2s'
+            }}>
                 <AdaptiveSuggestions />
               </div>
             </div>
 
             {/* Right Column */}
             <div className="space-y-4 sm:space-y-6 lg:space-y-8">
-              <div className="animate-fade-in" style={{ animationDelay: '0.1s' }}>
+              <div className="animate-fade-in" style={{
+              animationDelay: '0.1s'
+            }}>
                 <UsageLimitsCard />
               </div>
-              <div className="animate-fade-in" style={{ animationDelay: '0.3s' }}>
+              <div className="animate-fade-in" style={{
+              animationDelay: '0.3s'
+            }}>
                 <StreakDisplay />
               </div>
-              <div className="animate-fade-in" style={{ animationDelay: '0.4s' }}>
+              <div className="animate-fade-in" style={{
+              animationDelay: '0.4s'
+            }}>
                 <QuestsPanel />
               </div>
-              <div className="animate-fade-in" style={{ animationDelay: '0.5s' }}>
+              <div className="animate-fade-in" style={{
+              animationDelay: '0.5s'
+            }}>
                 <BadgesGrid achievements={userProgress.achievements} />
               </div>
             </div>
@@ -165,5 +156,4 @@ const Index = () => {
       </main>
     </div>;
 };
-
 export default Index;

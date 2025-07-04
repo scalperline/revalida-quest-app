@@ -1,3 +1,4 @@
+
 import { useState, useEffect, useRef } from 'react';
 import { Dialog, DialogContent, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { useChallengeTimer } from '@/hooks/useChallengeTimer';
@@ -14,12 +15,16 @@ import { toast } from 'sonner';
 interface SupremeChallengeModalProps {
   isOpen: boolean;
   onClose: () => void;
+  onVictory: (coins: number, discount: number) => void;
+  onChallengeEnd: () => void;
   questions: any[];
 }
 
 export function SupremeChallengeModal({ 
   isOpen, 
-  onClose, 
+  onClose,
+  onVictory,
+  onChallengeEnd,
   questions 
 }: SupremeChallengeModalProps) {
   const { playSound } = useChallengeAudio();
@@ -193,6 +198,9 @@ export function SupremeChallengeModal({
         localStorage.setItem('premium_challenge_won', 'true');
         setShowVictoryModal(true);
         
+        // Call onVictory with coins and discount values
+        onVictory(coinSystem.totalCoins, 20);
+        
         toast.success("🏆 DESAFIO SUPREMO CONQUISTADO! Seu prêmio está pronto!", {
           duration: 6000,
           className: "bg-gradient-to-r from-yellow-500 to-orange-500 text-white border-0"
@@ -206,6 +214,9 @@ export function SupremeChallengeModal({
           onClose();
         }, 2000);
       }
+      
+      // Call onChallengeEnd regardless of win/lose
+      onChallengeEnd();
     } else {
       // Next question
       setCurrentQuestionIndex(prev => prev + 1);

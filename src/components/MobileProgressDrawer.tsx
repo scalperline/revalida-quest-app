@@ -57,7 +57,7 @@ export function MobileProgressDrawer({
       <div className="fixed top-14 right-0 z-50 md:hidden">
         {/* Collapsed State - Arrow Button */}
         {!isExpanded && <div className="flex justify-end pr-3">
-            <button onClick={toggleDrawer} className="bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-b-lg shadow-md hover:shadow-lg transition-all duration-300 flex items-center gap-1.5 text-xs px-0 py-0">
+            <button onClick={toggleDrawer} className="bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-b-lg shadow-md hover:shadow-lg transition-all duration-300 flex items-center gap-1.5 px-0 py-0 text-xs font-normal">
               
               <ChevronDown className="w-3 h-3 py-0 px-0 my-0 mx-[14px]" />
             </button>

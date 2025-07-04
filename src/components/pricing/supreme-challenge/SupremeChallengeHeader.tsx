@@ -12,7 +12,8 @@ export function SupremeChallengeHeader({
       <div className="absolute inset-0 bg-gradient-to-r from-blue-700/5 to-cyan-600/5 bg-slate-900"></div>
       
       <div className="relative z-10 text-center">
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
+        <div className="flex flex-col items-center justify-center gap-4 mb-6">
+          <Crown className="w-12 h-12 sm:w-16 sm:h-16 text-yellow-500 animate-bounce delay-300" />
           
           <div>
             <h2 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-2">
@@ -24,7 +25,6 @@ export function SupremeChallengeHeader({
               {hasWonBefore ? '🏆 CONQUISTADO! Você é um MESTRE!' : 'Acerte 10 questões e ganhe o plano Premium pelo preço do Básico'}
             </p>
           </div>
-          <Crown className="w-12 h-12 sm:w-16 sm:h-16 text-yellow-500 animate-bounce delay-300" />
         </div>
 
         <div className="grid grid-cols-3 gap-4 sm:gap-8 text-center max-w-2xl mx-auto">

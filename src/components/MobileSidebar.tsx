@@ -1,11 +1,13 @@
 import { Link, useLocation } from 'react-router-dom';
-import { Home, FileText, BarChart3, User, Trophy, Target, HelpCircle, LogOut, X, Stethoscope } from 'lucide-react';
+import { Home, FileText, BarChart3, User, Trophy, Flag, HelpCircle, LogOut, X, Stethoscope } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
 import { MobileUserProgress } from './MobileUserProgress';
+
 interface Props {
   isOpen: boolean;
   onClose: () => void;
 }
+
 export function MobileSidebar({
   isOpen,
   onClose
@@ -27,7 +29,7 @@ export function MobileSidebar({
   }, {
     name: 'Missões',
     href: '/missions',
-    icon: Target,
+    icon: Flag,
     emoji: '🎯'
   }, {
     name: 'Estatísticas',
@@ -45,6 +47,7 @@ export function MobileSidebar({
     icon: User,
     emoji: '⚙️'
   }];
+
   const menuActions = [{
     name: 'Ajuda',
     icon: HelpCircle,

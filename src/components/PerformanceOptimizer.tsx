@@ -35,10 +35,10 @@ export function PerformanceOptimizer() {
     if ('performance' in window) {
       const perfData = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming;
       
-      // Log performance metrics for MVP monitoring
+      // Log performance metrics for MVP monitoring using modern properties
       console.log('Performance Metrics:', {
-        pageLoadTime: perfData.loadEventEnd - perfData.navigationStart,
-        domContentLoaded: perfData.domContentLoadedEventEnd - perfData.navigationStart,
+        pageLoadTime: perfData.loadEventEnd - perfData.fetchStart,
+        domContentLoaded: perfData.domContentLoadedEventEnd - perfData.fetchStart,
         firstContentfulPaint: performance.getEntriesByName('first-contentful-paint')[0]?.startTime,
         timestamp: new Date().toISOString()
       });

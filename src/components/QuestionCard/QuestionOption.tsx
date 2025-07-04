@@ -50,7 +50,7 @@ export function QuestionOption({
       variant="outline"
       onClick={() => onSelect(option.id)}
       disabled={disabled || showAnswer}
-      className={`w-full p-4 sm:p-6 h-auto text-left justify-start border-2 transition-all duration-300 relative overflow-hidden group ${getOptionColor(
+      className={`w-full p-3 sm:p-4 md:p-6 h-auto text-left justify-start border-2 transition-all duration-300 relative overflow-hidden group ${getOptionColor(
         option.id, 
         showAnswer, 
         selectedOption, 
@@ -74,9 +74,9 @@ export function QuestionOption({
         <div className="absolute inset-0 bg-gradient-to-r from-emerald-400/20 to-green-400/20 animate-pulse"></div>
       )}
       
-      <div className="flex items-start gap-3 sm:gap-4 w-full relative z-10">
-        <div className="flex items-center gap-2 sm:gap-3">
-          <div className={`flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center font-bold text-sm sm:text-base transition-all duration-300 ${
+      <div className="flex items-start gap-2 sm:gap-3 md:gap-4 w-full relative z-10">
+        <div className="flex items-center gap-1.5 sm:gap-2 md:gap-3 flex-shrink-0">
+          <div className={`flex-shrink-0 w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center font-bold text-xs sm:text-sm md:text-base transition-all duration-300 ${
             isCorrect 
               ? "bg-emerald-500 text-white shadow-lg" 
               : isUserAnswer && !isCorrect
@@ -89,8 +89,8 @@ export function QuestionOption({
           </div>
           {getOptionIcon(option.id)}
         </div>
-        <div className="flex-1 text-left min-w-0">
-          <span className="responsive-text-body text-gray-800 dark:text-gray-200 whitespace-normal break-words block">
+        <div className="flex-1 text-left min-w-0 overflow-hidden">
+          <span className="text-sm sm:text-base md:text-lg text-gray-800 dark:text-gray-200 leading-relaxed block word-wrap break-words hyphens-auto">
             {option.text}
           </span>
         </div>

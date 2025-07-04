@@ -1,3 +1,4 @@
+
 import { CardHeader } from '@/components/ui/card';
 import { Trophy, Crown, Target, Zap, Star } from 'lucide-react';
 interface SupremeChallengeHeaderProps {
@@ -21,7 +22,7 @@ export function SupremeChallengeHeader({
               </span>
             </h2>
             <p className="text-lg sm:text-xl text-yellow-900 font-semibold animate-pulse">
-              {hasWonBefore ? '🏆 CONQUISTADO! Você é um MESTRE!' : '⚡ Prove sua maestria e ganhe desconto ÉPICO!'}
+              {hasWonBefore ? '🏆 CONQUISTADO! Você é um MESTRE!' : 'Acerte 10 questões e ganhe o plano Premium pelo preço do Básico'}
             </p>
           </div>
           <Crown className="w-12 h-12 sm:w-16 sm:h-16 text-yellow-800 animate-bounce delay-300" />

@@ -19,6 +19,7 @@ export function MobileHamburgerButton({ isOpen, onToggle, className = '' }: Prop
         hover:scale-105 active:scale-95
         border-2 border-gray-400/60 hover:border-gray-500/70
         touch-manipulation
+        mr-2
         ${className}
       `}
       aria-label={isOpen ? 'Fechar menu' : 'Abrir menu'}

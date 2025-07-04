@@ -1,6 +1,6 @@
 
 import { useState, useEffect, useRef } from 'react';
-import { Dialog, DialogContent } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { usePremiumChallenge } from '@/hooks/usePremiumChallenge';
@@ -71,6 +71,7 @@ export function SupremeChallengeModal({ isOpen, onClose, onVictory }: SupremeCha
   // Iniciar timer quando questões estão prontas
   useEffect(() => {
     if (isOpen && isQuestionsReady && !isStarting) {
+      console.log('🕐 Timer do desafio iniciado');
       start();
     }
   }, [isOpen, isQuestionsReady, isStarting, start]);
@@ -109,7 +110,7 @@ export function SupremeChallengeModal({ isOpen, onClose, onVictory }: SupremeCha
     if (!selectedAnswer || !currentQuestion || showFeedback) return;
 
     const isCorrect = currentQuestion.correct === selectedAnswer;
-    const timeBonus = Math.max(0, timeLeft - 300); // Bônus por responder rápido
+    const timeBonus = Math.max(0, timeLeft - 300);
     
     setLastAnswerCorrect(isCorrect);
     setShowFeedback(true);
@@ -118,7 +119,6 @@ export function SupremeChallengeModal({ isOpen, onClose, onVictory }: SupremeCha
     if (isCorrect) {
       const coinsEarned = calculateCoins(true, timeBonus);
       
-      // Mostrar animação de moedas
       if (buttonRef.current) {
         const rect = buttonRef.current.getBoundingClientRect();
         setCoinAnimation({
@@ -128,7 +128,6 @@ export function SupremeChallengeModal({ isOpen, onClose, onVictory }: SupremeCha
         });
       }
 
-      // Sons baseados no combo
       if (coinSystem.combo >= 10) {
         playSound('combo', 2);
         toast.success(`🔥 COMBO SUPREMO ${coinSystem.combo + 1}x! +${coinsEarned} moedas!`, {
@@ -200,14 +199,11 @@ export function SupremeChallengeModal({ isOpen, onClose, onVictory }: SupremeCha
 
   return (
     <>
-      {/* Ocultar navbar quando modal está aberto */}
-      <style>{`
-        .navbar-hidden { display: none !important; }
-        body { overflow: hidden; }
-      `}</style>
-
       <Dialog open={isOpen} onOpenChange={handleClose}>
         <DialogContent className="max-w-7xl h-screen overflow-hidden p-0 border-0">
+          <DialogTitle className="sr-only">Desafio Supremo</DialogTitle>
+          <DialogDescription className="sr-only">Complete o desafio para ganhar desconto premium</DialogDescription>
+          
           <div className="flex flex-col h-full bg-gradient-to-br from-slate-900 via-purple-900/90 to-indigo-900 relative overflow-hidden">
             {/* Background animado */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -225,7 +221,6 @@ export function SupremeChallengeModal({ isOpen, onClose, onVictory }: SupremeCha
                   </span>
                 </div>
                 
-                {/* Progress bar do tempo */}
                 <div className="w-32 h-2 bg-gray-700 rounded-full overflow-hidden">
                   <div 
                     className={`h-full transition-all duration-1000 ${
@@ -240,13 +235,11 @@ export function SupremeChallengeModal({ isOpen, onClose, onVictory }: SupremeCha
               </div>
 
               <div className="flex items-center gap-4">
-                {/* Coins display */}
                 <div className="flex items-center gap-2 bg-gradient-to-r from-yellow-600/30 to-orange-600/30 backdrop-blur-sm rounded-full px-4 py-2">
                   <Coins className="w-5 h-5 text-yellow-400" />
                   <span className="text-yellow-400 font-bold">{coinSystem.sessionCoins}</span>
                 </div>
 
-                {/* Combo display */}
                 {coinSystem.combo >= 3 && (
                   <Badge 
                     className={`${
@@ -314,6 +307,18 @@ export function SupremeChallengeModal({ isOpen, onClose, onVictory }: SupremeCha
                   combo={coinSystem.combo}
                 />
               )}
+
+              {/* Debug info */}
+              {!isStarting && !startError && !isQuestionsReady && (
+                <div className="flex flex-col items-center justify-center h-full text-white">
+                  <h3 className="text-xl mb-4">Debug Info:</h3>
+                  <p>Challenge Active: {challengeState.isActive ? 'Yes' : 'No'}</p>
+                  <p>Questions Length: {challengeState.questions.length}</p>
+                  <p>Current Index: {challengeState.currentQuestionIndex}</p>
+                  <p>Is Starting: {isStarting ? 'Yes' : 'No'}</p>
+                  <p>Start Error: {startError || 'None'}</p>
+                </div>
+              )}
             </div>
 
             {/* Footer de ação */}
@@ -351,7 +356,6 @@ export function SupremeChallengeModal({ isOpen, onClose, onVictory }: SupremeCha
         </DialogContent>
       </Dialog>
 
-      {/* Coin animation */}
       <CoinAnimationPill
         coins={coinAnimation.coins}
         combo={coinSystem.combo}

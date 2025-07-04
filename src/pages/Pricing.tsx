@@ -32,23 +32,33 @@ export default function Pricing() {
   const [victoryData, setVictoryData] = useState({ coins: 0, discount: 0 });
 
   const handleStartChallenge = async (): Promise<boolean> => {
+    console.log('🚀 Iniciando Desafio Supremo');
+    
     if (!user) {
       navigate('/auth');
       return false;
     }
 
+    // Abrir modal primeiro
+    setShowSupremeModal(true);
+    
+    // Tentar iniciar o desafio
     const started = await startChallenge();
-    if (started) {
-      setShowSupremeModal(true);
-      // Ocultar navbar
-      document.querySelector('.navbar')?.classList.add('navbar-hidden');
+    console.log('Desafio iniciado:', started);
+    
+    if (!started) {
+      // Se falhou, fechar o modal
+      setShowSupremeModal(false);
+      return false;
     }
-    return started;
+
+    // Ocultar navbar
+    document.querySelector('.navbar')?.classList.add('navbar-hidden');
+    return true;
   };
 
   const handleCloseSupremeModal = () => {
     setShowSupremeModal(false);
-    // Mostrar navbar novamente
     document.querySelector('.navbar')?.classList.remove('navbar-hidden');
   };
 
@@ -56,12 +66,10 @@ export default function Pricing() {
     setVictoryData({ coins, discount });
     setShowSupremeModal(false);
     setShowVictoryModal(true);
-    // Manter navbar oculta até fechar modal de vitória
   };
 
   const handleCloseVictoryModal = () => {
     setShowVictoryModal(false);
-    // Mostrar navbar novamente
     document.querySelector('.navbar')?.classList.remove('navbar-hidden');
   };
 
@@ -115,6 +123,13 @@ export default function Pricing() {
         score={challengeState.score}
         total={challengeState.questions.length}
       />
+
+      {/* CSS para ocultar navbar */}
+      <style>{`
+        .navbar-hidden { 
+          display: none !important; 
+        }
+      `}</style>
     </div>
   );
 }

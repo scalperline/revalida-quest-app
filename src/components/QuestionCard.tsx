@@ -1,4 +1,5 @@
 
+
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -63,7 +64,7 @@ export function QuestionCard({
   };
 
   const getOptionClasses = (status: string) => {
-    const baseClasses = "w-full text-left p-4 rounded-xl border-2 transition-all duration-300 transform hover:scale-[1.02]";
+    const baseClasses = "w-full text-left p-4 rounded-xl border-2 transition-all duration-300 whitespace-normal break-words overflow-hidden";
     
     switch (status) {
       case 'selected':
@@ -80,11 +81,11 @@ export function QuestionCard({
   const getOptionIcon = (status: string) => {
     switch (status) {
       case 'correct':
-        return <CheckCircle className="w-5 h-5 text-green-600" />;
+        return <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0" />;
       case 'incorrect':
-        return <XCircle className="w-5 h-5 text-red-600" />;
+        return <XCircle className="w-5 h-5 text-red-600 flex-shrink-0" />;
       case 'selected':
-        return <Target className="w-5 h-5 text-blue-600" />;
+        return <Target className="w-5 h-5 text-blue-600 flex-shrink-0" />;
       default:
         return null;
     }
@@ -184,7 +185,7 @@ export function QuestionCard({
                     {getOptionIcon(status)}
                   </div>
                   <div 
-                    className="flex-1 text-left"
+                    className="flex-1 text-left whitespace-normal break-words overflow-hidden"
                     dangerouslySetInnerHTML={{ __html: option.text }}
                   />
                 </div>
@@ -239,3 +240,4 @@ export function QuestionCard({
 
 // Export the type for backward compatibility
 export type { Question };
+

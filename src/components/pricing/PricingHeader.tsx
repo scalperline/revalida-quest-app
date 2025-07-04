@@ -1,5 +1,5 @@
 
-import { Stethoscope, Sparkles, Star } from 'lucide-react';
+import { Stethoscope } from 'lucide-react';
 
 export function PricingHeader() {
   return (
@@ -8,11 +8,11 @@ export function PricingHeader() {
         <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center shadow-2xl rounded-lg">
           <Stethoscope className="w-8 h-8 text-white" />
         </div>
-        <h1 className="font-bold bg-gradient-to-r from-blue-400 via-blue-300 to-blue-200 bg-clip-text text-transparent md:text-4xl text-2xl">
+        <h1 className="font-bold text-white md:text-4xl text-2xl">
           Planos RevalidaQuest
         </h1>
       </div>
-      <p className="text-gray-300 max-w-3xl mx-auto mb-8 text-base">
+      <p className="text-slate-400 max-w-3xl mx-auto mb-8 text-base">
         Acelere sua preparação para o Revalida com nossos planos especializados
       </p>
     </div>

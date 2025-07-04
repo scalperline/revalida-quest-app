@@ -57,11 +57,11 @@ export default function Pricing() {
   }, [todasQuestoes]);
 
   return (
-    <div className="min-h-screen bg-gray-900">
+    <div className="min-h-screen bg-slate-950">
       <Navbar />
       
       <div className="pt-20">
-        <div className="container mx-auto px-4 py-8">
+        <div className="container mx-auto px-4 py-8 max-w-7xl">
           <PricingHeader />
 
           {/* Supreme Challenge Section */}

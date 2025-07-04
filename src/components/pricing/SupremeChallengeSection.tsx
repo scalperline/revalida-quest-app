@@ -138,7 +138,7 @@ export function SupremeChallengeSection({
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-gradient-to-r from-red-600/10 to-red-500/10 rounded-full blur-3xl animate-spin" style={{ animationDuration: '20s' }}></div>
       </div>
       
-      <Card className="relative overflow-hidden border-4 border-gradient-to-r from-red-600 via-red-500 to-red-400 bg-gradient-to-br from-red-900/95 via-red-800/20 to-red-900/95 backdrop-blur-xl shadow-2xl">
+      <Card className="relative overflow-hidden border border-red-900 bg-gradient-to-br from-red-900/95 via-red-800/20 to-red-900/95 backdrop-blur-xl shadow-2xl">
         <SupremeChallengeHeader hasWonBefore={hasWonBefore} attemptsLeft={attemptsLeft} />
         
         <SupremeChallengeContent

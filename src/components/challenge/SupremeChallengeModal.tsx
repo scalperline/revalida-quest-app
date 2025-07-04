@@ -3,7 +3,6 @@ import { useState, useEffect, useRef } from 'react';
 import { Dialog, DialogContent, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { usePremiumChallenge } from '@/hooks/usePremiumChallenge';
 import { useChallengeTimer } from '@/hooks/useChallengeTimer';
 import { useChallengeAudio } from '@/hooks/useChallengeAudio';
 import { useVirtualCoins } from '@/hooks/useVirtualCoins';
@@ -16,23 +15,30 @@ interface SupremeChallengeModalProps {
   isOpen: boolean;
   onClose: () => void;
   onVictory: (coins: number, discount: number) => void;
+  onChallengeEnd: () => void;
+  questions: any[];
 }
 
-export function SupremeChallengeModal({ isOpen, onClose, onVictory }: SupremeChallengeModalProps) {
-  const { 
-    challengeState, 
-    answerCurrentQuestion, 
-    nextQuestion, 
-    isStarting, 
-    startError, 
-    retryStart 
-  } = usePremiumChallenge();
-  
+export function SupremeChallengeModal({ 
+  isOpen, 
+  onClose, 
+  onVictory, 
+  onChallengeEnd, 
+  questions 
+}: SupremeChallengeModalProps) {
   const { playSound } = useChallengeAudio();
   const { coinSystem, calculateCoins, resetSession, getDiscountAmount } = useVirtualCoins();
+  
+  // Challenge state
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<string>('');
   const [showFeedback, setShowFeedback] = useState(false);
   const [lastAnswerCorrect, setLastAnswerCorrect] = useState<boolean | null>(null);
+  const [score, setScore] = useState(0);
+  const [answers, setAnswers] = useState<Record<string, string>>({});
+  const [isCompleted, setIsCompleted] = useState(false);
+  
+  // Animation state
   const [coinAnimation, setCoinAnimation] = useState<{
     show: boolean;
     coins: number;
@@ -40,8 +46,8 @@ export function SupremeChallengeModal({ isOpen, onClose, onVictory }: SupremeCha
   }>({ show: false, coins: 0, position: { x: 0, y: 0 } });
   
   const buttonRef = useRef<HTMLButtonElement>(null);
-  const currentQuestion = challengeState.questions[challengeState.currentQuestionIndex];
-  const isQuestionsReady = challengeState.isActive && challengeState.questions.length > 0;
+  const currentQuestion = questions[currentQuestionIndex];
+  const isQuestionsReady = questions.length > 0;
 
   const { timeLeft, minutes, seconds, start, stop, urgencyLevel, percentage } = useChallengeTimer(600, {
     onTimeWarning: (timeLeft) => {
@@ -68,37 +74,29 @@ export function SupremeChallengeModal({ isOpen, onClose, onVictory }: SupremeCha
     }
   });
 
-  // Iniciar timer quando questões estão prontas
+  // Start timer when modal opens
   useEffect(() => {
-    if (isOpen && isQuestionsReady && !isStarting) {
+    if (isOpen && isQuestionsReady) {
       console.log('🕐 Timer do desafio iniciado');
       start();
     }
-  }, [isOpen, isQuestionsReady, isStarting, start]);
+  }, [isOpen, isQuestionsReady, start]);
 
   // Reset states when modal closes
   useEffect(() => {
     if (!isOpen) {
+      setCurrentQuestionIndex(0);
       setSelectedAnswer('');
       setShowFeedback(false);
       setLastAnswerCorrect(null);
+      setScore(0);
+      setAnswers({});
+      setIsCompleted(false);
       setCoinAnimation({ show: false, coins: 0, position: { x: 0, y: 0 } });
       resetSession();
       stop();
     }
   }, [isOpen, resetSession, stop]);
-
-  // Parar timer quando completar
-  useEffect(() => {
-    if (challengeState.hasCompleted) {
-      stop();
-      if (challengeState.hasWon) {
-        const discount = getDiscountAmount();
-        playSound('victory');
-        onVictory(coinSystem.totalCoins, discount);
-      }
-    }
-  }, [challengeState.hasCompleted, challengeState.hasWon, stop, onVictory, coinSystem.totalCoins, getDiscountAmount, playSound]);
 
   const handleAnswer = (optionId: string) => {
     if (showFeedback) return;
@@ -114,9 +112,10 @@ export function SupremeChallengeModal({ isOpen, onClose, onVictory }: SupremeCha
     
     setLastAnswerCorrect(isCorrect);
     setShowFeedback(true);
-    answerCurrentQuestion(selectedAnswer);
+    setAnswers(prev => ({ ...prev, [currentQuestion.id]: selectedAnswer }));
     
     if (isCorrect) {
+      setScore(prev => prev + 1);
       const coinsEarned = calculateCoins(true, timeBonus);
       
       if (buttonRef.current) {
@@ -164,26 +163,50 @@ export function SupremeChallengeModal({ isOpen, onClose, onVictory }: SupremeCha
   };
 
   const handleNextQuestion = () => {
-    nextQuestion();
-    setSelectedAnswer('');
-    setShowFeedback(false);
-    setLastAnswerCorrect(null);
+    const isLastQuestion = currentQuestionIndex >= questions.length - 1;
+    
+    if (isLastQuestion) {
+      // Challenge completed
+      const hasWon = score >= 10; // Need perfect score
+      setIsCompleted(true);
+      stop();
+      
+      if (hasWon) {
+        const discount = getDiscountAmount();
+        playSound('victory');
+        onVictory(coinSystem.totalCoins, discount);
+      } else {
+        toast.error(`💪 Quase lá! Você acertou ${score}/${questions.length}. Tente novamente!`, {
+          duration: 4000,
+          className: "bg-gradient-to-r from-blue-500 to-purple-500 text-white border-0"
+        });
+        setTimeout(() => {
+          onChallengeEnd();
+          onClose();
+        }, 2000);
+      }
+    } else {
+      // Next question
+      setCurrentQuestionIndex(prev => prev + 1);
+      setSelectedAnswer('');
+      setShowFeedback(false);
+      setLastAnswerCorrect(null);
+    }
   };
 
   const handleTimeUp = () => {
-    nextQuestion();
+    setIsCompleted(true);
+    stop();
+    toast.error(`⏰ Tempo esgotado! Você acertou ${score}/${questions.length}.`);
+    setTimeout(() => {
+      onChallengeEnd();
+      onClose();
+    }, 2000);
   };
 
   const handleClose = () => {
     stop();
     onClose();
-  };
-
-  const handleRetry = async () => {
-    const success = await retryStart();
-    if (success) {
-      resetSession();
-    }
   };
 
   const getTimerColor = () => {
@@ -240,6 +263,11 @@ export function SupremeChallengeModal({ isOpen, onClose, onVictory }: SupremeCha
                   <span className="text-yellow-400 font-bold">{coinSystem.sessionCoins}</span>
                 </div>
 
+                <div className="flex items-center gap-2 bg-gradient-to-r from-green-600/30 to-emerald-600/30 backdrop-blur-sm rounded-full px-4 py-2">
+                  <Trophy className="w-5 h-5 text-green-400" />
+                  <span className="text-green-400 font-bold">{score}/10</span>
+                </div>
+
                 {coinSystem.combo >= 3 && (
                   <Badge 
                     className={`${
@@ -269,7 +297,7 @@ export function SupremeChallengeModal({ isOpen, onClose, onVictory }: SupremeCha
             {/* Conteúdo principal */}
             <div className="flex-1 p-6 overflow-y-auto relative z-10">
               {/* Loading state */}
-              {isStarting && !startError && (
+              {!isQuestionsReady && (
                 <div className="flex flex-col items-center justify-center h-full">
                   <div className="w-16 h-16 border-4 border-purple-500 border-t-transparent rounded-full animate-spin mb-4"></div>
                   <h3 className="text-2xl font-bold text-white mb-2">Preparando Desafio Supremo</h3>
@@ -277,29 +305,12 @@ export function SupremeChallengeModal({ isOpen, onClose, onVictory }: SupremeCha
                 </div>
               )}
 
-              {/* Error state */}
-              {startError && (
-                <div className="flex flex-col items-center justify-center h-full">
-                  <div className="text-6xl mb-4">⚠️</div>
-                  <h3 className="text-2xl font-bold text-white mb-4">Erro no Desafio</h3>
-                  <p className="text-gray-300 mb-6 text-center max-w-md">{startError}</p>
-                  <div className="flex gap-4">
-                    <Button onClick={handleRetry} className="bg-blue-600 hover:bg-blue-700">
-                      🔄 Tentar Novamente
-                    </Button>
-                    <Button variant="outline" onClick={handleClose}>
-                      Fechar
-                    </Button>
-                  </div>
-                </div>
-              )}
-
               {/* Question card */}
-              {isQuestionsReady && currentQuestion && !startError && (
+              {isQuestionsReady && currentQuestion && (
                 <PremiumQuestionCard
                   question={currentQuestion}
-                  questionNumber={challengeState.currentQuestionIndex + 1}
-                  totalQuestions={challengeState.questions.length}
+                  questionNumber={currentQuestionIndex + 1}
+                  totalQuestions={questions.length}
                   onAnswer={handleAnswer}
                   userAnswer={selectedAnswer}
                   showAnswer={showFeedback}
@@ -307,26 +318,14 @@ export function SupremeChallengeModal({ isOpen, onClose, onVictory }: SupremeCha
                   combo={coinSystem.combo}
                 />
               )}
-
-              {/* Debug info */}
-              {!isStarting && !startError && !isQuestionsReady && (
-                <div className="flex flex-col items-center justify-center h-full text-white">
-                  <h3 className="text-xl mb-4">Debug Info:</h3>
-                  <p>Challenge Active: {challengeState.isActive ? 'Yes' : 'No'}</p>
-                  <p>Questions Length: {challengeState.questions.length}</p>
-                  <p>Current Index: {challengeState.currentQuestionIndex}</p>
-                  <p>Is Starting: {isStarting ? 'Yes' : 'No'}</p>
-                  <p>Start Error: {startError || 'None'}</p>
-                </div>
-              )}
             </div>
 
             {/* Footer de ação */}
-            {isQuestionsReady && !startError && (
+            {isQuestionsReady && !isCompleted && (
               <div className="p-6 border-t border-purple-400/20 bg-black/20 backdrop-blur-sm relative z-10">
                 <div className="flex justify-between items-center">
                   <div className="text-sm text-gray-400">
-                    Questão {challengeState.currentQuestionIndex + 1} de {challengeState.questions.length}
+                    Questão {currentQuestionIndex + 1} de {questions.length}
                   </div>
                   
                   <div className="flex gap-4">
@@ -344,7 +343,7 @@ export function SupremeChallengeModal({ isOpen, onClose, onVictory }: SupremeCha
                         onClick={handleNextQuestion}
                         className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white px-8 py-3 text-lg font-bold"
                       >
-                        {challengeState.currentQuestionIndex + 1 >= challengeState.questions.length ? 
+                        {currentQuestionIndex + 1 >= questions.length ? 
                           'Finalizar Desafio' : 'Próxima Questão'}
                       </Button>
                     )}

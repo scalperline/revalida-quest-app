@@ -26,7 +26,6 @@ export function SupremeVictoryModal({
 }: SupremeVictoryModalProps) {
   const { createCheckoutSession } = useSubscription();
   const [claiming, setClaiming] = useState(false);
-  const [timeLeft, setTimeLeft] = useState(300); // 5 minutos
   const percentage = Math.round((score / total) * 100);
   const finalPrice = 49.90 - discount;
 
@@ -34,7 +33,13 @@ export function SupremeVictoryModal({
     try {
       setClaiming(true);
       const checkoutUrl = await createCheckoutSession('price_revalida_basic_monthly');
-      window.location.href = checkoutUrl;
+      // Open in new tab to maintain the victory modal experience
+      window.open(checkoutUrl, '_blank');
+      
+      toast.success('🎉 Checkout aberto em nova aba! Complete sua compra para garantir o desconto.', {
+        duration: 5000,
+        className: "bg-gradient-to-r from-green-500 to-emerald-500 text-white border-0"
+      });
     } catch (error) {
       console.error('Error claiming reward:', error);
       toast.error('Erro ao processar recompensa. Tente novamente.');
@@ -137,14 +142,6 @@ export function SupremeVictoryModal({
                   RECOMPENSA SUPREMA DESBLOQUEADA
                 </h3>
                 <Gift className="w-12 h-12 text-purple-400 animate-bounce delay-300" />
-              </div>
-              
-              {/* Urgency Timer */}
-              <div className="flex items-center justify-center gap-2 mb-6">
-                <Timer className="w-5 h-5 text-red-400 animate-pulse" />
-                <span className="text-red-400 font-bold">
-                  Oferta válida por apenas {Math.floor(timeLeft / 60)}:{String(timeLeft % 60).padStart(2, '0')}
-                </span>
               </div>
               
               <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 mb-6 border-2 border-white/20">

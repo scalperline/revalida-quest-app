@@ -32,11 +32,11 @@ export function QuestionOption({
     const isUserAnswer = optionId === (userAnswer || selectedOption);
 
     if (isCorrect) {
-      return <CheckCircle className="w-5 h-5 text-emerald-600" />;
+      return <CheckCircle className="w-5 h-5 text-emerald-600 flex-shrink-0" />;
     }
     
     if (isUserAnswer && !isCorrect) {
-      return <XCircle className="w-5 h-5 text-red-600" />;
+      return <XCircle className="w-5 h-5 text-red-600 flex-shrink-0" />;
     }
 
     return null;
@@ -50,7 +50,7 @@ export function QuestionOption({
       variant="outline"
       onClick={() => onSelect(option.id)}
       disabled={disabled || showAnswer}
-      className={`w-full p-4 sm:p-6 h-auto text-left justify-start border-2 transition-all duration-300 relative overflow-hidden group ${getOptionColor(
+      className={`question-option w-full min-h-[60px] h-auto text-left justify-start border-2 transition-all duration-300 relative overflow-hidden group p-3 sm:p-4 lg:p-6 rounded-xl ${getOptionColor(
         option.id, 
         showAnswer, 
         selectedOption, 
@@ -75,24 +75,25 @@ export function QuestionOption({
       )}
       
       <div className="flex items-start gap-3 sm:gap-4 w-full relative z-10">
-        <div className="flex items-center gap-2 sm:gap-3">
-          <div className={`flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center font-bold text-sm sm:text-base transition-all duration-300 ${
+        <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
+          <div className={`question-option-letter w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center font-bold text-sm sm:text-base transition-all duration-300 ${
             isCorrect 
-              ? "bg-emerald-500 text-white shadow-lg" 
+              ? "bg-emerald-500 text-white shadow-lg border-2 border-emerald-600" 
               : isUserAnswer && !isCorrect
-                ? "bg-red-500 text-white shadow-lg"
+                ? "bg-red-500 text-white shadow-lg border-2 border-red-600"
                 : isSelected
-                  ? "bg-blue-500 text-white shadow-lg"
-                  : "bg-blue-500 text-white"
+                  ? "bg-blue-500 text-white shadow-lg border-2 border-blue-600"
+                  : "bg-gray-100 text-gray-800 border-2 border-gray-300 hover:bg-blue-50 hover:border-blue-300"
           }`}>
             {option.id}
           </div>
           {getOptionIcon(option.id)}
         </div>
-        <div className="flex-1 text-left">
-          <span className="text-base leading-relaxed text-gray-800 dark:text-gray-200 whitespace-normal break-words">
-            {option.text}
-          </span>
+        <div className="question-option-text flex-1 min-w-0 text-left">
+          <div 
+            className="text-sm sm:text-base leading-relaxed text-gray-800 dark:text-gray-200"
+            dangerouslySetInnerHTML={{ __html: option.text }}
+          />
         </div>
       </div>
     </Button>

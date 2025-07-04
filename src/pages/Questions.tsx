@@ -1,7 +1,7 @@
 
 import { useState, useRef } from "react";
 import { Navbar } from "@/components/Navbar";
-import { QuestionCard } from "@/components/QuestionCard";
+import { QuestionCard } from "@/components/QuestionCard/QuestionCard";
 import { GamifiedQuestionsHeader } from "@/components/GamifiedQuestionsHeader";
 import { QuestionsPagination } from "@/components/QuestionsPagination";
 import { ConfettiAnimation } from "@/components/ConfettiAnimation";
@@ -128,8 +128,8 @@ export default function Questions() {
             <QuestionCard 
               key={question.id} 
               question={question}
-              onAnswerWithEffects={(optionId: string, correct: boolean, sourceElement?: HTMLElement) => {
-                handleQuestionAnswer(question.id, optionId, correct, sourceElement);
+              onAnswerWithEffects={(optionId: string, correct: boolean) => {
+                handleQuestionAnswer(question.id, optionId, correct);
               }}
             />
           ))}

@@ -23,13 +23,13 @@ export function SupremeChallengeModalFooter({
   if (isCompleted) return null;
 
   return (
-    <div className="p-4 sm:p-6 border-t border-purple-400/20 bg-black/20 backdrop-blur-sm relative z-10">
+    <div className="p-4 sm:p-6 border-t border-blue-400/20 bg-slate-900/40 backdrop-blur-sm relative z-10">
       <div className="flex justify-center">
         {!showFeedback ? (
           <Button
             onClick={onConfirmAnswer}
             disabled={!selectedAnswer}
-            className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-6 sm:px-8 py-2 sm:py-3 text-base sm:text-lg font-bold rounded-full"
+            className="bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white px-6 sm:px-8 py-2 sm:py-3 text-base sm:text-lg font-bold rounded-full"
           >
             Confirmar Resposta
           </Button>

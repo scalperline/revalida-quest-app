@@ -21,10 +21,10 @@ export function SupremeChallengeContent({
   onStartChallenge,
   onResetAttempts
 }: SupremeChallengeContentProps) {
-  return <CardContent className="relative z-10 text-center p-6 sm:p-8 backdrop-blur-sm bg-red-950 px-[24px]">
+  return <CardContent className="relative z-10 text-center p-6 sm:p-8 backdrop-blur-sm bg-blue-950/80 px-[24px]">
       {/* Epic Reward */}
-      <div className="bg-red-900/80 backdrop-blur-sm rounded-3xl p-6 sm:p-8 mb-6 sm:mb-8 border border-yellow-500/30 shadow-2xl relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/10 to-yellow-300/10 animate-pulse"></div>
+      <div className="bg-slate-900/90 backdrop-blur-sm rounded-3xl p-6 sm:p-8 mb-6 sm:mb-8 border border-blue-500/30 shadow-2xl relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-400/10 to-cyan-300/10 animate-pulse"></div>
         
         <div className="relative z-10">
           <h3 className="text-2xl sm:text-3xl font-bold mb-4 flex items-center justify-center gap-3 text-gray-50">

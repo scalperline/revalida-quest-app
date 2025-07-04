@@ -1,4 +1,3 @@
-
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Clock, Coins, Trophy, X, Zap, Flame } from 'lucide-react';
@@ -32,7 +31,7 @@ export function SupremeChallengeModalHeader({
   };
 
   return (
-    <div className="flex items-center justify-between p-4 sm:p-6 border-b border-purple-400/20 bg-black/20 backdrop-blur-sm relative z-10">
+    <div className="flex items-center justify-between p-4 sm:p-6 border-b border-blue-400/20 bg-slate-900/40 backdrop-blur-sm relative z-10">
       <div className="flex items-center gap-3 sm:gap-6">
         <div className="flex items-center gap-2">
           <Clock className={`w-5 h-5 sm:w-6 sm:h-6 ${getTimerColor()}`} />

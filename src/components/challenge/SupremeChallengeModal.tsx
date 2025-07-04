@@ -233,16 +233,16 @@ export function SupremeChallengeModal({
   return (
     <>
       <Dialog open={isOpen} onOpenChange={handleClose}>
-        <DialogContent className="max-w-full max-h-full h-screen w-screen overflow-hidden p-0 border-0 bg-gradient-to-br from-slate-900 via-purple-900/90 to-indigo-900">
+        <DialogContent className="max-w-full max-h-full h-screen w-screen overflow-hidden p-0 border-0 bg-gradient-to-br from-slate-900 via-blue-900/90 to-indigo-900">
           <DialogTitle className="sr-only">Desafio Supremo</DialogTitle>
           <DialogDescription className="sr-only">Complete o desafio para ganhar desconto premium</DialogDescription>
           
           <div className="flex flex-col h-full relative overflow-hidden">
             {/* Background animado */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
-              <div className="absolute -top-40 -right-40 w-80 h-80 bg-purple-500/10 rounded-full animate-pulse"></div>
-              <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-blue-500/10 rounded-full animate-bounce"></div>
-              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-purple-400/5 to-pink-400/5 rounded-full animate-spin" style={{ animationDuration: '20s' }}></div>
+              <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-500/10 rounded-full animate-pulse"></div>
+              <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-indigo-500/10 rounded-full animate-bounce"></div>
+              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-blue-400/5 to-indigo-400/5 rounded-full animate-spin" style={{ animationDuration: '20s' }}></div>
             </div>
 
             <SupremeChallengeModalHeader

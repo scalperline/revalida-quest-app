@@ -62,10 +62,10 @@ export function SupremeChallengeQuestionCard({
       {/* Question header */}
       <div className="text-center mb-4 sm:mb-6">
         <div className="flex items-center justify-center gap-2 mb-2">
-          <Badge variant="outline" className="border-purple-400 text-purple-300 text-xs sm:text-sm">
+          <Badge variant="outline" className="border-blue-400 text-blue-300 text-xs sm:text-sm">
             Questão {currentQuestionIndex + 1} de {totalQuestions}
           </Badge>
-          <Badge variant="outline" className="border-blue-400 text-blue-300 text-xs sm:text-sm">
+          <Badge variant="outline" className="border-cyan-400 text-cyan-300 text-xs sm:text-sm">
             {currentQuestion.area}
           </Badge>
           <Badge variant="outline" className="border-green-400 text-green-300 text-xs sm:text-sm">
@@ -75,7 +75,7 @@ export function SupremeChallengeQuestionCard({
       </div>
 
       {/* Question content */}
-      <div className="bg-gray-800/50 backdrop-blur-sm rounded-2xl p-4 sm:p-6 mb-6 border border-gray-600/50 flex-shrink-0">
+      <div className="bg-slate-800/60 backdrop-blur-sm rounded-2xl p-4 sm:p-6 mb-6 border border-blue-600/30 flex-shrink-0">
         <div 
           className="text-gray-100 text-base sm:text-lg leading-relaxed"
           dangerouslySetInnerHTML={{ __html: currentQuestion.enunciado }}

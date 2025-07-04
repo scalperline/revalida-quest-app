@@ -16,7 +16,7 @@ export function MissionsHeader() {
         {/* Main Title */}
         <div className="mb-4 sm:mb-6">
           <div className="flex items-center justify-center gap-2 sm:gap-3 mb-3 sm:mb-4">
-            <div className="p-2 sm:p-3 bg-gradient-to-r from-blue-500 to-purple-600 shadow-lg px-[12px] py-[12px] rounded-xl">
+            <div className="p-2 sm:p-3 bg-gradient-to-r from-blue-500 to-purple-600 shadow-lg rounded-xl py-[14px] px-[14px]">
               <Flag className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
             </div>
             

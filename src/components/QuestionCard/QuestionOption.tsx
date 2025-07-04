@@ -50,7 +50,7 @@ export function QuestionOption({
       variant="outline"
       onClick={() => onSelect(option.id)}
       disabled={disabled || showAnswer}
-      className={`w-full p-3 sm:p-4 md:p-6 h-auto text-left justify-start border-2 transition-all duration-300 relative overflow-hidden group ${getOptionColor(
+      className={`w-full p-3 sm:p-4 md:p-6 min-h-[60px] sm:min-h-[70px] h-auto text-left justify-start border-2 transition-all duration-300 relative group ${getOptionColor(
         option.id, 
         showAnswer, 
         selectedOption, 
@@ -89,8 +89,8 @@ export function QuestionOption({
           </div>
           {getOptionIcon(option.id)}
         </div>
-        <div className="flex-1 text-left min-w-0 overflow-hidden">
-          <span className="text-sm sm:text-base md:text-lg text-gray-800 dark:text-gray-200 leading-relaxed block word-wrap break-words hyphens-auto">
+        <div className="flex-1 text-left min-w-0">
+          <span className="text-sm sm:text-base md:text-lg text-gray-800 dark:text-gray-200 leading-relaxed block break-words whitespace-normal">
             {option.text}
           </span>
         </div>

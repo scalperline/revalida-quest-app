@@ -81,7 +81,7 @@ export function MobileProgressDrawer({
         {isExpanded && <div className={`bg-white/98 backdrop-blur-lg border-b-2 border-blue-200/50 shadow-2xl w-screen ${animationClass} border-l border-r border-gray-100`}>
             {/* Header Profissional */}
             <div className="flex justify-between items-center p-4 border-b border-gray-100/80 bg-gradient-to-r from-blue-50/50 to-purple-50/50">
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 mx-[14px]">
                 <div className="p-1.5 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg">
                   <Trophy className="w-4 h-4 text-white" />
                 </div>

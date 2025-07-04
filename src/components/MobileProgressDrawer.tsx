@@ -85,9 +85,7 @@ export function MobileProgressDrawer({
                 <div className="p-1.5 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg">
                   <Trophy className="w-4 h-4 text-white" />
                 </div>
-                <h3 className="text-lg font-bold bg-gradient-to-r from-blue-700 to-purple-700 bg-clip-text text-transparent">
-                  Progresso Gamificado
-                </h3>
+                <h3 className="text-lg font-bold bg-gradient-to-r from-blue-700 to-purple-700 bg-clip-text text-transparent">Jornada de Progresso</h3>
               </div>
               <button onClick={toggleDrawer} className="p-2 rounded-lg hover:bg-gray-100/80 transition-colors group">
                 <ChevronUp className="w-5 h-5 text-gray-600 group-hover:text-gray-800" />

@@ -67,10 +67,10 @@ export function MobileProgressDrawer({ isVisible = true, onXPReceived }: MobileP
           <div className="flex justify-center">
             <button
               onClick={toggleDrawer}
-              className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-4 py-2 rounded-b-xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2 animate-pulse"
+              className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-3 py-1.5 rounded-b-lg shadow-md hover:shadow-lg transition-all duration-300 flex items-center gap-1.5"
             >
-              <span className="text-sm font-medium">Nível {userProgress.level}</span>
-              <ChevronDown className="w-4 h-4" />
+              <span className="text-xs font-medium">Nível {userProgress.level}</span>
+              <ChevronDown className="w-3 h-3" />
             </button>
           </div>
         )}

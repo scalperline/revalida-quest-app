@@ -19,9 +19,7 @@ export function MissionsHeader() {
             <div className="p-2 sm:p-3 bg-gradient-to-r from-blue-500 to-purple-600 shadow-lg px-[12px] py-[12px] rounded-xl">
               <Flag className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
             </div>
-            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-              Central de Missões
-            </h1>
+            
           </div>
           
           <p className="text-sm sm:text-lg text-gray-600 max-w-2xl sm:max-w-3xl mx-auto leading-relaxed px-2 sm:px-4">

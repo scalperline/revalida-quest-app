@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import { useGamification } from '@/hooks/useGamification';
@@ -58,7 +57,7 @@ export function MobileProgressDrawer({
       <div className="fixed top-14 left-0 right-0 z-50 md:hidden">
         {/* Collapsed State - Arrow Button */}
         {!isExpanded && <div className="flex justify-center">
-            <button onClick={toggleDrawer} className="bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 flex items-center gap-1 px-3 py-1 text-xs">
+            <button onClick={toggleDrawer} className="bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-b-lg shadow-md hover:shadow-lg transition-all duration-300 flex items-center gap-1.5 px-[16px] py-0 text-sm">
               
               <ChevronDown className="w-3 h-3 rounded" />
             </button>

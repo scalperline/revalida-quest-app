@@ -4,6 +4,7 @@ import { ThemeProvider } from "next-themes"
 import { Toaster } from "@/components/ui/toaster"
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import SupremeChallenge from '@/pages/SupremeChallenge';
+import Index from '@/pages/Index';
 
 // Create a QueryClient instance
 const queryClient = new QueryClient();
@@ -15,7 +16,7 @@ function App() {
         <BrowserRouter>
           <div className="App">
             <Routes>
-              <Route path="/" element={<div>Home placeholder</div>} />
+              <Route path="/" element={<Index />} />
               <Route path="/questions" element={<div>Questions placeholder</div>} />
               <Route path="/missions" element={<div>Missions placeholder</div>} />
               <Route path="/stats" element={<div>Stats placeholder</div>} />

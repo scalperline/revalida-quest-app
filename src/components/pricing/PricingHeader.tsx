@@ -5,10 +5,10 @@ export function PricingHeader() {
   return (
     <div className="text-center mb-12">
       <div className="flex items-center justify-center gap-3 mb-6">
-        <div className="w-16 h-16 golden-gradient flex items-center justify-center shadow-2xl rounded-lg my-0 py-[2px] px-[3px]">
-          <Stethoscope className="w-8 h-8 text-black" />
+        <div className="w-16 h-16 bg-gradient-to-br from-white to-blue-600 flex items-center justify-center shadow-2xl rounded-lg my-0 py-[2px] px-[3px]">
+          <Stethoscope className="w-8 h-8 text-blue-900" />
         </div>
-        <h1 className="font-bold bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 bg-clip-text text-transparent md:text-4xl text-2xl">
+        <h1 className="font-bold bg-gradient-to-r from-blue-600 via-blue-500 to-blue-400 bg-clip-text text-transparent md:text-4xl text-2xl">
           Planos RevalidaQuest
         </h1>
       </div>

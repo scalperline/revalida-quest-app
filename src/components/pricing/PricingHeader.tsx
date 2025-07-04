@@ -4,7 +4,7 @@ import { Stethoscope, Sparkles, Star } from 'lucide-react';
 export function PricingHeader() {
   return (
     <div className="text-center mb-12">
-      <div className="flex items-center justify-center gap-3 mb-6">
+      <div className="flex flex-col items-center justify-center gap-4 mb-6">
         <div className="w-16 h-16 bg-gradient-to-br from-white to-blue-600 flex items-center justify-center shadow-2xl rounded-lg my-0 py-[2px] px-[3px]">
           <Stethoscope className="w-8 h-8 text-blue-900" />
         </div>

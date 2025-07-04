@@ -1,26 +1,35 @@
-
-import { Question } from "@/types/question";
-
 interface QuestionContentProps {
-  question: Question;
+  enunciado: string;
+  image?: string;
 }
 
-export function QuestionContent({ question }: QuestionContentProps) {
+export function QuestionContent({ enunciado, image }: QuestionContentProps) {
   return (
-    <div className="mb-6 sm:mb-8">
-      <p className="text-lg leading-relaxed text-gray-800 dark:text-gray-200">
-        {question.enunciado}
-      </p>
-      
-      {question.image && (
-        <div className="mt-6 sm:mt-8">
+    <>
+      {/* Question Text */}
+      <div className="mb-6">
+        <div className="prose prose-lg max-w-none">
+          <div 
+            className="text-gray-800 leading-relaxed"
+            dangerouslySetInnerHTML={{ __html: enunciado }}
+          />
+        </div>
+      </div>
+
+      {/* Question Image if exists */}
+      {image && (
+        <div className="mb-6 text-center">
           <img 
-            src={question.image} 
+            src={image} 
             alt="Imagem da questão" 
-            className="max-w-full h-auto rounded-lg border border-gray-200 dark:border-gray-600 shadow-sm"
+            className="max-w-full h-auto rounded-lg shadow-md mx-auto"
+            onError={(e) => {
+              console.error('Erro ao carregar imagem:', image);
+              (e.target as HTMLImageElement).style.display = 'none';
+            }}
           />
         </div>
       )}
-    </div>
+    </>
   );
 }

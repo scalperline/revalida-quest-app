@@ -1,10 +1,10 @@
+
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Link, useLocation } from 'react-router-dom';
 import { Home, FileText, BarChart3, User, Trophy, Flag, HelpCircle, LogOut, X, Stethoscope } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
-import { MobileUserProgress } from './MobileUserProgress';
 
 interface Props {
   isOpen: boolean;
@@ -99,11 +99,6 @@ export function MobileSidebar({
           <button onClick={onClose} className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors touch-target" aria-label="Fechar menu">
             <X className="w-5 h-5 text-gray-500" />
           </button>
-        </div>
-
-        {/* User Progress Section - Responsive container */}
-        <div className="border-b border-gray-100 dark:border-gray-800 flex-shrink-0 bg-gradient-to-r from-gray-50/80 to-blue-50/30 dark:from-gray-800/80 dark:to-gray-700/30">
-          <MobileUserProgress />
         </div>
 
         {/* Navigation Menu - Improved touch targets */}

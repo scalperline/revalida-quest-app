@@ -20,7 +20,7 @@ const Index = () => {
 
   return (
     <ResponsiveLayout>
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-blue-100 to-blue-200 dark:from-gray-900 dark:to-gray-800 relative overflow-hidden -mt-12 xs:-mt-14 sm:-mt-16 lg:-mt-18">
+      <div className="w-full min-h-screen bg-gradient-to-br from-blue-50 via-blue-100 to-blue-200 dark:from-gray-900 dark:to-gray-800 relative overflow-hidden">
         {/* Enhanced Animated Background Elements - Ultra Responsive */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className="absolute -top-1 -right-1 xs:-top-2 xs:-right-2 sm:-top-4 sm:-right-4 w-4 h-4 xs:w-8 xs:h-8 sm:w-16 sm:h-16 lg:w-24 lg:h-24 bg-blue-400 rounded-full opacity-20 animate-bounce"></div>
@@ -31,10 +31,10 @@ const Index = () => {
           <Zap className="absolute bottom-5 right-5 xs:bottom-10 xs:right-10 sm:bottom-20 sm:right-20 w-1.5 h-1.5 xs:w-3 xs:h-3 sm:w-5 sm:h-5 text-purple-400 opacity-30 animate-bounce delay-700" />
         </div>
 
-        <main className="relative z-10 pt-12 xs:pt-16 sm:pt-20 lg:pt-24 pb-4 xs:pb-6 sm:pb-8">
-          <div className="max-w-7xl mx-auto px-2 xs:px-3 sm:px-4 lg:px-6 xl:px-8">
+        <main className="relative z-10 w-full pb-4 xs:pb-6 sm:pb-8">
+          <div className="w-full px-2 xs:px-3 sm:px-4 lg:px-6 xl:px-8">
             {/* Enhanced Hero Section - Ultra Responsive */}
-            <div className="text-center mb-4 xs:mb-6 sm:mb-8 lg:mb-12 relative">
+            <div className="text-center mb-4 xs:mb-6 sm:mb-8 lg:mb-12 relative pt-4 xs:pt-6 sm:pt-8">
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-100/50 to-transparent rounded-2xl xs:rounded-3xl blur-2xl xs:blur-3xl"></div>
               <div className="relative z-10 p-2 xs:p-3 sm:p-4 lg:p-6 xl:p-8">
                 <h1 className="text-base xs:text-lg sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 mb-2 xs:mb-3 sm:mb-4 lg:mb-6 leading-tight px-1 xs:px-2 sm:px-4">

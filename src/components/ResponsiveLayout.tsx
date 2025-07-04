@@ -1,7 +1,6 @@
 
 import { ReactNode } from 'react';
 import { ResponsiveNavbar } from './ResponsiveNavbar';
-import { useIsMobile } from '@/hooks/use-mobile';
 
 interface ResponsiveLayoutProps {
   children: ReactNode;
@@ -9,23 +8,17 @@ interface ResponsiveLayoutProps {
 }
 
 export function ResponsiveLayout({ children, className = '' }: ResponsiveLayoutProps) {
-  const isMobile = useIsMobile();
-
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen w-full bg-background overflow-x-hidden">
       <ResponsiveNavbar />
       
-      {/* Main Content with responsive padding */}
+      {/* Main Content ocupa toda a largura da tela */}
       <main className={`
-        pt-14 sm:pt-16 lg:pt-18
-        px-3 sm:px-4 md:px-6 lg:px-8 xl:px-12
-        pb-4 sm:pb-6 lg:pb-8
-        max-w-7xl mx-auto
+        w-full min-h-screen
+        pt-12 xs:pt-14 sm:pt-16 lg:pt-18
         ${className}
       `}>
-        <div className="w-full">
-          {children}
-        </div>
+        {children}
       </main>
     </div>
   );

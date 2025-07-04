@@ -63,7 +63,7 @@ export default function Missions() {
   if (executingMission) {
     return (
       <ResponsiveLayout>
-        <div className="min-h-screen bg-gradient-to-br from-blue-50 via-blue-100 to-blue-200 dark:from-gray-900 dark:to-gray-800 relative overflow-hidden -mt-14 sm:-mt-16 lg:-mt-18">
+        <div className="w-full min-h-screen bg-gradient-to-br from-blue-50 via-blue-100 to-blue-200 dark:from-gray-900 dark:to-gray-800 relative overflow-hidden">
           {/* Animated Background Elements */}
           <div className="absolute inset-0 overflow-hidden">
             <div className="absolute -top-4 -right-4 w-16 h-16 sm:w-24 sm:h-24 bg-blue-400 rounded-full opacity-20 animate-bounce"></div>
@@ -72,8 +72,8 @@ export default function Missions() {
             <div className="absolute top-1/3 right-1/3 w-6 h-6 sm:w-8 sm:h-8 bg-blue-600 rounded-full opacity-20 animate-bounce delay-1000"></div>
           </div>
           
-          <div className="relative z-10 container mx-auto px-2 sm:px-4 pt-16 sm:pt-24 pb-4 sm:pb-8">
-            <div className="max-w-4xl sm:max-w-6xl mx-auto">
+          <div className="relative z-10 w-full px-2 sm:px-4 pt-4 sm:pt-8 pb-4 sm:pb-8">
+            <div className="w-full">
               <MissionExecution 
                 mission={executingMission} 
                 onBack={handleBackFromMission} 
@@ -88,7 +88,7 @@ export default function Missions() {
 
   return (
     <ResponsiveLayout>
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-blue-100 to-blue-200 dark:from-gray-900 dark:to-gray-800 relative overflow-hidden -mt-14 sm:-mt-16 lg:-mt-18">
+      <div className="w-full min-h-screen bg-gradient-to-br from-blue-50 via-blue-100 to-blue-200 dark:from-gray-900 dark:to-gray-800 relative overflow-hidden">
         {/* Animated Background Elements */}
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute -top-4 -right-4 w-16 h-16 sm:w-24 sm:h-24 bg-blue-400 rounded-full opacity-20 animate-bounce"></div>
@@ -97,8 +97,8 @@ export default function Missions() {
           <div className="absolute top-1/3 right-1/3 w-6 h-6 sm:w-8 sm:h-8 bg-blue-600 rounded-full opacity-20 animate-bounce delay-1000"></div>
         </div>
         
-        <div className="relative z-10 container mx-auto px-2 sm:px-4 pt-16 sm:pt-24 pb-4 sm:pb-8 py-[80px]">
-          <div className="max-w-4xl sm:max-w-6xl mx-auto space-y-4 sm:space-y-8">
+        <div className="relative z-10 w-full px-2 sm:px-4 pt-4 sm:pt-8 pb-4 sm:pb-8">
+          <div className="w-full space-y-4 sm:space-y-8">
             
             <MissionsHeader />
 

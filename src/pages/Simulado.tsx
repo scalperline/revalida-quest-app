@@ -18,7 +18,7 @@ export default function Simulado() {
 
   return (
     <ResponsiveLayout>
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-blue-100 to-blue-200 dark:from-gray-900 dark:to-gray-800 relative overflow-hidden -mt-14 sm:-mt-16 lg:-mt-18">
+      <div className="w-full min-h-screen bg-gradient-to-br from-blue-50 via-blue-100 to-blue-200 dark:from-gray-900 dark:to-gray-800 relative overflow-hidden">
         {/* Animated Background Elements */}
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute -top-4 -right-4 w-16 h-16 sm:w-24 sm:h-24 bg-blue-400 rounded-full opacity-20 animate-bounce"></div>
@@ -27,8 +27,8 @@ export default function Simulado() {
           <div className="absolute top-1/3 right-1/3 w-6 h-6 sm:w-8 sm:h-8 bg-blue-600 rounded-full opacity-20 animate-bounce delay-1000"></div>
         </div>
 
-        <main className="relative z-10 pt-16 sm:pt-20 lg:pt-24 pb-6 sm:pb-8">
-          <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 xl:px-8">
+        <main className="relative z-10 w-full pt-4 sm:pt-8 pb-6 sm:pb-8">
+          <div className="w-full px-3 sm:px-4 lg:px-6 xl:px-8">
             {simuladoStarted ? (
               <PersonalizedSimuladoSection onBackToTabs={handleBackToConfig} />
             ) : (

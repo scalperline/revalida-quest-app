@@ -1,7 +1,8 @@
 
 import { useState } from 'react';
-import { Card, CardContent } from '@/components/ui/card';
+import { CardContent } from '@/components/ui/card';
 import { ChallengeModal } from './ChallengeModal';
+import { ChallengeCard } from './challenge/ChallengeCard';
 import { ChallengeHeader } from './challenge/ChallengeHeader';
 import { ChallengeRequirements } from './challenge/ChallengeRequirements';
 import { ChallengeReward } from './challenge/ChallengeReward';
@@ -91,32 +92,24 @@ export function PremiumChallengeSection({
 
   return (
     <>
-      <div className="relative mb-8 md:mb-16">
-        {/* Background Effects */}
-        <div className="absolute inset-0 overflow-hidden rounded-2xl md:rounded-3xl">
-          <div className="absolute -top-2 -right-2 md:-top-4 md:-right-4 w-20 h-20 md:w-32 md:h-32 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full opacity-15 animate-pulse blur-xl"></div>
-          <div className="absolute -bottom-2 -left-2 md:-bottom-4 md:-left-4 w-16 h-16 md:w-24 md:h-24 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full opacity-20 animate-bounce blur-lg"></div>
-        </div>
+      <ChallengeCard>
+        <ChallengeHeader hasWonBefore={hasWonBefore} />
 
-        <Card className="relative overflow-hidden border-2 border-purple-400/30 bg-gradient-to-br from-slate-900/95 via-purple-900/90 to-indigo-900/95 backdrop-blur-xl shadow-2xl">
-          <ChallengeHeader hasWonBefore={hasWonBefore} />
-
-          <CardContent className="relative z-10 text-center px-3 md:px-6">
-            <ChallengeRequirements />
-            <ChallengeReward />
-            
-            <div className="flex flex-col items-center gap-4 md:gap-8">
-              <ChallengeAction
-                canStartChallenge={canStartChallenge}
-                attemptsLeft={attemptsLeft}
-                isStarting={isStarting}
-                onStartChallenge={handleStartChallenge}
-                onResetAttempts={onResetAttempts}
-              />
-            </div>
-          </CardContent>
-        </Card>
-      </div>
+        <CardContent className="relative z-10 text-center px-3 md:px-6">
+          <ChallengeRequirements />
+          <ChallengeReward />
+          
+          <div className="flex flex-col items-center gap-4 md:gap-8">
+            <ChallengeAction
+              canStartChallenge={canStartChallenge}
+              attemptsLeft={attemptsLeft}
+              isStarting={isStarting}
+              onStartChallenge={handleStartChallenge}
+              onResetAttempts={onResetAttempts}
+            />
+          </div>
+        </CardContent>
+      </ChallengeCard>
 
       <ChallengeModal 
         isOpen={showModal} 

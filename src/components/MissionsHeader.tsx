@@ -1,4 +1,5 @@
-import { Trophy, Target, Star, Zap } from 'lucide-react';
+
+import { Flag, Target, Star, Zap } from 'lucide-react';
 import { useGamification } from '@/hooks/useGamification';
 export function MissionsHeader() {
   const {
@@ -17,7 +18,7 @@ export function MissionsHeader() {
         <div className="mb-4 sm:mb-6">
           <div className="flex items-center justify-center gap-2 sm:gap-3 mb-3 sm:mb-4">
             <div className="p-2 sm:p-3 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full shadow-lg">
-              <Trophy className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
+              <Flag className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
             </div>
             <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
               Central de Missões

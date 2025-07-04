@@ -1,4 +1,5 @@
 
+
 import { CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -40,22 +41,22 @@ export function SupremeChallengeContent({
             </p>
           </div>
           
-          <div className="grid grid-cols-2 gap-4 text-yellow-300 text-sm sm:text-base">
-            <div className="flex items-center gap-2">
-              <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-400 flex-shrink-0" />
-              <span className="text-white">Acesso Premium completo</span>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 max-w-2xl mx-auto">
+            <div className="flex items-center justify-center sm:justify-start gap-3 p-3 bg-slate-800/50 rounded-xl border border-slate-700/50">
+              <Sparkles className="w-5 h-5 text-yellow-400 flex-shrink-0" />
+              <span className="text-white text-sm sm:text-base">Acesso Premium completo</span>
             </div>
-            <div className="flex items-center gap-2">
-              <Zap className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-500 flex-shrink-0" />
-              <span className="text-white">IA personalizada avançada</span>
+            <div className="flex items-center justify-center sm:justify-start gap-3 p-3 bg-slate-800/50 rounded-xl border border-slate-700/50">
+              <Zap className="w-5 h-5 text-yellow-500 flex-shrink-0" />
+              <span className="text-white text-sm sm:text-base">IA personalizada avançada</span>
             </div>
-            <div className="flex items-center gap-2">
-              <Target className="w-4 h-4 sm:w-5 sm:h-5 text-green-400 flex-shrink-0" />
-              <span className="text-white">Simulados ilimitados</span>
+            <div className="flex items-center justify-center sm:justify-start gap-3 p-3 bg-slate-800/50 rounded-xl border border-slate-700/50">
+              <Target className="w-5 h-5 text-green-400 flex-shrink-0" />
+              <span className="text-white text-sm sm:text-base">Simulados ilimitados</span>
             </div>
-            <div className="flex items-center gap-2">
-              <Crown className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-400 flex-shrink-0" />
-              <span className="text-white">Suporte prioritário</span>
+            <div className="flex items-center justify-center sm:justify-start gap-3 p-3 bg-slate-800/50 rounded-xl border border-slate-700/50">
+              <Crown className="w-5 h-5 text-yellow-400 flex-shrink-0" />
+              <span className="text-white text-sm sm:text-base">Suporte prioritário</span>
             </div>
           </div>
         </div>
@@ -100,3 +101,4 @@ export function SupremeChallengeContent({
       </div>
     </CardContent>;
 }
+

@@ -28,7 +28,7 @@ export function ChallengeModal({ isOpen, onClose }: ChallengeModalProps) {
   const currentQuestion = challengeState.questions[challengeState.currentQuestionIndex];
   const progress = challengeState.questions.length > 0 ? ((challengeState.currentQuestionIndex + 1) / challengeState.questions.length) * 100 : 0;
   
-  // Check if we're still loading questions (simplified condition)
+  // Simplificar a condição - mostrar loading quando ativo mas sem questões
   const isLoadingQuestions = challengeState.isActive && challengeState.questions.length === 0;
 
   console.log('=== CHALLENGE MODAL RENDER ===');
@@ -137,12 +137,9 @@ export function ChallengeModal({ isOpen, onClose }: ChallengeModalProps) {
     onClose();
   };
 
-  // Only hide modal if it's not open OR if challenge is not active
-  if (!isOpen || !challengeState.isActive) {
-    console.log('🚫 Modal não deve ser exibido:', {
-      isOpen,
-      isActive: challengeState.isActive
-    });
+  // Renderizar o modal se estiver aberto, independentemente do estado do desafio
+  if (!isOpen) {
+    console.log('🚫 Modal não deve ser exibido - isOpen:', isOpen);
     return null;
   }
 
@@ -178,6 +175,7 @@ export function ChallengeModal({ isOpen, onClose }: ChallengeModalProps) {
                 </Button>
               </div>
               
+              {/* Só mostrar informações do header se não estiver carregando */}
               {!isLoadingQuestions && (
                 <>
                   <div className="flex items-center justify-between mt-4 flex-wrap gap-4">

@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -48,24 +47,24 @@ export function PremiumChallengeSection({
         className: "bg-gradient-to-r from-purple-500 to-pink-500 text-white border-0"
       });
       
-      // Abrir modal imediatamente para melhor UX
-      setShowModal(true);
-      
-      // Pequeno delay para melhor UX
-      await new Promise(resolve => setTimeout(resolve, 500));
-      
+      // Chamar onStartChallenge primeiro e aguardar o resultado
       const started = onStartChallenge();
       console.log('Desafio iniciado?', started);
       
       if (started) {
         console.log('✅ Desafio iniciado com sucesso');
+        // Pequeno delay para garantir que o estado esteja atualizado
+        await new Promise(resolve => setTimeout(resolve, 500));
+        
+        // Só abrir o modal após confirmar que o desafio foi iniciado
+        setShowModal(true);
+        
         toast.success("Desafio Supremo iniciado! Boa sorte! 🚀", {
           duration: 2000,
           className: "bg-gradient-to-r from-green-500 to-emerald-500 text-white border-0"
         });
       } else {
         console.log('❌ Falha ao iniciar desafio');
-        setShowModal(false); // Fechar modal se falhou
         toast.error("Erro ao iniciar o desafio. Tente novamente!", {
           duration: 3000,
           className: "bg-gradient-to-r from-red-500 to-red-600 text-white border-0"
@@ -73,7 +72,6 @@ export function PremiumChallengeSection({
       }
     } catch (error) {
       console.error('❌ Erro ao iniciar desafio:', error);
-      setShowModal(false); // Fechar modal em caso de erro
       toast.error("Erro inesperado. Tente novamente!", {
         duration: 3000,
         className: "bg-gradient-to-r from-red-500 to-red-600 text-white border-0"

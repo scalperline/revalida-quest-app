@@ -171,7 +171,7 @@ export function QuestionCard({
               <Button
                 key={optionId}
                 onClick={() => handleOptionSelect(optionId)}
-                className={getOptionClasses(status)}
+                className={`${getOptionClasses(status)} min-h-[60px] sm:min-h-[70px]`}
                 variant="ghost"
                 disabled={disabled || (showAnswer && !isReviewMode)}
               >
@@ -180,10 +180,12 @@ export function QuestionCard({
                     <span className="font-bold text-lg">({optionId})</span>
                     {getOptionIcon(status)}
                   </div>
-                  <div 
-                    className="flex-1 text-left"
-                    dangerouslySetInnerHTML={{ __html: option.text }}
-                  />
+                  <div className="flex-1 text-left min-w-0">
+                    <div 
+                      className="break-words whitespace-normal leading-relaxed"
+                      dangerouslySetInnerHTML={{ __html: option.text }}
+                    />
+                  </div>
                 </div>
               </Button>
             );

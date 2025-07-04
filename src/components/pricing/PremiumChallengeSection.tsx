@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -10,7 +11,7 @@ interface PremiumChallengeSectionProps {
   canStartChallenge: boolean;
   attemptsLeft: number;
   hasWonBefore: boolean;
-  onStartChallenge: () => boolean;
+  onStartChallenge: () => Promise<boolean>;
   onResetAttempts?: () => void;
 }
 
@@ -41,30 +42,24 @@ export function PremiumChallengeSection({
     setIsStarting(true);
     
     try {
-      console.log('🚀 Iniciando desafio...');
-      toast.loading("Preparando o Desafio Supremo...", {
-        duration: 2000,
-        className: "bg-gradient-to-r from-purple-500 to-pink-500 text-white border-0"
-      });
+      console.log('🚀 Preparando desafio...');
       
-      // Chamar onStartChallenge primeiro e aguardar o resultado
-      const started = onStartChallenge();
+      // ABRIR MODAL IMEDIATAMENTE
+      setShowModal(true);
+      
+      // INICIAR DESAFIO
+      const started = await onStartChallenge();
       console.log('Desafio iniciado?', started);
       
       if (started) {
-        console.log('✅ Desafio iniciado com sucesso');
-        // Pequeno delay para garantir que o estado esteja atualizado
-        await new Promise(resolve => setTimeout(resolve, 500));
-        
-        // Só abrir o modal após confirmar que o desafio foi iniciado
-        setShowModal(true);
-        
+        console.log('✅ Desafio iniciado com sucesso - modal já aberto');
         toast.success("Desafio Supremo iniciado! Boa sorte! 🚀", {
           duration: 2000,
           className: "bg-gradient-to-r from-green-500 to-emerald-500 text-white border-0"
         });
       } else {
-        console.log('❌ Falha ao iniciar desafio');
+        console.log('❌ Falha ao iniciar desafio - fechando modal');
+        setShowModal(false);
         toast.error("Erro ao iniciar o desafio. Tente novamente!", {
           duration: 3000,
           className: "bg-gradient-to-r from-red-500 to-red-600 text-white border-0"
@@ -72,6 +67,7 @@ export function PremiumChallengeSection({
       }
     } catch (error) {
       console.error('❌ Erro ao iniciar desafio:', error);
+      setShowModal(false);
       toast.error("Erro inesperado. Tente novamente!", {
         duration: 3000,
         className: "bg-gradient-to-r from-red-500 to-red-600 text-white border-0"

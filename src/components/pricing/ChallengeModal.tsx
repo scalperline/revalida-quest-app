@@ -4,7 +4,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/u
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
-import { Clock, Target, Zap, Trophy, X, Shield, CheckCircle, XCircle, Flame, Sparkles, Loader2 } from 'lucide-react';
+import { Clock, Target, Zap, Trophy, X, Shield, CheckCircle, XCircle, Flame, Sparkles, Loader2, AlertCircle, RotateCcw } from 'lucide-react';
 import { usePremiumChallenge } from '@/hooks/usePremiumChallenge';
 import { useTimer } from '@/hooks/useTimer';
 import { PremiumQuestionCard } from '@/components/premium/PremiumQuestionCard';
@@ -19,7 +19,15 @@ interface ChallengeModalProps {
 }
 
 export function ChallengeModal({ isOpen, onClose }: ChallengeModalProps) {
-  const { challengeState, answerCurrentQuestion, nextQuestion } = usePremiumChallenge();
+  const { 
+    challengeState, 
+    answerCurrentQuestion, 
+    nextQuestion, 
+    isStarting, 
+    startError, 
+    retryStart 
+  } = usePremiumChallenge();
+  
   const { timeLeft, minutes, seconds, isRunning, isFinished, start, stop } = useTimer(600);
   const [selectedAnswer, setSelectedAnswer] = useState<string>('');
   const [showSuccessModal, setShowSuccessModal] = useState(false);
@@ -31,17 +39,17 @@ export function ChallengeModal({ isOpen, onClose }: ChallengeModalProps) {
   const currentQuestion = challengeState.questions[challengeState.currentQuestionIndex];
   const progress = challengeState.questions.length > 0 ? ((challengeState.currentQuestionIndex + 1) / challengeState.questions.length) * 100 : 0;
 
-  // LOADING LÓGICA SIMPLIFICADA
-  const isLoadingQuestions = challengeState.isLoading;
-  const hasQuestionsReady = challengeState.isActive && challengeState.questions.length > 0 && !challengeState.isLoading;
+  // Estados do modal
+  const isQuestionsReady = challengeState.isActive && challengeState.questions.length > 0;
+  const hasError = startError !== null;
 
   // Iniciar timer quando questões estão prontas
   useEffect(() => {
-    if (isOpen && hasQuestionsReady && !isRunning && !isFinished) {
+    if (isOpen && isQuestionsReady && !isRunning && !isFinished) {
       console.log('🕐 Iniciando timer do desafio...');
       start();
     }
-  }, [isOpen, hasQuestionsReady, isRunning, isFinished, start]);
+  }, [isOpen, isQuestionsReady, isRunning, isFinished, start]);
 
   // Parar timer quando completar
   useEffect(() => {
@@ -135,6 +143,13 @@ export function ChallengeModal({ isOpen, onClose }: ChallengeModalProps) {
     }
   };
 
+  const handleRetry = async () => {
+    const success = await retryStart();
+    if (!success) {
+      console.log('❌ Falha ao tentar novamente');
+    }
+  };
+
   if (!isOpen) {
     return null;
   }
@@ -177,7 +192,7 @@ export function ChallengeModal({ isOpen, onClose }: ChallengeModalProps) {
                 </Button>
               </div>
               
-              {hasQuestionsReady && (
+              {isQuestionsReady && (
                 <>
                   <div className="flex items-center justify-between mt-6 flex-wrap gap-4">
                     <div className="flex items-center gap-6 flex-wrap">
@@ -236,11 +251,12 @@ export function ChallengeModal({ isOpen, onClose }: ChallengeModalProps) {
 
             {/* Conteúdo das questões */}
             <div className="flex-1 p-6 overflow-y-auto relative z-10">
-              {isLoadingQuestions ? (
+              {/* TELA DE LOADING */}
+              {isStarting && !hasError && (
                 <div className="flex flex-col items-center justify-center h-full text-center">
                   <div className="mb-6">
                     <Loader2 className="w-16 h-16 text-purple-400 animate-spin mx-auto mb-4" />
-                    <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">🚀 CARREGANDO DESAFIO SUPREMO</h3>
+                    <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">🚀 PREPARANDO DESAFIO SUPREMO</h3>
                     <p className="text-gray-300 text-lg mb-4">Selecionando as 10 melhores questões do Revalida</p>
                     <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-xl p-4 border border-purple-400/30">
                       <div className="flex items-center justify-center gap-3 text-yellow-300">
@@ -251,7 +267,46 @@ export function ChallengeModal({ isOpen, onClose }: ChallengeModalProps) {
                     </div>
                   </div>
                 </div>
-              ) : null}
+              )}
+
+              {/* TELA DE ERRO */}
+              {hasError && (
+                <div className="flex flex-col items-center justify-center h-full text-center">
+                  <div className="mb-6">
+                    <AlertCircle className="w-16 h-16 text-red-400 animate-pulse mx-auto mb-4" />
+                    <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">❌ ERRO NO DESAFIO</h3>
+                    <p className="text-red-300 text-lg mb-6">{startError}</p>
+                    
+                    <div className="flex gap-4 justify-center">
+                      <Button
+                        onClick={handleRetry}
+                        disabled={isStarting}
+                        className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white px-6 py-3 rounded-full font-bold"
+                      >
+                        {isStarting ? (
+                          <>
+                            <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                            Tentando...
+                          </>
+                        ) : (
+                          <>
+                            <RotateCcw className="w-4 h-4 mr-2" />
+                            Tentar Novamente
+                          </>
+                        )}
+                      </Button>
+                      
+                      <Button
+                        onClick={handleClose}
+                        variant="outline"
+                        className="border-2 border-gray-400 text-gray-300 hover:bg-gray-700 px-6 py-3 rounded-full font-bold"
+                      >
+                        Fechar
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              )}
 
               {/* Feedback overlay */}
               {showFeedback && (
@@ -286,7 +341,7 @@ export function ChallengeModal({ isOpen, onClose }: ChallengeModalProps) {
               )}
 
               {/* Card da questão */}
-              {hasQuestionsReady && currentQuestion && (
+              {isQuestionsReady && currentQuestion && !hasError && (
                 <PremiumQuestionCard
                   question={currentQuestion}
                   questionNumber={challengeState.currentQuestionIndex + 1}
@@ -301,7 +356,7 @@ export function ChallengeModal({ isOpen, onClose }: ChallengeModalProps) {
             </div>
 
             {/* Footer de ação */}
-            {hasQuestionsReady && (
+            {isQuestionsReady && !hasError && (
               <div className="relative z-10 bg-gradient-to-r from-slate-800/95 to-gray-800/95 backdrop-blur-xl border-t-4 border-purple-400/50 p-6">
                 <div className="flex flex-col md:flex-row justify-between items-center max-w-6xl mx-auto gap-4">
                   <div className="flex items-center gap-4 text-center md:text-left">

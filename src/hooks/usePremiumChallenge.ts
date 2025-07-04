@@ -18,7 +18,6 @@ interface ChallengeState {
   timeBonus: number;
   coinsEarned: number;
   perfectAnswers: number;
-  isLoading: boolean;
 }
 
 export function usePremiumChallenge() {
@@ -37,9 +36,11 @@ export function usePremiumChallenge() {
     combo: 0,
     timeBonus: 0,
     coinsEarned: 0,
-    perfectAnswers: 0,
-    isLoading: false
+    perfectAnswers: 0
   });
+
+  const [isStarting, setIsStarting] = useState(false);
+  const [startError, setStartError] = useState<string | null>(null);
 
   const [attemptsUsed, setAttemptsUsed] = useState(() => {
     const saved = localStorage.getItem('premium_challenge_attempts');
@@ -50,29 +51,60 @@ export function usePremiumChallenge() {
   const questionsCount = 10;
   const winThreshold = 10;
 
-  // FUNÇÃO SIMPLIFICADA QUE SEMPRE FUNCIONA
-  const selectTenQuestions = useCallback(() => {
-    console.log('🎯 SELECIONANDO 10 QUESTÕES - MODO SIMPLES');
+  // FUNÇÃO BULLETPROOF DE SELEÇÃO DE QUESTÕES
+  const selectTenQuestions = useCallback((): Question[] => {
+    console.log('🎯 SELEÇÃO BULLETPROOF DE QUESTÕES');
     console.log('📊 Total questões disponíveis:', todasQuestoes?.length || 0);
     
     if (!todasQuestoes || todasQuestoes.length === 0) {
-      console.error('❌ ERRO: Nenhuma questão disponível');
-      return [];
+      console.error('❌ ERRO CRÍTICO: Nenhuma questão disponível');
+      throw new Error('Nenhuma questão disponível para o desafio');
     }
 
-    // PEGAR AS PRIMEIRAS 10 QUESTÕES VÁLIDAS (SIMPLES E EFICAZ)
-    const validQuestions = todasQuestoes
-      .filter(q => q && q.id && q.enunciado && q.options && q.correct)
-      .slice(0, questionsCount);
+    // VALIDAR E FILTRAR QUESTÕES VÁLIDAS
+    const questoesValidas = todasQuestoes.filter(q => {
+      return q && 
+             q.id && 
+             q.enunciado && 
+             q.options && 
+             Array.isArray(q.options) && 
+             q.options.length >= 2 && 
+             q.correct &&
+             q.year &&
+             q.area;
+    });
 
-    console.log('✅ Questões selecionadas:', validQuestions.length);
-    console.log('📋 IDs:', validQuestions.map(q => q.id));
+    console.log('✅ Questões válidas encontradas:', questoesValidas.length);
+
+    if (questoesValidas.length < questionsCount) {
+      console.error('❌ ERRO: Não há questões válidas suficientes');
+      throw new Error(`Apenas ${questoesValidas.length} questões válidas encontradas. Necessário ${questionsCount}.`);
+    }
+
+    // SELEÇÃO INTELIGENTE: DIVERSIFICAR POR ANO E ÁREA
+    const questoesSelecionadas: Question[] = [];
+    const questoesDisponiveis = [...questoesValidas];
     
-    return validQuestions;
+    // Embaralhar questões para randomização
+    for (let i = questoesDisponiveis.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [questoesDisponiveis[i], questoesDisponiveis[j]] = [questoesDisponiveis[j], questoesDisponiveis[i]];
+    }
+
+    // Selecionar as primeiras 10 questões embaralhadas
+    questoesSelecionadas.push(...questoesDisponiveis.slice(0, questionsCount));
+
+    console.log('🎉 SELEÇÃO CONCLUÍDA:', questoesSelecionadas.length, 'questões');
+    console.log('📋 IDs selecionados:', questoesSelecionadas.map(q => q.id));
+    console.log('🏷️ Anos:', [...new Set(questoesSelecionadas.map(q => q.year))]);
+    console.log('📚 Áreas:', [...new Set(questoesSelecionadas.map(q => q.area))]);
+    
+    return questoesSelecionadas;
   }, [todasQuestoes, questionsCount]);
 
-  const startChallenge = useCallback(() => {
-    console.log('=== 🚀 INICIANDO DESAFIO SUPREMO ===');
+  // FUNÇÃO BULLETPROOF DE INÍCIO DO DESAFIO
+  const startChallenge = useCallback(async (): Promise<boolean> => {
+    console.log('=== 🚀 INICIANDO DESAFIO SUPREMO (BULLETPROOF) ===');
     
     if (attemptsUsed >= maxAttempts) {
       console.log('❌ Limite de tentativas atingido');
@@ -83,38 +115,33 @@ export function usePremiumChallenge() {
       return false;
     }
 
-    // IMEDIATAMENTE MARCAR COMO ATIVO E LOADING
-    setChallengeState(prev => ({
-      ...prev,
-      isLoading: true,
-      isActive: true
-    }));
+    setIsStarting(true);
+    setStartError(null);
 
-    // SELECIONAR QUESTÕES DE FORMA SÍNCRONA
-    const selectedQuestions = selectTenQuestions();
-    
-    if (selectedQuestions.length === 0) {
-      console.error('❌ FALHA: Nenhuma questão selecionada');
-      toast.error("Erro ao carregar questões. Tente novamente!", {
-        duration: 4000,
-        className: "bg-gradient-to-r from-red-500 to-red-600 text-white border-0"
-      });
+    try {
+      console.log('⏳ Aguardando questões...');
       
-      setChallengeState(prev => ({
-        ...prev,
-        isLoading: false,
-        isActive: false
-      }));
-      return false;
-    }
+      // AGUARDAR QUESTÕES ESTAREM DISPONÍVEIS (com timeout)
+      let attempts = 0;
+      const maxAttempts = 10;
+      
+      while ((!todasQuestoes || todasQuestoes.length === 0) && attempts < maxAttempts) {
+        console.log(`⏱️ Tentativa ${attempts + 1}/${maxAttempts} - aguardando questões...`);
+        await new Promise(resolve => setTimeout(resolve, 100));
+        attempts++;
+      }
 
-    console.log('✅ DESAFIO CONFIGURADO COM SUCESSO!', selectedQuestions.length, 'questões');
+      if (!todasQuestoes || todasQuestoes.length === 0) {
+        throw new Error('Timeout: Questões não carregaram a tempo');
+      }
 
-    // APLICAR ESTADO FINAL APÓS BREVE DELAY
-    setTimeout(() => {
-      setChallengeState(prev => ({
-        ...prev,
-        isLoading: false,
+      // SELECIONAR QUESTÕES
+      const selectedQuestions = selectTenQuestions();
+      
+      console.log('✅ DESAFIO CONFIGURADO COM SUCESSO!');
+
+      // CONFIGURAR ESTADO DO DESAFIO
+      setChallengeState({
         isActive: true,
         currentQuestionIndex: 0,
         score: 0,
@@ -127,11 +154,27 @@ export function usePremiumChallenge() {
         timeBonus: 0,
         coinsEarned: 0,
         perfectAnswers: 0
-      }));
-    }, 500); // Reduzido para 0.5 segundos
+      });
 
-    return true;
-  }, [selectTenQuestions, attemptsUsed, maxAttempts]);
+      return true;
+
+    } catch (error) {
+      console.error('❌ ERRO AO INICIAR DESAFIO:', error);
+      const errorMessage = error instanceof Error ? error.message : 'Erro desconhecido';
+      
+      setStartError(errorMessage);
+      
+      toast.error(`Erro ao iniciar desafio: ${errorMessage}`, {
+        duration: 4000,
+        className: "bg-gradient-to-r from-red-500 to-red-600 text-white border-0"
+      });
+      
+      return false;
+      
+    } finally {
+      setIsStarting(false);
+    }
+  }, [selectTenQuestions, attemptsUsed, maxAttempts, todasQuestoes]);
 
   const answerCurrentQuestion = useCallback((optionId: string) => {
     console.log('=== 📝 RESPONDENDO QUESTÃO ===');
@@ -245,10 +288,17 @@ export function usePremiumChallenge() {
       combo: 0,
       timeBonus: 0,
       coinsEarned: 0,
-      perfectAnswers: 0,
-      isLoading: false
+      perfectAnswers: 0
     });
+    setIsStarting(false);
+    setStartError(null);
   }, []);
+
+  const retryStart = useCallback(() => {
+    console.log('🔄 Tentando novamente...');
+    setStartError(null);
+    return startChallenge();
+  }, [startChallenge]);
 
   const canStartChallenge = attemptsUsed < maxAttempts;
   const attemptsLeft = maxAttempts - attemptsUsed;
@@ -269,10 +319,13 @@ export function usePremiumChallenge() {
     maxAttempts,
     hasWonBefore,
     winThreshold,
+    isStarting,
+    startError,
     startChallenge,
     answerCurrentQuestion,
     nextQuestion,
     resetChallenge,
-    resetAttempts
+    resetAttempts,
+    retryStart
   };
 }

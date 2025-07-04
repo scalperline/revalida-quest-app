@@ -24,33 +24,33 @@ export function SupremeChallengeContent({
   return (
     <CardContent className="relative z-10 text-center p-6 sm:p-8">
       {/* Challenge Requirements */}
-      <div className="bg-gradient-to-br from-black/80 to-gray-900/80 backdrop-blur-sm rounded-3xl p-6 sm:p-8 mb-6 sm:mb-8 border-2 border-yellow-500/30">
-        <h3 className="text-xl sm:text-2xl font-bold text-white mb-4 sm:mb-6 flex items-center justify-center gap-3">
+      <div className="bg-black/80 backdrop-blur-sm rounded-3xl p-6 sm:p-8 mb-6 sm:mb-8 border border-yellow-500/30">
+        <h3 className="text-xl sm:text-2xl font-bold text-yellow-400 mb-4 sm:mb-6 flex items-center justify-center gap-3">
           <Target className="w-6 h-6 sm:w-8 sm:h-8 text-yellow-400" />
           DESAFIO EXTREMO
         </h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 text-base sm:text-lg">
-          <div className="flex items-center gap-3 text-gray-200">
-            <div className="w-6 h-6 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full flex items-center justify-center flex-shrink-0">
-              <span className="text-xs font-bold text-white">✓</span>
+          <div className="flex items-center gap-3 text-yellow-300">
+            <div className="w-6 h-6 bg-gradient-to-r from-yellow-500 to-yellow-600 rounded-full flex items-center justify-center flex-shrink-0">
+              <span className="text-xs font-bold text-black">✓</span>
             </div>
             <span>10 questões oficiais do Revalida</span>
           </div>
-          <div className="flex items-center gap-3 text-gray-200">
+          <div className="flex items-center gap-3 text-yellow-300">
             <div className="w-6 h-6 bg-gradient-to-r from-yellow-500 to-yellow-600 rounded-full flex items-center justify-center flex-shrink-0">
-              <span className="text-xs font-bold text-white">⚡</span>
+              <span className="text-xs font-bold text-black">⚡</span>
             </div>
             <span>Cronômetro regressivo de 10 minutos</span>
           </div>
-          <div className="flex items-center gap-3 text-gray-200">
-            <div className="w-6 h-6 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-full flex items-center justify-center flex-shrink-0">
-              <span className="text-xs font-bold text-white">🎯</span>
+          <div className="flex items-center gap-3 text-yellow-300">
+            <div className="w-6 h-6 bg-gradient-to-r from-yellow-500 to-yellow-600 rounded-full flex items-center justify-center flex-shrink-0">
+              <span className="text-xs font-bold text-black">🎯</span>
             </div>
             <span>100% de aproveitamento obrigatório</span>
           </div>
-          <div className="flex items-center gap-3 text-gray-200">
-            <div className="w-6 h-6 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center flex-shrink-0">
-              <span className="text-xs font-bold text-white">🔥</span>
+          <div className="flex items-center gap-3 text-yellow-300">
+            <div className="w-6 h-6 bg-gradient-to-r from-yellow-500 to-yellow-600 rounded-full flex items-center justify-center flex-shrink-0">
+              <span className="text-xs font-bold text-black">🔥</span>
             </div>
             <span>Sistema de combos e streaks</span>
           </div>
@@ -58,27 +58,27 @@ export function SupremeChallengeContent({
       </div>
 
       {/* Epic Reward */}
-      <div className="bg-gradient-to-br from-yellow-900/80 to-yellow-800/80 backdrop-blur-sm rounded-3xl p-6 sm:p-8 mb-6 sm:mb-8 border-4 border-yellow-400/70 shadow-2xl relative overflow-hidden">
+      <div className="bg-black/80 backdrop-blur-sm rounded-3xl p-6 sm:p-8 mb-6 sm:mb-8 border border-yellow-500/30 shadow-2xl relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/10 to-yellow-300/10 animate-pulse"></div>
         
         <div className="relative z-10">
-          <h3 className="text-2xl sm:text-3xl font-bold text-white mb-4 flex items-center justify-center gap-3">
+          <h3 className="text-2xl sm:text-3xl font-bold text-yellow-400 mb-4 flex items-center justify-center gap-3">
             <Trophy className="w-8 h-8 sm:w-10 sm:h-10 text-yellow-400 animate-bounce" />
             RECOMPENSA SUPREMA
           </h3>
           <div className="text-center mb-6">
             <div className="text-3xl sm:text-5xl font-bold mb-2">
-              <span className="text-gray-400 line-through text-xl sm:text-2xl">R$ 49,90</span>
-              <span className="text-transparent bg-gradient-to-r from-green-400 to-emerald-500 bg-clip-text ml-4">
+              <span className="text-yellow-500 line-through text-xl sm:text-2xl">R$ 49,90</span>
+              <span className="text-yellow-400 ml-4">
                 R$ 29,90
               </span>
             </div>
-            <p className="text-yellow-200 text-lg sm:text-xl font-semibold">
+            <p className="text-yellow-300 text-lg sm:text-xl font-semibold">
               💰 Desconto de R$ 20,00/mês no Plano Premium!
             </p>
           </div>
           
-          <div className="grid grid-cols-2 gap-4 text-gray-200 text-sm sm:text-base">
+          <div className="grid grid-cols-2 gap-4 text-yellow-300 text-sm sm:text-base">
             <div className="flex items-center gap-2">
               <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-400 flex-shrink-0" />
               <span>Acesso Premium completo</span>
@@ -103,10 +103,10 @@ export function SupremeChallengeContent({
       <div className="flex flex-col items-center gap-6">
         {hasWonBefore ? (
           <div className="text-center">
-            <Badge className="bg-gradient-to-r from-green-500 to-emerald-600 text-white text-base sm:text-lg px-4 sm:px-6 py-2 sm:py-3 mb-4">
+            <Badge className="bg-gradient-to-r from-yellow-500 to-yellow-600 text-black text-base sm:text-lg px-4 sm:px-6 py-2 sm:py-3 mb-4">
               🏆 DESAFIO CONQUISTADO! Você é um MESTRE!
             </Badge>
-            <p className="text-gray-300 mb-4 text-sm sm:text-base">Parabéns! Você já conquistou este desafio épico.</p>
+            <p className="text-yellow-300 mb-4 text-sm sm:text-base">Parabéns! Você já conquistou este desafio épico.</p>
             <Button
               onClick={onResetAttempts}
               variant="outline"
@@ -130,7 +130,7 @@ export function SupremeChallengeContent({
               </div>
             </Button>
             
-            <p className="text-gray-300 mt-4 text-sm sm:text-base">
+            <p className="text-yellow-300 mt-4 text-sm sm:text-base">
               💡 Tentativas restantes: <span className="text-yellow-400 font-bold">{attemptsLeft}</span>
             </p>
             
@@ -139,7 +139,7 @@ export function SupremeChallengeContent({
                 onClick={onResetAttempts}
                 variant="ghost"
                 size="sm"
-                className="mt-2 text-gray-500 text-xs"
+                className="mt-2 text-yellow-500 text-xs"
               >
                 🔧 Dev: Resetar tentativas
               </Button>
@@ -147,10 +147,10 @@ export function SupremeChallengeContent({
           </div>
         ) : (
           <div className="text-center">
-            <Badge variant="destructive" className="text-base sm:text-lg px-4 sm:px-6 py-2 sm:py-3 mb-4">
+            <Badge variant="destructive" className="text-base sm:text-lg px-4 sm:px-6 py-2 sm:py-3 mb-4 bg-red-800/80 text-yellow-300">
               ❌ Tentativas Esgotadas
             </Badge>
-            <p className="text-gray-300 mb-4 text-sm sm:text-base">Você utilizou todas as 3 tentativas disponíveis.</p>
+            <p className="text-yellow-300 mb-4 text-sm sm:text-base">Você utilizou todas as 3 tentativas disponíveis.</p>
             <Button
               onClick={onResetAttempts}
               variant="outline"

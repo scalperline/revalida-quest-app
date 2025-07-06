@@ -29,12 +29,15 @@ serve(async (req) => {
     if (!priceId) throw new Error("Price ID is required");
 
     const stripe = new Stripe(Deno.env.get("STRIPE_SECRET_KEY") || "", { apiVersion: "2023-10-16" });
+    
+    // Check if customer already exists
     const customers = await stripe.customers.list({ email: user.email, limit: 1 });
     let customerId;
     if (customers.data.length > 0) {
       customerId = customers.data[0].id;
     }
 
+    // Create checkout session with discount support
     const session = await stripe.checkout.sessions.create({
       customer: customerId,
       customer_email: customerId ? undefined : user.email,
@@ -45,8 +48,12 @@ serve(async (req) => {
         },
       ],
       mode: "subscription",
-      success_url: `${req.headers.get("origin")}/success`,
+      allow_promotion_codes: true, // Enable promotion codes
+      success_url: `${req.headers.get("origin")}/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${req.headers.get("origin")}/pricing`,
+      metadata: {
+        user_id: user.id,
+      },
     });
 
     return new Response(JSON.stringify({ url: session.url }), {
@@ -54,6 +61,7 @@ serve(async (req) => {
       status: 200,
     });
   } catch (error) {
+    console.error('Error creating checkout session:', error);
     return new Response(JSON.stringify({ error: error.message }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
       status: 500,

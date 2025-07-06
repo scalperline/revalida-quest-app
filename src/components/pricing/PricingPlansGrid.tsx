@@ -5,6 +5,7 @@ import { Badge } from '@/components/ui/badge';
 import { Check, Crown, Zap, Sparkles, ArrowRight, Star } from 'lucide-react';
 import { useSubscription } from '@/hooks/useSubscription';
 import { toast } from 'sonner';
+
 const plans = [{
   name: 'Gratuito',
   description: 'Para conhecer a plataforma',
@@ -43,11 +44,13 @@ const plans = [{
   popular: true,
   tier: 'enterprise'
 }];
+
 interface PricingPlansGridProps {
   subscribed: boolean;
   subscription_tier: string | null;
   loading: boolean;
 }
+
 export function PricingPlansGrid({
   subscribed,
   subscription_tier,
@@ -57,6 +60,7 @@ export function PricingPlansGrid({
     createCheckoutSession
   } = useSubscription();
   const [loadingPlan, setLoadingPlan] = useState<string | null>(null);
+
   const handleSelectPlan = async (plan: typeof plans[0]) => {
     if (!plan.priceId) return; // Free plan
 
@@ -71,12 +75,14 @@ export function PricingPlansGrid({
       setLoadingPlan(null);
     }
   };
+
   const isCurrentPlan = (planName: string) => {
     if (planName === 'Gratuito' && !subscribed) return true;
     if (planName === 'Básico' && subscribed && subscription_tier === 'Basic') return true;
     if (planName === 'Premium' && subscribed && subscription_tier === 'Premium') return true;
     return false;
   };
+
   return <div className="grid md:grid-cols-3 gap-6 lg:gap-8 max-w-7xl mx-auto mb-16 px-4">
       {plans.map((plan, index) => {
       const Icon = plan.icon;

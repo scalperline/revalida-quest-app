@@ -26,5 +26,8 @@ verify_jwt = true
 [functions.customer-portal]
 verify_jwt = true
 
+[functions.stripe-webhook]
+verify_jwt = false
+
 [functions.delete-user-data]
 verify_jwt = true

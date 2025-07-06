@@ -65,10 +65,10 @@ serve(async (req) => {
         const priceId = subscription.items.data[0].price.id;
         let subscriptionTier = "Basic";
         
-        if (priceId === 'price_revalida_premium_monthly') {
+        if (priceId.includes("revalida-premium")) {
           subscriptionTier = "Premium";
-        } else if (priceId === 'price_revalida_basic_monthly') {
-          subscriptionTier = "Basic";
+        } else if (priceId.includes("revalida-pro")) {
+          subscriptionTier = "Pro";
         }
 
         const subscriptionEnd = new Date(subscription.current_period_end * 1000).toISOString();

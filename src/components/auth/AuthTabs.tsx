@@ -17,6 +17,7 @@ interface AuthTabsProps {
   onSignIn: (e: React.FormEvent) => void;
   onSignUp: (e: React.FormEvent) => void;
   onResetForm: () => void;
+  onForgotPassword?: () => void;
 }
 
 export function AuthTabs({
@@ -30,7 +31,8 @@ export function AuthTabs({
   onDisplayNameChange,
   onSignIn,
   onSignUp,
-  onResetForm
+  onResetForm,
+  onForgotPassword
 }: AuthTabsProps) {
   return (
     <Tabs defaultValue="login" className="w-full" onValueChange={onResetForm}>
@@ -60,6 +62,7 @@ export function AuthTabs({
           onEmailChange={onEmailChange}
           onPasswordChange={onPasswordChange}
           onSubmit={onSignIn}
+          onForgotPassword={onForgotPassword}
         />
       </TabsContent>
       

@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { useAuth } from '@/hooks/useAuth';
@@ -6,6 +7,7 @@ import { AuthSuccessAlert } from './AuthSuccessAlert';
 import { AuthErrorAlert } from './AuthErrorAlert';
 import { AuthTabs } from './AuthTabs';
 import { AuthStatsFooter } from './AuthStatsFooter';
+import { ForgotPasswordModal } from './ForgotPasswordModal';
 
 export function AuthForm() {
   const { signIn, signUp, loading } = useAuth();
@@ -15,6 +17,7 @@ export function AuthForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const [error, setError] = useState('');
+  const [showForgotPassword, setShowForgotPassword] = useState(false);
 
   const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -81,32 +84,44 @@ export function AuthForm() {
     setShowSuccess(false);
   };
 
+  const handleForgotPassword = () => {
+    setShowForgotPassword(true);
+  };
+
   return (
-    <div className="w-full max-w-sm mx-auto">
-      <Card className="bg-white/95 backdrop-blur-sm shadow-2xl border-0 overflow-hidden rounded-2xl">
-        <AuthFormHeader />
-        
-        <CardContent className="px-6 pb-6">
-          <AuthSuccessAlert showSuccess={showSuccess} />
-          <AuthErrorAlert error={error} />
+    <>
+      <div className="w-full max-w-sm mx-auto">
+        <Card className="bg-white/95 backdrop-blur-sm shadow-2xl border-0 overflow-hidden rounded-2xl">
+          <AuthFormHeader />
+          
+          <CardContent className="px-6 pb-6">
+            <AuthSuccessAlert showSuccess={showSuccess} />
+            <AuthErrorAlert error={error} />
 
-          <AuthTabs
-            email={email}
-            password={password}
-            displayName={displayName}
-            isSubmitting={isSubmitting}
-            loading={loading}
-            onEmailChange={setEmail}
-            onPasswordChange={setPassword}
-            onDisplayNameChange={setDisplayName}
-            onSignIn={handleSignIn}
-            onSignUp={handleSignUp}
-            onResetForm={resetForm}
-          />
+            <AuthTabs
+              email={email}
+              password={password}
+              displayName={displayName}
+              isSubmitting={isSubmitting}
+              loading={loading}
+              onEmailChange={setEmail}
+              onPasswordChange={setPassword}
+              onDisplayNameChange={setDisplayName}
+              onSignIn={handleSignIn}
+              onSignUp={handleSignUp}
+              onResetForm={resetForm}
+              onForgotPassword={handleForgotPassword}
+            />
 
-          <AuthStatsFooter />
-        </CardContent>
-      </Card>
-    </div>
+            <AuthStatsFooter />
+          </CardContent>
+        </Card>
+      </div>
+
+      <ForgotPasswordModal 
+        isOpen={showForgotPassword}
+        onClose={() => setShowForgotPassword(false)}
+      />
+    </>
   );
 }

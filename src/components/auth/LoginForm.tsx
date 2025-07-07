@@ -13,6 +13,7 @@ interface LoginFormProps {
   onEmailChange: (value: string) => void;
   onPasswordChange: (value: string) => void;
   onSubmit: (e: React.FormEvent) => void;
+  onForgotPassword?: () => void;
 }
 
 export function LoginForm({
@@ -22,7 +23,8 @@ export function LoginForm({
   loading,
   onEmailChange,
   onPasswordChange,
-  onSubmit
+  onSubmit,
+  onForgotPassword
 }: LoginFormProps) {
   return (
     <form onSubmit={onSubmit} className="space-y-4">
@@ -56,6 +58,21 @@ export function LoginForm({
           className="h-10 rounded-lg border-2 border-gray-200 focus:border-blue-500 transition-all duration-200 px-3 text-sm"
         />
       </div>
+      
+      {/* Forgot Password Link */}
+      {onForgotPassword && (
+        <div className="text-right">
+          <button
+            type="button"
+            onClick={onForgotPassword}
+            className="text-sm text-blue-600 hover:text-blue-800 hover:underline transition-colors duration-200"
+            disabled={isSubmitting || loading}
+          >
+            Esqueci minha senha
+          </button>
+        </div>
+      )}
+      
       <Button 
         type="submit" 
         className="w-full h-10 medical-button-primary text-sm font-semibold"

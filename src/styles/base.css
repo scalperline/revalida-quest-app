@@ -30,6 +30,16 @@
     overflow-x: hidden;
   }
 
+  /* Hide scrollbar for horizontal scroll */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
   /* Enhanced touch targets for mobile - minimum 44px */
   button, a, input, select, textarea {
     min-height: 44px;
@@ -178,6 +188,26 @@
     .container-responsive {
       padding-left: 1rem;
       padding-right: 1rem;
+    }
+  }
+
+  /* Navbar specific responsive improvements */
+  @media (max-width: 374px) {
+    .navbar-mobile {
+      padding-left: 0.75rem;
+      padding-right: 0.75rem;
+    }
+  }
+
+  @media (min-width: 640px) and (max-width: 768px) {
+    .navbar-tablet {
+      gap: 0.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .navbar-desktop {
+      gap: 2rem;
     }
   }
 }

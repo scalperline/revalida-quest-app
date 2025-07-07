@@ -1,12 +1,9 @@
-
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Play, Star, Users, BookOpen, Trophy, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
-
 export function HeroSection() {
-  return (
-    <section className="relative pt-20 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
+  return <section className="relative pt-20 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-4 -right-4 w-24 h-24 bg-blue-400 rounded-full opacity-20 animate-bounce"></div>
@@ -27,7 +24,7 @@ export function HeroSection() {
           {/* Headline */}
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
             Domine o{" "}
-            <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent text-4xl">
               Revalida
             </span>{" "}
             com{" "}
@@ -109,6 +106,5 @@ export function HeroSection() {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 }

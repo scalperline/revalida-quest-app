@@ -1,11 +1,8 @@
-
 import { Button } from "@/components/ui/button";
 import { ArrowRight, BookOpen, Star } from "lucide-react";
 import { Link } from "react-router-dom";
-
 export function CTASection() {
-  return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-blue-600 via-purple-600 to-blue-700 relative overflow-hidden">
+  return <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-blue-600 via-purple-600 to-blue-700 relative overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-4 -right-4 w-24 h-24 bg-white/10 rounded-full animate-bounce"></div>
@@ -26,7 +23,7 @@ export function CTASection() {
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
           <Link to="/auth">
-            <Button size="lg" className="bg-white text-white hover:bg-blue-50 px-8 py-4 text-lg font-semibold">
+            <Button size="lg" className="px-8 py-4 text-lg font-semibold bg-white text-white">
               <BookOpen className="w-5 h-5 mr-2" />
               Começar Grátis Agora
               <ArrowRight className="w-5 h-5 ml-2" />
@@ -50,6 +47,5 @@ export function CTASection() {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 }

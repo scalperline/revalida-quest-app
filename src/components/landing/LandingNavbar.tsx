@@ -23,37 +23,50 @@ export function LandingNavbar() {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
-            <nav className="flex items-center gap-6">
-              <a href="#features" className="text-gray-700 hover:text-blue-600 transition-colors text-sm font-medium">
-                Recursos
-              </a>
-              <a href="#testimonials" className="text-gray-700 hover:text-blue-600 transition-colors text-sm font-medium">
-                Depoimentos
-              </a>
-              <a href="#pricing" className="text-gray-700 hover:text-blue-600 transition-colors text-sm font-medium">
-                Preços
-              </a>
+            <nav className="flex items-center gap-2">
+              <Button
+                variant="ghost"
+                size="sm"
+                asChild
+                className="text-gray-700 hover:text-blue-600 hover:bg-blue-50 font-medium transition-all duration-200"
+              >
+                <a href="#features">Recursos</a>
+              </Button>
+              <Button
+                variant="ghost"
+                size="sm"
+                asChild
+                className="text-gray-700 hover:text-blue-600 hover:bg-blue-50 font-medium transition-all duration-200"
+              >
+                <a href="#testimonials">Depoimentos</a>
+              </Button>
+              <Button
+                variant="ghost"
+                size="sm"
+                asChild
+                className="text-gray-700 hover:text-blue-600 hover:bg-blue-50 font-medium transition-all duration-200"
+              >
+                <a href="#pricing">Preços</a>
+              </Button>
             </nav>
             
             {/* Action Buttons */}
-            <div className="flex items-center gap-3">
-              <Link to="/auth">
-                <Button 
-                  variant="ghost" 
-                  size="sm"
-                  className="text-gray-700 hover:text-blue-600 hover:bg-blue-50 font-medium"
-                >
-                  Entrar
-                </Button>
-              </Link>
-              <Link to="/auth">
-                <Button 
-                  size="sm"
-                  className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 font-medium"
-                >
-                  Começar Grátis
-                </Button>
-              </Link>
+            <div className="flex items-center gap-3 pl-4 border-l border-blue-200">
+              <Button 
+                variant="ghost" 
+                size="sm"
+                asChild
+                className="text-gray-700 hover:text-blue-600 hover:bg-blue-50 font-medium transition-all duration-200"
+              >
+                <Link to="/auth">Entrar</Link>
+              </Button>
+              <Button 
+                size="sm"
+                asChild
+                className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 font-medium shadow-md hover:shadow-lg transition-all duration-200"
+              >
+                <Link to="/auth">Começar Grátis</Link>
+              </Button>
             </div>
           </div>
 
@@ -69,32 +82,49 @@ export function LandingNavbar() {
         {/* Mobile Menu */}
         {isMenuOpen && (
           <div className="md:hidden py-4 border-t border-blue-200 bg-white/95 backdrop-blur-md">
-            <div className="flex flex-col gap-4">
-              <a href="#features" className="text-gray-700 hover:text-blue-600 transition-colors font-medium py-2">
-                Recursos
-              </a>
-              <a href="#testimonials" className="text-gray-700 hover:text-blue-600 transition-colors font-medium py-2">
-                Depoimentos
-              </a>
-              <a href="#pricing" className="text-gray-700 hover:text-blue-600 transition-colors font-medium py-2">
-                Preços
-              </a>
+            <div className="flex flex-col gap-2">
+              <Button
+                variant="ghost"
+                size="sm"
+                asChild
+                className="justify-start text-gray-700 hover:text-blue-600 hover:bg-blue-50 font-medium transition-all duration-200"
+              >
+                <a href="#features">Recursos</a>
+              </Button>
+              <Button
+                variant="ghost"
+                size="sm"
+                asChild
+                className="justify-start text-gray-700 hover:text-blue-600 hover:bg-blue-50 font-medium transition-all duration-200"
+              >
+                <a href="#testimonials">Depoimentos</a>
+              </Button>
+              <Button
+                variant="ghost"
+                size="sm"
+                asChild
+                className="justify-start text-gray-700 hover:text-blue-600 hover:bg-blue-50 font-medium transition-all duration-200"
+              >
+                <a href="#pricing">Preços</a>
+              </Button>
               
               {/* Mobile Action Buttons */}
               <div className="flex flex-col gap-3 pt-4 border-t border-blue-100">
-                <Link to="/auth">
-                  <Button 
-                    variant="ghost" 
-                    className="w-full text-gray-700 hover:text-blue-600 hover:bg-blue-50 font-medium"
-                  >
-                    Entrar
-                  </Button>
-                </Link>
-                <Link to="/auth">
-                  <Button className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 font-medium">
-                    Começar Grátis
-                  </Button>
-                </Link>
+                <Button 
+                  variant="ghost" 
+                  size="sm"
+                  asChild
+                  className="justify-start text-gray-700 hover:text-blue-600 hover:bg-blue-50 font-medium transition-all duration-200"
+                >
+                  <Link to="/auth">Entrar</Link>
+                </Button>
+                <Button 
+                  size="sm"
+                  asChild
+                  className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 font-medium shadow-md hover:shadow-lg transition-all duration-200"
+                >
+                  <Link to="/auth">Começar Grátis</Link>
+                </Button>
               </div>
             </div>
           </div>

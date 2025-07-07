@@ -1,5 +1,5 @@
 
-import { Navigate } from 'react-router-dom';
+import { Navigate, useSearchParams } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
 import { Stethoscope } from 'lucide-react';
 import { AuthHeroSection } from '@/components/auth/AuthHeroSection';
@@ -8,10 +8,12 @@ import { MobileOfficialCards } from '@/components/auth/MobileOfficialCards';
 
 export default function Auth() {
   const { user, loading } = useAuth();
+  const [searchParams] = useSearchParams();
 
   // Redirect if already logged in
   if (user && !loading) {
-    return <Navigate to="/" replace />;
+    const redirectTo = searchParams.get('redirect') || '/app';
+    return <Navigate to={redirectTo} replace />;
   }
 
   if (loading) {

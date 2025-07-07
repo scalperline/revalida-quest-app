@@ -18,16 +18,28 @@ export function LandingNavbar() {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
-            <a href="#features" className="text-gray-700 hover:text-blue-600 transition-colors">Recursos</a>
-            <a href="#testimonials" className="text-gray-700 hover:text-blue-600 transition-colors">Depoimentos</a>
-            <a href="#pricing" className="text-gray-700 hover:text-blue-600 transition-colors">Preços</a>
-            <Link to="/auth" className="text-gray-700 hover:text-blue-600 transition-colors">Entrar</Link>
-            <Link to="/auth">
-              <Button className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 mx-0 my-0 py-0 px-0">
-                Começar Grátis
-              </Button>
-            </Link>
+          <div className="hidden md:flex items-center gap-6 lg:gap-8">
+            <nav className="flex items-center gap-6 lg:gap-8">
+              <a href="#features" className="text-gray-700 hover:text-blue-600 transition-all duration-300 font-medium hover:scale-105">
+                Recursos
+              </a>
+              <a href="#testimonials" className="text-gray-700 hover:text-blue-600 transition-all duration-300 font-medium hover:scale-105">
+                Depoimentos
+              </a>
+              <a href="#pricing" className="text-gray-700 hover:text-blue-600 transition-all duration-300 font-medium hover:scale-105">
+                Preços
+              </a>
+            </nav>
+            <div className="flex items-center gap-3 ml-2">
+              <Link to="/auth" className="text-gray-700 hover:text-blue-600 transition-all duration-300 font-medium px-3 py-2 rounded-lg hover:bg-blue-50">
+                Entrar
+              </Link>
+              <Link to="/auth">
+                <Button size="sm" className="shadow-lg hover:shadow-xl transition-all duration-300">
+                  Começar Grátis
+                </Button>
+              </Link>
+            </div>
           </div>
 
           {/* Mobile Menu Button */}

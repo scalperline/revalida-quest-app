@@ -28,7 +28,7 @@ export function LandingNavbar() {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center justify-center gap-8 flex-1">
+          <div className="hidden md:flex items-center gap-8">
             <a href="#features" className="text-gray-700 hover:text-blue-600 transition-colors">Recursos</a>
             <a href="#testimonials" className="text-gray-700 hover:text-blue-600 transition-colors">Depoimentos</a>
             <a href="#pricing" className="text-gray-700 hover:text-blue-600 transition-colors">Preços</a>

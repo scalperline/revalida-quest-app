@@ -12,13 +12,19 @@ export function LandingNavbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2 hover:scale-105 transition-transform">
-            <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-blue-700 rounded-lg flex items-center justify-center">
-              <Stethoscope className="w-5 h-5 text-white" />
+          <Link to="/" className="flex items-center gap-2 sm:gap-3 py-2 group transition-all duration-300 hover:scale-105 min-w-0">
+            <div className="w-8 h-8 sm:w-9 sm:h-9 lg:w-10 lg:h-10 xl:w-12 xl:h-12 bg-gradient-to-br from-blue-500 via-blue-600 to-purple-600 flex items-center justify-center flex-shrink-0 shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:rotate-3 mx-[3px] px-0 my-0 py-0 rounded-lg">
+              <Stethoscope className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 text-white mx-0 my-0 py-0 px-0" />
             </div>
-            <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">
-              RevalidaQuest
-            </span>
+            {/* Responsive logo text */}
+            <div className="flex flex-col min-w-0">
+              <span className="sm:text-base lg:text-lg xl:text-xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent leading-tight group-hover:animate-pulse whitespace-nowrap text-lg">
+                RevalidaQuest
+              </span>
+              <span className="text-xs text-gray-500 -mt-0.5 whitespace-nowrap hidden xs:block">
+                Sua jornada médica
+              </span>
+            </div>
           </Link>
 
           {/* Desktop Navigation */}

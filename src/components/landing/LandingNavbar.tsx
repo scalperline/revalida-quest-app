@@ -51,8 +51,8 @@ export function LandingNavbar() {
 
           {/* Auth Buttons - Desktop */}
           <div className="hidden md:flex items-center gap-2 flex-shrink-0">
-            <div className="bg-white/90 backdrop-blur-sm rounded-xl px-2 py-1.5 shadow-lg border border-gray-200 flex items-center gap-2">
-              <Link to="/auth" className="text-gray-700 hover:text-blue-600 transition-colors text-sm font-medium px-3 py-1 rounded-lg hover:bg-blue-50">
+            <div className="bg-white/90 backdrop-blur-sm rounded-xl px-2 py-1.5 shadow-lg border border-gray-200 flex items-center justify-center gap-2">
+              <Link to="/auth" className="flex items-center justify-center text-gray-700 hover:text-blue-600 transition-colors text-sm font-medium px-3 py-1 rounded-lg hover:bg-blue-50">
                 Entrar
               </Link>
               <Link to="/auth">
@@ -109,7 +109,7 @@ export function LandingNavbar() {
                 <div className="pt-4 border-t border-gray-200 space-y-3">
                   <Link 
                     to="/auth" 
-                    className="block w-full text-center px-4 py-3 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-200"
+                    className="flex items-center justify-center w-full text-center px-4 py-3 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-200"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     Entrar

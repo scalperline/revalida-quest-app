@@ -38,7 +38,7 @@ export function HeroSection() {
           {/* CTAs */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
             <Link to="/auth">
-              <Button size="lg" className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 px-8 py-4 text-lg">
+              <Button size="lg" className="bg-gradient-to-br from-blue-500 via-blue-600 to-purple-600 hover:from-blue-600 hover:via-blue-700 hover:to-purple-700 text-white px-8 py-4 text-lg">
                 <BookOpen className="w-5 h-5 mr-2" />
                 Começar Grátis Agora
               </Button>

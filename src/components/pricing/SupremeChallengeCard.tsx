@@ -1,4 +1,3 @@
-
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Trophy, Crown } from 'lucide-react';
@@ -32,42 +31,42 @@ export function SupremeChallengeCard() {
         
         {/* Badge Container */}
         <div className="absolute -top-3 left-0 right-0 z-20 flex justify-center">
-          <Badge className="bg-gradient-to-r from-yellow-500 to-orange-600 text-black px-4 py-2 text-sm font-bold shadow-xl border-0 rounded-full animate-pulse">
+          <Badge className="bg-gradient-to-r from-yellow-500 to-orange-600 text-black px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-bold shadow-xl border-0 rounded-full animate-pulse">
             <Trophy className="w-3 h-3 mr-1 fill-current" />
             🏆 Desafio Conquistado!
           </Badge>
         </div>
         
-        <Card className="relative bg-white/95 dark:bg-gray-900/95 backdrop-blur-xl border-0 rounded-3xl shadow-2xl overflow-hidden min-h-[600px] lg:min-h-[650px] flex flex-col shadow-yellow-500/20 ring-2 ring-yellow-200/50">
-          <CardHeader className="text-center pb-4 pt-8 px-6 lg:px-8 flex-shrink-0 bg-gradient-to-br from-yellow-600 to-orange-700">
+        <Card className="relative bg-white/95 dark:bg-gray-900/95 backdrop-blur-xl border-0 rounded-3xl shadow-2xl overflow-hidden min-h-[500px] sm:min-h-[600px] lg:min-h-[650px] flex flex-col shadow-yellow-500/20 ring-2 ring-yellow-200/50">
+          <CardHeader className="text-center pb-3 sm:pb-4 pt-6 sm:pt-8 px-4 sm:px-6 lg:px-8 flex-shrink-0 bg-gradient-to-br from-yellow-600 to-orange-700">
             {/* Icon with enhanced gradient */}
-            <div className="w-16 h-16 lg:w-20 lg:h-20 mx-auto mb-4 lg:mb-6 bg-gradient-to-br from-yellow-500 to-orange-600 rounded-2xl flex items-center justify-center shadow-2xl relative overflow-hidden group-hover:scale-110 transition-transform duration-300 animate-pulse">
+            <div className="w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20 mx-auto mb-3 sm:mb-4 lg:mb-6 bg-gradient-to-br from-yellow-500 to-orange-600 rounded-2xl flex items-center justify-center shadow-2xl relative overflow-hidden group-hover:scale-110 transition-transform duration-300 animate-pulse">
               <div className="absolute inset-0 bg-gradient-to-tr from-white/20 to-transparent bg-yellow-400 animate-pulse"></div>
-              <Crown className="w-7 h-7 lg:w-9 lg:h-9 text-white relative z-10" />
+              <Crown className="w-5 h-5 sm:w-7 sm:h-7 lg:w-9 lg:h-9 text-white relative z-10" />
             </div>
 
             {/* Plan Name and Description */}
-            <CardTitle className="text-2xl lg:text-3xl font-bold mb-2 lg:mb-3 text-white">PARABÉNS!</CardTitle>
-            <CardDescription className="text-base lg:text-lg font-medium text-zinc-200">
+            <CardTitle className="text-xl sm:text-2xl lg:text-3xl font-bold mb-2 lg:mb-3 text-white">PARABÉNS!</CardTitle>
+            <CardDescription className="text-sm sm:text-base lg:text-lg font-medium text-zinc-200 px-2">
               Você conquistou o Desafio Supremo! Resgate seu prêmio abaixo.
             </CardDescription>
 
             {/* Pricing */}
-            <div className="mt-6 lg:mt-8 mb-2">
+            <div className="mt-4 sm:mt-6 lg:mt-8 mb-2">
               <div className="flex items-baseline justify-center">
-                <span className="text-4xl lg:text-5xl font-bold bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">R$ 29,00</span>
-                <span className="text-lg lg:text-xl font-medium ml-1 text-zinc-200">/ mês </span>
+                <span className="text-2xl sm:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">R$ 29,00</span>
+                <span className="text-sm sm:text-lg lg:text-xl font-medium ml-1 text-zinc-200">/ mês </span>
               </div>
             </div>
           </CardHeader>
 
-          <CardContent className="lg:px-8 pb-6 lg:pb-8 flex-1 flex flex-col px-[25px] bg-gradient-to-br from-yellow-600 to-orange-700">
+          <CardContent className="px-4 sm:px-6 lg:px-8 pb-4 sm:pb-6 lg:pb-8 flex-1 flex flex-col bg-gradient-to-br from-yellow-600 to-orange-700">
             {/* Victory Content */}
-            <div className="text-center mb-6">
-              <h3 className="text-xl font-bold text-white mb-4">🎉 SEU CUPOM DE DESCONTO 🎉</h3>
-              <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-6 mb-4 border-2 border-white/30">
-                <div className="flex items-center justify-center gap-4">
-                  <Badge className="bg-gradient-to-r from-white to-gray-100 text-black text-2xl font-bold px-6 py-3 animate-pulse">
+            <div className="text-center mb-4 sm:mb-6">
+              <h3 className="text-lg sm:text-xl font-bold text-white mb-3 sm:mb-4">🎉 SEU CUPOM DE DESCONTO 🎉</h3>
+              <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-4 sm:p-6 mb-4 border-2 border-white/30">
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
+                  <Badge className="bg-gradient-to-r from-white to-gray-100 text-black text-lg sm:text-2xl font-bold px-4 sm:px-6 py-2 sm:py-3 animate-pulse">
                     #SUPREME
                   </Badge>
                   <button 
@@ -75,56 +74,56 @@ export function SupremeChallengeCard() {
                       navigator.clipboard.writeText('#SUPREME');
                       // Add toast notification here if needed
                     }}
-                    className="bg-white/20 hover:bg-white/30 text-white px-4 py-2 rounded-lg font-medium transition-colors"
+                    className="bg-white/20 hover:bg-white/30 text-white px-3 sm:px-4 py-2 rounded-lg font-medium transition-colors text-sm sm:text-base"
                   >
                     📋 Copiar
                   </button>
                 </div>
-                <p className="text-white/80 text-sm mt-2">
+                <p className="text-white/80 text-xs sm:text-sm mt-2">
                   Use este cupom no checkout para garantir seu desconto especial!
                 </p>
               </div>
             </div>
 
             {/* Features List */}
-            <div className="space-y-3 lg:space-y-4 mb-6 lg:mb-8 flex-1">
-              <div className="flex items-start gap-3">
-                <div className="w-5 h-5 lg:w-6 lg:h-6 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 shadow-lg">
-                  <Trophy className="w-3 h-3 lg:w-3.5 lg:h-3.5 text-white font-bold" />
+            <div className="space-y-2 sm:space-y-3 lg:space-y-4 mb-4 sm:mb-6 lg:mb-8 flex-1">
+              <div className="flex items-start gap-2 sm:gap-3">
+                <div className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 shadow-lg">
+                  <Trophy className="w-2.5 h-2.5 sm:w-3 sm:h-3 lg:w-3.5 lg:h-3.5 text-white font-bold" />
                 </div>
-                <span className="font-medium leading-relaxed text-sm lg:text-base text-white">
+                <span className="font-medium leading-relaxed text-xs sm:text-sm lg:text-base text-white">
                   Plano Premium pelo preço do Básico
                 </span>
               </div>
-              <div className="flex items-start gap-3">
-                <div className="w-5 h-5 lg:w-6 lg:h-6 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 shadow-lg">
-                  <Crown className="w-3 h-3 lg:w-3.5 lg:h-3.5 text-white font-bold" />
+              <div className="flex items-start gap-2 sm:gap-3">
+                <div className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 shadow-lg">
+                  <Crown className="w-2.5 h-2.5 sm:w-3 sm:h-3 lg:w-3.5 lg:h-3.5 text-white font-bold" />
                 </div>
-                <span className="font-medium leading-relaxed text-sm lg:text-base text-white">
+                <span className="font-medium leading-relaxed text-xs sm:text-sm lg:text-base text-white">
                   Economia de R$ 20,00/mês
                 </span>
               </div>
             </div>
 
             {/* Action Buttons */}
-            <div className="mt-auto space-y-3">
+            <div className="mt-auto space-y-2 sm:space-y-3">
               <button
                 onClick={() => {
                   // Here you would implement the checkout logic
                   console.log('Redirect to Premium checkout with SUPREME coupon');
                 }}
-                className="w-full py-3 lg:py-4 text-base lg:text-lg font-bold transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:scale-[1.02] rounded-2xl border-0 bg-gradient-to-r from-white to-gray-100 hover:from-gray-100 hover:to-white text-black animate-pulse"
+                className="w-full py-2.5 sm:py-3 lg:py-4 text-sm sm:text-base lg:text-lg font-bold transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:scale-[1.02] rounded-2xl border-0 bg-gradient-to-r from-white to-gray-100 hover:from-gray-100 hover:to-white text-black animate-pulse"
               >
-                <div className="flex items-center justify-center gap-2">
-                  <Crown className="w-4 h-4 lg:w-5 lg:h-5" />
-                  🏆 RESGATAR PRÊMIO PREMIUM
-                  <Trophy className="w-4 h-4 lg:w-5 lg:h-5" />
+                <div className="flex items-center justify-center gap-1 sm:gap-2">
+                  <Crown className="w-3 h-3 sm:w-4 sm:h-4 lg:w-5 lg:h-5" />
+                  <span className="text-xs sm:text-sm lg:text-base">🏆 RESGATAR PRÊMIO PREMIUM</span>
+                  <Trophy className="w-3 h-3 sm:w-4 sm:h-4 lg:w-5 lg:h-5" />
                 </div>
               </button>
               
               <button
                 onClick={resetAttempts}
-                className="w-full py-2 lg:py-3 text-sm lg:text-base font-medium rounded-xl border-2 border-white/30 text-white hover:bg-white/10 transition-colors"
+                className="w-full py-2 sm:py-2 lg:py-3 text-xs sm:text-sm lg:text-base font-medium rounded-xl border-2 border-white/30 text-white hover:bg-white/10 transition-colors"
               >
                 🔄 Resetar Tentativas
               </button>

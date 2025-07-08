@@ -23,8 +23,10 @@ export function HeroSection() {
           </Badge>
 
           {/* Headline */}
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
-            O Banco de Questões Oficiais do{" "}
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+            <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent">
+              O Banco de Questões Oficiais do
+            </span>{" "}
             <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent text-4xl">Revalida INEP</span>
           </h1>
 

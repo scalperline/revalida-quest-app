@@ -1,4 +1,3 @@
-
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Trophy, Crown } from 'lucide-react';
@@ -152,6 +151,9 @@ export function SupremeChallengeCard() {
             <Crown className="w-7 h-7 lg:w-9 lg:h-9 text-white relative z-10" />
           </div>
 
+          {/* Countdown Timer */}
+          <SupremeChallengeCountdown />
+
           {/* Plan Name and Description */}
           <CardTitle className="text-2xl lg:text-3xl font-bold mb-2 lg:mb-3 text-white">DESAFIO SURPRESA</CardTitle>
           <CardDescription className="text-base lg:text-lg font-medium text-zinc-300">
@@ -175,13 +177,8 @@ export function SupremeChallengeCard() {
           {/* Features List */}
           <SupremeChallengeFeatures />
 
-          {/* Countdown Timer - Now positioned above the action button */}
-          <div className="mt-auto mb-4">
-            <SupremeChallengeCountdown />
-          </div>
-
           {/* Action Button */}
-          <div>
+          <div className="mt-auto">
             <SupremeChallengeActions hasWonBefore={hasWonBefore} canStartChallenge={canStartChallenge} onStartChallenge={handleStartChallenge} onResetAttempts={resetAttempts} attemptsLeft={attemptsLeft} />
           </div>
         </CardContent>

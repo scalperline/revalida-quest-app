@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Check, Crown, Zap, Sparkles, ArrowRight, Star } from 'lucide-react';
 import { useSubscription } from '@/hooks/useSubscription';
+import { SupremeChallengeCard } from './SupremeChallengeCard';
 import { toast } from 'sonner';
 
 const plans = [
@@ -108,7 +109,7 @@ export function PricingPlansGrid({ subscribed, subscription_tier, loading }: Pri
   };
 
   return (
-    <div className="grid md:grid-cols-3 gap-6 lg:gap-8 max-w-7xl mx-auto mb-16 px-4">
+    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 max-w-7xl mx-auto mb-16 px-4">
       {plans.map((plan, index) => {
         const Icon = plan.icon;
         const isCurrent = isCurrentPlan(plan.name);
@@ -241,6 +242,9 @@ export function PricingPlansGrid({ subscribed, subscription_tier, loading }: Pri
           </div>
         );
       })}
+      
+      {/* Supreme Challenge Card */}
+      <SupremeChallengeCard />
     </div>
   );
 }

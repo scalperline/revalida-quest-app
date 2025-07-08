@@ -71,33 +71,33 @@ export function FeaturesSection() {
         </div>
 
         {/* Features Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {features.map((feature, index) => (
             <div
               key={index}
-              className={`relative bg-white/95 backdrop-blur-sm rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-[1.02] border-2 ${feature.borderColor} ${feature.hoverBorder} group overflow-hidden`}
+              className={`relative bg-white/95 backdrop-blur-sm rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-500 hover:scale-[1.02] border-2 ${feature.borderColor} ${feature.hoverBorder} group overflow-hidden text-center`}
             >
               {/* Subtle background gradient */}
               <div className={`absolute inset-0 bg-gradient-to-br ${feature.color} opacity-[0.02] group-hover:opacity-[0.05] transition-opacity duration-500`}></div>
               
               {/* Content */}
-              <div className="relative z-10">
-                <div className={`w-16 h-16 bg-gradient-to-r ${feature.color} rounded-2xl flex items-center justify-center mb-6 shadow-xl group-hover:scale-110 transition-all duration-500 relative overflow-hidden`}>
+              <div className="relative z-10 flex flex-col items-center">
+                <div className={`w-12 h-12 bg-gradient-to-r ${feature.color} rounded-xl flex items-center justify-center mb-4 shadow-lg group-hover:scale-110 transition-all duration-500 relative overflow-hidden`}>
                   <div className="absolute inset-0 bg-gradient-to-tr from-white/20 to-transparent"></div>
-                  <feature.icon className="w-8 h-8 text-white relative z-10" />
+                  <feature.icon className="w-6 h-6 text-white relative z-10" />
                 </div>
                 
-                <h3 className="text-xl font-bold text-gray-900 mb-4 group-hover:text-gray-800 transition-colors">
+                <h3 className="text-lg font-bold text-gray-900 mb-3 group-hover:text-gray-800 transition-colors">
                   {feature.title}
                 </h3>
                 
-                <p className="text-gray-600 leading-relaxed group-hover:text-gray-700 transition-colors">
+                <p className="text-sm text-gray-600 leading-relaxed group-hover:text-gray-700 transition-colors">
                   {feature.description}
                 </p>
               </div>
 
               {/* Decorative corner element */}
-              <div className={`absolute -top-2 -right-2 w-20 h-20 bg-gradient-to-br ${feature.color} opacity-10 rounded-full blur-xl group-hover:opacity-20 transition-opacity duration-500`}></div>
+              <div className={`absolute -top-1 -right-1 w-16 h-16 bg-gradient-to-br ${feature.color} opacity-10 rounded-full blur-xl group-hover:opacity-20 transition-opacity duration-500`}></div>
             </div>
           ))}
         </div>

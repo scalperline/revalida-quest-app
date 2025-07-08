@@ -1,31 +1,6 @@
-
 import { PricingPlansGrid } from "@/components/pricing/PricingPlansGrid";
-import { SupremeChallengeSection } from "@/components/pricing/SupremeChallengeSection";
-import { useState, useEffect } from 'react';
-import { getFixedSupremeChallengeQuestions } from '@/utils/fixedSupremeChallengeQuestions';
-
 export function PricingSection() {
-  // Challenge states - using fixed questions
-  const [challengeQuestions, setChallengeQuestions] = useState<any[]>([]);
-  const [challengeReady, setChallengeReady] = useState(false);
-
-  // Prepare fixed challenge questions
-  useEffect(() => {
-    console.log('🎯 Preparing Supreme Challenge with fixed questions...');
-    
-    try {
-      const fixedQuestions = getFixedSupremeChallengeQuestions();
-      setChallengeQuestions(fixedQuestions);
-      setChallengeReady(true);
-      console.log('✅ Supreme Challenge prepared with fixed questions:', fixedQuestions.length);
-    } catch (error) {
-      console.error('❌ Error preparing fixed questions:', error);
-      setChallengeReady(false);
-    }
-  }, []);
-
-  return (
-    <section id="pricing" className="py-20 px-4 sm:px-6 lg:px-8">
+  return <section id="pricing" className="py-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-16">
@@ -35,26 +10,14 @@ export function PricingSection() {
               plano ideal
             </span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-12">
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             Comece grátis e evolua conforme suas necessidades. Todos os planos incluem
             acesso às questões oficiais e sistema gamificado.
           </p>
         </div>
 
-        {/* Supreme Challenge Section - Only on Desktop */}
-        <div className="hidden lg:block mb-16">
-          <SupremeChallengeSection
-            todasQuestoes={challengeQuestions}
-            challengeQuestions={challengeQuestions}
-            challengeReady={challengeReady}
-            setChallengeQuestions={setChallengeQuestions}
-            setChallengeReady={setChallengeReady}
-          />
-        </div>
-
         {/* Pricing Grid */}
-        <PricingPlansGrid subscribed={false} subscription_tier={null} loading={false} showSupremeChallenge={true} />
+        <PricingPlansGrid subscribed={false} subscription_tier={null} loading={false} />
       </div>
-    </section>
-  );
+    </section>;
 }

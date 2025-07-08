@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -79,10 +80,9 @@ interface PricingPlansGridProps {
   subscribed: boolean;
   subscription_tier: string | null;
   loading: boolean;
-  showSupremeChallenge?: boolean;
 }
 
-export function PricingPlansGrid({ subscribed, subscription_tier, loading, showSupremeChallenge = false }: PricingPlansGridProps) {
+export function PricingPlansGrid({ subscribed, subscription_tier, loading }: PricingPlansGridProps) {
   const { createCheckoutSession } = useSubscription();
   const [loadingPlan, setLoadingPlan] = useState<string | null>(null);
 
@@ -109,17 +109,9 @@ export function PricingPlansGrid({ subscribed, subscription_tier, loading, showS
   };
 
   return (
-    <div className={`grid gap-6 lg:gap-8 max-w-7xl mx-auto mb-16 px-4 ${
-      showSupremeChallenge 
-        ? 'md:grid-cols-2 lg:grid-cols-4' // Show Supreme Challenge on mobile/tablet for pricing page
-        : 'md:grid-cols-1 lg:grid-cols-3' // Hide Supreme Challenge for landing page on desktop
-    }`}>
-      {/* Supreme Challenge Card - Show on mobile/tablet for pricing page, or always if showSupremeChallenge is true */}
-      {showSupremeChallenge && (
-        <div className="lg:hidden">
-          <SupremeChallengeCard />
-        </div>
-      )}
+    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 max-w-7xl mx-auto mb-16 px-4">
+      {/* Supreme Challenge Card - First Position */}
+      <SupremeChallengeCard />
       
       {plans.map((plan, index) => {
         const Icon = plan.icon;

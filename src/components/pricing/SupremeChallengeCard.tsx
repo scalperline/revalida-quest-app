@@ -1,3 +1,4 @@
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Trophy, Crown } from 'lucide-react';
@@ -53,7 +54,8 @@ export function SupremeChallengeCard() {
 
             {/* Pricing */}
             <div className="mt-4 sm:mt-6 lg:mt-8 mb-2">
-              <div className="flex items-baseline justify-center">
+              <div className="flex items-baseline justify-center gap-2">
+                <span className="text-lg sm:text-xl lg:text-2xl font-medium text-gray-400 line-through">R$ 49,90</span>
                 <span className="text-2xl sm:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">R$ 29,00</span>
                 <span className="text-sm sm:text-lg lg:text-xl font-medium ml-1 text-zinc-200">/ mês </span>
               </div>
@@ -168,7 +170,8 @@ export function SupremeChallengeCard() {
 
           {/* Pricing */}
           <div className="mt-6 lg:mt-8 mb-2">
-            <div className="flex items-baseline justify-center">
+            <div className="flex items-baseline justify-center gap-2">
+              <span className="text-lg sm:text-xl lg:text-2xl font-medium text-gray-400 line-through">R$ 49,90</span>
               <span className="text-4xl lg:text-5xl font-bold bg-gradient-to-r from-red-600 to-red-700 bg-clip-text text-lime-400">R$ 29,00</span>
               <span className="text-lg lg:text-xl font-medium ml-1 text-zinc-500">/ mês </span>
             </div>

@@ -1,3 +1,4 @@
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Trophy, Crown } from 'lucide-react';
@@ -6,6 +7,7 @@ import { SupremeChallengeVictoryModal } from '@/components/challenge/SupremeChal
 import { SupremeChallengeStats } from './supreme-challenge/SupremeChallengeStats';
 import { SupremeChallengeFeatures } from './supreme-challenge/SupremeChallengeFeatures';
 import { SupremeChallengeActions } from './supreme-challenge/SupremeChallengeActions';
+import { SupremeChallengeCountdown } from './supreme-challenge/SupremeChallengeCountdown';
 import { useSupremeChallengeLogic } from './supreme-challenge/SupremeChallengeLogic';
 
 export function SupremeChallengeCard() {
@@ -152,6 +154,9 @@ export function SupremeChallengeCard() {
             <div className="absolute inset-0 bg-gradient-to-tr from-white/20 to-transparent bg-gradient-to-r from-yellow-500 to-orange-600 animate-pulse"></div>
             <Crown className="w-7 h-7 lg:w-9 lg:h-9 text-white relative z-10" />
           </div>
+
+          {/* Countdown Timer */}
+          <SupremeChallengeCountdown />
 
           {/* Plan Name and Description */}
           <CardTitle className="text-2xl lg:text-3xl font-bold mb-2 lg:mb-3 text-white">DESAFIO SUPREMO</CardTitle>

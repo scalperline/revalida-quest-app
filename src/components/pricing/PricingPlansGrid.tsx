@@ -110,6 +110,9 @@ export function PricingPlansGrid({ subscribed, subscription_tier, loading }: Pri
 
   return (
     <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 max-w-7xl mx-auto mb-16 px-4">
+      {/* Supreme Challenge Card - First Position */}
+      <SupremeChallengeCard />
+      
       {plans.map((plan, index) => {
         const Icon = plan.icon;
         const isCurrent = isCurrentPlan(plan.name);
@@ -242,9 +245,6 @@ export function PricingPlansGrid({ subscribed, subscription_tier, loading }: Pri
           </div>
         );
       })}
-      
-      {/* Supreme Challenge Card */}
-      <SupremeChallengeCard />
     </div>
   );
 }

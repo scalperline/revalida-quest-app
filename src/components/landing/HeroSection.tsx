@@ -64,11 +64,11 @@ export function HeroSection() {
               onClick={scrollToSupremeChallenge}
               className="relative overflow-hidden bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 hover:from-yellow-500 hover:via-yellow-600 hover:to-yellow-700 text-black border-0 px-8 py-4 text-lg font-bold shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300"
               style={{
-                animation: 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite'
+                animation: 'scale-bounce 2s ease-in-out infinite'
               }}
             >
               {/* Glow effect */}
-              <div className="absolute inset-0 bg-gradient-to-r from-yellow-300 to-orange-400 blur-md opacity-60 animate-pulse"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-yellow-300 to-orange-400 blur-md opacity-60"></div>
               
               {/* Button content */}
               <div className="relative z-10 flex items-center">

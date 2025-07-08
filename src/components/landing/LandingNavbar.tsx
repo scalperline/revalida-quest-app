@@ -56,7 +56,7 @@ export function LandingNavbar() {
                 Entrar
               </Link>
               <Link to="/auth">
-                <Button className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-4 py-2 text-sm font-medium">
+                <Button className="bg-gradient-to-br from-blue-500 via-blue-600 to-purple-600 hover:from-blue-600 hover:via-blue-700 hover:to-purple-700 text-white px-4 py-2 text-sm font-medium">
                   Começar Grátis
                 </Button>
               </Link>
@@ -115,7 +115,7 @@ export function LandingNavbar() {
                     Entrar
                   </Link>
                   <Link to="/auth" onClick={() => setIsMenuOpen(false)}>
-                    <Button className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white py-3 text-base font-medium">
+                    <Button className="w-full bg-gradient-to-br from-blue-500 via-blue-600 to-purple-600 hover:from-blue-600 hover:via-blue-700 hover:to-purple-700 text-white py-3 text-base font-medium">
                       Começar Grátis
                     </Button>
                   </Link>

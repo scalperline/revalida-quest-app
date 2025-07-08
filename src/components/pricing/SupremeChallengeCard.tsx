@@ -121,7 +121,7 @@ export function SupremeChallengeCard() {
         <CardHeader className="text-center pb-4 pt-8 px-6 lg:px-8 flex-shrink-0 bg-rose-950">
           {/* Icon with enhanced gradient */}
           <div className="w-16 h-16 lg:w-20 lg:h-20 mx-auto mb-4 lg:mb-6 bg-gradient-to-br from-red-600 to-red-700 rounded-2xl flex items-center justify-center shadow-2xl relative overflow-hidden group-hover:scale-110 transition-transform duration-300">
-            <div className="absolute inset-0 bg-gradient-to-tr from-white/20 to-transparent"></div>
+            <div className="absolute inset-0 bg-gradient-to-tr from-white/20 to-transparent bg-amber-400"></div>
             <Crown className="w-7 h-7 lg:w-9 lg:h-9 text-white relative z-10" />
           </div>
 
@@ -133,8 +133,8 @@ export function SupremeChallengeCard() {
           {/* Pricing */}
           <div className="mt-6 lg:mt-8 mb-2">
             <div className="flex items-baseline justify-center">
-              <span className="text-4xl lg:text-5xl font-bold bg-gradient-to-r from-red-600 to-red-700 bg-clip-text text-transparent">-R$ 20/</span>
-              <span className="text-gray-500 dark:text-gray-400 text-lg lg:text-xl font-medium ml-1">mês </span>
+              <span className="text-4xl lg:text-5xl font-bold bg-gradient-to-r from-red-600 to-red-700 bg-clip-text text-lime-400">R$ 29,00</span>
+              <span className="text-lg lg:text-xl font-medium ml-1 text-zinc-100">/ mês </span>
             </div>
           </div>
         </CardHeader>

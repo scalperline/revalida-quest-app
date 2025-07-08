@@ -7,6 +7,7 @@ import { SupremeChallengeStats } from './supreme-challenge/SupremeChallengeStats
 import { SupremeChallengeFeatures } from './supreme-challenge/SupremeChallengeFeatures';
 import { SupremeChallengeActions } from './supreme-challenge/SupremeChallengeActions';
 import { useSupremeChallengeLogic } from './supreme-challenge/SupremeChallengeLogic';
+
 export function SupremeChallengeCard() {
   const {
     showSupremeModal,
@@ -23,7 +24,8 @@ export function SupremeChallengeCard() {
 
   // Show victory modal after winning
   if (hasWonBefore) {
-    return <div className="relative group transition-all duration-500 hover:scale-[1.02] md:-mt-4 lg:-mt-6">
+    return (
+      <div className="relative group transition-all duration-500 hover:scale-[1.02] md:-mt-4 lg:-mt-6">
         {/* Gradient Border Effect */}
         <div className="absolute inset-0 bg-gradient-to-br from-yellow-300 via-orange-400 to-yellow-300 rounded-3xl blur-sm opacity-70 group-hover:opacity-100 transition-opacity duration-300 animate-pulse"></div>
         
@@ -126,9 +128,12 @@ export function SupremeChallengeCard() {
 
         {/* Supreme Challenge Modal */}
         <SupremeChallengeModal isOpen={showSupremeModal} onClose={handleCloseSupremeModal} onVictory={handleVictory} onChallengeEnd={handleChallengeEnd} questions={challengeQuestions} />
-      </div>;
+      </div>
+    );
   }
-  return <div className="relative group transition-all duration-500 hover:scale-[1.02] md:-mt-4 lg:-mt-6">
+
+  return (
+    <div className="relative group transition-all duration-500 hover:scale-[1.02] md:-mt-4 lg:-mt-6">
       {/* Gradient Border Effect */}
       <div className="absolute inset-0 bg-gradient-to-br from-red-300 via-red-400 to-red-300 rounded-3xl blur-sm opacity-70 group-hover:opacity-100 transition-opacity duration-300"></div>
       
@@ -158,7 +163,7 @@ export function SupremeChallengeCard() {
           <div className="mt-6 lg:mt-8 mb-2">
             <div className="flex items-baseline justify-center gap-2">
               <span className="text-lg sm:text-xl lg:text-2xl font-medium text-gray-400 line-through">R$ 49,90</span>
-              <span className="lg:text-5xl font-bold bg-gradient-to-r from-red-600 to-red-700 bg-clip-text text-lime-400 text-2xl">R$ 29,90</span>
+              <span className="lg:text-5xl font-bold bg-gradient-to-r from-red-600 to-red-700 bg-clip-text text-lime-400 text-2xl">R$ 29,00</span>
               <span className="text-lg lg:text-xl font-medium ml-1 text-zinc-500">/mês</span>
             </div>
           </div>
@@ -173,7 +178,13 @@ export function SupremeChallengeCard() {
 
           {/* Action Button */}
           <div className="mt-auto">
-            <SupremeChallengeActions hasWonBefore={hasWonBefore} canStartChallenge={canStartChallenge} onStartChallenge={handleStartChallenge} onResetAttempts={resetAttempts} />
+            <SupremeChallengeActions 
+              hasWonBefore={hasWonBefore} 
+              canStartChallenge={canStartChallenge} 
+              onStartChallenge={handleStartChallenge} 
+              onResetAttempts={resetAttempts}
+              attemptsLeft={attemptsLeft}
+            />
           </div>
         </CardContent>
 
@@ -183,5 +194,6 @@ export function SupremeChallengeCard() {
 
       {/* Supreme Challenge Modal */}
       <SupremeChallengeModal isOpen={showSupremeModal} onClose={handleCloseSupremeModal} onVictory={handleVictory} onChallengeEnd={handleChallengeEnd} questions={challengeQuestions} />
-    </div>;
+    </div>
+  );
 }

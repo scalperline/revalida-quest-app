@@ -127,9 +127,7 @@ export function SupremeChallengeCard() {
 
           {/* Plan Name and Description */}
           <CardTitle className="text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white mb-2 lg:mb-3">DESAFIO SUPREMO</CardTitle>
-          <CardDescription className="text-gray-600 dark:text-gray-400 text-base lg:text-lg font-medium">
-            Acerte 10 questões e ganhe desconto
-          </CardDescription>
+          <CardDescription className="text-gray-600 dark:text-gray-400 text-base lg:text-lg font-medium">Acerte 10 questões oficiais e ganhe o plano Premium pelo preço do Básico!</CardDescription>
 
           {/* Pricing */}
           <div className="mt-6 lg:mt-8 mb-2">

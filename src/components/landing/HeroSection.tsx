@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Play, Star, Users, BookOpen, Trophy, Sparkles } from "lucide-react";
@@ -15,7 +14,7 @@ export function HeroSection() {
       </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
-        <div className="text-center mb-12">
+        <div className="text-center mb-12 my-[16px]">
           {/* Badge */}
           <Badge className="mb-6 bg-gradient-to-r from-green-100 to-emerald-100 text-green-800 border-green-200 px-4 py-2">
             <Star className="w-4 h-4 mr-2 fill-current" />
@@ -38,7 +37,7 @@ export function HeroSection() {
           {/* CTAs */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
             <Link to="/auth">
-              <Button size="lg" className="bg-gradient-to-br from-blue-500 via-blue-600 to-purple-600 hover:from-blue-600 hover:via-blue-700 hover:to-purple-700 text-white px-8 py-4 text-lg">
+              <Button size="lg" className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 px-8 py-4 text-lg">
                 <BookOpen className="w-5 h-5 mr-2" />
                 Começar Grátis Agora
               </Button>

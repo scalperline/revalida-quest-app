@@ -1,119 +1,29 @@
 
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from '@/hooks/useAuth';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Trophy, Crown, Target, Zap, Star, Sparkles, Gift } from 'lucide-react';
+import { Trophy, Crown } from 'lucide-react';
 import { SupremeChallengeModal } from '@/components/challenge/SupremeChallengeModal';
-import { getFixedSupremeChallengeQuestions } from '@/utils/fixedSupremeChallengeQuestions';
-import { toast } from 'sonner';
+import { SupremeChallengeStats } from './supreme-challenge/SupremeChallengeStats';
+import { SupremeChallengeFeatures } from './supreme-challenge/SupremeChallengeFeatures';
+import { SupremeChallengeActions } from './supreme-challenge/SupremeChallengeActions';
+import { useSupremeChallengeLogic } from './supreme-challenge/SupremeChallengeLogic';
 
 export function SupremeChallengeCard() {
-  const navigate = useNavigate();
   const {
-    user
-  } = useAuth();
+    showSupremeModal,
+    challengeQuestions,
+    attemptsLeft,
+    hasWonBefore,
+    canStartChallenge,
+    handleStartChallenge,
+    handleCloseSupremeModal,
+    handleVictory,
+    handleChallengeEnd,
+    resetAttempts
+  } = useSupremeChallengeLogic();
 
-  // Challenge states
-  const [showSupremeModal, setShowSupremeModal] = useState(false);
-  const [challengeQuestions, setChallengeQuestions] = useState<any[]>([]);
-  const [challengeReady, setChallengeReady] = useState(false);
-
-  // Attempts system
-  const [attemptsUsed, setAttemptsUsed] = useState(() => {
-    const saved = localStorage.getItem('supreme_challenge_attempts');
-    return saved ? parseInt(saved) : 0;
-  });
-  const maxAttempts = 3;
-  const canStartChallenge = attemptsUsed < maxAttempts;
-  const attemptsLeft = maxAttempts - attemptsUsed;
-  const hasWonBefore = localStorage.getItem('supreme_challenge_won') === 'true';
-
-  const handleStartChallenge = async () => {
-    console.log('🚀 Iniciando Desafio Supremo');
-    if (!user) {
-      navigate('/auth');
-      return;
-    }
-    if (!canStartChallenge) {
-      toast.error("Você já utilizou todas as 3 tentativas disponíveis!", {
-        duration: 4000,
-        className: "bg-gradient-to-r from-red-500 to-red-600 text-white border-0"
-      });
-      return;
-    }
-    try {
-      const fixedQuestions = getFixedSupremeChallengeQuestions();
-      setChallengeQuestions(fixedQuestions);
-      setChallengeReady(true);
-
-      // Hide navbar
-      const navbar = document.querySelector('.navbar');
-      if (navbar) {
-        navbar.classList.add('navbar-hidden');
-      }
-      setShowSupremeModal(true);
-      toast.success("🏆 Desafio Supremo iniciado! Boa sorte!", {
-        duration: 2000,
-        className: "bg-gradient-to-r from-purple-500 to-pink-500 text-white border-0"
-      });
-    } catch (error) {
-      console.error('❌ Erro ao preparar questões fixas:', error);
-      toast.error("Erro ao carregar desafio. Tente novamente!");
-    }
-  };
-
-  const handleCloseSupremeModal = () => {
-    setShowSupremeModal(false);
-
-    // Show navbar again
-    const navbar = document.querySelector('.navbar');
-    if (navbar) {
-      navbar.classList.remove('navbar-hidden');
-    }
-  };
-
-  const handleVictory = (coins: number, discount: number) => {
-    console.log('🏆 VITÓRIA NO DESAFIO SUPREMO! Coins:', coins, 'Discount:', discount);
-    setShowSupremeModal(false);
-
-    // Mark as won and increment attempts
-    localStorage.setItem('supreme_challenge_won', 'true');
-    const newAttempts = attemptsUsed + 1;
-    setAttemptsUsed(newAttempts);
-    localStorage.setItem('supreme_challenge_attempts', newAttempts.toString());
-
-    // Show navbar again
-    const navbar = document.querySelector('.navbar');
-    if (navbar) {
-      navbar.classList.remove('navbar-hidden');
-    }
-    toast.success("🏆 DESAFIO SUPREMO CONQUISTADO! Seu prêmio está no card abaixo!", {
-      duration: 6000,
-      className: "bg-gradient-to-r from-yellow-500 to-orange-500 text-white border-0"
-    });
-  };
-
-  const handleChallengeEnd = () => {
-    // Increment attempts on challenge end (win or lose)
-    const newAttempts = attemptsUsed + 1;
-    setAttemptsUsed(newAttempts);
-    localStorage.setItem('supreme_challenge_attempts', newAttempts.toString());
-  };
-
-  const resetAttempts = () => {
-    console.log('🔄 RESETANDO tentativas (modo debug)');
-    localStorage.removeItem('supreme_challenge_attempts');
-    localStorage.removeItem('supreme_challenge_won');
-    setAttemptsUsed(0);
-    toast.success("Tentativas resetadas!", {
-      duration: 2000
-    });
-  };
-
-  return <div className="relative group transition-all duration-500 hover:scale-[1.02] md:-mt-4 lg:-mt-6">
+  return (
+    <div className="relative group transition-all duration-500 hover:scale-[1.02] md:-mt-4 lg:-mt-6">
       {/* Gradient Border Effect */}
       <div className="absolute inset-0 bg-gradient-to-br from-red-300 via-red-400 to-red-300 rounded-3xl blur-sm opacity-70 group-hover:opacity-100 transition-opacity duration-300"></div>
       
@@ -135,8 +45,9 @@ export function SupremeChallengeCard() {
 
           {/* Plan Name and Description */}
           <CardTitle className="text-2xl lg:text-3xl font-bold mb-2 lg:mb-3 text-white">DESAFIO SUPREMO</CardTitle>
-          <CardDescription className="text-base lg:text-lg font-medium text-white">Acerte 10 questões oficiais e ganhe o plano Premium pelo preço do Básico!
-        </CardDescription>
+          <CardDescription className="text-base lg:text-lg font-medium text-white">
+            Acerte 10 questões oficiais e ganhe o plano Premium pelo preço do Básico!
+          </CardDescription>
 
           {/* Pricing */}
           <div className="mt-6 lg:mt-8 mb-2">
@@ -149,78 +60,19 @@ export function SupremeChallengeCard() {
 
         <CardContent className="lg:px-8 pb-6 lg:pb-8 flex-1 flex flex-col px-[25px] bg-orange-950">
           {/* Challenge Stats */}
-          <div className="grid grid-cols-3 gap-2 mb-6 text-center">
-            <div className="rounded-xl p-3 border border-red-200/50 bg-transparent">
-              <Target className="w-5 h-5 text-red-600 mx-auto mb-1" />
-              <div className="text-sm font-bold text-white">10/10</div>
-              <div className="text-xs text-white">Acertos</div>
-            </div>
-            <div className="rounded-xl p-3 border border-red-200/50 bg-transparent">
-              <Zap className="w-5 h-5 text-red-600 mx-auto mb-1" />
-              <div className="text-sm font-bold text-white">10min</div>
-              <div className="text-xs text-white">Tempo</div>
-            </div>
-            <div className="rounded-xl p-3 border border-red-200/50 bg-transparent">
-              <Star className="w-5 h-5 text-red-600 mx-auto mb-1" />
-              <div className="text-sm font-bold text-white">{attemptsLeft}</div>
-              <div className="text-xs text-white">Tentativas</div>
-            </div>
-          </div>
+          <SupremeChallengeStats attemptsLeft={attemptsLeft} />
 
           {/* Features List */}
-          <div className="space-y-3 lg:space-y-4 mb-6 lg:mb-8 flex-1">
-            <div className="flex items-start gap-3">
-              <div className="w-5 h-5 lg:w-6 lg:h-6 bg-gradient-to-r from-red-600 to-red-700 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 shadow-lg">
-                <Trophy className="w-3 h-3 lg:w-3.5 lg:h-3.5 text-white font-bold" />
-              </div>
-              <span className="font-medium leading-relaxed text-sm lg:text-base text-white">
-                Plano Premium pelo preço do Básico
-              </span>
-            </div>
-            <div className="flex items-start gap-3">
-              <div className="w-5 h-5 lg:w-6 lg:h-6 bg-gradient-to-r from-red-600 to-red-700 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 shadow-lg">
-                <Sparkles className="w-3 h-3 lg:w-3.5 lg:h-3.5 text-white font-bold" />
-              </div>
-              <span className="font-medium leading-relaxed text-sm lg:text-base text-white">
-                10 questões oficiais do INEP
-              </span>
-            </div>
-            <div className="flex items-start gap-3">
-              <div className="w-5 h-5 lg:w-6 lg:h-6 bg-gradient-to-r from-red-600 to-red-700 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 shadow-lg">
-                <Gift className="w-3 h-3 lg:w-3.5 lg:h-3.5 text-white font-bold" />
-              </div>
-              <span className="font-medium leading-relaxed text-sm lg:text-base text-white">
-                Economia de R$ 20,00/mês
-              </span>
-            </div>
-            <div className="flex items-start gap-3">
-              <div className="w-5 h-5 lg:w-6 lg:h-6 bg-gradient-to-r from-red-600 to-red-700 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 shadow-lg">
-                <Zap className="w-3 h-3 lg:w-3.5 lg:h-3.5 text-white font-bold" />
-              </div>
-              <span className="font-medium leading-relaxed text-sm lg:text-base text-white">
-                Apenas 3 tentativas disponíveis
-              </span>
-            </div>
-          </div>
+          <SupremeChallengeFeatures />
 
           {/* Action Button */}
           <div className="mt-auto">
-            {hasWonBefore ? <div className="text-center">
-                <Badge className="mb-4 bg-gradient-to-r from-yellow-500 to-yellow-600 text-black text-sm px-4 py-2">
-                  🏆 Desafio Conquistado!
-                </Badge>
-                <Button onClick={resetAttempts} variant="outline" className="w-full py-3 lg:py-4 text-base lg:text-lg font-bold border-2 border-red-400 text-red-600 hover:bg-red-50">
-                  🔄 Resetar Tentativas
-                </Button>
-              </div> : canStartChallenge ? <Button onClick={handleStartChallenge} className="w-full py-3 lg:py-4 text-base lg:text-lg font-bold transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:scale-[1.02] rounded-2xl border-0 bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-black animate-pulse-enhanced">
-                <div className="flex items-center justify-center gap-2">
-                  <Crown className="w-4 h-4 lg:w-5 lg:h-5" />
-                  Aceitar Desafio
-                  <Trophy className="w-4 h-4 lg:w-5 lg:h-5" />
-                </div>
-              </Button> : <Button disabled className="w-full py-3 lg:py-4 text-base lg:text-lg font-bold rounded-2xl border-0 bg-gray-400 text-white opacity-75 cursor-not-allowed">
-                ❌ Tentativas Esgotadas
-              </Button>}
+            <SupremeChallengeActions
+              hasWonBefore={hasWonBefore}
+              canStartChallenge={canStartChallenge}
+              onStartChallenge={handleStartChallenge}
+              onResetAttempts={resetAttempts}
+            />
           </div>
         </CardContent>
 
@@ -229,6 +81,13 @@ export function SupremeChallengeCard() {
       </Card>
 
       {/* Supreme Challenge Modal */}
-      <SupremeChallengeModal isOpen={showSupremeModal} onClose={handleCloseSupremeModal} onVictory={handleVictory} onChallengeEnd={handleChallengeEnd} questions={challengeQuestions} />
-    </div>;
+      <SupremeChallengeModal 
+        isOpen={showSupremeModal} 
+        onClose={handleCloseSupremeModal} 
+        onVictory={handleVictory} 
+        onChallengeEnd={handleChallengeEnd} 
+        questions={challengeQuestions} 
+      />
+    </div>
+  );
 }

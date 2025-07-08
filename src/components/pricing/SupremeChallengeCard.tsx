@@ -8,6 +8,7 @@ import { Trophy, Crown, Target, Zap, Star, Sparkles, Gift } from 'lucide-react';
 import { SupremeChallengeModal } from '@/components/challenge/SupremeChallengeModal';
 import { getFixedSupremeChallengeQuestions } from '@/utils/fixedSupremeChallengeQuestions';
 import { toast } from 'sonner';
+
 export function SupremeChallengeCard() {
   const navigate = useNavigate();
   const {
@@ -28,6 +29,7 @@ export function SupremeChallengeCard() {
   const canStartChallenge = attemptsUsed < maxAttempts;
   const attemptsLeft = maxAttempts - attemptsUsed;
   const hasWonBefore = localStorage.getItem('supreme_challenge_won') === 'true';
+
   const handleStartChallenge = async () => {
     console.log('🚀 Iniciando Desafio Supremo');
     if (!user) {
@@ -61,6 +63,7 @@ export function SupremeChallengeCard() {
       toast.error("Erro ao carregar desafio. Tente novamente!");
     }
   };
+
   const handleCloseSupremeModal = () => {
     setShowSupremeModal(false);
 
@@ -70,6 +73,7 @@ export function SupremeChallengeCard() {
       navbar.classList.remove('navbar-hidden');
     }
   };
+
   const handleVictory = (coins: number, discount: number) => {
     console.log('🏆 VITÓRIA NO DESAFIO SUPREMO! Coins:', coins, 'Discount:', discount);
     setShowSupremeModal(false);
@@ -90,12 +94,14 @@ export function SupremeChallengeCard() {
       className: "bg-gradient-to-r from-yellow-500 to-orange-500 text-white border-0"
     });
   };
+
   const handleChallengeEnd = () => {
     // Increment attempts on challenge end (win or lose)
     const newAttempts = attemptsUsed + 1;
     setAttemptsUsed(newAttempts);
     localStorage.setItem('supreme_challenge_attempts', newAttempts.toString());
   };
+
   const resetAttempts = () => {
     console.log('🔄 RESETANDO tentativas (modo debug)');
     localStorage.removeItem('supreme_challenge_attempts');
@@ -105,6 +111,7 @@ export function SupremeChallengeCard() {
       duration: 2000
     });
   };
+
   return <div className="relative group transition-all duration-500 hover:scale-[1.02] md:-mt-4 lg:-mt-6">
       {/* Gradient Border Effect */}
       <div className="absolute inset-0 bg-gradient-to-br from-red-300 via-red-400 to-red-300 rounded-3xl blur-sm opacity-70 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -126,15 +133,15 @@ export function SupremeChallengeCard() {
           </div>
 
           {/* Plan Name and Description */}
-          <CardTitle className="text-2xl lg:text-3xl font-bold mb-2 lg:mb-3 text-gray-50">DESAFIO SUPREMO</CardTitle>
-          <CardDescription className="text-base lg:text-lg font-medium text-zinc-200">Acerte 10 questões oficiais e ganhe o plano Premium pelo preço do Básico!
+          <CardTitle className="text-2xl lg:text-3xl font-bold mb-2 lg:mb-3 text-white">DESAFIO SUPREMO</CardTitle>
+          <CardDescription className="text-base lg:text-lg font-medium text-white">Acerte 10 questões oficiais e ganhe o plano Premium pelo preço do Básico!
         </CardDescription>
 
           {/* Pricing */}
           <div className="mt-6 lg:mt-8 mb-2">
             <div className="flex items-baseline justify-center">
-              <span className="text-4xl lg:text-5xl font-bold bg-gradient-to-r from-red-600 to-red-700 bg-clip-text text-lime-400">R$ 29,00</span>
-              <span className="text-lg lg:text-xl font-medium ml-1 text-zinc-500">/ mês </span>
+              <span className="text-4xl lg:text-5xl font-bold bg-gradient-to-r from-red-600 to-red-700 bg-clip-text text-white">R$ 29,00</span>
+              <span className="text-lg lg:text-xl font-medium ml-1 text-white">/ mês </span>
             </div>
           </div>
         </CardHeader>
@@ -144,18 +151,18 @@ export function SupremeChallengeCard() {
           <div className="grid grid-cols-3 gap-2 mb-6 text-center">
             <div className="rounded-xl p-3 border border-red-200/50 bg-transparent">
               <Target className="w-5 h-5 text-red-600 mx-auto mb-1" />
-              <div className="text-sm font-bold text-red-700 dark:text-red-300 bg-transparent">10/10</div>
-              <div className="text-xs text-red-600 dark:text-red-400 bg-transparent">Acertos</div>
+              <div className="text-sm font-bold text-white">10/10</div>
+              <div className="text-xs text-white">Acertos</div>
             </div>
             <div className="rounded-xl p-3 border border-red-200/50 bg-transparent">
               <Zap className="w-5 h-5 text-red-600 mx-auto mb-1" />
-              <div className="text-sm font-bold text-red-700 dark:text-red-300">10min</div>
-              <div className="text-xs text-red-600 dark:text-red-400">Tempo</div>
+              <div className="text-sm font-bold text-white">10min</div>
+              <div className="text-xs text-white">Tempo</div>
             </div>
             <div className="rounded-xl p-3 border border-red-200/50 bg-transparent">
               <Star className="w-5 h-5 text-red-600 mx-auto mb-1" />
-              <div className="text-sm font-bold text-red-700 dark:text-red-300">{attemptsLeft}</div>
-              <div className="text-xs text-red-600 dark:text-red-400">Tentativas</div>
+              <div className="text-sm font-bold text-white">{attemptsLeft}</div>
+              <div className="text-xs text-white">Tentativas</div>
             </div>
           </div>
 
@@ -165,7 +172,7 @@ export function SupremeChallengeCard() {
               <div className="w-5 h-5 lg:w-6 lg:h-6 bg-gradient-to-r from-red-600 to-red-700 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 shadow-lg">
                 <Trophy className="w-3 h-3 lg:w-3.5 lg:h-3.5 text-white font-bold" />
               </div>
-              <span className="font-medium leading-relaxed text-sm lg:text-base text-zinc-100">
+              <span className="font-medium leading-relaxed text-sm lg:text-base text-white">
                 Plano Premium pelo preço do Básico
               </span>
             </div>
@@ -173,7 +180,7 @@ export function SupremeChallengeCard() {
               <div className="w-5 h-5 lg:w-6 lg:h-6 bg-gradient-to-r from-red-600 to-red-700 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 shadow-lg">
                 <Sparkles className="w-3 h-3 lg:w-3.5 lg:h-3.5 text-white font-bold" />
               </div>
-              <span className="font-medium leading-relaxed text-sm lg:text-base text-zinc-100">
+              <span className="font-medium leading-relaxed text-sm lg:text-base text-white">
                 10 questões oficiais do INEP
               </span>
             </div>
@@ -181,7 +188,7 @@ export function SupremeChallengeCard() {
               <div className="w-5 h-5 lg:w-6 lg:h-6 bg-gradient-to-r from-red-600 to-red-700 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 shadow-lg">
                 <Gift className="w-3 h-3 lg:w-3.5 lg:h-3.5 text-white font-bold" />
               </div>
-              <span className="font-medium leading-relaxed text-sm lg:text-base text-zinc-100">
+              <span className="font-medium leading-relaxed text-sm lg:text-base text-white">
                 Economia de R$ 20,00/mês
               </span>
             </div>
@@ -189,7 +196,7 @@ export function SupremeChallengeCard() {
               <div className="w-5 h-5 lg:w-6 lg:h-6 bg-gradient-to-r from-red-600 to-red-700 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 shadow-lg">
                 <Zap className="w-3 h-3 lg:w-3.5 lg:h-3.5 text-white font-bold" />
               </div>
-              <span className="font-medium leading-relaxed text-sm lg:text-base text-zinc-100">
+              <span className="font-medium leading-relaxed text-sm lg:text-base text-white">
                 Apenas 3 tentativas disponíveis
               </span>
             </div>

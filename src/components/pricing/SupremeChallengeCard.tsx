@@ -132,12 +132,8 @@ export function SupremeChallengeCard() {
           {/* Pricing */}
           <div className="mt-6 lg:mt-8 mb-2">
             <div className="flex items-baseline justify-center">
-              <span className="text-4xl lg:text-5xl font-bold bg-gradient-to-r from-red-600 to-red-700 bg-clip-text text-transparent">
-                R$ 20
-              </span>
-              <span className="text-gray-500 dark:text-gray-400 text-lg lg:text-xl font-medium ml-1">
-                de desconto
-              </span>
+              <span className="text-4xl lg:text-5xl font-bold bg-gradient-to-r from-red-600 to-red-700 bg-clip-text text-transparent">-R$ 20/</span>
+              <span className="text-gray-500 dark:text-gray-400 text-lg lg:text-xl font-medium ml-1">mês </span>
             </div>
           </div>
         </CardHeader>

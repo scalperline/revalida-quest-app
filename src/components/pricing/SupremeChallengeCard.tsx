@@ -27,7 +27,7 @@ export function SupremeChallengeCard() {
       <div className="absolute -top-3 left-0 right-0 z-20 flex justify-center">
         <Badge className="bg-gradient-to-r from-red-600 via-red-500 to-red-600 text-white px-4 py-2 text-sm font-bold shadow-xl border-0 rounded-full">
           <Trophy className="w-3 h-3 mr-1 fill-current" />
-          Desafio Épico
+          Tem Coragem?
         </Badge>
       </div>
       

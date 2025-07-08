@@ -8,6 +8,7 @@ import { SupremeChallengeFeatures } from './supreme-challenge/SupremeChallengeFe
 import { SupremeChallengeActions } from './supreme-challenge/SupremeChallengeActions';
 import { SupremeChallengeCountdown } from './supreme-challenge/SupremeChallengeCountdown';
 import { useSupremeChallengeLogic } from './supreme-challenge/SupremeChallengeLogic';
+
 export function SupremeChallengeCard() {
   const {
     showSupremeModal,
@@ -47,7 +48,7 @@ export function SupremeChallengeCard() {
             {/* Plan Name and Description */}
             <CardTitle className="text-xl sm:text-2xl lg:text-3xl font-bold mb-2 lg:mb-3 text-white">PARABÉNS!</CardTitle>
             <CardDescription className="text-sm sm:text-base lg:text-lg font-medium text-zinc-200 px-2">
-              Você conquistou o Desafio Supremo! Resgate seu prêmio abaixo.
+              Você conquistou o Desafio Surpresa! Resgate seu prêmio abaixo.
             </CardDescription>
 
             {/* Pricing */}
@@ -129,6 +130,7 @@ export function SupremeChallengeCard() {
         <SupremeChallengeModal isOpen={showSupremeModal} onClose={handleCloseSupremeModal} onVictory={handleVictory} onChallengeEnd={handleChallengeEnd} questions={challengeQuestions} />
       </div>;
   }
+
   return <div className="relative group transition-all duration-500 hover:scale-[1.02] md:-mt-4 lg:-mt-6">
       {/* Gradient Border Effect */}
       <div className="absolute inset-0 bg-gradient-to-br from-red-300 via-red-400 to-red-300 rounded-3xl blur-sm opacity-70 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -153,7 +155,7 @@ export function SupremeChallengeCard() {
           <SupremeChallengeCountdown />
 
           {/* Plan Name and Description */}
-          <CardTitle className="text-2xl lg:text-3xl font-bold mb-2 lg:mb-3 text-white">DESAFIO SUPREMO</CardTitle>
+          <CardTitle className="text-2xl lg:text-3xl font-bold mb-2 lg:mb-3 text-white">DESAFIO SURPRESA</CardTitle>
           <CardDescription className="text-base lg:text-lg font-medium text-zinc-300">
             Acerte 10 questões oficiais e ganhe o plano Premium pelo preço do Básico!
           </CardDescription>

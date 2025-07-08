@@ -118,7 +118,7 @@ export function SupremeChallengeCard() {
       </div>
       
       <Card className="relative bg-white/95 dark:bg-gray-900/95 backdrop-blur-xl border-0 rounded-3xl shadow-2xl overflow-hidden min-h-[600px] lg:min-h-[650px] flex flex-col shadow-red-500/20 ring-2 ring-red-200/50">
-        <CardHeader className="text-center pb-4 pt-8 px-6 lg:px-8 flex-shrink-0">
+        <CardHeader className="text-center pb-4 pt-8 px-6 lg:px-8 flex-shrink-0 bg-rose-950">
           {/* Icon with enhanced gradient */}
           <div className="w-16 h-16 lg:w-20 lg:h-20 mx-auto mb-4 lg:mb-6 bg-gradient-to-br from-red-600 to-red-700 rounded-2xl flex items-center justify-center shadow-2xl relative overflow-hidden group-hover:scale-110 transition-transform duration-300">
             <div className="absolute inset-0 bg-gradient-to-tr from-white/20 to-transparent"></div>
@@ -126,8 +126,9 @@ export function SupremeChallengeCard() {
           </div>
 
           {/* Plan Name and Description */}
-          <CardTitle className="text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white mb-2 lg:mb-3">DESAFIO SUPREMO</CardTitle>
-          <CardDescription className="text-gray-600 dark:text-gray-400 text-base lg:text-lg font-medium">Acerte 10 questões oficiais e ganhe o plano Premium pelo preço do Básico!</CardDescription>
+          <CardTitle className="text-2xl lg:text-3xl font-bold mb-2 lg:mb-3 text-gray-50">DESAFIO SUPREMO</CardTitle>
+          <CardDescription className="text-base lg:text-lg font-medium text-zinc-200">Acerte 10 questões oficiais e ganhe o plano Premium pelo preço do Básico!
+        </CardDescription>
 
           {/* Pricing */}
           <div className="mt-6 lg:mt-8 mb-2">

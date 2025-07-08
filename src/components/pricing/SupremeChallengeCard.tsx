@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
@@ -211,7 +212,7 @@ export function SupremeChallengeCard() {
                 <Button onClick={resetAttempts} variant="outline" className="w-full py-3 lg:py-4 text-base lg:text-lg font-bold border-2 border-red-400 text-red-600 hover:bg-red-50">
                   🔄 Resetar Tentativas
                 </Button>
-              </div> : canStartChallenge ? <Button onClick={handleStartChallenge} className="w-full py-3 lg:py-4 text-base lg:text-lg font-bold transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:scale-[1.02] rounded-2xl border-0 bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-black">
+              </div> : canStartChallenge ? <Button onClick={handleStartChallenge} className="w-full py-3 lg:py-4 text-base lg:text-lg font-bold transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:scale-[1.02] rounded-2xl border-0 bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-black animate-pulse-enhanced">
                 <div className="flex items-center justify-center gap-2">
                   <Crown className="w-4 h-4 lg:w-5 lg:h-5" />
                   Aceitar Desafio

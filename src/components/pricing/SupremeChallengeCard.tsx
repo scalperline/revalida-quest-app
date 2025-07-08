@@ -1,4 +1,3 @@
-
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Trophy, Crown } from 'lucide-react';
@@ -7,7 +6,6 @@ import { SupremeChallengeStats } from './supreme-challenge/SupremeChallengeStats
 import { SupremeChallengeFeatures } from './supreme-challenge/SupremeChallengeFeatures';
 import { SupremeChallengeActions } from './supreme-challenge/SupremeChallengeActions';
 import { useSupremeChallengeLogic } from './supreme-challenge/SupremeChallengeLogic';
-
 export function SupremeChallengeCard() {
   const {
     showSupremeModal,
@@ -21,9 +19,7 @@ export function SupremeChallengeCard() {
     handleChallengeEnd,
     resetAttempts
   } = useSupremeChallengeLogic();
-
-  return (
-    <div className="relative group transition-all duration-500 hover:scale-[1.02] md:-mt-4 lg:-mt-6">
+  return <div className="relative group transition-all duration-500 hover:scale-[1.02] md:-mt-4 lg:-mt-6">
       {/* Gradient Border Effect */}
       <div className="absolute inset-0 bg-gradient-to-br from-red-300 via-red-400 to-red-300 rounded-3xl blur-sm opacity-70 group-hover:opacity-100 transition-opacity duration-300"></div>
       
@@ -45,15 +41,15 @@ export function SupremeChallengeCard() {
 
           {/* Plan Name and Description */}
           <CardTitle className="text-2xl lg:text-3xl font-bold mb-2 lg:mb-3 text-white">DESAFIO SUPREMO</CardTitle>
-          <CardDescription className="text-base lg:text-lg font-medium text-white">
+          <CardDescription className="text-base lg:text-lg font-medium text-zinc-200">
             Acerte 10 questões oficiais e ganhe o plano Premium pelo preço do Básico!
           </CardDescription>
 
           {/* Pricing */}
           <div className="mt-6 lg:mt-8 mb-2">
             <div className="flex items-baseline justify-center">
-              <span className="text-4xl lg:text-5xl font-bold bg-gradient-to-r from-red-600 to-red-700 bg-clip-text text-white">R$ 29,00</span>
-              <span className="text-lg lg:text-xl font-medium ml-1 text-white">/ mês </span>
+              <span className="text-4xl lg:text-5xl font-bold bg-gradient-to-r from-red-600 to-red-700 bg-clip-text text-lime-400">R$ 29,00</span>
+              <span className="text-lg lg:text-xl font-medium ml-1 text-zinc-500">/ mês </span>
             </div>
           </div>
         </CardHeader>
@@ -67,12 +63,7 @@ export function SupremeChallengeCard() {
 
           {/* Action Button */}
           <div className="mt-auto">
-            <SupremeChallengeActions
-              hasWonBefore={hasWonBefore}
-              canStartChallenge={canStartChallenge}
-              onStartChallenge={handleStartChallenge}
-              onResetAttempts={resetAttempts}
-            />
+            <SupremeChallengeActions hasWonBefore={hasWonBefore} canStartChallenge={canStartChallenge} onStartChallenge={handleStartChallenge} onResetAttempts={resetAttempts} />
           </div>
         </CardContent>
 
@@ -81,13 +72,6 @@ export function SupremeChallengeCard() {
       </Card>
 
       {/* Supreme Challenge Modal */}
-      <SupremeChallengeModal 
-        isOpen={showSupremeModal} 
-        onClose={handleCloseSupremeModal} 
-        onVictory={handleVictory} 
-        onChallengeEnd={handleChallengeEnd} 
-        questions={challengeQuestions} 
-      />
-    </div>
-  );
+      <SupremeChallengeModal isOpen={showSupremeModal} onClose={handleCloseSupremeModal} onVictory={handleVictory} onChallengeEnd={handleChallengeEnd} questions={challengeQuestions} />
+    </div>;
 }

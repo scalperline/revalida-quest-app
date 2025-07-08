@@ -35,8 +35,8 @@ export function SupremeChallengeVictoryModal({ isOpen, onClose }: SupremeChallen
   const handleClaimPrize = async () => {
     try {
       setClaiming(true);
-      const checkoutUrl = await createCheckoutSession('price_revalida_basic_monthly');
-      window.open(checkoutUrl, '_blank');
+      // Use direct Stripe checkout URL for Premium plan
+      window.open('https://buy.stripe.com/bJeaEX08TeQE38v8xi7ss02', '_blank');
       
       toast.success('🎉 Checkout aberto! Use o cupom #supreme para seu desconto especial.', {
         duration: 5000,
@@ -101,7 +101,7 @@ export function SupremeChallengeVictoryModal({ isOpen, onClose }: SupremeChallen
           </h2>
 
           <p className="text-xl md:text-2xl text-gray-200 mb-8 font-semibold">
-            Você ganhou o <span className="text-yellow-400 font-bold">Desafio Supremo!</span>
+            Você ganhou o <span className="text-yellow-400 font-bold">Desafio Supremo!</span>  
           </p>
 
           {/* Seção do prêmio */}

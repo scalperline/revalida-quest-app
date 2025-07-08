@@ -15,6 +15,7 @@ const plans = [
     price: 'R$ 0',
     period: '/mês',
     priceId: null,
+    checkoutUrl: null,
     features: [
       '10 questões por dia',
       '1 simulado por mês',
@@ -38,6 +39,7 @@ const plans = [
     price: 'R$ 29',
     period: ',90/mês',
     priceId: 'price_revalida_basic_monthly',
+    checkoutUrl: 'https://buy.stripe.com/14AdR9g7R0ZOaAXaFq7ss01',
     features: [
       'Questões ilimitadas',
       '5 simulados por mês',
@@ -58,6 +60,7 @@ const plans = [
     price: 'R$ 49',
     period: ',90/mês',
     priceId: 'price_revalida_premium_monthly',
+    checkoutUrl: 'https://buy.stripe.com/bJeaEX08TeQE38v8xi7ss02',
     features: [
       'Tudo do plano Basic',
       'Simulados ilimitados',
@@ -91,6 +94,14 @@ export function PricingPlansGrid({ subscribed, subscription_tier, loading }: Pri
 
     try {
       setLoadingPlan(plan.name);
+      
+      // Use direct Stripe checkout URL if available
+      if (plan.checkoutUrl) {
+        window.open(plan.checkoutUrl, '_blank');
+        return;
+      }
+      
+      // Fallback to existing checkout system
       const checkoutUrl = await createCheckoutSession(plan.priceId);
       window.location.href = checkoutUrl;
     } catch (error) {

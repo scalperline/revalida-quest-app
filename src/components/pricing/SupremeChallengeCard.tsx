@@ -134,7 +134,7 @@ export function SupremeChallengeCard() {
           <div className="mt-6 lg:mt-8 mb-2">
             <div className="flex items-baseline justify-center">
               <span className="text-4xl lg:text-5xl font-bold bg-gradient-to-r from-red-600 to-red-700 bg-clip-text text-lime-400">R$ 29,00</span>
-              <span className="text-lg lg:text-xl font-medium ml-1 text-zinc-100">/ mês </span>
+              <span className="text-lg lg:text-xl font-medium ml-1 text-zinc-500">/ mês </span>
             </div>
           </div>
         </CardHeader>

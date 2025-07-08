@@ -1,20 +1,20 @@
-
 import { Button } from "@/components/ui/button";
 import { Stethoscope, Menu, X } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-
 export function LandingNavbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const navigation = [
-    { name: 'Recursos', href: '#features' },
-    { name: 'Depoimentos', href: '#testimonials' },
-    { name: 'Preços', href: '#pricing' }
-  ];
-
-  return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b-2 border-blue-100 shadow-xl transition-all duration-300">
+  const navigation = [{
+    name: 'Recursos',
+    href: '#features'
+  }, {
+    name: 'Depoimentos',
+    href: '#testimonials'
+  }, {
+    name: 'Preços',
+    href: '#pricing'
+  }];
+  return <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b-2 border-blue-100 shadow-xl transition-all duration-300">
       <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 xl:px-8">
         <div className="flex justify-between items-center h-14 sm:h-16 lg:h-18">
           {/* Logo - Responsive and always visible */}
@@ -36,17 +36,7 @@ export function LandingNavbar() {
 
           {/* Desktop Navigation - Full with text (md+) */}
           <div className="hidden md:flex items-center justify-center flex-1 max-w-2xl mx-4">
-            <div className="flex items-center bg-gray-50/90 backdrop-blur-sm rounded-2xl px-1 py-1 border-2 border-gray-200/50 shadow-lg hover:shadow-xl transition-all duration-300">
-              {navigation.map(item => (
-                <a 
-                  key={item.name} 
-                  href={item.href} 
-                  className="flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 whitespace-nowrap group text-gray-700 hover:bg-white/90 hover:text-blue-600 hover:shadow-md hover:scale-[1.02]"
-                >
-                  <span>{item.name}</span>
-                </a>
-              ))}
-            </div>
+            
           </div>
 
           {/* Auth Buttons - Desktop */}
@@ -65,11 +55,7 @@ export function LandingNavbar() {
 
           {/* Mobile Menu Button */}
           <div className="md:hidden flex items-center">
-            <button
-              className="relative p-2 rounded-lg transition-all duration-200 bg-gradient-to-r from-gray-50 to-white hover:from-gray-100 hover:to-gray-50 text-gray-700 shadow-lg hover:shadow-xl border-2 border-gray-200 hover:border-gray-300 transform hover:scale-105 active:scale-95"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              aria-label={isMenuOpen ? 'Fechar menu' : 'Abrir menu'}
-            >
+            <button className="relative p-2 rounded-lg transition-all duration-200 bg-gradient-to-r from-gray-50 to-white hover:from-gray-100 hover:to-gray-50 text-gray-700 shadow-lg hover:shadow-xl border-2 border-gray-200 hover:border-gray-300 transform hover:scale-105 active:scale-95" onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label={isMenuOpen ? 'Fechar menu' : 'Abrir menu'}>
               <div className="relative w-5 h-5">
                 <Menu className={`absolute inset-0 w-5 h-5 transition-all duration-300 ${isMenuOpen ? 'opacity-0 rotate-180 scale-50' : 'opacity-100 rotate-0 scale-100'}`} />
                 <X className={`absolute inset-0 w-5 h-5 transition-all duration-300 ${isMenuOpen ? 'opacity-100 rotate-0 scale-100' : 'opacity-0 -rotate-180 scale-50'}`} />
@@ -79,39 +65,25 @@ export function LandingNavbar() {
         </div>
 
         {/* Mobile Menu */}
-        {isMenuOpen && (
-          <>
+        {isMenuOpen && <>
             {/* Overlay */}
-            <div 
-              className="fixed inset-0 bg-black/50 z-40 transition-opacity duration-300 backdrop-blur-sm md:hidden" 
-              onClick={() => setIsMenuOpen(false)}
-              style={{ touchAction: 'none' }}
-            />
+            <div className="fixed inset-0 bg-black/50 z-40 transition-opacity duration-300 backdrop-blur-sm md:hidden" onClick={() => setIsMenuOpen(false)} style={{
+          touchAction: 'none'
+        }} />
             
             {/* Mobile Menu Content */}
             <div className="absolute top-full left-0 right-0 bg-white/95 backdrop-blur-md border-b-2 border-blue-100 shadow-xl z-50 md:hidden">
               <div className="px-4 py-6 space-y-4">
                 {/* Navigation Links */}
                 <div className="space-y-2">
-                  {navigation.map(item => (
-                    <a 
-                      key={item.name}
-                      href={item.href} 
-                      className="block px-4 py-3 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-200"
-                      onClick={() => setIsMenuOpen(false)}
-                    >
+                  {navigation.map(item => <a key={item.name} href={item.href} className="block px-4 py-3 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-200" onClick={() => setIsMenuOpen(false)}>
                       {item.name}
-                    </a>
-                  ))}
+                    </a>)}
                 </div>
                 
                 {/* Auth Buttons */}
                 <div className="pt-4 border-t border-gray-200 space-y-3">
-                  <Link 
-                    to="/auth" 
-                    className="flex items-center justify-center w-full text-center px-4 py-3 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-200"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
+                  <Link to="/auth" className="flex items-center justify-center w-full text-center px-4 py-3 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-200" onClick={() => setIsMenuOpen(false)}>
                     Entrar
                   </Link>
                   <Link to="/auth" onClick={() => setIsMenuOpen(false)}>
@@ -122,9 +94,7 @@ export function LandingNavbar() {
                 </div>
               </div>
             </div>
-          </>
-        )}
+          </>}
       </div>
-    </nav>
-  );
+    </nav>;
 }

@@ -23,7 +23,7 @@ export function HeroSection() {
           </Badge>
 
           {/* Headline */}
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-6 leading-tight">
             <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent">
               O Banco de Questões Oficiais do
             </span>{" "}
@@ -31,7 +31,7 @@ export function HeroSection() {
           </h1>
 
           {/* Subtitle */}
-          <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-lg sm:text-xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
             A única plataforma que transforma sua preparação para o Revalida em uma 
             jornada gamificada com mais de 1.500 questões oficiais, missões exclusivas 
             e análises com IA.

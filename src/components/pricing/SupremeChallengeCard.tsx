@@ -1,4 +1,3 @@
-
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Trophy, Crown } from 'lucide-react';
@@ -9,7 +8,6 @@ import { SupremeChallengeFeatures } from './supreme-challenge/SupremeChallengeFe
 import { SupremeChallengeActions } from './supreme-challenge/SupremeChallengeActions';
 import { SupremeChallengeCountdown } from './supreme-challenge/SupremeChallengeCountdown';
 import { useSupremeChallengeLogic } from './supreme-challenge/SupremeChallengeLogic';
-
 export function SupremeChallengeCard() {
   const {
     showSupremeModal,
@@ -26,8 +24,7 @@ export function SupremeChallengeCard() {
 
   // Show victory modal after winning
   if (hasWonBefore) {
-    return (
-      <div className="relative group transition-all duration-500 hover:scale-[1.02] md:-mt-4 lg:-mt-6">
+    return <div className="relative group transition-all duration-500 hover:scale-[1.02] md:-mt-4 lg:-mt-6">
         {/* Gradient Border Effect */}
         <div className="absolute inset-0 bg-gradient-to-br from-yellow-300 via-orange-400 to-yellow-300 rounded-3xl blur-sm opacity-70 group-hover:opacity-100 transition-opacity duration-300 animate-pulse"></div>
         
@@ -130,12 +127,9 @@ export function SupremeChallengeCard() {
 
         {/* Supreme Challenge Modal */}
         <SupremeChallengeModal isOpen={showSupremeModal} onClose={handleCloseSupremeModal} onVictory={handleVictory} onChallengeEnd={handleChallengeEnd} questions={challengeQuestions} />
-      </div>
-    );
+      </div>;
   }
-
-  return (
-    <div className="relative group transition-all duration-500 hover:scale-[1.02] md:-mt-4 lg:-mt-6">
+  return <div className="relative group transition-all duration-500 hover:scale-[1.02] md:-mt-4 lg:-mt-6">
       {/* Gradient Border Effect */}
       <div className="absolute inset-0 bg-gradient-to-br from-red-300 via-red-400 to-red-300 rounded-3xl blur-sm opacity-70 group-hover:opacity-100 transition-opacity duration-300"></div>
       
@@ -160,7 +154,7 @@ export function SupremeChallengeCard() {
 
           {/* Plan Name and Description */}
           <CardTitle className="text-2xl lg:text-3xl font-bold mb-2 lg:mb-3 text-white">DESAFIO SUPREMO</CardTitle>
-          <CardDescription className="text-base lg:text-lg font-medium text-zinc-200">
+          <CardDescription className="text-base lg:text-lg font-medium text-zinc-300">
             Acerte 10 questões oficiais e ganhe o plano Premium pelo preço do Básico!
           </CardDescription>
 
@@ -183,13 +177,7 @@ export function SupremeChallengeCard() {
 
           {/* Action Button */}
           <div className="mt-auto">
-            <SupremeChallengeActions 
-              hasWonBefore={hasWonBefore} 
-              canStartChallenge={canStartChallenge} 
-              onStartChallenge={handleStartChallenge} 
-              onResetAttempts={resetAttempts}
-              attemptsLeft={attemptsLeft}
-            />
+            <SupremeChallengeActions hasWonBefore={hasWonBefore} canStartChallenge={canStartChallenge} onStartChallenge={handleStartChallenge} onResetAttempts={resetAttempts} attemptsLeft={attemptsLeft} />
           </div>
         </CardContent>
 
@@ -199,6 +187,5 @@ export function SupremeChallengeCard() {
 
       {/* Supreme Challenge Modal */}
       <SupremeChallengeModal isOpen={showSupremeModal} onClose={handleCloseSupremeModal} onVictory={handleVictory} onChallengeEnd={handleChallengeEnd} questions={challengeQuestions} />
-    </div>
-  );
+    </div>;
 }

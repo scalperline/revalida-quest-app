@@ -8,6 +8,7 @@ import { SupremeChallengeStats } from './supreme-challenge/SupremeChallengeStats
 import { SupremeChallengeFeatures } from './supreme-challenge/SupremeChallengeFeatures';
 import { SupremeChallengeActions } from './supreme-challenge/SupremeChallengeActions';
 import { useSupremeChallengeLogic } from './supreme-challenge/SupremeChallengeLogic';
+
 export function SupremeChallengeCard() {
   const {
     showSupremeModal,
@@ -153,7 +154,7 @@ export function SupremeChallengeCard() {
       </div>
       
       <Card className="relative bg-white/95 dark:bg-gray-900/95 backdrop-blur-xl border-0 rounded-3xl shadow-2xl overflow-hidden min-h-[600px] lg:min-h-[650px] flex flex-col shadow-red-500/20 ring-2 ring-red-200/50">
-        <CardHeader className="text-center pb-4 pt-8 px-6 lg:px-8 flex-shrink-0 bg-orange-950">
+        <CardHeader className="text-center pb-4 pt-8 px-6 lg:px-8 flex-shrink-0 bg-red-950">
           {/* Icon with enhanced gradient */}
           <div className="w-16 h-16 lg:w-20 lg:h-20 mx-auto mb-4 lg:mb-6 bg-gradient-to-br from-red-600 to-red-700 rounded-2xl flex items-center justify-center shadow-2xl relative overflow-hidden group-hover:scale-110 transition-transform duration-300">
             <div className="absolute inset-0 bg-gradient-to-tr from-white/20 to-transparent bg-gradient-to-r from-yellow-500 to-orange-600 animate-pulse"></div>
@@ -175,7 +176,7 @@ export function SupremeChallengeCard() {
           </div>
         </CardHeader>
 
-        <CardContent className="lg:px-8 pb-6 lg:pb-8 flex-1 flex flex-col px-[25px] bg-orange-950">
+        <CardContent className="lg:px-8 pb-6 lg:pb-8 flex-1 flex flex-col px-[25px] bg-red-950">
           {/* Challenge Stats */}
           <SupremeChallengeStats attemptsLeft={attemptsLeft} />
 

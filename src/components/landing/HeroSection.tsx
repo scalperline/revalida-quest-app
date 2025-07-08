@@ -27,7 +27,7 @@ export function HeroSection() {
             <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent">
               O Banco de Questões Oficiais do
             </span>{" "}
-            <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent text-4xl">Revalida INEP</span>
+            <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent">Revalida INEP</span>
           </h1>
 
           {/* Subtitle */}

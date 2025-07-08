@@ -76,7 +76,7 @@ export function HeroSection() {
                 <span className="bg-gradient-to-r from-yellow-900 to-orange-800 bg-clip-text text-transparent font-extrabold">
                   Desafio Surpresa
                 </span>
-                <Sparkles className="w-5 h-5 ml-2 text-yellow-900 animate-spin" />
+                <span className="w-5 h-5 ml-2 text-yellow-900">🥇</span>
               </div>
               
               {/* Shine effect */}

@@ -1,73 +1,56 @@
 
-import { useGamificationSupabase } from './useGamificationSupabase';
-import { useGamificationState } from './useGamificationState';
-import { useGamificationAchievements } from './useGamificationAchievements';
-import { useGamificationActions } from './useGamificationActions';
-import { useAuth } from './useAuth';
+import { useGamificationCore } from './useGamificationCore';
 
 // Re-export types for backward compatibility
 export type { Achievement, Quest, MedicalCard, UserProgress } from '@/types/gamification';
 
 export function useGamification() {
-  const { user } = useAuth();
-  
-  // Use Supabase integration if user is logged in, otherwise use local state
-  const supabaseGamification = useGamificationSupabase();
-  const { userProgress: localProgress, setUserProgress } = useGamificationState();
-  
   const {
+    user,
+    userProgress,
+    loading,
+    supabaseGamification,
+    setUserProgress,
     unlockAchievement,
     checkAchievements,
     getNewlyUnlockedAchievement,
-    clearNewlyUnlockedAchievement
-  } = useGamificationAchievements(
-    user ? supabaseGamification.userProgress : localProgress, 
-    setUserProgress
-  );
-
-  const {
-    resetStats: localResetStats,
-    answerQuestion: baseAnswerQuestion,
-    completeSimulado: baseCompleteSimulado,
-    getAccuracy: localGetAccuracy,
-    getProgressPercentage: localGetProgressPercentage,
+    clearNewlyUnlockedAchievement,
+    localResetStats,
+    baseAnswerQuestion,
+    localGetAccuracy,
+    localGetProgressPercentage,
     getStreakBonus,
+    localGetAdvancedStats,
+    localGetStudyGoals,
     generateQuestSuggestions
-  } = useGamificationActions(
-    user ? supabaseGamification.userProgress : localProgress, 
-    setUserProgress, 
-    checkAchievements
-  );
-
-  // Use Supabase methods if user is logged in
-  const userProgress = user ? supabaseGamification.userProgress : localProgress;
-  const loading = user ? supabaseGamification.loading : false;
+  } = useGamificationCore();
   
-  const answerQuestion = (correct: boolean, area?: string, questionId?: number) => {
-    console.log('useGamification.answerQuestion called:', { correct, area, questionId, user: !!user });
+  const answerQuestion = (correct: boolean, area?: string, questionId?: number, difficulty: 'easy' | 'medium' | 'hard' = 'medium') => {
+    console.log('useGamification.answerQuestion called:', { correct, area, questionId, difficulty, user: !!user });
     
     if (user) {
       // Use Supabase for logged-in users
-      supabaseGamification.answerQuestion(correct, area, questionId);
+      supabaseGamification.answerQuestion(correct, area, difficulty);
     } else {
       // Use local state for non-logged-in users
-      baseAnswerQuestion(correct, area);
+      baseAnswerQuestion(correct, area, difficulty);
     }
   };
 
-  const completeSimulado = (score: number, total: number) => {
-    console.log('useGamification.completeSimulado called:', { score, total, user: !!user });
+  // Remover completeSimulado do escopo, pois não é necessário para o reset de jornada
+  // const completeSimulado = (score: number, total: number) => {
+  //   console.log('useGamification.completeSimulado called:', { score, total, user: !!user });
     
-    if (user) {
-      supabaseGamification.completeSimulado(score, total);
-    } else {
-      baseCompleteSimulado(score, total);
-    }
+  //   if (user) {
+  //     supabaseGamification.completeSimulado(score, total);
+  //   } else {
+  //     baseCompleteSimulado(score, total);
+  //   }
     
-    if (score === total) {
-      unlockAchievement('sniper_gabarito');
-    }
-  };
+  //   if (score === total) {
+  //     unlockAchievement('sniper_gabarito');
+  //   }
+  // };
 
   const addXP = (points: number) => {
     console.log('useGamification.addXP called:', { points, user: !!user });
@@ -96,6 +79,38 @@ export function useGamification() {
     }
   };
 
+  const resetJornada = async () => {
+    if (user) {
+      await supabaseGamification.resetJornada();
+    } else {
+      // Para usuários não logados, zere o progresso local
+      setUserProgress({
+        level: 1,
+        xp: 0,
+        xpToNextLevel: 100,
+        totalQuestions: 0,
+        correctAnswers: 0,
+        streakDias: 0,
+        achievements: [],
+        newlyUnlockedAchievements: [],
+        quests: [],
+        medicalCards: [],
+        areaStats: {},
+        weeklyXP: 0,
+        monthlyXP: 0,
+        xpHistory: [],
+        periodStats: [],
+        studyGoals: [],
+        advancedStats: undefined,
+        currentCombo: 0,
+        maxCombo: 0,
+        totalStudyTime: 0,
+        lastXPBreakdown: undefined,
+        lastActivityDate: undefined
+      });
+    }
+  };
+
   const getAccuracy = () => {
     if (user) {
       return supabaseGamification.getAccuracy();
@@ -109,6 +124,22 @@ export function useGamification() {
       return supabaseGamification.getProgressPercentage();
     } else {
       return localGetProgressPercentage();
+    }
+  };
+
+  const getAdvancedStats = () => {
+    if (user) {
+      return supabaseGamification.getAdvancedStats();
+    } else {
+      return localGetAdvancedStats();
+    }
+  };
+
+  const getStudyGoals = () => {
+    if (user) {
+      return supabaseGamification.getStudyGoals();
+    } else {
+      return localGetStudyGoals();
     }
   };
 
@@ -129,7 +160,10 @@ export function useGamification() {
       xp: userProgress.xp,
       xpToNextLevel: userProgress.xpToNextLevel,
       totalQuestions: userProgress.totalQuestions,
-      correctAnswers: userProgress.correctAnswers
+      correctAnswers: userProgress.correctAnswers,
+      weeklyXP: userProgress.weeklyXP,
+      currentCombo: userProgress.currentCombo,
+      maxCombo: userProgress.maxCombo
     },
     loading
   });
@@ -137,18 +171,17 @@ export function useGamification() {
   return {
     userProgress,
     loading,
-    addXP,
     answerQuestion,
-    completeSimulado,
+    addXP,
+    resetStats,
+    resetJornada,
     getAccuracy,
     getProgressPercentage,
-    getNewlyUnlockedAchievement,
-    clearNewlyUnlockedAchievement,
+    getStreakBonus,
+    getAdvancedStats,
+    getStudyGoals,
     getNewlyUnlockedBadge,
     clearNewlyUnlockedBadge,
-    getStreakBonus,
-    generateQuestSuggestions,
-    resetStats,
-    unlockAchievement
+    generateQuestSuggestions
   };
 }

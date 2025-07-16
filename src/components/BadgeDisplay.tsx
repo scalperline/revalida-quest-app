@@ -4,6 +4,8 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Trophy, Lock, Star, Crown, Target, Award } from 'lucide-react';
 
+// Componente responsável por exibir os badges (conquistas) do usuário de forma visual e interativa.
+// Siga o padrão de nomenclatura: PascalCase para componentes.
 interface BadgeDisplayProps {
   achievement: Achievement;
   size?: 'sm' | 'md' | 'lg';

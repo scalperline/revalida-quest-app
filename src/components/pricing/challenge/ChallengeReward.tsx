@@ -40,10 +40,6 @@ export function ChallengeReward() {
           <Target className="w-5 h-5 md:w-6 md:h-6 text-green-400 flex-shrink-0" />
           <span className="text-green-200">Análises preditivas</span>
         </div>
-        <div className="flex items-center gap-3 md:gap-4 p-3 md:p-4 bg-gradient-to-r from-yellow-900/40 to-orange-900/40 rounded-xl border border-yellow-400/20">
-          <Trophy className="w-5 h-5 md:w-6 md:h-6 text-yellow-400 flex-shrink-0" />
-          <span className="text-yellow-200">Simulados ilimitados</span>
-        </div>
       </div>
     </div>
   );

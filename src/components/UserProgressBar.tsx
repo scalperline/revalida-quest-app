@@ -10,7 +10,7 @@ export function UserProgressBar() {
         <ProgressSection />
       </div>
       <div className="flex items-center gap-0.5 md:gap-1">
-        <UpgradeButton />
+        {/* <UpgradeButton /> */}
         <LogoutButton />
       </div>
     </div>

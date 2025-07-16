@@ -9,6 +9,7 @@ const corsHeaders = {
 };
 
 serve(async (req) => {
+  console.log('[create-checkout] Início da execução');
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
   }
@@ -58,5 +59,7 @@ serve(async (req) => {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
       status: 500,
     });
+  } finally {
+    console.log('[create-checkout] Fim da execução');
   }
 });

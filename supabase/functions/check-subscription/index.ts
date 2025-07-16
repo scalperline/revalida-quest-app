@@ -25,6 +25,7 @@ serve(async (req) => {
   );
 
   try {
+    console.log('[check-subscription] Início da execução');
     logStep("Function started");
 
     const stripeKey = Deno.env.get("STRIPE_SECRET_KEY");
@@ -122,5 +123,7 @@ serve(async (req) => {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
       status: 500,
     });
+  } finally {
+    console.log('[check-subscription] Fim da execução');
   }
 });

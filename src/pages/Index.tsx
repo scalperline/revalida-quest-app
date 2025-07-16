@@ -1,6 +1,5 @@
 import { useAuth } from "@/hooks/useAuth";
 import { Navbar } from "@/components/Navbar";
-import { QuickChallenge } from "@/components/QuickChallenge";
 import { QuestsPanel } from "@/components/QuestsPanel";
 import { AdaptiveSuggestions } from "@/components/AdaptiveSuggestions";
 import { StreakDisplay } from "@/components/StreakDisplay";
@@ -8,6 +7,24 @@ import { BadgesGrid } from "@/components/BadgesGrid";
 import { UsageLimitsCard } from "@/components/UsageLimitsCard";
 import { useGamification } from "@/hooks/useGamification";
 import { BookOpen, Target, TrendingUp, Stethoscope, Sparkles, Zap } from "lucide-react";
+import { StatCard } from "@/components/StatCard";
+import { GreetingSection } from "@/components/GreetingSection";
+import { MissaoSurpresaInepCard } from '@/components/MissaoSurpresaInepCard';
+import { JornadaMissionModal } from '@/components/JornadaMissionModal';
+import { Question } from '@/types/question';
+import { useState } from 'react';
+import { CongratsCard } from '@/components/CongratsCard';
+import { QUESTOES_REVALIDA_2011 } from '@/data/questoesRevalida2011';
+import { QUESTOES_REVALIDA_2012 } from '@/data/questoesRevalida2012';
+import { QUESTOES_REVALIDA_2013 } from '@/data/questoesRevalida2013';
+import { QUESTOES_REVALIDA_2014 } from '@/data/questoesRevalida2014';
+import { QUESTOES_REVALIDA_2015 } from '@/data/questoesRevalida2015';
+import { QUESTOES_REVALIDA_2020 } from '@/data/questoesRevalida2020';
+import { QUESTOES_REVALIDA_2021 } from '@/data/questoesRevalida2021';
+import { QUESTOES_REVALIDA_2022_1 } from '@/data/questoesRevalida2022_1';
+import { QUESTOES_REVALIDA_2022_2 } from '@/data/questoesRevalida2022_2';
+import { QUESTOES_REVALIDA_2023_1 } from '@/data/questoesRevalida2023_1';
+// Adicione outros anos conforme necessário
 const Index = () => {
   const {
     user
@@ -17,6 +34,81 @@ const Index = () => {
   } = useGamification();
   const handleQuickChallengeStart = () => {
     console.log("Quick challenge started");
+  };
+  // Missão Surpresa INEP state
+  const [showMissaoSurpresa, setShowMissaoSurpresa] = useState(false);
+  const [surpresaAnswers, setSurpresaAnswers] = useState<Record<string, string>>({});
+  const [surpresaCurrentIndex, setSurpresaCurrentIndex] = useState(0);
+  const [surpresaQuestions, setSurpresaQuestions] = useState<Question[]>([]);
+  const [showCongrats, setShowCongrats] = useState(false);
+  const [surpresaResult, setSurpresaResult] = useState<any>(null);
+
+  // Dados da missão surpresa
+  const missaoSurpresa = {
+    nivel: 99,
+    questoes: 5,
+    xp: 75,
+    timerPorQuestao: 2, // minutos
+    title: 'Missão Surpresa INEP',
+    badge: 'Desbravador INEP',
+    nomeExibicao: 'Missão Surpresa',
+  };
+
+  // Função para sortear 5 questões aleatórias do banco oficial (exemplo simplificado)
+  function getRandomQuestions(): Question[] {
+    const allQuestions = [
+      ...QUESTOES_REVALIDA_2011,
+      ...QUESTOES_REVALIDA_2012,
+      ...QUESTOES_REVALIDA_2013,
+      ...QUESTOES_REVALIDA_2014,
+      ...QUESTOES_REVALIDA_2015,
+      ...QUESTOES_REVALIDA_2020,
+      ...QUESTOES_REVALIDA_2021,
+      ...QUESTOES_REVALIDA_2022_1,
+      ...QUESTOES_REVALIDA_2022_2,
+      ...QUESTOES_REVALIDA_2023_1,
+      // ...adicione outros anos aqui
+    ];
+    // Shuffle simples (Fisher-Yates)
+    for (let i = allQuestions.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [allQuestions[i], allQuestions[j]] = [allQuestions[j], allQuestions[i]];
+    }
+    return allQuestions.slice(0, 5);
+  }
+
+  const handleStartMissaoSurpresa = () => {
+    setSurpresaQuestions(getRandomQuestions());
+    setSurpresaAnswers({});
+    setSurpresaCurrentIndex(0);
+    setShowMissaoSurpresa(true);
+    setShowCongrats(false);
+  };
+
+  const handleCloseMissaoSurpresa = () => {
+    setShowMissaoSurpresa(false);
+  };
+
+  const handleAnswerSurpresa = (optionId: string) => {
+    const q = surpresaQuestions[surpresaCurrentIndex];
+    setSurpresaAnswers((prev) => ({ ...prev, [q.id]: optionId }));
+  };
+
+  const handleNextSurpresa = () => {
+    setSurpresaCurrentIndex((idx) => idx + 1);
+  };
+
+  const handleFinishSurpresa = () => {
+    setShowMissaoSurpresa(false);
+    // Calcular resultado
+    const correct = surpresaQuestions.filter(q => surpresaAnswers[q.id] === q.correct).length;
+    setSurpresaResult({
+      total: surpresaQuestions.length,
+      correct,
+      xp: missaoSurpresa.xp,
+      badge: missaoSurpresa.badge,
+    });
+    setShowCongrats(true);
   };
   return <div className="min-h-screen bg-gradient-to-br from-blue-50 via-blue-100 to-blue-200 dark:from-gray-900 dark:to-gray-800 relative overflow-hidden">
       {/* Enhanced Animated Background Elements - Responsive */}
@@ -31,37 +123,14 @@ const Index = () => {
 
       <Navbar />
       
-      <main className="relative z-10 pt-16 sm:pt-20 lg:pt-24 pb-6 sm:pb-8">
+      <main className="relative z-10 pt-24 sm:pt-28 pb-6 sm:pb-8">
         <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 xl:px-8">
-          {/* Enhanced Hero Section - Fully Responsive */}
-          <div className="text-center mb-6 sm:mb-8 lg:mb-12 relative">
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-100/50 to-transparent rounded-3xl blur-3xl"></div>
-            <div className="relative z-10 p-3 sm:p-4 lg:p-6 xl:p-8">
-              <h1 className="text-lg xs:text-xl sm:text-2xl md:text-3xl xl:text-5xl font-bold text-gray-900 mb-3 sm:mb-4 lg:mb-6 leading-tight px-2 sm:px-4 lg:text-4xl">
-                Bem-vindo ao{" "}
-                <span className="gradient-text bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent animate-pulse font-bold text-4xl">
-                  RevalidaQuest
-                </span>
-                , {user?.user_metadata?.display_name || 'Doutor'}! 
-                <span className="inline-block animate-bounce ml-1 sm:ml-2 text-lg">👋</span>
-              </h1>
-              
-              <p className="text-xs xs:text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-gray-600 max-w-sm xs:max-w-md sm:max-w-2xl lg:max-w-3xl xl:max-w-5xl mx-auto leading-relaxed px-2 sm:px-4 lg:px-6">
-                Sua jornada de preparação para o Revalida começa aqui. 
-                Pratique com questões oficiais, complete missões gamificadas e 
-                acompanhe seu progresso em tempo real.
-              </p>
-
-              {/* Motivational Badge - Responsive */}
-              <div className="mt-3 sm:mt-4 lg:mt-6 inline-flex items-center gap-1 sm:gap-2 bg-gradient-to-r from-green-100 to-emerald-100 border-2 border-green-200 rounded-full px-3 sm:px-4 py-1.5 sm:py-2 shadow-lg animate-fade-in">
-                <Target className="w-3 h-3 sm:w-4 sm:h-4 lg:w-5 lg:h-5 text-green-600 flex-shrink-0" />
-                <span className="text-xs sm:text-sm lg:text-base font-semibold text-green-800 whitespace-nowrap">
-                  Você está no nível {userProgress.level} com {userProgress.xp} XP!
-                </span>
-                <Sparkles className="w-3 h-3 sm:w-4 sm:h-4 text-green-600 animate-pulse flex-shrink-0" />
-              </div>
-            </div>
-          </div>
+          {/* Saudação e progresso */}
+          <GreetingSection
+            displayName={user?.user_metadata?.display_name || 'Doutor'}
+            level={userProgress.level}
+            xp={userProgress.xp}
+          />
 
           {/* Enhanced Quick Stats - Mobile First Responsive Grid */}
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 xs:gap-3 sm:gap-4 lg:gap-6 mb-6 sm:mb-8 lg:mb-12">
@@ -119,11 +188,9 @@ const Index = () => {
             {/* Left Column */}
             <div className="xl:col-span-2 space-y-4 sm:space-y-6 lg:space-y-8">
               <div className="animate-fade-in">
-                <QuickChallenge onStart={handleQuickChallengeStart} />
+                <MissaoSurpresaInepCard onStart={handleStartMissaoSurpresa} />
               </div>
-              <div className="animate-fade-in" style={{
-              animationDelay: '0.2s'
-            }}>
+              <div className="animate-fade-in" style={{ animationDelay: '0.2s' }}>
                 <AdaptiveSuggestions />
               </div>
             </div>
@@ -145,15 +212,33 @@ const Index = () => {
             }}>
                 <QuestsPanel />
               </div>
-              <div className="animate-fade-in" style={{
-              animationDelay: '0.5s'
-            }}>
-                <BadgesGrid achievements={userProgress.achievements} />
-              </div>
             </div>
           </div>
         </div>
       </main>
+      {showMissaoSurpresa && (
+        <JornadaMissionModal
+          isOpen={showMissaoSurpresa}
+          onClose={handleCloseMissaoSurpresa}
+          mission={missaoSurpresa}
+          questions={surpresaQuestions}
+          currentQuestionIndex={surpresaCurrentIndex}
+          answers={surpresaAnswers}
+          onAnswer={handleAnswerSurpresa}
+          onNext={handleNextSurpresa}
+          onFinish={handleFinishSurpresa}
+          nomeExibicao={missaoSurpresa.nomeExibicao}
+        />
+      )}
+      {showCongrats && surpresaResult && (
+        <CongratsCard
+          xp={surpresaResult.xp}
+          correct={surpresaResult.correct}
+          total={surpresaResult.total}
+          badge={surpresaResult.badge}
+          onClose={() => setShowCongrats(false)}
+        />
+      )}
     </div>;
 };
 export default Index;

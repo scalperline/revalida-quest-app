@@ -1,15 +1,19 @@
 
-import { Mission, MissionProgress } from '@/types/missions';
+import { Mission, MissionProgress, CustomMission } from '@/types/missions';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { Trophy, Target, Clock, Zap, CheckCircle, AlertTriangle, Calendar, Star, Flame, Sparkles } from 'lucide-react';
+import { useSubscription } from '@/hooks/useSubscription';
+import { useEffect, useState } from 'react';
+import { useMissions } from '@/hooks/useMissions';
+import { LimitReachedModal } from './LimitReachedModal';
 
 interface MissionCardProps {
-  mission: Mission;
+  mission: Mission | CustomMission;
   progress?: MissionProgress;
-  onStartMission: (mission: Mission) => void;
+  onStartMission: (mission: Mission | CustomMission) => void;
   availableQuestions?: number;
 }
 
@@ -22,6 +26,40 @@ export function MissionCard({ mission, progress, onStartMission, availableQuesti
   const hasEnoughQuestions = availableQuestions >= mission.targetQuestions;
   const isHighXP = mission.reward.xp >= 300;
   const isTrending = Math.random() > 0.7;
+
+  const { getFeatureLimit, isPremiumPlan } = useSubscription();
+  const { getMissionLimit, getMissionAttemptsThisMonth, tryStartMission } = useMissions();
+  const [attemptsUsed, setAttemptsUsed] = useState<number>(0);
+  const [attemptsLimit, setAttemptsLimit] = useState<number>(0);
+  const [loadingAttempts, setLoadingAttempts] = useState(true);
+  const [showLimitModal, setShowLimitModal] = useState(false);
+
+  useEffect(() => {
+    let mounted = true;
+    async function fetchAttempts() {
+      setLoadingAttempts(true);
+      const limit = getMissionLimit();
+      const used = await getMissionAttemptsThisMonth(mission.id);
+      if (mounted) {
+        setAttemptsLimit(limit);
+        setAttemptsUsed(used);
+        setLoadingAttempts(false);
+      }
+    }
+    fetchAttempts();
+    return () => { mounted = false; };
+  }, [mission.id, getMissionLimit, getMissionAttemptsThisMonth]);
+
+  const handleStart = async () => {
+    if (loadingAttempts) return;
+    const canStart = await tryStartMission(mission.id);
+    if (!canStart) {
+      setShowLimitModal(true);
+      return;
+    }
+    setAttemptsUsed(prev => prev + 1); // Otimista
+    onStartMission(mission);
+  };
 
   const getDifficultyColor = (difficulty: Mission['difficulty']) => {
     switch (difficulty) {
@@ -210,6 +248,15 @@ export function MissionCard({ mission, progress, onStartMission, availableQuesti
                 <span>Meta: {mission.targetAccuracy}%</span>
               </div>
             )}
+            {/* Tentativas restantes */}
+            <div className="mt-2 flex items-center gap-2">
+              <span className="text-xs font-medium text-blue-700">
+                {isPremiumPlan ? 'Tentativas ilimitadas' : `Tentativas restantes: ${attemptsUsed}/${attemptsLimit === 9999 ? '∞' : attemptsLimit}`}
+              </span>
+              {!isPremiumPlan && attemptsUsed >= attemptsLimit && attemptsLimit !== 9999 && (
+                <span className="text-xs text-orange-600 font-bold animate-pulse">Última tentativa!</span>
+              )}
+            </div>
           </div>
 
           {/* Rewards Section - Mobile Optimized */}
@@ -231,8 +278,8 @@ export function MissionCard({ mission, progress, onStartMission, availableQuesti
           {/* Action Button - Mobile Optimized */}
           {!mission.completed ? (
             <Button
-              onClick={() => onStartMission(mission)}
-              disabled={!hasEnoughQuestions}
+              onClick={handleStart}
+              disabled={!hasEnoughQuestions || loadingAttempts || (attemptsUsed >= attemptsLimit && attemptsLimit !== 9999)}
               className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white disabled:opacity-50 disabled:cursor-not-allowed border border-blue-500 shadow-lg hover:shadow-xl transition-all duration-200 font-bold py-3 text-sm sm:text-base"
             >
               <Target className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
@@ -253,7 +300,28 @@ export function MissionCard({ mission, progress, onStartMission, availableQuesti
             </div>
           )}
         </div>
+        {/* Tentativas de missão */}
+        <div className="p-3 sm:p-4 rounded-xl border-l-4 shadow-sm bg-gradient-to-r from-blue-50 to-indigo-50 border-blue-500">
+          <div className="flex items-center gap-2">
+            <Calendar className="w-4 h-4 text-blue-600" />
+            <span className="font-semibold text-blue-800 text-sm">Tentativas este mês:</span>
+            {loadingAttempts ? (
+              <span className="text-gray-400 text-xs ml-2">Carregando...</span>
+            ) : (
+              <span className="text-blue-700 font-bold ml-2">{attemptsUsed}/{attemptsLimit === 9999 ? '∞' : attemptsLimit}</span>
+            )}
+          </div>
+          {!loadingAttempts && attemptsUsed >= attemptsLimit && attemptsLimit !== 9999 && (
+            <p className="text-xs text-red-600 mt-1">Limite de tentativas atingido. Faça upgrade para mais tentativas!</p>
+          )}
+        </div>
       </CardContent>
+      {/* Modal de limite atingido */}
+      <LimitReachedModal 
+        open={showLimitModal} 
+        onClose={() => setShowLimitModal(false)} 
+        limitType="missions" 
+      />
     </Card>
   );
 }

@@ -6,3 +6,7 @@
 @import './styles/animations.css';
 @import './styles/mobile-menu.css';
 @import './styles/question-card.css';
+
+body.modal-missao-aberta .navbar, body.modal-missao-aberta nav {
+  display: none !important;
+}

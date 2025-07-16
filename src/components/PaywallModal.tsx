@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSubscription } from '@/hooks/useSubscription';
+import { useToast } from '@/hooks/use-toast';
 import {
   Dialog,
   DialogContent,
@@ -25,8 +26,9 @@ export function PaywallModal({ isOpen, onClose, feature, currentUsage, limit }: 
   const navigate = useNavigate();
   const { createCheckoutSession } = useSubscription();
   const [loading, setLoading] = useState<string | null>(null);
+  const { toast } = useToast();
 
-  const featureText = feature === 'questions' ? 'questões' : 'simulados';
+  const featureText = feature === 'questions' ? 'questões' : 'este mês';
   const period = feature === 'questions' ? 'hoje' : 'este mês';
 
   const plans = [
@@ -37,7 +39,7 @@ export function PaywallModal({ isOpen, onClose, feature, currentUsage, limit }: 
       priceId: 'price_revalida_basic_monthly',
       icon: Crown,
       color: 'from-blue-600 to-blue-700',
-      features: ['Questões ilimitadas', '5 simulados/mês', 'Análises básicas', 'Suporte email'],
+      features: ['Questões ilimitadas', '5 questões/mês', 'Análises básicas', 'Suporte email'],
       highlight: feature === 'questions'
     },
     {
@@ -47,7 +49,7 @@ export function PaywallModal({ isOpen, onClose, feature, currentUsage, limit }: 
       priceId: 'price_revalida_premium_monthly',
       icon: Sparkles,
       color: 'from-purple-600 to-purple-700',
-      features: ['Tudo do Basic', 'Simulados ilimitados', 'IA avançada', 'Relatórios PDF'],
+      features: ['Tudo do Basic', 'Questões ilimitadas', 'IA avançada', 'Relatórios PDF'],
       highlight: true,
       popular: true
     },
@@ -70,6 +72,11 @@ export function PaywallModal({ isOpen, onClose, feature, currentUsage, limit }: 
       window.location.href = checkoutUrl;
     } catch (error) {
       console.error('Error creating checkout session:', error);
+      toast({
+        title: 'Erro ao processar pagamento',
+        description: 'Não foi possível iniciar o checkout. Tente novamente ou entre em contato com o suporte.',
+        variant: 'destructive',
+      });
       navigate('/pricing');
     } finally {
       setLoading(null);

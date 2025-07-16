@@ -12,11 +12,11 @@ export function AuthStatsFooter() {
             <div className="text-gray-500 text-xs">Questões</div>
           </div>
           <div>
-            <div className="font-bold text-green-600 text-base">95%</div>
+            <div className="font-bold text-green-600 text-base">87%</div>
             <div className="text-gray-500 text-xs">Aprovação</div>
           </div>
           <div>
-            <div className="font-bold text-yellow-600 text-base">12k+</div>
+            <div className="font-bold text-yellow-600 text-base">11,2k</div>
             <div className="text-gray-500 text-xs">Médicos</div>
           </div>
         </div>

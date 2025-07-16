@@ -17,15 +17,18 @@ const plans = [
     priceId: null,
     checkoutUrl: null,
     features: [
-      '10 questões por dia',
-      '1 simulado por mês',
-      'Ranking básico',
-      'Estatísticas básicas'
+      '10 questões por dia por usuário',
+      '3 tentativas de missões por mês',
+      '3 simulados por mês',
+      'Acesso ao banco de questões oficiais',
+      'Estatísticas básicas',
     ],
     limitations: [
-      'Funcionalidades limitadas',
-      'Sem análises avançadas',
-      'Sem suporte prioritário'
+      'Não participa do ranking nacional',
+      'Sem análise de desempenho por IA',
+      'Sem exportação de PDF',
+      'Sem suporte prioritário',
+      'Funcionalidades limitadas'
     ],
     icon: Zap,
     color: 'from-slate-600 to-slate-700',
@@ -42,11 +45,17 @@ const plans = [
     checkoutUrl: 'https://buy.stripe.com/14AdR9g7R0ZOaAXaFq7ss01',
     features: [
       'Questões ilimitadas',
-      '5 simulados por mês',
-      'Análises básicas de desempenho',
-      'Ranking premium',
+      '10 tentativas de missões por mês',
+      '10 simulados por mês',
+      'Participa do ranking nacional',
       'Estatísticas detalhadas',
-      'Suporte por email'
+      'Suporte por email',
+    ],
+    limitations: [
+      'Sem análise de desempenho por IA',
+      'Sem exportação de PDF',
+      'Sem suporte prioritário',
+      'Sem acesso antecipado a novidades'
     ],
     icon: Crown,
     color: 'from-blue-600 to-blue-700',
@@ -62,15 +71,17 @@ const plans = [
     priceId: 'price_revalida_premium_monthly',
     checkoutUrl: 'https://buy.stripe.com/bJeaEX08TeQE38v8xi7ss02',
     features: [
-      'Tudo do plano Basic',
+      'Questões ilimitadas',
+      'Tentativas de missões ilimitadas',
       'Simulados ilimitados',
-      'IA avançada personalizada',
-      'Análises preditivas com IA',
+      'Participa do ranking nacional',
+      'Análise de desempenho por IA',
       'Sugestões inteligentes de estudo',
-      'Exportação de relatórios PDF',
+      'Estatísticas detalhadas e avançadas',
       'Suporte prioritário',
-      'Acesso antecipado a funcionalidades'
+      'Acesso antecipado a funcionalidades',
     ],
+    limitations: [],
     icon: Sparkles,
     color: 'from-purple-600 to-indigo-600',
     borderGradient: 'from-purple-300 via-pink-300 to-purple-300',
@@ -120,10 +131,8 @@ export function PricingPlansGrid({ subscribed, subscription_tier, loading }: Pri
   };
 
   return (
-    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 max-w-7xl mx-auto mb-16 px-4">
-      {/* Supreme Challenge Card - First Position */}
-      <SupremeChallengeCard />
-      
+    <div className="flex justify-center w-full">
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 max-w-5xl w-full mb-16 px-4 justify-center">
       {plans.map((plan, index) => {
         const Icon = plan.icon;
         const isCurrent = isCurrentPlan(plan.name);
@@ -256,6 +265,7 @@ export function PricingPlansGrid({ subscribed, subscription_tier, loading }: Pri
           </div>
         );
       })}
+      </div>
     </div>
   );
 }

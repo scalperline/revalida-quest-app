@@ -26,7 +26,7 @@ export function QuestionsHeader({
     <div className="max-w-6xl mx-auto w-full mb-8">
       <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-4">
         <h1 className="text-3xl font-bold text-foreground">
-          Questões do Revalida
+          Provas do Revalida
         </h1>
         <div className="flex items-center gap-4">
           <Select

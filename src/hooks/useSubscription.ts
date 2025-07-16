@@ -121,14 +121,19 @@ export function useSubscription() {
             .delete()
             .eq('id', record.id);
         }
-        
-        setUsageLimits(mostRecent);
+        setUsageLimits({
+          ...mostRecent,
+          monthly_simulados_used: mostRecent['monthly_simulados_used'] ?? 0
+        } as UsageLimits);
         console.log('Limite definido (após limpeza):', mostRecent);
         return;
       }
 
       if (allRecords && allRecords.length === 1) {
-        setUsageLimits(allRecords[0]);
+        setUsageLimits({
+          ...allRecords[0],
+          monthly_simulados_used: allRecords[0]['monthly_simulados_used'] ?? 0
+        } as UsageLimits);
         console.log('Limite definido (único registro):', allRecords[0]);
         return;
       }
@@ -152,7 +157,10 @@ export function useSubscription() {
       }
 
       console.log('Novo registro criado:', newRecord);
-      setUsageLimits(newRecord);
+      setUsageLimits({
+        ...newRecord,
+        monthly_simulados_used: newRecord['monthly_simulados_used'] ?? 0
+      } as UsageLimits);
       
     } catch (error) {
       console.error('Erro geral em fetchUsageLimits:', error);
@@ -207,7 +215,10 @@ export function useSubscription() {
         }
 
         console.log('✅ Primeiro registro criado:', created);
-        setUsageLimits(created);
+        setUsageLimits({
+          ...created,
+          monthly_simulados_used: created['monthly_simulados_used'] ?? 0
+        } as UsageLimits);
         return;
       }
 
@@ -241,7 +252,10 @@ export function useSubscription() {
       }
 
       console.log('✅ Registro atualizado com sucesso:', updated);
-      setUsageLimits(updated);
+      setUsageLimits({
+        ...updated,
+        monthly_simulados_used: updated['monthly_simulados_used'] ?? 0
+      } as UsageLimits);
       
     } catch (error) {
       console.error('❌ Erro geral em updateUsage:', error);
@@ -277,43 +291,67 @@ export function useSubscription() {
     }
   };
 
-  const getFeatureLimit = (feature: 'questions' | 'simulados'): { used: number; limit: number; unlimited: boolean } => {
+  const getFeatureLimit = (feature: 'questions' | 'simulados' | 'missions'): { used: number; limit: number; unlimited: boolean } => {
     if (!usageLimits) return { used: 0, limit: 0, unlimited: false };
 
-    const unlimited = subscriptionData.subscribed;
-    
+    const unlimited = subscriptionData.subscribed && (subscriptionData.subscription_tier === 'Premium' || subscriptionData.subscription_tier === 'Pro');
+    let limit = 3;
+    if (subscriptionData.subscribed) {
+      switch (subscriptionData.subscription_tier) {
+        case 'Basic':
+          limit = 10;
+          break;
+        case 'Premium':
+        case 'Pro':
+          limit = 9999; // Considerado ilimitado
+          break;
+      }
+    }
+
     if (feature === 'questions') {
       return {
         used: usageLimits.daily_questions_used || 0,
-        limit: 10,
-        unlimited
+        limit: 10, // Mantém padrão para questões
+        unlimited: unlimited
       };
-    } else {
-      // Simulados limits based on plan
-      let limit = 1; // Free plan
-      if (subscriptionData.subscribed) {
-        switch (subscriptionData.subscription_tier) {
-          case 'Basic':
-            limit = 5;
-            break;
-          case 'Premium':
-          case 'Pro':
-            return { used: usageLimits.monthly_simulados_used || 0, limit: 999, unlimited: true };
-        }
-      }
-      
+    } else if (feature === 'simulados') {
       return {
         used: usageLimits.monthly_simulados_used || 0,
         limit,
-        unlimited: subscriptionData.subscription_tier === 'Premium' || subscriptionData.subscription_tier === 'Pro'
+        unlimited
+      };
+    } else if (feature === 'missions') {
+      // Para missões, cada missão terá seu próprio contador, mas o limite é o mesmo por missão
+      return {
+        used: 0, // O controle por missão será feito no componente/hook de missão
+        limit,
+        unlimited
       };
     }
+    return { used: 0, limit: 0, unlimited: false };
   };
 
   useEffect(() => {
     checkSubscription();
     fetchUsageLimits();
   }, [checkSubscription, fetchUsageLimits]);
+
+  // Resetar contadores locais de missões e simulados personalizados ao renovar plano
+  useEffect(() => {
+    if (!usageLimits) return;
+    const lastReset = localStorage.getItem('last-usage-reset');
+    if (lastReset !== usageLimits.last_reset_date) {
+      // Resetar tentativas de simulados personalizados
+      localStorage.setItem('simulado-personalizado-attempts', '0');
+      // Resetar tentativas de todas as missões
+      Object.keys(localStorage).forEach(key => {
+        if (key.startsWith('mission-attempts-')) {
+          localStorage.setItem(key, '0');
+        }
+      });
+      localStorage.setItem('last-usage-reset', usageLimits.last_reset_date);
+    }
+  }, [usageLimits]);
 
   return {
     ...subscriptionData,

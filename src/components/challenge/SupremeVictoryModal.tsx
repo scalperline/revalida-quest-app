@@ -172,10 +172,6 @@ export function SupremeVictoryModal({
                   <Coins className="w-6 h-6 text-yellow-400" />
                   <span>Sistema de moedas permanente</span>
                 </div>
-                <div className="flex items-center gap-3">
-                  <Trophy className="w-6 h-6 text-orange-400" />
-                  <span>Simulados ilimitados</span>
-                </div>
               </div>
             </div>
           </div>

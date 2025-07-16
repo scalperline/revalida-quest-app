@@ -50,8 +50,8 @@ export default function Terms() {
 
       <Navbar />
       
-      <div className="relative z-10 container mx-auto px-4 pt-24 pb-8">
-        <div className="max-w-4xl mx-auto">
+      <div className="relative z-10 container mx-auto px-4 pt-24 sm:pt-28 pb-8">
+        <div className="max-w-3xl mx-auto">
           {/* Header with Back Button */}
           <div className="mb-8">
             <Link 

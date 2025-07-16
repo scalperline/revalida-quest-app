@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 interface LimitReachedModalProps {
   open: boolean;
   onClose: () => void;
-  limitType: 'questions' | 'simulados';
+  limitType: 'questions' | 'simulados' | 'missions';
 }
 
 export function LimitReachedModal({ open, onClose, limitType }: LimitReachedModalProps) {
@@ -15,10 +15,24 @@ export function LimitReachedModal({ open, onClose, limitType }: LimitReachedModa
 
   const handleUpgrade = () => {
     navigate('/pricing');
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'auto' });
+    }, 50);
     onClose();
   };
 
-  const isQuestions = limitType === 'questions';
+  let title = 'Limite Atingido';
+  let description = '';
+  if (limitType === 'questions') {
+    title = 'Limite Diário Atingido';
+    description = 'Você completou o máximo de 10 questões diárias no modo gratuito. Volte amanhã para continuar evoluindo ou desbloqueie acesso ilimitado agora.';
+  } else if (limitType === 'simulados') {
+    title = 'Limite de Simulados Atingido';
+    description = 'Você atingiu o limite de tentativas de simulados personalizados do seu plano. Faça upgrade para liberar tentativas ilimitadas e potencializar sua preparação!';
+  } else if (limitType === 'missions') {
+    title = 'Limite de Missões Atingido';
+    description = 'Você atingiu o limite de tentativas para esta missão no seu plano. Faça upgrade para liberar tentativas ilimitadas e conquistar mais recompensas!';
+  }
   
   return (
     <Dialog open={open} onOpenChange={onClose}>
@@ -26,26 +40,23 @@ export function LimitReachedModal({ open, onClose, limitType }: LimitReachedModa
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
             <AlertTriangle className="w-5 h-5 text-orange-500" />
-            Limite Atingido
+            {title}
           </DialogTitle>
           <DialogDescription>
-            {isQuestions 
-              ? "Você atingiu seu limite diário de 10 questões no plano gratuito."
-              : "Você atingiu seu limite mensal de 1 simulado no plano gratuito."
-            }
+            {description}
           </DialogDescription>
         </DialogHeader>
         
         <div className="space-y-4">
           <div className="bg-gradient-to-r from-blue-50 to-purple-50 p-4 rounded-lg border">
             <h3 className="font-semibold text-blue-800 mb-2">
-              Faça upgrade e tenha acesso ilimitado!
+              Desbloqueie o modo Premium e evolua sem limites:
             </h3>
-            <ul className="text-sm text-blue-700 space-y-1">
-              <li>✅ Questões ilimitadas por dia</li>
-              <li>✅ Simulados ilimitados por mês</li>
-              <li>✅ Relatórios avançados</li>
-              <li>✅ Suporte prioritário</li>
+            <ul className="text-sm text-blue-700 space-y-1 font-medium">
+              <li>🎯 Responda quantas questões quiser</li>
+              <li>🏆 Ranking avançado e conquistas exclusivas</li>
+              <li>📊 Estatísticas detalhadas e missões especiais</li>
+              <li>👑 Suporte prioritário</li>
             </ul>
           </div>
           
@@ -67,10 +78,7 @@ export function LimitReachedModal({ open, onClose, limitType }: LimitReachedModa
           </div>
           
           <p className="text-xs text-gray-500 text-center">
-            {isQuestions 
-              ? "Seus limites diários resetam a cada 24 horas"
-              : "Seus limites mensais resetam todo dia 1º"
-            }
+            Limite diário: renove sua energia amanhã ou evolua agora.
           </p>
         </div>
       </DialogContent>

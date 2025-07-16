@@ -79,3 +79,62 @@ BEGIN
   WHERE EXTRACT(day FROM now()) = 1; -- First day of month
 END;
 $function$;
+
+-- Tabela para registrar tentativas de missões por usuário
+CREATE TABLE public.mission_attempts (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE,
+  mission_id TEXT NOT NULL,
+  attempted_at TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
+-- Habilitar Row Level Security
+ALTER TABLE public.mission_attempts ENABLE ROW LEVEL SECURITY;
+
+-- Políticas de acesso para mission_attempts
+CREATE POLICY "select_own_mission_attempts" ON public.mission_attempts
+  FOR SELECT
+  USING (user_id = auth.uid());
+
+CREATE POLICY "insert_own_mission_attempts" ON public.mission_attempts
+  FOR INSERT
+  WITH CHECK (user_id = auth.uid());
+
+-- Função para contar tentativas de missão do usuário no mês atual
+CREATE OR REPLACE FUNCTION public.count_mission_attempts_this_month(user_id_input UUID, mission_id_input TEXT)
+RETURNS INTEGER
+LANGUAGE plpgsql
+AS $$
+DECLARE
+  attempts_count INTEGER;
+BEGIN
+  SELECT COUNT(*) INTO attempts_count
+  FROM public.mission_attempts
+  WHERE user_id = user_id_input
+    AND mission_id = mission_id_input
+    AND attempted_at >= date_trunc('month', now());
+  RETURN attempts_count;
+END;
+$$;
+
+-- Função para registrar nova tentativa de missão
+CREATE OR REPLACE FUNCTION public.register_mission_attempt(user_id_input UUID, mission_id_input TEXT)
+RETURNS VOID
+LANGUAGE plpgsql
+AS $$
+BEGIN
+  INSERT INTO public.mission_attempts (user_id, mission_id, attempted_at)
+  VALUES (user_id_input, mission_id_input, now());
+END;
+$$;
+
+-- Função para reset mensal de tentativas de missão (opcional, se quiser limpar ou auditar)
+-- CREATE OR REPLACE FUNCTION public.reset_monthly_mission_attempts()
+-- RETURNS void
+-- LANGUAGE plpgsql
+-- AS $function$
+-- BEGIN
+--   DELETE FROM public.mission_attempts
+--   WHERE attempted_at < date_trunc('month', now());
+-- END;
+-- $function$;

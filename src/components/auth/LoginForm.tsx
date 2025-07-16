@@ -75,7 +75,7 @@ export function LoginForm({
       
       <Button 
         type="submit" 
-        className="w-full h-10 medical-button-primary text-sm font-semibold"
+        className="w-full h-10 bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 text-white font-semibold rounded-lg shadow-lg hover:from-blue-700 hover:via-purple-700 hover:to-blue-900 transition-all duration-300 text-sm"
         disabled={isSubmitting || loading}
       >
         {isSubmitting || loading ? (

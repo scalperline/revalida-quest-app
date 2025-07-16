@@ -13,7 +13,7 @@ export function StatsControls({ onReset, hasAnyData }: StatsControlsProps) {
   }
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-2xl p-4 border border-blue-100 dark:border-gray-700 shadow-xl mb-8">
+    <div className="border-0 shadow-2xl bg-gradient-to-br from-blue-50 via-purple-50 to-white dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 rounded-3xl p-4 mb-8">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <Settings2 className="w-5 h-5 text-blue-600" />

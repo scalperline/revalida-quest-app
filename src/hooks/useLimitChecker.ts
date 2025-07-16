@@ -2,12 +2,14 @@
 import { useSubscription } from './useSubscription';
 import { useToast } from './use-toast';
 import { useState } from 'react';
+import { useMissions } from './useMissions';
 
 export function useLimitChecker() {
   const { canUseFeature, updateUsage, getFeatureLimit } = useSubscription();
   const { toast } = useToast();
   const [showLimitModal, setShowLimitModal] = useState(false);
-  const [limitType, setLimitType] = useState<'questions' | 'simulados'>('questions');
+  const [limitType, setLimitType] = useState<'questions' | 'simulados' | 'missions'>('questions');
+  const { getMissionLimit, getMissionAttemptsThisMonth, registerMissionAttempt } = useMissions();
 
   const checkQuestionLimit = async (): Promise<boolean> => {
     console.log('=== VERIFICANDO LIMITE DE QUESTÕES ===');
@@ -57,6 +59,22 @@ export function useLimitChecker() {
     return true;
   };
 
+  const checkMissionLimit = async (missionId: string): Promise<boolean> => {
+    const limit = getMissionLimit();
+    const attempts = await getMissionAttemptsThisMonth(missionId);
+    if (attempts >= limit) {
+      toast({
+        title: 'Limite de tentativas de missão atingido',
+        description: `Você já utilizou ${attempts}/${limit} tentativas para esta missão neste mês. Faça upgrade para mais tentativas!`,
+        variant: 'destructive',
+      });
+      setLimitType('missions');
+      setShowLimitModal(true);
+      return false;
+    }
+    return true;
+  };
+
   const incrementQuestionUsage = async () => {
     console.log('=== INCREMENTANDO CONTADOR DE QUESTÕES ===');
     try {
@@ -77,6 +95,15 @@ export function useLimitChecker() {
     }
   };
 
+  const incrementMissionUsage = async (missionId: string) => {
+    try {
+      await registerMissionAttempt(missionId);
+      console.log('✅ Tentativa de missão registrada');
+    } catch (error) {
+      console.error('❌ Erro ao registrar tentativa de missão:', error);
+    }
+  };
+
   const closeLimitModal = () => {
     setShowLimitModal(false);
   };
@@ -84,8 +111,10 @@ export function useLimitChecker() {
   return {
     checkQuestionLimit,
     checkSimuladoLimit,
+    checkMissionLimit,
     incrementQuestionUsage,
     incrementSimuladoUsage,
+    incrementMissionUsage,
     showLimitModal,
     limitType,
     closeLimitModal

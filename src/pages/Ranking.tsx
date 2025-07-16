@@ -1,211 +1,425 @@
 
-import { useState } from 'react';
 import { useRanking } from '@/hooks/useRanking';
 import { Navbar } from '@/components/Navbar';
-import { RankingPageHeader } from '@/components/RankingPageHeader';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Badge } from '@/components/ui/badge';
-import { Avatar, AvatarFallback } from '@/components/ui/avatar';
-import { Trophy, Crown, Star, Medal, Target, Calendar } from 'lucide-react';
+import { Trophy, TrendingUp, Crown, Medal, Star, User, ChevronRight, Zap, Award } from 'lucide-react';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { useState, useEffect } from 'react';
+import { GamifiedHeaderAlert } from '@/components/GamifiedHeaderAlert';
+import { PodiumCard } from '@/components/PodiumCard';
+import { useAuth } from '@/hooks/useAuth';
+import { RankingUtils } from '@/utils/rankingUtils';
+import { RankingIcons } from '@/components/RankingIcons';
 import {
-  Pagination,
-  PaginationContent,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-} from '@/components/ui/pagination';
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogClose
+} from '@/components/ui/dialog';
+import { Badge } from '@/components/ui/badge';
+import { ProgressBar } from '@/components/ProgressBar';
+
+// Componente de background animado
+const AnimatedBackground = () => (
+  <div className="absolute inset-0 overflow-hidden pointer-events-none">
+    <div className="absolute -top-2 -right-2 sm:-top-4 sm:-right-4 w-8 h-8 sm:w-16 sm:h-16 lg:w-24 lg:h-24 bg-blue-400 rounded-full opacity-20 animate-bounce"></div>
+    <div className="absolute top-1/4 -left-2 sm:-left-4 w-6 h-6 sm:w-12 sm:h-12 lg:w-16 lg:h-16 bg-blue-500 rounded-full opacity-20 animate-pulse"></div>
+    <div className="absolute bottom-1/4 right-1/4 w-4 h-4 sm:w-8 sm:h-8 lg:w-12 lg:h-12 bg-blue-300 rounded-full opacity-20 animate-ping"></div>
+    <div className="absolute top-1/3 right-1/3 w-3 h-3 sm:w-6 sm:h-6 lg:w-8 lg:h-8 bg-blue-600 rounded-full opacity-20 animate-bounce delay-1000"></div>
+  </div>
+);
+
+// Componente de header da página
+const RankingHeader = () => (
+  <div className="flex flex-col items-center justify-center min-h-[30vh] text-center">
+    <h1 className="font-bold text-4xl sm:text-5xl bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent drop-shadow-lg mb-4 select-none leading-[1.15] pb-2">
+      Ranking Geral
+    </h1>
+    <GamifiedHeaderAlert icon={<span className='text-xl'>🏆</span>}>
+      Suba no ranking respondendo questões e complete desafios para ganhar XP!
+    </GamifiedHeaderAlert>
+  </div>
+);
+
+// Componente de pódio
+const RankingPodium = ({ podium }: any) => (
+  <div className="flex flex-col sm:flex-row justify-center items-center gap-6 sm:gap-4 md:gap-8 mb-10 mt-4 w-full">
+    {/* 1º lugar - central no desktop, topo no mobile */}
+    <div className="order-1 sm:order-2 flex flex-1 justify-center max-w-xs" style={{ zIndex: 2 }}>
+      {podium[0] && (
+        <PodiumCard
+          position={1}
+          name={podium[0].display_name}
+          avatarUrl={podium[0].avatar_url}
+          level={RankingUtils.getLevelTitle(podium[0].level)}
+          score={podium[0].total_xp}
+          accuracy={RankingUtils.getAccuracy(podium[0])}
+        />
+      )}
+    </div>
+    
+    {/* 2º lugar - esquerda no desktop, meio no mobile */}
+    <div className="order-2 sm:order-1 flex flex-1 justify-center max-w-xs">
+      {podium[1] && (
+        <PodiumCard
+          position={2}
+          name={podium[1].display_name}
+          avatarUrl={podium[1].avatar_url}
+          level={RankingUtils.getLevelTitle(podium[1].level)}
+          score={podium[1].total_xp}
+          accuracy={RankingUtils.getAccuracy(podium[1])}
+        />
+      )}
+    </div>
+    
+    {/* 3º lugar - direita no desktop, baixo no mobile */}
+    <div className="order-3 sm:order-3 flex flex-1 justify-center max-w-xs">
+      {podium[2] && (
+        <PodiumCard
+          position={3}
+          name={podium[2].display_name}
+          avatarUrl={podium[2].avatar_url}
+          level={RankingUtils.getLevelTitle(podium[2].level)}
+          score={podium[2].total_xp}
+          accuracy={RankingUtils.getAccuracy(podium[2])}
+        />
+      )}
+    </div>
+  </div>
+);
+
+// Componente de status de atualização
+const UpdateStatus = () => (
+  <div className="flex items-center justify-center gap-2 text-xs text-blue-700 mb-4">
+    <TrendingUp className="w-4 h-4" />
+    <span>Atualizado em tempo real</span>
+  </div>
+);
+
+// Componente de mensagem motivacional
+const MotivationalMessage = ({ message }: { message: string }) => (
+  <div className="my-6 p-4 rounded-xl bg-gradient-to-r from-green-100 to-blue-100 text-green-900 font-semibold text-center shadow-lg border border-green-200">
+    {message}
+  </div>
+);
+
+// Componente de card de usuário para mobile
+const MobileUserCard = ({ userItem, isLoggedUser, isTop3, movement, setSelectedUser, setOpenProfile }: any) => {
+  const { XpIcon, ArrowUp, ArrowDown, PodiumIcon, LevelBadgeIcon } = RankingIcons;
+  
+  return (
+    <div
+      key={userItem.id}
+      className={`relative rounded-2xl shadow-lg px-4 py-3 flex items-center gap-3 transition-all duration-300 ring-0 ring-offset-0 hover:scale-105 hover:shadow-xl hover:ring-2 hover:ring-yellow-300 active:scale-98 cursor-pointer`}
+      style={{
+        background: 'linear-gradient(135deg, #3b82f6 0%, #2563eb 60%, #7c3aed 100%)',
+        borderRadius: '20px',
+        boxShadow: '0 6px 32px 0 rgba(30, 64, 175, 0.10)',
+      }}
+    >
+      {/* Posição */}
+      <div className="flex flex-col items-center w-8">
+        <div
+          className={`w-8 h-8 flex items-center justify-center rounded-full font-extrabold text-base shadow-sm border-2
+            ${userItem.position === 1 ? 'bg-gradient-to-br from-yellow-300 to-yellow-500 text-yellow-900 border-yellow-400' :
+              userItem.position === 2 ? 'bg-gradient-to-br from-gray-200 to-gray-400 text-gray-800 border-gray-400' :
+              userItem.position === 3 ? 'bg-gradient-to-br from-orange-200 to-orange-400 text-orange-900 border-orange-400' :
+              'bg-blue-900 text-white border-blue-700'}
+          `}
+          style={{ letterSpacing: 1 }}
+          title={isTop3 ? `${userItem.position}º lugar` : undefined}
+        >
+          {isTop3 ? `${userItem.position}º` : userItem.position}
+        </div>
+      </div>
+
+      {/* Avatar */}
+      <Avatar
+        className="w-12 h-12 bg-white flex items-center justify-center"
+        style={{
+          borderRadius: '50%',
+          border: '2.5px solid transparent',
+          background: `#fff padding-box, ${RankingUtils.getAvatarBorderStyle(userItem, isTop3)} border-box`,
+          boxShadow: 'inset 0 1px 4px rgba(0,0,0,0.10)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+        onClick={() => { setSelectedUser(userItem); setOpenProfile(true); }}
+      >
+        {userItem.avatar_url ? (
+          <AvatarImage src={userItem.avatar_url} className="object-cover w-full h-full rounded-full" />
+        ) : (
+          <AvatarFallback className="text-gray-500 font-semibold text-lg" style={{ fontFamily: 'Poppins, Inter, sans-serif', letterSpacing: 1 }}>
+            {userItem.display_name.split(' ').map((n: string) => n[0]).join('').toUpperCase()}
+          </AvatarFallback>
+        )}
+      </Avatar>
+
+      {/* Conteúdo principal */}
+      <div className="flex-1 min-w-0 flex flex-col gap-1">
+        {/* Nome e badges */}
+        <div className="flex items-center gap-2">
+          <span className="text-lg font-bold text-white px-2 py-0.5 rounded-lg border-2 border-blue-300 shadow-sm bg-white/10" style={{ fontFamily: 'Inter, Montserrat, Poppins, sans-serif' }}>
+            {userItem.display_name}
+          </span>
+          
+          {/* Badge de título */}
+          {userItem.position === 1 && (
+            <span className="ml-1 px-2 py-0.5 rounded-full bg-gradient-to-r from-[#e7c873] to-[#bfa14a] text-white text-xs font-semibold shadow-sm border-none" style={{ fontFamily: 'Inter, Montserrat, Poppins, sans-serif' }}>
+              Mestre do Mês
+            </span>
+          )}
+          
+          {/* Indicador 'Você' */}
+          {isLoggedUser && (
+            <span className="ml-1 px-2 py-0.5 rounded-full bg-blue-100 text-blue-700 text-xs font-semibold border border-blue-300" style={{ fontFamily: 'Inter, Montserrat, Poppins, sans-serif' }}>
+              Você
+            </span>
+          )}
+        </div>
+
+        {/* XP e Nível */}
+        <div className="flex items-center gap-4 text-base text-gray-100 mt-1" style={{ fontFamily: 'Inter, Montserrat, Poppins, sans-serif' }}>
+          <span className="flex items-center gap-1">
+            <XpIcon />
+            <span className="font-bold">{userItem.total_xp} XP</span>
+          </span>
+          
+          <span className="flex items-center gap-1 border-l border-gray-700 pl-3">
+            <span className="font-bold">Nível:</span>
+            <span className="rounded-full bg-gradient-to-r from-yellow-600 to-yellow-400 text-white px-2 py-0.5 text-xs font-bold border-none shadow-sm">
+              {userItem.level}
+            </span>
+            
+            {/* Movimentação */}
+            {(movement.type === 'up' || movement.type === 'down') && (
+              <span className="ml-2 flex items-center gap-1 border-l border-gray-700 pl-3">
+                {movement.type === 'up' && <ArrowUp />}
+                {movement.type === 'down' && <span className="text-red-400"><ArrowDown /></span>}
+                <span>{movement.type === 'up' ? '+' : '-'}{movement.value}</span>
+              </span>
+            )}
+          </span>
+        </div>
+      </div>
+
+      {/* CTA */}
+      <ChevronRight className="w-5 h-5 text-white/60 absolute right-4 top-1/2 -translate-y-1/2 opacity-70 hover:opacity-100 transition" />
+    </div>
+  );
+};
+
+// Componente de tabela para desktop
+const DesktopRankingTable = ({ podium, others, user, setSelectedUser, setOpenProfile }: any) => {
+  const { ArrowUp, ArrowDown, PodiumIcon } = RankingIcons;
+  // Função para renderizar badges/conquistas rápidas (máx 2)
+  const renderBadges = (userItem: any) => {
+    if (!userItem.achievements || userItem.achievements.length === 0) return null;
+    return (
+      <div className="flex gap-1 ml-2">
+        {userItem.achievements.filter((a: any) => a.unlocked).slice(0,2).map((a: any) => (
+          <Badge key={a.id} variant="default" title={a.title} className="px-2 py-0.5 text-xs">
+            <span className="mr-1">{a.icon}</span>{a.title}
+          </Badge>
+        ))}
+      </div>
+    );
+  };
+  // Função para barra de progresso de XP
+  const renderXPBar = (userItem: any) => {
+    if (userItem.xpToNextLevel && userItem.level !== undefined) {
+      return (
+        <ProgressBar level={userItem.level} xp={userItem.total_xp} xpToNextLevel={userItem.xpToNextLevel} className="w-48 mx-auto" />
+      );
+    }
+    return null;
+  };
+  return (
+    <div className="hidden sm:flex w-full px-8 justify-start items-center min-h-[70vh]">
+      <div className="w-full max-w-6xl">
+        <table className="min-w-full rounded-2xl shadow-2xl text-xs sm:text-sm md:text-base border-separate border-spacing-y-2" style={{ background: 'linear-gradient(135deg, #f8fafc 60%, #e0e7ef 100%)' }}>
+          <thead>
+            <tr className="bg-gradient-to-r from-blue-200 via-purple-200 to-yellow-100 text-blue-900 text-left shadow-xl border-b-4 border-blue-300/40">
+              <th className="px-4 py-5 font-extrabold text-lg text-center tracking-wider drop-shadow-md select-none transition-all duration-300 group-hover:scale-105">
+                <span className="inline-flex items-center gap-1"><Trophy className="w-5 h-5 text-yellow-500 mr-1" />Ranking</span>
+              </th>
+              <th className="px-4 py-5 font-extrabold text-lg tracking-wider drop-shadow-md select-none transition-all duration-300 group-hover:scale-105">
+                <span className="inline-flex items-center gap-1"><Star className="w-5 h-5 text-purple-500 mr-1" />Nome</span>
+              </th>
+              <th className="px-4 py-5 font-extrabold text-lg text-center tracking-wider drop-shadow-md select-none transition-all duration-300 group-hover:scale-105">
+                <span className="inline-flex items-center gap-1"><Crown className="w-5 h-5 text-yellow-400 mr-1" />Nível</span>
+              </th>
+              <th className="px-4 py-5 font-extrabold text-lg text-center tracking-wider drop-shadow-md select-none transition-all duration-300 group-hover:scale-105">
+                <span className="inline-flex items-center gap-1"><Zap className="w-5 h-5 text-orange-400 mr-1" />XP</span>
+              </th>
+              <th className="px-4 py-5 font-extrabold text-lg text-center tracking-wider drop-shadow-md select-none transition-all duration-300 group-hover:scale-105">
+                <span className="inline-flex items-center gap-1"><TrendingUp className="w-5 h-5 text-green-500 mr-1" />Progresso</span>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {[...podium, ...others].map((userItem: any, idx: number) => {
+              const isLoggedUser = userItem.id === user?.id;
+              const isTop3 = userItem.position <= 3;
+              const movement = RankingUtils.simulateMovement(idx);
+              return (
+                <tr key={userItem.id}
+                  className={`transition-all duration-200 ${isLoggedUser ? 'bg-gradient-to-r from-blue-100 via-purple-100 to-yellow-50 ring-2 ring-blue-500 scale-[1.015] shadow-xl' : idx % 2 === 0 ? 'bg-white/80' : 'bg-blue-50/40'} ${isTop3 ? 'font-bold' : ''} hover:scale-[1.01] hover:shadow-2xl rounded-xl group`}
+                  style={{ borderRadius: 16 }}
+                  onClick={() => setSelectedUser && setOpenProfile && setSelectedUser(userItem) && setOpenProfile(true)}
+                >
+                  <td className="px-4 py-4 text-lg text-center">
+                    {isTop3 ? (
+                      <span
+                        className={`inline-flex items-center justify-center w-10 h-10 font-extrabold text-xl rounded-full shadow-md border-4 select-none
+                          ${userItem.position === 1 ? 'bg-gradient-to-br from-yellow-300 to-yellow-500 text-yellow-900 border-yellow-400' :
+                            userItem.position === 2 ? 'bg-gradient-to-br from-gray-200 to-gray-400 text-gray-800 border-gray-400' :
+                            'bg-gradient-to-br from-orange-200 to-orange-400 text-orange-900 border-orange-400'}
+                        `}
+                        style={{ letterSpacing: 1 }}
+                        title={`${userItem.position}º lugar`}
+                      >
+                        {userItem.position}º
+                      </span>
+                    ) : userItem.position}
+                  </td>
+                  <td className="px-6 py-4 min-w-[200px] flex items-center gap-2">
+                    <Avatar className="w-9 h-9 bg-white border border-blue-200 shadow-sm">
+                      {userItem.avatar_url ? (
+                        <AvatarImage src={userItem.avatar_url} className="object-cover w-full h-full rounded-full" />
+                      ) : (
+                        <AvatarFallback className="text-blue-700 font-bold text-base">
+                          {userItem.display_name.split(' ').map((n: string) => n[0]).join('').toUpperCase()}
+                        </AvatarFallback>
+                      )}
+                    </Avatar>
+                    <span className="font-bold text-blue-900 px-3 py-1 rounded-full bg-white/80 shadow-sm text-base group-hover:bg-blue-50 transition-colors duration-200" style={{ textShadow: '0 1px 4px #fff' }}>
+                      {userItem.display_name}
+                    </span>
+                    {isLoggedUser && (
+                      <Badge variant="outline" className="ml-2 border-blue-400 text-blue-700 animate-pulse">Você</Badge>
+                    )}
+                    {renderBadges(userItem)}
+                  </td>
+                  <td className="px-4 py-4 text-center">
+                    <span className="rounded-full bg-gradient-to-r from-blue-200 to-purple-200 text-blue-900 px-2 py-0.5 text-xs font-bold border border-blue-300 shadow-sm">
+                      {userItem.level}
+                    </span>
+                  </td>
+                  <td className="px-4 py-4 font-bold text-center">
+                    <span className="flex items-center gap-2 text-lg font-extrabold rounded-full bg-white/80 shadow px-4 py-1 text-yellow-700 justify-center">
+                      <span className="text-xl">⚡</span>
+                      {userItem.total_xp}
+                    </span>
+                  </td>
+                  <td className="px-4 py-4 text-center">
+                    {movement.type === 'up' && <span className="text-green-600 font-bold animate-bounce-up">↑ +{movement.value}</span>}
+                    {movement.type === 'down' && <span className="text-red-600 font-bold animate-bounce-down">↓ -{movement.value}</span>}
+                    {movement.type === 'same' && <span className="text-gray-400 font-bold">●</span>}
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+};
+
+// Componente de paginação
+const RankingPagination = ({ currentPage, totalPages, onPageChange }: any) => (
+  <div className="flex justify-center items-center gap-4 mt-8 mb-4">
+    <button
+      className={`flex items-center gap-2 px-4 py-2 rounded-lg border text-base font-medium transition disabled:opacity-50 disabled:cursor-not-allowed bg-white shadow-sm hover:bg-blue-50`}
+      onClick={() => onPageChange(currentPage - 1)}
+      disabled={currentPage <= 1}
+    >
+      <span className="text-xl">&#60;</span>
+      <span>Anterior</span>
+    </button>
+    
+    <span className="text-base font-semibold text-gray-700 select-none">
+      Página {currentPage} de {totalPages}
+    </span>
+    
+    <button
+      className={`flex items-center gap-2 px-4 py-2 rounded-lg border text-base font-medium transition disabled:opacity-50 disabled:cursor-not-allowed bg-white shadow-sm hover:bg-blue-50`}
+      onClick={() => onPageChange(currentPage + 1)}
+      disabled={currentPage >= totalPages}
+    >
+      <span>Próxima</span>
+      <span className="text-xl">&#62;</span>
+    </button>
+  </div>
+);
 
 export default function Ranking() {
   const {
     allTimeRanking,
-    weeklyRanking,
-    currentUserPosition,
     loading,
+    filters,
+    updateFilters,
     allTimeCurrentPage,
-    weeklyCurrentPage,
     setAllTimeCurrentPage,
-    setWeeklyCurrentPage,
     allTimeTotalPages,
-    weeklyTotalPages,
-    allTimeTotalCount,
-    weeklyTotalCount
+    refreshRankings,
   } = useRanking();
+  
+  const { user } = useAuth();
+  
+  // Estados organizados
+  const [selectedUser, setSelectedUser] = useState<any>(null);
+  const [openProfile, setOpenProfile] = useState(false);
+  const [userMovement, setUserMovement] = useState<'up' | 'down' | 'same' | null>(null);
 
-  const getRankIcon = (position: number) => {
-    if (position === 1) return <Crown className="w-6 h-6 text-yellow-500" />;
-    if (position === 2) return <Medal className="w-6 h-6 text-gray-400" />;
-    if (position === 3) return <Star className="w-6 h-6 text-amber-600" />;
-    return <Target className="w-5 h-5 text-blue-500" />;
-  };
+  // Dados organizados
+  const podium = allTimeRanking.slice(0, 3);
+  const others = allTimeRanking.slice(3, 10);
+  const loggedUserInRanking = allTimeRanking.find(u => u.id === user?.id);
+  const loggedUserInTop10 = [...podium, ...others].some(u => u.id === user?.id);
+  const showLoggedUserSeparately = user && loggedUserInRanking && !loggedUserInTop10;
 
-  const getRankColor = (position: number) => {
-    if (position === 1) return 'from-yellow-400 to-yellow-600';
-    if (position === 2) return 'from-gray-300 to-gray-500';
-    if (position === 3) return 'from-amber-400 to-amber-600';
-    return 'from-blue-400 to-blue-600';
-  };
+  // Mensagem motivacional
+  const motivationalMessage = RankingUtils.generateMotivationalMessage(loggedUserInRanking, allTimeRanking);
 
-  const getLevelTitle = (level: number) => {
-    if (level >= 20) return 'Mestre Cirurgião';
-    if (level >= 15) return 'Especialista';
-    if (level >= 10) return 'Residente Sênior';
-    if (level >= 5) return 'Interno Avançado';
-    return 'Estudante';
-  };
-
-  const RankingList = ({
-    data,
-    type
-  }: {
-    data: any[];
-    type: 'allTime' | 'weekly';
-  }) => {
-    const currentUser = data.find(user => {
-      return false;
-    });
+  // Efeitos organizados
+  useEffect(() => {
+    if (!user || !loggedUserInRanking) return;
     
-    return (
-      <div className="space-y-3">
-        {data.map((user, index) => {
-          const isCurrentUser = false;
+    const storageKey = `ranking_position_${user.id}`;
+    const prevPosition = Number(localStorage.getItem(storageKey));
+    
+    if (prevPosition) {
+      if (loggedUserInRanking.position < prevPosition) setUserMovement('up');
+      else if (loggedUserInRanking.position > prevPosition) setUserMovement('down');
+      else setUserMovement('same');
+    }
+    
+    localStorage.setItem(storageKey, String(loggedUserInRanking.position));
+  }, [user, loggedUserInRanking?.position]);
 
-          return (
-            <Card key={user.id} className={`transition-all duration-200 hover:shadow-md bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm border-2 border-blue-200/50 dark:border-blue-700/50 ${isCurrentUser ? 'ring-2 ring-blue-500 bg-gradient-to-r from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20' : ''}`}>
-              <CardContent className="p-4">
-                <div className="flex items-center gap-4">
-                  <div className={`w-12 h-12 rounded-full bg-gradient-to-r ${getRankColor(user.position)} flex items-center justify-center text-white font-bold text-lg shadow-lg`}>
-                    {user.position <= 3 ? getRankIcon(user.position) : `#${user.position}`}
-                  </div>
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (typeof refreshRankings === 'function') refreshRankings();
+    }, 30000);
+    return () => clearInterval(interval);
+  }, [refreshRankings]);
 
-                  <Avatar className="w-12 h-12 border-2 border-blue-200 dark:border-blue-700">
-                    <AvatarFallback className="bg-gradient-to-r from-blue-500 to-blue-600 text-white font-semibold">
-                      {user.display_name.split(' ').map(n => n[0]).join('').toUpperCase()}
-                    </AvatarFallback>
-                  </Avatar>
-
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2 mb-1">
-                      <h3 className="font-semibold text-gray-900 dark:text-white">
-                        {user.display_name}
-                      </h3>
-                      {isCurrentUser && (
-                        <Badge variant="secondary" className="bg-blue-100 text-blue-800 dark:bg-blue-900/50 dark:text-blue-200">
-                          Você
-                        </Badge>
-                      )}
-                    </div>
-                    <p className="text-sm text-gray-700 dark:text-gray-300">
-                      {getLevelTitle(user.level)} • Nível {user.level}
-                    </p>
-                  </div>
-
-                  <div className="text-right">
-                    <div className="text-2xl font-bold text-gray-900 dark:text-white">
-                      {type === 'allTime' ? user.total_xp : user.weekly_xp}
-                    </div>
-                    <div className="text-xs text-gray-600 dark:text-gray-400">
-                      XP {type === 'allTime' ? 'Total' : 'Semanal'}
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          );
-        })}
-      </div>
-    );
-  };
-
-  const RankingPagination = ({ 
-    currentPage, 
-    totalPages, 
-    onPageChange,
-    totalCount
-  }: { 
-    currentPage: number; 
-    totalPages: number; 
-    onPageChange: (page: number) => void;
-    totalCount: number;
-  }) => {
-    if (totalPages <= 1) return null;
-
-    return (
-      <div className="mt-6 flex flex-col items-center gap-4">
-        <p className="text-sm text-gray-600 dark:text-gray-400">
-          Mostrando {Math.min((currentPage - 1) * 10 + 1, totalCount)} - {Math.min(currentPage * 10, totalCount)} de {totalCount} usuários
-        </p>
-        
-        <Pagination>
-          <PaginationContent>
-            <PaginationItem>
-              <PaginationPrevious 
-                href="#"
-                onClick={(e) => {
-                  e.preventDefault();
-                  if (currentPage > 1) onPageChange(currentPage - 1);
-                }}
-                className={currentPage <= 1 ? 'pointer-events-none opacity-50' : 'cursor-pointer'}
-              />
-            </PaginationItem>
-            
-            {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
-              let pageNum;
-              if (totalPages <= 5) {
-                pageNum = i + 1;
-              } else if (currentPage <= 3) {
-                pageNum = i + 1;
-              } else if (currentPage >= totalPages - 2) {
-                pageNum = totalPages - 4 + i;
-              } else {
-                pageNum = currentPage - 2 + i;
-              }
-              
-              return (
-                <PaginationItem key={pageNum}>
-                  <PaginationLink
-                    href="#"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      onPageChange(pageNum);
-                    }}
-                    isActive={currentPage === pageNum}
-                    className="cursor-pointer"
-                  >
-                    {pageNum}
-                  </PaginationLink>
-                </PaginationItem>
-              );
-            })}
-            
-            <PaginationItem>
-              <PaginationNext
-                href="#"
-                onClick={(e) => {
-                  e.preventDefault();
-                  if (currentPage < totalPages) onPageChange(currentPage + 1);
-                }}
-                className={currentPage >= totalPages ? 'pointer-events-none opacity-50' : 'cursor-pointer'}
-              />
-            </PaginationItem>
-          </PaginationContent>
-        </Pagination>
-      </div>
-    );
+  // Handlers organizados
+  const handlePageChange = (newPage: number) => {
+    setAllTimeCurrentPage(newPage);
   };
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-blue-100 to-blue-200 dark:from-gray-900 dark:to-gray-800">
-        <Navbar />
-        <div className="container mx-auto px-4 pt-24 pb-8">
-          <div className="flex items-center justify-center min-h-[400px]">
-            <div className="text-center">
-              <Trophy className="w-16 h-16 text-blue-500 mx-auto mb-4 animate-pulse" />
-              <p className="text-lg text-gray-700 dark:text-gray-300">Carregando ranking...</p>
-            </div>
-          </div>
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-blue-100 to-blue-200 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600 mx-auto"></div>
+          <p className="mt-4 text-lg text-blue-700">Carregando ranking...</p>
         </div>
       </div>
     );
@@ -213,102 +427,108 @@ export default function Ranking() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-blue-100 to-blue-200 dark:from-gray-900 dark:to-gray-800 relative overflow-hidden">
-      {/* Animated Background Elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-4 -right-4 w-24 h-24 bg-blue-400 rounded-full opacity-20 animate-bounce"></div>
-        <div className="absolute top-1/4 -left-4 w-16 h-16 bg-blue-500 rounded-full opacity-20 animate-pulse"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-12 h-12 bg-blue-300 rounded-full opacity-20 animate-ping"></div>
-        <div className="absolute top-1/3 right-1/3 w-8 h-8 bg-blue-600 rounded-full opacity-20 animate-bounce delay-1000"></div>
-      </div>
+      <AnimatedBackground />
       
       <Navbar />
       
-      <div className="relative z-10 container mx-auto px-4 pt-24 pb-8">
-        <div className="max-w-4xl mx-auto">
-          <RankingPageHeader />
+      <main className="max-w-6xl mx-auto px-4 pt-20 pb-8 relative z-10">
+        <RankingHeader />
+        
+        <RankingPodium podium={podium} />
+        
+        <UpdateStatus />
+        
+        {motivationalMessage && (
+          <MotivationalMessage message={motivationalMessage} />
+        )}
 
-          <Tabs defaultValue="allTime" className="w-full">
-            <TabsList className="grid w-full grid-cols-2 mb-6 bg-blue-50 dark:bg-gray-700">
-              <TabsTrigger value="allTime" className="flex items-center gap-2 data-[state=active]:bg-blue-600 data-[state=active]:text-white font-normal text-lg">
-                <Trophy className="w-4 h-4" />
-                Ranking Geral
-              </TabsTrigger>
-              <TabsTrigger value="weekly" className="flex items-center gap-2 data-[state=active]:bg-blue-600 data-[state=active]:text-white font-normal text-lg">
-                <Calendar className="w-4 h-4" />
-                Ranking Semanal
-              </TabsTrigger>
-            </TabsList>
+        {/* Mobile Layout */}
+        <div className="block sm:hidden">
+          <div className="flex flex-col gap-3">
+            {[...podium, ...others].map((userItem: any, idx: number) => {
+              const isLoggedUser = userItem.id === user?.id;
+              const isTop3 = userItem.position <= 3;
+              const movement = RankingUtils.simulateMovement(idx);
+              
+              return (
+                <MobileUserCard
+                  key={userItem.id}
+                  userItem={userItem}
+                  isLoggedUser={isLoggedUser}
+                  isTop3={isTop3}
+                  movement={movement}
+                  setSelectedUser={setSelectedUser}
+                  setOpenProfile={setOpenProfile}
+                />
+              );
+            })}
             
-            <TabsContent value="allTime" className="space-y-6">
-              <Card className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm border-2 border-blue-200/50 dark:border-blue-700/50">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <Trophy className="w-6 h-6 text-yellow-500" />
-                    Top Estudantes - XP Total
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  {allTimeRanking.length > 0 ? (
-                    <>
-                      <RankingList data={allTimeRanking} type="allTime" />
-                      <RankingPagination
-                        currentPage={allTimeCurrentPage}
-                        totalPages={allTimeTotalPages}
-                        onPageChange={setAllTimeCurrentPage}
-                        totalCount={allTimeTotalCount}
-                      />
-                    </>
+            {/* Usuário logado fora do top 10 */}
+            {showLoggedUserSeparately && loggedUserInRanking && (
+              <div className="relative rounded-2xl shadow-lg px-4 py-3 flex items-center gap-3 ring-2 ring-blue-500 font-bold mt-2"
+                style={{
+                  background: 'linear-gradient(135deg, #3b82f6 0%, #2563eb 60%, #7c3aed 100%)',
+                  borderRadius: '20px',
+                  boxShadow: '0 4px 24px 0 rgba(30, 64, 175, 0.08)',
+                }}
+              >
+                <div className="flex flex-col items-center w-8">
+                  <div className="w-8 h-8 flex items-center justify-center rounded-full font-extrabold text-base shadow-sm border-2 bg-blue-900 text-white border-blue-700" style={{ letterSpacing: 1 }}>
+                    {loggedUserInRanking.position}
+                  </div>
+                </div>
+                
+                <Avatar className="w-12 h-12 border-4 border-blue-200 bg-white">
+                  {loggedUserInRanking.avatar_url ? (
+                    <AvatarImage src={loggedUserInRanking.avatar_url} />
                   ) : (
-                    <div className="text-center py-12">
-                      <Trophy className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-                      <h3 className="text-xl font-bold mb-2 text-gray-600 dark:text-gray-400">
-                        Nenhum estudante no ranking ainda
-                      </h3>
-                      <p className="text-gray-600 dark:text-gray-400">
-                        Seja o primeiro a aparecer no ranking!
-                      </p>
-                    </div>
+                    <AvatarFallback className="bg-gradient-to-r from-blue-500 to-purple-600 text-gray-500 font-semibold">
+                      {loggedUserInRanking.display_name.split(' ').map((n: string) => n[0]).join('').toUpperCase()}
+                    </AvatarFallback>
                   )}
-                </CardContent>
-              </Card>
-            </TabsContent>
-            
-            <TabsContent value="weekly" className="space-y-6">
-              <Card className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm border-2 border-blue-200/50 dark:border-blue-700/50">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <Calendar className="w-6 h-6 text-blue-600" />
-                    Top da Semana - XP Semanal
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  {weeklyRanking.length > 0 ? (
-                    <>
-                      <RankingList data={weeklyRanking} type="weekly" />
-                      <RankingPagination
-                        currentPage={weeklyCurrentPage}
-                        totalPages={weeklyTotalPages}
-                        onPageChange={setWeeklyCurrentPage}
-                        totalCount={weeklyTotalCount}
-                      />
-                    </>
-                  ) : (
-                    <div className="text-center py-12">
-                      <Calendar className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-                      <h3 className="text-xl font-bold mb-2 text-gray-600 dark:text-gray-400">
-                        Nenhum estudante no ranking semanal ainda
-                      </h3>
-                      <p className="text-gray-600 dark:text-gray-400">
-                        Comece a estudar para aparecer no ranking desta semana!
-                      </p>
-                    </div>
-                  )}
-                </CardContent>
-              </Card>
-            </TabsContent>
-          </Tabs>
+                </Avatar>
+                
+                <div className="flex-1 min-w-0 flex flex-col gap-1">
+                  <div className="font-bold text-blue-700 truncate text-base px-2 py-0.5 rounded-lg border-2 border-blue-300 shadow-sm bg-white/30">
+                    Você ({loggedUserInRanking.display_name})
+                  </div>
+                  <div className="flex items-center gap-4 text-sm mt-1">
+                    <span className="flex items-center gap-1">
+                      <Star className="w-4 h-4 text-yellow-400" />
+                      <span className="font-bold">{loggedUserInRanking.total_xp} XP</span>
+                    </span>
+                    <span className="flex items-center gap-1 border-l border-gray-200 pl-3">
+                      <span className="font-bold">Nível:</span>
+                      <span className="inline-flex items-center gap-1">
+                        <span className="rounded-full bg-gradient-to-r from-blue-200 to-purple-200 text-blue-900 px-2 py-0.5 text-xs font-bold border border-blue-300">
+                          {loggedUserInRanking.level}
+                        </span>
+                        <RankingIcons.LevelBadgeIcon level={loggedUserInRanking.level} />
+                      </span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
-      </div>
+
+        {/* Desktop Layout */}
+        <DesktopRankingTable 
+          podium={podium} 
+          others={others} 
+          user={user} 
+          setSelectedUser={setSelectedUser} 
+          setOpenProfile={setOpenProfile} 
+        />
+
+        {/* Paginação */}
+        <RankingPagination 
+          currentPage={allTimeCurrentPage}
+          totalPages={allTimeTotalPages}
+          onPageChange={handlePageChange}
+        />
+      </main>
     </div>
   );
 }

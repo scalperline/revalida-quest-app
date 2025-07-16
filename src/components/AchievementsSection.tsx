@@ -7,10 +7,7 @@ export function AchievementsSection() {
 
   return (
     <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 border border-blue-100 dark:border-gray-700 shadow-xl">
-      <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white flex items-center gap-3">
-        <Trophy className="w-6 h-6 text-yellow-500" />
-        Conquistas Acadêmicas
-      </h2>
+      {/* Título removido conforme solicitado */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {userProgress.achievements.map(achievement => (
           <div 

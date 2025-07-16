@@ -93,10 +93,6 @@ export function SupremeChallengeContent({
             </div>
             <div className="flex items-center justify-center sm:justify-start gap-3 p-3 bg-slate-800/50 rounded-xl border border-slate-700/50">
               <Target className="w-5 h-5 text-green-400 flex-shrink-0" />
-              <span className="text-white text-sm sm:text-base">Simulados ilimitados</span>
-            </div>
-            <div className="flex items-center justify-center sm:justify-start gap-3 p-3 bg-slate-800/50 rounded-xl border border-slate-700/50">
-              <Crown className="w-5 h-5 text-yellow-400 flex-shrink-0" />
               <span className="text-white text-sm sm:text-base">Suporte prioritário</span>
             </div>
           </div>

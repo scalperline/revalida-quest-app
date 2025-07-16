@@ -22,16 +22,14 @@ export function UsageMonitor() {
     if (!usageLimits) return;
 
     const questionsLimit = getFeatureLimit('questions');
-    const simuladosLimit = getFeatureLimit('simulados');
 
     // Check system health based on usage
     if (!subscribed) {
       const questionsUsage = (questionsLimit.used / questionsLimit.limit) * 100;
-      const simuladosUsage = (simuladosLimit.used / simuladosLimit.limit) * 100;
 
-      if (questionsUsage >= 100 || simuladosUsage >= 100) {
+      if (questionsUsage >= 100) {
         setSystemStatus('error');
-      } else if (questionsUsage >= 80 || simuladosUsage >= 80) {
+      } else if (questionsUsage >= 80) {
         setSystemStatus('warning');
       } else {
         setSystemStatus('healthy');
@@ -55,7 +53,6 @@ export function UsageMonitor() {
   }
 
   const questionsLimit = getFeatureLimit('questions');
-  const simuladosLimit = getFeatureLimit('simulados');
 
   const getStatusIcon = () => {
     switch (systemStatus) {
@@ -80,7 +77,7 @@ export function UsageMonitor() {
   };
 
   return (
-    <Card>
+    <Card className="border-0 shadow-2xl bg-gradient-to-br from-blue-50 via-purple-50 to-white dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 rounded-3xl">
       <CardHeader>
         <CardTitle className="flex items-center justify-between">
           <div className="flex items-center gap-2">
@@ -123,20 +120,6 @@ export function UsageMonitor() {
               className="h-2"
             />
           </div>
-
-          {/* Simulados Usage */}
-          <div className="space-y-2">
-            <div className="flex justify-between text-sm">
-              <span className="font-medium">Simulados (mês)</span>
-              <span className="text-gray-600">
-                {simuladosLimit.unlimited ? 'Ilimitado' : `${simuladosLimit.used}/${simuladosLimit.limit}`}
-              </span>
-            </div>
-            <Progress 
-              value={simuladosLimit.unlimited ? 100 : (simuladosLimit.used / simuladosLimit.limit) * 100}
-              className="h-2"
-            />
-          </div>
         </div>
 
         {/* Alerts */}
@@ -161,7 +144,7 @@ export function UsageMonitor() {
         {/* Usage Tips */}
         {!subscribed && (
           <div className="text-xs text-gray-500 space-y-1">
-            <p>• Limites resetam diariamente (questões) e mensalmente (simulados)</p>
+            <p>• Limites resetam diariamente (questões)</p>
             <p>• Planos pagos oferecem acesso ilimitado</p>
           </div>
         )}

@@ -160,10 +160,6 @@ export function SuccessRewardModal({ isOpen, onClose, score, total }: SuccessRew
                   <Target className="w-6 h-6 text-green-400" />
                   <span>Análises preditivas exclusivas</span>
                 </div>
-                <div className="flex items-center gap-3">
-                  <Trophy className="w-6 h-6 text-yellow-400" />
-                  <span>Simulados ilimitados</span>
-                </div>
               </div>
             </div>
           </div>

@@ -13,7 +13,7 @@ export function CTASection() {
       <div className="max-w-4xl mx-auto text-center relative z-10">
         <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6">
           Comece sua jornada rumo à{" "}
-          <span className="text-yellow-300 text-3xl">aprovação</span>
+          <span className="text-yellow-300 text-3xl lg:text-5xl">aprovação</span>
         </h2>
         
         <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
@@ -23,7 +23,7 @@ export function CTASection() {
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
           <Link to="/auth">
-            <Button size="lg" className="bg-white text-white hover:bg-blue-50 px-8 py-4 text-lg font-semibold">
+            <Button size="lg" className="bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 hover:from-yellow-500 hover:to-yellow-700 text-gray-800 px-8 py-4 text-lg font-semibold shadow-lg transition-all duration-300">
               <BookOpen className="w-5 h-5 mr-2" />
               Começar Grátis Agora
               <ArrowRight className="w-5 h-5 ml-2" />
@@ -35,7 +35,7 @@ export function CTASection() {
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-12">
           <div className="flex items-center justify-center gap-2 text-blue-100">
             <Star className="w-5 h-5 text-yellow-300 fill-current" />
-            <span>Sem cartão de crédito</span>
+            <span>Experimente grátis</span>
           </div>
           <div className="flex items-center justify-center gap-2 text-blue-100">
             <Star className="w-5 h-5 text-yellow-300 fill-current" />

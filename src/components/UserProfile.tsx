@@ -10,6 +10,7 @@ import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { BadgesGrid } from '@/components/BadgesGrid';
 import { User, Trophy, Target, Calendar, Star, Crown, Zap } from 'lucide-react';
+import { supabase } from '@/integrations/supabase/client';
 
 interface UserData {
   name: string;
@@ -28,11 +29,34 @@ export function UserProfile() {
 
   const [isEditing, setIsEditing] = useState(false);
   const [editData, setEditData] = useState(userData);
+  const [uploading, setUploading] = useState(false);
 
   const handleSave = () => {
     setUserData(editData);
     setIsEditing(false);
   };
+
+  // Função para upload de avatar
+  async function handleAvatarUpload(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setUploading(true);
+    try {
+      const fileExt = file.name.split('.').pop();
+      const fileName = `${userData.email.replace(/[^a-zA-Z0-9]/g, '')}_${Date.now()}.${fileExt}`;
+      const { data, error } = await supabase.storage.from('avatars').upload(fileName, file, { upsert: true });
+      if (error) throw error;
+      const { data: publicUrlData } = supabase.storage.from('avatars').getPublicUrl(fileName);
+      const avatarUrl = publicUrlData.publicUrl;
+      setUserData(prev => ({ ...prev, avatar: avatarUrl }));
+      setEditData(prev => ({ ...prev, avatar: avatarUrl }));
+      // Aqui você pode salvar a URL no banco de dados do usuário, se necessário
+    } catch (err) {
+      alert('Erro ao fazer upload do avatar');
+    } finally {
+      setUploading(false);
+    }
+  }
 
   const getRankTitle = (level: number) => {
     if (level >= 20) return 'Mestre Cirurgião';
@@ -64,6 +88,11 @@ export function UserProfile() {
           <div className="absolute -bottom-2 -right-2 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full p-2 border-2 border-white shadow-lg">
             <span className="text-white font-bold text-sm">{userProgress.level}</span>
           </div>
+          {/* Botão de upload de avatar */}
+          <label className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-8 cursor-pointer bg-blue-600 text-white px-3 py-1 rounded-lg text-xs shadow hover:bg-blue-700 transition">
+            {uploading ? 'Enviando...' : 'Trocar Avatar'}
+            <input type="file" accept="image/*" className="hidden" onChange={handleAvatarUpload} disabled={uploading} />
+          </label>
         </div>
         
         <div className="text-center md:text-left flex-1">
@@ -128,7 +157,7 @@ export function UserProfile() {
 
       <div className="grid grid-cols-1 gap-6">
         {/* Badges Section */}
-        <BadgesGrid achievements={userProgress.achievements} />
+        {/* Remover <BadgesGrid achievements={userProgress.achievements} /> */}
 
         {/* Profile Information and Progress Details in a row */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -217,10 +246,6 @@ export function UserProfile() {
                   <div className="p-4 bg-gradient-to-r from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/20 rounded-lg border border-green-200 dark:border-green-700">
                     <div className="text-2xl font-bold text-green-600 dark:text-green-400">{userProgress.correctAnswers}</div>
                     <div className="text-sm text-gray-600 dark:text-gray-400">Acertos</div>
-                  </div>
-                  <div className="p-4 bg-gradient-to-r from-purple-50 to-purple-100 dark:from-purple-900/20 dark:to-purple-800/20 rounded-lg border border-purple-200 dark:border-purple-700">
-                    <div className="text-2xl font-bold text-purple-600 dark:text-purple-400">{userProgress.simuladosCompletos}</div>
-                    <div className="text-sm text-gray-600 dark:text-gray-400">Simulados</div>
                   </div>
                 </div>
               </div>

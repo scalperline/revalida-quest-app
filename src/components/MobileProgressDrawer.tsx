@@ -64,9 +64,14 @@ export function MobileProgressDrawer({
         {/* Estado Colapsado - Botão com Preview */}
         {!isExpanded && <div className="flex justify-end pr-3">
             <button onClick={toggleDrawer} className="bg-gradient-to-r from-blue-500 via-blue-600 to-purple-600 text-white rounded-b-xl shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col items-center justify-center gap-1 font-medium border-t-0 border-2 border-blue-300/30 px-3 py-2 text-center text-xs min-w-[60px]">
-              {/* XP centralizado */}
-              <span className="font-medium text-xs">{userProgress.xp}</span>
-              
+              {/* Capelo SVG centralizado */}
+              <span className="flex items-center justify-center">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M2 7.5L12 3L22 7.5L12 12L2 7.5Z" fill="white"/>
+                  <path d="M6 10.5V15.5C6 17.1569 8.68629 18.5 12 18.5C15.3137 18.5 18 17.1569 18 15.5V10.5" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
+                  <circle cx="19" cy="10" r="1" fill="white"/>
+                </svg>
+              </span>
               <ChevronDown className="w-3 h-3" />
             </button>
           </div>}

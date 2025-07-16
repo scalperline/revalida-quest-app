@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from 'react';
-import { Mission } from '@/types/missions';
+import { Mission, CustomMission } from '@/types/missions';
 import { useMissions } from '@/hooks/useMissions';
 import { useGamification } from '@/hooks/useGamification';
 import { useAudio } from '@/hooks/useAudio';
@@ -11,14 +11,14 @@ import { Button } from '@/components/ui/button';
 import { ArrowLeft, ArrowRight, Trophy, Target } from 'lucide-react';
 
 interface MissionExecutionProps {
-  mission: Mission;
+  mission: Mission | CustomMission;
   onBack: () => void;
-  onComplete: (mission: Mission) => void;
+  onComplete: (mission: Mission | CustomMission) => void;
 }
 
 export function MissionExecution({ mission, onBack, onComplete }: MissionExecutionProps) {
   const { getQuestionsForMission, updateMissionProgress } = useMissions();
-  const { completeSimulado, answerQuestion } = useGamification();
+  const { answerQuestion } = useGamification();
   const { playSound } = useAudio();
 
   const [questions, setQuestions] = useState<Question[]>([]);
@@ -97,7 +97,9 @@ export function MissionExecution({ mission, onBack, onComplete }: MissionExecuti
     const completed = updateMissionProgress(mission.id, questions.length, correctAnswers);
     
     // Award XP through gamification system
-    completeSimulado(correctAnswers, questions.length);
+    if (completed) {
+      // completeSimulado(correctAnswers, questions.length); // Removed as per edit hint
+    }
     
     if (completed) {
       playSound('achievement');

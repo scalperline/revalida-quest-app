@@ -1,3 +1,70 @@
+# RevalidaQuest
+
+## Visão Geral
+
+O RevalidaQuest é uma plataforma gamificada para estudo e preparação para exames, com funcionalidades de missões, conquistas, desafios, estatísticas e integração com pagamentos.
+
+## Onboarding Rápido
+
+### Instalação e Execução
+
+```sh
+# Clone o repositório
+git clone <YOUR_GIT_URL>
+cd <YOUR_PROJECT_NAME>
+
+# Instale as dependências
+npm install
+
+# Rode o servidor de desenvolvimento
+npm run dev
+```
+
+### Estrutura do Projeto
+
+- `src/components/` — Componentes reutilizáveis da interface
+- `src/hooks/` — Hooks customizados para lógica compartilhada
+- `src/pages/` — Páginas principais da aplicação
+- `src/data/` — Dados estáticos e mocks
+- `src/utils/` — Funções utilitárias
+- `src/styles/` — Estilos globais e utilitários
+- `supabase/functions/` — Funções serverless (backend)
+- `supabase/migrations/` — Migrações do banco de dados
+
+### Rodando Testes
+
+```sh
+# (Se aplicável) Execute os testes automatizados
+npm test
+```
+
+> **Nota:** Caso não existam testes, consulte a seção "Testes" abaixo para orientações de como começar.
+
+## Tecnologias Utilizadas
+- React + TypeScript
+- Vite
+- Tailwind CSS
+- Supabase
+- Stripe (pagamentos)
+
+## Testes
+
+O projeto ainda não possui testes automatizados. Recomenda-se utilizar [Jest](https://jestjs.io/) e [Testing Library](https://testing-library.com/) para componentes React. Exemplos de testes podem ser adicionados em `src/components/__tests__` e `src/utils/__tests__`.
+
+## Padrão de Nomenclatura
+
+- Componentes: PascalCase (ex: `UserProfileCard.tsx`)
+- Hooks: camelCase iniciado por "use" (ex: `useAuth.ts`)
+- Funções utilitárias: camelCase
+
+## Comentários e Contribuição
+
+Comente trechos críticos do código e siga o padrão de nomenclatura acima. Para contribuir, abra um PR seguindo as boas práticas do projeto.
+
+---
+
+# (Conteúdo Lovable original abaixo)
+
 # Welcome to your Lovable project
 
 ## Project info

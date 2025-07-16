@@ -1,19 +1,17 @@
 
-import { Mission } from '@/types/missions';
+import { Mission, CustomMission } from '@/types/missions';
 import { useMissions } from '@/hooks/useMissions';
-import { SimuladoFilters } from '@/components/SimuladoFilters';
 import { MissionCard } from '@/components/MissionCard';
+import { CustomMissionCard } from '@/components/CustomMissionCard';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Flag, Settings, Trophy, Sparkles } from 'lucide-react';
-import { SimuladoConfig } from '@/hooks/useSimulado';
 
 interface MissionsTabsSectionProps {
-  onStartMission: (mission: Mission) => void;
-  onStartPersonalizedSimulado: (config: SimuladoConfig) => void;
+  onStartMission: (mission: Mission | CustomMission) => void;
   filters?: any;
 }
 
-export function MissionsTabsSection({ onStartMission, onStartPersonalizedSimulado, filters = {} }: MissionsTabsSectionProps) {
+export function MissionsTabsSection({ onStartMission, filters = {} }: MissionsTabsSectionProps) {
   const { getMissionProgress, getAvailableMissions, getCompletedMissions, getAvailableQuestionsCount } = useMissions();
 
   const availableMissions = getAvailableMissions();
@@ -146,8 +144,8 @@ export function MissionsTabsSection({ onStartMission, onStartPersonalizedSimulad
         </TabsContent>
         
         <TabsContent value="personalizada" className="space-y-3 sm:space-y-6">
-          <div className="bg-gradient-to-r from-purple-50 to-indigo-50 rounded-xl p-3 sm:p-6 border-2 border-purple-200">
-            <SimuladoFilters onStart={onStartPersonalizedSimulado} />
+          <div className="grid grid-cols-1 gap-3 sm:gap-6 lg:grid-cols-2">
+            <CustomMissionCard onStartMission={onStartMission} />
           </div>
         </TabsContent>
         

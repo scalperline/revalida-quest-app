@@ -85,13 +85,24 @@ export default function Help() {
 
           <div>
             <h4 className="font-semibold mb-3 text-lg">Posso cancelar minha assinatura?</h4>
-            <p className="text-gray-700 dark:text-gray-300 mb-3 text-base">Sim! Você pode cancelar a qualquer momento:</p>
+            <p className="text-gray-700 dark:text-gray-300 mb-3 text-base">Sim! Você pode cancelar a qualquer momento de forma simples e transparente:</p>
             <ol className="list-decimal pl-6 text-gray-700 dark:text-gray-300 space-y-2 text-base">
               <li>Acesse o <strong>Portal do Cliente</strong> no seu perfil</li>
               <li>Clique em "Gerenciar Assinatura"</li>
               <li>Selecione "Cancelar Assinatura"</li>
+              <li>Confirme o cancelamento no portal seguro do Stripe</li>
               <li>Seu acesso continuará ativo até o final do período pago</li>
             </ol>
+            
+            <div className="mt-4 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
+              <h5 className="font-medium text-blue-900 dark:text-blue-100 mb-2">O que acontece após o cancelamento:</h5>
+              <ul className="text-sm text-blue-800 dark:text-blue-200 space-y-1">
+                <li>• <strong>Acesso mantido:</strong> Seus benefícios continuam até o final do período pago</li>
+                <li>• <strong>Sem cobranças:</strong> Não haverá mais cobranças automáticas</li>
+                <li>• <strong>Reativação fácil:</strong> Pode reativar a qualquer momento</li>
+                <li>• <strong>Processo seguro:</strong> Cancelamento processado pelo Stripe</li>
+              </ul>
+            </div>
           </div>
 
           <div>
@@ -377,7 +388,7 @@ export default function Help() {
 
       <Navbar />
       
-      <div className="relative z-10 container mx-auto px-4 pt-24 pb-8">
+      <div className="container mx-auto px-4 pt-24 sm:pt-28 pb-8">
         <div className="max-w-4xl mx-auto">
           {/* Header with Back Button */}
           <div className="mb-8">

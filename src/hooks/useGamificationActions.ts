@@ -3,7 +3,12 @@ import { UserProgress } from '@/types/gamification';
 import { 
   calculateLevelUp, 
   calculateStreakXP, 
-  generateQuestSuggestions
+  generateQuestSuggestions,
+  getXPForQuestion,
+  getXPForMissionCompletion,
+  calculateQuestionXP,
+  calculateAdvancedStats,
+  generateStudyGoals
 } from '@/utils/gamificationHelpers';
 
 export function useGamificationActions(
@@ -16,7 +21,6 @@ export function useGamificationActions(
       ...prev,
       totalQuestions: 0,
       correctAnswers: 0,
-      simuladosCompletos: 0,
       areaStats: {},
     }));
   };
@@ -67,7 +71,10 @@ export function useGamificationActions(
         areaStats[area].correct += 1;
       }
       
-      return { ...prev, areaStats };
+      return {
+        ...prev,
+        areaStats
+      };
     });
   };
 
@@ -84,17 +91,63 @@ export function useGamificationActions(
     });
   };
 
-  const answerQuestion = (correct: boolean, area?: string) => {
+  const addXPWithBreakdown = (xpBreakdown: any) => {
+    setUserProgress(prev => {
+      const { newXP, newLevel, newXPToNext } = calculateLevelUp(prev.xp, prev.level, xpBreakdown.totalXP);
+
+      // Atualizar XP semanal
+      const newWeeklyXP = (prev.weeklyXP || 0) + xpBreakdown.totalXP;
+
+      // Adicionar ao histórico de XP
+      const newXPHistory = [
+        ...(prev.xpHistory || []),
+        {
+          date: new Date().toISOString().split('T')[0],
+          xpGained: xpBreakdown.totalXP,
+          source: 'question' as const,
+          details: `Questão: ${xpBreakdown.baseXP} + Streak: ${xpBreakdown.streakBonus} + Combo: ${xpBreakdown.comboBonus}`
+        }
+      ].slice(-50); // Manter apenas os últimos 50 registros
+
+      return {
+        ...prev,
+        xp: newXP,
+        level: newLevel,
+        xpToNextLevel: newXPToNext,
+        weeklyXP: newWeeklyXP,
+        xpHistory: newXPHistory,
+        lastXPBreakdown: xpBreakdown
+      };
+    });
+  };
+
+  const answerQuestion = (correct: boolean, area?: string, difficulty: 'easy' | 'medium' | 'hard' = 'medium') => {
     updateStreak();
     
     setUserProgress(prev => {
       const newTotal = prev.totalQuestions + 1;
       const newCorrect = correct ? prev.correctAnswers + 1 : prev.correctAnswers;
       
+      // Atualizar combo
+      const newCombo = correct ? (prev.currentCombo || 0) + 1 : 0;
+      const newMaxCombo = Math.max(prev.maxCombo || 0, newCombo);
+      
+      // Calcular XP com breakdown
+      const xpBreakdown = calculateQuestionXP(
+        correct,
+        prev.streakDias,
+        newCombo,
+        difficulty,
+        prev.newlyUnlockedAchievements.length > 0
+      );
+
       return {
         ...prev,
         totalQuestions: newTotal,
-        correctAnswers: newCorrect
+        correctAnswers: newCorrect,
+        currentCombo: newCombo,
+        maxCombo: newMaxCombo,
+        lastXPBreakdown: xpBreakdown
       };
     });
 
@@ -103,23 +156,18 @@ export function useGamificationActions(
     }
 
     checkAchievements(correct, area);
-    addXP(correct ? 10 : 5);
-  };
-
-  const completeSimulado = (score: number, total: number) => {
-    setUserProgress(prev => ({
-      ...prev,
-      simuladosCompletos: prev.simuladosCompletos + 1
-    }));
-
-    if (score === total) {
-      // This would need to be passed from the achievements hook
-      // For now, we'll handle this in the main hook
+    
+    // Adicionar XP com breakdown se correto
+    if (correct) {
+      const xpBreakdown = calculateQuestionXP(
+        correct,
+        userProgress.streakDias,
+        userProgress.currentCombo || 0,
+        difficulty,
+        userProgress.newlyUnlockedAchievements.length > 0
+      );
+      addXPWithBreakdown(xpBreakdown);
     }
-
-    const percentage = score / total;
-    const bonusXP = Math.floor(percentage * 50) + 25;
-    addXP(bonusXP);
   };
 
   const getAccuracy = () => {
@@ -135,13 +183,22 @@ export function useGamificationActions(
     return calculateStreakXP(userProgress.streakDias);
   };
 
+  const getAdvancedStats = () => {
+    return calculateAdvancedStats(userProgress);
+  };
+
+  const getStudyGoals = () => {
+    return generateStudyGoals(userProgress);
+  };
+
   return {
     resetStats,
     answerQuestion,
-    completeSimulado,
     getAccuracy,
     getProgressPercentage,
     getStreakBonus,
+    getAdvancedStats,
+    getStudyGoals,
     generateQuestSuggestions: () => generateQuestSuggestions(userProgress.areaStats)
   };
 }

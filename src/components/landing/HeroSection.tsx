@@ -3,18 +3,52 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Play, Star, Users, BookOpen, Trophy, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 
 export function HeroSection() {
   const scrollToSupremeChallenge = () => {
-    // Scroll to the pricing section where the Supreme Challenge card is located
-    const pricingSection = document.getElementById('pricing');
-    if (pricingSection) {
-      pricingSection.scrollIntoView({ 
+    // Scroll to the Supreme Challenge card
+    const supremeCard = document.getElementById('supreme-challenge-card');
+    if (supremeCard) {
+      supremeCard.scrollIntoView({ 
         behavior: 'smooth',
-        block: 'center'
+        block: 'start'
       });
     }
   };
+
+  useEffect(() => {
+    let player: any = null;
+    let apiLoaded = false;
+    function onYouTubeIframeAPIReady() {
+      player = new (window as any).YT.Player('demo-youtube', {
+        events: {
+          'onStateChange': function (event: any) {
+            // 0 = ended
+            if (event.data === 0) {
+              player.seekTo(0);
+              player.pauseVideo();
+            }
+          }
+        }
+      });
+    }
+
+    // Carrega a API do YouTube apenas uma vez
+    if (!(window as any).YT) {
+      const tag = document.createElement('script');
+      tag.src = "https://www.youtube.com/iframe_api";
+      document.body.appendChild(tag);
+      (window as any).onYouTubeIframeAPIReady = onYouTubeIframeAPIReady;
+    } else if ((window as any).YT && (window as any).YT.Player) {
+      onYouTubeIframeAPIReady();
+    }
+
+    return () => {
+      if (player && player.destroy) player.destroy();
+      delete (window as any).onYouTubeIframeAPIReady;
+    };
+  }, []);
 
   return (
     <section className="relative pt-20 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
@@ -36,17 +70,15 @@ export function HeroSection() {
           </Badge>
 
           {/* Headline */}
-          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-6 leading-tight">
-            <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-inherit text-4xl">
-              O Banco de Questões Oficiais do
-            </span>{" "}
-            <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent text-4xl">Revalida INEP</span>
+          <h1 className="font-bold mb-6 leading-tight flex flex-wrap justify-center items-center gap-1">
+            <span className="text-gray-800 text-4xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl">A Nova Era da Preparação Para o </span>
+            <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent text-4xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl">Revalida INEP</span>
           </h1>
 
           {/* Subtitle */}
           <p className="text-lg sm:text-xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
             A única plataforma que transforma sua preparação para o Revalida em uma 
-            jornada gamificada com mais de 1.500 questões oficiais, missões exclusivas 
+            jornada gamificada com mais de 1.500 questões oficiais, missões exclusivas, simulados personalizados 
             e análises com IA.
           </p>
 
@@ -104,12 +136,15 @@ export function HeroSection() {
         {/* Hero Image/Video Placeholder */}
         <div className="relative max-w-4xl mx-auto">
           <div className="aspect-video bg-gradient-to-br from-blue-100 to-purple-100 rounded-2xl shadow-2xl border-4 border-white overflow-hidden">
-            <div className="w-full h-full bg-gradient-to-br from-blue-500/20 to-purple-500/20 flex items-center justify-center">
-              <div className="text-center">
-                <Play className="w-16 h-16 text-blue-600 mx-auto mb-4 opacity-70" />
-                <p className="text-blue-700 font-semibold">Demonstração do Produto</p>
-              </div>
-            </div>
+            <iframe
+              id="demo-youtube"
+              className="w-full h-full"
+              src="https://www.youtube.com/embed/udbUFjgUV4A?rel=0&modestbranding=1&enablejsapi=1"
+              title="Demonstração do Produto"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            ></iframe>
           </div>
           {/* Floating Elements */}
           <div className="absolute -top-4 -left-4 bg-white rounded-xl shadow-lg p-3 animate-bounce">

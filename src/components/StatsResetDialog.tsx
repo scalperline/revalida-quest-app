@@ -23,30 +23,24 @@ export function StatsResetDialog({ onReset }: StatsResetDialogProps) {
       <AlertDialogTrigger asChild>
         <Button variant="outline" size="sm" className="text-red-600 border-red-200 hover:bg-red-50">
           <RotateCcw className="w-4 h-4 mr-2" />
-          Reiniciar Estatísticas
+          Reiniciar Jornada
         </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Reiniciar Estatísticas de Desempenho</AlertDialogTitle>
+          <AlertDialogTitle>Reiniciar Jornada</AlertDialogTitle>
           <AlertDialogDescription>
-            Esta ação irá apagar todas as suas estatísticas de questões e simulados, 
-            mas manterá seu nível, XP e conquistas. Esta ação não pode ser desfeita.
-            <br /><br />
+            Esta ação irá zerar completamente seu progresso no aplicativo, incluindo XP, missões, estatísticas e conquistas. <br /><br />
             <strong>Será resetado:</strong>
             <ul className="list-disc list-inside mt-2 text-sm">
-              <li>Total de questões respondidas</li>
-              <li>Taxa de acertos por área</li>
-              <li>Simulados concluídos</li>
-              <li>Gráfico de desempenho</li>
-            </ul>
-            <br />
-            <strong>Será mantido:</strong>
-            <ul className="list-disc list-inside text-sm">
-              <li>Nível atual e XP</li>
+              <li>XP e nível</li>
+              <li>Progresso e tentativas de todas as missões</li>
+              <li>Estatísticas de desempenho</li>
               <li>Conquistas desbloqueadas</li>
               <li>Streak de estudos</li>
             </ul>
+            <br />
+            <span className="text-red-600 font-semibold">Esta ação não pode ser desfeita.</span>
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>

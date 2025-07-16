@@ -105,8 +105,8 @@ export function MobileOfficialCards() {
               <div className="relative">
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-blue-600/10 rounded-xl"></div>
                 <div className="relative p-3">
-                  <div className="text-xl font-bold text-blue-700">12k+</div>
-                  <div className="text-xs text-gray-600 dark:text-gray-400">Médicos</div>
+                  <div className="text-xl font-bold text-blue-700">1.5k+</div>
+                  <div className="text-xs text-gray-600 dark:text-gray-400">Questões</div>
                 </div>
               </div>
               <div className="relative">
@@ -119,7 +119,7 @@ export function MobileOfficialCards() {
               <div className="relative">
                 <div className="absolute inset-0 bg-gradient-to-r from-yellow-500/10 to-yellow-600/10 rounded-xl"></div>
                 <div className="relative p-3">
-                  <div className="text-xl font-bold text-yellow-700">95%</div>
+                  <div className="text-xl font-bold text-yellow-700">87%</div>
                   <div className="text-xs text-gray-600 dark:text-gray-400">Aprovação</div>
                 </div>
               </div>

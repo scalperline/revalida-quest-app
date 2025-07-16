@@ -3,10 +3,13 @@ import { Zap } from 'lucide-react';
 import { useGamification } from '@/hooks/useGamification';
 import { useSubscription } from '@/hooks/useSubscription';
 import { Button } from '@/components/ui/button';
+import { useAuth } from '@/hooks/useAuth';
+import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 
 export function ProgressSection() {
   const { userProgress } = useGamification();
   const { subscribed, subscription_tier } = useSubscription();
+  const { user } = useAuth();
 
   // Gamification level (separate from subscription plan)
   const gamificationLevel = userProgress.level;
@@ -29,6 +32,8 @@ export function ProgressSection() {
   };
 
   const planInfo = getPlanInfo();
+  const avatarUrl = user?.user_metadata?.avatar_url;
+  const displayName = user?.user_metadata?.display_name || 'Usuário';
 
   return (
     <Button 
@@ -54,7 +59,6 @@ export function ProgressSection() {
           <span className="text-xs font-medium text-gray-600 whitespace-nowrap">
             {userProgress.xp}/{userProgress.xpToNextLevel}
           </span>
-          
           {/* Barra de Progresso XP - mais estreita */}
           <div className="relative w-4 md:w-6 lg:w-8 h-1 md:h-1.5 bg-gray-200 rounded-full overflow-hidden flex-shrink-0">
             <div 
@@ -73,6 +77,16 @@ export function ProgressSection() {
           <span className="text-xs font-medium text-gray-600">
             {planInfo.name}
           </span>
+        </div>
+
+        {/* Avatar do usuário - sempre visível na ponta direita do balance */}
+        <div className="ml-2 flex items-center">
+          <Avatar className="h-10 w-10 md:h-12 md:w-12 lg:h-14 lg:w-14 border-2 border-transparent bg-gradient-to-br from-blue-600 via-purple-500 to-purple-700 p-0.5">
+            <div className="bg-white rounded-full w-full h-full flex items-center justify-center overflow-hidden">
+              <AvatarImage src={avatarUrl} alt={displayName} />
+              <AvatarFallback>{displayName?.[0] || 'U'}</AvatarFallback>
+            </div>
+          </Avatar>
         </div>
       </div>
     </Button>

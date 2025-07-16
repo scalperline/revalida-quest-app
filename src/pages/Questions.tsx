@@ -11,6 +11,10 @@ import { useQuestionsFilters } from "@/hooks/useQuestionsFilters";
 import { useAudio } from "@/hooks/useAudio";
 import { useXPPillAnimation } from "@/hooks/useXPPillAnimation";
 import { getDefaultTipoProva } from "@/utils/questionSelector";
+import { useToast } from '@/hooks/use-toast';
+import { GamifiedHeaderAlert } from '@/components/GamifiedHeaderAlert';
+import { LoadingState, SkeletonGrid } from "@/components/LoadingStates";
+import { TouchButton } from "@/components/MobileEnhancements";
 
 export default function Questions() {
   const [anoSelecionado, setAnoSelecionado] = useState(2025);
@@ -21,6 +25,20 @@ export default function Questions() {
   const [selectedDifficulty, setSelectedDifficulty] = useState("Todas");
   const [showConfetti, setShowConfetti] = useState(false);
   const [drawerXPReceived, setDrawerXPReceived] = useState(false);
+  const { toast } = useToast();
+  const [isLoading, setIsLoading] = useState(false);
+  const [loadError, setLoadError] = useState<string | null>(null);
+
+  // Simulação de carregamento e erro (substitua pelo fetch real se necessário)
+  // useEffect(() => {
+  //   setIsLoading(true);
+  //   fetchQuestions()
+  //     .then(() => setIsLoading(false))
+  //     .catch(() => {
+  //       setLoadError('Erro ao carregar questões. Tente novamente.');
+  //       setIsLoading(false);
+  //     });
+  // }, []);
 
   const drawerRef = useRef<HTMLDivElement>(null);
   const { playSound } = useAudio();
@@ -93,6 +111,14 @@ export default function Questions() {
       </div>
 
       <Navbar />
+      <div className="relative z-10 flex flex-col items-center justify-center min-h-[30vh] pt-24 sm:pt-28 px-4 text-center">
+        <h1 className="font-bold text-4xl sm:text-5xl bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent drop-shadow-lg mb-4 select-none">
+          Banco de Questões
+        </h1>
+        <GamifiedHeaderAlert icon={<span className="text-xl" role="img" aria-label="livro">📚</span>}>
+          + de 1500 questões oficiais do Revalida, filtros avançados e estatísticas para turbinar seus estudos!
+        </GamifiedHeaderAlert>
+      </div>
       
       {/* Mobile Progress Drawer */}
       <MobileProgressDrawer 
@@ -108,7 +134,7 @@ export default function Questions() {
         onAnimationComplete={handleAnimationComplete}
       />
 
-      <div className="relative z-10 container mx-auto px-4 pt-20 pb-8">
+      <div className="relative z-10 container mx-auto px-4 pt-4 pb-8">
         <div className="max-w-4xl mx-auto">
           <GamifiedQuestionsHeader
             anoSelecionado={anoSelecionado}
@@ -124,7 +150,25 @@ export default function Questions() {
             setSelectedDifficulty={setSelectedDifficulty}
           />
 
-          {filteredQuestions.map((question) => (
+          {isLoading && (
+            <LoadingState type="questions" message="Carregando questões do Revalida..." />
+          )}
+          {loadError && (
+            <div className="text-center py-8">
+              <div className="bg-red-50 border-2 border-red-200 rounded-xl p-6 max-w-md mx-auto">
+                <h3 className="text-lg font-semibold text-red-800 mb-2">Erro ao carregar</h3>
+                <p className="text-red-600">{loadError}</p>
+                <TouchButton 
+                  onClick={() => window.location.reload()} 
+                  className="mt-4 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg"
+                >
+                  Tentar Novamente
+                </TouchButton>
+              </div>
+            </div>
+          )}
+
+          {!isLoading && !loadError && filteredQuestions.map((question) => (
             <QuestionCard 
               key={question.id} 
               question={question}
@@ -134,11 +178,26 @@ export default function Questions() {
             />
           ))}
 
-          <QuestionsPagination
-            paginaAtual={currentPage}
-            totalPaginas={Math.ceil(totalQuestions / questionsPerPage)}
-            onPageChange={setCurrentPage}
-          />
+          {/* Paginação visível igual ao Ranking */}
+          <div className="flex justify-center items-center gap-4 mt-6 mb-2">
+            <button
+              className={`flex items-center gap-1 px-4 py-2 rounded-lg border text-base font-medium transition disabled:opacity-50 disabled:cursor-not-allowed bg-white shadow-sm hover:bg-blue-50`}
+              onClick={() => setCurrentPage(currentPage - 1)}
+              disabled={currentPage <= 1}
+            >
+              <span className="text-xl">&#60;</span> Anterior
+            </button>
+            <span className="text-base font-semibold text-gray-700 select-none">
+              Página {currentPage} de {Math.ceil(totalQuestions / questionsPerPage)}
+            </span>
+            <button
+              className={`flex items-center gap-1 px-4 py-2 rounded-lg border text-base font-medium transition disabled:opacity-50 disabled:cursor-not-allowed bg-white shadow-sm hover:bg-blue-50`}
+              onClick={() => setCurrentPage(currentPage + 1)}
+              disabled={currentPage >= Math.ceil(totalQuestions / questionsPerPage)}
+            >
+              Próxima <span className="text-xl">&#62;</span>
+            </button>
+          </div>
         </div>
       </div>
 

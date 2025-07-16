@@ -10,8 +10,8 @@ interface SEOHeadProps {
 
 export function SEOHead({ 
   title = "RevalidaQuest - Prepare-se para o Revalida com Gamificação",
-  description = "Plataforma gamificada para preparação do Revalida com mais de 1.500 questões oficiais, simulados e sistema de conquistas. Estude de forma inteligente e divertida!",
-  keywords = "revalida, medicina, questões, simulado, gamificação, preparação médica, exame médico",
+  description = "Plataforma gamificada para preparação do Revalida com mais de 1.500 questões oficiais e sistema de conquistas. Estude de forma inteligente e divertida!",
+  keywords = "revalida, medicina, questões, gamificação, preparação médica, exame médico",
   ogImage = "/placeholder.svg"
 }: SEOHeadProps) {
   

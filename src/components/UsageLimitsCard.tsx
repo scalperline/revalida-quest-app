@@ -5,6 +5,8 @@ import { Progress } from '@/components/ui/progress';
 import { Button } from '@/components/ui/button';
 import { Crown, Zap, ArrowRight, BarChart3, FileText } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { useMissions } from '@/hooks/useMissions';
+import { useEffect, useState } from 'react';
 
 export function UsageLimitsCard() {
   const navigate = useNavigate();
@@ -15,6 +17,24 @@ export function UsageLimitsCard() {
     canUseFeature,
     loading 
   } = useSubscription();
+
+  const { getMissionLimit, getMissionAttemptsThisMonth, missions } = useMissions();
+  const [missionsAttempts, setMissionsAttempts] = useState<{used: number, limit: number} | null>(null);
+  useEffect(() => {
+    let mounted = true;
+    async function fetchMissionAttempts() {
+      if (!missions || missions.length === 0) return;
+      const limit = getMissionLimit();
+      let maxUsed = 0;
+      for (const mission of missions) {
+        const used = await getMissionAttemptsThisMonth(mission.id);
+        if (used > maxUsed) maxUsed = used;
+      }
+      if (mounted) setMissionsAttempts({ used: maxUsed, limit });
+    }
+    fetchMissionAttempts();
+    return () => { mounted = false; };
+  }, [missions, getMissionLimit, getMissionAttemptsThisMonth]);
 
   if (loading || !usageLimits) {
     return (
@@ -32,13 +52,10 @@ export function UsageLimitsCard() {
 
   // Free plan limits
   const dailyQuestionsLimit = 10;
-  const monthlySimuladosLimit = 1;
 
   const questionsUsed = usageLimits.daily_questions_used;
-  const simuladosUsed = usageLimits.monthly_simulados_used;
 
   const questionsPercentage = subscribed ? 100 : (questionsUsed / dailyQuestionsLimit) * 100;
-  const simuladosPercentage = subscribed ? 100 : (simuladosUsed / monthlySimuladosLimit) * 100;
 
   return (
     <Card className="w-full">
@@ -86,24 +103,24 @@ export function UsageLimitsCard() {
           )}
         </div>
 
-        {/* Simulados Usage */}
+        {/* Missões Usage */}
         <div className="space-y-2">
           <div className="flex items-center justify-between text-sm">
             <div className="flex items-center gap-2">
-              <Zap className="w-4 h-4 text-blue-500" />
-              <span className="font-medium">Simulados (mês)</span>
+              <Zap className="w-4 h-4 text-purple-500" />
+              <span className="font-medium">Missões (mês)</span>
             </div>
             <span className="text-gray-600">
-              {subscribed ? 'Ilimitado' : `${simuladosUsed}/${monthlySimuladosLimit}`}
+              {subscribed ? 'Ilimitado' : missionsAttempts ? `${missionsAttempts.used}/${missionsAttempts.limit === 9999 ? '∞' : missionsAttempts.limit}` : '...'}
             </span>
           </div>
           <Progress 
-            value={simuladosPercentage} 
-            className="h-2"
+            value={subscribed ? 100 : missionsAttempts ? (missionsAttempts.used / missionsAttempts.limit) * 100 : 0} 
+            className="h-2 bg-purple-100"
           />
-          {!subscribed && simuladosUsed >= monthlySimuladosLimit && (
+          {!subscribed && missionsAttempts && missionsAttempts.used >= missionsAttempts.limit && missionsAttempts.limit !== 9999 && (
             <p className="text-xs text-red-600">
-              Limite mensal atingido. Faça upgrade para mais simulados!
+              Limite mensal de missões atingido. Faça upgrade para continuar!
             </p>
           )}
         </div>
@@ -119,7 +136,7 @@ export function UsageLimitsCard() {
               <ArrowRight className="w-4 h-4 ml-2" />
             </Button>
             <p className="text-xs text-gray-500 text-center mt-2">
-              Desbloqueie questões e simulados ilimitados
+              Desbloqueie questões ilimitadas
             </p>
           </div>
         )}

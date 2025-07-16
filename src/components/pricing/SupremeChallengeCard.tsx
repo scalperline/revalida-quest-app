@@ -2,12 +2,12 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { Trophy, Crown } from 'lucide-react';
 import { SupremeChallengeModal } from '@/components/challenge/SupremeChallengeModal';
-import { SupremeChallengeVictoryModal } from '@/components/challenge/SupremeChallengeVictoryModal';
 import { SupremeChallengeStats } from './supreme-challenge/SupremeChallengeStats';
 import { SupremeChallengeFeatures } from './supreme-challenge/SupremeChallengeFeatures';
 import { SupremeChallengeActions } from './supreme-challenge/SupremeChallengeActions';
 import { SupremeChallengeCountdown } from './supreme-challenge/SupremeChallengeCountdown';
 import { useSupremeChallengeLogic } from './supreme-challenge/SupremeChallengeLogic';
+import { useToast } from '@/hooks/use-toast';
 
 export function SupremeChallengeCard() {
   const {
@@ -22,6 +22,7 @@ export function SupremeChallengeCard() {
     handleChallengeEnd,
     resetAttempts
   } = useSupremeChallengeLogic();
+  const { toast } = useToast();
 
   // Show victory modal after winning
   if (hasWonBefore) {
@@ -55,7 +56,7 @@ export function SupremeChallengeCard() {
             <div className="mt-4 sm:mt-6 lg:mt-8 mb-2">
               <div className="flex items-baseline justify-center gap-2">
                 <span className="text-lg sm:text-xl lg:text-2xl font-medium text-gray-400 line-through">R$ 49,90</span>
-                <span className="text-2xl sm:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">R$ 29,00</span>
+                <span className="text-2xl sm:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">R$ 29,90</span>
                 <span className="text-sm sm:text-lg lg:text-xl font-medium ml-1 text-zinc-200">/ mês </span>
               </div>
             </div>
@@ -68,12 +69,15 @@ export function SupremeChallengeCard() {
               <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-4 sm:p-6 mb-4 border-2 border-white/30">
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
                   <Badge className="bg-gradient-to-r from-white to-gray-100 text-black text-lg sm:text-2xl font-bold px-4 sm:px-6 py-2 sm:py-3 animate-pulse">
-                    #SUPREME
+                    SUPREME
                   </Badge>
                   <button onClick={() => {
-                  navigator.clipboard.writeText('#SUPREME');
-                  // Add toast notification here if needed
-                }} className="bg-white/20 hover:bg-white/30 text-white px-3 sm:px-4 py-2 rounded-lg font-medium transition-colors text-sm sm:text-base">
+                    navigator.clipboard.writeText('SUPREME');
+                    toast({
+                      title: 'Cupom copiado!',
+                      description: 'Cole no checkout para aplicar o desconto.',
+                    });
+                  }} className="bg-white/20 hover:bg-white/30 text-white px-3 sm:px-4 py-2 rounded-lg font-medium transition-colors text-sm sm:text-base">
                     📋 Copiar
                   </button>
                 </div>
@@ -106,9 +110,8 @@ export function SupremeChallengeCard() {
             {/* Action Buttons */}
             <div className="mt-auto space-y-2 sm:space-y-3">
               <button onClick={() => {
-              // Here you would implement the checkout logic
-              console.log('Redirect to Premium checkout with SUPREME coupon');
-            }} className="w-full py-2.5 sm:py-3 lg:py-4 text-sm sm:text-base lg:text-lg font-bold transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:scale-[1.02] rounded-2xl border-0 bg-gradient-to-r from-white to-gray-100 hover:from-gray-100 hover:to-white text-black animate-pulse">
+                window.open('https://buy.stripe.com/bJeaEX08TeQE38v8xi7ss02', '_blank');
+              }} className="w-full py-2.5 sm:py-3 lg:py-4 text-sm sm:text-base lg:text-lg font-bold transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:scale-[1.02] rounded-2xl border-0 bg-gradient-to-r from-white to-gray-100 hover:from-gray-100 hover:to-white text-black animate-pulse">
                 <div className="flex items-center justify-center gap-1 sm:gap-2">
                   <Crown className="w-3 h-3 sm:w-4 sm:h-4 lg:w-5 lg:h-5" />
                   <span className="text-xs sm:text-sm lg:text-base">🏆 RESGATAR PRÊMIO PREMIUM</span>
@@ -131,7 +134,7 @@ export function SupremeChallengeCard() {
       </div>;
   }
 
-  return <div className="relative group transition-all duration-500 hover:scale-[1.02] md:-mt-4 lg:-mt-6">
+  return <div id="supreme-challenge-card" className="relative group transition-all duration-500 hover:scale-[1.02] md:-mt-4 lg:-mt-6">
       {/* Gradient Border Effect */}
       <div className="absolute inset-0 bg-gradient-to-br from-red-300 via-red-400 to-red-300 rounded-3xl blur-sm opacity-70 group-hover:opacity-100 transition-opacity duration-300"></div>
       
@@ -139,7 +142,7 @@ export function SupremeChallengeCard() {
       <div className="absolute -top-3 left-0 right-0 z-20 flex justify-center">
         <Badge className="bg-gradient-to-r from-red-600 via-red-500 to-red-600 text-white px-4 py-2 text-sm font-bold shadow-xl border-0 rounded-full">
           <Trophy className="w-3 h-3 mr-1 fill-current" />
-          Tem Coragem?
+          Vai encarar?
         </Badge>
       </div>
       
@@ -164,7 +167,7 @@ export function SupremeChallengeCard() {
           <div className="mt-6 lg:mt-8 mb-2">
             <div className="flex items-baseline justify-center gap-2">
               <span className="text-lg sm:text-xl lg:text-2xl font-medium text-gray-400 line-through">R$ 49,90</span>
-              <span className="lg:text-5xl font-bold bg-gradient-to-r from-red-600 to-red-700 bg-clip-text text-lime-400 text-2xl">R$ 29,00</span>
+              <span className="lg:text-5xl font-bold bg-gradient-to-r from-red-600 to-red-700 bg-clip-text text-lime-400 text-2xl">R$ 29,90</span>
               <span className="text-lg lg:text-xl font-medium ml-1 text-zinc-500">/mês</span>
             </div>
           </div>

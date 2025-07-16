@@ -31,7 +31,7 @@ export function GamifiedQuestionsHeader({
   setSelectedDifficulty
 }: GamifiedQuestionsHeaderProps) {
   const [showFilters, setShowFilters] = useState(false);
-  return <div className="relative overflow-hidden bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-gray-900 dark:to-gray-800 border-2 border-blue-100 dark:border-gray-700 rounded-3xl p-4 sm:p-6 lg:p-8 mb-6 sm:mb-8 shadow-2xl">
+  return <div className="relative overflow-hidden bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-gray-900 dark:to-gray-800 border-2 border-blue-100 dark:border-gray-700 rounded-3xl p-4 sm:p-6 lg:p-8 mb-2 sm:mb-4 shadow-2xl">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-4 right-1/4 w-4 h-4 sm:w-6 sm:h-6 bg-blue-400 rounded-full opacity-20 animate-bounce"></div>
@@ -42,18 +42,21 @@ export function GamifiedQuestionsHeader({
 
       <div className="relative z-10">
         {/* Title and Stats Section */}
-        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 mb-6">
+        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 mb-4 sm:mb-4">
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-3 mb-2">
-              <div className="p-2 sm:p-3 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full shadow-lg animate-pulse">
+              {/* Ícone removido daqui */}
+              {/* <div className="p-2 sm:p-3 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full shadow-lg animate-pulse">
                 <BookOpen className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
-              </div>
-              <h1 className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent leading-tight">Banco de Questões Oficiais</h1>
+              </div> */}
+              {/* <h1 ...>Banco de Questões Oficiais</h1> */}
             </div>
-            
             {/* Stats Badge */}
             <div className="inline-flex items-center gap-2 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-blue-200 dark:border-gray-600 rounded-full px-3 py-1.5 sm:px-4 sm:py-2 shadow-md">
-              <Target className="w-4 h-4 text-blue-600" />
+              <span className='p-2 sm:p-2.5 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full shadow-lg animate-pulse'>
+                <BookOpen className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
+              </span>
+              {/* <Target className="w-4 h-4 text-blue-600" /> */}
               <span className="text-sm sm:text-base font-medium text-gray-700 dark:text-gray-300">
                 {totalQuestoes > 0 ? `${totalQuestoes} questões encontradas` : "Nenhuma questão encontrada"}
               </span>

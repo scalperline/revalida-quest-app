@@ -116,7 +116,6 @@ export type Database = {
           daily_questions_used: number | null
           id: string
           last_reset_date: string | null
-          monthly_simulados_used: number | null
           updated_at: string
           user_id: string | null
         }
@@ -125,7 +124,6 @@ export type Database = {
           daily_questions_used?: number | null
           id?: string
           last_reset_date?: string | null
-          monthly_simulados_used?: number | null
           updated_at?: string
           user_id?: string | null
         }
@@ -134,7 +132,6 @@ export type Database = {
           daily_questions_used?: number | null
           id?: string
           last_reset_date?: string | null
-          monthly_simulados_used?: number | null
           updated_at?: string
           user_id?: string | null
         }
@@ -151,7 +148,6 @@ export type Database = {
           id: string
           last_activity_date: string | null
           level: number
-          simulados_completos: number
           streak_dias: number
           total_questions: number
           total_xp: number
@@ -169,7 +165,6 @@ export type Database = {
           id?: string
           last_activity_date?: string | null
           level?: number
-          simulados_completos?: number
           streak_dias?: number
           total_questions?: number
           total_xp?: number
@@ -187,7 +182,6 @@ export type Database = {
           id?: string
           last_activity_date?: string | null
           level?: number
-          simulados_completos?: number
           streak_dias?: number
           total_questions?: number
           total_xp?: number

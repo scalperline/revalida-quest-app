@@ -3,19 +3,19 @@ import { useState, useMemo } from "react";
 import { type Question } from "@/types/question";
 import { useLimitChecker } from "./useLimitChecker";
 
-export interface SimuladoConfig {
+export interface MissaoConfig {
   quantidade: number;
   areas: string[];
   tempoMinutos: number;
 }
 
-export function useSimulado(questoes: Question[], config?: SimuladoConfig) {
-  const { checkSimuladoLimit, incrementSimuladoUsage } = useLimitChecker();
+export function useMissao(questoes: Question[], config?: MissaoConfig) {
+  const { checkMissaoLimit, incrementMissaoUsage } = useLimitChecker();
   
   const questoesSelecionadas = useMemo(() => {
     let questoesFiltradas = [...questoes];
     
-    console.log('=== DEBUG USESIMULADO - RECALCULANDO QUESTÕES ===');
+    console.log('=== DEBUG USEMISSAO - RECALCULANDO QUESTÕES ===');
     console.log('Questões totais disponíveis:', questoesFiltradas.length);
     console.log('Configuração recebida:', config);
     
@@ -55,7 +55,7 @@ export function useSimulado(questoes: Question[], config?: SimuladoConfig) {
 
   const [respostas, setRespostas] = useState<{[id: number]: string}>({});
   const [index, setIndex] = useState(0);
-  const [simuladoIniciado, setSimuladoIniciado] = useState(false);
+  const [missaoIniciada, setMissaoIniciada] = useState(false);
 
   function respostaAtual() {
     const questaoAtual = questoesSelecionadas[index];
@@ -77,19 +77,19 @@ export function useSimulado(questoes: Question[], config?: SimuladoConfig) {
     setIndex(novoIndex);
   }
 
-  const iniciarSimulado = async (): Promise<boolean> => {
-    if (simuladoIniciado) {
+  const iniciarMissao = async (): Promise<boolean> => {
+    if (missaoIniciada) {
       return true;
     }
 
-    const podeIniciar = await checkSimuladoLimit();
+    const podeIniciar = await checkMissaoLimit();
     
     if (!podeIniciar) {
       return false;
     }
 
-    await incrementSimuladoUsage();
-    setSimuladoIniciado(true);
+    await incrementMissaoUsage();
+    setMissaoIniciada(true);
     
     return true;
   };
@@ -105,7 +105,7 @@ export function useSimulado(questoes: Question[], config?: SimuladoConfig) {
     proxima,
     terminou: index >= questoesSelecionadas.length,
     config: config || { quantidade: 10, areas: [], tempoMinutos: 120 },
-    iniciarSimulado,
-    simuladoIniciado
+    iniciarMissao,
+    missaoIniciada
   };
 }

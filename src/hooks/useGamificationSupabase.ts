@@ -5,6 +5,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { UserProgress } from '@/types/gamification';
 import { ACHIEVEMENTS } from '@/data/achievements';
 import { useToast } from '@/hooks/use-toast';
+import { getXPForQuestion, calculateQuestionXP, calculateAdvancedStats, generateStudyGoals } from '@/utils/gamificationHelpers';
 
 export function useGamificationSupabase() {
   const { user } = useAuth();
@@ -16,13 +17,22 @@ export function useGamificationSupabase() {
     xpToNextLevel: 100,
     totalQuestions: 0,
     correctAnswers: 0,
-    simuladosCompletos: 0,
     streakDias: 0,
     achievements: [...ACHIEVEMENTS],
     newlyUnlockedAchievements: [],
     quests: [],
     medicalCards: [],
-    areaStats: {}
+    areaStats: {},
+    weeklyXP: 0,
+    monthlyXP: 0,
+    xpHistory: [],
+    periodStats: [],
+    studyGoals: [],
+    advancedStats: undefined,
+    currentCombo: 0,
+    maxCombo: 0,
+    totalStudyTime: 0,
+    lastXPBreakdown: undefined
   });
 
   const [loading, setLoading] = useState(true);
@@ -39,40 +49,37 @@ export function useGamificationSupabase() {
   }, [user]);
 
   const loadUserProgress = async () => {
-    if (!user) return;
-
     try {
-      console.log('Carregando progresso do usuário:', user.id);
-      
+      console.log('Carregando progresso do usuário:', user?.id);
+
       const { data: profile, error } = await supabase
         .from('user_profiles')
         .select('*')
-        .eq('user_id', user.id)
-        .maybeSingle();
+        .eq('user_id', user?.id)
+        .single();
 
-      if (error) {
-        console.error('Erro ao carregar progresso:', error);
-        // Continue with default values instead of returning
+      if (error && error.code !== 'PGRST116') {
+        throw error;
       }
 
       if (profile) {
-        console.log('Perfil carregado:', profile);
-        
-        // Merge achievements from database with default achievements
-        const savedAchievements = profile.achievements ? 
-          (profile.achievements as any[]).map(ach => ({
-            ...ach,
-            unlockedAt: ach.unlockedAt ? new Date(ach.unlockedAt) : undefined
-          })) : [];
+        console.log('Perfil encontrado:', profile);
 
-        // Merge with default achievements to ensure all achievements are present
-        const allAchievements = ACHIEVEMENTS.map(defaultAch => {
-          const savedAch = savedAchievements.find(saved => saved.id === defaultAch.id);
-          return savedAch || defaultAch;
-        });
+        // Parse achievements
+        const allAchievements = [...ACHIEVEMENTS];
+        if (profile.achievements) {
+          const savedAchievements = profile.achievements as any[];
+          savedAchievements.forEach(saved => {
+            const existing = allAchievements.find(a => a.id === saved.id);
+            if (existing) {
+              existing.unlocked = saved.unlocked;
+              existing.unlockedAt = saved.unlockedAt ? new Date(saved.unlockedAt) : undefined;
+            }
+          });
+        }
 
-        // Type-safe area stats parsing
-        const areaStats = profile.area_stats && typeof profile.area_stats === 'object' && !Array.isArray(profile.area_stats)
+        // Parse area stats
+        const areaStats = profile.area_stats 
           ? profile.area_stats as Record<string, { correct: number; total: number }>
           : {};
 
@@ -82,15 +89,28 @@ export function useGamificationSupabase() {
           xpToNextLevel: (profile.level || 1) * 100,
           totalQuestions: profile.total_questions || 0,
           correctAnswers: profile.correct_answers || 0,
-          simuladosCompletos: profile.simulados_completos || 0,
           streakDias: profile.streak_dias || 0,
           lastActivityDate: profile.last_activity_date ? new Date(profile.last_activity_date) : undefined,
           achievements: allAchievements,
           newlyUnlockedAchievements: [],
           quests: [],
           medicalCards: [],
-          areaStats
+          areaStats,
+          weeklyXP: profile.weekly_xp || 0,
+          monthlyXP: (profile as any).monthly_xp || 0,
+          xpHistory: (profile as any).xp_history ? (profile as any).xp_history : [],
+          periodStats: [], // TODO: implementar
+          studyGoals: [],
+          advancedStats: undefined,
+          currentCombo: 0,
+          maxCombo: 0,
+          totalStudyTime: (profile.total_questions || 0) * 2, // 2 min por questão
+          lastXPBreakdown: undefined
         };
+
+        // Calcular estatísticas avançadas
+        progressData.advancedStats = calculateAdvancedStats(progressData);
+        progressData.studyGoals = generateStudyGoals(progressData);
 
         console.log('Definindo progresso:', progressData);
         setUserProgress(progressData);
@@ -133,10 +153,9 @@ export function useGamificationSupabase() {
         user_id: user.id,
         level: progress.level,
         total_xp: progress.xp,
-        weekly_xp: progress.xp, // For now, we'll use total_xp as weekly_xp
+        weekly_xp: progress.weeklyXP || 0,
         total_questions: progress.totalQuestions,
         correct_answers: progress.correctAnswers,
-        simulados_completos: progress.simuladosCompletos,
         streak_dias: progress.streakDias,
         last_activity_date: progress.lastActivityDate?.toISOString() || new Date().toISOString(),
         achievements: achievementsJson as any,
@@ -194,7 +213,8 @@ export function useGamificationSupabase() {
         ...prev,
         xp: newXP,
         level: newLevel,
-        xpToNextLevel: newXPToNext
+        xpToNextLevel: newXPToNext,
+        weeklyXP: (prev.weeklyXP || 0) + points
       };
 
       console.log('Progresso atualizado com XP:', updated);
@@ -205,34 +225,55 @@ export function useGamificationSupabase() {
     });
   };
 
-  const answerQuestion = async (correct: boolean, area?: string, questionId?: number) => {
-    if (!user) {
-      console.log('Nenhum usuário logado, não salvando resposta');
-      return;
-    }
+  const addXPWithBreakdown = (xpBreakdown: any) => {
+    console.log('Adicionando XP com breakdown:', xpBreakdown);
+    
+    setUserProgress(prev => {
+      let newXP = prev.xp + xpBreakdown.totalXP;
+      let newLevel = prev.level;
+      let newXPToNext = newLevel * 100;
 
-    console.log('Respondendo questão:', { correct, area, questionId });
-
-    // Save the answer to database
-    if (questionId) {
-      try {
-        await supabase
-          .from('user_question_answers')
-          .upsert({
-            user_id: user.id,
-            question_id: questionId,
-            user_answer: correct ? 'correct' : 'incorrect',
-            is_correct: correct,
-            answered_at: new Date().toISOString()
-          }, {
-            onConflict: 'user_id,question_id',
-            ignoreDuplicates: false
-          });
-      } catch (error) {
-        console.error('Erro ao salvar resposta:', error);
+      while (newXP >= newXPToNext) {
+        newXP -= newXPToNext;
+        newLevel++;
+        newXPToNext = newLevel * 100;
       }
-    }
 
+      // Atualizar XP semanal
+      const newWeeklyXP = (prev.weeklyXP || 0) + xpBreakdown.totalXP;
+
+      // Adicionar ao histórico de XP
+      const newXPHistory = [
+        ...(prev.xpHistory || []),
+        {
+          date: new Date().toISOString().split('T')[0],
+          xpGained: xpBreakdown.totalXP,
+          source: 'question' as const,
+          details: `Questão: ${xpBreakdown.baseXP} + Streak: ${xpBreakdown.streakBonus} + Combo: ${xpBreakdown.comboBonus}`
+        }
+      ].slice(-50); // Manter apenas os últimos 50 registros
+
+      const updated = {
+        ...prev,
+        xp: newXP,
+        level: newLevel,
+        xpToNextLevel: newXPToNext,
+        weeklyXP: newWeeklyXP,
+        xpHistory: newXPHistory,
+        lastXPBreakdown: xpBreakdown
+      };
+
+      console.log('Progresso atualizado com XP breakdown:', updated);
+      
+      // Save with debounce
+      setTimeout(() => saveUserProgress(updated), 1000);
+      return updated;
+    });
+  };
+
+  const answerQuestion = (correct: boolean, area?: string, difficulty: 'easy' | 'medium' | 'hard' = 'medium') => {
+    console.log('Respondendo questão:', { correct, area, difficulty });
+    
     setUserProgress(prev => {
       const today = new Date();
       const todayStr = today.toDateString();
@@ -263,13 +304,20 @@ export function useGamificationSupabase() {
         }
       }
 
+      // Atualizar combo
+      const newCombo = correct ? (prev.currentCombo || 0) + 1 : 0;
+      const newMaxCombo = Math.max(prev.maxCombo || 0, newCombo);
+
       const updated = {
         ...prev,
         totalQuestions: prev.totalQuestions + 1,
         correctAnswers: correct ? prev.correctAnswers + 1 : prev.correctAnswers,
         streakDias: newStreak,
         lastActivityDate: today,
-        areaStats
+        areaStats,
+        currentCombo: newCombo,
+        maxCombo: newMaxCombo,
+        totalStudyTime: (prev.totalStudyTime || 0) + 2 // 2 min por questão
       };
 
       console.log('Progresso atualizado após resposta:', updated);
@@ -279,29 +327,17 @@ export function useGamificationSupabase() {
       return updated;
     });
 
-    // Add XP
-    addXP(correct ? 10 : 5);
-  };
-
-  const completeSimulado = (score: number, total: number) => {
-    console.log('Completando simulado:', { score, total });
-    
-    setUserProgress(prev => {
-      const updated = {
-        ...prev,
-        simuladosCompletos: prev.simuladosCompletos + 1
-      };
-      
-      console.log('Progresso atualizado após simulado:', updated);
-      
-      // Save with debounce
-      setTimeout(() => saveUserProgress(updated), 1000);
-      return updated;
-    });
-
-    const percentage = score / total;
-    const bonusXP = Math.floor(percentage * 50) + 25;
-    addXP(bonusXP);
+    // Add XP with breakdown if correct
+    if (correct) {
+      const xpBreakdown = calculateQuestionXP(
+        correct,
+        userProgress.streakDias,
+        userProgress.currentCombo || 0,
+        difficulty,
+        userProgress.newlyUnlockedAchievements.length > 0
+      );
+      addXPWithBreakdown(xpBreakdown);
+    }
   };
 
   const resetStats = () => {
@@ -310,13 +346,46 @@ export function useGamificationSupabase() {
         ...prev,
         totalQuestions: 0,
         correctAnswers: 0,
-        simuladosCompletos: 0,
         areaStats: {},
+        currentCombo: 0,
+        maxCombo: 0,
+        totalStudyTime: 0
       };
       
       saveUserProgress(updated);
       return updated;
     });
+  };
+
+  const resetJornada = async () => {
+    if (!user) return;
+    const resetAchievements = ACHIEVEMENTS.map(a => ({ ...a, unlocked: false, unlockedAt: undefined }));
+    const resetProgress: UserProgress = {
+      level: 1,
+      xp: 0,
+      xpToNextLevel: 100,
+      totalQuestions: 0,
+      correctAnswers: 0,
+      streakDias: 0,
+      achievements: resetAchievements,
+      newlyUnlockedAchievements: [],
+      quests: [],
+      medicalCards: [],
+      areaStats: {},
+      weeklyXP: 0,
+      monthlyXP: 0,
+      xpHistory: [],
+      periodStats: [],
+      studyGoals: [],
+      advancedStats: undefined,
+      currentCombo: 0,
+      maxCombo: 0,
+      totalStudyTime: 0,
+      lastXPBreakdown: undefined,
+      lastActivityDate: undefined
+    };
+    setUserProgress(resetProgress);
+    await saveUserProgress(resetProgress);
   };
 
   const getAccuracy = () => {
@@ -328,16 +397,26 @@ export function useGamificationSupabase() {
     return Math.round((userProgress.xp / userProgress.xpToNextLevel) * 100);
   };
 
+  const getAdvancedStats = () => {
+    return calculateAdvancedStats(userProgress);
+  };
+
+  const getStudyGoals = () => {
+    return generateStudyGoals(userProgress);
+  };
+
   return {
     userProgress,
     loading,
     saving,
     addXP,
+    addXPWithBreakdown,
     answerQuestion,
-    completeSimulado,
     resetStats,
+    resetJornada,
     getAccuracy,
     getProgressPercentage,
-    refreshProgress: loadUserProgress
+    getAdvancedStats,
+    getStudyGoals,
   };
 }

@@ -1,52 +1,27 @@
 
-import { useState, useEffect } from 'react';
 import { useSubscription } from '@/hooks/useSubscription';
 import { Navbar } from '@/components/Navbar';
 import { PricingHeader } from '@/components/pricing/PricingHeader';
 import { PricingPlansGrid } from '@/components/pricing/PricingPlansGrid';
 import { PricingFAQ } from '@/components/pricing/PricingFAQ';
 import { PricingFooter } from '@/components/pricing/PricingFooter';
-import { SupremeChallengeSection } from '@/components/pricing/SupremeChallengeSection';
-import { getFixedSupremeChallengeQuestions } from '@/utils/fixedSupremeChallengeQuestions';
+import { SupremeChallengeCard } from '@/components/pricing/SupremeChallengeCard';
 
 export default function Pricing() {
   const { subscribed, subscription_tier, loading } = useSubscription();
 
-  // Challenge states - usando questões fixas
-  const [challengeQuestions, setChallengeQuestions] = useState<any[]>([]);
-  const [challengeReady, setChallengeReady] = useState(false);
-
-  // Preparar questões fixas do desafio
-  useEffect(() => {
-    console.log('🎯 Preparando Desafio Supremo com questões fixas...');
-    
-    try {
-      const fixedQuestions = getFixedSupremeChallengeQuestions();
-      setChallengeQuestions(fixedQuestions);
-      setChallengeReady(true);
-      console.log('✅ Desafio Supremo preparado com questões fixas:', fixedQuestions.length);
-    } catch (error) {
-      console.error('❌ Erro ao preparar questões fixas:', error);
-      setChallengeReady(false);
-    }
-  }, []);
-
   return (
-    <div className="min-h-screen bg-slate-950">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-blue-100 to-blue-200 dark:from-gray-900 dark:to-gray-800">
       <Navbar />
       
       <div className="pt-20">
-        <div className="container mx-auto px-4 py-8 max-w-7xl">
+        <div className="container mx-auto px-4 pt-8 sm:pt-12 pb-8 max-w-7xl">
           <PricingHeader />
 
-          {/* Supreme Challenge Section */}
-          <SupremeChallengeSection
-            todasQuestoes={challengeQuestions} // Usar questões fixas
-            challengeQuestions={challengeQuestions}
-            challengeReady={challengeReady}
-            setChallengeQuestions={setChallengeQuestions}
-            setChallengeReady={setChallengeReady}
-          />
+          {/* Supreme Challenge Card - Desafio Surpresa (cópia idêntica da landing page) */}
+          <div className="flex justify-center mb-16">
+            <SupremeChallengeCard />
+          </div>
 
           <PricingPlansGrid subscribed={subscribed} subscription_tier={subscription_tier} loading={loading} />
           <PricingFAQ />

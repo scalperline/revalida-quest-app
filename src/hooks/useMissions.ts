@@ -1,8 +1,12 @@
 
 import { useState, useEffect } from 'react';
-import { Mission, MissionProgress } from '@/types/missions';
+import { Mission, MissionProgress, CustomMission } from '@/types/missions';
 import { MISSIONS } from '@/data/missions';
 import { useGamification } from '@/hooks/useGamification';
+import { useAuth } from '@/hooks/useAuth';
+import { useSubscription } from '@/hooks/useSubscription';
+import { supabase } from '@/integrations/supabase/client';
+import { useToast } from '@/hooks/use-toast';
 
 // Import all question sets
 import { QUESTOES_REVALIDA_2011 } from "@/data/questoesRevalida2011";
@@ -29,7 +33,10 @@ import { QUESTOES_REVALIDA_2025_1 } from "@/data/questoesRevalida2025_1";
 export function useMissions() {
   const [missions, setMissions] = useState<Mission[]>([]);
   const [missionProgress, setMissionProgress] = useState<Record<string, MissionProgress>>({});
-  const { addXP, unlockAchievement } = useGamification();
+  const { addXP } = useGamification();
+  const { user } = useAuth();
+  const { subscription_tier, subscribed } = useSubscription();
+  const { toast } = useToast();
 
   // Combine all questions from all editions
   const allQuestions = [
@@ -77,10 +84,13 @@ export function useMissions() {
     setMissionProgress(progress);
   }, []);
 
-  const getQuestionsForMission = (mission: Mission) => {
+  const getQuestionsForMission = (mission: Mission | CustomMission) => {
     let questionsForArea;
 
-    if (mission.area === 'Mista') {
+    // Se for uma missão personalizada, aplicar filtros específicos
+    if ('isCustom' in mission && mission.isCustom) {
+      questionsForArea = filterQuestionsByCustomMission(allQuestions, mission);
+    } else if (mission.area === 'Mista') {
       // For mixed missions, use all questions
       questionsForArea = allQuestions;
     } else {
@@ -91,6 +101,34 @@ export function useMissions() {
     // Shuffle and take the required amount
     const shuffled = [...questionsForArea].sort(() => Math.random() - 0.5);
     return shuffled.slice(0, mission.targetQuestions);
+  };
+
+  const filterQuestionsByCustomMission = (questions: any[], mission: CustomMission) => {
+    let filteredQuestions = questions;
+
+    // Filtrar por áreas médicas
+    if (
+      mission.filters.medicalAreas.length > 0 &&
+      !mission.filters.medicalAreas.includes('Todas')
+    ) {
+      filteredQuestions = filteredQuestions.filter(q => 
+        mission.filters.medicalAreas.some(area => 
+          q.area.includes(area) || area.includes(q.area)
+        )
+      );
+    }
+
+    // Filtrar por especialidades (se especificadas)
+    if (mission.filters.specialties.length > 0) {
+      filteredQuestions = filteredQuestions.filter(q => 
+        mission.filters.specialties.some(specialty => 
+          q.area.includes(specialty) || 
+          (q.area.includes('/') && q.area.split('/').some(part => part.includes(specialty)))
+        )
+      );
+    }
+
+    return filteredQuestions;
   };
 
   const updateMissionProgress = (missionId: string, questionsAnswered: number, correctAnswers: number) => {
@@ -148,11 +186,66 @@ export function useMissions() {
     return missions.filter(m => m.completed);
   };
 
-  const getAvailableQuestionsCount = (mission: Mission) => {
+  const getAvailableQuestionsCount = (mission: Mission | CustomMission) => {
+    if ('isCustom' in mission && mission.isCustom) {
+      const filteredQuestions = filterQuestionsByCustomMission(allQuestions, mission);
+      return filteredQuestions.length;
+    }
+    
     if (mission.area === 'Mista') {
       return allQuestions.length;
     }
     return allQuestions.filter(q => q.area === mission.area).length;
+  };
+
+  // Limites por plano
+  const getMissionLimit = () => {
+    if (!subscribed) return 3; // Gratuito
+    if (subscription_tier === 'Basic') return 10;
+    if (subscription_tier === 'Premium' || subscription_tier === 'Pro') return 9999;
+    return 3;
+  };
+
+  // Consulta tentativas do mês para a missão
+  const getMissionAttemptsThisMonth = async (missionId: string): Promise<number> => {
+    if (!user) return 0;
+    const { data, error } = await supabase.rpc('count_mission_attempts_this_month', {
+      user_id_input: user.id,
+      mission_id_input: missionId
+    });
+    if (error) {
+      console.error('Erro ao buscar tentativas de missão:', error);
+      return 0;
+    }
+    return data as number;
+  };
+
+  // Registra nova tentativa
+  const registerMissionAttempt = async (missionId: string) => {
+    if (!user) return;
+    const { error } = await supabase.rpc('register_mission_attempt', {
+      user_id_input: user.id,
+      mission_id_input: missionId
+    });
+    if (error) {
+      console.error('Erro ao registrar tentativa de missão:', error);
+    }
+  };
+
+  // Função para iniciar missão com controle de limite
+  const tryStartMission = async (missionId: string): Promise<boolean> => {
+    const limit = getMissionLimit();
+    const attempts = await getMissionAttemptsThisMonth(missionId);
+    if (attempts >= limit) {
+      toast({
+        title: 'Limite de tentativas atingido',
+        description: `Você já utilizou ${attempts}/${limit} tentativas para esta missão neste mês. Faça upgrade para mais tentativas!`,
+        variant: 'destructive',
+      });
+      return false;
+    }
+    await registerMissionAttempt(missionId);
+    return true;
   };
 
   return {
@@ -163,6 +256,9 @@ export function useMissions() {
     getCompletedMissions,
     getQuestionsForMission,
     getAvailableQuestionsCount,
-    allQuestions
+    allQuestions,
+    tryStartMission,
+    getMissionAttemptsThisMonth,
+    getMissionLimit,
   };
 }

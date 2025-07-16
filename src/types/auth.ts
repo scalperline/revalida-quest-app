@@ -18,7 +18,6 @@ export interface UserProfile {
   weekly_xp: number;
   total_questions: number;
   correct_answers: number;
-  simulados_completos: number;
   streak_dias: number;
   last_activity_date?: string;
   achievements: any[];

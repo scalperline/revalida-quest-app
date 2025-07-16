@@ -3,6 +3,8 @@ import { useCallback } from 'react';
 
 type SoundType = 'click' | 'correct' | 'incorrect' | 'levelup' | 'achievement';
 
+// Hook customizado para controlar reprodução de áudio em componentes React.
+// Siga o padrão de nomenclatura: camelCase iniciado por 'use' para hooks.
 export function useAudio() {
   const playSound = useCallback((type: SoundType) => {
     // Create audio context and play sounds programmatically

@@ -1,9 +1,9 @@
 
 import { useState } from 'react';
-import { SimuladoConfig } from '@/hooks/useSimulado';
+import { MissaoConfig } from '@/hooks/useMissao';
 
-export function useSimuladoState() {
-  const [configuracao, setConfiguracao] = useState<SimuladoConfig | null>(null);
+export function useMissaoState() {
+  const [configuracao, setConfiguracao] = useState<MissaoConfig | null>(null);
   const [iniciado, setIniciado] = useState(false);
   const [finalizado, setFinalizado] = useState(false);
   const [showLevelUp, setShowLevelUp] = useState(false);
@@ -24,7 +24,7 @@ export function useSimuladoState() {
     setShowConfetti(false);
   };
 
-  const startSimulado = (config: SimuladoConfig) => {
+  const startMissao = (config: MissaoConfig) => {
     setConfiguracao(config);
     setIniciado(true);
     setFinalizado(false);
@@ -58,6 +58,6 @@ export function useSimuladoState() {
     
     // Actions
     resetState,
-    startSimulado,
+    startMissao,
   };
 }

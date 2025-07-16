@@ -20,12 +20,12 @@ export function MobileSidebar({
     signOut
   } = useAuth();
   const navigation = [{
-    name: 'Dashboard',
-    href: '/',
+    name: 'Início',
+    href: '/app',
     icon: Home,
     emoji: '📊'
   }, {
-    name: 'Questões',
+    name: 'Provas',
     href: '/questions',
     icon: FileText,
     emoji: '📚'
@@ -34,6 +34,11 @@ export function MobileSidebar({
     href: '/missions',
     icon: Flag,
     emoji: '🎯'
+  }, {
+    name: 'Simulados',
+    href: '/simulados',
+    icon: BarChart3,
+    emoji: '📝'
   }, {
     name: 'Estatísticas',
     href: '/stats',

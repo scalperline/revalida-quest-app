@@ -1,7 +1,7 @@
 
 import { Question } from "@/types/question";
 import { Badge } from "@/components/ui/badge";
-import { Calendar, BookOpen, Trophy, Target, Sparkles } from "lucide-react";
+import { Calendar, BookOpen } from "lucide-react";
 
 interface QuestionHeaderProps {
   question: Question;
@@ -34,64 +34,24 @@ export function QuestionHeader({ question, isCorrect }: QuestionHeaderProps) {
   };
 
   return (
-    <div className="border-b-2 border-gray-100 dark:border-gray-700 pb-4 sm:pb-6 mb-4 sm:mb-6">
-      {/* Question Meta Info */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 mb-4">
-        <div className="flex items-center gap-2 sm:gap-3">
-          <div className="p-2 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full shadow-lg">
-            <BookOpen className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
-          </div>
-          <div>
-            <h3 className="text-base sm:text-lg font-bold text-gray-900 dark:text-gray-100">
+    <div className="relative mb-4 sm:mb-6 rounded-2xl overflow-hidden shadow-md border-2 border-blue-100 dark:border-blue-700 bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800">
+      <div className="flex items-center gap-3 px-4 pt-4 pb-2">
+        <span className="p-2 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full shadow-lg">
+          <BookOpen className="w-5 h-5 text-white" />
+        </span>
+        <h3 className="text-lg sm:text-xl font-extrabold text-white drop-shadow">
               Questão {question.id}
             </h3>
-            <div className="flex items-center gap-2 text-xs sm:text-sm text-gray-600 dark:text-gray-400">
-              <Calendar className="w-3 h-3 sm:w-4 sm:h-4" />
-              <span>Revalida {question.year}</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Result Indicator */}
-        {isCorrect !== undefined && (
-          <div className={`flex items-center gap-2 px-3 py-1.5 rounded-full shadow-lg animate-fade-in ${
-            isCorrect 
-              ? 'bg-green-100 text-green-800 border-2 border-green-200' 
-              : 'bg-red-100 text-red-800 border-2 border-red-200'
-          }`}>
-            {isCorrect ? (
-              <>
-                <Trophy className="w-4 h-4 animate-bounce" />
-                <span className="font-semibold text-sm">Correto!</span>
-                <Sparkles className="w-4 h-4 animate-pulse" />
-              </>
-            ) : (
-              <>
-                <Target className="w-4 h-4" />
-                <span className="font-semibold text-sm">Incorreto</span>
-              </>
-            )}
-          </div>
-        )}
       </div>
-
-      {/* Enhanced Badges */}
-      <div className="flex flex-wrap gap-2 sm:gap-3">
-        <Badge 
-          variant="outline" 
-          className={`px-3 py-1 font-semibold text-xs sm:text-sm border-2 shadow-sm hover:shadow-md transition-all duration-200 ${getAreaColor(question.area)}`}
-        >
-          <BookOpen className="w-3 h-3 mr-1.5" />
-          {question.area}
-        </Badge>
-        
-        <Badge 
-          variant="outline" 
-          className="px-3 py-1 font-semibold text-xs sm:text-sm bg-indigo-100 text-indigo-800 border-2 border-indigo-200 shadow-sm hover:shadow-md transition-all duration-200"
-        >
-          <Calendar className="w-3 h-3 mr-1.5" />
+      <div className="flex flex-wrap gap-2 px-4 pb-4">
+        <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-white/20 text-white border border-white/30 text-xs sm:text-sm font-semibold">
+          <Calendar className="w-4 h-4" />
           {question.year}
-        </Badge>
+        </span>
+        <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-white/20 text-white border border-white/30 text-xs sm:text-sm font-semibold">
+          <BookOpen className="w-4 h-4" />
+          {question.area}
+        </span>
       </div>
     </div>
   );

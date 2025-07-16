@@ -1,5 +1,6 @@
 
 import { useState, useEffect } from 'react';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 
 export interface UserRankingData {
@@ -10,120 +11,165 @@ export interface UserRankingData {
   total_xp: number;
   weekly_xp: number;
   position: number;
+  area_stats?: Record<string, { correct: number; total: number }>;
 }
 
-export function useRanking() {
-  const [allTimeRanking, setAllTimeRanking] = useState<UserRankingData[]>([]);
-  const [weeklyRanking, setWeeklyRanking] = useState<UserRankingData[]>([]);
-  const [currentUserPosition, setCurrentUserPosition] = useState<{ allTime: number; weekly: number }>({ allTime: 0, weekly: 0 });
-  const [loading, setLoading] = useState(true);
+export interface RankingFilters {
+  area?: string;
+  period?: 'allTime' | 'weekly' | 'monthly';
+  level?: 'all' | 'beginner' | 'intermediate' | 'advanced';
+}
 
-  // Pagination states
+const ITEMS_PER_PAGE = 10;
+
+// Query keys para React Query
+export const rankingKeys = {
+  all: ['ranking'] as const,
+  lists: () => [...rankingKeys.all, 'list'] as const,
+  list: (filters: RankingFilters, page: number) => [...rankingKeys.lists(), filters, page] as const,
+  userPosition: () => [...rankingKeys.all, 'userPosition'] as const,
+};
+
+// Função para buscar ranking paginado
+const fetchPaginatedRanking = async (type: 'allTime' | 'weekly', page: number, filters?: RankingFilters) => {
+  const orderBy = type === 'allTime' ? 'total_xp' : 'weekly_xp';
+  const offset = (page - 1) * ITEMS_PER_PAGE;
+
+  // Buscar apenas os campos necessários para o ranking
+  let query = supabase
+    .from('user_profiles')
+    .select('id, user_id, display_name, avatar_url, level, total_xp, weekly_xp');
+
+  // Aplicar filtros se fornecidos
+  if (filters?.area) {
+    // Filtro por área médica (implementação básica) - TODO: implementar filtro correto
+    // query = query.filter('area_stats', 'cs', `{"${filters.area}": {"correct": {"gt": 0}}}`);
+  }
+
+  if (filters?.level && filters.level !== 'all') {
+    const levelRanges = {
+      beginner: { min: 1, max: 5 },
+      intermediate: { min: 6, max: 15 },
+      advanced: { min: 16, max: 999 }
+    };
+    const range = levelRanges[filters.level as keyof typeof levelRanges];
+    query = query.gte('level', range.min).lte('level', range.max);
+  }
+
+  // Get total count (query separada para evitar erro de argumentos)
+  const { count } = await supabase
+    .from('user_profiles')
+    .select('id', { count: 'exact', head: true });
+
+  // Get paginated data
+  const { data, error } = await query
+    .order(orderBy, { ascending: false })
+    .range(offset, offset + ITEMS_PER_PAGE - 1);
+
+  if (error) {
+    throw new Error(`Error fetching ${type} ranking: ${error.message}`);
+  }
+
+  // Add position to data (based on global ranking position)
+  const rankingWithPosition = data?.map((user, index) => ({
+    ...user,
+    position: offset + index + 1
+  })) || [];
+
+  // Log nomes para depuração
+  if (rankingWithPosition.length > 0) {
+    console.log(`[useRanking] Ranking (${type}) nomes:`, rankingWithPosition.map(u => u.display_name));
+  }
+
+  return {
+    data: rankingWithPosition,
+    totalCount: count || 0,
+    currentPage: page,
+    totalPages: Math.ceil((count || 0) / ITEMS_PER_PAGE)
+  };
+};
+
+// Função para buscar posição do usuário de forma eficiente
+const fetchUserPosition = async () => {
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) return { allTime: 0, weekly: 0 };
+
+  // Buscar o XP do usuário
+  const { data: userData, error: userError } = await supabase
+    .from('user_profiles')
+    .select('total_xp, weekly_xp')
+    .eq('user_id', user.id)
+    .maybeSingle();
+
+  if (userError || !userData) return { allTime: 0, weekly: 0 };
+
+  // Buscar posição no ranking geral (quantos têm mais XP)
+  const { count: allTimeCount } = await supabase
+    .from('user_profiles')
+    .select('id', { count: 'exact', head: true })
+    .gt('total_xp', userData.total_xp);
+
+  // Buscar posição no ranking semanal (quantos têm mais weekly_xp)
+  const { count: weeklyCount } = await supabase
+    .from('user_profiles')
+    .select('id', { count: 'exact', head: true })
+    .gt('weekly_xp', userData.weekly_xp);
+
+  return {
+    allTime: (allTimeCount || 0) + 1,
+    weekly: (weeklyCount || 0) + 1
+  };
+};
+
+export function useRanking() {
+  const queryClient = useQueryClient();
+  
+  // Estados locais para paginação
   const [allTimeCurrentPage, setAllTimeCurrentPage] = useState(1);
   const [weeklyCurrentPage, setWeeklyCurrentPage] = useState(1);
-  const [allTimeTotalCount, setAllTimeTotalCount] = useState(0);
-  const [weeklyTotalCount, setWeeklyTotalCount] = useState(0);
-  
-  const ITEMS_PER_PAGE = 10;
+  const [filters, setFilters] = useState<RankingFilters>({});
 
-  const fetchPaginatedRanking = async (type: 'allTime' | 'weekly', page: number) => {
-    try {
-      const orderBy = type === 'allTime' ? 'total_xp' : 'weekly_xp';
-      const offset = (page - 1) * ITEMS_PER_PAGE;
+  // Query para ranking geral
+  const {
+    data: allTimeRankingData,
+    isLoading: allTimeLoading,
+    error: allTimeError
+  } = useQuery({
+    queryKey: rankingKeys.list({ ...filters, period: 'allTime' }, allTimeCurrentPage),
+    queryFn: () => fetchPaginatedRanking('allTime', allTimeCurrentPage, filters),
+    staleTime: 5 * 60 * 1000, // 5 minutos
+    gcTime: 10 * 60 * 1000, // 10 minutos
+  });
 
-      // Get total count
-      const { count } = await supabase
-        .from('user_profiles')
-        .select('*', { count: 'exact', head: true });
+  // Query para ranking semanal
+  const {
+    data: weeklyRankingData,
+    isLoading: weeklyLoading,
+    error: weeklyError
+  } = useQuery({
+    queryKey: rankingKeys.list({ ...filters, period: 'weekly' }, weeklyCurrentPage),
+    queryFn: () => fetchPaginatedRanking('weekly', weeklyCurrentPage, filters),
+    staleTime: 2 * 60 * 1000, // 2 minutos (mais frequente)
+    gcTime: 5 * 60 * 1000, // 5 minutos
+  });
 
-      // Get paginated data
-      const { data, error } = await supabase
-        .from('user_profiles')
-        .select('*')
-        .order(orderBy, { ascending: false })
-        .range(offset, offset + ITEMS_PER_PAGE - 1);
+  // Query para posição do usuário
+  const {
+    data: currentUserPosition,
+    isLoading: userPositionLoading,
+    error: userPositionError
+  } = useQuery({
+    queryKey: rankingKeys.userPosition(),
+    queryFn: fetchUserPosition,
+    staleTime: 1 * 60 * 1000, // 1 minuto
+    gcTime: 5 * 60 * 1000, // 5 minutos
+  });
 
-      if (error) {
-        console.error(`Error fetching ${type} ranking:`, error);
-        return;
-      }
-
-      // Add position to data (based on global ranking position)
-      const rankingWithPosition = data?.map((user, index) => ({
-        ...user,
-        position: offset + index + 1
-      })) || [];
-
-      if (type === 'allTime') {
-        setAllTimeRanking(rankingWithPosition);
-        setAllTimeTotalCount(count || 0);
-      } else {
-        setWeeklyRanking(rankingWithPosition);
-        setWeeklyTotalCount(count || 0);
-      }
-
-    } catch (error) {
-      console.error(`Error in fetch${type}Ranking:`, error);
-    }
-  };
-
-  const fetchUserPosition = async () => {
-    try {
+  // Mutation para atualizar perfil do usuário
+  const updateUserProfileMutation = useMutation({
+    mutationFn: async (userData: { display_name: string; level: number; total_xp: number; weekly_xp: number }) => {
       const { data: { user } } = await supabase.auth.getUser();
-      if (!user) return;
-
-      // Get user's position in all-time ranking
-      const { data: allTimeData } = await supabase
-        .from('user_profiles')
-        .select('user_id, total_xp')
-        .order('total_xp', { ascending: false });
-
-      // Get user's position in weekly ranking
-      const { data: weeklyData } = await supabase
-        .from('user_profiles')
-        .select('user_id, weekly_xp')
-        .order('weekly_xp', { ascending: false });
-
-      const allTimePos = allTimeData?.findIndex(u => u.user_id === user.id) ?? -1;
-      const weeklyPos = weeklyData?.findIndex(u => u.user_id === user.id) ?? -1;
-
-      setCurrentUserPosition({
-        allTime: allTimePos >= 0 ? allTimePos + 1 : 0,
-        weekly: weeklyPos >= 0 ? weeklyPos + 1 : 0
-      });
-    } catch (error) {
-      console.error('Error fetching user position:', error);
-    }
-  };
-
-  const fetchRankings = async () => {
-    setLoading(true);
-    await Promise.all([
-      fetchPaginatedRanking('allTime', allTimeCurrentPage),
-      fetchPaginatedRanking('weekly', weeklyCurrentPage),
-      fetchUserPosition()
-    ]);
-    setLoading(false);
-  };
-
-  // Update rankings when page changes
-  useEffect(() => {
-    fetchPaginatedRanking('allTime', allTimeCurrentPage);
-  }, [allTimeCurrentPage]);
-
-  useEffect(() => {
-    fetchPaginatedRanking('weekly', weeklyCurrentPage);
-  }, [weeklyCurrentPage]);
-
-  // Initial load
-  useEffect(() => {
-    fetchRankings();
-  }, []);
-
-  const updateUserProfile = async (userData: { display_name: string; level: number; total_xp: number; weekly_xp: number }) => {
-    try {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) return;
+      if (!user) throw new Error('User not authenticated');
 
       const { error } = await supabase
         .from('user_profiles')
@@ -136,37 +182,88 @@ export function useRanking() {
           updated_at: new Date().toISOString()
         });
 
-      if (error) {
-        console.error('Error updating user profile:', error);
-      } else {
-        // Refresh rankings after update
-        fetchRankings();
-      }
-    } catch (error) {
-      console.error('Error in updateUserProfile:', error);
-    }
+      if (error) throw new Error(`Error updating user profile: ${error.message}`);
+      return userData;
+    },
+    onSuccess: () => {
+      // Invalidate e refetch queries relacionadas
+      queryClient.invalidateQueries({ queryKey: rankingKeys.lists() });
+      queryClient.invalidateQueries({ queryKey: rankingKeys.userPosition() });
+    },
+  });
+
+  // Função para refazer queries
+  const refreshRankings = () => {
+    queryClient.invalidateQueries({ queryKey: rankingKeys.lists() });
+    queryClient.invalidateQueries({ queryKey: rankingKeys.userPosition() });
   };
 
-  const getTotalPages = (type: 'allTime' | 'weekly') => {
-    const totalCount = type === 'allTime' ? allTimeTotalCount : weeklyTotalCount;
-    return Math.ceil(totalCount / ITEMS_PER_PAGE);
+  // Função para atualizar filtros
+  const updateFilters = (newFilters: Partial<RankingFilters>) => {
+    setFilters(prev => ({ ...prev, ...newFilters }));
+    // Reset páginas quando filtros mudam
+    setAllTimeCurrentPage(1);
+    setWeeklyCurrentPage(1);
   };
+
+  // --- Realtime: Atualização automática do ranking ---
+  useEffect(() => {
+    // Cria canal realtime para user_profiles
+    const channel = supabase.channel('public:user_profiles')
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'user_profiles' }, (payload) => {
+        // Invalida queries do ranking ao detectar mudanças
+        queryClient.invalidateQueries({ queryKey: rankingKeys.lists() });
+        queryClient.invalidateQueries({ queryKey: rankingKeys.userPosition() });
+      })
+      .subscribe();
+
+    // Listener para evento customizado de refresh
+    const handleRankingRefresh = () => {
+      console.log('[useRanking] Evento ranking-refresh recebido, refazendo ranking...');
+      refreshRankings();
+    };
+    window.addEventListener('ranking-refresh', handleRankingRefresh);
+    return () => {
+      window.removeEventListener('ranking-refresh', handleRankingRefresh);
+      supabase.removeChannel(channel);
+    };
+  }, [queryClient]);
 
   return {
-    allTimeRanking,
-    weeklyRanking,
-    currentUserPosition,
-    loading,
-    refreshRankings: fetchRankings,
-    updateUserProfile,
-    // Pagination
+    // Dados do ranking
+    allTimeRanking: allTimeRankingData?.data || [],
+    weeklyRanking: weeklyRankingData?.data || [],
+    currentUserPosition: currentUserPosition || { allTime: 0, weekly: 0 },
+    
+    // Estados de loading
+    loading: allTimeLoading || weeklyLoading || userPositionLoading,
+    allTimeLoading,
+    weeklyLoading,
+    userPositionLoading,
+    
+    // Erros
+    allTimeError,
+    weeklyError,
+    userPositionError,
+    
+    // Paginação
     allTimeCurrentPage,
     weeklyCurrentPage,
     setAllTimeCurrentPage,
     setWeeklyCurrentPage,
-    allTimeTotalPages: getTotalPages('allTime'),
-    weeklyTotalPages: getTotalPages('weekly'),
-    allTimeTotalCount,
-    weeklyTotalCount
+    allTimeTotalPages: allTimeRankingData?.totalPages || 0,
+    weeklyTotalPages: weeklyRankingData?.totalPages || 0,
+    allTimeTotalCount: allTimeRankingData?.totalCount || 0,
+    weeklyTotalCount: weeklyRankingData?.totalCount || 0,
+    
+    // Filtros
+    filters,
+    updateFilters,
+    
+    // Ações
+    refreshRankings,
+    updateUserProfile: updateUserProfileMutation.mutate,
+    isUpdatingProfile: updateUserProfileMutation.isPending,
+    updateProfileError: updateUserProfileMutation.error,
   };
 }

@@ -1,14 +1,17 @@
-import { Stethoscope } from 'lucide-react';
 export function PricingHeader() {
-  return <div className="text-center mb-12">
+  return (
+    <div className="text-center mb-12">
       <div className="flex flex-col items-center justify-center gap-4 mb-6">
-        <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center shadow-2xl rounded-lg">
-          <Stethoscope className="w-8 h-8 text-white" />
-        </div>
-        <h1 className="font-bold text-white md:text-4xl text-2xl">
-          Planos RevalidaQuest
-        </h1>
+        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+          Escolha seu{' '}
+          <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent text-3xl lg:text-5xl">
+            plano ideal
+          </span>
+        </h2>
+        <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          Comece grátis e evolua conforme suas necessidades. Todos os planos incluem acesso às questões oficiais e sistema gamificado.
+        </p>
       </div>
-      
-    </div>;
+    </div>
+  );
 }

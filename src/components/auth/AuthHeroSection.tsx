@@ -19,19 +19,19 @@ export function AuthHeroSection() {
       <div className="text-left stagger-animation">
         <div className="flex items-center mb-6">
           <div className="relative">
-            <div className="w-16 h-16 medical-gradient rounded-2xl flex items-center justify-center shadow-2xl">
+            <div className="w-16 h-16 bg-gradient-to-br from-blue-500 via-blue-600 to-purple-600 rounded-2xl flex items-center justify-center shadow-2xl">
               <Stethoscope className="w-8 h-8 text-white" />
             </div>
           </div>
           <div className="ml-3">
-            <h1 className="text-3xl font-bold text-white">
-              Revalida Quest
+            <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent">
+              RevalidaQuest
             </h1>
           </div>
         </div>
         
-        <p className="text-lg text-blue-50 leading-relaxed mb-6">
-          Prepare-se para o <span className="font-semibold text-white">Revalida INEP</span> com questões e gabaritos oficiais em uma experiência única. 
+        <p className="text-lg text-black leading-relaxed mb-6">
+          Prepare-se para o <span className="font-semibold text-black">Revalida INEP</span> com questões e gabaritos oficiais em uma experiência única. 
           Sua jornada médica começa aqui.
         </p>
       </div>

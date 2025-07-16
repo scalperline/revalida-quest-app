@@ -27,7 +27,7 @@ export function DetailedAreaStats() {
   }
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 border border-blue-100 dark:border-gray-700 shadow-xl mb-8">
+    <div className="border-0 shadow-2xl bg-gradient-to-br from-blue-50 via-purple-50 to-white dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 rounded-3xl p-8 mb-8">
       <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white flex items-center gap-3">
         <Target className="w-6 h-6 text-green-600" />
         Análise Detalhada por Especialidade

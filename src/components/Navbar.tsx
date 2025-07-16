@@ -12,16 +12,20 @@ export function Navbar() {
   
   const navigation = [{
     name: 'Início',
-    href: '/',
+    href: '/app',
     icon: Home
   }, {
-    name: 'Questões',
+    name: 'Provas',
     href: '/questions',
     icon: FileText
   }, {
     name: 'Missões',
     href: '/missions',
     icon: Flag
+  }, {
+    name: 'Simulados',
+    href: '/simulados',
+    icon: Stethoscope
   }, {
     name: 'Estatísticas',
     href: '/stats',

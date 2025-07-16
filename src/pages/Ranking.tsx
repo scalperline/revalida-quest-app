@@ -213,7 +213,7 @@ const MobileUserCard = ({ userItem, isLoggedUser, isTop3, movement, setSelectedU
 };
 
 // Componente de tabela para desktop
-const DesktopRankingTable = ({ podium, others, user, setSelectedUser, setOpenProfile }: any) => {
+const DesktopRankingTable = ({ podium, others, user, setSelectedUser, setOpenProfile, isFirstPage, usersToShow }: any) => {
   const { ArrowUp, ArrowDown, PodiumIcon } = RankingIcons;
   // Função para renderizar badges/conquistas rápidas (máx 2)
   const renderBadges = (userItem: any) => {
@@ -238,7 +238,7 @@ const DesktopRankingTable = ({ podium, others, user, setSelectedUser, setOpenPro
     return null;
   };
   return (
-    <div className="hidden sm:flex w-full px-8 justify-start items-center min-h-[70vh]">
+    <div className={`hidden sm:flex w-full justify-start items-center${isFirstPage ? ' px-8 min-h-[70vh]' : ''}`}>
       <div className="w-full max-w-6xl">
         <table className="min-w-full rounded-2xl shadow-2xl text-xs sm:text-sm md:text-base border-separate border-spacing-y-2" style={{ background: 'linear-gradient(135deg, #f8fafc 60%, #e0e7ef 100%)' }}>
           <thead>
@@ -261,9 +261,9 @@ const DesktopRankingTable = ({ podium, others, user, setSelectedUser, setOpenPro
             </tr>
           </thead>
           <tbody>
-            {[...podium, ...others].map((userItem: any, idx: number) => {
+            {usersToShow.map((userItem: any, idx: number) => {
               const isLoggedUser = userItem.id === user?.id;
-              const isTop3 = userItem.position <= 3;
+              const isTop3 = isFirstPage && userItem.position <= 3;
               const movement = RankingUtils.simulateMovement(idx);
               return (
                 <tr key={userItem.id}
@@ -376,11 +376,16 @@ export default function Ranking() {
   const [openProfile, setOpenProfile] = useState(false);
   const [userMovement, setUserMovement] = useState<'up' | 'down' | 'same' | null>(null);
 
-  // Dados organizados
-  const podium = allTimeRanking.slice(0, 3);
-  const others = allTimeRanking.slice(3, 10);
+  // Lógica para exibir pódio apenas na primeira página
+  const isFirstPage = allTimeCurrentPage === 1;
+  const podium = isFirstPage ? allTimeRanking.slice(0, 3) : [];
+  const others = isFirstPage
+    ? allTimeRanking.slice(3, 10)
+    : allTimeRanking; // ou o slice correto para a página atual, se houver paginação real
+  const usersToShow = isFirstPage ? [...podium, ...others] : allTimeRanking;
+
   const loggedUserInRanking = allTimeRanking.find(u => u.id === user?.id);
-  const loggedUserInTop10 = [...podium, ...others].some(u => u.id === user?.id);
+  const loggedUserInTop10 = usersToShow.some(u => u.id === user?.id);
   const showLoggedUserSeparately = user && loggedUserInRanking && !loggedUserInTop10;
 
   // Mensagem motivacional
@@ -433,95 +438,131 @@ export default function Ranking() {
       
       <main className="max-w-6xl mx-auto px-4 pt-20 pb-8 relative z-10">
         <RankingHeader />
-        
-        <RankingPodium podium={podium} />
-        
+        {/* Exibe o pódio apenas na primeira página */}
+        {isFirstPage && <RankingPodium podium={podium} />}
         <UpdateStatus />
-        
-        {motivationalMessage && (
-          <MotivationalMessage message={motivationalMessage} />
-        )}
-
-        {/* Mobile Layout */}
-        <div className="block sm:hidden">
-          <div className="flex flex-col gap-3">
-            {[...podium, ...others].map((userItem: any, idx: number) => {
-              const isLoggedUser = userItem.id === user?.id;
-              const isTop3 = userItem.position <= 3;
-              const movement = RankingUtils.simulateMovement(idx);
-              
-              return (
-                <MobileUserCard
-                  key={userItem.id}
-                  userItem={userItem}
-                  isLoggedUser={isLoggedUser}
-                  isTop3={isTop3}
-                  movement={movement}
-                  setSelectedUser={setSelectedUser}
-                  setOpenProfile={setOpenProfile}
-                />
-              );
-            })}
-            
-            {/* Usuário logado fora do top 10 */}
-            {showLoggedUserSeparately && loggedUserInRanking && (
-              <div className="relative rounded-2xl shadow-lg px-4 py-3 flex items-center gap-3 ring-2 ring-blue-500 font-bold mt-2"
-                style={{
-                  background: 'linear-gradient(135deg, #3b82f6 0%, #2563eb 60%, #7c3aed 100%)',
-                  borderRadius: '20px',
-                  boxShadow: '0 4px 24px 0 rgba(30, 64, 175, 0.08)',
-                }}
-              >
-                <div className="flex flex-col items-center w-8">
-                  <div className="w-8 h-8 flex items-center justify-center rounded-full font-extrabold text-base shadow-sm border-2 bg-blue-900 text-white border-blue-700" style={{ letterSpacing: 1 }}>
-                    {loggedUserInRanking.position}
-                  </div>
-                </div>
-                
-                <Avatar className="w-12 h-12 border-4 border-blue-200 bg-white">
-                  {loggedUserInRanking.avatar_url ? (
-                    <AvatarImage src={loggedUserInRanking.avatar_url} />
-                  ) : (
-                    <AvatarFallback className="bg-gradient-to-r from-blue-500 to-purple-600 text-gray-500 font-semibold">
-                      {loggedUserInRanking.display_name.split(' ').map((n: string) => n[0]).join('').toUpperCase()}
-                    </AvatarFallback>
-                  )}
-                </Avatar>
-                
-                <div className="flex-1 min-w-0 flex flex-col gap-1">
-                  <div className="font-bold text-blue-700 truncate text-base px-2 py-0.5 rounded-lg border-2 border-blue-300 shadow-sm bg-white/30">
-                    Você ({loggedUserInRanking.display_name})
-                  </div>
-                  <div className="flex items-center gap-4 text-sm mt-1">
-                    <span className="flex items-center gap-1">
-                      <Star className="w-4 h-4 text-yellow-400" />
-                      <span className="font-bold">{loggedUserInRanking.total_xp} XP</span>
-                    </span>
-                    <span className="flex items-center gap-1 border-l border-gray-200 pl-3">
-                      <span className="font-bold">Nível:</span>
-                      <span className="inline-flex items-center gap-1">
-                        <span className="rounded-full bg-gradient-to-r from-blue-200 to-purple-200 text-blue-900 px-2 py-0.5 text-xs font-bold border border-blue-300">
-                          {loggedUserInRanking.level}
-                        </span>
-                        <RankingIcons.LevelBadgeIcon level={loggedUserInRanking.level} />
-                      </span>
-                    </span>
-                  </div>
-                </div>
-              </div>
+        {/*
+          Da página 2 em diante, a tabela deve aparecer logo após 'Atualizado em tempo real',
+          sem mensagem motivacional ou outros elementos intermediários.
+        */}
+        {isFirstPage ? (
+          <>
+            {motivationalMessage && (
+              <MotivationalMessage message={motivationalMessage} />
             )}
-          </div>
-        </div>
-
-        {/* Desktop Layout */}
-        <DesktopRankingTable 
-          podium={podium} 
-          others={others} 
-          user={user} 
-          setSelectedUser={setSelectedUser} 
-          setOpenProfile={setOpenProfile} 
-        />
-
+            {/* Mobile Layout */}
+            <div className="block sm:hidden">
+              <div className="flex flex-col gap-3">
+                {usersToShow.map((userItem: any, idx: number) => {
+                  const isLoggedUser = userItem.id === user?.id;
+                  const isTop3 = isFirstPage && userItem.position <= 3;
+                  const movement = RankingUtils.simulateMovement(idx);
+                  return (
+                    <MobileUserCard
+                      key={userItem.id}
+                      userItem={userItem}
+                      isLoggedUser={isLoggedUser}
+                      isTop3={isTop3}
+                      movement={movement}
+                      setSelectedUser={setSelectedUser}
+                      setOpenProfile={setOpenProfile}
+                    />
+                  );
+                })}
+                {/* Usuário logado fora do top 10 */}
+                {showLoggedUserSeparately && loggedUserInRanking && (
+                  <div className="relative rounded-2xl shadow-lg px-4 py-3 flex items-center gap-3 ring-2 ring-blue-500 font-bold mt-2"
+                    style={{
+                      background: 'linear-gradient(135deg, #3b82f6 0%, #2563eb 60%, #7c3aed 100%)',
+                      borderRadius: '20px',
+                      boxShadow: '0 4px 24px 0 rgba(30, 64, 175, 0.08)',
+                    }}
+                  >
+                    <div className="flex flex-col items-center w-8">
+                      <div className="w-8 h-8 flex items-center justify-center rounded-full font-extrabold text-base shadow-sm border-2 bg-blue-900 text-white border-blue-700" style={{ letterSpacing: 1 }}>
+                        {loggedUserInRanking.position}
+                      </div>
+                    </div>
+                    <Avatar className="w-12 h-12 border-4 border-blue-200 bg-white">
+                      {loggedUserInRanking.avatar_url ? (
+                        <AvatarImage src={loggedUserInRanking.avatar_url} />
+                      ) : (
+                        <AvatarFallback className="bg-gradient-to-r from-blue-500 to-purple-600 text-gray-500 font-semibold">
+                          {loggedUserInRanking.display_name.split(' ').map((n: string) => n[0]).join('').toUpperCase()}
+                        </AvatarFallback>
+                      )}
+                    </Avatar>
+                    <div className="flex-1 min-w-0 flex flex-col gap-1">
+                      <div className="font-bold text-blue-700 truncate text-base px-2 py-0.5 rounded-lg border-2 border-blue-300 shadow-sm bg-white/30">
+                        Você ({loggedUserInRanking.display_name})
+                      </div>
+                      <div className="flex items-center gap-4 text-sm mt-1">
+                        <span className="flex items-center gap-1">
+                          <Star className="w-4 h-4 text-yellow-400" />
+                          <span className="font-bold">{loggedUserInRanking.total_xp} XP</span>
+                        </span>
+                        <span className="flex items-center gap-1 border-l border-gray-200 pl-3">
+                          <span className="font-bold">Nível:</span>
+                          <span className="inline-flex items-center gap-1">
+                            <span className="rounded-full bg-gradient-to-r from-blue-200 to-purple-200 text-blue-900 px-2 py-0.5 text-xs font-bold border border-blue-300">
+                              {loggedUserInRanking.level}
+                            </span>
+                            <RankingIcons.LevelBadgeIcon level={loggedUserInRanking.level} />
+                          </span>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+            {/* Desktop Layout */}
+            <DesktopRankingTable 
+              podium={podium} 
+              others={others} 
+              user={user} 
+              setSelectedUser={setSelectedUser} 
+              setOpenProfile={setOpenProfile} 
+              isFirstPage={isFirstPage}
+              usersToShow={usersToShow}
+            />
+          </>
+        ) : (
+          // Da página 2 em diante, mostra só a tabela imediatamente após o status
+          <>
+            {/* Mobile Layout */}
+            <div className="block sm:hidden">
+              <div className="flex flex-col gap-3">
+                {usersToShow.map((userItem: any, idx: number) => {
+                  const isLoggedUser = userItem.id === user?.id;
+                  const isTop3 = false;
+                  const movement = RankingUtils.simulateMovement(idx);
+                  return (
+                    <MobileUserCard
+                      key={userItem.id}
+                      userItem={userItem}
+                      isLoggedUser={isLoggedUser}
+                      isTop3={isTop3}
+                      movement={movement}
+                      setSelectedUser={setSelectedUser}
+                      setOpenProfile={setOpenProfile}
+                    />
+                  );
+                })}
+              </div>
+            </div>
+            {/* Desktop Layout */}
+            <DesktopRankingTable 
+              podium={[]}
+              others={usersToShow}
+              user={user}
+              setSelectedUser={setSelectedUser}
+              setOpenProfile={setOpenProfile}
+              isFirstPage={false}
+              usersToShow={usersToShow}
+            />
+          </>
+        )}
         {/* Paginação */}
         <RankingPagination 
           currentPage={allTimeCurrentPage}

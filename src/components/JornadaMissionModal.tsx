@@ -423,7 +423,7 @@ export function JornadaMissionModal({
               <Button
                 onClick={() => {
                   onFinish();
-                  navigate(0);
+                  navigate('/missions');
                 }}
                 className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-semibold"
               >
@@ -436,7 +436,7 @@ export function JornadaMissionModal({
                     onFinish();
                     setShowPerformanceCard(false);
                     setMissionResults(null);
-                    navigate(0);
+                    // Reinicia a missão sem reload
                   }}
                   className="flex-1 bg-orange-500 hover:bg-orange-600 text-white font-semibold"
                 >
@@ -449,7 +449,6 @@ export function JornadaMissionModal({
                     onFinish();
                     onClose();
                     navigate('/missions');
-                    navigate(0);
                   }}
                   className="flex-1 bg-orange-500 hover:bg-orange-600 text-white font-semibold"
                 >

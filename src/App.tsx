@@ -3,7 +3,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { AuthProvider } from "@/hooks/useAuth";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
 import { CookieBanner } from "@/components/CookieBanner";
@@ -28,6 +28,15 @@ import Help from "./pages/Help";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { useEffect } from "react";
 
+// Componente global para garantir scroll ao topo a cada mudança de rota
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "auto" });
+  }, [pathname]);
+  return null;
+}
+
 const queryClient = new QueryClient();
 
 const App = () => {
@@ -48,6 +57,7 @@ const App = () => {
             <PreloadResources />
             <BrowserRouter>
               <AccessibilityEnhancer />
+              <ScrollToTop />
               <Routes>
                 <Route path="/" element={<Landing />} />
                 <Route path="/app" element={

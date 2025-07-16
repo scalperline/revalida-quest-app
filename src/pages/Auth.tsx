@@ -20,19 +20,23 @@ export default function Auth() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-blue-100 to-blue-200 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center">
-        <div className="relative">
-          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-400"></div>
-          <div className="absolute inset-0 flex items-center justify-center">
-            <Stethoscope className="w-8 h-8 text-blue-400 animate-pulse" />
+      <>
+        <LandingNavbar />
+        <div className="min-h-screen bg-gradient-to-br from-blue-50 via-blue-100 to-blue-200 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center">
+          <div className="relative">
+            <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-400"></div>
+            <div className="absolute inset-0 flex items-center justify-center">
+              <Stethoscope className="w-8 h-8 text-blue-400 animate-pulse" />
+            </div>
           </div>
         </div>
-      </div>
+      </>
     );
   }
 
   return (
     <>
+      <LandingNavbar />
       <div className="min-h-screen bg-gradient-to-br from-blue-50 via-blue-100 to-blue-200 dark:from-gray-900 dark:to-gray-800 relative overflow-hidden">
       {/* Elementos decorativos do fundo da LandingPage */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">

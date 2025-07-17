@@ -70,7 +70,7 @@ export default function Help() {
             <ul className="list-disc pl-6 text-gray-700 dark:text-gray-300 space-y-2 text-base">
               <li><strong>Gratuito:</strong> 10 questões por dia + 1 simulado por mês</li>
               <li><strong>Basic (R$ 29,90/mês):</strong> Acesso ampliado às funcionalidades</li>
-              <li><strong>Premium (R$ 49,90/mês):</strong> Acesso completo a todas as funcionalidades</li>
+              <li><strong>Premium (R$ 79,90/mês):</strong> Acesso completo a todas as funcionalidades</li>
             </ul>
           </div>
 

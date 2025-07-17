@@ -490,15 +490,16 @@ export function SimuladoModal({
                   Tentar Novamente
                 </Button>
               )}
-              {/* Exibir Análise por IA para todos os simulados */}
-              <Button
-                onClick={() => {
-                  setStep('ia');
-                }}
-                className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-semibold"
-              >
-                Análise por IA
-              </Button>
+              {isCustom && (
+                <Button
+                  onClick={() => {
+                    setStep('ia');
+                  }}
+                  className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-semibold"
+                >
+                  Análise por IA
+                </Button>
+              )}
             </div>
           </div>
           {/* Confetti apenas para simulado concluído */}

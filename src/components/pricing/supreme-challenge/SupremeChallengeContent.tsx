@@ -46,7 +46,7 @@ export function SupremeChallengeContent({
     try {
       setClaiming(true);
       // Use direct Stripe checkout URL for Premium plan
-      window.open('https://buy.stripe.com/bJeaEX08TeQE38v8xi7ss02', '_blank');
+      window.open('https://buy.stripe.com/aFa5kDbRB37W4cz14Q7ss03', '_blank');
       
       toast.success('🎉 Checkout aberto! Use o cupom #supreme para seu desconto especial.', {
         duration: 5000,
@@ -72,7 +72,7 @@ export function SupremeChallengeContent({
           </h3>
           <div className="text-center mb-6">
             <div className="text-3xl sm:text-5xl font-bold mb-2">
-              <span className="line-through text-xl sm:text-2xl text-zinc-400">R$ 49,90</span>
+              <span className="line-through text-xl sm:text-2xl text-zinc-400">R$ 79,90</span>
               <span className="ml-4 text-lime-400 text-2xl">
                 R$ 29,90
               </span>

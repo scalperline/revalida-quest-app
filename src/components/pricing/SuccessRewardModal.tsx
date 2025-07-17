@@ -137,7 +137,7 @@ export function SuccessRewardModal({ isOpen, onClose, score, total }: SuccessRew
                   <span className="text-gray-200">Plano Premium por apenas</span>
                 </div>
                 <div className="flex items-center justify-center gap-6 mb-4">
-                  <span className="text-3xl text-gray-400 line-through">R$ 49,90</span>
+                  <span className="text-3xl text-gray-400 line-through">R$ 79,90</span>
                   <span className="text-6xl font-bold text-transparent bg-gradient-to-r from-green-400 to-emerald-500 bg-clip-text animate-pulse">
                     R$ 29,90
                   </span>

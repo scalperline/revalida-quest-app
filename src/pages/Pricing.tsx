@@ -18,7 +18,7 @@ export default function Pricing() {
         <div className="container mx-auto px-4 pt-8 sm:pt-12 pb-8 max-w-7xl">
           <PricingHeader />
 
-          {/* Supreme Challenge Card - Desafio Surpresa (cópia idêntica da landing page) */}
+          {/* Supreme Challenge Card - Desafio Relâmpago (cópia idêntica da landing page) */}
           <div className="flex justify-center mb-16">
             <SupremeChallengeCard />
           </div>

@@ -17,7 +17,7 @@ export function PricingSection() {
           </p>
         </div>
 
-        {/* Supreme Challenge Card - Desafio Surpresa */}
+        {/* Supreme Challenge Card - Desafio Relâmpago */}
         <div className="flex justify-center mb-10">
           <SupremeChallengeCard />
         </div>

@@ -17,9 +17,9 @@ export function PricingFAQ() {
         
         <Card className="bg-white/80 dark:bg-slate-800/50 backdrop-blur-sm border border-gray-200 dark:border-slate-700 shadow-lg">
           <CardContent className="pt-6">
-            <h3 className="font-semibold mb-3 text-lg text-gray-800 dark:text-white">Como funciona o Desafio Surpresa?</h3>
+            <h3 className="font-semibold mb-3 text-lg text-gray-800 dark:text-white">Como funciona o Desafio Relâmpago?</h3>
             <p className="text-gray-600 dark:text-slate-300">
-              O Desafio Surpresa é uma oportunidade única: responda corretamente 10 questões em 10 minutos, sem errar nenhuma, e ganhe o Plano Premium pelo preço do Basic! Você tem até 3 tentativas para conquistar esse benefício exclusivo.
+              O Desafio Relâmpago é uma oportunidade única: responda corretamente 10 questões em 10 minutos, sem errar nenhuma, e ganhe o Plano Premium pelo preço do Basic! Você tem até 3 tentativas para conquistar esse benefício exclusivo.
             </p>
           </CardContent>
         </Card>

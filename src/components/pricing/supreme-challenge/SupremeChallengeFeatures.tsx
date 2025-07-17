@@ -1,4 +1,5 @@
-import { Trophy, Sparkles, Gift, Zap } from 'lucide-react';
+import { Trophy, Sparkles, Gift, Zap, Clock } from 'lucide-react';
+
 export function SupremeChallengeFeatures() {
   const features = [{
     icon: Trophy,
@@ -8,11 +9,15 @@ export function SupremeChallengeFeatures() {
     text: "10 questões oficiais do INEP"
   }, {
     icon: Gift,
-    text: "Economia de R$ 20,00/mês"
+    text: "Economia de R$ 50,00/mês"
+  }, {
+    icon: Clock,
+    text: "Valor promocional válido por 12 meses"
   }, {
     icon: Zap,
     text: "Apenas 3 tentativas disponíveis"
   }];
+  
   return <div className="space-y-3 lg:space-y-4 mb-6 lg:mb-8 flex-1">
       {features.map((feature, index) => {
       const Icon = feature.icon;

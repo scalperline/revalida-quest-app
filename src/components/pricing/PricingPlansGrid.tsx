@@ -66,10 +66,10 @@ const plans = [
   {
     name: 'Premium',
     description: 'Para máximo desempenho',
-    price: 'R$ 49',
+    price: 'R$ 79',
     period: ',90/mês',
     priceId: 'price_revalida_premium_monthly',
-    checkoutUrl: 'https://buy.stripe.com/bJeaEX08TeQE38v8xi7ss02',
+    checkoutUrl: 'https://buy.stripe.com/aFa5kDbRB37W4cz14Q7ss03',
     features: [
       'Questões ilimitadas',
       'Tentativas de missões ilimitadas',

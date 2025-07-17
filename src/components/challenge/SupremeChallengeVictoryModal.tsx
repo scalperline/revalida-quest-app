@@ -36,7 +36,7 @@ export function SupremeChallengeVictoryModal({ isOpen, onClose }: SupremeChallen
     try {
       setClaiming(true);
       // Use direct Stripe checkout URL for Premium plan
-      window.open('https://buy.stripe.com/bJeaEX08TeQE38v8xi7ss02', '_blank');
+      window.open('https://buy.stripe.com/aFa5kDbRB37W4cz14Q7ss03', '_blank');
       
       toast.success('🎉 Checkout aberto! Use o cupom #supreme para seu desconto especial.', {
         duration: 5000,

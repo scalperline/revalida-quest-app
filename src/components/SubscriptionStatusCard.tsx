@@ -103,7 +103,7 @@ export function SubscriptionStatusCard({ onManageSubscription }: SubscriptionSta
       case 'Premium':
         return {
           name: 'Premium',
-          price: 'R$ 49,90',
+          price: 'R$ 79,90',
           color: 'from-purple-500 to-purple-600',
           features: ['Tudo do Basic', 'Simulados ilimitados', 'IA avançada', 'Relatórios PDF']
         };
@@ -117,7 +117,7 @@ export function SubscriptionStatusCard({ onManageSubscription }: SubscriptionSta
       default:
         return {
           name: 'Premium',
-          price: 'R$ 49,90',
+          price: 'R$ 79,90',
           color: 'from-purple-500 to-purple-600',
           features: ['Acesso completo', 'Recursos avançados']
         };

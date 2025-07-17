@@ -49,14 +49,14 @@ export function SupremeChallengeCard() {
             {/* Plan Name and Description */}
             <CardTitle className="text-xl sm:text-2xl lg:text-3xl font-bold mb-2 lg:mb-3 text-white">PARABÉNS!</CardTitle>
             <CardDescription className="text-sm sm:text-base lg:text-lg font-medium text-zinc-200 px-2">
-              Você conquistou o Desafio Surpresa! Resgate seu prêmio abaixo.
+              Você conquistou o Desafio Relâmpago! Resgate seu prêmio abaixo.
             </CardDescription>
 
             {/* Pricing */}
             <div className="mt-4 sm:mt-6 lg:mt-8 mb-2">
               <div className="flex items-baseline justify-center gap-2">
-                <span className="text-lg sm:text-xl lg:text-2xl font-medium text-gray-400 line-through">R$ 49,90</span>
-                <span className="text-2xl sm:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">R$ 29,90</span>
+                <span className="text-lg sm:text-xl lg:text-2xl font-medium text-gray-300 line-through">R$ 79,90</span>
+                <span className="text-2xl sm:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-lime-400 to-green-500 bg-clip-text text-transparent">R$ 29,90</span>
                 <span className="text-sm sm:text-lg lg:text-xl font-medium ml-1 text-zinc-200">/ mês </span>
               </div>
             </div>
@@ -69,10 +69,10 @@ export function SupremeChallengeCard() {
               <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-4 sm:p-6 mb-4 border-2 border-white/30">
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
                   <Badge className="bg-gradient-to-r from-white to-gray-100 text-black text-lg sm:text-2xl font-bold px-4 sm:px-6 py-2 sm:py-3 animate-pulse">
-                    SUPREME
+                    CRM2025
                   </Badge>
                   <button onClick={() => {
-                    navigator.clipboard.writeText('SUPREME');
+                    navigator.clipboard.writeText('CRM2025');
                     toast({
                       title: 'Cupom copiado!',
                       description: 'Cole no checkout para aplicar o desconto.',
@@ -81,9 +81,14 @@ export function SupremeChallengeCard() {
                     📋 Copiar
                   </button>
                 </div>
-                <p className="text-white/80 text-xs sm:text-sm mt-2">
+                <p className="text-white font-bold text-xs sm:text-sm mt-2">
                   Use este cupom no checkout para garantir seu desconto especial!
                 </p>
+                <div className="mt-3 p-3 bg-red-500/20 border border-red-400/30 rounded-lg">
+                  <p className="text-black text-xs sm:text-sm font-bold text-center">
+                    ⚠️ ATENÇÃO: Este Código Promocional expira em 24 horas!
+                  </p>
+                </div>
               </div>
             </div>
 
@@ -102,7 +107,15 @@ export function SupremeChallengeCard() {
                   <Crown className="w-2.5 h-2.5 sm:w-3 sm:h-3 lg:w-3.5 lg:h-3.5 text-white font-bold" />
                 </div>
                 <span className="font-medium leading-relaxed text-xs sm:text-sm lg:text-base text-white">
-                  Economia de R$ 20,00/mês
+                  Economia de R$ 50,00/mês
+                </span>
+              </div>
+              <div className="flex items-start gap-2 sm:gap-3">
+                <div className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 shadow-lg">
+                  <Trophy className="w-2.5 h-2.5 sm:w-3 sm:h-3 lg:w-3.5 lg:h-3.5 text-white font-bold" />
+                </div>
+                <span className="font-medium leading-relaxed text-xs sm:text-sm lg:text-base text-white">
+                  Valor promocional válido por 12 meses
                 </span>
               </div>
             </div>
@@ -110,17 +123,17 @@ export function SupremeChallengeCard() {
             {/* Action Buttons */}
             <div className="mt-auto space-y-2 sm:space-y-3">
               <button onClick={() => {
-                window.open('https://buy.stripe.com/bJeaEX08TeQE38v8xi7ss02', '_blank');
+                window.open('https://buy.stripe.com/aFa5kDbRB37W4cz14Q7ss03', '_blank');
               }} className="w-full py-2.5 sm:py-3 lg:py-4 text-sm sm:text-base lg:text-lg font-bold transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:scale-[1.02] rounded-2xl border-0 bg-gradient-to-r from-white to-gray-100 hover:from-gray-100 hover:to-white text-black animate-pulse">
                 <div className="flex items-center justify-center gap-1 sm:gap-2">
                   <Crown className="w-3 h-3 sm:w-4 sm:h-4 lg:w-5 lg:h-5" />
-                  <span className="text-xs sm:text-sm lg:text-base">🏆 RESGATAR PRÊMIO PREMIUM</span>
+                  <span className="text-xs sm:text-sm lg:text-base">🏆 RESGATAR PLANO PREMIUM</span>
                   <Trophy className="w-3 h-3 sm:w-4 sm:h-4 lg:w-5 lg:h-5" />
                 </div>
               </button>
               
               <button onClick={resetAttempts} className="w-full py-2 sm:py-2 lg:py-3 text-xs sm:text-sm lg:text-base font-medium rounded-xl border-2 border-white/30 text-white hover:bg-white/10 transition-colors">
-                🔄 Resetar Tentativas
+                🔄 Voltar ao Desafio
               </button>
             </div>
           </CardContent>
@@ -158,7 +171,7 @@ export function SupremeChallengeCard() {
           <SupremeChallengeCountdown />
 
           {/* Plan Name and Description */}
-          <CardTitle className="text-2xl lg:text-3xl font-bold mb-2 lg:mb-3 text-white">DESAFIO SURPRESA</CardTitle>
+          <CardTitle className="text-2xl lg:text-3xl font-bold mb-2 lg:mb-3 text-white">DESAFIO RELÂMPAGO</CardTitle>
           <CardDescription className="text-base lg:text-lg font-medium text-zinc-300">
             Acerte 10 questões oficiais e ganhe o plano Premium pelo preço do Básico!
           </CardDescription>
@@ -166,7 +179,7 @@ export function SupremeChallengeCard() {
           {/* Pricing */}
           <div className="mt-6 lg:mt-8 mb-2">
             <div className="flex items-baseline justify-center gap-2">
-              <span className="text-lg sm:text-xl lg:text-2xl font-medium text-gray-400 line-through">R$ 49,90</span>
+              <span className="text-lg sm:text-xl lg:text-2xl font-medium text-gray-400 line-through">R$ 79,90</span>
               <span className="lg:text-5xl font-bold bg-gradient-to-r from-red-600 to-red-700 bg-clip-text text-lime-400 text-2xl">R$ 29,90</span>
               <span className="text-lg lg:text-xl font-medium ml-1 text-zinc-500">/mês</span>
             </div>

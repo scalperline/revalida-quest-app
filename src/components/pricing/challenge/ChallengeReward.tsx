@@ -20,7 +20,7 @@ export function ChallengeReward() {
         </div>
         
         <div className="flex items-center justify-center gap-3 md:gap-6 mb-4 md:mb-8">
-          <span className="text-xl md:text-3xl text-gray-400 line-through">R$ 49,90</span>
+          <span className="text-xl md:text-3xl text-gray-400 line-through">R$ 79,90</span>
           <Badge className="bg-gradient-to-r from-red-500 to-red-600 text-white px-3 py-2 md:px-6 md:py-3 font-bold text-sm md:text-xl shadow-lg">
             40% OFF
           </Badge>

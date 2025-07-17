@@ -260,7 +260,7 @@ export function SimuladoModal({
   };
 
   const handleSelectOption = (optionId: string) => {
-    if (selectedAnswer || showFeedback) return;
+    if (showFeedback) return;
     setSelectedAnswer(optionId);
     setPendingConfirmation(true);
   };
@@ -490,16 +490,15 @@ export function SimuladoModal({
                   Tentar Novamente
                 </Button>
               )}
-              {isCustom && simuladoResults.accuracy < 70 && (
-                <Button
-                  onClick={() => {
-                    setStep('ia');
-                  }}
-                  className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-semibold"
-                >
-                  Análise por IA
-                </Button>
-              )}
+              {/* Exibir Análise por IA para todos os simulados */}
+              <Button
+                onClick={() => {
+                  setStep('ia');
+                }}
+                className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-semibold"
+              >
+                Análise por IA
+              </Button>
             </div>
           </div>
           {/* Confetti apenas para simulado concluído */}
@@ -614,7 +613,7 @@ export function SimuladoModal({
                       <button
                         key={option.id}
                         onClick={() => handleSelectOption(option.id)}
-                        disabled={!!selectedAnswer || showFeedback}
+                        disabled={showFeedback}
                         className={`w-full p-4 text-left rounded-xl border-2 transition-all duration-200 flex items-center gap-3 ${borderClass} ${bgClass} ${showFeedback ? 'pointer-events-none' : 'cursor-pointer'} ${!showFeedback && selectedAnswer !== option.id ? 'hover:border-blue-300' : ''}`}
                       >
                         <span className="flex items-center justify-center w-7 h-7 rounded-full border border-gray-400 text-gray-700 text-base mr-2 select-none">

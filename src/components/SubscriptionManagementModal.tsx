@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useSubscription } from '@/hooks/useSubscription';
-import { useSubscriptionCancellation } from '@/hooks/useSubscriptionCancellation';
-import { useToast } from '@/hooks/use-toast';
+import { CancellationModal } from './CancellationModal';
+import { useNavbarVisibility } from '@/hooks/useNavbarVisibility';
 import { 
   Dialog, 
   DialogContent, 
@@ -16,15 +16,10 @@ import { Badge } from '@/components/ui/badge';
 import { 
   Crown, 
   Calendar, 
-  CreditCard, 
   AlertTriangle, 
   Info, 
-  ExternalLink, 
-  Pause, 
   XCircle,
-  CheckCircle,
-  Clock,
-  Shield
+  CheckCircle
 } from 'lucide-react';
 
 interface SubscriptionManagementModalProps {
@@ -33,48 +28,16 @@ interface SubscriptionManagementModalProps {
 }
 
 export function SubscriptionManagementModal({ isOpen, onClose }: SubscriptionManagementModalProps) {
-  const { subscribed, subscription_tier, subscription_end, openCustomerPortal } = useSubscription();
-  const { toast } = useToast();
-  const [loading, setLoading] = useState(false);
-  const [showCancelConfirm, setShowCancelConfirm] = useState(false);
-  const { 
-    initiateCancellation, 
-    confirmCancellation, 
-    cancelCancellation,
-    cancellationInfo,
-    cancellationReasons,
-    isProcessing: cancellationProcessing 
-  } = useSubscriptionCancellation();
+  const { subscribed, subscription_tier, subscription_end } = useSubscription();
+  const [showCancellationModal, setShowCancellationModal] = useState(false);
 
-  const handleOpenPortal = async () => {
-    try {
-      setLoading(true);
-      await openCustomerPortal();
-      toast({
-        title: "Portal aberto! 🔗",
-        description: "Gerencie sua assinatura na nova aba que foi aberta.",
-      });
-    } catch (error) {
-      console.error('Error opening customer portal:', error);
-      toast({
-        title: "Erro ao abrir portal",
-        description: "Não foi possível abrir o portal do cliente. Tente novamente.",
-        variant: "destructive",
-      });
-    } finally {
-      setLoading(false);
-    }
-  };
+  // Controlar visibilidade da navbar quando modal de cancelamento estiver aberto
+  useNavbarVisibility(showCancellationModal);
+
+
 
   const handleCancelSubscription = () => {
-    initiateCancellation();
-    setShowCancelConfirm(true);
-  };
-
-  const confirmCancel = async () => {
-    await confirmCancellation();
-    setShowCancelConfirm(false);
-    onClose();
+    setShowCancellationModal(true);
   };
 
   const getTierInfo = () => {
@@ -134,7 +97,6 @@ export function SubscriptionManagementModal({ isOpen, onClose }: SubscriptionMan
           </DialogDescription>
         </DialogHeader>
 
-        {!showCancelConfirm ? (
           <div className="space-y-6">
             {/* Current Plan Info */}
             <Card className="border-2 border-blue-100 bg-gradient-to-br from-blue-50 to-white">
@@ -184,62 +146,7 @@ export function SubscriptionManagementModal({ isOpen, onClose }: SubscriptionMan
               </CardContent>
             </Card>
 
-            {/* Management Options */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <Card className="border border-blue-200 hover:border-blue-300 transition-colors">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-lg">
-                    <CreditCard className="w-5 h-5 text-blue-600" />
-                    Gerenciar Pagamentos
-                  </CardTitle>
-                  <CardDescription>
-                    Atualizar método de pagamento, ver histórico de faturas
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <Button 
-                    onClick={handleOpenPortal} 
-                    disabled={loading}
-                    className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800"
-                  >
-                    {loading ? (
-                      <>
-                        <Clock className="w-4 h-4 mr-2 animate-spin" />
-                        Carregando...
-                      </>
-                    ) : (
-                      <>
-                        <ExternalLink className="w-4 h-4 mr-2" />
-                        Abrir Portal
-                      </>
-                    )}
-                  </Button>
-                </CardContent>
-              </Card>
 
-              <Card className="border border-orange-200 hover:border-orange-300 transition-colors">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-lg">
-                    <Pause className="w-5 h-5 text-orange-600" />
-                    Pausar Assinatura
-                  </CardTitle>
-                  <CardDescription>
-                    Pausar temporariamente sem perder benefícios
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <Button 
-                    onClick={handleOpenPortal} 
-                    disabled={loading}
-                    variant="outline"
-                    className="w-full border-orange-300 text-orange-700 hover:bg-orange-50"
-                  >
-                    <Pause className="w-4 h-4 mr-2" />
-                    Pausar
-                  </Button>
-                </CardContent>
-              </Card>
-            </div>
 
             {/* Cancel Option */}
             <Card className="border border-red-200 bg-red-50">
@@ -293,66 +200,12 @@ export function SubscriptionManagementModal({ isOpen, onClose }: SubscriptionMan
               </AlertDescription>
             </Alert>
           </div>
-        ) : (
-          /* Confirmation Dialog */
-          <div className="space-y-6">
-            <Alert className="border-red-200 bg-red-50">
-              <AlertTriangle className="w-4 h-4 text-red-600" />
-              <AlertDescription className="text-red-700">
-                <strong>Confirmação de Cancelamento</strong>
-              </AlertDescription>
-            </Alert>
 
-            <div className="text-center space-y-4">
-              <div className="p-6 bg-gray-50 rounded-lg">
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                  Tem certeza que deseja cancelar?
-                </h3>
-                <p className="text-gray-600 mb-4">
-                  Você está prestes a cancelar sua assinatura {tierInfo.name} ({tierInfo.price}/mês).
-                </p>
-                
-                <div className="bg-white p-4 rounded-lg border border-gray-200 mb-4">
-                  <h4 className="font-medium text-gray-900 mb-2">Lembre-se:</h4>
-                  <ul className="text-sm text-gray-600 space-y-1">
-                    <li>✓ Seu acesso continuará até {subscription_end ? new Date(subscription_end).toLocaleDateString('pt-BR') : 'o final do período pago'}</li>
-                    <li>✓ Não haverá cobranças adicionais</li>
-                    <li>✓ Você pode reativar a qualquer momento</li>
-                    <li>⚠️ Perderá acesso aos recursos premium após o período pago</li>
-                  </ul>
-                </div>
-              </div>
-
-              <div className="flex gap-3">
-                <Button 
-                  onClick={() => setShowCancelConfirm(false)} 
-                  variant="outline" 
-                  className="flex-1"
-                >
-                  Manter Assinatura
-                </Button>
-                <Button 
-                  onClick={confirmCancel}
-                  disabled={loading}
-                  variant="destructive"
-                  className="flex-1"
-                >
-                  {loading ? (
-                    <>
-                      <Clock className="w-4 h-4 mr-2 animate-spin" />
-                      Processando...
-                    </>
-                  ) : (
-                    <>
-                      <XCircle className="w-4 h-4 mr-2" />
-                      Confirmar Cancelamento
-                    </>
-                  )}
-                </Button>
-              </div>
-            </div>
-          </div>
-        )}
+        {/* Cancellation Modal */}
+        <CancellationModal 
+          isOpen={showCancellationModal} 
+          onClose={() => setShowCancellationModal(false)} 
+        />
       </DialogContent>
     </Dialog>
   );

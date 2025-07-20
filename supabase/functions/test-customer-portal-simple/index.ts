@@ -1,4 +1,3 @@
-
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import Stripe from "https://esm.sh/stripe@14.21.0";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.0";
@@ -9,7 +8,7 @@ const corsHeaders = {
 };
 
 function logStep(step: string, data?: any) {
-  console.log(`[customer-portal] ${step}`, data ? JSON.stringify(data) : '');
+  console.log(`[test-customer-portal-simple] ${step}`, data ? JSON.stringify(data) : '');
 }
 
 serve(async (req) => {
@@ -26,26 +25,14 @@ serve(async (req) => {
       { auth: { persistSession: false } }
     );
 
-    const authHeader = req.headers.get("Authorization");
-    if (!authHeader) throw new Error("No authorization header provided");
-    logStep("Authorization header found");
-
-    const token = authHeader.replace("Bearer ", "");
-    logStep("Authenticating user with token");
-    
-    const { data: userData, error: userError } = await supabaseClient.auth.getUser(token);
-    if (userError) throw new Error(`Authentication error: ${userError.message}`);
-    const user = userData.user;
-    if (!user?.email) throw new Error("User not authenticated or email not available");
-    logStep("User authenticated", { userId: user.id, email: user.email });
-
-    // Buscar dados de assinatura para obter customer_id
-    logStep("Fetching subscriber data", { email: user.email });
+    // Buscar dados do usuário específico diretamente (sem autenticação)
+    const email = "scalperline@gmail.com";
+    logStep("Fetching subscriber data", { email });
     
     const { data: subscriberData, error: subscriberError } = await supabaseClient
       .from("subscribers")
       .select("stripe_customer_id, subscribed, subscription_tier")
-      .eq("email", user.email)
+      .eq("email", email)
       .single();
 
     if (subscriberError) {
@@ -61,18 +48,13 @@ serve(async (req) => {
     });
 
     if (!subscriberData) {
-      logStep("No subscriber data found", { email: user.email });
+      logStep("No subscriber data found", { email });
       throw new Error("No subscription data found for this user");
     }
 
     if (!subscriberData.stripe_customer_id) {
-      logStep("No stripe_customer_id found", { email: user.email, subscribed: subscriberData.subscribed });
+      logStep("No stripe_customer_id found", { email, subscribed: subscriberData.subscribed });
       throw new Error("No Stripe customer ID found for this user");
-    }
-
-    if (subscriberData.stripe_customer_id.trim() === '') {
-      logStep("Empty stripe_customer_id", { email: user.email });
-      throw new Error("Stripe customer ID is empty");
     }
 
     logStep("Stripe customer ID found", { customerId: subscriberData.stripe_customer_id });
@@ -86,34 +68,45 @@ serve(async (req) => {
     const stripe = new Stripe(stripeSecretKey, { apiVersion: "2023-10-16" });
     logStep("Stripe client created");
 
-    const origin = req.headers.get("origin") || "http://localhost:3000";
+    const origin = req.headers.get("origin") || "https://revalidaquest.com";
     logStep("Creating portal session", { origin, customerId: subscriberData.stripe_customer_id });
     
     try {
-    const portalSession = await stripe.billingPortal.sessions.create({
+      const portalSession = await stripe.billingPortal.sessions.create({
         customer: subscriberData.stripe_customer_id,
         return_url: `${origin}/profile`,
-    });
+      });
       
       logStep("Portal session created successfully", { sessionId: portalSession.id, url: portalSession.url });
 
-    return new Response(JSON.stringify({ url: portalSession.url }), {
-      headers: { ...corsHeaders, "Content-Type": "application/json" },
-      status: 200,
-    });
+      return new Response(JSON.stringify({ 
+        success: true,
+        url: portalSession.url,
+        data: {
+          customerId: subscriberData.stripe_customer_id,
+          email: email,
+          tier: subscriberData.subscription_tier
+        }
+      }), {
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+        status: 200,
+      });
     } catch (stripeError) {
       logStep("Error creating portal session", { error: stripeError });
       throw new Error(`Stripe error: ${stripeError instanceof Error ? stripeError.message : 'Unknown error'}`);
     }
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : String(error);
-    logStep("ERROR in customer-portal", { message: errorMessage });
-    console.error('[customer-portal] Error:', errorMessage);
-    return new Response(JSON.stringify({ error: errorMessage }), {
+    logStep("ERROR in test-customer-portal-simple", { message: errorMessage });
+    console.error('[test-customer-portal-simple] Error:', errorMessage);
+    return new Response(JSON.stringify({ 
+      success: false,
+      error: errorMessage 
+    }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
       status: 500,
     });
   } finally {
-    console.log('[customer-portal] Fim da execução');
+    console.log('[test-customer-portal-simple] Fim da execução');
   }
-});
+}); 

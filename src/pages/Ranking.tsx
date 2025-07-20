@@ -5,7 +5,7 @@ import { Trophy, TrendingUp, Crown, Medal, Star, User, ChevronRight, Zap, Award 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { useState, useEffect } from 'react';
 import { GamifiedHeaderAlert } from '@/components/GamifiedHeaderAlert';
-import { PodiumCard } from '@/components/PodiumCard';
+import { PodiumCard, PodiumCardSkeleton } from '@/components/PodiumCard';
 import { useAuth } from '@/hooks/useAuth';
 import { RankingUtils } from '@/utils/rankingUtils';
 import { RankingIcons } from '@/components/RankingIcons';
@@ -43,58 +43,78 @@ const RankingHeader = () => (
   </div>
 );
 
+
+
 // Componente de pódio
-const RankingPodium = ({ podium }: any) => (
-  <div className="flex flex-col sm:flex-row justify-center items-center gap-6 sm:gap-4 md:gap-8 mb-10 mt-4 w-full">
-    {/* 1º lugar - central no desktop, topo no mobile */}
-    <div className="order-1 sm:order-2 flex flex-1 justify-center max-w-xs" style={{ zIndex: 2 }}>
-      {podium[0] && (
-        <PodiumCard
-          position={1}
-          name={podium[0].display_name}
-          avatarUrl={podium[0].avatar_url}
-          level={RankingUtils.getLevelTitle(podium[0].level)}
-          score={podium[0].total_xp}
-          accuracy={RankingUtils.getAccuracy(podium[0])}
-        />
-      )}
+const RankingPodium = ({ podium, loading }: any) => (
+  <div className="relative mb-12 mt-8">
+    {/* Background do pódio */}
+    <div className="absolute inset-0 bg-gradient-to-b from-blue-50/50 to-transparent rounded-3xl -z-10"></div>
+    
+    {/* Container principal */}
+    <div className="flex flex-col sm:flex-row justify-center items-end gap-4 sm:gap-6 md:gap-8 px-4">
+      {/* 2º lugar - esquerda no desktop, meio no mobile */}
+      <div className="order-2 sm:order-1 flex justify-center transform sm:translate-y-8">
+        {loading ? (
+          <PodiumCardSkeleton position={2} />
+        ) : podium[1] ? (
+          <PodiumCard
+            position={2}
+            name={podium[1].display_name}
+            avatarUrl={podium[1].avatar_url}
+            level={RankingUtils.getLevelTitle(podium[1].level)}
+            score={podium[1].total_xp}
+            accuracy={RankingUtils.getAccuracy(podium[1])}
+          />
+        ) : null}
+      </div>
+      
+      {/* 1º lugar - central no desktop, topo no mobile */}
+      <div className="order-1 sm:order-2 flex justify-center transform sm:-translate-y-4 relative z-10">
+        {loading ? (
+          <PodiumCardSkeleton position={1} />
+        ) : podium[0] ? (
+          <PodiumCard
+            position={1}
+            name={podium[0].display_name}
+            avatarUrl={podium[0].avatar_url}
+            level={RankingUtils.getLevelTitle(podium[0].level)}
+            score={podium[0].total_xp}
+            accuracy={RankingUtils.getAccuracy(podium[0])}
+          />
+        ) : null}
+      </div>
+      
+      {/* 3º lugar - direita no desktop, baixo no mobile */}
+      <div className="order-3 sm:order-3 flex justify-center transform sm:translate-y-8">
+        {loading ? (
+          <PodiumCardSkeleton position={3} />
+        ) : podium[2] ? (
+          <PodiumCard
+            position={3}
+            name={podium[2].display_name}
+            avatarUrl={podium[2].avatar_url}
+            level={RankingUtils.getLevelTitle(podium[2].level)}
+            score={podium[2].total_xp}
+            accuracy={RankingUtils.getAccuracy(podium[2])}
+          />
+        ) : null}
+      </div>
     </div>
     
-    {/* 2º lugar - esquerda no desktop, meio no mobile */}
-    <div className="order-2 sm:order-1 flex flex-1 justify-center max-w-xs">
-      {podium[1] && (
-        <PodiumCard
-          position={2}
-          name={podium[1].display_name}
-          avatarUrl={podium[1].avatar_url}
-          level={RankingUtils.getLevelTitle(podium[1].level)}
-          score={podium[1].total_xp}
-          accuracy={RankingUtils.getAccuracy(podium[1])}
-        />
-      )}
-    </div>
-    
-    {/* 3º lugar - direita no desktop, baixo no mobile */}
-    <div className="order-3 sm:order-3 flex flex-1 justify-center max-w-xs">
-      {podium[2] && (
-        <PodiumCard
-          position={3}
-          name={podium[2].display_name}
-          avatarUrl={podium[2].avatar_url}
-          level={RankingUtils.getLevelTitle(podium[2].level)}
-          score={podium[2].total_xp}
-          accuracy={RankingUtils.getAccuracy(podium[2])}
-        />
-      )}
-    </div>
+    {/* Linha de base do pódio */}
+    <div className="hidden sm:block mt-8 mx-auto w-4/5 h-1 bg-gradient-to-r from-transparent via-gray-300 to-transparent rounded-full opacity-50"></div>
   </div>
 );
 
 // Componente de status de atualização
 const UpdateStatus = () => (
-  <div className="flex items-center justify-center gap-2 text-xs text-blue-700 mb-4">
-    <TrendingUp className="w-4 h-4" />
-    <span>Atualizado em tempo real</span>
+  <div className="flex items-center justify-center gap-3 text-sm text-blue-700 mb-6 bg-blue-50/50 rounded-full px-6 py-3 border border-blue-200/50">
+    <div className="flex items-center gap-2">
+      <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+      <TrendingUp className="w-4 h-4" />
+      <span className="font-medium">Atualizado em tempo real</span>
+    </div>
   </div>
 );
 
@@ -439,7 +459,9 @@ export default function Ranking() {
       <main className="max-w-6xl mx-auto px-4 pt-20 pb-8 relative z-10">
         <RankingHeader />
         {/* Exibe o pódio apenas na primeira página */}
-        {isFirstPage && <RankingPodium podium={podium} />}
+        {isFirstPage && (
+          <RankingPodium podium={podium} loading={loading} />
+        )}
         <UpdateStatus />
         {/*
           Da página 2 em diante, a tabela deve aparecer logo após 'Atualizado em tempo real',

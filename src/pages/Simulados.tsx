@@ -3,6 +3,7 @@ import { Navbar } from '@/components/Navbar';
 import { CustomSimuladoCard } from '@/components/CustomSimuladoCard';
 import { SimuladoCard } from '@/components/SimuladoCard';
 import { SimuladoModal } from '@/components/SimuladoModal';
+
 import { getQuestionsByYearAndType } from '@/utils/questionSelector';
 import { Question } from '@/types/question';
 import { CustomMission } from '@/types/missions';
@@ -213,6 +214,8 @@ export default function Simulados() {
         {/* Card de Simulado Personalizado - Topo */}
         <div className="mb-8">
           <CustomSimuladoCard onStartSimulado={handleStartCustomSimulado} tentativasRestantes={tentativasRestantes[0] ?? 3} />
+          
+
           {/* Modal de contagem regressiva */}
           {showCountdown && (
             <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70">

@@ -96,6 +96,8 @@ export function CustomSimuladoCard({ onStartSimulado, tentativasRestantes }: Cus
   const limiteTexto = simuladoLimit.unlimited ? 'Simulados ilimitados' : `${simuladoLimit.limit} simulados/mês`;
   const atingiuLimite = !simuladoLimit.unlimited && simuladoLimit.used >= simuladoLimit.limit;
 
+
+
   // Ao iniciar simulado, incrementa contador no backend
   const handleStartSimulado = async () => {
     setIsLoading(true);
@@ -250,10 +252,12 @@ export function CustomSimuladoCard({ onStartSimulado, tentativasRestantes }: Cus
 
               {/* Frases abaixo do botão */}
               <div className="mt-2 w-full flex flex-col items-center">
-                <div className={`flex items-center gap-2 justify-center ${tentativasRestantesNum === 0 ? 'text-red-500' : 'text-yellow-400'}`}> 
-                  <Repeat className={`w-4 h-4 ${tentativasRestantesNum === 0 ? 'text-red-500' : 'text-yellow-400'}`} />
-                  <span className={`${tentativasRestantesNum === 0 ? 'text-red-500 font-bold' : 'text-yellow-400 font-bold'} text-xs sm:text-sm`}>
-                    {simuladoLimit.unlimited ? '∞ simulados restantes • Simulados ilimitados' : `${tentativasRestantesNum}/${simuladoLimit.limit} simulados restantes • ${simuladoLimit.limit} simulados/mês`}
+                <div className={`flex items-center gap-2 justify-center ${tentativasRestantesNum === 0 ? 'text-red-500' : 'text-green-400'}`}> 
+                  <span className={`${tentativasRestantesNum === 0 ? 'text-red-500 font-bold' : 'text-green-400 font-bold'} text-xs sm:text-sm`}>
+                    {simuladoLimit.unlimited 
+                      ? <>↻ simulados ilimitados • Premium</>
+                      : `${tentativasRestantesNum}/${simuladoLimit.limit} simulados restantes • ${simuladoLimit.limit} simulados/mês`
+                    }
                   </span>
                 </div>
                 {atingiuLimite && (

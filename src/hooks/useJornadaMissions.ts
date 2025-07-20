@@ -28,7 +28,7 @@ export function useJornadaMissions() {
   const { todasQuestoes } = useQuestions();
   const { user } = useAuth();
   const { addXP, answerQuestion: gamificationAnswerQuestion } = useGamification();
-  const { isFreePlan, isBasicPlan, isPremiumPlan } = useSubscription();
+  const { isFreePlan, isBasicPlan, isPremiumPlan, isEnterprisePlan } = useSubscription();
 
   // Estado das missões
   const [missions, setMissions] = useState<JornadaMission[]>(() => {
@@ -54,16 +54,24 @@ export function useJornadaMissions() {
 
   // Função para obter tentativas restantes baseada no plano do usuário
   async function getTentativasRestantesSupabase(nivel: number): Promise<number | 'ilimitado'> {
-    if (isPremiumPlan) return 'ilimitado';
+    // Verificar planos ilimitados primeiro
+    if (isPremiumPlan || isEnterprisePlan) {
+      return 'ilimitado';
+    }
+    
     let maxTentativas = 3;
     if (isBasicPlan) maxTentativas = 10;
-    if (isPremiumPlan) return 'ilimitado';
-    if (!user) return maxTentativas;
+    
+    if (!user) {
+      return maxTentativas;
+    }
+    
     // Consultar tentativas usadas no Supabase
     const { data, error } = await supabase.rpc<any, any>('count_mission_attempts_this_month', {
       user_id_input: user.id,
       mission_id_input: `jornada_nivel_${nivel}`
     });
+    
     const usadas = error ? 0 : (data as number);
     return Math.max(0, maxTentativas - usadas);
   }
@@ -138,7 +146,7 @@ export function useJornadaMissions() {
     setIsMissionActive(true);
     setMissions(prev => prev.map(m => m.nivel === nivel ? { ...m, status: 'em_andamento' as const } : m));
     return true;
-  }, [missions, selectQuestionsForMission, user, isPremiumPlan, isBasicPlan]);
+  }, [missions, selectQuestionsForMission, user, isPremiumPlan, isBasicPlan, isEnterprisePlan]);
 
   // Função para responder uma questão
   const answerMissionQuestion = useCallback((optionId: string) => {
@@ -213,7 +221,7 @@ export function useJornadaMissions() {
     setCurrentQuestionIndex(0);
     setAnswers({});
     setIsMissionActive(false);
-  }, [currentMission, missionQuestions, answers, addXP, user, isPremiumPlan, isBasicPlan]);
+  }, [currentMission, missionQuestions, answers, addXP, user, isPremiumPlan, isBasicPlan, isEnterprisePlan]);
 
   // Nova função para avançar questão
   const goToNextMissionQuestion = useCallback(() => {
@@ -244,8 +252,27 @@ export function useJornadaMissions() {
       }
       setMissions(atualizadas);
     }
+    
+    if (user) {
     updateTentativasRestantes();
-  }, [user, isPremiumPlan, isBasicPlan]);
+    }
+  }, [user, isPremiumPlan, isBasicPlan, isEnterprisePlan, missions]);
+
+  // Forçar atualização das tentativas quando o componente montar
+  useEffect(() => {
+    if (user) {
+      const timer = setTimeout(async () => {
+        const atualizadas: JornadaMission[] = [];
+        for (const m of missions) {
+          const tent = await getTentativasRestantesSupabase(m.nivel);
+          atualizadas.push({ ...m, tentativasRestantes: tent });
+        }
+        setMissions(atualizadas);
+      }, 1000); // Aguarda 1 segundo para garantir que os dados de assinatura estejam carregados
+      
+      return () => clearTimeout(timer);
+    }
+  }, [user]);
 
   // Função para contar missões completas
   function getCompletedMissionsCount() {

@@ -42,7 +42,7 @@ export function useSubscription() {
       });
 
       if (error) throw error;
-
+      
       setSubscriptionData({
         subscribed: data.subscribed,
         subscription_tier: data.subscription_tier,
@@ -123,7 +123,7 @@ export function useSubscription() {
         }
         setUsageLimits({
           ...mostRecent,
-          monthly_simulados_used: mostRecent['monthly_simulados_used'] ?? 0
+          monthly_simulados_used: (mostRecent as any)['monthly_simulados_used'] ?? 0
         } as UsageLimits);
         console.log('Limite definido (após limpeza):', mostRecent);
         return;
@@ -132,7 +132,7 @@ export function useSubscription() {
       if (allRecords && allRecords.length === 1) {
         setUsageLimits({
           ...allRecords[0],
-          monthly_simulados_used: allRecords[0]['monthly_simulados_used'] ?? 0
+          monthly_simulados_used: (allRecords[0] as any)['monthly_simulados_used'] ?? 0
         } as UsageLimits);
         console.log('Limite definido (único registro):', allRecords[0]);
         return;
@@ -140,6 +140,9 @@ export function useSubscription() {
 
       // Se não há registros, criar um novo
       console.log('Criando novo registro de limites');
+      console.log('User ID para inserção:', user.id);
+      console.log('User email:', user.email);
+      
       const { data: newRecord, error: createError } = await supabase
         .from('usage_limits')
         .insert({
@@ -153,13 +156,19 @@ export function useSubscription() {
 
       if (createError) {
         console.error('Erro ao criar registro:', createError);
+        console.error('Detalhes do erro:', {
+          code: createError.code,
+          message: createError.message,
+          details: createError.details,
+          hint: createError.hint
+        });
         return;
       }
 
       console.log('Novo registro criado:', newRecord);
       setUsageLimits({
         ...newRecord,
-        monthly_simulados_used: newRecord['monthly_simulados_used'] ?? 0
+        monthly_simulados_used: (newRecord as any)['monthly_simulados_used'] ?? 0
       } as UsageLimits);
       
     } catch (error) {
@@ -203,6 +212,7 @@ export function useSubscription() {
           last_reset_date: new Date().toISOString().split('T')[0]
         };
 
+        console.log('Dados para inserção:', newData);
         const { data: created, error: createError } = await supabase
           .from('usage_limits')
           .insert(newData)
@@ -211,13 +221,19 @@ export function useSubscription() {
 
         if (createError) {
           console.error('Erro ao criar registro:', createError);
+          console.error('Detalhes do erro:', {
+            code: createError.code,
+            message: createError.message,
+            details: createError.details,
+            hint: createError.hint
+          });
           return;
         }
 
         console.log('✅ Primeiro registro criado:', created);
         setUsageLimits({
           ...created,
-          monthly_simulados_used: created['monthly_simulados_used'] ?? 0
+          monthly_simulados_used: (created as any)['monthly_simulados_used'] ?? 0
         } as UsageLimits);
         return;
       }
@@ -228,12 +244,12 @@ export function useSubscription() {
         : (currentRecord.daily_questions_used || 0);
       
       const newSimulados = type === 'simulados' 
-        ? (currentRecord.monthly_simulados_used || 0) + increment 
-        : (currentRecord.monthly_simulados_used || 0);
+        ? ((currentRecord as any).monthly_simulados_used || 0) + increment 
+        : ((currentRecord as any).monthly_simulados_used || 0);
 
       console.log('Valores antes da atualização:');
       console.log('- Questions:', currentRecord.daily_questions_used, '→', newQuestions);
-      console.log('- Simulados:', currentRecord.monthly_simulados_used, '→', newSimulados);
+      console.log('- Simulados:', (currentRecord as any).monthly_simulados_used, '→', newSimulados);
 
       const { data: updated, error: updateError } = await supabase
         .from('usage_limits')
@@ -254,7 +270,7 @@ export function useSubscription() {
       console.log('✅ Registro atualizado com sucesso:', updated);
       setUsageLimits({
         ...updated,
-        monthly_simulados_used: updated['monthly_simulados_used'] ?? 0
+        monthly_simulados_used: (updated as any)['monthly_simulados_used'] ?? 0
       } as UsageLimits);
       
     } catch (error) {
@@ -266,10 +282,12 @@ export function useSubscription() {
     console.log('=== VERIFICANDO SE PODE USAR FEATURE ===');
     console.log('Feature:', feature);
     console.log('Subscribed:', subscriptionData.subscribed);
+    console.log('Subscription Tier:', subscriptionData.subscription_tier);
     console.log('Usage Limits:', usageLimits);
 
-    if (subscriptionData.subscribed) {
-      console.log('✅ Usuário assinante - permitido');
+    // Usuários Premium, Pro e Enterprise têm acesso ilimitado
+    if (subscriptionData.subscribed && (subscriptionData.subscription_tier === 'Premium' || subscriptionData.subscription_tier === 'Pro' || subscriptionData.subscription_tier === 'Enterprise')) {
+      console.log('✅ Usuário Premium/Pro/Enterprise - acesso ilimitado');
       return true;
     }
     
@@ -280,13 +298,20 @@ export function useSubscription() {
 
     if (feature === 'questions') {
       const used = usageLimits.daily_questions_used || 0;
-      const canUse = used < 10;
+      // Usuários Basic têm questões ilimitadas
+      const canUse = subscriptionData.subscribed ? true : used < 10;
       console.log(`Questions: ${used}/10 - ${canUse ? 'PERMITIDO' : 'BLOQUEADO'}`);
       return canUse;
     } else {
       const used = usageLimits.monthly_simulados_used || 0;
-      const canUse = used < 1;
-      console.log(`Simulados: ${used}/1 - ${canUse ? 'PERMITIDO' : 'BLOQUEADO'}`);
+      let limit = 1; // Padrão para usuários gratuitos
+      
+      if (subscriptionData.subscribed && subscriptionData.subscription_tier === 'Basic') {
+        limit = 10;
+      }
+      
+      const canUse = used < limit;
+      console.log(`Simulados: ${used}/${limit} - ${canUse ? 'PERMITIDO' : 'BLOQUEADO'}`);
       return canUse;
     }
   };
@@ -294,8 +319,11 @@ export function useSubscription() {
   const getFeatureLimit = (feature: 'questions' | 'simulados' | 'missions'): { used: number; limit: number; unlimited: boolean } => {
     if (!usageLimits) return { used: 0, limit: 0, unlimited: false };
 
-    const unlimited = subscriptionData.subscribed && (subscriptionData.subscription_tier === 'Premium' || subscriptionData.subscription_tier === 'Pro');
-    let limit = 3;
+    // Definir se o usuário tem acesso ilimitado baseado no plano
+    const unlimited = subscriptionData.subscribed && (subscriptionData.subscription_tier === 'Premium' || subscriptionData.subscription_tier === 'Pro' || subscriptionData.subscription_tier === 'Enterprise');
+    
+    // Definir limites baseados no plano
+    let limit = 1; // Padrão para usuários gratuitos
     if (subscriptionData.subscribed) {
       switch (subscriptionData.subscription_tier) {
         case 'Basic':
@@ -303,6 +331,7 @@ export function useSubscription() {
           break;
         case 'Premium':
         case 'Pro':
+        case 'Enterprise':
           limit = 9999; // Considerado ilimitado
           break;
       }
@@ -312,19 +341,19 @@ export function useSubscription() {
       return {
         used: usageLimits.daily_questions_used || 0,
         limit: 10, // Mantém padrão para questões
-        unlimited: unlimited
+        unlimited: subscriptionData.subscribed // Questões ilimitadas para qualquer plano pago
       };
     } else if (feature === 'simulados') {
       return {
         used: usageLimits.monthly_simulados_used || 0,
-        limit,
+        limit: unlimited ? 9999 : limit, // Se ilimitado, usa 9999, senão usa o limite do plano
         unlimited
       };
     } else if (feature === 'missions') {
       // Para missões, cada missão terá seu próprio contador, mas o limite é o mesmo por missão
       return {
         used: 0, // O controle por missão será feito no componente/hook de missão
-        limit,
+        limit: unlimited ? 9999 : limit,
         unlimited
       };
     }
@@ -353,6 +382,13 @@ export function useSubscription() {
     }
   }, [usageLimits]);
 
+  // Valores calculados
+  const isFreePlan = !subscriptionData.subscribed;
+  const isBasicPlan = subscriptionData.subscribed && subscriptionData.subscription_tier === 'Basic';
+  const isPremiumPlan = subscriptionData.subscribed && (subscriptionData.subscription_tier === 'Premium' || subscriptionData.subscription_tier === 'Pro' || subscriptionData.subscription_tier === 'Enterprise');
+  const isProPlan = subscriptionData.subscribed && subscriptionData.subscription_tier === 'Pro';
+  const isEnterprisePlan = subscriptionData.subscribed && subscriptionData.subscription_tier === 'Enterprise';
+
   return {
     ...subscriptionData,
     usageLimits,
@@ -362,9 +398,10 @@ export function useSubscription() {
     updateUsage,
     canUseFeature,
     getFeatureLimit,
-    isFreePlan: !subscriptionData.subscribed,
-    isBasicPlan: subscriptionData.subscribed && subscriptionData.subscription_tier === 'Basic',
-    isPremiumPlan: subscriptionData.subscribed && subscriptionData.subscription_tier === 'Premium',
-    isProPlan: subscriptionData.subscribed && subscriptionData.subscription_tier === 'Pro',
+    isFreePlan,
+    isBasicPlan,
+    isPremiumPlan,
+    isProPlan,
+    isEnterprisePlan,
   };
 }

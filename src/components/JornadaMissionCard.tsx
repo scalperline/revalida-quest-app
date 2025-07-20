@@ -117,10 +117,9 @@ export function JornadaMissionCard({
               </Button>
               {/* Contador gamificado de tentativas restantes */}
               <div className="flex items-center justify-center gap-2 mt-3">
-                <Repeat className={`w-5 h-5 ${tentativasRestantes === 'ilimitado' ? 'text-green-400' : tentativasRestantes === 0 ? 'text-red-400' : tentativasRestantes <= 3 ? 'text-yellow-400' : 'text-blue-300'}`} />
-                <span className={`text-sm font-semibold ${tentativasRestantes === 'ilimitado' ? 'text-green-300' : tentativasRestantes === 0 ? 'text-red-400' : tentativasRestantes <= 3 ? 'text-yellow-300' : 'text-blue-100'}`}>
+                <span className={`text-sm font-semibold ${tentativasRestantes === 'ilimitado' ? 'text-green-400' : tentativasRestantes === 0 ? 'text-red-400' : tentativasRestantes <= 3 ? 'text-yellow-400' : 'text-blue-300'}`}>
                   {tentativasRestantes === 'ilimitado'
-                    ? 'Tentativas ilimitadas'
+                    ? <>↻ tentativas ilimitadas • Premium</>
                     : tentativasRestantes === 1
                       ? 'Última tentativa'
                       : `${tentativasRestantes} tentativas restantes`}

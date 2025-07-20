@@ -202,14 +202,14 @@ export function useMissions() {
   const getMissionLimit = () => {
     if (!subscribed) return 3; // Gratuito
     if (subscription_tier === 'Basic') return 10;
-    if (subscription_tier === 'Premium' || subscription_tier === 'Pro') return 9999;
+    if (subscription_tier === 'Premium' || subscription_tier === 'Pro' || subscription_tier === 'Enterprise') return 9999;
     return 3;
   };
 
   // Consulta tentativas do mês para a missão
   const getMissionAttemptsThisMonth = async (missionId: string): Promise<number> => {
     if (!user) return 0;
-    const { data, error } = await supabase.rpc('count_mission_attempts_this_month', {
+    const { data, error } = await supabase.rpc('count_mission_attempts_this_month' as any, {
       user_id_input: user.id,
       mission_id_input: missionId
     });
@@ -223,7 +223,7 @@ export function useMissions() {
   // Registra nova tentativa
   const registerMissionAttempt = async (missionId: string) => {
     if (!user) return;
-    const { error } = await supabase.rpc('register_mission_attempt', {
+    const { error } = await supabase.rpc('register_mission_attempt' as any, {
       user_id_input: user.id,
       mission_id_input: missionId
     });

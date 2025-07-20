@@ -69,7 +69,7 @@ const plans = [
     price: 'R$ 79',
     period: ',90/mês',
     priceId: 'price_revalida_premium_monthly',
-    checkoutUrl: 'https://buy.stripe.com/aFa5kDbRB37W4cz14Q7ss03',
+    checkoutUrl: 'https://buy.stripe.com/test_aFadR9g7R9wk10n8xi7ss00', // ALTERADO PARA LINK DE TESTE
     features: [
       'Questões ilimitadas',
       'Tentativas de missões ilimitadas',

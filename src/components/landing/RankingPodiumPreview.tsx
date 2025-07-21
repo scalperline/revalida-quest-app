@@ -63,13 +63,20 @@ export function RankingPodiumPreview() {
   return (
     <section className="w-full py-12 sm:py-16 bg-gradient-to-br from-blue-50 via-blue-100 to-blue-200 dark:from-gray-900 dark:to-gray-800">
       <div className="max-w-4xl mx-auto px-2 sm:px-4 flex flex-col items-center">
-        <h2 className="font-bold mb-3 leading-tight flex flex-wrap justify-center items-center gap-1 text-3xl sm:text-4xl md:text-5xl text-center">
-          <span className="text-gray-800">Veja quem está no topo!</span>
-          <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent">Ranking</span>
-        </h2>
-        <p className="text-center text-gray-600 mb-8 sm:mb-10 text-base sm:text-lg">Os melhores do ranking Revalida Quest</p>
+        <div className="font-bold mb-12 flex flex-col justify-center items-center text-center">
+          <span className="text-yellow-500 text-5xl sm:text-3xl md:text-4xl lg:text-5xl mb-2 animate-bounce">🏆</span>
+          <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent text-4xl sm:text-4xl md:text-5xl mb-2 leading-normal py-2">
+            Ranking
+          </span>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-4 font-normal">
+            Responda questões, conquiste pontos e avance no ranking! Compare-se com outros médicos em uma disputa emocionante em busca do CRM.
+          </p>
+        </div>
+
         {/* Centralização e responsividade do pódio */}
-        <PodiumRow podium={podium} />
+        <div className="mt-8">
+          <PodiumRow podium={podium} />
+        </div>
         {/* Atualizado em tempo real */}
         <div className="flex items-center justify-center gap-3 text-sm text-blue-700 mt-10 bg-blue-50/70 rounded-full px-6 py-3 border border-blue-200/50 mx-auto w-fit">
           <div className="flex items-center gap-2">

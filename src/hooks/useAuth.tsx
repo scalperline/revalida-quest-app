@@ -19,6 +19,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState(true);
+  const [isInitialLoad, setIsInitialLoad] = useState(true);
   const { toast } = useToast();
 
   useEffect(() => {
@@ -30,8 +31,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         setUser(session?.user ?? null);
         setLoading(false);
 
-        // Handle auth events
-        if (event === 'SIGNED_IN') {
+        // Handle auth events - only show login success for actual login, not session restoration
+        if (event === 'SIGNED_IN' && !isInitialLoad) {
           toast({
             title: "Login realizado com sucesso!",
             description: "Bem-vindo de volta ao Revalida Quest! 🎉",
@@ -41,6 +42,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             title: "Logout realizado",
             description: "Até logo! Continue sua jornada quando quiser. 👋",
           });
+        }
+        
+        // Mark that initial load is complete after first auth state change
+        if (isInitialLoad) {
+          setIsInitialLoad(false);
         }
       }
     );

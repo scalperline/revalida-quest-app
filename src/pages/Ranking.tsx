@@ -52,9 +52,9 @@ const RankingPodium = ({ podium, loading }: any) => (
     <div className="absolute inset-0 bg-gradient-to-b from-blue-50/50 to-transparent rounded-3xl -z-10"></div>
     
     {/* Container principal */}
-    <div className="flex flex-col sm:flex-row justify-center items-end gap-4 sm:gap-6 md:gap-8 px-4">
+    <div className="flex flex-col sm:flex-row justify-center items-center sm:items-end gap-4 sm:gap-6 md:gap-8 px-4 mx-auto max-w-md sm:max-w-none">
       {/* 2º lugar - esquerda no desktop, meio no mobile */}
-      <div className="order-2 sm:order-1 flex justify-center transform sm:translate-y-8">
+      <div className="order-2 sm:order-1 flex justify-center transform sm:translate-y-8 w-full sm:w-auto">
         {loading ? (
           <PodiumCardSkeleton position={2} />
         ) : podium[1] ? (
@@ -70,7 +70,7 @@ const RankingPodium = ({ podium, loading }: any) => (
       </div>
       
       {/* 1º lugar - central no desktop, topo no mobile */}
-      <div className="order-1 sm:order-2 flex justify-center transform sm:-translate-y-4 relative z-10">
+      <div className="order-1 sm:order-2 flex justify-center transform sm:-translate-y-4 relative z-10 w-full sm:w-auto">
         {loading ? (
           <PodiumCardSkeleton position={1} />
         ) : podium[0] ? (
@@ -86,7 +86,7 @@ const RankingPodium = ({ podium, loading }: any) => (
       </div>
       
       {/* 3º lugar - direita no desktop, baixo no mobile */}
-      <div className="order-3 sm:order-3 flex justify-center transform sm:translate-y-8">
+      <div className="order-3 sm:order-3 flex justify-center transform sm:translate-y-8 w-full sm:w-auto">
         {loading ? (
           <PodiumCardSkeleton position={3} />
         ) : podium[2] ? (
@@ -156,27 +156,24 @@ const MobileUserCard = ({ userItem, isLoggedUser, isTop3, movement, setSelectedU
       </div>
 
       {/* Avatar */}
-      <Avatar
-        className="w-12 h-12 bg-white flex items-center justify-center"
+      <div 
+        className="relative w-12 h-12 rounded-full p-1"
         style={{
-          borderRadius: '50%',
-          border: '2.5px solid transparent',
-          background: `#fff padding-box, ${RankingUtils.getAvatarBorderStyle(userItem, isTop3)} border-box`,
-          boxShadow: 'inset 0 1px 4px rgba(0,0,0,0.10)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
+          background: RankingUtils.getAvatarBorderStyle(userItem, isTop3),
+          boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
         }}
         onClick={() => { setSelectedUser(userItem); setOpenProfile(true); }}
       >
-        {userItem.avatar_url ? (
-          <AvatarImage src={userItem.avatar_url} className="object-cover w-full h-full rounded-full" />
-        ) : (
-          <AvatarFallback className="text-gray-500 font-semibold text-lg" style={{ fontFamily: 'Poppins, Inter, sans-serif', letterSpacing: 1 }}>
-            {userItem.display_name.split(' ').map((n: string) => n[0]).join('').toUpperCase()}
-          </AvatarFallback>
-        )}
-      </Avatar>
+        <Avatar className="w-full h-full bg-white flex items-center justify-center">
+          {userItem.avatar_url ? (
+            <AvatarImage src={userItem.avatar_url} className="object-cover w-full h-full rounded-full" />
+          ) : (
+            <AvatarFallback className="text-gray-500 font-semibold text-lg" style={{ fontFamily: 'Poppins, Inter, sans-serif', letterSpacing: 1 }}>
+              {userItem.display_name.split(' ').map((n: string) => n[0]).join('').toUpperCase()}
+            </AvatarFallback>
+          )}
+        </Avatar>
+      </div>
 
       {/* Conteúdo principal */}
       <div className="flex-1 min-w-0 flex flex-col gap-1">
@@ -307,15 +304,17 @@ const DesktopRankingTable = ({ podium, others, user, setSelectedUser, setOpenPro
                     ) : userItem.position}
                   </td>
                   <td className="px-6 py-4 min-w-[200px] flex items-center gap-2">
-                    <Avatar className="w-9 h-9 bg-white border border-blue-200 shadow-sm">
-                      {userItem.avatar_url ? (
-                        <AvatarImage src={userItem.avatar_url} className="object-cover w-full h-full rounded-full" />
-                      ) : (
-                        <AvatarFallback className="text-blue-700 font-bold text-base">
-                          {userItem.display_name.split(' ').map((n: string) => n[0]).join('').toUpperCase()}
-                        </AvatarFallback>
-                      )}
-                    </Avatar>
+                    <div className="relative w-9 h-9 rounded-full p-0.5 bg-gradient-to-br from-blue-300 via-blue-400 to-blue-500 shadow-sm">
+                      <Avatar className="w-full h-full bg-white">
+                        {userItem.avatar_url ? (
+                          <AvatarImage src={userItem.avatar_url} className="object-cover w-full h-full rounded-full" />
+                        ) : (
+                          <AvatarFallback className="text-blue-700 font-bold text-base">
+                            {userItem.display_name.split(' ').map((n: string) => n[0]).join('').toUpperCase()}
+                          </AvatarFallback>
+                        )}
+                      </Avatar>
+                    </div>
                     <span className="font-bold text-blue-900 px-3 py-1 rounded-full bg-white/80 shadow-sm text-base group-hover:bg-blue-50 transition-colors duration-200" style={{ textShadow: '0 1px 4px #fff' }}>
                       {userItem.display_name}
                     </span>

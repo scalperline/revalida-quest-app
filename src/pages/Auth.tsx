@@ -5,12 +5,14 @@ import { Stethoscope } from 'lucide-react';
 import { AuthHeroSection } from '@/components/auth/AuthHeroSection';
 import { AuthForm } from '@/components/auth/AuthForm';
 import { MobileOfficialCards } from '@/components/auth/MobileOfficialCards';
-import { PricingBackground } from '@/components/pricing/PricingBackground';
-import { LandingNavbar } from "@/components/landing/LandingNavbar";
+import { useNavbarVisibility } from '@/hooks/useNavbarVisibility';
 
 export default function Auth() {
   const { user, loading } = useAuth();
   const [searchParams] = useSearchParams();
+
+  // Hide navbar on auth page
+  useNavbarVisibility(true);
 
   // Redirect if already logged in
   if (user && !loading) {
@@ -20,24 +22,19 @@ export default function Auth() {
 
   if (loading) {
     return (
-      <>
-        <LandingNavbar />
-        <div className="min-h-screen bg-gradient-to-br from-blue-50 via-blue-100 to-blue-200 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center">
-          <div className="relative">
-            <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-400"></div>
-            <div className="absolute inset-0 flex items-center justify-center">
-              <Stethoscope className="w-8 h-8 text-blue-400 animate-pulse" />
-            </div>
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-blue-100 to-blue-200 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center">
+        <div className="relative">
+          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-400"></div>
+          <div className="absolute inset-0 flex items-center justify-center">
+            <Stethoscope className="w-8 h-8 text-blue-400 animate-pulse" />
           </div>
         </div>
-      </>
+      </div>
     );
   }
 
   return (
-    <>
-      <LandingNavbar />
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-blue-100 to-blue-200 dark:from-gray-900 dark:to-gray-800 relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-blue-100 to-blue-200 dark:from-gray-900 dark:to-gray-800 relative overflow-hidden">
       {/* Elementos decorativos do fundo da LandingPage */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-4 -right-4 w-24 h-24 bg-blue-400 rounded-full opacity-20 animate-bounce"></div>
@@ -48,7 +45,7 @@ export default function Auth() {
       </div>
 
       <div className="relative z-10 flex items-center justify-center min-h-screen p-4">
-        <div className="w-full max-w-7xl grid lg:grid-cols-[3fr_2fr] gap-12 items-center pt-24 sm:pt-28">
+        <div className="w-full max-w-7xl grid lg:grid-cols-[3fr_2fr] gap-12 items-center">
           {/* Hero Section - Desktop 60% */}
           <AuthHeroSection />
           {/* Auth Form - Desktop 40% */}
@@ -60,6 +57,5 @@ export default function Auth() {
       {/* Mobile Official Cards - Only shown on mobile, positioned at the bottom */}
       <MobileOfficialCards />
     </div>
-    </>
   );
 }

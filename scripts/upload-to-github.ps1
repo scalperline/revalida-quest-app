@@ -7,7 +7,7 @@ Write-Host ""
 
 # Verificar se estamos no diretório correto
 if (!(Test-Path "package.json")) {
-    Write-Host "❌ Erro: Execute este script no diretório raiz do projeto" -ForegroundColor Red
+    Write-Host "[ERROR] Erro: Execute este script no diretorio raiz do projeto" -ForegroundColor Red
     exit 1
 }
 
@@ -15,12 +15,12 @@ if (!(Test-Path "package.json")) {
 try {
     git --version | Out-Null
 } catch {
-    Write-Host "❌ Erro: Git não está instalado" -ForegroundColor Red
+    Write-Host "[ERROR] Erro: Git nao esta instalado" -ForegroundColor Red
     exit 1
 }
 
 # Atualizar .gitignore para proteger arquivos sensíveis
-Write-Host "📝 Atualizando .gitignore..."
+Write-Host "[UPDATE] Atualizando .gitignore..."
 $gitignoreContent = @"
 # Dependencies
 node_modules/
@@ -132,10 +132,10 @@ temp/
 "@
 
 Set-Content -Path ".gitignore" -Value $gitignoreContent -Encoding UTF8
-Write-Host "✅ .gitignore atualizado" -ForegroundColor Green
+Write-Host "[OK] .gitignore atualizado" -ForegroundColor Green
 
 # Verificar se há arquivos sensíveis
-Write-Host "🔍 Verificando arquivos sensíveis..."
+Write-Host "[CHECK] Verificando arquivos sensiveis..."
 $sensitivePatterns = @(
     "*.env*",
     "*key*",
@@ -151,40 +151,40 @@ foreach ($pattern in $sensitivePatterns) {
 }
 
 if ($sensitiveFiles.Count -gt 0) {
-    Write-Host "⚠️  Arquivos sensíveis encontrados:" -ForegroundColor Yellow
+    Write-Host "[WARNING] Arquivos sensiveis encontrados:" -ForegroundColor Yellow
     foreach ($file in $sensitiveFiles) {
         Write-Host "   - $($file.FullName)" -ForegroundColor Yellow
     }
     $continue = Read-Host "Deseja continuar mesmo assim? (y/N)"
     if ($continue -ne "y" -and $continue -ne "Y") {
-        Write-Host "❌ Upload cancelado pelo usuário" -ForegroundColor Red
+        Write-Host "[ERROR] Upload cancelado pelo usuario" -ForegroundColor Red
         exit 1
     }
 }
 
 # Verificar build
-Write-Host "🔨 Verificando se o projeto compila..."
+Write-Host "[BUILD] Verificando se o projeto compila..."
 try {
     npm run build 2>&1 | Out-Null
     if ($LASTEXITCODE -eq 0) {
-        Write-Host "✅ Build bem-sucedido" -ForegroundColor Green
+        Write-Host "[OK] Build bem-sucedido" -ForegroundColor Green
     } else {
-        Write-Host "⚠️  Build falhou, mas continuando..." -ForegroundColor Yellow
+        Write-Host "[WARNING] Build falhou, mas continuando..." -ForegroundColor Yellow
     }
 } catch {
-    Write-Host "⚠️  Erro no build, mas continuando..." -ForegroundColor Yellow
+    Write-Host "[WARNING] Erro no build, mas continuando..." -ForegroundColor Yellow
 }
 
 # Verificar status do Git
-Write-Host "📊 Verificando status do repositório..."
+Write-Host "[GIT] Verificando status do repositorio..."
 $gitStatus = git status --porcelain
 if ([string]::IsNullOrEmpty($gitStatus)) {
-    Write-Host "✅ Nenhuma alteração detectada" -ForegroundColor Green
-    Write-Host "ℹ️  Nada para fazer upload" -ForegroundColor Blue
+    Write-Host "[OK] Nenhuma alteracao detectada" -ForegroundColor Green
+    Write-Host "[INFO] Nada para fazer upload" -ForegroundColor Blue
     exit 0
 }
 
-Write-Host "📋 Alterações detectadas:"
+Write-Host "[INFO] Alteracoes detectadas:"
 git status --short
 Write-Host ""
 
@@ -192,67 +192,67 @@ Write-Host ""
 try {
     $remoteUrl = git remote get-url origin 2>$null
     if ([string]::IsNullOrEmpty($remoteUrl)) {
-        Write-Host "🔗 Configurando remote origin..."
+        Write-Host "[GIT] Configurando remote origin..."
         git remote add origin https://github.com/scalperline/revalida-quest-app.git
-        Write-Host "✅ Remote origin configurado" -ForegroundColor Green
+        Write-Host "[OK] Remote origin configurado" -ForegroundColor Green
     } else {
-        Write-Host "✅ Remote origin já configurado: $remoteUrl" -ForegroundColor Green
+        Write-Host "[OK] Remote origin ja configurado: $remoteUrl" -ForegroundColor Green
     }
 } catch {
-    Write-Host "🔗 Configurando remote origin..."
+    Write-Host "[GIT] Configurando remote origin..."
     git remote add origin https://github.com/scalperline/revalida-quest-app.git
-    Write-Host "✅ Remote origin configurado" -ForegroundColor Green
+    Write-Host "[OK] Remote origin configurado" -ForegroundColor Green
 }
 
 # Adicionar arquivos
-Write-Host "📦 Adicionando arquivos..."
+Write-Host "[GIT] Adicionando arquivos..."
 git add .
-Write-Host "✅ Arquivos adicionados" -ForegroundColor Green
+Write-Host "[OK] Arquivos adicionados" -ForegroundColor Green
 
 # Criar commit com mensagem descritiva
 $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm"
 $commitMessage = "feat: Melhorias na sincronizacao Stripe e correcoes do sistema - $timestamp"
 
-Write-Host "💬 Criando commit..."
+Write-Host "[GIT] Criando commit..."
 git commit -m "$commitMessage"
 if ($LASTEXITCODE -eq 0) {
-    Write-Host "✅ Commit criado com sucesso" -ForegroundColor Green
+    Write-Host "[OK] Commit criado com sucesso" -ForegroundColor Green
 } else {
-    Write-Host "❌ Erro ao criar commit" -ForegroundColor Red
+    Write-Host "[ERROR] Erro ao criar commit" -ForegroundColor Red
     exit 1
 }
 
 # Push para o repositório
-Write-Host "🚀 Fazendo upload para GitHub..."
+Write-Host "[UPLOAD] Fazendo upload para GitHub..."
 try {
     git push origin main
     if ($LASTEXITCODE -eq 0) {
-        Write-Host "✅ Upload concluído com sucesso!" -ForegroundColor Green
-        Write-Host "🌐 Repositório: https://github.com/scalperline/revalida-quest-app" -ForegroundColor Blue
+        Write-Host "[OK] Upload concluido com sucesso!" -ForegroundColor Green
+        Write-Host "[INFO] Repositorio: https://github.com/scalperline/revalida-quest-app" -ForegroundColor Blue
     } else {
-        Write-Host "⚠️  Tentando push para branch master..." -ForegroundColor Yellow
+        Write-Host "[WARNING] Tentando push para branch master..." -ForegroundColor Yellow
         git push origin master
         if ($LASTEXITCODE -eq 0) {
-            Write-Host "✅ Upload concluído com sucesso!" -ForegroundColor Green
-            Write-Host "🌐 Repositório: https://github.com/scalperline/revalida-quest-app" -ForegroundColor Blue
+            Write-Host "[OK] Upload concluido com sucesso!" -ForegroundColor Green
+            Write-Host "[INFO] Repositorio: https://github.com/scalperline/revalida-quest-app" -ForegroundColor Blue
         } else {
-            Write-Host "❌ Erro no upload. Verifique suas credenciais e conexão" -ForegroundColor Red
-            Write-Host "💡 Dica: Você pode precisar autenticar com GitHub" -ForegroundColor Yellow
+            Write-Host "[ERROR] Erro no upload. Verifique suas credenciais e conexao" -ForegroundColor Red
+            Write-Host "[TIP] Dica: Voce pode precisar autenticar com GitHub" -ForegroundColor Yellow
             exit 1
         }
     }
 } catch {
-    Write-Host "❌ Erro no upload: $($_.Exception.Message)" -ForegroundColor Red
+    Write-Host "[ERROR] Erro no upload: $($_.Exception.Message)" -ForegroundColor Red
     exit 1
 }
 
 # Resumo final
 Write-Host ""
 Write-Host "=== RESUMO DO UPLOAD ===" -ForegroundColor Cyan
-Write-Host "✅ Arquivos verificados e protegidos" -ForegroundColor Green
-Write-Host "✅ Build verificado" -ForegroundColor Green
-Write-Host "✅ Commit criado com mensagem descritiva" -ForegroundColor Green
-Write-Host "✅ Upload para GitHub concluído" -ForegroundColor Green
-Write-Host "🌐 Repositório: https://github.com/scalperline/revalida-quest-app" -ForegroundColor Blue
+Write-Host "[OK] Arquivos verificados e protegidos" -ForegroundColor Green
+Write-Host "[OK] Build verificado" -ForegroundColor Green
+Write-Host "[OK] Commit criado com mensagem descritiva" -ForegroundColor Green
+Write-Host "[OK] Upload para GitHub concluido" -ForegroundColor Green
+Write-Host "[INFO] Repositorio: https://github.com/scalperline/revalida-quest-app" -ForegroundColor Blue
 Write-Host ""
-Write-Host "🎉 Todas as atualizações foram enviadas com sucesso!" -ForegroundColor Green
+Write-Host "[SUCCESS] Todas as atualizacoes foram enviadas com sucesso!" -ForegroundColor Green

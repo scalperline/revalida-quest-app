@@ -26,6 +26,7 @@ import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
 import Help from "./pages/Help";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
+
 import { useEffect } from "react";
 
 // Componente global para garantir scroll ao topo a cada mudança de rota
@@ -58,6 +59,7 @@ const App = () => {
             <BrowserRouter>
               <AccessibilityEnhancer />
               <ScrollToTop />
+
               <Routes>
                 <Route path="/" element={<Landing />} />
                 <Route path="/app" element={

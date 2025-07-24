@@ -178,14 +178,10 @@ export function useSubscription() {
 
   const updateUsage = async (type: 'questions' | 'simulados', increment: number = 1) => {
     if (!user) {
-      console.log('❌ Não pode atualizar: usuário não logado');
       return;
     }
 
     try {
-      console.log('=== ATUALIZANDO CONTADORES ===');
-      console.log('Tipo:', type, 'Incremento:', increment);
-      
       // Buscar registro atual
       const { data: currentRecord, error: fetchError } = await supabase
         .from('usage_limits')
@@ -200,19 +196,14 @@ export function useSubscription() {
         return;
       }
 
-      console.log('Registro atual encontrado:', currentRecord);
-
       // Se não existe, criar
       if (!currentRecord) {
-        console.log('Criando primeiro registro de uso');
         const newData = {
           user_id: user.id,
           daily_questions_used: type === 'questions' ? increment : 0,
           monthly_simulados_used: type === 'simulados' ? increment : 0,
           last_reset_date: new Date().toISOString().split('T')[0]
         };
-
-        console.log('Dados para inserção:', newData);
         const { data: created, error: createError } = await supabase
           .from('usage_limits')
           .insert(newData)
@@ -230,7 +221,7 @@ export function useSubscription() {
           return;
         }
 
-        console.log('✅ Primeiro registro criado:', created);
+        
         setUsageLimits({
           ...created,
           monthly_simulados_used: (created as any)['monthly_simulados_used'] ?? 0
@@ -247,9 +238,7 @@ export function useSubscription() {
         ? ((currentRecord as any).monthly_simulados_used || 0) + increment 
         : ((currentRecord as any).monthly_simulados_used || 0);
 
-      console.log('Valores antes da atualização:');
-      console.log('- Questions:', currentRecord.daily_questions_used, '→', newQuestions);
-      console.log('- Simulados:', (currentRecord as any).monthly_simulados_used, '→', newSimulados);
+      
 
       const { data: updated, error: updateError } = await supabase
         .from('usage_limits')
@@ -267,7 +256,7 @@ export function useSubscription() {
         return;
       }
 
-      console.log('✅ Registro atualizado com sucesso:', updated);
+      
       setUsageLimits({
         ...updated,
         monthly_simulados_used: (updated as any)['monthly_simulados_used'] ?? 0
@@ -279,29 +268,19 @@ export function useSubscription() {
   };
 
   const canUseFeature = (feature: 'questions' | 'simulados'): boolean => {
-    console.log('=== VERIFICANDO SE PODE USAR FEATURE ===');
-    console.log('Feature:', feature);
-    console.log('Subscribed:', subscriptionData.subscribed);
-    console.log('Subscription Tier:', subscriptionData.subscription_tier);
-    console.log('Usage Limits:', usageLimits);
-
     // Usuários Premium, Pro e Enterprise têm acesso ilimitado
     if (subscriptionData.subscribed && (subscriptionData.subscription_tier === 'Premium' || subscriptionData.subscription_tier === 'Pro' || subscriptionData.subscription_tier === 'Enterprise')) {
-      console.log('✅ Usuário Premium/Pro/Enterprise - acesso ilimitado');
       return true;
     }
     
     if (!usageLimits) {
-      console.log('❌ Sem limites de uso - negado');
       return false;
     }
 
     if (feature === 'questions') {
       const used = usageLimits.daily_questions_used || 0;
       // Usuários Basic têm questões ilimitadas
-      const canUse = subscriptionData.subscribed ? true : used < 10;
-      console.log(`Questions: ${used}/10 - ${canUse ? 'PERMITIDO' : 'BLOQUEADO'}`);
-      return canUse;
+      return subscriptionData.subscribed ? true : used < 10;
     } else {
       const used = usageLimits.monthly_simulados_used || 0;
       let limit = 1; // Padrão para usuários gratuitos
@@ -310,9 +289,7 @@ export function useSubscription() {
         limit = 10;
       }
       
-      const canUse = used < limit;
-      console.log(`Simulados: ${used}/${limit} - ${canUse ? 'PERMITIDO' : 'BLOQUEADO'}`);
-      return canUse;
+      return used < limit;
     }
   };
 

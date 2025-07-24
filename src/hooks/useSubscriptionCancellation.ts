@@ -191,7 +191,7 @@ export function useSubscriptionCancellation() {
     initiateCancellation,
     confirmCancellation,
     cancelCancellation,
-    showReasonModal,
+    openReasonModal: showReasonModal,
     hideReasonModal,
 
     // Info
@@ -202,4 +202,4 @@ export function useSubscriptionCancellation() {
     subscribed,
     subscription_tier,
   };
-} 
+}

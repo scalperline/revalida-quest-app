@@ -83,26 +83,50 @@ serve(async (req) => {
       throw new Error("Stripe configuration error");
     }
     
+    // Verificar se a chave é válida
+    if (!stripeSecretKey.startsWith('sk_')) {
+      logStep("ERROR: Invalid STRIPE_SECRET_KEY format", { startsWith: stripeSecretKey.substring(0, 3) });
+      throw new Error("Invalid Stripe secret key format");
+    }
+    
     const stripe = new Stripe(stripeSecretKey, { apiVersion: "2023-10-16" });
     logStep("Stripe client created");
+
+    // Verificar se o customer existe no Stripe
+    try {
+      const customer = await stripe.customers.retrieve(subscriberData.stripe_customer_id);
+      logStep("Customer verified in Stripe", { 
+        customerId: customer.id, 
+        customerEmail: customer.email 
+      });
+    } catch (customerError) {
+      logStep("Error verifying customer in Stripe", { error: customerError });
+      throw new Error(`Customer not found in Stripe: ${customerError instanceof Error ? customerError.message : 'Unknown error'}`);
+    }
 
     const origin = req.headers.get("origin") || "http://localhost:3000";
     logStep("Creating portal session", { origin, customerId: subscriberData.stripe_customer_id });
     
     try {
-    const portalSession = await stripe.billingPortal.sessions.create({
+      const portalSession = await stripe.billingPortal.sessions.create({
         customer: subscriberData.stripe_customer_id,
         return_url: `${origin}/profile`,
-    });
+      });
       
       logStep("Portal session created successfully", { sessionId: portalSession.id, url: portalSession.url });
 
-    return new Response(JSON.stringify({ url: portalSession.url }), {
-      headers: { ...corsHeaders, "Content-Type": "application/json" },
-      status: 200,
-    });
+      return new Response(JSON.stringify({ url: portalSession.url }), {
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+        status: 200,
+      });
     } catch (stripeError) {
       logStep("Error creating portal session", { error: stripeError });
+      
+      // Tratamento específico para erro de configuração
+      if (stripeError instanceof Error && stripeError.message.includes("No configuration provided")) {
+        throw new Error("Portal de cobrança não configurado no Stripe. Entre em contato com o suporte.");
+      }
+      
       throw new Error(`Stripe error: ${stripeError instanceof Error ? stripeError.message : 'Unknown error'}`);
     }
   } catch (error) {

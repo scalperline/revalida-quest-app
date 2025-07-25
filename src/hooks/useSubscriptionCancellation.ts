@@ -68,6 +68,10 @@ export function useSubscriptionCancellation() {
           errorMessage = 'ID do cliente inválido. Entre em contato com o suporte.';
         } else if (error.message.includes('Stripe configuration error')) {
           errorMessage = 'Erro de configuração do sistema de pagamento. Entre em contato com o suporte.';
+        } else if (error.message.includes('Portal de cobrança não configurado')) {
+          errorMessage = 'Portal de cancelamento temporariamente indisponível. Entre em contato com o suporte para cancelar sua assinatura.';
+        } else if (error.message.includes('Customer not found in Stripe')) {
+          errorMessage = 'Dados de assinatura desatualizados. Entre em contato com o suporte.';
         } else if (error.message.includes('Stripe error:')) {
           errorMessage = 'Erro no sistema de pagamento. Tente novamente ou entre em contato com o suporte.';
         } else if (error.message.includes('Authentication error')) {
